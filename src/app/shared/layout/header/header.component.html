@@ -1,0 +1,25 @@
+<header>
+  <div class="wrapper">
+    <div class="nav">
+      <app-text-slider></app-text-slider>
+    </div>
+    <div class="actions">
+      <div class="icons">
+        <ul>
+          <li *ngFor="let i of icons">
+            <i [class]="i"></i>
+          </li>
+          <li (click)="theme()">
+            <i class="fas fa-palette"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="search"
+           (click)="show = !show">
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<app-search-bar *ngIf="show" (closed)="show = !show"></app-search-bar>

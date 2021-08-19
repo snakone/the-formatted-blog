@@ -1,0 +1,16 @@
+body {
+  transition: background 666ms ease-in-out,
+              color 1000ms ease-in-out,;
+}
+
+:root {
+  //DARK MODE
+  body.dark {
+    --light-color: #000000;
+    --dark-color: #ffffff;
+    --shadow-color: #2b2b2b;
+    --text-color: #bdbdbd;
+    --primary-color: #d8d4be;
+    --input-bg: rgba(20, 20, 20, .5);
+  }
+}

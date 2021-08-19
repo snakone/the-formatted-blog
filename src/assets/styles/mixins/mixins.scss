@@ -1,0 +1,19 @@
+@mixin container() {
+  @media (min-width: 768px) { width: 750px; }
+  @media (min-width: 992px) { width: 970px; }
+  @media (min-width: 1200px) { width: 1170px; }
+}
+
+@mixin row() {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin hover($value) {
+  &:hover {
+    cursor: pointer;
+    filter: brightness($value);
+  }
+}
