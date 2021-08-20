@@ -1,9 +1,9 @@
 <header>
   <div class="wrapper">
-    <div class="nav">
+    <div class="nav"> <!-- LEFT SIDE -->
       <app-text-slider></app-text-slider>
     </div>
-    <div class="actions">
+    <div class="actions"> <!-- RIGHT SIDE -->
       <div class="icons">
         <ul>
           <li *ngFor="let i of icons">
@@ -21,5 +21,5 @@
     </div>
   </div>
 </header>
-
+ <!-- SEARCH BAR -->
 <app-search-bar *ngIf="show" (closed)="show = !show"></app-search-bar>

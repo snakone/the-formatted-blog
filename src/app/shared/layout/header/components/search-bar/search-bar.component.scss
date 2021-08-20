@@ -3,6 +3,7 @@
 .search-bar {
   @include container();
   @include row();
+  width: 100%;
   display: grid;
   place-content: center;
   grid-template-columns: 1fr auto;
@@ -30,6 +31,7 @@
 }
 
 .search-input {
+  width: 100%;
   text-align: center;
 
   input {
@@ -78,8 +80,8 @@
 .close {
   & i {
     position: relative;
-    top: 2px;
-    left: -7px;
+    top: 3px;
+    left: -8px;
     font-size: 1.2rem;
     @include hover(1.5);
   }

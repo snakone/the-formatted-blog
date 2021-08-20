@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '@core/services/storage/storage.service';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +19,13 @@ export class HeaderComponent implements OnInit {
     'fab fa-dribbble'
   ];
 
-  constructor() { }
+  constructor(private ls: StorageService) { }
 
   ngOnInit(): void { }
 
   public theme(): void {
-    document.body.classList.toggle('dark');
+    const res = document.body.classList.toggle('dark');
+    this.ls.setKey('theme', res ? 'dark' : 'light');
   }
 
 }

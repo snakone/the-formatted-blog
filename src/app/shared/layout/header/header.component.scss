@@ -83,3 +83,20 @@ header {
     color: var(--primary-color);
   }
 }
+
+@media(max-width: 700px) {
+  .wrapper {
+    display: block;
+  }
+
+  .nav, .actions {
+    justify-content: center;
+  }
+
+  .icons ul { border: none }
+
+  .actions {
+    position: relative;
+    left: -11px;
+  }
+}
