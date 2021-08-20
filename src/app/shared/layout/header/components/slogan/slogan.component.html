@@ -1,0 +1,10 @@
+<div class="slogan">
+  <div class="wrapper">
+    <span *ngFor="let c of title.split(' '); let i = index"
+           [ngClass]="{'first': i === 0,
+                'last': (i + 1) === title.split(' ').length}">
+      {{convert(i)}}
+    </span>
+  </div>
+  <p>{{slogan}}</p>
+</div>

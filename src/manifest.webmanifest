@@ -1,6 +1,6 @@
 {
-  "name": "easy-blog",
-  "short_name": "easy-blog",
+  "name": "formatted-blog",
+  "short_name": "formatted-blog",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

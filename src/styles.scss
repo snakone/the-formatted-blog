@@ -21,8 +21,6 @@ body {
   background-color: var(--light-color);
   color: var(--text-color);
   font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
-}
-
-html {
+  min-width: var(--app-width);
   -webkit-font-smoothing: antialiased;
 }

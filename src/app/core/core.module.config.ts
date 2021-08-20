@@ -6,7 +6,7 @@ export interface CoreModuleConfig {
 
 export const CORE_MODULE_CONSTANTS: CoreModuleConfig = {
   WEBSTORAGE_CONFIG: {
-    prefix: 'easy-blog',
+    prefix: 'formatted-blog',
     separator: '.',
     caseSensitive: false
   }

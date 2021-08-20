@@ -5,11 +5,13 @@ import { SnippetsModule } from '@shared/snippets/snippets.module';
 import { SharedModule } from '@shared/shared.module';
 import { HeaderComponent } from './header/header.component';
 import { SearchBarComponent } from './header/components/search-bar/search-bar.component';
+import { SloganComponent } from './header/components/slogan/slogan.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SloganComponent
   ],
   imports: [
     CommonModule,

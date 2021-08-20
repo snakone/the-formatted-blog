@@ -35,7 +35,7 @@ export class TextSliderComponent implements AfterContentChecked {
     if (this.slider) {
       const style = this.slider.style;
       style.transition = `all ${this.time}ms 0`;
-      style.transform = `translate3d(-${this.index * 230}px, 0, 0)`;
+      style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
     }
   }
 

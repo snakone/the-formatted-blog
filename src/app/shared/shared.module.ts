@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     FormsModule,
     PipesModule

@@ -1,1 +1,11 @@
-<app-header></app-header>
+<div id="app" class="animated fadeIn">
+  <app-header></app-header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<div class="min-width animated fadeIn">
+  <h2 [innerHTML]="sentence"></h2>
+  <p>El equipo de desarollo.</p>
+</div>

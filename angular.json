@@ -3,11 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "easy-blog": {
+
+    "formatted-blog": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -20,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/easy-blog",
+            "outputPath": "dist/formatted-blog",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,7 +30,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
@@ -82,18 +86,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "easy-blog:build"
+            "browserTarget": "formatted-blog:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "easy-blog:build:production"
+              "browserTarget": "formatted-blog:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "easy-blog:build"
+            "browserTarget": "formatted-blog:build"
           }
         },
         "test": {
@@ -131,16 +135,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "easy-blog:serve"
+            "devServerTarget": "formatted-blog:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "easy-blog:serve:production"
+              "devServerTarget": "formatted-blog:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "easy-blog"
+  "defaultProject": "formatted-blog"
 }

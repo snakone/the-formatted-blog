@@ -1,10 +1,10 @@
 {
-  "name": "easy-blog",
-  "version": "0.0.0",
+  "name": "formatted-blog",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
