@@ -14,7 +14,7 @@
       &:not([class]) {
         font-size: 3rem;
         padding: 0 .8rem;
-        top: 10px;
+        top: 9px;
         letter-spacing: 1px;
         font-weight: bold;
         position: relative;
@@ -22,7 +22,7 @@
 
       &.first, &.last {
         font-weight: normal;
-        border-bottom: 1px solid var(--dark-color);
+        border-bottom: 1px solid var(--contrast-color);
         line-height: 35px;
         padding: 0;
         width: 55px;
@@ -46,12 +46,12 @@
     font-size: 12px;
     line-height: 24px;
     letter-spacing: 8px;
-    margin: 11px 0 0;
+    margin: 10px 0 0;
     position: relative;
     left: 2px;
   }
 
   @media(max-width: 700px) {
-    padding: 70px 0 60px 0;
+    padding: 70px 0 50px 0;
   }
 }

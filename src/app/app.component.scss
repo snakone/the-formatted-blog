@@ -1,8 +1,11 @@
+@import 'mixins/mixins.scss';
+
 #app {
-  @media(max-width: 440px) { display: none }
+  @media(max-width: 450px) { display: none }
 }
 
-h2 {
-  line-height: 2rem;
-  font-weight: normal;
+main {
+  height: 100vh;
+  @include container();
+  @include row();
 }

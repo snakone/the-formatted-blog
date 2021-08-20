@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 15px;
+  padding: 15px 15px 15px 0;
 
   & .buttons {
     width: 50px;
 
     & i {
       margin-right: 6.66px;
-      color: var(--text-color);
+      color: var(--contrast-color);
 
       &:hover {
         cursor: pointer;
@@ -36,5 +36,9 @@
       width: var(--text-slide-width);
       float: left;
     }
+  }
+
+  @media(max-width: 700px) {
+    padding: initial;
   }
 }

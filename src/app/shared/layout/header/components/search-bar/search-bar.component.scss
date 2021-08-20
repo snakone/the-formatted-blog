@@ -10,7 +10,7 @@
 }
 
 .wrapper {
-  position: absolute;
+  position: fixed;
   display: flex;
   padding: 1rem;
   left: 0;
@@ -19,6 +19,7 @@
   height: calc(var(--header-height) + 2rem);
   background: var(--light-color);
   z-index: 999;
+  box-shadow: 0 0 3px 1px var(--shadow-color);
 }
 
 .backdrop {
@@ -31,7 +32,7 @@
 }
 
 .search-input {
-  width: 108%;
+  width: 104%;
   text-align: center;
   transition: width 300ms ease-in-out;
 
@@ -77,7 +78,11 @@
     }
   }
 
-  @media(max-width: 600px) {
+  @media(max-width: 900px) {
+    width: 108%;
+  }
+
+  @media(max-width: 550px) {
     width: 100%;
   }
 }

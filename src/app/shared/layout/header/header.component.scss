@@ -88,7 +88,7 @@ nav {
     font-size: 1rem;
     position: relative;
     top: 1px;
-    color: var(--primary-color);
+    color: var(--contrast-color);
   }
 }
 
@@ -99,6 +99,7 @@ section {
 @media(max-width: 700px) {
   .wrapper {
     display: block;
+    padding: 0;
   }
 
   .nav, .actions {
@@ -108,7 +109,11 @@ section {
   .icons ul { border: none }
 
   .actions {
+    width: 100%;
     position: relative;
     left: -11px;
+    top: 0;
+    border-top: 1px solid var(--shadow-color);
+    background: var(--light-color);
   }
 }

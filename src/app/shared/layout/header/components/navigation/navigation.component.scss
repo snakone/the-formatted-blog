@@ -1,0 +1,129 @@
+@import 'mixins/mixins.scss';
+
+nav {
+  font-size: 13px;
+  line-height: 15px;
+  margin: 0;
+  border: 0;
+  background: none;
+  text-transform: uppercase;
+
+  & .wrapper {
+    @include container();
+    @include row();
+
+    & ul {
+      text-align: center;
+      width: 100%;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      border-bottom: 1px solid #f4f4f4;
+      border-top: 1px solid #f4f4f4;
+
+      & li {
+        float: none;
+        padding: 15px 12px;
+        display: inline-block;
+        line-height: normal;
+        position: relative;
+        background: none;
+        color: var(--text-color);
+        outline: 0 none;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+
+        &:hover {
+          @include hover(1.5);
+        }
+
+        &::after, &::before {
+          content: "";
+          height: 25%;
+          left: 0;
+          position: absolute;
+          top: 38%;
+          transform: scale(0);
+          transition: all 0.5s ease-in-out 0s;
+          width: 100%;
+          z-index: 3;
+        }
+
+        &::before {
+          border-left: 1px solid var(--contrast-color);
+          transform-origin: 0 100% 0;
+        }
+
+        &::after {
+          border-right: 1px solid var(--contrast-color);
+          transform-origin: 100% 0 0;
+        }
+
+        &:hover::after, &:hover::before {
+          transform: scale(1);
+        }
+      }
+
+      @media(max-width: 1200px) {
+        margin: 0 auto;
+
+        & li {
+          padding: 10px 12px;
+        }
+      }
+
+      @media(max-width: 1199px) and (min-width:730px) {
+        width: 80%;
+      }
+    }
+
+    @media(max-width: 730px) {
+      max-width: 435px;
+      overflow: hidden;
+      padding-left: 0px;
+      z-index: 100;
+      transition: all 0.5s ease-in-out;
+
+      & ul {
+        min-width: 1080px;
+      }
+    }
+
+    @media(max-width: 510px) {
+      max-width: 380px;
+    }
+  }
+
+  & .indicators {
+    position: relative;
+    & i {
+      position: absolute;
+      transition: all 0.4s ease-in-out;
+
+      &.next {
+        left: 0;
+        top: -1.3rem;
+      }
+
+      &.prev {
+        right: 0;
+        top: -1.3rem;
+      }
+
+      @media(min-width: 730px) {
+        display: none;
+      }
+
+      @media(max-width: 510px) {
+        &.next { left: 27px; }
+        &.prev { right: 27px; }
+      }
+    }
+
+    @media(max-width: 730px) {
+      max-width: 435px;
+      margin: 0 auto;
+      padding-left: 0px;
+    }
+  }
+}

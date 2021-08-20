@@ -1,6 +1,6 @@
-# TheFormattedBlog
+# The Formatted Blog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 
 ## Development server
 

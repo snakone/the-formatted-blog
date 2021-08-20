@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { StorageService } from '@core/services/storage/storage.service';
-import { fromEvent, map, throttleTime } from 'rxjs';
+import { fromEvent, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +8,13 @@ import { fromEvent, map, throttleTime } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   @Input() slogan: boolean | undefined;
   show = false;
   scroll = 0;
+  el: HTMLElement | undefined | null;
+  mode: string | undefined;
 
   icons = [
     'fab fa-facebook-f',
@@ -24,30 +26,39 @@ export class HeaderComponent implements OnInit {
 
   constructor(private ls: StorageService) { }
 
+  ngAfterViewInit(): void {
+    this.el = document.getElementById('nav');
+  }
+
   ngOnInit(): void {
+    this.stickyNavbar();
+    this.mode = this.ls.get('theme');
+  }
+
+  private stickyNavbar(): void {
     fromEvent(window, 'scroll')
      .pipe(
        throttleTime(100)
      )
       .subscribe(_ => {
         const current = window.pageYOffset;
-        const el =  document.getElementsByTagName('nav')[0];
-        if (current <= 32) { return; }
+        if (current <= 20) { return; }
 
-        if (current > this.scroll &&
-           !el.classList.contains('scroll-down')) {
-            el.classList.add('scroll-down');
+        if (this.el && current > this.scroll &&
+           !this.el.classList.contains('scroll-down')) {
+            this.el.classList.add('scroll-down');
         }
 
-        if (current < this.scroll) {
-           el.classList.remove('scroll-down');
-       }
+        if (this.el && current < this.scroll) {
+          this.el.classList.remove('scroll-down');
+        }
         this.scroll = current;
-      });
+    });
   }
 
   public theme(): void {
     const res = document.body.classList.toggle('dark');
+    res ? this.mode = 'dark' : this.mode = 'light';
     this.ls.setKey('theme', res ? 'dark' : 'light');
   }
 

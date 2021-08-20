@@ -11,7 +11,7 @@ import { NO_WIDTH } from '@shared/data/data';
 
 export class AppComponent {
 
-  sentence = NO_WIDTH;
+
 
   constructor(private ls: StorageService) {
     this.checkTheme();
