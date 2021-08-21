@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { StorageService } from '@core/services/storage/storage.service';
-import { NO_WIDTH } from '@shared/data/data';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +8,6 @@ import { NO_WIDTH } from '@shared/data/data';
 })
 
 export class AppComponent {
-
-
 
   constructor(private ls: StorageService) {
     this.checkTheme();

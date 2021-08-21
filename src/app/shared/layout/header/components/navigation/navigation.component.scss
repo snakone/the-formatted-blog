@@ -110,6 +110,11 @@ nav {
         top: -1.3rem;
       }
 
+      &:hover {
+        cursor: pointer;
+        color: var(--contrast-color);
+      }
+
       @media(min-width: 730px) {
         display: none;
       }

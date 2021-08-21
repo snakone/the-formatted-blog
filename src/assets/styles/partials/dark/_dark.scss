@@ -1,6 +1,6 @@
 body {
   transition: background 666ms ease-in-out,
-              color 888ms ease-in-out,;
+              color 888ms ease-in-out;
 }
 
 :root {
@@ -13,5 +13,8 @@ body {
     --primary-color: #d8d4be;
     --input-bg: rgba(20, 20, 20, .5);
     --contrast-color: #ffe364;
+    --border-color: #141414;
+    --transparent-bg: rgba(0, 0, 0 , 0.9);
+    --quote-bg: #080808;
   }
 }

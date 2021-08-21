@@ -34,4 +34,16 @@ export class NavigationComponent implements AfterViewInit {
     if (this.el) { this.el.scrollLeft = this.total; }
   }
 
+  public move(next: boolean): void {
+    if (this.el) {
+      next ? (
+        this.el.scrollLeft += 100,
+        this.total += 100
+      ) : (
+        this.el.scrollLeft -= 100,
+        this.total -= 100
+      );
+    }
+  }
+
 }
