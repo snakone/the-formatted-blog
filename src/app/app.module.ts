@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { environment } from '@env/environment';
 import { CoreModule } from '@core/core.module';
-import { LayoutModule } from '@layout/layout.module';
+import { HammerConfig } from '@core/hammer.config';
+import { HeaderModule } from '@layout/header/header.module';
+import { MinWidthComponent } from '@layout/min-width/min-width.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MinWidthComponent
   ],
   imports: [
     BrowserModule,
@@ -19,9 +22,11 @@ import { LayoutModule } from '@layout/layout.module';
       enabled: environment.production
     }),
     CoreModule,
-    LayoutModule
+    HeaderModule
   ],
-  providers: [],
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
+  ],
   bootstrap: [AppComponent]
 })
 

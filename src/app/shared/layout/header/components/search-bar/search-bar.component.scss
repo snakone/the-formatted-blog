@@ -3,7 +3,6 @@
 .search-bar {
   @include container();
   @include row();
-  width: 100%;
   display: grid;
   place-content: center;
   grid-template-columns: 1fr auto;
@@ -11,7 +10,7 @@
 }
 
 .wrapper {
-  position: absolute;
+  position: fixed;
   display: flex;
   padding: 1rem;
   left: 0;
@@ -19,6 +18,8 @@
   width: 100%;
   height: calc(var(--header-height) + 2rem);
   background: var(--light-color);
+  z-index: 999;
+  box-shadow: 0 0 3px 1px var(--shadow-color);
 }
 
 .backdrop {
@@ -31,8 +32,9 @@
 }
 
 .search-input {
-  width: 100%;
+  width: 104%;
   text-align: center;
+  transition: width 300ms ease-in-out;
 
   input {
     width: 50%;
@@ -75,12 +77,20 @@
       color: var(--light-color);
     }
   }
+
+  @media(max-width: 900px) {
+    width: 108%;
+  }
+
+  @media(max-width: 550px) {
+    width: 100%;
+  }
 }
 
 .close {
   & i {
     position: relative;
-    top: 3px;
+    top: 3.5px;
     left: -8px;
     font-size: 1.2rem;
     @include hover(1.5);

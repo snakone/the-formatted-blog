@@ -11,11 +11,13 @@ export class TextSliderComponent implements AfterContentChecked {
   index = 0;
   time = 400;
   slider: HTMLElement | undefined | null;
+  loop = true;
+  interval = this.createInterval();
 
   items: string[] = [
     'The Latest New For Your New Post',
     'The Latest New For Your',
-    'The Latest New For Your New Post'
+    'The Latest New'
   ];
 
   constructor() { }
@@ -24,7 +26,7 @@ export class TextSliderComponent implements AfterContentChecked {
     this.slider = document.getElementById('slides');
   }
 
-  public slide(value: number): void {
+  public slide(value: number, clear = false): void {
     if (this.index + value < 0)
       this.set(this.items.length - 1, 800);
     else if (this.index + value >= this.items.length)
@@ -35,7 +37,11 @@ export class TextSliderComponent implements AfterContentChecked {
     if (this.slider) {
       const style = this.slider.style;
       style.transition = `all ${this.time}ms 0`;
-      style.transform = `translate3d(-${this.index * 230}px, 0, 0)`;
+      style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
+    }
+
+    if (clear && this.interval) {
+      window.clearInterval(this.interval);
     }
   }
 
@@ -45,6 +51,10 @@ export class TextSliderComponent implements AfterContentChecked {
   ): void {
     this.index = index;
     this.time = time;
+  }
+
+  private createInterval(): NodeJS.Timer {
+    return setInterval(() => this.slide(1), 5000);
   }
 
 }
