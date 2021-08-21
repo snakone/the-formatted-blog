@@ -1,0 +1,30 @@
+<owl-carousel-o [options]="customOptions">
+  <ng-template carouselSlide *ngFor="let i of items">
+    <div class="item">
+      <figure>
+        <img [src]="'assets/images/' + i"/>
+      </figure>
+      <div class="overlay">
+        <div class="info">
+          <div class="inner">
+            <p>
+              <span>LifeStyle</span>
+              <span class="slash">Sep, 17 2019</span>
+            </p>
+            <h3>What do you think of Lifestyle</h3>
+            <p>
+              <span>
+                <i class="fas fa-user"></i>
+                Jhone Smithon
+              </span>
+              <span class="slash">
+                <i class="fas fa-comment"></i>
+                No Comments Yet
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</owl-carousel-o>
