@@ -1,9 +1,8 @@
 .notification {
   width: 100%;
   margin: 36px 0 35px;
-  overflow: hidden;
   background: var(--quote-bg);
-  padding: 20px 25px;
+  padding: 15px 22px;
   transition: background 666ms ease-in-out;
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -19,8 +18,41 @@
       font-weight: 600;
       line-height: 1.5;
       margin: 0;
-      text-transform: capitalize;
       font-size: 20px;
+
+      & i {
+        position: relative;
+        top: 1px;
+        right: -14px;
+        color: var(--dark-color);
+        font-size: 15px;
+        cursor: pointer;
+        @media(min-width: 993px) { display: none; }
+
+        &::after {
+          content: '¿Quieres enterarte de todo? Te aseguramos que no enviamos spam. Recibirás solo lo que realmente te interesa de nuestra parte.';
+          background: var(--dark-color);
+          position: absolute;
+          width: 250px;
+          padding: 10px 8px;
+          text-align: center;
+          top: -92px;
+          right: -132.5px;
+          opacity: 0;
+          border: 1px solid var(--border-color);
+          font-weight: normal;
+          color: var(--light-color);
+          transition: opacity 300ms ease-in-out;
+          font-size: 13px;
+          font-family: 'Raleway', Arial, Helvetica, sans-serif;
+        }
+
+        &:hover {
+          &::after {
+            opacity: .9;
+          }
+        }
+      }
     }
 
     & p {

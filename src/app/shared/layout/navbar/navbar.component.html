@@ -1,0 +1,33 @@
+<nav id="nav">
+  <div class="wrapper">
+    <div class="nav"> <!-- LEFT SIDE -->
+      <app-text-slider></app-text-slider>
+    </div>
+    <div class="actions"> <!-- RIGHT SIDE -->
+      <div class="icons">
+        <ul>
+          <li *ngFor="let i of icons">
+            <i [class]="i"></i>
+          </li>
+          <ng-container *ngIf="mode === 'dark'; else light">
+            <li (click)="theme()">
+              <i class="far fa-lightbulb"></i>
+            </li>
+          </ng-container>
+          <ng-template #light>
+            <li (click)="theme()">
+              <i class="far fa-moon"></i>
+            </li>
+          </ng-template>
+        </ul>
+      </div>
+      <div class="search"
+           (click)="show = !show">
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+ <!-- SEARCH BAR -->
+ <app-search-bar *ngIf="show" (closed)="show = !show"></app-search-bar>

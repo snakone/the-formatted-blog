@@ -13,8 +13,4 @@ export class SloganComponent {
 
   constructor() { }
 
-  public convert(index: number): string {
-    return this.title.split(' ')[index];
-  }
-
 }

@@ -1,0 +1,6 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+}

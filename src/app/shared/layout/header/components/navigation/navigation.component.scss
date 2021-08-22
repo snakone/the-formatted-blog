@@ -3,14 +3,14 @@
 nav {
   font-size: 13px;
   line-height: 15px;
-  margin: 0;
   border: 0;
   background: none;
   text-transform: uppercase;
+  @include container();
+  @include row();
 
   & .wrapper {
-    @include container();
-    @include row();
+
 
     & ul {
       text-align: center;
@@ -78,19 +78,13 @@ nav {
     }
 
     @media(max-width: 730px) {
-      max-width: 435px;
       overflow: hidden;
-      padding-left: 0px;
       z-index: 100;
       transition: all 0.5s ease-in-out;
 
       & ul {
         min-width: 1080px;
       }
-    }
-
-    @media(max-width: 510px) {
-      max-width: 380px;
     }
   }
 
@@ -118,15 +112,9 @@ nav {
       @media(min-width: 730px) {
         display: none;
       }
-
-      @media(max-width: 510px) {
-        &.next { left: 27px; }
-        &.prev { right: 27px; }
-      }
     }
 
     @media(max-width: 730px) {
-      max-width: 435px;
       margin: 0 auto;
       padding-left: 0px;
     }
