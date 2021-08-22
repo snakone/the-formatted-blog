@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SloganComponent } from './components/slogan/slogan.component';
 import { HeaderComponent } from './header.component';
-import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { SharedModule } from '@shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
   ],
   exports: [
     HeaderComponent

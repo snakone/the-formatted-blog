@@ -27,10 +27,12 @@
         color: var(--dark-color);
         font-size: 15px;
         cursor: pointer;
+
         @media(min-width: 993px) { display: none; }
+        @media(max-width: 550px) { right: -8px; }
 
         &::after {
-          content: '¿Quieres enterarte de todo? Te aseguramos que no enviamos spam. Recibirás solo lo que realmente te interesa de nuestra parte.';
+          content: attr(data-tooltip);
           background: var(--dark-color);
           position: absolute;
           width: 250px;
@@ -48,16 +50,12 @@
         }
 
         &:hover {
-          &::after {
-            opacity: .9;
-          }
+          &::after { opacity: .9; }
         }
       }
     }
 
-    & p {
-      text-transform: capitalize;
-    }
+    & p { text-transform: capitalize; }
 
     @media(max-width: 992px) {
       & h2 { font-size: 16px; }

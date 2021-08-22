@@ -24,6 +24,7 @@
     "ngx-owl-carousel-o": "^6.0.0",
     "ngx-webstorage": "^8.0.0",
     "rxjs": "~7.3.0",
+    "sticky-sidebar": "^3.3.1",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4"
   },

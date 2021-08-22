@@ -9,8 +9,9 @@
   color: var(--primary-color);
   place-items: center;
   display: none;
-  z-index: 666;
+  z-index: 9999;
   padding: 2rem;
+  pointer-events: none;
 
   & h2 {
     font-size: 1.5rem;
