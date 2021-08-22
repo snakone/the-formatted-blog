@@ -11,7 +11,7 @@
       text-transform: uppercase;
       display: inline-block;
 
-      &:not([class]) {
+      &.main {
         font-size: 3rem;
         padding: 0 .8rem;
         top: 9px;

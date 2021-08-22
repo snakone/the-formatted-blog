@@ -107,6 +107,11 @@
         & h2 { margin: 0 0 12px; }
       }
     }
+
+    @media(max-width: 991px) and (min-width: 731px) {
+      left: 30%;
+      width: 40%;
+    }
   }
 
   &:hover {

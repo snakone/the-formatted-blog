@@ -1,0 +1,55 @@
+<article>
+  <figure>
+    <img src="assets/images/05-img.jpg" alt="Post Image"/>
+    <!-- HOVER -->
+    <div class="inner">
+      <div class="content">
+        <span>
+          <i class="fas fa-link"></i>
+        </span>
+        <span>
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+  </figure>
+  <!-- CONTENT -->
+  <div class="main-content">
+    <p class="category">LifeStyle</p>
+    <h3>Beauty of Nature</h3>
+    <p class="date">
+      <span>Sep, 17 2015</span>
+    </p>
+    <!-- MESSAGE -->
+    <div class="message">
+      <p>
+        Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,
+        sollicitudin vel nibh. Aenean rhoncus pharetra ex. Sed facilisis interdum nunc, et
+        tempus dolor gravida nec. Vivamus ultrices nisi dui, nec condimentum est ornare eu.
+        Donec sed molestie arcu. Morbi eu suscipit felis, iaculis faucibus libero.
+        Suspendisse eu augue ac nisi maximus posuere vitae finibus risus.
+      </p>
+      <p>
+        Aenean vestibulum diam sit amet leo tristique vehicula. Ut ullamcorper nulla eu
+        magna tincidunt consectetur. Nulla elementum gravida suscipit. Pellentesque habitant
+        morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        Sed euismod suscipit auctor. Suspendisse sapien sapien, porttitor vel posuere laoreet,
+        vulputate non elit. Nunc feugiat, erat ut vehicula vehicula, tellus quam
+        pulvinar augue, vel cursus massa erat.
+      </p>
+    </div>
+    <!-- CONTINUE -->
+    <div class="continue">
+      <span>Continuar Leyendo</span>
+    </div>
+    <!-- BOTTOM -->
+    <div class="bottom">
+      <ul>
+        <li *ngFor="let i of icons">
+          <i [class]="i"></i>
+        </li>
+      </ul>
+      <span class="author">Post By : Jhone Albert</span>
+    </div>
+  </div>
+</article>

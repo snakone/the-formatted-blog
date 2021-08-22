@@ -1,11 +1,7 @@
-@import 'mixins/mixins.scss';
-
 #app {
   @media(max-width: 450px) { display: none }
 }
 
 main {
   height: 150vh;
-  @include container();
-  @include row();
 }
