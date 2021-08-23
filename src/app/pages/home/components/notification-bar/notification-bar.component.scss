@@ -66,6 +66,14 @@
       & h2 { font-size: 15px; }
       & p { font-size: 11px; }
     }
+
+    @media(max-width: 460px) {
+      padding-right: 22%;
+    }
+
+    @media(max-width: 400px) {
+      padding-right: 18%;
+    }
   }
 
   & .info {

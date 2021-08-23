@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { StorageService } from '@core/services/storage/storage.service';
+import { StorageService } from '@services/storage/storage.service';
 import { fromEvent, throttleTime } from 'rxjs';
-import { debounceTime, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { StickyService } from '@services/sticky/sticky.service';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     'Politics'
   ];
 
-  constructor(private ls: StorageService) { }
+  constructor(
+    private ls: StorageService,
+    private stickySrv: StickyService
+  ) { }
 
   ngAfterViewInit(): void {
     this.el = document.getElementById('nav');
@@ -51,6 +55,11 @@ export class NavbarComponent implements OnInit, AfterViewInit {
        tap(_ => setTimeout(() => this.menuOpened = false, 100))
      )
       .subscribe(_ => {
+        if (
+          window.document.body.clientWidth < 992
+          && this.stickySrv.sticky
+        ) { this.stickySrv.destroy(); }  // Prevent Sticky Sidebar
+
         const current = window.pageYOffset;
         if (current <= 20) { return; }
 
