@@ -2,6 +2,7 @@
   overflow: hidden;
   position: relative;
   margin-top: .666rem;
+  z-index: -1;
 
   & figure {
     & img {

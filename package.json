@@ -1,10 +1,10 @@
 {
   "name": "formatted-blog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build",
+    "build": "ng build --configuration='production'",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

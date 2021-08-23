@@ -1,34 +1,10 @@
-<aside Sticky [selector]="'home-content'">
-  <div class="sidebar">
-    <div class="sidebar__inner">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Minus ab ipsam nostrum praesentium repellat possimus architecto
-        maiores inventore, sit laborum soluta reprehenderit doloribus
-        pariatur a labore suscipit porro ea eum quam sed repudiandae
-        voluptatum voluptate? Officia natus sapiente exercitationem,
-        distinctio, nisi labore nihil, laborum numquam autem ea velit tempore consequatur.
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Minus ab ipsam nostrum praesentium repellat possimus architecto
-        maiores inventore, sit laborum soluta reprehenderit doloribus
-        pariatur a labore suscipit porro ea eum quam sed repudiandae
-        voluptatum voluptate? Officia natus sapiente exercitationem,
-        distinctio, nisi labore nihil, laborum numquam autem ea velit tempore consequatur.
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Minus ab ipsam nostrum praesentium repellat possimus architecto
-        maiores inventore, sit laborum soluta reprehenderit doloribus
-        pariatur a labore suscipit porro ea eum quam sed repudiandae
-        voluptatum voluptate? Officia natus sapiente exercitationem,
-        distinctio, nisi labore nihil, laborum numquam autem ea velit tempore consequatur.
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Minus ab ipsam nostrum praesentium repellat possimus architecto
-        maiores inventore, sit laborum soluta reprehenderit doloribus
-        pariatur a labore suscipit porro ea eum quam sed repudiandae
-        voluptatum voluptate? Officia natus sapiente exercitationem,
-        distinctio, nisi labore nihil, laborum numquam autem ea velit tempore consequatur.
-      </p>
-    </div>
+<app-sticky-aside [selector]="'home-content'">
+  <div class="grid">
+    <app-popular-box></app-popular-box>
+    <app-recent-post-box></app-recent-post-box>
+    <app-social-box></app-social-box>
+    <app-category-box></app-category-box>
   </div>
-</aside>
+</app-sticky-aside>
+
+

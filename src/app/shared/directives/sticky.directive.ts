@@ -31,7 +31,8 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
       .pipe(
         debounceTime(500),
         takeUntil(this.unsubscribe$),
-        map(_ => window.document.body.clientWidth < 992 ?? true),
+        filter(res => !!res && this.stickyEl),
+        map(_ => (window.document.body.clientWidth < 992) ?? true),
         distinctUntilChanged(),
       )
     .subscribe(_ => _ ? (
@@ -43,7 +44,7 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
   private startSticky(): void {
     if (!this.stickyEl) {
       this.stickyEl =  new StickySidebar('.sidebar', {
-        topSpacing: 68,
+        topSpacing: 72,
         bottomSpacing: 20,
         resizeSensor: false,
         containerSelector: `.${this.selector}`,
@@ -53,7 +54,7 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.stickyEl.destroy();
+    if (this.stickyEl) this.stickyEl.destroy();
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }

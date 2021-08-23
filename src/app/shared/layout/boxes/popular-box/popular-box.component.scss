@@ -1,0 +1,51 @@
+@import 'mixins/mixins.scss';
+
+.popular {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  & h4 {
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    margin: 0 0 4px;
+    line-height: normal;
+    @include span-hr-title();
+  }
+
+  & .image {
+    width: 190px;
+    height: 190px;
+    border: 1px solid #e0e0e0;
+    margin: 24px auto 20px;
+    overflow: hidden;
+
+    & img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 3px solid var(--light-color);
+      transition: border 666ms ease-in-out;
+    }
+  }
+
+  & p {
+    letter-spacing: normal;
+    line-height: 24px;
+    margin-bottom: 10px;
+
+    @media(max-width: 650px) {
+      padding: 0 40px;
+    }
+
+    @media(max-width: 500px) {
+      padding: 0 30px;
+    }
+  }
+
+  & .continue {
+    text-align: center;
+    margin: 1.1rem auto;
+    @include wall-title();
+  }
+}

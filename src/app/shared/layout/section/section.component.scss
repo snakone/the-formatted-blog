@@ -3,7 +3,7 @@
 .section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-  margin-top: calc(6rem - 1px);
+  margin-top: calc(4rem - 1px);
   position: relative;
-  @include hbar();
+  @include carrousel-fix();
 }

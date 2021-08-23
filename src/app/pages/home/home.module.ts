@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { HomeRoutingModule } from './home.routing';
-import { HeaderModule } from '@layout/header/header.module';
-import { SectionModule } from '@layout/section/section.module';
+import { LayoutModule } from '@layout/layout.module';
 
 import { HomeComponent } from './home.component';
 import { MainPostComponent } from './components/main-post/main-post.component';
@@ -12,8 +11,6 @@ import { NotificationBarComponent } from './components/notification-bar/notifica
 import { PostCarrouselComponent } from './components/post-carrousel/post-carrousel.component';
 import { HomeContentComponent } from './components/home-content/home-content.component';
 import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.component';
-import { LayoutModule } from '@layout/layout.module';
-import { DirectivesModule } from '@shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +25,7 @@ import { DirectivesModule } from '@shared/directives/directives.module';
     CommonModule,
     HomeRoutingModule,
     CarouselModule,
-    HeaderModule,
-    SectionModule,
-    LayoutModule,
-    DirectivesModule
+    LayoutModule
   ]
 })
 
