@@ -31,11 +31,10 @@ export class StickyDirective implements AfterViewInit, OnDestroy {
       .pipe(
         debounceTime(500),
         takeUntil(this.unsubscribe$),
-        filter(res => !!res && this.stickyEl),
         map(_ => (window.document.body.clientWidth < 992) ?? true),
         distinctUntilChanged(),
       )
-    .subscribe(_ => _ ? (
+    .subscribe(_ => _ && this.stickyEl ? (
       this.stickyEl.destroy(),
       this.stickyEl = null
     ) : this.startSticky());
