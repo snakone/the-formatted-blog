@@ -39,6 +39,9 @@
       "@layout/*": [
         "app/shared/layout/*"
       ],
+      "@services/*": [
+        "app/core/services/*"
+      ],
     }
   },
   "angularCompilerOptions": {

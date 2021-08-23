@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { StorageService } from '@core/services/storage/storage.service';
+import { StorageService } from '@services/storage/storage.service';
 import { fromEvent, throttleTime } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { StickyService } from '@services/sticky/sticky.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +16,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   mode: string | undefined;
   scroll = 0;
   el: HTMLElement | undefined | null;
+  menuOpened = false;
 
   icons = [
     'fab fa-facebook-f',
@@ -23,7 +26,18 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     'fab fa-dribbble'
   ];
 
-  constructor(private ls: StorageService) { }
+  dropdown = [
+    'Home',
+    'About us',
+    'Contact',
+    'Travel',
+    'Politics'
+  ];
+
+  constructor(
+    private ls: StorageService,
+    private stickySrv: StickyService
+  ) { }
 
   ngAfterViewInit(): void {
     this.el = document.getElementById('nav');
@@ -37,9 +51,15 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   private stickyNavbar(): void {
     fromEvent(window, 'scroll')
      .pipe(
-       throttleTime(100)
+       throttleTime(100),
+       tap(_ => setTimeout(() => this.menuOpened = false, 100))
      )
       .subscribe(_ => {
+        if (
+          window.document.body.clientWidth < 992
+          && this.stickySrv.sticky
+        ) { this.stickySrv.destroy(); }  // Prevent Sticky Sidebar
+
         const current = window.pageYOffset;
         if (current <= 20) { return; }
 

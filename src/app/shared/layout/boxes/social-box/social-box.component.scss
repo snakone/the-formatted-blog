@@ -1,0 +1,45 @@
+@import 'mixins/mixins.scss';
+
+.social {
+  text-align: center;
+  margin-bottom: 55px;
+
+  & h4 {
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    margin: 0 0 24px;
+    line-height: normal;
+    @include span-hr-title();
+  }
+
+  & ul {
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    & li {
+      float: left;
+      list-style: none;
+      width: 33.33%;
+      overflow: hidden;
+      transition: transform 100ms ease-in-out;
+
+      &:hover {
+        transform: scale(.9);
+        cursor: pointer;
+        opacity: .9;
+      }
+
+      & img {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        border: 0;
+        overflow: hidden;
+        vertical-align: middle;
+      }
+    }
+  }
+}

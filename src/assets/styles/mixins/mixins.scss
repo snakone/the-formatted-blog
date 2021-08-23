@@ -1,3 +1,4 @@
+// RESPONSIVE CONTAINER
 @mixin container() {
   width: 100%;
   @media (min-width: 768px) { width: 750px; }
@@ -5,6 +6,7 @@
   @media (min-width: 1200px) { width: 1170px; }
 }
 
+// CENTER CONTENT
 @mixin row() {
   padding-right: 15px;
   padding-left: 15px;
@@ -12,6 +14,7 @@
   margin-left: auto;
 }
 
+// HOVER STATE
 @mixin hover($value) {
   &:hover {
     cursor: pointer;
@@ -19,6 +22,7 @@
   }
 }
 
+// LEFT COLUMN
 @mixin grid-component() {
   padding-right: 25px;
   grid-column: 1 / 4;
@@ -31,12 +35,14 @@
   }
 }
 
+// RIGHT COLUMN
 @mixin grid-child() {
   @media(max-width: 992px) {
     grid-column: 1 / -1;
   }
 }
 
+// HORIZONTAL BAR
 @mixin hbar() {
   &::before {
     content: '';
@@ -46,3 +52,94 @@
     border-top: 1px solid var(--border-color);
   }
 }
+
+// CARROUSEL FIX OVERLAP
+@mixin carrousel-fix() {
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3rem;
+    width: 100%;
+  }
+}
+
+
+
+// TITLE LINES
+@mixin hr-title() {
+  &::after, &::before {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 80px;
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--contrast-color);
+    transition: background 666ms ease-in-out;
+  }
+
+  &::before {
+    left: auto;
+    right: 100%;
+  }
+}
+
+// SPAN HR TITLE
+@mixin span-hr-title() {
+  & span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding: 0 1rem;
+
+    &::before, &::after {
+      content: '';
+      display: block;
+      width: 500px;
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      background: var(--contrast-color);
+      height: 1px;
+      transition: background 666ms ease-in-out;
+    }
+
+    &::before {
+      left: auto;
+      right: 100%;
+    }
+  }
+}
+
+// WALL TITLE
+@mixin wall-title {
+  & span {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: 14px;
+    position: relative;
+    margin: 0 0 30px;
+    @include hover(1.4);
+
+    &::after, &::before {
+      width: 1px;
+      height: 70%;
+      display: block;
+      content: '';
+      background: var(--contrast-color);
+      left: 0;
+      top: 15%;
+      position: absolute;
+    }
+
+    &::before {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+

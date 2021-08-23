@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { SEARCH_SENTENCE } from '@shared/data/data';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,7 +11,7 @@ export class SearchBarComponent implements OnInit {
 
   @Output() closed = new EventEmitter<void>();
   value = '';
-  sentence = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';
+  sentence = SEARCH_SENTENCE;
   placeholder = '';
   index = 0;
 

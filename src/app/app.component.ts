@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StorageService } from '@core/services/storage/storage.service';
+import { StorageService } from '@services/storage/storage.service';
 
 @Component({
   selector: 'app-root',

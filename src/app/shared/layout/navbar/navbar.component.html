@@ -19,6 +19,16 @@
               <i class="far fa-moon"></i>
             </li>
           </ng-template>
+          <li class="dropdown">
+            <i class="fas fa-align-justify"
+               (click)="menuOpened = !menuOpened">
+            </i>
+            <ul class="dropdown-menu" *ngIf="menuOpened">
+              <li [class]="'dropdown-item-' + (i + 1)"
+                  *ngFor="let m of dropdown; let i = index">{{m}}
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="search"
@@ -28,6 +38,11 @@
     </div>
   </div>
 </nav>
+
+<div class="backdrop"
+     (click)="menuOpened = false"
+     *ngIf="menuOpened">
+</div>
 
  <!-- SEARCH BAR -->
  <app-search-bar *ngIf="show" (closed)="show = !show"></app-search-bar>

@@ -12,7 +12,7 @@ export class NavigationComponent implements AfterViewInit {
   items = [
     'Home', 'About us', 'Contact', 'Post Type', 'Lifestyle',
     'Style & Beaty', 'Home & Living', 'Everyday life & Inspirations',
-    'Travel', 'Dropdown'
+    'Travel', 'Games'
   ];
 
   el: HTMLElement | undefined | null;

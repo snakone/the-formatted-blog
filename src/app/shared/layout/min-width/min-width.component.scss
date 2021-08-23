@@ -14,7 +14,7 @@
   pointer-events: none;
 
   & h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     position: relative;
     top: -1rem;
     text-align: center;
@@ -25,7 +25,7 @@
     & span { font-size: inherit !important }
   }
 
-  @media(max-width: 450px) {
+  @media(max-width: 377px) {
     display: flex;
     flex-direction: column;
     justify-content: center;

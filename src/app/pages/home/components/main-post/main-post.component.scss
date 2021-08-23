@@ -2,6 +2,7 @@
   overflow: hidden;
   position: relative;
   margin-top: .666rem;
+  z-index: -1;
 
   & figure {
     & img {
@@ -50,6 +51,7 @@
 
         @media (max-width: 991px) { font-size: 24px; }
         @media (max-width: 550px) { font-size: 20px; }
+        @media (max-width: 475px) { font-size: 16px; }
       }
 
       & p {
@@ -91,6 +93,11 @@
       }
     }
 
+    @media(max-width: 991px) and (min-width: 731px) {
+      left: 30%;
+      width: 40%;
+    }
+
     @media(max-width: 730px) {
       top: auto;
       bottom: 0;
@@ -108,10 +115,8 @@
       }
     }
 
-    @media(max-width: 991px) and (min-width: 731px) {
-      left: 30%;
-      width: 40%;
-    }
+    @media(max-width: 475px) { height: 100%; }
+
   }
 
   &:hover {

@@ -1,1 +1,19 @@
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
 
+.popular, .recent, .list, .social {
+  @media(max-width: 650px) {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  @media(max-width: 500px) {
+    max-width: 100%;
+  }
+}
