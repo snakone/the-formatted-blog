@@ -1,0 +1,75 @@
+.slogan {
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & .wrapper {
+    display: block;
+
+    & span {
+      text-transform: uppercase;
+      display: inline-block;
+
+      &.main {
+        font-size: 3rem;
+        padding: 0 .8rem;
+        top: 9px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        position: relative;
+      }
+
+      &.first, &.last {
+        font-weight: normal;
+        border-bottom: 1px solid var(--contrast-color);
+        line-height: 35px;
+        padding: 0;
+        width: 55px;
+        text-align: center;
+      }
+
+      &.first {
+        font-size: 1.4rem;
+        transform: rotate(-90deg);
+      }
+
+      &.last {
+        font-size: 1.2rem;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  & p {
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    letter-spacing: 8px;
+    margin: 10px 0 0;
+    position: relative;
+    left: 2px;
+  }
+
+  @media(max-width: 700px) {
+    padding: 70px 0 50px 0;
+  }
+
+  @media(max-width: 475px) {
+    & .wrapper span {
+      &.main {
+        font-size: 2rem;
+      }
+
+      &.first, &.last {
+        font-size: 1rem;
+      }
+    }
+
+    & p {
+      font-size: 10px;
+      margin: 20px 0 0;
+    }
+  }
+}
+

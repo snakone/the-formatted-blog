@@ -1,6 +1,13 @@
-# EasyBlog
+# The Formatted Blog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+
+## Installation
+
+1. Download LTS Version of Nodejs
+2. Clone this repository
+3. Navigate to the root folder
+4. Execute `npm install`
 
 ## Development server
 

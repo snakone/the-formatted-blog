@@ -1,0 +1,14 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+}
+
+app-home-content {
+  @include grid-component();
+}
+
+app-home-sidebar {
+  @include grid-child();
+}

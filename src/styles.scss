@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/main.scss';
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  overscroll-behavior-y: contain;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--light-color);
+  color: var(--text-color);
+  font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
+  min-width: var(--app-width);
+  -webkit-font-smoothing: antialiased;
+}

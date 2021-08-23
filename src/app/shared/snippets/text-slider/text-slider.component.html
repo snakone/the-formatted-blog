@@ -1,0 +1,17 @@
+<div class="slider">
+   <!-- BUTTONS -->
+  <div class="buttons">
+    <i class="fas fa-chevron-circle-left"
+       (click)="slide(-1, true)">
+    </i>
+    <i class="fas fa-chevron-circle-right"
+       (click)="slide(1, true)">
+    </i>
+  </div>
+   <!-- SLIDES -->
+  <div class="wrapper">
+    <div class="items" id="slides">
+      <p *ngFor="let i of items">{{i}}</p>
+    </div>
+  </div>
+</div>
