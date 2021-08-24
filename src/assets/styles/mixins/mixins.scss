@@ -24,7 +24,7 @@
 
 // LEFT COLUMN
 @mixin grid-component() {
-  padding-right: 25px;
+  padding-right: 30px;
   grid-column: 1 / 4;
 
   @media(max-width: 1200px) { grid-column: 1 / 3; }
@@ -62,8 +62,6 @@
     width: 100%;
   }
 }
-
-
 
 // TITLE LINES
 @mixin hr-title() {
@@ -141,5 +139,19 @@
       right: 0;
     }
   }
+}
+
+// FLEX CENTER
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// FLEX BETWEEN
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 

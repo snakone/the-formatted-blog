@@ -52,14 +52,12 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     fromEvent(window, 'scroll')
      .pipe(
        throttleTime(100),
-       tap(_ => setTimeout(() => this.menuOpened = false, 100))
+       tap(_ => setTimeout(() => (
+         this.menuOpened = false,
+         this.stickySrv.checkSticky()
+        ), 100))
      )
       .subscribe(_ => {
-        if (
-          window.document.body.clientWidth < 992
-          && this.stickySrv.sticky
-        ) { this.stickySrv.destroy(); }  // Prevent Sticky Sidebar
-
         const current = window.pageYOffset;
         if (current <= 20) { return; }
 

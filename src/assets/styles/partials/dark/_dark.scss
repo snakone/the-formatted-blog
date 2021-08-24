@@ -6,8 +6,8 @@ body {
 :root {
   //DARK MODE
   body.dark {
-    --light-color: #000000;
-    --dark-color: #ffffff;
+    --light-color: #090b0e;
+    --dark-color: #f7f3f3;
     --shadow-color: #2b2b2b;
     --text-color: #bdbdbd;
     --primary-color: #d8d4be;
@@ -17,5 +17,6 @@ body {
     --transparent-bg: rgba(0, 0, 0 , 0.9);
     --quote-bg: #080808;
     --shade-color: #484a4a;
+    --navigation-border: #4d4d4d;
   }
 }
