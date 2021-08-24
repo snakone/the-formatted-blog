@@ -32,7 +32,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/_redirects"
             ],
             "styles": [
               "src/styles.scss"
@@ -77,8 +78,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
