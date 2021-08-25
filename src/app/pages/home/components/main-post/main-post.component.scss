@@ -2,7 +2,6 @@
   overflow: hidden;
   position: relative;
   margin-top: .666rem;
-  z-index: -1;
 
   & figure {
     & img {
@@ -24,7 +23,7 @@
     height: 100%;
     padding: 20px;
     background: var(--transparent-bg);
-    transition: background 666ms ease-in-out,
+    transition: background 200ms ease-in-out,
                 border 666ms ease-in-out;
     border: 1px solid transparent;
 
@@ -47,7 +46,7 @@
         margin: 0 0 22px;
         font-style: normal;
         text-align: center;
-        transition: border 300ms ease-in-out;
+        transition: border 666ms ease-in-out;
 
         @media (max-width: 991px) { font-size: 24px; }
         @media (max-width: 550px) { font-size: 20px; }

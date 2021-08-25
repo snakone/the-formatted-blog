@@ -1,0 +1,95 @@
+@import 'mixins/mixins.scss';
+
+.footer-nav {
+  @include container();
+  @include row();
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 40%;
+
+  @media(max-width: 993px) { max-width: 70%; }
+  @media(max-width: 500px) { max-width: 90%; }
+
+  & .about, & .newsletter {
+    h5 {
+      color: #424242;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0px 0px 8px 0px;
+      text-transform: capitalize;
+      font-size: 16px;
+    }
+
+    & p { margin-bottom: 1.2rem; }
+
+    & ul {
+      text-align: center;
+      padding: 25px 0;
+      border-bottom: 0;
+      border-top: 0;
+      @include flex-center();
+
+      & li {
+        display: inline-block;
+        width: 39px;
+        height: 18px;
+        line-height: 28px;
+        list-style: disc inside none;
+
+        & i {
+          font-size: 1rem;
+          position: relative;
+          top: -4px;
+          @include hover(1.5);
+         }
+      }
+    }
+  }
+
+  & .newsletter {
+    & label { font-size: 12px; }
+
+    & input {
+      width: 100%;
+      border: 0;
+      color: var(--text-color);
+      outline: none;
+      font-size: .9rem;
+      padding: 5px 12px;
+      border-radius: 5px;
+      background: var(--quote-bg);
+      margin-bottom: 1rem;
+    }
+
+    & button {
+      display: block;
+      width: 100%;
+      background: var(--dark-color);
+      color: var(--light-color);
+      margin-top: 1rem;
+      font-size: 16px;
+      line-height: 16px;
+      padding: 10px;
+      border-radius: 0;
+      font-weight: 600;
+      transition: all 666ms ease-in-out;
+      border: 0;
+      text-align: center;
+
+      @media(max-width: 992px) { font-size: 14px; }
+
+      & span {
+        position: relative;
+        top: 1px;
+      }
+
+      &:hover {
+        background: var(--light-color);
+        color: var(--dark-color);
+        cursor: pointer;
+      }
+    }
+  }
+}

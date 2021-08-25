@@ -18,6 +18,7 @@ nav {
       list-style: none;
       border-bottom: 1px solid var(--navigation-border);
       border-top: 1px solid var(--navigation-border);
+      transition: border 666ms ease-in-out;
 
       & li {
         float: none;

@@ -19,12 +19,10 @@ export class CategoryBoxComponent implements OnInit {
     { name: 'Miscellenious', amount: 9852 },
     { name: 'Games', amount: 452 },
     { name: 'Video Streaming', amount: 89 },
-    { name: 'Fun & Travel', amount: 420 },
   ];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

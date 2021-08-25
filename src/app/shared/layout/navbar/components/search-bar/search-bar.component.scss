@@ -44,7 +44,7 @@
     font-size: .9rem;
     padding: 5px 12px;
     border-radius: 5px;
-    background: var(--input-bg);
+    background: var(--quote-bg);
   }
 
   & i {
@@ -60,8 +60,8 @@
     padding: 4px 12px;
     border: 1px solid var(--dark-color);
     font-weight: 500;
-    color: var(--dark-color);
-    background: var(--light-color);
+    color: var(--light-color);
+    background: var(--primary-color);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -72,10 +72,7 @@
       opacity: .3;
     }
 
-    &:hover {
-      background: var(--primary-color);
-      color: var(--light-color);
-    }
+    @include hover(1.2);
   }
 
   @media(max-width: 900px) {

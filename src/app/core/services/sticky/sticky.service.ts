@@ -21,17 +21,15 @@ export class StickyService {
   }
 
   public startSticky(selector: string): void {
-    if (!this.sticky) {
-      this.stickyElement =  new StickySidebar('.sidebar', {
-        topSpacing: 72,
-        bottomSpacing: 20,
-        resizeSensor: false,
-        containerSelector: `.${selector}`,
-        innerWrapperSelector: '.sidebar__inner'
-      });
+    this.stickyElement =  new StickySidebar('.sidebar', {
+      topSpacing: 72,
+      bottomSpacing: 20,
+      resizeSensor: false,
+      containerSelector: `.${selector}`,
+      innerWrapperSelector: '.sidebar__inner'
+    });
 
-      this.setSticky(true);
-    }
+    this.setSticky(true);
   }
 
   public checkSticky(): void {
@@ -44,7 +42,6 @@ export class StickyService {
   public destroy(): void {
     if (this.stickyElement) {
       this.stickyElement.destroy();
-      this.stickyElement = null;
       this.setSticky(false);
     }
   }

@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <h4>Follow me on Twitter</h4>
+  <div class="gallery">
+    <div class="inner" *ngFor="let i of items">
+      <img [src]="'assets/images/' + i"
+            alt="Gallery Photo"/>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,6 @@ export class StickyAsideComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
 }
