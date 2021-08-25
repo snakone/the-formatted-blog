@@ -7,7 +7,7 @@
         <span>
           <i class="fas fa-link"></i>
         </span>
-        <span>
+        <span [routerLink]="'/post'">
           <i class="fas fa-search"></i>
         </span>
       </div>
@@ -43,7 +43,8 @@
       <span>Continuar Leyendo</span>
     </div>
     <!-- BOTTOM -->
-    <div class="bottom">
+    <div class="bottom"
+          [ngClass]="{'bottom-border': border}">
       <ul>
         <li *ngFor="let i of icons">
           <i [class]="i"></i>

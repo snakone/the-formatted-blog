@@ -1,0 +1,11 @@
+.bottom {
+  text-align: center;
+  margin: 20px 0 5px 0;
+  font-size: 12px;
+  font-weight: 600;
+
+  & p {
+    position: relative;
+    left: 5px;
+  }
+}

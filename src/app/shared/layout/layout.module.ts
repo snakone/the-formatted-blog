@@ -8,18 +8,22 @@ import { HeaderModule } from './header/header.module';
 import { BoxesModule } from './boxes/boxes.module';
 import { SectionModule } from './section/section.module';
 import { DirectivesModule } from '../directives/directives.module';
+import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchBarComponent } from './navbar/components/search-bar/search-bar.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import { StickyAsideComponent } from './sticky-aside/sticky-aside.component';
+import { FooterModule } from './footer/footer.module';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SearchBarComponent,
     PostCardComponent,
-    StickyAsideComponent
+    StickyAsideComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { StickyAsideComponent } from './sticky-aside/sticky-aside.component';
     HeaderModule,
     BoxesModule,
     SectionModule,
-    DirectivesModule
+    DirectivesModule,
+    RouterModule,
+    FooterModule
   ],
   exports: [
     NavbarComponent,
@@ -37,7 +43,9 @@ import { StickyAsideComponent } from './sticky-aside/sticky-aside.component';
     PostCardComponent,
     BoxesModule,
     SectionModule,
-    StickyAsideComponent
+    StickyAsideComponent,
+    FooterModule,
+    LoaderComponent
   ]
 })
 

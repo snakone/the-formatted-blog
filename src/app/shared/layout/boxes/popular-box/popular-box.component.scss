@@ -21,8 +21,8 @@
     overflow: hidden;
 
     @media(max-width: 475px) {
-      width: 160px;
-      height: 160px;
+      width: 120px;
+      height: 120px;
     }
 
     & img {
@@ -36,15 +36,17 @@
 
   & p {
     letter-spacing: normal;
-    line-height: 24px;
+    line-height: 22px;
     margin-bottom: 10px;
+    font-size: .9rem;
+    padding: 0 25px;
 
     @media(max-width: 650px) {
-      padding: 0 40px;
+      padding: 0 15px 0 30px;
     }
 
     @media(max-width: 500px) {
-      padding: 0 30px;
+      font-size: .85rem;
     }
   }
 
@@ -52,5 +54,33 @@
     text-align: center;
     margin: 1.1rem auto;
     @include wall-title();
+    &-mobile { display: none; }
+  }
+}
+
+@media(max-width: 650px) {
+  .popular {
+    margin-bottom: 3rem;
+
+    & .flex {
+      display: grid;
+      grid-template-columns: 2fr auto;
+      align-items: center;
+    }
+
+    & .continue {
+      display: none;
+
+      &-mobile {
+        position: relative;
+        @include wall-title();
+        display: block;
+        position: relative;
+        top: 1rem;
+        text-align: center;
+        padding-left: 21px;
+        & span { margin: 0 !important; }
+      }
+    }
   }
 }

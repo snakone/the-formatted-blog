@@ -11,7 +11,9 @@
   </div>
   <div class="wrapper" id="pan-nav">
     <ul>
-      <li *ngFor="let i of items">{{i}}</li>
+      <li *ngFor="let i of items"
+          [routerLink]="'/home'">{{i}}
+      </li>
     </ul>
   </div>
 </nav>

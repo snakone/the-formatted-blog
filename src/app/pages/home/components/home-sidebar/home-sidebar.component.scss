@@ -5,14 +5,14 @@
     column-gap: 3rem;
   }
 
-  app-recent-post-box {
+  app-category-box {
     grid-row: 1/2;
     grid-column: 1/2;
   }
 
-  app-category-box {
+  app-recent-post-box {
     grid-row: 2/2;
-    grid-column: 1/2;
+    grid-column: 1/-1;
   }
 }
 

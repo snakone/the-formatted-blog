@@ -52,6 +52,11 @@
         &:hover {
           &::after { opacity: .9; }
         }
+
+        @media(max-width: 460px) {
+          right: -26px;
+          top: -26px;
+        }
       }
     }
 
@@ -63,12 +68,12 @@
     }
 
     @media(max-width: 525px) {
-      & h2 { font-size: 15px; }
+      & h2 { font-size: 14px; }
       & p { font-size: 11px; }
     }
 
     @media(max-width: 460px) {
-      padding-right: 22%;
+      padding-right: 30%;
     }
 
     @media(max-width: 400px) {

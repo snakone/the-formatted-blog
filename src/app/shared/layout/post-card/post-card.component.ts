@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-post-card',
@@ -8,6 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class PostCardComponent implements OnInit {
+
+  @Input() border = true;
 
   icons = [
     'fab fa-twitter',

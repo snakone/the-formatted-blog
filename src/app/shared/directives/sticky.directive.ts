@@ -20,7 +20,9 @@ export class StickyDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.subscribeToResize();
-    window.dispatchEvent(new Event('resize'));
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 1000);
   }
 
   private subscribeToResize(): void {

@@ -148,9 +148,9 @@ article {
       align-items: center;
       justify-content: space-between;
       overflow: hidden;
-      border-bottom: 1px solid var(--border-color);
       transition: border-bottom 666ms ease-in-out;
       padding: 0 0 20px;
+      &-border { border-bottom: 1px solid var(--border-color); }
 
       & ul {
         & li {
