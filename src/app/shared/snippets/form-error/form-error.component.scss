@@ -1,0 +1,14 @@
+.form-error {
+  color: #ff4747;
+  position: absolute;
+
+  & span {
+    display: block;
+    font-size: 0.7rem !important;
+
+    & strong {
+      position: relative;
+      top: -1px;
+    }
+  }
+}

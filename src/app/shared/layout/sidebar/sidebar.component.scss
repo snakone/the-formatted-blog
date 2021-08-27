@@ -1,0 +1,30 @@
+@media(max-width: 992px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+
+  app-category-box {
+    grid-row: 1/2;
+    grid-column: 1/2;
+  }
+
+  app-recent-post-box {
+    grid-row: 2/2;
+    grid-column: 1/-1;
+  }
+}
+
+@media(max-width: 650px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 0;
+  }
+
+  app-recent-post-box,
+  app-category-box  {
+    grid-row: initial;
+    grid-column: initial;
+  }
+}

@@ -1,0 +1,14 @@
+<div *ngIf="control.invalid && (control.dirty || control.touched)"
+     class="form-error">
+  <ng-container *ngFor="let v of validator">
+    <span *ngIf="v === 'minlength' && control.errors?.minlength">
+      Tamaño mínimo: <strong>{{control.errors?.minlength.requiredLength}}</strong>
+    </span>
+    <span *ngIf="v === 'required' && control.errors?.required">
+      Campo requerido
+    </span>
+    <span *ngIf="v === 'pattern' && control.errors?.pattern">
+      PAttern
+    </span>
+  </ng-container>
+</div>

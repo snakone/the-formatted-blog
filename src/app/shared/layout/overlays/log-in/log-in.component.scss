@@ -1,0 +1,56 @@
+button {
+  width: 100%;
+  display: block;
+  background: var(--dark-color);
+  color: var(--light-color);
+  font-size: 16px;
+  line-height: 16px;
+  padding: 10px;
+  border-radius: 0;
+  font-weight: 600;
+  transition: all 666ms ease-in-out;
+  border: 0;
+  text-align: center;
+  margin: 1.5rem auto;
+
+  @media(max-width: 992px) { font-size: 14px; }
+
+  & span {
+    position: relative;
+    top: 1px;
+  }
+
+  &:hover {
+    background: var(--light-color);
+    color: var(--dark-color);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+
+input[type="checkbox"] {
+  position: relative;
+  left: 10px;
+  top: 2px;
+  margin-top: 1.2rem;
+  cursor: pointer;
+}
+
+.form-control {
+  margin-bottom: 1.8rem;
+  position: relative;
+  &:nth-child(3) { margin-bottom: 0; }
+}
+
+.bottom {
+  text-align: center;
+
+  & p {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}

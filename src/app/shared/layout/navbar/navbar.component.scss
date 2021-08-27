@@ -55,9 +55,9 @@ nav {
       list-style: disc inside none;
 
       & + li {
-        border-left: 1px solid #e9e9e9;
+        border-left: 1px solid var(--navbar-border);
 
-        &:nth-last-child(2) {
+        &:nth-last-child(3) {
           border-left-style: double;
           border-left-width: 3px;
 

@@ -35,17 +35,7 @@
   width: 104%;
   text-align: center;
   transition: width 300ms ease-in-out;
-
-  input {
-    width: 50%;
-    border: 0;
-    color: var(--text-color);
-    outline: none;
-    font-size: .9rem;
-    padding: 5px 12px;
-    border-radius: 5px;
-    background: var(--quote-bg);
-  }
+  & input { width: 50%; }
 
   & i {
     font-size: 1rem;

@@ -16,6 +16,8 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { StickyAsideComponent } from './sticky-aside/sticky-aside.component';
 import { FooterModule } from './footer/footer.module';
 import { LoaderComponent } from './loader/loader.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { OverlaysModule } from './overlays/overlays.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { LoaderComponent } from './loader/loader.component';
     SearchBarComponent,
     PostCardComponent,
     StickyAsideComponent,
-    LoaderComponent
+    LoaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,8 @@ import { LoaderComponent } from './loader/loader.component';
     SectionModule,
     DirectivesModule,
     RouterModule,
-    FooterModule
+    FooterModule,
+    OverlaysModule
   ],
   exports: [
     NavbarComponent,
@@ -45,7 +49,8 @@ import { LoaderComponent } from './loader/loader.component';
     SectionModule,
     StickyAsideComponent,
     FooterModule,
-    LoaderComponent
+    LoaderComponent,
+    SidebarComponent
   ]
 })
 
