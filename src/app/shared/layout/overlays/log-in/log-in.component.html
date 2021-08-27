@@ -6,7 +6,7 @@
                autocomplete="off"
                type="email"/>
         <app-form-error [control]="email"
-                        [validator]="['required', 'minlength']">
+                        [validator]="['required', 'email']">
         </app-form-error>
       </div>
 
@@ -28,7 +28,7 @@
       </div>
 
     <button type="submit"
-            aria-label="Sign In"
+            aria-label="Entrar"
             [disabled]="signInForm.invalid">
       Entrar
     </button>
@@ -41,7 +41,7 @@
       </p>
       <p class="recover"
          (click)="recover()">
-        <i>¿Has perdido la contraseña?</i>
+        <i>¿Has olvidado la contraseña?</i>
       </p>
     </div>
   </form>

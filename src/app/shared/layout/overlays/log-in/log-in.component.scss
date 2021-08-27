@@ -53,4 +53,12 @@ input[type="checkbox"] {
     font-size: 12px;
     line-height: 20px;
   }
+
+  & strong, & .recover i  {
+    cursor: pointer;
+
+    &:hover { filter: brightness(1.2); }
+  }
+
+
 }

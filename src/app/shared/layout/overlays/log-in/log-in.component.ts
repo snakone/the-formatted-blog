@@ -44,7 +44,7 @@ export class LogInOverlayComponent implements OnInit {
   public onSubmit(): void {
     if (this.signInForm.invalid) { return; }
     const { email, password } = this.signInForm.value;
-    console.log(email, password);
+    console.log(email, password, this.remember);
   }
 
   public signUp(): void {
