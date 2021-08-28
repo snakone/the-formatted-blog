@@ -3,7 +3,7 @@
 .recent {
   text-align: center;
   margin-bottom: 40px;
-  @media(max-width: 993px) { margin-bottom: 30px; }
+  @media(max-width: 993px) and (min-width: 649px) { margin-bottom: 50px; }
 
   & h4 {
     position: relative;
@@ -32,6 +32,8 @@
         padding-top: 0;
         border: 0;
       }
+
+      &:nth-last-child(-n+2) { display: none; }
 
       & .wrapper {
         overflow: hidden;
@@ -80,17 +82,30 @@
           transform: scale(1.1);
         }
       }
+
+      @media(max-width: 599px) {
+        &:nth-last-child(-n+2) { display: flex; }
+      }
     }
 
-    @media(min-width: 600px) and (max-width: 992px) {
+    @media(min-width: 750px) and (max-width: 992px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 2rem;
+
+      & li {
+        padding-top: 0;
+        border-top: 0;
+        & .info h5 { font-size: 14px; }
+        &:nth-last-child(-n+2) { display: flex; }
+      }
+    }
+
+    @media(min-width: 600px) and (max-width: 749px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      column-gap: 3rem;
-
-      & li:nth-child(2) {
-        padding-top: 0;
-        border: 0;
-      }
+      & li:nth-child(2) { border-top: 0}
+      & li:nth-last-child(-n+2) { display: flex; }
     }
   }
 }

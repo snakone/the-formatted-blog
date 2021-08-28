@@ -3,7 +3,6 @@
 .social {
   text-align: center;
   margin-bottom: 60px;
-  @media(max-width: 650px) { margin-bottom: 60px; }
 
   & h4 {
     position: relative;
@@ -11,6 +10,7 @@
     font-size: 18px;
     margin: 0 0 24px;
     line-height: normal;
+    @include span-hr-title();
   }
 
   & ul {
@@ -42,4 +42,7 @@
       }
     }
   }
+
+  @media(max-width: 992px) { margin-bottom: 50px; }
+  @media(max-width: 650px) { margin-bottom: 60px; }
 }

@@ -7,7 +7,10 @@
       <div class="icons">
         <ul>  <!-- ARRAY -->
           <li *ngFor="let i of icons">
-            <i [class]="i"></i>
+            <i [class]="i.icon"
+               [routerLink]="i.route"
+               routerLinkActive="active">
+            </i>
           </li>
           <ng-container *ngIf="mode === 'dark'; else light">
             <li (click)="theme()">

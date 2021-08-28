@@ -60,7 +60,7 @@ nav {
         &:nth-last-child(3) {
           border-left-style: double;
           border-left-width: 3px;
-
+          border-left-color: var(--contrast-color);
           & i {
             position: relative;
             right: -1px;
@@ -73,6 +73,7 @@ nav {
         position: relative;
         top: -4px;
         @include hover(1.5);
+        &.active { color: var(--contrast-color); }
        }
     }
   }

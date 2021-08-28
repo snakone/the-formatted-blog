@@ -22,10 +22,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   menuOpened = false;
 
   icons = [
-    'fab fa-twitter',
-    'fab fa-instagram',
-    'fab fa-pinterest',
-    'fab fa-dribbble'
+    { icon: 'fas fa-home', route: '/home' },
+    { icon: 'fab fa-instagram', route: '/post' },
+    { icon: 'fab fa-pinterest', route: '/help' },
+    { icon: 'fab fa-dribbble', route: '/about' }
   ];
 
   dropdown = [

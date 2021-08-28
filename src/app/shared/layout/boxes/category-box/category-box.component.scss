@@ -11,6 +11,7 @@
     font-size: 18px;
     margin: 0 0 26px;
     line-height: normal;
+    @include span-hr-title();
   }
 
   & ul {
