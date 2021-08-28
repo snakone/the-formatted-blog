@@ -1,6 +1,6 @@
 @import 'mixins/mixins.scss';
 
-section {
+section, .wrapper {
   @include container();
   @include row();
   margin-top: 0.666rem;

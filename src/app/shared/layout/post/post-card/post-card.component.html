@@ -1,0 +1,45 @@
+<article>
+  <figure>
+    <img src="assets/images/05-img.jpg" alt="Post Image"/>
+    <!-- HOVER -->
+    <div class="inner">
+      <div class="content">
+        <span>
+          <i class="fas fa-link"></i>
+        </span>
+        <span [routerLink]="'/post'">
+          <i [class]="alone ? 'far fa-heart' : 'fas fa-search'"></i>
+        </span>
+      </div>
+    </div>
+  </figure>
+  <!-- CONTENT -->
+  <div class="main-content">
+    <p class="category">LifeStyle</p>
+    <h3>Beauty of Nature</h3>
+    <p class="date">
+      <span>Sep, 17 2015</span>
+    </p>
+    <!-- MESSAGE -->
+    <div class="message">
+      <div [innerHTML]="message"></div>
+      <ng-container *ngIf="alone">
+        <div [innerHTML]="messageAlone"></div>
+      </ng-container>
+    </div>
+    <!-- CONTINUE -->
+    <div class="continue" *ngIf="!alone">
+      <span>Continuar Leyendo</span>
+    </div>
+    <!-- BOTTOM -->
+    <div class="bottom"
+          [ngClass]="{'bottom-border': border}">
+      <ul>
+        <li *ngFor="let i of icons">
+          <i [class]="i"></i>
+        </li>
+      </ul>
+      <span class="author">Post By : Jhone Albert</span>
+    </div>
+  </div>
+</article>

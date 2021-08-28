@@ -1,6 +1,5 @@
 <div class="grid">
-  <!-- <app-popular-box></app-popular-box> -->
-  <app-recent-post-box></app-recent-post-box>
-  <app-social-box></app-social-box>
-  <app-category-box></app-category-box>
+  <app-recent-post-box *ngIf="recent"></app-recent-post-box>
+  <app-social-box *ngIf="social"></app-social-box>
+  <app-category-box *ngIf="categories"></app-category-box>
 </div>

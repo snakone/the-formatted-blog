@@ -6,11 +6,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./post-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class PostContentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,6 +8,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class SidebarComponent implements OnInit {
+
+  @Input() recent = true;
+  @Input() categories = true;
+  @Input() social = true;
 
   constructor() { }
 

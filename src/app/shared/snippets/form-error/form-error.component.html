@@ -1,4 +1,4 @@
-<div *ngIf="control.invalid && (control.dirty || control.touched)"
+<div *ngIf="control.invalid && control.dirty"
      class="form-error">
     <span *ngIf="validator.includes('minlength') && control.errors?.minlength">
       Tamaño mínimo:

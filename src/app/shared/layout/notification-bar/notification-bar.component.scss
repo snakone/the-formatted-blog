@@ -1,3 +1,5 @@
+@import 'mixins/mixins.scss';
+
 .notification {
   width: 100%;
   margin: 36px 0 35px;
@@ -18,7 +20,7 @@
       font-weight: 600;
       line-height: 1.5;
       margin: 0;
-      font-size: 20px;
+      font-size: 18px;
 
       & i {
         position: relative;
@@ -98,31 +100,7 @@
     justify-content: flex-end;
 
     & button {
-      display: block;
-      background: var(--dark-color);
-      color: var(--light-color);
-      margin-left: auto;
-      font-size: 16px;
-      line-height: 16px;
-      padding: 10px;
-      border-radius: 0;
-      font-weight: 600;
-      transition: all 666ms ease-in-out;
-      border: 0;
-      text-align: center;
-
-      @media(max-width: 992px) { font-size: 14px; }
-
-      & span {
-        position: relative;
-        top: 1px;
-      }
-
-      &:hover {
-        background: var(--light-color);
-        color: var(--dark-color);
-        cursor: pointer;
-      }
+      @include hover-button();
     }
   }
 

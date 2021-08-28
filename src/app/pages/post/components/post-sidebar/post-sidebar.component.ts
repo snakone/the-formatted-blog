@@ -6,11 +6,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./post-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class PostSidebarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

@@ -1,0 +1,27 @@
+.message {
+  overflow: hidden;
+  text-align: left;
+  padding: 0 0 0;
+
+  & p {
+    margin: 0 0 30px;
+    text-align: left;
+
+    @media(max-width: 600px) {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  & blockquote {
+    width: 100%;
+    margin: 36px 0 35px;
+    background: var(--quote-bg);
+    padding: 15px 22px;
+    transition: background 666ms ease-in-out;
+    font-style: italic;
+    font-size: 18px;
+  }
+}
