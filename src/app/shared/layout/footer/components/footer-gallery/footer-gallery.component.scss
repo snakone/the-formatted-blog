@@ -9,7 +9,7 @@
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16%, 1fr));
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   overflow: hidden;
 
   & .inner {
@@ -42,7 +42,7 @@ h4 {
   text-align: center;
   font-size: 18px;
   position: relative;
-  padding-top: 20px;
+  padding-top: 30px;
 
   &::before {
     content: '';
@@ -56,6 +56,6 @@ h4 {
   }
 
   @media(max-width: 992px) {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 }

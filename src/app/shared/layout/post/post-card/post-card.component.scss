@@ -118,25 +118,6 @@ article {
       }
     }
 
-    & .message {
-      overflow: hidden;
-      padding: 0 0 0;
-
-      & p {
-        margin: 0 0 30px;
-        text-align: left;
-
-        @media(max-width: 600px) {
-          display: -webkit-box;
-          -webkit-line-clamp: 5;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-
-          &:last-child { display: none; }
-        }
-      }
-    }
-
     & .continue {
       text-align: center;
       margin-top: 1rem;
@@ -149,6 +130,7 @@ article {
       justify-content: space-between;
       overflow: hidden;
       transition: border-bottom 666ms ease-in-out;
+      margin-top: 1rem;
       padding: 0 0 20px;
       &-border { border-bottom: 1px solid var(--border-color); }
 

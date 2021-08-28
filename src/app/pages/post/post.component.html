@@ -1,1 +1,12 @@
-<p>post works!</p>
+<div class="animated fadeIn">
+  <div class="wrapper">
+    <app-post-carrousel></app-post-carrousel>
+    <app-notification-bar></app-notification-bar>
+  </div>
+  <section class="post-content">
+    <app-section [margin]="false">
+      <app-post-content></app-post-content>
+      <app-post-sidebar></app-post-sidebar>
+    </app-section>
+  </section>
+</div>

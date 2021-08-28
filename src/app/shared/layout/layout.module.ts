@@ -12,18 +12,22 @@ import { RouterModule } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchBarComponent } from './navbar/components/search-bar/search-bar.component';
-import { PostCardComponent } from './post-card/post-card.component';
 import { StickyAsideComponent } from './sticky-aside/sticky-aside.component';
 import { FooterModule } from './footer/footer.module';
 import { LoaderComponent } from './loader/loader.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { OverlaysModule } from './overlays/overlays.module';
+import { PostLayoutModule } from './post/post-layout.module';
+import { NotificationBarComponent } from './notification-bar/notification-bar.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SearchBarComponent,
-    PostCardComponent,
     StickyAsideComponent,
-    LoaderComponent
+    LoaderComponent,
+    SidebarComponent,
+    NotificationBarComponent
   ],
   imports: [
     CommonModule,
@@ -35,17 +39,21 @@ import { LoaderComponent } from './loader/loader.component';
     SectionModule,
     DirectivesModule,
     RouterModule,
-    FooterModule
+    FooterModule,
+    OverlaysModule,
+    PostLayoutModule
   ],
   exports: [
     NavbarComponent,
     HeaderModule,
-    PostCardComponent,
     BoxesModule,
     SectionModule,
     StickyAsideComponent,
     FooterModule,
-    LoaderComponent
+    LoaderComponent,
+    SidebarComponent,
+    PostLayoutModule,
+    NotificationBarComponent
   ]
 })
 

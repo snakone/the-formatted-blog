@@ -5,21 +5,24 @@
     </div>
     <div class="actions"> <!-- RIGHT SIDE -->
       <div class="icons">
-        <ul>
+        <ul>  <!-- ARRAY -->
           <li *ngFor="let i of icons">
-            <i [class]="i"></i>
+            <i [class]="i.icon"
+               [routerLink]="i.route"
+               routerLinkActive="active">
+            </i>
           </li>
           <ng-container *ngIf="mode === 'dark'; else light">
             <li (click)="theme()">
               <i class="far fa-lightbulb"></i>
             </li>
           </ng-container>
-          <ng-template #light>
+          <ng-template #light> <!-- THEME -->
             <li (click)="theme()">
               <i class="far fa-moon"></i>
             </li>
           </ng-template>
-          <li class="dropdown">
+          <li class="dropdown"> <!-- DROPDOWN -->
             <i class="fas fa-align-justify"
                (click)="menuOpened = !menuOpened">
             </i>
@@ -28,9 +31,12 @@
                   *ngFor="let m of dropdown; let i = index">{{m}}
               </li>
             </ul>
+          </li>  <!-- USER -->
+          <li (click)="openModal()">
+            <i class="fas fa-sign-in-alt"></i>
           </li>
         </ul>
-      </div>
+      </div> <!-- SEARCH BUTTON -->
       <div class="search"
            (click)="show = !show">
         <i class="fas fa-search"></i>

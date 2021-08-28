@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StorageService } from '@services/storage/storage.service';
 import { from, fromEvent, throttleTime } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
+import { CrafterService } from '@services/crafter/crafter.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,11 +22,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   menuOpened = false;
 
   icons = [
-    'fab fa-facebook-f',
-    'fab fa-twitter',
-    'fab fa-instagram',
-    'fab fa-pinterest',
-    'fab fa-dribbble'
+    { icon: 'fas fa-home', route: '/home' },
+    { icon: 'fab fa-instagram', route: '/post' },
+    { icon: 'fab fa-pinterest', route: '/help' },
+    { icon: 'fab fa-dribbble', route: '/about' }
   ];
 
   dropdown = [
@@ -38,7 +39,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   constructor(
     private ls: StorageService,
     private stickySrv: StickyService,
-    private router: Router
+    private router: Router,
+    private crafter: CrafterService
   ) { }
 
   ngAfterViewInit(): void {
@@ -62,20 +64,26 @@ export class NavbarComponent implements OnInit, AfterViewInit {
      )
       .subscribe(_ => {
         const current = window.pageYOffset;
+        const css = this.el?.classList || null;
+
         if (current <= 20) { return; }
 
         if (
-            this.el && (current > this.scroll) &&
-           !this.el.classList.contains('scroll-down')
+            css && (current > this.scroll) &&
+           !css.contains('scroll-down')
            ) {
-            this.el.classList.add('scroll-down');
+            css.add('scroll-down');
         }
 
-        if (this.el && current < this.scroll) {
-          this.el.classList.remove('scroll-down');
+        if (css && current < this.scroll) {
+          css.remove('scroll-down');
         }
         this.scroll = current;
     });
+  }
+
+  public openModal(): void {
+    this.crafter.dialog(LogInOverlayComponent);
   }
 
   private showOnNavigation(): void {

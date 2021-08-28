@@ -1,0 +1,18 @@
+// FORMS
+input:not([type="checkbox"]) {
+  width: 100%;
+  border: 1px solid transparent;
+  color: var(--text-color);
+  outline: none;
+  font-size: .9rem;
+  padding: 5px 12px;
+  border-radius: 5px;
+  background: var(--quote-bg);
+  transition: border 300ms ease-in-out;
+}
+
+input {
+  &.ng-invalid:not(.ng-pristine) {
+    border: 1px solid red;
+  }
+}
