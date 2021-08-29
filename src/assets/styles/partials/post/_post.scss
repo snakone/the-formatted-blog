@@ -1,8 +1,11 @@
+@import 'mixins/mixins.scss';
+
 .message {
   overflow: hidden;
   text-align: left;
   padding: 0 0 0;
 
+  // PARAGRAPH
   & p {
     margin: 0 0 30px;
     text-align: left;
@@ -15,13 +18,84 @@
     }
   }
 
+  // BLOCKQUOTE
   & blockquote {
     width: 100%;
     margin: 36px 0 35px;
     background: var(--quote-bg);
-    padding: 15px 22px;
+    padding: 15px 22px 15px 25px;
     transition: background 666ms ease-in-out;
     font-style: italic;
     font-size: 18px;
+    border-left: 3px solid var(--contrast-color);
+  }
+
+  // UNORDER LIST
+  & ul {
+    margin: 36px 0 35px;
+    list-style: none;
+
+    & li {
+      margin: 12px 0;
+      position: relative;
+      padding-left: 27px;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0da";
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-size: 20px;
+        color: var(--contrast-color);
+      }
+    }
+  }
+
+  // ORDERED LIST
+  & ol {
+    counter-reset: my-counter;
+    margin: 36px 0 35px;
+    list-style: none;
+
+    & li {
+      margin: 12px 0;
+      position: relative;
+      padding-left: 27px;
+      counter-increment: my-counter;
+
+      &::before {
+        content: counter(my-counter);
+        position: absolute;
+        left: 0;
+        top: -3px;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-size: 20px;
+        color: var(--contrast-color);
+      }
+    }
+  }
+
+  // HEADING
+  & h2 {
+    margin: 45px 0 30px 0;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom:-2px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background: var(--contrast-color);
+    }
   }
 }

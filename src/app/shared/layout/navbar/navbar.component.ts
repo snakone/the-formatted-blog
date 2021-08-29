@@ -23,9 +23,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   icons = [
     { icon: 'fas fa-home', route: '/home' },
-    { icon: 'fab fa-instagram', route: '/post' },
-    { icon: 'fab fa-pinterest', route: '/help' },
-    { icon: 'fab fa-dribbble', route: '/about' }
+    { icon: 'fas fa-feather-alt', route: '/post' },
+    { icon: 'far fa-user', route: '/profile' },
+    { icon: 'fas fa-question', route: '/about' }
   ];
 
   dropdown = [

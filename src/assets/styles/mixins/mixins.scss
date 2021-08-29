@@ -48,7 +48,7 @@
   background: var(--dark-color);
   color: var(--light-color);
   margin-left: auto;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 16px;
   padding: 10px;
   border-radius: 0;
@@ -62,6 +62,7 @@
   & span {
     position: relative;
     top: 1px;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
   }
 
   &:hover {

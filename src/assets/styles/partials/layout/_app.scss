@@ -22,3 +22,7 @@
   background: var(--light-color);
   color: var(--text-color);
 }
+
+.owl-carousel.owl-theme.owl-loaded {
+  z-index: 0;
+}

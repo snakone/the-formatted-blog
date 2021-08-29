@@ -20,7 +20,7 @@
       font-weight: 600;
       line-height: 1.5;
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
 
       & i {
         position: relative;
@@ -49,6 +49,7 @@
           transition: opacity 300ms ease-in-out;
           font-size: 13px;
           font-family: 'Raleway', Arial, Helvetica, sans-serif;
+          z-index: 10;
         }
 
         &:hover {
@@ -84,13 +85,13 @@
   }
 
   & .info {
-    max-width: 55%;
+    max-width: 65%;
     margin: auto;
     font-size: .7rem;
     opacity: .9;
     text-align: center;
     line-height: 13px;
-
+    @media(min-width: 1201px) { padding: 0 30px; }
     @media(max-width: 992px) { display: none; }
   }
 
