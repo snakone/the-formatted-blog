@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     { icon: 'fas fa-home', route: '/home' },
     { icon: 'fas fa-feather-alt', route: '/create' },
     { icon: 'far fa-file-alt', route: '/news' },
-    { icon: 'far fa-user', route: '/profile' },
+    // { icon: 'far fa-user', route: '/profile' },
     { icon: 'fas fa-question', route: '/help' }
 
   ];

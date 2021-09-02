@@ -1,3 +1,5 @@
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 export const NO_WIDTH = `Lo sentimos. Esta aplicación sólo se puede usar
 con una pantalla superior a <strong>377px</strong> de ancho. Disculpa las molestias.`;
 
@@ -178,3 +180,26 @@ laudantium ullam suscipit ducimus eveniet dicta ratione facilis hic molestias ve
 labore excepturi at.
 </p>
 `;
+
+export const CARROUSEL_OPTS: OwlOptions = {
+  loop: false,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: false,
+  dots: false,
+  navSpeed: 700,
+  margin: 20,
+  lazyLoad: true,
+  responsiveRefreshRate: 100,
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 2
+    },
+    992: {
+      items: 3
+    }
+  }
+};

@@ -4,12 +4,14 @@ nav {
   width: 100%;
   height: var(--header-height);
   box-shadow: 0 0 5px 1px var(--shadow-color);
-  transition: all 400ms ease-in-out;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 998;
   background: var(--light-color);
+  transition: transform 666ms ease-in-out,
+              background 666ms ease-in-out,
+              box-shadow 666ms ease-in-out;
 
   &.scroll-down {
     transform: translate3d(0, -100px, 0);
@@ -114,7 +116,6 @@ nav {
 
 li.dropdown {
   position: relative;
-  transition: all 300ms ease-in-out;
   @for $i from 1 to 6 {
     .dropdown-item-#{$i} {
       transform-origin: top center;
