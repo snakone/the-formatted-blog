@@ -70,16 +70,11 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
         if (current <= 20) { return; }
 
-        if (
-            css && (current > this.scroll) &&
+        if (css && (current > this.scroll) &&
            !css.contains('scroll-down')
-           ) {
-            css.add('scroll-down');
-        }
+           ) { css.add('scroll-down'); }
 
-        if (css && current < this.scroll) {
-          css.remove('scroll-down');
-        }
+        if (css && current < this.scroll) { css.remove('scroll-down'); }
         this.scroll = current;
     });
   }
@@ -95,13 +90,13 @@ export class NavbarComponent implements OnInit, AfterViewInit {
      )
        .subscribe(_ => {
          if (this.el) this.el.classList.remove('scroll-down');
-       });
+    });
   }
 
   public theme(): void {
     const res = document.body.classList.toggle('dark');
     res ? this.mode = 'dark' : this.mode = 'light';
-    this.ls.setKey('theme', res ? 'dark' : 'light');
+    this.ls.setKey('theme', this.mode);
   }
 
 }

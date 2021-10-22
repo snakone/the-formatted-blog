@@ -21,6 +21,11 @@ export class SearchBarComponent implements OnInit {
     this.autoType();
   }
 
+  public search(): void {
+    console.log(this.value);
+    this.close();
+  }
+
   public close(): void {
     const el = document.getElementById('search-bar');
     if (el) {

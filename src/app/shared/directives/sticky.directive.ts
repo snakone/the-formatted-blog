@@ -1,12 +1,11 @@
 import {
   Directive,
-  OnDestroy,
   AfterViewInit,
   Input
 } from '@angular/core';
 
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
 
 // tslint:disable-next-line:directive-selector
