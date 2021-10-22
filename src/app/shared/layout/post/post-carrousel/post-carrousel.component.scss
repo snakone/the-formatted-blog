@@ -124,8 +124,6 @@
         color: var(--contrast-color);
         margin-bottom: 1rem;
         outline: none;
-        -webkit-animation: SpinBack .5s;
-        animation: SpinBack .5s;
         transition: all 666ms ease-in-out;
       }
 
@@ -146,9 +144,7 @@
   &:hover {
     & .inner {
       & .info i {
-        filter: contrast(2);
-        -webkit-animation: ClockwiseSpin 2s infinite linear;
-        animation: ClockwiseSpin 2s infinite linear;
+        filter: contrast(3);
       }
     }
   }

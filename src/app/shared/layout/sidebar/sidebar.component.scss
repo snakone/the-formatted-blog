@@ -1,3 +1,5 @@
+@import 'mixins/mixins.scss';
+
 @media(max-width: 992px) {
   .grid {
     display: grid;
@@ -26,4 +28,8 @@
     grid-row: initial;
     grid-column: initial;
   }
+}
+
+span {
+  @include hbar();
 }

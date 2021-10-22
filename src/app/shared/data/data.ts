@@ -186,11 +186,12 @@ export const CARROUSEL_OPTS: OwlOptions = {
   mouseDrag: true,
   touchDrag: true,
   pullDrag: false,
-  dots: false,
+  dots: true,
   navSpeed: 700,
   margin: 20,
   lazyLoad: true,
   responsiveRefreshRate: 100,
+  fluidSpeed: true,
   responsive: {
     0: {
       items: 1

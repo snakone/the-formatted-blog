@@ -1,6 +1,7 @@
 @import 'mixins/mixins.scss';
 
 .recent {
+  position: relative;
   text-align: center;
   margin-bottom: 40px;
   @media(max-width: 993px) and (min-width: 649px) { margin-bottom: 50px; }
@@ -11,6 +12,7 @@
     font-size: 18px;
     margin: 0 0 24px;
     line-height: normal;
+    @include span-hr-title();
   }
 
   & ul {
@@ -107,6 +109,15 @@
       & li:nth-child(2) { border-top: 0}
       & li:nth-last-child(-n+2) { display: flex; }
     }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -2.75rem;
+    width: 100%;
+    left: 0;
+    border-top: 1px solid var(--border-color);
   }
 }
 

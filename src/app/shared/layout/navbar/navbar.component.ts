@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         const current = window.pageYOffset;
         const css = this.el?.classList || null;
 
-        if (current <= 20) { return; }
+        if (current <= 0) { return; }
 
         if (css && (current > this.scroll) &&
            !css.contains('scroll-down')
