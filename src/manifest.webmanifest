@@ -1,11 +1,16 @@
 {
-  "name": "formatted-blog",
-  "short_name": "formatted-blog",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
-  "display": "standalone",
-  "scope": "./",
+  "name": "The Formatted Blog",
+  "short_name": "Formatted Blog",
   "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Create and share your content",
+  "dir": "ltr",
+  "categories": "education,entertainment,personalization,social,utilities",
+  "lang": "es",
+  "orientation": "portrait",
+  "scope": "./",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

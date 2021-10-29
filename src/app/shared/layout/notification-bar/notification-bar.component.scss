@@ -106,6 +106,15 @@
 
     & button {
       @include hover-button();
+      transition: all 333ms ease-in-out;
+      background: #090b0e;
+      color: #ffffff;
+
+      &:hover {
+        background: var(--contrast-color);
+        color: var(--light-color);
+        cursor: pointer;
+      }
     }
   }
 

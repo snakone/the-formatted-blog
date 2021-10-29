@@ -2,7 +2,7 @@
 
 article {
   overflow: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 
   & figure {
     overflow: hidden;
@@ -88,7 +88,6 @@ article {
     position: relative;
 
     & .category {
-      color: var(--text-color);
       text-align: center;
       overflow: hidden;
       padding: 0 0 20px;
@@ -97,6 +96,8 @@ article {
       text-transform: uppercase;
       opacity: .9;
       transition: all 300ms ease-in-out;
+      color: var(--contrast-color);
+      cursor: pointer;
     }
 
     & h3 {
@@ -105,6 +106,12 @@ article {
       line-height: 22px;
       font-size: 22px;
       transition: all 300ms ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        font-weight: bold;
+        filter: brightness(1.5);
+      }
     }
 
     & .date {
@@ -121,13 +128,6 @@ article {
         font-size: 12px;
         @include hr-title();
       }
-    }
-
-    & .continue {
-      text-align: center;
-      margin-top: 1rem;
-      margin-bottom: 1.5rem;
-      @include wall-title();
     }
 
     & .bottom {
@@ -228,8 +228,6 @@ article {
       }
 
       & .category {
-        color: var(--contrast-color);
-        
         @media (max-width: 1200px) {
           padding: 0 0 10px;
         }
@@ -237,7 +235,6 @@ article {
 
       & h3, & .category {
         text-align: left;
-        cursor: pointer;
       }
 
       & h3 {
@@ -245,11 +242,6 @@ article {
 
         @media (max-width: 1200px) {
           font-size: 18px;
-        }
-
-        &:hover {
-          font-weight: bold;
-          filter: brightness(1.5);
         }
       }
 
