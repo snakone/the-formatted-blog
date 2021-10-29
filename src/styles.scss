@@ -23,4 +23,5 @@ body {
   font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
   min-width: var(--app-width);
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
 }

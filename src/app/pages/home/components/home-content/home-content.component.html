@@ -1,5 +1,9 @@
 <div class="content">
-  <app-post-card></app-post-card>
-  <app-post-card></app-post-card>
-  <app-post-card [border]="false"></app-post-card>
+  <app-post-card *ngFor="let item of [1,2,3,4,5]; 
+                         let i = index; 
+                         let last = last"
+                 [small]="i >= 1"
+                 [border]="!last && i < 1"
+                 [last]="last">
+  </app-post-card>
 </div>

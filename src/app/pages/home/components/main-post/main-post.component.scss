@@ -48,7 +48,7 @@
         text-align: center;
         transition: border 666ms ease-in-out;
 
-        @media (max-width: 991px) { font-size: 24px; }
+        @media (max-width: 993px) { font-size: 24px; }
         @media (max-width: 550px) { font-size: 20px; }
         @media (max-width: 475px) { font-size: 16px; }
       }
@@ -92,7 +92,7 @@
       }
     }
 
-    @media(max-width: 991px) and (min-width: 731px) {
+    @media(max-width: 993px) and (min-width: 731px) {
       left: 30%;
       width: 40%;
     }

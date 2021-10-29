@@ -8,6 +8,7 @@ article {
     overflow: hidden;
     margin: 0 0 40px;
     position: relative;
+    transition: all 300ms ease-in-out;
 
     & img {
       display: block;
@@ -68,6 +69,7 @@ article {
     }
 
     &:hover {
+      cursor: pointer;
       & .inner {
         visibility: visible;
         opacity: 1;
@@ -83,6 +85,7 @@ article {
   & .main-content {
     overflow: hidden;
     text-align: center;
+    position: relative;
 
     & .category {
       color: var(--text-color);
@@ -93,6 +96,7 @@ article {
       font-family: 'Merriweather', Arial, Helvetica, sans-serif;
       text-transform: uppercase;
       opacity: .9;
+      transition: all 300ms ease-in-out;
     }
 
     & h3 {
@@ -100,6 +104,7 @@ article {
       margin: 0 0 20px;
       line-height: 22px;
       font-size: 22px;
+      transition: all 300ms ease-in-out;
     }
 
     & .date {
@@ -121,6 +126,7 @@ article {
     & .continue {
       text-align: center;
       margin-top: 1rem;
+      margin-bottom: 1.5rem;
       @include wall-title();
     }
 
@@ -135,6 +141,9 @@ article {
       &-border { border-bottom: 1px solid var(--border-color); }
 
       & ul {
+        position: relative;
+        left: -8px;
+
         & li {
           display: inline-block;
           width: 32px;
@@ -158,6 +167,113 @@ article {
         font-style: italic;
         font-family: 'Merriweather', Arial, Helvetica, sans-serif;
         font-size: 12px;
+      }
+    }
+  }
+
+// SMALL CARD
+  &.small {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 49% 1fr;
+    }
+
+    @media (max-width: 750px) {
+      grid-template-columns: 1fr;
+    }
+
+    &.last {
+      margin-bottom: 40px;
+    }
+    
+    & figure {
+      margin: 0;
+
+      & .inner .content span {
+        width: 40px;
+        height: 40px;
+        right: 56%;
+
+        &:first-child {
+          left: 56%;
+        }
+
+        & i {
+          line-height: 40px;
+          font-size: 20px;
+        }
+      }
+
+      & img {
+        height: 100%;
+      }
+    }
+
+    & .main-content {
+      & .date {
+        text-align: left;
+        padding: 0 0 10px;
+
+        @media (max-width: 1200px) {
+          padding: 0;
+        }
+
+        & span {
+          padding-left: 0;
+        }
+      }
+
+      & .category {
+        color: var(--contrast-color);
+        
+        @media (max-width: 1200px) {
+          padding: 0 0 10px;
+        }
+      }
+
+      & h3, & .category {
+        text-align: left;
+      }
+
+      & h3 {
+        font-size: 20px;
+
+        @media (max-width: 1200px) {
+          font-size: 18px;
+        }
+      }
+
+      & .bottom {
+        padding: 0;
+        position: relative;
+        top: 12px;
+
+        @media (max-width: 1200px) and (min-width: 992px) {
+          top: 0;
+        }
+
+        @media (max-width: 750px) {
+          top: 0;
+        }
+      }
+
+      &:hover {
+        & h3 {
+          font-weight: bold;
+          filter: brightness(1.5);
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      & figure {
+        filter: brightness(1.1);
       }
     }
   }
