@@ -3,7 +3,7 @@
 .notification {
   width: 100%;
   margin: 36px 0 35px;
-  background: var(--quote-bg);
+  background: #fffce8;
   padding: 15px 22px;
   transition: background 666ms ease-in-out;
   display: grid;
@@ -106,11 +106,6 @@
 
     & button {
       @include hover-button();
-      &:hover {
-        background: var(--button-text-color);
-        color: var(--light-color);
-        cursor: pointer;
-      }
     }
   }
 

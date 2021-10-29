@@ -237,6 +237,7 @@ article {
 
       & h3, & .category {
         text-align: left;
+        cursor: pointer;
       }
 
       & h3 {
@@ -245,35 +246,28 @@ article {
         @media (max-width: 1200px) {
           font-size: 18px;
         }
-      }
 
-      & .bottom {
-        padding: 0;
-        position: relative;
-        top: 12px;
-
-        @media (max-width: 1200px) and (min-width: 992px) {
-          top: 0;
-        }
-
-        @media (max-width: 750px) {
-          top: 0;
-        }
-      }
-
-      &:hover {
-        & h3 {
+        &:hover {
           font-weight: bold;
           filter: brightness(1.5);
         }
       }
-    }
 
-    &:hover {
-      cursor: pointer;
+      & .bottom {
+        padding: 0;
+        position: absolute;
+        bottom: 2px;
+        width: 100%;
 
-      & figure {
-        filter: brightness(1.1);
+        @media (max-width: 1200px) and (min-width: 992px) {
+          top: 0;
+          position: relative;
+        }
+
+        @media (max-width: 750px) {
+          top: 0;
+          position: relative;
+        }
       }
     }
   }

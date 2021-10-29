@@ -22,12 +22,13 @@
   & blockquote {
     width: 100%;
     margin: 36px 0 35px;
-    background: var(--quote-bg);
+    background: #fffce8;
     padding: 15px 22px 15px 25px;
     transition: background 666ms ease-in-out;
     font-style: italic;
     font-size: 18px;
     border-left: 3px solid var(--contrast-color);
+    color: var(--button-text-color);
   }
 
   // UNORDER LIST

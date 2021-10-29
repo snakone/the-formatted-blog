@@ -1,7 +1,7 @@
 // RESPONSIVE CONTAINER
 @mixin container() {
   width: 100%;
-  @media (min-width: 768px) { width: 750px; }
+  @media (min-width: 865px) { width: 850px; }
   @media (min-width: 992px) { width: 970px; }
   @media (min-width: 1200px) { width: 1170px; }
 }
@@ -66,8 +66,7 @@
   }
 
   &:hover {
-    background: var(--quote-bg);
-    color: var(--dark-color);
+    background: var(--contrast-color);
     cursor: pointer;
   }
 }
