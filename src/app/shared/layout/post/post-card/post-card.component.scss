@@ -82,6 +82,23 @@ article {
     }
   }
 
+  &.default {
+    & .main-content {
+      & h3 {
+        line-height: 30px;
+
+        @media (max-width: 820px) {
+          width: 80%;
+          margin: 0 auto 20px;
+        }
+
+        @media (max-width: 520px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
   & .main-content {
     overflow: hidden;
     text-align: center;
@@ -109,8 +126,7 @@ article {
 
       &:hover {
         cursor: pointer;
-        font-weight: bold;
-        filter: brightness(1.5);
+        filter: contrast(1.5);
       }
     }
 
@@ -155,6 +171,11 @@ article {
             line-height: 15px;
             text-align: center;
             @include hover(1.5);
+
+            &.fa-envelope {
+              position: relative;
+              top: 1px;
+            }
           }
         }
       }

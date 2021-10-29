@@ -28,7 +28,7 @@ export class NavigationComponent implements AfterViewInit {
   public panned(e: Event): void {
     if (window.innerWidth > 730) { return; }
     const event = (e as unknown) as HammerInput;
-    this.total += (event.deltaX * -.08);
+    this.total += (event.deltaX * -.09);
 
     if (this.total <= 0) { this.total = 0; }
     if (this.total >= 700) { this.total = 700; }
@@ -36,7 +36,6 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   public move(next: boolean): void {
- 
     if (this.el) {
       next ? (
         this.el.scrollLeft += this.scrollDistance,

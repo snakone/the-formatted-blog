@@ -17,6 +17,14 @@ export class FooterNavComponent implements OnInit {
     'fab fa-dribbble'
   ];
 
+  // icons = [
+  //   'icons8-facebook-50.svg',
+  //   'icons8-twitter-50.svg',
+  //   'icons8-instagram-50.svg',
+  //   'icons8-pinterest-50.svg',
+  //   'icons8-linkedin-50.svg'
+  // ];
+
   constructor() { }
 
   ngOnInit(): void { }

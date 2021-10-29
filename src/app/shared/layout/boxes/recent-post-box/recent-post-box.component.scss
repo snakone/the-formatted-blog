@@ -81,7 +81,7 @@
 
       &:hover {
         cursor: pointer;
-        & h5 { filter: brightness(1.5); }
+        & h5 { filter: contrast(1.5); }
 
         & img {
           opacity: .8;

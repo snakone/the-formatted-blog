@@ -39,11 +39,22 @@
         list-style: disc inside none;
 
         & i {
-          font-size: 1rem;
+          font-size: 1.1rem;
           position: relative;
           top: -4px;
           @include hover(1.5);
-         }
+        }
+        
+        // & img {
+        //   width: 42px;
+        //   height: 42px;
+        //   padding: 0 4px;
+
+        //   &:hover {
+        //     filter: brightness(1.1);
+        //     cursor: pointer;
+        //   }
+        // }
       }
     }
   }

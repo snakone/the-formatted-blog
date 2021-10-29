@@ -19,9 +19,7 @@ Suspendisse eu augue ac nisi maximus posuere vitae finibus risus.
 Aenean vestibulum diam sit amet leo tristique vehicula. Ut ullamcorper nulla eu
 magna tincidunt consectetur. Nulla elementum gravida suscipit. Pellentesque habitant
 morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-Sed euismod suscipit auctor. Suspendisse sapien sapien, porttitor vel posuere laoreet,
-vulputate non elit. Nunc feugiat, erat ut vehicula vehicula, tellus quam
-pulvinar augue, vel cursus massa erat.
+Sed euismod suscipit auctor.
 </p>
 `;
 
