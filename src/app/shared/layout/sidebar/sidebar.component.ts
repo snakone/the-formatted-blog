@@ -11,7 +11,6 @@ export class SidebarComponent implements OnInit {
 
   @Input() recent = true;
   @Input() categories = true;
-  @Input() social = true;
 
   constructor() { }
 

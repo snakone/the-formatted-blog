@@ -1,0 +1,25 @@
+<div class="grid"
+    [ngClass]="{'loaded': isLoaded}"
+    id="grid">
+    <div class="grid-item" *ngFor="let item of items; let i = index">
+        <div class="masonry-content">
+            <img src="https://picsum.photos/450/325?image={{item * 4}}" alt="Dummy Image" [style.height]="item % 3 === 0 ? '450px' : 'auto'">
+            <h3 class="masonry-title">{{item}}Nesciunt aspernatur eaque similique laudantium a</h3>
+            <p class="masonry-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Assumenda modi inventore, totam vero consequuntur, aut animi veritatis tempora nulla 
+                facere placeat velit illum explicabo dicta enim ipsum. Vitae ducimus, ratione.
+            </p>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="!isLoaded">
+    <h4>Cargando... Por favor espera</h4>
+    <div class="progress">
+        <div class="progress-value"></div>
+    </div>
+</ng-container>
+
+
+
+

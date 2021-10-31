@@ -30,7 +30,7 @@
       </div>
       <!-- BOTTOM -->
       <div class="bottom"
-           [ngClass]="{'first': first}">
+           [ngClass]="{'first': border}">
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>
@@ -67,8 +67,7 @@
         <span>Sep, 17 2015</span>
       </p>
       <!-- BOTTOM -->
-      <div class="bottom"
-           [ngClass]="{'bottom-border': first}">
+      <div class="bottom">
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>

@@ -1,1 +1,12 @@
-<p>news works!</p>
+<div class="animated fadeIn">
+  <div class="wrapper">
+    <app-notification-bar [margin]="true"></app-notification-bar>
+  </div>
+    <section class="news-content">
+      <app-section [margin]="false">
+        <app-news-masonry (loaded)="loaded = true" 
+                          [isLoaded]="loaded">
+        </app-news-masonry>
+      </app-section>
+    </section>
+  </div>

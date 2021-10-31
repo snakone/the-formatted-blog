@@ -200,14 +200,6 @@ article {
     gap: 20px;
     margin-bottom: 30px;
 
-    // @media (max-width: 1200px) {
-    //   grid-template-columns: 49% 1fr;
-    // }
-
-    // @media (max-width: 1200px) {
-    //   grid-template-columns: 38% 1fr;
-    // }
-
     @media (max-width: 750px) {
       grid-template-columns: 1fr;
     }
@@ -239,10 +231,6 @@ article {
       & img {
         height: 100%;
       }
-
-      // &:hover .content span {
-      //   top: 56% !important;
-      // }
     }
 
     & .main-content {

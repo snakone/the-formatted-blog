@@ -3,14 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { NewsRoutingModule } from './news.routing';
 import { NewsComponent } from './news.component';
+import { LayoutModule } from '@shared/layout/layout.module';
+import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
 
 @NgModule({
   declarations: [
-    NewsComponent
+    NewsComponent,
+    NewsMasonryComponent
   ],
   imports: [
     CommonModule,
-    NewsRoutingModule
+    NewsRoutingModule,
+    LayoutModule
   ]
 })
 
