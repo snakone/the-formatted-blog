@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { NOTIFICATION_TOOLTIP } from '@shared/data/data';
 
 @Component({
@@ -10,6 +10,7 @@ import { NOTIFICATION_TOOLTIP } from '@shared/data/data';
 
 export class NotificationBarComponent implements OnInit {
 
+  @Input() margin = false;
   tooltip = NOTIFICATION_TOOLTIP;
 
   constructor() { }

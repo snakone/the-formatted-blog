@@ -10,7 +10,7 @@ import { POST_MESSAGE, POST_MESSAGE_ALONE } from '@shared/data/data';
 
 export class PostCardComponent implements OnInit {
 
-  @Input() border = true;
+  @Input() first = true;
   @Input() alone = false;
   @Input() small = false;
   @Input() last!: boolean;

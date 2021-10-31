@@ -16,6 +16,10 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
+    &:last-of-type {
+      margin: 0;
+    }
   }
 
   // BLOCKQUOTE

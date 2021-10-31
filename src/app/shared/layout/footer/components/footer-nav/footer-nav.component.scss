@@ -5,12 +5,10 @@
   @include row();
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 3rem;
   text-align: center;
-  max-width: 40%;
+  max-width: 56%;
 
-  @media(max-width: 993px) { max-width: 70%; }
-  @media(max-width: 500px) { max-width: 90%; }
+  @media(max-width: 993px) { max-width: 89%; }
 
   & .about, & .newsletter {
     h5 {

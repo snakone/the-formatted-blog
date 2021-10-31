@@ -9,6 +9,10 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
 
+  &.margin {
+    margin: 20px 0 35px;
+  }
+
   & .title {
     display: flex;
     flex-direction: column;
@@ -57,8 +61,8 @@
         }
 
         @media(max-width: 460px) {
-          right: -26px;
-          top: -26px;
+          right: -28px;
+          top: -22px;
         }
       }
     }
@@ -85,7 +89,7 @@
     }
 
     @media(max-width: 460px) {
-      padding-right: 30%;
+      padding-right: 27%;
     }
 
     @media(max-width: 400px) {

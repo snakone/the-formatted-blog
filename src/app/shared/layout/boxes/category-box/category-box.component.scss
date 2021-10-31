@@ -4,6 +4,7 @@
   text-align: center;
   margin-bottom: 4rem;
   padding-bottom: 1rem;
+  position: relative;
 
   & h4 {
     position: relative;
@@ -15,20 +16,20 @@
   }
 
   & ul {
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
     & li {
       overflow: hidden;
       list-style: none;
       padding: 5px;
-      border-top: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: filter 666ms ease-in-out;
+      transition: color 666ms ease-in-out,
+                  border-top 666ms ease-in-out;
       font-weight: normal;
 
       &:first-child {
@@ -47,7 +48,23 @@
     }
   }
 
-  @media (max-width: 993px) {
-    margin-bottom: 2rem;
+  @media (max-width: 992px) {
+    margin-bottom: 15px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      width: 100%;
+      left: 0;
+      border-top: 1px solid var(--border-color);
+      transition: all 666ms ease-in-out;
+    }
+
+    & ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      column-gap: 2rem;
+    }
   }
 }

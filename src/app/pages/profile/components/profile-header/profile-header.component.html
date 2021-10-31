@@ -1,0 +1,24 @@
+<div class="header-profile">
+    <div class="edit">
+        <button>Editar</button>
+    </div>
+</div>
+
+<div class="info-profile">
+    <div class="flex-start">
+        <div class="avatar">
+            <img src="assets/images/author.jpg" alt="Avatar"/>
+        </div>
+        <div class="name">
+            <p>New York, USA</p>
+            <h4>Marian Smith</h4>
+        </div>
+    </div>
+    <div class="actions">
+        <ul>
+            <li *ngFor="let i of items">
+                <i [class]="i.icon"></i>
+            </li>
+        </ul>
+    </div>
+</div>

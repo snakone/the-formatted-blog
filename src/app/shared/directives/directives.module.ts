@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
-import { StickyDirective } from './sticky.directive';
+import { StickyDirective } from './sticky/sticky.directive';
+import { NavDirective } from './nav/nav.directive';
 
 @NgModule({
   declarations: [
-    StickyDirective
+    StickyDirective,
+    NavDirective
   ],
   exports: [
-    StickyDirective
+    StickyDirective,
+    NavDirective
   ]
 })
 

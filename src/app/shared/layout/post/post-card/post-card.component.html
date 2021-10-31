@@ -1,7 +1,7 @@
 <ng-container *ngIf="!small; else smallSize">
   <article class="default">
     <figure>
-      <img src="assets/images/05-img_small.jpg" alt="Post Image"/>
+      <img src="assets/images/05-img.jpg" alt="Post Image"/>
       <!-- HOVER -->
       <div class="inner">
         <div class="content">
@@ -30,7 +30,7 @@
       </div>
       <!-- BOTTOM -->
       <div class="bottom"
-           [ngClass]="{'bottom-border': border}">
+           [ngClass]="{'first': first}">
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>
@@ -68,7 +68,7 @@
       </p>
       <!-- BOTTOM -->
       <div class="bottom"
-           [ngClass]="{'bottom-border': border}">
+           [ngClass]="{'bottom-border': first}">
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>

@@ -3,8 +3,7 @@
 .recent {
   position: relative;
   text-align: center;
-  margin-bottom: 40px;
-  @media(max-width: 993px) and (min-width: 649px) { margin-bottom: 50px; }
+  @media(max-width: 993px) { margin-bottom: 80px; }
 
   & h4 {
     position: relative;
@@ -24,18 +23,19 @@
     & li {
       list-style: none;
       overflow: hidden;
-      padding: 15px 0;
-      border-top: 1px solid var(--border-color);
+      padding: 10px 0;
       display: flex;
       align-items: center;
       transition: border-top 666ms ease-in-out;
 
-      &:first-child {
-        padding-top: 0;
-        border: 0;
+      @media (min-width: 992px) {
+        &:first-child {
+          padding-top: 0;
+          border: 0;
+        }
       }
 
-      &:nth-last-child(-n+2) { display: none; }
+      &:nth-last-child(-n+1) { display: none; }
 
       & .wrapper {
         overflow: hidden;
@@ -75,6 +75,7 @@
 
           &.date {
             color: var(--contrast-color);
+            transition: color 666ms ease-in-out;
           }
         }
       }
@@ -100,14 +101,12 @@
       column-gap: 2rem;
 
       & li {
-        padding-top: 0;
-        border-top: 0;
         & .info h5 { font-size: 14px; }
-        &:nth-last-child(-n+2) { display: flex; }
+        &:nth-last-child(-n+1) { display: flex; }
       }
     }
 
-    @media(min-width: 600px) and (max-width: 749px) {
+    @media(min-width: 550px) and (max-width: 749px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       & li:nth-child(2) { border-top: 0}
@@ -118,24 +117,25 @@
   &:before {
     content: "";
     position: absolute;
-    top: -2.75rem;
+    top: -45px;
     width: 100%;
     left: 0;
     border-top: 1px solid var(--border-color);
+    transition: all 666ms ease-in-out;
   }
 }
 
-.box {
-  margin: 0 auto;
-  margin-bottom: 50px;
-  width: 250px;
-  height: 250px;
-  background: var(--transparent-bg);
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  transition: all 666ms ease-in-out;
-  @media(max-width: 992px) { display: none; }
-}
+// .box {
+//   margin: 0 auto;
+//   margin-bottom: 50px;
+//   width: 250px;
+//   height: 250px;
+//   background: var(--transparent-bg);
+//   border: 1px solid var(--border-color);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 28px;
+//   transition: all 666ms ease-in-out;
+//   @media(max-width: 992px) { display: none; }
+// }
