@@ -5,12 +5,10 @@
   @include row();
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 3rem;
   text-align: center;
-  max-width: 40%;
+  max-width: 56%;
 
-  @media(max-width: 993px) { max-width: 70%; }
-  @media(max-width: 500px) { max-width: 90%; }
+  @media(max-width: 993px) { max-width: 89%; }
 
   & .about, & .newsletter {
     h5 {
@@ -39,11 +37,22 @@
         list-style: disc inside none;
 
         & i {
-          font-size: 1rem;
+          font-size: 1.1rem;
           position: relative;
           top: -4px;
           @include hover(1.5);
-         }
+        }
+        
+        // & img {
+        //   width: 42px;
+        //   height: 42px;
+        //   padding: 0 4px;
+
+        //   &:hover {
+        //     filter: brightness(1.1);
+        //     cursor: pointer;
+        //   }
+        // }
       }
     }
   }

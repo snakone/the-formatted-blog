@@ -1,30 +1,12 @@
+@import 'mixins/mixins.scss';
+
 button {
+  @include hover-button();
   width: 100%;
-  display: block;
-  background: var(--dark-color);
-  color: var(--light-color);
   font-size: 16px;
   line-height: 16px;
   padding: 10px;
-  border-radius: 0;
-  font-weight: 600;
-  transition: all 666ms ease-in-out;
-  border: 0;
-  text-align: center;
   margin: 1.5rem auto;
-
-  @media(max-width: 992px) { font-size: 14px; }
-
-  & span {
-    position: relative;
-    top: 1px;
-  }
-
-  &:hover {
-    background: var(--light-color);
-    color: var(--dark-color);
-    cursor: pointer;
-  }
 
   &:disabled {
     opacity: .5;
@@ -36,7 +18,7 @@ input[type="checkbox"] {
   position: relative;
   left: 10px;
   top: 2px;
-  margin-top: 1.2rem;
+  margin-top: .8rem;
   cursor: pointer;
 }
 
@@ -54,9 +36,12 @@ input[type="checkbox"] {
     line-height: 20px;
   }
 
+  & strong {
+    color: var(--contrast-color);
+  }
+
   & strong, & .recover i  {
     cursor: pointer;
-
     &:hover { filter: brightness(1.2); }
   }
 

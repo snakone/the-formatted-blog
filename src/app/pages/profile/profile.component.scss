@@ -1,0 +1,13 @@
+@import 'mixins/mixins.scss';
+
+section, .wrapper {
+  @include container();
+  @include row();
+  margin-top: 0.666rem;
+}
+
+.profile-content {
+  position: relative;
+  top: -110px;
+  margin-bottom: -110px;
+}

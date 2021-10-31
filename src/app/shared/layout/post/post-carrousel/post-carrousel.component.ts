@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { CARROUSEL_OPTS } from '@shared/data/data';
 
 @Component({
   selector: 'app-post-carrousel',
@@ -10,28 +10,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export class PostCarrouselComponent implements OnInit {
 
-  customOptions: OwlOptions = {
-    loop: false,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    margin: 20,
-    lazyLoad: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 2
-      },
-      992: {
-        items: 3
-      }
-    }
-  };
+  @Input() profile = false;
+
+  customOptions = CARROUSEL_OPTS;
 
   items = [
     '02-img.jpg',

@@ -1,4 +1,4 @@
-<nav id="nav">
+<nav StickyNav (scrolled)="onScroll($event)">
   <div class="wrapper">
     <div class="nav"> <!-- LEFT SIDE -->
       <app-text-slider></app-text-slider>
@@ -38,7 +38,7 @@
         </ul>
       </div> <!-- SEARCH BUTTON -->
       <div class="search"
-           (click)="show = !show">
+           (click)="showSearchBar = !showSearchBar">
         <i class="fas fa-search"></i>
       </div>
     </div>
@@ -51,4 +51,6 @@
 </div>
 
  <!-- SEARCH BAR -->
- <app-search-bar *ngIf="show" (closed)="show = !show"></app-search-bar>
+ <app-search-bar *ngIf="showSearchBar" 
+                (closed)="showSearchBar = !showSearchBar">
+</app-search-bar>

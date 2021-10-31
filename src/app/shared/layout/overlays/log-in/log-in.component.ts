@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +16,8 @@ export class LogInOverlayComponent implements OnInit {
   remember = false;
 
   constructor(
-    public dialogRef: MatDialogRef<LogInOverlayComponent>
+    public dialogRef: MatDialogRef<LogInOverlayComponent>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,8 @@ export class LogInOverlayComponent implements OnInit {
     if (this.signInForm.invalid) { return; }
     const { email, password } = this.signInForm.value;
     console.log(email, password, this.remember);
+    this.dialogRef.close();
+    this.router.navigateByUrl('/profile');
   }
 
   public signUp(): void {

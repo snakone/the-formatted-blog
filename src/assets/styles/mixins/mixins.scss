@@ -1,7 +1,7 @@
 // RESPONSIVE CONTAINER
 @mixin container() {
   width: 100%;
-  @media (min-width: 768px) { width: 750px; }
+  @media (min-width: 865px) { width: 850px; }
   @media (min-width: 992px) { width: 970px; }
   @media (min-width: 1200px) { width: 1170px; }
 }
@@ -48,7 +48,7 @@
   background: var(--dark-color);
   color: var(--light-color);
   margin-left: auto;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 16px;
   padding: 10px;
   border-radius: 0;
@@ -62,11 +62,11 @@
   & span {
     position: relative;
     top: 1px;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
   }
 
   &:hover {
-    background: var(--light-color);
-    color: var(--dark-color);
+    background: var(--contrast-color);
     cursor: pointer;
   }
 }

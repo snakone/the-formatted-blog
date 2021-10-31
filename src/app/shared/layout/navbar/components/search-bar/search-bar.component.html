@@ -8,7 +8,9 @@
              [(ngModel)]="value"
              [placeholder]="placeholder"
              id="search-input"/>
-      <button [disabled]="!value">Buscar</button>
+      <button [disabled]="!value"
+              (click)="search()">Buscar
+      </button>
     </div>
      <!-- CLOSE -->
     <div class="close">

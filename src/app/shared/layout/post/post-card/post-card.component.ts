@@ -12,6 +12,8 @@ export class PostCardComponent implements OnInit {
 
   @Input() border = true;
   @Input() alone = false;
+  @Input() small = false;
+  @Input() last!: boolean;
 
   message = POST_MESSAGE;
   messageAlone = POST_MESSAGE_ALONE;

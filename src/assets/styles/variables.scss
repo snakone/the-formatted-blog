@@ -5,7 +5,7 @@
   --shadow-color: #d4d4d4;
   --text-color: #424242;
   --primary-color: #272b41;
-  --input-bg: rgba(235, 235, 235, .5);
+  --input-bg: var(--quote-bg);
   --contrast-color: #001c9b;
   --border-color: #ebebeb;
   --transparent-bg: rgba(255, 255, 255 , 0.85);
@@ -13,6 +13,9 @@
   --shade-color: #b7b5b5;
   --navigation-border: #e2e1e1;
   --navbar-border: var(--shade-color);
+  --add-bg: rgba(225, 225, 225, .7);
+  --button-text-color: #3b3939;
+  --inverted-contrast: #ffe364;
 
   // SIZE
   --app-width: 377px;

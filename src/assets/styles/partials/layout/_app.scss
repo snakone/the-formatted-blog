@@ -7,18 +7,11 @@
   z-index: 0;
 }
 
-.popular, .recent, .list, .social, .gallery {
-  @media(max-width: 650px) {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-
-  @media(max-width: 500px) {
-    max-width: 100%;
-  }
-}
-
 .mat-dialog-container {
   background: var(--light-color);
   color: var(--text-color);
+}
+
+.owl-carousel.owl-theme.owl-loaded {
+  z-index: 0;
 }
