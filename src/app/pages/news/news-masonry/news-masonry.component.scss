@@ -1,6 +1,8 @@
+@import 'mixins/mixins.scss';
+
 .grid-item { 
     width: 31.57%;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     @media (max-width: 1200px) { width: 31.18%; }
     @media (max-width: 993px) { width: 30.7%; }
     @media (max-width: 800px) { width: 47.85%; }
@@ -10,21 +12,20 @@
     @media (max-width: 550px) { width: 100%; }
 }
 
-img { 
-    max-width: 100%;
-    width: 100%;
-}
-
 .grid {
    z-index: 1;
    opacity: 0;
    transition: opacity 666ms ease-in-out;
    height: 0;
+   max-height: 0;
    margin-bottom: -20px;
+   visibility: hidden;
 
    &.loaded {
        opacity: 1;
        height: auto;
+       max-height: 100%;
+       visibility: visible;
    }
 }
 
@@ -37,11 +38,11 @@ img {
     display: flex;
     height: 16px;
     width: 100%;
-    margin: 16px 0 40px 0;
+    margin: 70px 0 25px 0;
 }
   
 .progress-value {
-    animation: load 3s normal forwards;
+    animation: load 2s normal forwards;
     box-shadow: 0 10px 20px -10px var(--shadow-color);
     background: var(--dark-color);
     height: 18px;
@@ -63,11 +64,83 @@ img {
     100% { width: 100%; }
 }
 
-h4 {
-    font-size: 1.1rem;
-    text-align: center;
-    margin-top: 70px;
-    letter-spacing: 3px;
-    opacity: .8;
-    font-weight: 100;
+.content {
+    overflow: hidden;
+    position: relative;
+
+    & .inner {
+        overflow: hidden;
+        height: 260px;
+
+        & img { 
+            max-width: 100%;
+            width: 100%;
+            max-width: 100%;
+            border: 0;
+            height: 100%;
+            transition: transform 300ms ease-in-out;
+        
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    & h4 {
+        text-transform: uppercase;
+        margin: 5px 0 12px;
+        line-height: 22px;
+        font-size: 20px;
+        padding-right: 10px;
+        cursor: pointer;
+
+        &:hover {
+            cursor: pointer;
+            filter: contrast(1.5);
+        }
+    }
+    
+    // & h3 {
+    //     font-size: 1.1rem;
+    //     text-align: center;
+    //     margin-top: 70px;
+    //     letter-spacing: 3px;
+    //     opacity: .8;
+    //     font-weight: 100;
+    // }
+    
+    & .category {
+        overflow: hidden;
+        padding: 15px 0 0;
+        font-style: italic;
+        font-family: "Merriweather", Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        opacity: 0.9;
+        transition: all 300ms ease-in-out;
+        color: var(--contrast-color);
+        cursor: pointer;
+    }
+
+    & p {
+        margin-bottom: 10px;
+        font-size: .8rem;
+
+        &.date {
+            color: #888;
+            overflow: hidden;
+            padding: 0;
+            margin-bottom: 18px;
+            font-style: italic;
+            font: 'Merriweather', Arial, Helvetica, sans-serif;
+      
+            & span {
+              padding: 0 10px 0 0;
+              position: relative;
+              font-size: 12px;
+              @include hr-title();
+            }
+          }
+    }
 }

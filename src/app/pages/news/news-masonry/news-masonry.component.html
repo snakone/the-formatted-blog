@@ -1,20 +1,31 @@
-<div class="grid"
-    [ngClass]="{'loaded': isLoaded}"
-    id="grid">
-    <div class="grid-item" *ngFor="let item of items; let i = index">
-        <div class="masonry-content">
-            <img src="https://picsum.photos/450/325?image={{item * 4}}" alt="Dummy Image" [style.height]="item % 3 === 0 ? '450px' : 'auto'">
-            <h3 class="masonry-title">{{item}}Nesciunt aspernatur eaque similique laudantium a</h3>
-            <p class="masonry-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+<div class="grid" id="grid"
+    [ngClass]="{'loaded': isLoaded}">
+    <div class="grid-item" *ngFor="let item of items; let i = index" #el (click)="remove(el)">
+        <div class="content">
+            <div class="inner">
+                <img src="https://picsum.photos/450/325?image={{item * 4}}">
+            </div>
+            <p class="category">Lifestyle</p>
+            <h4>Nesciunt aspernatur eaque similique laudantium a</h4>
+            <p class="date">
+                <span>Sep, 17 2015</span>
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                 Assumenda modi inventore, totam vero consequuntur, aut animi veritatis tempora nulla 
                 facere placeat velit illum explicabo dicta enim ipsum. Vitae ducimus, ratione.
+            </p>
+            <p *ngIf="i % 3.5 === 0">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus nam illum temporibus 
+                delectus quo praesentium incidunt, quasi itaque at ratione asperiores est obcaecati odio 
+                sapiente doloribus culpa aliquam assumenda voluptatem dignissimos error! 
+                Ea incidunt error obcaecati facere sit illo molestiae.
             </p>
         </div>
     </div>
 </div>
 
 <ng-container *ngIf="!isLoaded">
-    <h4>Cargando... Por favor espera</h4>
+    <!-- <h4>Cargando... Por favor espera</h4> -->
     <div class="progress">
         <div class="progress-value"></div>
     </div>

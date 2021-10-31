@@ -5,6 +5,7 @@ import { NewsRoutingModule } from './news.routing';
 import { NewsComponent } from './news.component';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
+import { DirectivesModule } from '@shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
   imports: [
     CommonModule,
     NewsRoutingModule,
-    LayoutModule
+    LayoutModule,
+    DirectivesModule
   ]
 })
 

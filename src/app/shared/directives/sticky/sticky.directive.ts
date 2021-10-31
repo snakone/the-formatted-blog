@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, throttleTime } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
 
 // tslint:disable-next-line:directive-selector
@@ -27,7 +27,7 @@ export class StickyDirective implements AfterViewInit {
   private subscribeToResize(): void {
     fromEvent(window, 'resize')
       .pipe(
-        debounceTime(500),
+        throttleTime(500),
         map(_ => (window.document.body.clientWidth < 992) ?? true),
         distinctUntilChanged(),
       )

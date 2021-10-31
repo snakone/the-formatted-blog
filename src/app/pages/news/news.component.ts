@@ -14,4 +14,8 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  public goTop(): void {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
 }
