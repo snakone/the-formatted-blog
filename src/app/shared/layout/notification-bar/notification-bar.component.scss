@@ -22,7 +22,7 @@
       color: #424242;
       font-style: normal;
       font-weight: 600;
-      line-height: 1.5;
+      line-height: 1;
       margin-top: 3px;
       font-size: 17px;
 
@@ -54,14 +54,18 @@
           font-size: 13px;
           font-family: 'Raleway', Arial, Helvetica, sans-serif;
           z-index: 10;
+          display: none;
         }
 
         &:hover {
-          &::after { opacity: .9; }
+          &::after { 
+            opacity: .9;
+            display: block;
+          }
         }
 
         @media(max-width: 460px) {
-          right: -28px;
+          right: -24px;
           top: -22px;
         }
       }

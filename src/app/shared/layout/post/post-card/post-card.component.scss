@@ -81,6 +81,16 @@ article {
   }
 
   &.default {
+    &.alone {
+      & .main-content {
+        & .bottom {
+          @media (max-width: 993px) {
+            margin-bottom: 65px;
+          }
+        }
+      }
+    }
+
     & .main-content {
       & h3 {
         line-height: 30px;

@@ -10,15 +10,10 @@
     margin: 0 0 30px;
     text-align: left;
 
-    @media(max-width: 600px) {
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    &:last-of-type {
-      margin: 0;
+    @media(min-width: 992px) {
+      &:last-of-type {
+        margin: 0;
+      }
     }
   }
 

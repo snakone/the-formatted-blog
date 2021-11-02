@@ -1,5 +1,6 @@
 <ng-container *ngIf="!small; else smallSize">
-  <article class="default">
+  <article class="default"
+           [ngClass]="{'alone': alone}">
     <figure>
       <img src="assets/images/05-img.jpg" alt="Post Image"/>
       <!-- HOVER -->
