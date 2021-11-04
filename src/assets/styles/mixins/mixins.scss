@@ -42,6 +42,24 @@
   }
 }
 
+// TITLE MAIN POST
+@mixin main-title {
+  text-transform: uppercase;
+  color: var(--text-color);
+  line-height: 1.5;
+  font-size: 32px;
+  border-top: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  margin: 0 0 20px;
+  font-style: normal;
+  text-align: center;
+  transition: border 666ms ease-in-out;
+
+  @media (max-width: 993px) { font-size: 24px; }
+  @media (max-width: 550px) { font-size: 20px; }
+  @media (max-width: 475px) { font-size: 16px; }
+}
+
 // HOVER BUTTON
 @mixin hover-button() {
   display: block;

@@ -1,3 +1,5 @@
+@import 'mixins/mixins.scss';
+
 .wrapper {
   overflow: hidden;
   position: relative;
@@ -27,6 +29,10 @@
                 border 666ms ease-in-out;
     border: 1px solid transparent;
 
+    @media (min-width: 1200px) {
+      padding: 20px 30px;
+    }
+
     & .inner {
       display: flex;
       justify-content: center;
@@ -36,21 +42,7 @@
       width: 100%;
 
       & h2 {
-        margin: 0;
-        text-transform: uppercase;
-        color: var(--text-color);
-        line-height: 1.5;
-        font-size: 36px;
-        border-top: 2px solid var(--border-color);
-        border-bottom: 2px solid var(--border-color);
-        margin: 0 0 22px;
-        font-style: normal;
-        text-align: center;
-        transition: border 666ms ease-in-out;
-
-        @media (max-width: 993px) { font-size: 24px; }
-        @media (max-width: 550px) { font-size: 20px; }
-        @media (max-width: 475px) { font-size: 16px; }
+        @include main-title();
       }
 
       & p {
