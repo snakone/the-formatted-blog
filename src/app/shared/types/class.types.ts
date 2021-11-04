@@ -3,4 +3,4 @@ export class MasonryType {
     public appended!: (els: Element[]) => void;
     public prepended!: (els: Element[]) => void;
     public remove!: (els: Element[]) => void;
-  }
+}

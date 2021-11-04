@@ -1,6 +1,8 @@
 <div class="grid" id="grid"
     [ngClass]="{'loaded': isLoaded}">
-    <div class="grid-item" *ngFor="let item of items; let i = index" #el (click)="remove(el)">
+    <div class="grid-item" *ngFor="let item of items; let i = index" 
+        #el 
+        (click)="remove(el)">
         <div class="content">
             <div class="inner">
                 <img src="https://picsum.photos/450/325?image={{item * 4}}">

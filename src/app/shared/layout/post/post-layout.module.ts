@@ -4,6 +4,7 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { PostCarrouselComponent } from './post-carrousel/post-carrousel.component';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   imports: [
     CommonModule,
     RouterModule,
-    CarouselModule
+    CarouselModule,
+    PipesModule
   ],
   exports: [
     PostCardComponent,

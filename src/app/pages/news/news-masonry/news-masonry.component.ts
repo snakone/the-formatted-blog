@@ -7,11 +7,8 @@ import {
   Input,
   OnDestroy
  } from '@angular/core';
-import { MasonryService } from '@core/services/masonry/masonry.service';
 
-import { MasonryType } from '@shared/types/class.types';
-
-import { 
+ import { 
   fromEvent, 
   filter, 
   takeWhile, 
@@ -19,7 +16,8 @@ import {
   Subject, 
   takeUntil } from 'rxjs';
 
-
+import { MasonryService } from '@core/services/masonry/masonry.service';
+import { MasonryType } from '@shared/types/class.types';
 
 @Component({
   selector: 'app-news-masonry',

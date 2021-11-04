@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { POST_MESSAGE, POST_MESSAGE_ALONE } from '@shared/data/data';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-post-card',
@@ -10,13 +10,12 @@ import { POST_MESSAGE, POST_MESSAGE_ALONE } from '@shared/data/data';
 
 export class PostCardComponent implements OnInit {
 
+  @Input() post: Post | undefined;
+
   @Input() border = true;
   @Input() alone = false;
   @Input() small = false;
   @Input() last!: boolean;
-
-  message = POST_MESSAGE;
-  messageAlone = POST_MESSAGE_ALONE;
 
   icons = [
     'fab fa-twitter',

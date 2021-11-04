@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { NOTIFICATION_TOOLTIP } from '@shared/data/data';
+import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-notification-bar',

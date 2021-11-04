@@ -269,6 +269,7 @@ article {
 
       & h3 {
         font-size: 20px;
+        line-height: initial;
 
         @media (max-width: 1200px) {
           font-size: 18px;
