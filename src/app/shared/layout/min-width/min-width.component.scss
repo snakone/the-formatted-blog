@@ -6,7 +6,6 @@
   height: 100%;
   overflow: hidden;
   background: var(--light-color);
-  color: var(--primary-color);
   place-items: center;
   display: none;
   z-index: 9999;
@@ -24,6 +23,12 @@
     color: var(--dark-color);
 
     & span { font-size: inherit !important }
+  }
+
+  & p {
+    font-size: .9rem;
+    color: var(--contrast-color);
+    font-weight: bold;
   }
 
   @media(max-width: 377px) {

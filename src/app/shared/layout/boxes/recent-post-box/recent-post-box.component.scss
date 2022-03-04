@@ -3,7 +3,7 @@
 .recent {
   position: relative;
   text-align: center;
-  @media(max-width: 993px) { margin-bottom: 80px; }
+  @media(max-width: 993px) { margin-bottom: 35px; }
 
   & h4 {
     position: relative;
@@ -42,6 +42,8 @@
         margin-right: 20px;
         width: 75px;
         height: 75px;
+
+
       }
 
       & img {
@@ -110,7 +112,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       
-      & li:nth-child(2) { border-top: 0}
+      & li:nth-child(2) { border-top: 0; }
       & li:nth-last-child(-n+2) { display: flex; }
     }
   }
@@ -118,11 +120,23 @@
   &:before {
     content: "";
     position: absolute;
-    top: -45px;
+    top: -35px;
     width: 100%;
     left: 0;
     border-top: 1px solid var(--border-color);
     transition: all 666ms ease-in-out;
+  }
+
+  @media(max-width: 992px) {
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -35px;
+      width: 100%;
+      left: 0;
+      border-bottom: 1px solid var(--border-color);
+      transition: all 666ms ease-in-out;
+    }
   }
 }
 

@@ -14,9 +14,7 @@ export class MasonryService {
         itemSelector: '.grid-item',
         percentPosition: true,
         horizontalOrder: true,
-        gutter: 30.5,
-        stagger: 10,
-        transitionDuration: '0.2s'
+        gutter: 30.5
       });
   }
 

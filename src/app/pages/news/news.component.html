@@ -1,12 +1,14 @@
 <div class="animated fadeIn">
   <div class="wrapper">
-    <app-notification-bar [margin]="true"></app-notification-bar>
+    <app-action-bar [tooltip]="tooltip"
+                    buttonText="Subscríbete"
+                    [function]="notification"
+                    [margin]="true">
+    </app-action-bar>
   </div>
     <section class="news-content">
       <app-section [margin]="false">
-        <app-news-masonry (loaded)="loaded = true" 
-                          [isLoaded]="loaded">
-        </app-news-masonry>
+        <app-news-masonry [isLoaded]="loaded"></app-news-masonry>
       </app-section>
     </section>
   </div>

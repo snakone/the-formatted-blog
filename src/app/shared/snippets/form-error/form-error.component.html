@@ -1,16 +1,23 @@
-<div *ngIf="control.invalid && control.dirty"
-     class="form-error">
-    <span *ngIf="validator.includes('minlength') && control.errors?.minlength">
+<div *ngIf="control.invalid && control.dirty" class="form-error">
+    <!-- MIN LENGTH -->
+    <span *ngIf="validator.includes('minlength') && 
+                 control.errors?.minlength">
       Tamaño mínimo:
       <strong>{{control.errors?.minlength.requiredLength}}</strong>
     </span>
-    <span *ngIf="validator.includes('required') && control.errors?.required">
+    <!-- REQUIRED -->
+    <span *ngIf="validator.includes('required') && 
+                 control.errors?.required">
       Campo requerido
     </span>
-    <span *ngIf="validator.includes('pattern') && control.errors?.pattern">
+    <!-- PATTERN -->
+    <span *ngIf="validator.includes('pattern') && 
+                 control.errors?.pattern">
       Fórmato no válido
     </span>
-    <span *ngIf="validator.includes('email') && control.errors?.email">
+    <!-- EMAIL -->
+    <span *ngIf="validator.includes('email') && 
+                 control.errors?.email">
       Fórmato email no válido
     </span>
 </div>

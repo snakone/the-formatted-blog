@@ -1,0 +1,72 @@
+@import 'mixins/mixins.scss';
+
+.action {
+  width: 100%;
+  margin: 30px 0;
+  background: #ffffff;
+  padding: 12px 20px;
+  transition: background 666ms ease-in-out;
+  display: grid;
+  grid-template-columns: 69% auto;
+
+  &.margin {
+    margin: 18px 0 35px;
+  }
+
+  & .info {
+    margin: auto;
+
+    & p {
+      font-size: .8rem;
+      text-align: center;
+      line-height: 14px;
+      color: #303030;
+      font-style: italic;
+    }
+
+    @media(max-width: 750px) { 
+      max-width: 82%;
+
+      & p {
+        margin-bottom: 4px;
+        line-height: 16px;
+      }
+     }
+  }
+
+  & .submit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    & button {
+      width: 75%;
+      @include hover-button();
+      transition: all 333ms ease-in-out;
+      background: #090b0e;
+      color: #ffffff;
+
+      &:hover {
+        background: var(--contrast-color);
+        color: var(--light-color);
+        cursor: pointer;
+      }
+
+      @media(max-width: 750px) {
+        padding: 10px 82px;
+        margin-left: inherit;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  @media(max-width: 750px) { 
+    grid-template-columns: repeat(1, auto);
+    text-align: center;
+    padding: 15px 0;
+
+    & .submit {
+      justify-content: center;
+    }
+   }
+}

@@ -1,6 +1,10 @@
 <div class="animated fadeIn">
   <section>
     <app-profile-header></app-profile-header>
+        <app-action-bar [tooltip]="tooltip"
+                        buttonText="Like"
+                        [function]="like">
+        </app-action-bar>
   </section>
   <section class="profile-content">
     <app-section [margin]="false">

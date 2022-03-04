@@ -18,7 +18,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { OverlaysModule } from './overlays/overlays.module';
 import { PostLayoutModule } from './post/post-layout.module';
-import { NotificationBarComponent } from './notification-bar/notification-bar.component';
+import { ActionBarComponent } from './action-bar/action-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { NotificationBarComponent } from './notification-bar/notification-bar.co
     StickyAsideComponent,
     LoaderComponent,
     SidebarComponent,
-    NotificationBarComponent
+    ActionBarComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +53,7 @@ import { NotificationBarComponent } from './notification-bar/notification-bar.co
     LoaderComponent,
     SidebarComponent,
     PostLayoutModule,
-    NotificationBarComponent
+    ActionBarComponent
   ]
 })
 

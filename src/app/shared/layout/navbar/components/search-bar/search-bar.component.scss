@@ -22,15 +22,6 @@
   box-shadow: 0 0 3px 1px var(--shadow-color);
 }
 
-.backdrop {
-  position: absolute;
-  top: var(--header-height);
-  left: 0;
-  width: 100%;
-  height: calc(100vh - var(--header-height));
-  z-index: -1;
-}
-
 .search-input {
   width: 106%;
   text-align: center;

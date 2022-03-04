@@ -26,7 +26,9 @@
       padding: 0 30px 0 30px;
       background: var(--transparent-bg);
       transition: background 666ms ease-in-out,
-                  border 666ms ease-in-out;
+                  border 666ms ease-in-out,
+                  left 333ms ease-in-out,
+                  width 333ms ease-in-out;
       border: 1px solid transparent;
   
       & .inner {
@@ -66,6 +68,8 @@
           @include main-title();
           color: var(--contrast-color);
           margin: 0;
+          transition: font-size 300ms ease-in;
+          transition: color, border 666ms ease-in;
         }
 
         & .data {
@@ -111,7 +115,7 @@
               @include hover-button();
               background: var(--contrast-color);
               border: 1px solid transparent;
-              transition: 100ms ease-in-out;
+              transition: all 333ms ease-in-out;
               
               &:hover { 
                 filter: brightness(1.2);
@@ -131,26 +135,32 @@
           }
         }
       }
-  
-      @media(max-width: 993px) and (min-width: 731px) {
-        left: 30%;
-        width: 40%;
+
+      @media(max-width: 1200px) {
+        left: 26%;
+        width: 48%;
       }
   
-      @media(max-width: 730px) {
+      @media(max-width: 720px) {
         top: auto;
         bottom: 0;
+        left: 21%;
+        width: 58%;
+        height: 100%;
+      }
+
+      @media(max-width: 640px) {
+        left: 15%;
+        width: 70%;
+      }
+
+      @media(max-width: 550px) {
         left: 0;
         width: 100%;
-        height: auto;
-        padding: 10px;
-  
-        & .inner {
-          & h2 { margin: 0 0 12px; }
-        }
+        height: 76%;
+        top: 12%;
+        bottom: 12%;
       }
-  
-      @media(max-width: 475px) { height: 100%; }
     }
   
     &:hover {
@@ -160,10 +170,8 @@
       & .content {
         background: var(--light-color);
   
-        @media(max-width: 730px) {
-          border-top: 1px solid transparent;
-          border-left: 1px solid var(--border-color);
-          border-right: 1px solid var(--border-color);
+        @media(max-width: 720px) {
+          border: 1px solid var(--border-color);
         }
 
         & .inner {
@@ -174,5 +182,62 @@
       }
     }
   }
+
+@media (max-width: 1200px) {
+  .wrapper {
+    & .content {
+      & .inner {
+        & h2 {
+          font-size: 26px;
+        }
+
+        & p {
+          line-height: 20px;
+        }
+
+        & .data {
+          & ul {
+            margin: 18px 0 0;
+          }
+
+          & .actions {
+            margin: 28px 0 0 0;
+
+            & button {
+              padding: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    & .content {
+      & .inner {
+        & h2 {
+          font-size: 24px;
+        }
+      }
+    }
+
+    & figure {
+      & img {
+        width: initial;
+        max-width: initial;
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .wrapper {
+    & .content {
+      padding: 0 30px 0 30px;
+    }
+  }
+}
   
   

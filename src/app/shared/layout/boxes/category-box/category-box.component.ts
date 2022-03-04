@@ -18,8 +18,7 @@ export class CategoryBoxComponent implements OnInit {
     { name: 'Politics', amount: 958 },
     { name: 'Miscellenious', amount: 9852 },
     { name: 'Games', amount: 452 },
-    { name: 'Video Streaming', amount: 89 },
-    { name: 'Travelling', amount: 158 },
+    { name: 'Video Streaming', amount: 89 }
   ];
 
   constructor() { }

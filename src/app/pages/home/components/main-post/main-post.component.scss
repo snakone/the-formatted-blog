@@ -116,8 +116,6 @@
 
     & .content {
       background: var(--light-color);
-      border-bottom: 1px solid var(--border-color);
-      border-top: 1px solid var(--border-color);
 
       @media(max-width: 730px) {
         border-top: 1px solid transparent;

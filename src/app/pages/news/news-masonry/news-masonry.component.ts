@@ -1,9 +1,6 @@
 import { 
   Component, 
   OnInit, 
-  ChangeDetectionStrategy, 
-  Output, 
-  EventEmitter, 
   Input,
   OnDestroy
  } from '@angular/core';
@@ -14,7 +11,8 @@ import {
   takeWhile, 
   debounceTime, 
   Subject, 
-  takeUntil } from 'rxjs';
+  takeUntil 
+} from 'rxjs';
 
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
@@ -28,14 +26,13 @@ import { MasonryType } from '@shared/types/class.types';
 export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   @Input() isLoaded = false;
-  @Output() loaded = new EventEmitter<void>();
   grid!: HTMLElement | null;
   wrapper!: Element | null;
   $unsubscribe = new Subject<void>();
 
   firstTime = true;
   masonry!: MasonryType;
-  duration = 2000;
+  duration = 3000;
   items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 
   constructor(private masonrySrv: MasonryService) { }
@@ -49,12 +46,12 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
     }, this.duration);
   }
 
-  private createMasonry(emit = true): void {
+  private createMasonry(): void {
     if (this.wrapper) {
+      this.isLoaded = true;
+      this.firstTime = false;
       setTimeout(() => {
         this.masonry = this.masonrySrv.createMasonry(this.wrapper);
-        if (emit) { this.loaded.emit(); }
-        this.firstTime = false;
       }, 123);
     }
   }
@@ -79,16 +76,16 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
       const el = Array.from(
         document.querySelectorAll('.grid-item')
       ).slice(0, 3);
-        this.addElements(el);
+      this.addElements(el);
     } catch (err) { console.log(err); }
   }
 
   private addElements(el: Element[]): void {
     this.masonry.appended(el);
-    this.createMasonry(false);
+    this.createMasonry();
     this.items.push(...[1, 2, 3]);
     if (this.firstTime) {
-      setTimeout(() => this.createMasonry(false), 2000);
+      setTimeout(() => this.createMasonry(), 2000);
     }
   }
 

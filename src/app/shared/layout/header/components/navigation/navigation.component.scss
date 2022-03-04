@@ -68,8 +68,8 @@ nav {
         & li { padding: 10px 12px; }
       }
 
-      @media(max-width: 1199px) and (min-width:730px) {
-        width: 83%;
+      @media(min-width: 731px) and (max-width: 1200px) {
+        & li { padding: 10px 4%; }
       }
     }
 
@@ -84,9 +84,11 @@ nav {
 
   & .indicators {
     position: relative;
+
     & i {
       position: absolute;
       transition: all 0.4s ease-in-out;
+      color: var(--contrast-color);
 
       &.next {
         left: 0;

@@ -51,7 +51,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     date: 'Sep, 17 2015',
-    image: '02-img.jpg',
+    image: '05-img.jpg',
     message: POST_MESSAGE
   },
   {
@@ -69,7 +69,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     date: 'Jan, 05 2016',
-    image: '04-img.jpg',
+    image: '05-img.jpg',
     message: POST_MESSAGE
   }
 ];

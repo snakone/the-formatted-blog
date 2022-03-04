@@ -34,12 +34,12 @@
       <!-- BOTTOM -->
       <div class="bottom"
            [ngClass]="{'first': border}">
+        <span class="author">{{post?.author}}</span>
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>
           </li>
         </ul>
-        <span class="author">Post By: {{post?.author}}</span>
       </div>
     </div>
   </article>
