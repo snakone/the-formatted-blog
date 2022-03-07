@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NO_WIDTH } from '@shared/data/data';
+import { NO_WIDTH } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-min-width',

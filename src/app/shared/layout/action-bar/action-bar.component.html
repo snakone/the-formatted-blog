@@ -1,0 +1,13 @@
+<div class="action"
+     [ngClass]="{'margin': margin}">
+  <!-- INFO TOOLTIP -->
+  <div class="info">
+    <p [innerHTML]="tooltip"></p>
+  </div>
+  <!-- BUTTON -->
+  <div class="submit">
+    <button (click)="function()">
+      <span>{{ buttonText }}</span>
+    </button>
+  </div>
+</div>

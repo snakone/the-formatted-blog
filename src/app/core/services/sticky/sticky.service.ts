@@ -21,15 +21,18 @@ export class StickyService {
   }
 
   public startSticky(selector: string): void {
-    this.stickyElement =  new StickySidebar('.sidebar', {
-      topSpacing: 72,
-      bottomSpacing: 20,
-      resizeSensor: false,
-      containerSelector: `.${selector}`,
-      innerWrapperSelector: '.sidebar__inner'
-    });
+    if (!selector) { return; }
 
-    this.setSticky(true);
+    try {
+      this.stickyElement = new StickySidebar('.sidebar', {
+        topSpacing: 72,
+        bottomSpacing: 20,
+        resizeSensor: false,
+        containerSelector: `.${selector}`,
+        innerWrapperSelector: '.sidebar__inner'
+      });
+      this.setSticky(true);
+    } catch (err) { console.log(err); }
   }
 
   public checkSticky(): void {

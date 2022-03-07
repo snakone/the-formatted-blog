@@ -1,7 +1,11 @@
 <div class="animated fadeIn">
   <div class="wrapper">
     <app-post-carrousel></app-post-carrousel>
-    <app-notification-bar [margin]="true"></app-notification-bar>
+    <app-action-bar [tooltip]="tooltip"
+                    buttonText="Subscríbete"
+                    [function]="notification"
+                    [margin]="true">
+    </app-action-bar>
   </div>
   <section class="post-content">
     <app-section [margin]="false">

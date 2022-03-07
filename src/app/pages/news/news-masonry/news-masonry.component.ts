@@ -1,15 +1,21 @@
 import { 
   Component, 
   OnInit, 
-  ChangeDetectionStrategy, 
-  Output, 
-  EventEmitter, 
-  Input
+  Input,
+  OnDestroy
  } from '@angular/core';
 
-import { fromEvent, filter, takeWhile, debounceTime } from 'rxjs';
+ import { 
+  fromEvent, 
+  filter, 
+  takeWhile, 
+  debounceTime, 
+  Subject, 
+  takeUntil 
+} from 'rxjs';
 
-declare const Masonry: any;
+import { MasonryService } from '@core/services/masonry/masonry.service';
+import { MasonryType } from '@shared/types/class.types';
 
 @Component({
   selector: 'app-news-masonry',
@@ -17,18 +23,19 @@ declare const Masonry: any;
   styleUrls: ['./news-masonry.component.scss']
 })
 
-export class NewsMasonryComponent implements OnInit {
+export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   @Input() isLoaded = false;
-  @Output() loaded = new EventEmitter<void>();
   grid!: HTMLElement | null;
   wrapper!: Element | null;
+  $unsubscribe = new Subject<void>();
 
   firstTime = true;
   masonry!: MasonryType;
+  duration = 3000;
   items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 
-  constructor() { }
+  constructor(private masonrySrv: MasonryService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -36,56 +43,50 @@ export class NewsMasonryComponent implements OnInit {
       this.grid = document.getElementById('grid');
       this.createMasonry();
       this.hasEnded();
-    }, 2000);
+    }, this.duration);
   }
 
-  private createMasonry(emit = true): void {
-    setTimeout(() => {
-      this.masonry = new Masonry(this.wrapper, {
-        itemSelector: '.grid-item',
-        percentPosition: true,
-        horizontalOrder: true,
-        gutter: 30.5,
-        stagger: 10,
-        transitionDuration: '0.2s'
-      });
-  
-      if (emit) {
-        this.loaded.emit();
-      }
+  private createMasonry(): void {
+    if (this.wrapper) {
+      this.isLoaded = true;
       this.firstTime = false;
-      this.masonry.layout();
-    }, 123);
+      setTimeout(() => {
+        this.masonry = this.masonrySrv.createMasonry(this.wrapper);
+      }, 123);
+    }
   }
 
   private hasEnded(): void {
     fromEvent(window, 'scroll')
       .pipe(
+        takeUntil(this.$unsubscribe),
         filter(_ => !!this.items.length && !!this.masonry),
         takeWhile(() => this.items.length <= 50),
+        filter((_: any) => (
+          this.grid!.offsetHeight - 
+          _.target.scrollingElement.scrollTop <= 450
+        )),
         debounceTime(200)
       )
-    .subscribe(e => this.makeScroll(e));
+    .subscribe(_ => this.makeScroll());
   }
 
-  private makeScroll(e: any): void {
-    const bottom = 450;
+  private makeScroll(): void {
     try {
-      const top = e.target.scrollingElement.scrollTop;
-      if (this.grid && (
-        this.grid.offsetHeight - top <= bottom
-      )) {
-
-        const el = Array.from(document.querySelectorAll('.grid-item')).slice(0, 3);
-
-        this.masonry.appended(el);
-        this.createMasonry(false);
-        this.items.push(...[1, 2, 3]);
-        if (this.firstTime) {
-          setTimeout(() => this.createMasonry(false), 1000);
-        }
-     }
+      const el = Array.from(
+        document.querySelectorAll('.grid-item')
+      ).slice(0, 3);
+      this.addElements(el);
     } catch (err) { console.log(err); }
+  }
+
+  private addElements(el: Element[]): void {
+    this.masonry.appended(el);
+    this.createMasonry();
+    this.items.push(...[1, 2, 3]);
+    if (this.firstTime) {
+      setTimeout(() => this.createMasonry(), 2000);
+    }
   }
 
   public remove(el: HTMLDivElement): void {
@@ -93,11 +94,11 @@ export class NewsMasonryComponent implements OnInit {
     this.masonry.layout();
   }
 
+  ngOnDestroy() {
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
+  }
+
 }
 
-class MasonryType {
-  public layout!: () => void;
-  public appended!: (els: Element[]) => void;
-  public prepended!: (els: Element[]) => void;
-  public remove!: (els: Element[]) => void;
-}
+

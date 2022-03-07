@@ -1,7 +1,13 @@
-<ng-container *ngIf="!small; else smallSize">
-  <article class="default">
+<ng-container>
+  <article class="default"
+           [ngClass]="{
+             'alone': alone, 
+             'small': small, 
+             'last': last
+            }">
     <figure>
-      <img src="assets/images/05-img.jpg" alt="Post Image"/>
+      <img [src]="'assets/images/' + post?.image" 
+           alt="Post Image"/>
       <!-- HOVER -->
       <div class="inner">
         <div class="content">
@@ -16,65 +22,25 @@
     </figure>
     <!-- CONTENT -->
     <div class="main-content">
-      <p class="category">LifeStyle</p>
-      <h3>Beauty of Nature</h3>
+      <p class="category">{{post?.category}}</p>
+      <h3>{{post?.title}}</h3>
       <p class="date">
-        <span>Sep, 17 2015</span>
+        <span>{{post?.date}}</span>
       </p>
       <!-- MESSAGE -->
       <div class="message">
-        <div [innerHTML]="message"></div>
-        <ng-container *ngIf="alone">
-          <div [innerHTML]="messageAlone"></div>
-        </ng-container>
+        <div [innerHTML]="post?.message | shortMessage: alone : small"></div>
       </div>
       <!-- BOTTOM -->
       <div class="bottom"
            [ngClass]="{'first': border}">
+        <span class="author">{{post?.author}}</span>
         <ul>
           <li *ngFor="let i of icons">
             <i [class]="i"></i>
           </li>
         </ul>
-        <span class="author">Post By : Jhone Albert</span>
       </div>
     </div>
   </article>
 </ng-container>
-
-<!-- SMALL CARD -->
-<ng-template #smallSize>
-  <article class="small"
-          [ngClass]="{'last': last}">
-    <figure>
-      <img src="assets/images/05-img.jpg" alt="Post Image"/>
-      <div class="inner">
-        <div class="content">
-          <span>
-            <i class="fas fa-link"></i>
-          </span>
-          <span [routerLink]="'/post'">
-            <i [class]="alone ? 'far fa-heart' : 'fas fa-search'"></i>
-          </span>
-        </div>
-      </div>
-    </figure>
-    <!-- CONTENT -->
-    <div class="main-content">
-      <p class="category">LifeStyle</p>
-      <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit ousl bak.</h3>
-      <p class="date">
-        <span>Sep, 17 2015</span>
-      </p>
-      <!-- BOTTOM -->
-      <div class="bottom">
-        <ul>
-          <li *ngFor="let i of icons">
-            <i [class]="i"></i>
-          </li>
-        </ul>
-        <span class="author">Post By : Jhone Albert</span>
-      </div>
-    </div>
-  </article>
-</ng-template>

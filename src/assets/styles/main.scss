@@ -10,3 +10,11 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.jump {
+  display: none;
+  @media (min-width: 575px) and (max-width: 1200px) {
+    display: block;
+  }
+}

@@ -14,8 +14,10 @@ export class PWAService {
 
   public updateSW(): void {
     this.swUpdate.available
-    .pipe(filter(event => event && !!event))
-     .subscribe(_ => {
+     .pipe(
+       filter(event => event && !!event)
+      )
+      .subscribe(_ => {
         this.swUpdate.activateUpdate()
         .then(() => this.document.location.reload());
     });

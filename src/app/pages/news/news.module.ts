@@ -6,6 +6,7 @@ import { NewsComponent } from './news.component';
 import { LayoutModule } from '@shared/layout/layout.module';
 import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
+import { MasonryService } from '@core/services/masonry/masonry.service';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,9 @@ import { DirectivesModule } from '@shared/directives/directives.module';
     NewsRoutingModule,
     LayoutModule,
     DirectivesModule
+  ],
+  providers: [
+    MasonryService
   ]
 })
 

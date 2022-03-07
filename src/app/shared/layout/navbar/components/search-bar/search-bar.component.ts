@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
-import { SEARCH_SENTENCE } from '@shared/data/data';
+import { SEARCH_SENTENCE } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-search-bar',

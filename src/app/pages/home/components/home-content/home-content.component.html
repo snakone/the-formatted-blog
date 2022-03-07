@@ -1,9 +1,10 @@
 <div class="content">
-  <app-post-card *ngFor="let item of [1,2,3,4,5]; 
+  <app-post-card *ngFor="let item of items; 
                          let i = index; 
                          let last = last"
                  [small]="i >= 1"
                  [border]="i === 0"
-                 [last]="last">
+                 [last]="last"
+                 [post]="item">
   </app-post-card>
 </div>
