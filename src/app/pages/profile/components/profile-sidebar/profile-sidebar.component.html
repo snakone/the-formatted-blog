@@ -1,0 +1,14 @@
+<app-sticky-aside [selector]="'profile-content'">
+  <ul>
+    <li *ngFor="let i of list" 
+         [routerLink]="i.route"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">
+      <i [class]="i.icon"></i> {{i.label}}
+    </li>
+    <li (click)="logOut()">
+      <i class="fas fa-sign-out-alt"></i>Salir
+    </li>
+  </ul>
+  <div class="box"></div>
+</app-sticky-aside>

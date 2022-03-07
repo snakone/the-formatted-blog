@@ -14,8 +14,6 @@ export class ProfileContentComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  logOut(): void {
-    this.userFcd.logOut();
-  }
+
 
 }

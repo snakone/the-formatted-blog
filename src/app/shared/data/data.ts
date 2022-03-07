@@ -1,4 +1,4 @@
-import { Post } from '@shared/types/interface.types';
+import { IconList, Post } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { POST_MESSAGE, POST_MESSAGE_ALONE } from './sentences';
 
@@ -67,3 +67,18 @@ export const DUMMY_POST: Post[] = [
     message: POST_MESSAGE
   }
 ];
+
+export const USER_STATS: IconList[] = [
+  { icon: 'fas fa-pencil-alt', label: 'posts' },
+  { icon: 'far fa-heart', label: 'likes' },
+  { icon: 'fas fa-users', label: 'friends' }
+];
+
+export const USER_INDEX: IconList[] = [
+  { icon: 'far fa-user-circle', label: 'Perfil', route: './' },
+  { icon: 'fab fa-ioxhost', label: 'Posts', route: 'posts' },
+  { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
+  { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
+  { icon: 'fas fa-cog', label: 'Configuración', route: 'settings' }
+]
+

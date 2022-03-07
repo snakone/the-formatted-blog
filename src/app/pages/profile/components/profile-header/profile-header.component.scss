@@ -61,6 +61,7 @@
             font-style: italic;
             margin-bottom: 25px;
             width: 100%;
+            font-size: .8rem;
           }
         }
 
@@ -70,6 +71,8 @@
           color: var(--contrast-color);
           transition: font-size 300ms ease-in;
           transition: color, border 666ms ease-in;
+          letter-spacing: 2px;
+          margin: 0 0 16px;
         }
 
         & .data {
