@@ -1,8 +1,8 @@
 import { InjectionToken } from "@angular/core";
 import * as fromUsers from '@store/users/users.reducer';
 
-export const URI = '';
-const APP_VERSION = '0.9.6';
+const APP_VERSION = '0.0.5';
+export const URI = 'https://formatted-blog.netlify.app/';
 
 export interface AppState {
   users: fromUsers.UserState;

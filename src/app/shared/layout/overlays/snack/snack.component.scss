@@ -4,14 +4,14 @@
   @include flex-center();
   background: var(--dark-color);
   color: var(--light-color);
-  height: 35px;
+  min-width: var(--snack-width);
+  height: var(--snack-height);
   text-align: center;
   font-weight: bold;
-  font-size: .8rem;
+  font-size: .85rem;
   position: fixed;
   top: 80px;
   left: 0;
-  min-width: var(--snack-width);
   text-transform: uppercase;
   font: normal 12px/15px "Merriweather", Arial, Helvetica;
 
@@ -23,5 +23,21 @@
     width: 4px;
     right: 0;
     top: 0;
+  }
+
+  @media(max-width: 700px) {
+    top: 1%;
+    z-index: 9999;
+  }
+
+  &.error { border: 3px solid #b40707 }
+  &.warning { border: 3px solid #e0bf04 }
+  &.info { border: 3px solid #0554ca }
+
+  &.error, &.warning, &.info {
+    &::after {
+      content: none;
+      width: 0;
+    }
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { StorageService } from '@services/storage/storage.service';
 import { StickyService } from '@services/sticky/sticky.service';
-import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
 import { CrafterService } from '@services/crafter/crafter.service';
-import { Observable } from 'rxjs';
 import { User } from '@shared/types/interface.types';
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
 
 @Component({
   selector: 'app-navbar',
@@ -18,15 +19,13 @@ export class NavbarComponent implements OnInit {
   showSearchBar = false;
   mode: string | undefined;
   menuOpened = false;
-
   user$!: Observable<User | null>;
 
   icons = [
     { icon: 'fas fa-home', route: '/home' },
     { icon: 'fas fa-feather-alt', route: '/create' },
     { icon: 'far fa-file-alt', route: '/news' },
-    // { icon: 'far fa-user', route: '/profile' },
-    { icon: 'fas fa-question', route: '/profile' }
+    { icon: 'fas fa-question', route: '/help' }
 
   ];
 

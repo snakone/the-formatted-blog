@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,11 @@ import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  tooltip = NOTIFICATION_TOOLTIP;
+  text = NOTIFICATION_TEXT;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   public notification(): void {
     console.log('home');

@@ -6,15 +6,6 @@
   padding-bottom: 15px;
   position: relative;
 
-  & h4 {
-    position: relative;
-    overflow: hidden;
-    font-size: 18px;
-    margin: 0 0 26px;
-    line-height: normal;
-    @include span-hr-title();
-  }
-
   & ul {
       overflow: hidden;
       list-style: none;

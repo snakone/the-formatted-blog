@@ -25,7 +25,7 @@
 .search-input {
   width: 106%;
   text-align: center;
-  transition: width 300ms ease-in-out;
+  transition: width 666ms ease-in-out;
   & input { width: 50%; }
 
   & i {
@@ -52,20 +52,12 @@
     position: relative;
     top: -1px;
 
-    &[disabled] {
-      opacity: .3;
-    }
-
+    &[disabled] { opacity: .3; }
     @include hover(1.2);
   }
 
-  @media(max-width: 900px) {
-    width: 108%;
-  }
-
-  @media(max-width: 550px) {
-    width: 100%;
-  }
+  @media(max-width: 900px) { width: 108%; }
+  @media(max-width: 550px) { width: 100%; }
 }
 
 .close {
@@ -76,16 +68,12 @@
     font-size: 1.2rem;
     @include hover(1.5);
 
-    @media (min-width: 993px) and (max-width: 1200px) {
-      left: -4px;
-    }
+    @media (min-width: 993px) and 
+           (max-width: 1200px) { left: -4px }
 
-    @media(max-width: 992px) and (min-width: 881px) {
-      left: -2px;
-    }
+    @media(max-width: 992px) and 
+          (min-width: 881px) { left: -2px }
 
-    @media(max-width: 880px) {
-      left: 8px;
-    }
+    @media(max-width: 880px) { left: 8px }
   }
 }

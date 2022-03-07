@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app.routing';
-import { AppComponent } from './app.component';
-import { CoreModule } from '@core/core.module';
-import { MinWidthComponent } from '@layout/min-width/min-width.component';
-import { LayoutModule } from '@layout/layout.module';
-import { APP_CONFIG, APP_CONSTANTS } from './app.config';
 import { StoreModule } from '@ngrx/store';
 
+import { CoreModule } from '@core/core.module';
+import { LayoutModule } from '@layout/layout.module';
+import { AppComponent } from './app.component';
+import { RoutingModule } from './app.routing';
+import { APP_CONFIG, APP_CONSTANTS } from './app.config';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    MinWidthComponent
-  ],
+  bootstrap: [AppComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RoutingModule,
     CoreModule,
     LayoutModule,
     StoreModule.forRoot({}, {
@@ -26,10 +23,7 @@ import { StoreModule } from '@ngrx/store';
       }
     }),
   ],
-  providers: [
-    { provide: APP_CONFIG, useValue: APP_CONSTANTS },
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: APP_CONFIG, useValue: APP_CONSTANTS }]
 })
 
 export class AppModule { }

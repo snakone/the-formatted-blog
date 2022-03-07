@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/post/post.module')
        .then(mod => mod.PostModule), data: { name: 'Post' }
-  },
+  }
 ];
 
 @NgModule({
@@ -48,4 +48,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class RoutingModule { }

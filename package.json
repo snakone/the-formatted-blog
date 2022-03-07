@@ -1,6 +1,20 @@
 {
   "name": "formatted-blog",
-  "version": "0.0.4",
+  "version": "0.0.5",
+  "description": "Application to create content",
+  "keywords": ["Content", "Create", "Blog"],
+  "license": "MIT",
+  "author": {
+    "name": "Sergi Martínez",
+    "url": "https://formatted-blog.netlify.app/home"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snakone/the-formatted-blog"
+  },
+  "engines": {
+    "node": ">=12.20 <16.10"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",

@@ -10,6 +10,7 @@ import {
 import { Observable} from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 import { catchError } from 'rxjs/operators';
+import { SnackService } from '../snack/snack.service';
 
 @Injectable()
 
@@ -24,7 +25,8 @@ export class HttpService {
 
   constructor(
     private http: HttpClient,
-    private ls: StorageService
+    private ls: StorageService,
+    private snackSrv: SnackService
   ) {}
 
   public get<T>(url: string,
@@ -78,11 +80,13 @@ export class HttpService {
 
   private error(err: HttpErrorResponse): void {
     switch (err.status) {
-      case 406: console.log(err)
+      case 406: this.snackSrv.setSnack('No válido!', 'warning')
         break;
-      case 401: console.log('Unauthorized')
+      case 401: this.snackSrv.setSnack('Sin permisos!', 'warning');
         break;
-      default: console.log(err)
+      case 0: this.snackSrv.setSnack('Server Error!', 'error');
+        break;
+      default: console.log(err);
     }
   }
 }

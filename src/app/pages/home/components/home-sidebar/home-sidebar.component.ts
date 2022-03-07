@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-home-sidebar',
@@ -7,11 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HomeSidebarComponent implements OnInit {
+export class HomeSidebarComponent {
 
   constructor() { }
 
-  ngOnInit(): void { }
 }
 
 

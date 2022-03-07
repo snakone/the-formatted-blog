@@ -8,6 +8,7 @@ export class NavDirective implements AfterViewInit {
 
   @Output() scrolled = new EventEmitter<boolean>();
   scroll = 0;
+  css!: DOMTokenList;
   
   constructor(
     private el: ElementRef,
@@ -17,6 +18,7 @@ export class NavDirective implements AfterViewInit {
   ngAfterViewInit() {
     this.stickyNavbar();
     this.showNavOnNavigation();
+    this.css = this.el?.nativeElement.classList || null;
   }
 
   private stickyNavbar(): void {
@@ -27,8 +29,7 @@ export class NavDirective implements AfterViewInit {
      )
       .subscribe(_ => {
         const current = window.pageYOffset;
-        const css = this.el?.nativeElement.classList || null;
-        this.checkScroll(css, current);
+        this.checkScroll(this.css, current);
         this.scroll = current;
     });
   }

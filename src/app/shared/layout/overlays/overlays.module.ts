@@ -5,7 +5,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LogInModule } from './log-in/log-in.module';
 import { SnackComponent } from './snack/snack.component';
 
-
 const Material = [
   MatDialogModule,
 ];

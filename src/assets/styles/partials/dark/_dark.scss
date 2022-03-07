@@ -1,10 +1,5 @@
-body {
-  transition: background 666ms ease-in-out,
-              color 666ms ease-in-out;
-}
-
+//DARK MODE
 :root {
-  //DARK MODE
   body.dark {
     --light-color: #090b0e;
     --dark-color: #f7f3f3;
@@ -16,17 +11,11 @@ body {
     --border-color: #242424;
     --transparent-bg: rgba(0, 0, 0 , 0.9);
     --quote-bg: #fffce8;
-    --shade-color: #484a4a;
     --navigation-border: #4d4d4d;
     --navbar-border: #e9e9e9;
     --add-bg: rgba(30, 30, 30, .7);
     --button-text-color: #615d5d;
     --inverted-contrast: #001c9b;
-    --shadow-card-1: rgba(200, 200, 200, 0.12);
-    --shadow-card-2: rgba(200, 200, 200, 0.24);
-    --shadow-card-hover-1: rgba(200, 200, 200, 0.20);
-    --shadow-card-hover-2: rgba(200, 200, 200, 0.16);
-
     & a { color: rgb(0, 140, 255) }
   }
 }

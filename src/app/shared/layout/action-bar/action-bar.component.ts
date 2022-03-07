@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-action-bar',
@@ -7,15 +7,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ActionBarComponent implements OnInit {
+export class ActionBarComponent {
 
   @Input() margin = false;
-  @Input() tooltip!: string;
+  @Input() text!: string;
   @Input() buttonText!: string;
   @Input() function!: Function;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

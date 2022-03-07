@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
 
@@ -7,7 +8,6 @@ import {
   UserResponse
  } from '@shared/types/interface.types';
 
-import { Observable } from 'rxjs';
 import { StorageService } from '@services/storage/storage.service';
 import { map, filter, tap } from 'rxjs/operators';
 import { UsersFacade } from '@store/users/users.facade';
@@ -38,17 +38,16 @@ export class UserService {
     return this.http
       .get<UserResponse>(environment.api + 'token')
       .pipe(
-        filter(res => res && !!res),
+        filter(res => !!res && res.ok),
         map(res => res.user)
       );
   }
 
   public refreshToken(id: string): Observable<User> {
-    console.log('refresh')
     return this.http
       .post<UserResponse>(environment.api + 'token/' + id, null)
       .pipe(
-        filter(res => res && !!res.ok),
+        filter(res => !!res && res.ok),
         tap(_ => this.ls.setKey('token', _?.token)),
         map(res => res.user)
       );

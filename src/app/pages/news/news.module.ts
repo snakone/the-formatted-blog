@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NewsRoutingModule } from './news.routing';
-import { NewsComponent } from './news.component';
 import { LayoutModule } from '@shared/layout/layout.module';
-import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { MasonryService } from '@core/services/masonry/masonry.service';
+import { SnippetsModule } from '@shared/snippets/snippets.module';
+
+import { NewsRoutingModule } from './news.routing';
+import { NewsComponent } from './news.component';
+import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { MasonryService } from '@core/services/masonry/masonry.service';
     CommonModule,
     NewsRoutingModule,
     LayoutModule,
-    DirectivesModule
+    DirectivesModule,
+    SnippetsModule
   ],
   providers: [
     MasonryService

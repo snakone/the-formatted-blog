@@ -17,7 +17,6 @@ import {
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
 
-
 @Component({
   selector: 'app-news-masonry',
   templateUrl: './news-masonry.component.html',
@@ -65,10 +64,8 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
         filter((_: any) => (
           this.grid!.offsetHeight - 
           _.target.scrollingElement.scrollTop <= 450
-        )),
-        debounceTime(200)
-      )
-    .subscribe(_ => this.makeScroll());
+        ))
+      ).subscribe(_ => this.makeScroll());
   }
 
   private makeScroll(): void {

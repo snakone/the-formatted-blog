@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-recent-post-box',
@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class RecentPostBoxComponent implements OnInit {
+export class RecentPostBoxComponent {
 
   items = [
     '06-img.jpg',
@@ -19,7 +19,5 @@ export class RecentPostBoxComponent implements OnInit {
   ];
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

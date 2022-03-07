@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CARROUSEL_OPTS } from '@shared/data/data';
 
 @Component({
@@ -10,8 +10,6 @@ import { CARROUSEL_OPTS } from '@shared/data/data';
 
 export class PostCarrouselComponent implements OnInit {
 
-  @Input() profile = false;
-
   customOptions = CARROUSEL_OPTS;
 
   items = [
@@ -20,7 +18,6 @@ export class PostCarrouselComponent implements OnInit {
     '04-img.jpg',
     '02-img.jpg',
   ];
-
 
   constructor() { }
 

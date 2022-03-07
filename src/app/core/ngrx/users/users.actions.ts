@@ -20,12 +20,9 @@ export const register =
   props<{ user: User }>());
 
 // USER LOGOUT
-export const userLogOut =
-  createAction('[Users API] User Log Out');
-
+export const userLogOut = createAction('[Users API] User Log Out');
 // VERIFY TOKEN
-export const verifyToken =
-  createAction('[Users API] Verify Token');
+export const verifyToken = createAction('[Users API] Verify Token');
 
 // REFRESH TOKEN
 export const refreshToken =

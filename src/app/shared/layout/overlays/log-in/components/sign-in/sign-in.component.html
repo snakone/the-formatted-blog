@@ -1,5 +1,6 @@
-<div class="animated fadeIn">
+<div class="login animated fadeIn">
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <!-- EMAIL -->
     <div class="form-control">
       <label for="name">Email</label>
       <input formControlName="email"
@@ -9,7 +10,7 @@
                       [validator]="['required', 'email']">
       </app-form-error>
     </div>
-
+    <!-- PASSWORD -->
     <div class="form-control">
       <label for="password">Password</label>
       <input formControlName="password"
@@ -25,7 +26,7 @@
             [disabled]="signInForm.invalid">
       Entrar
     </button>
-
+    <!-- SUBMIT -->
     <div class="bottom">
       <p>¿No tienes cuenta?
         <strong (click)="signUp()">

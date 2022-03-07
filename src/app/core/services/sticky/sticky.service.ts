@@ -31,6 +31,7 @@ export class StickyService {
         containerSelector: `.${selector}`,
         innerWrapperSelector: '.sidebar__inner'
       });
+      
       this.setSticky(true);
     } catch (err) { console.log(err); }
   }

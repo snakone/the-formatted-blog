@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
+import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-post',
@@ -10,7 +10,7 @@ import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
 
 export class PostComponent implements OnInit {
 
-  tooltip = NOTIFICATION_TOOLTIP;
+  text = NOTIFICATION_TEXT;
 
   constructor() { }
 

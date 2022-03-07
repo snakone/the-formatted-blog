@@ -1,6 +1,6 @@
 .section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
   position: relative;
-  &-margin {  margin-top: 30px; }
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+  &.margin {  margin-top: 30px }
 }

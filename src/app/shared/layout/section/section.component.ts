@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-section',
@@ -7,13 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SectionComponent implements OnInit {
+export class SectionComponent {
 
   @Input() margin = true;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

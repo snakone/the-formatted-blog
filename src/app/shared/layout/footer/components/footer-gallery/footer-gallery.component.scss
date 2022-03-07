@@ -58,8 +58,6 @@ h4 {
     margin-top: 35px;
     padding-top: 10px;
 
-    &::before {
-      content: none;
-    }
+    &::before { content: none }
   }
 }

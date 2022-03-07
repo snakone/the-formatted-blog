@@ -14,7 +14,7 @@ export class SnackService {
     message: string,
     type: string = 'default',
     duration: number = 5000
-  ) {
+  ): void {
     this.snack$.next({message, type});
     setTimeout(() => {
       this.snack$.next({message: null});

@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <div class="wrapper">
-    <app-action-bar [tooltip]="tooltip"
+    <app-action-bar [text]="text"
                     buttonText="Subscríbete"
                     [function]="notification"
                     [margin]="true">
@@ -13,9 +13,5 @@
   </section>
 </div>
 
-<div class="top">
-  <a TopDirective class="animated" (click)="goTop()">
-    <i class="fas fa-chevron-up"></i>
-  </a>
-</div>
+<app-scroll-top></app-scroll-top>
 

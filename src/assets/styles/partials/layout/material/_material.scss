@@ -1,0 +1,12 @@
+// DIALOG CONTAINER
+.mat-dialog-container {
+  background: var(--light-color);
+  color: var(--text-color);
+}
+
+// OVERLAY BACKDROP
+.cdk-overlay-dark-backdrop { background: rgba(0, 0, 0, .82) }
+
+// LOGIN OVERLAY
+.login-overlay 
+.mat-dialog-container { max-width: 361px }

@@ -1,0 +1,65 @@
+// RESPONSIVE CONTAINER
+@mixin container() {
+  width: 100%;
+  @media (min-width: 865px) { width: 850px }
+  @media (min-width: 992px) { width: 970px }
+  @media (min-width: 1200px) { width: 1170px }
+}
+
+// CENTER CONTENT
+@mixin row() {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// LEFT COLUMN
+@mixin grid-component() {
+  padding-right: 40px;
+  grid-column: 1 / 4;
+
+  @media(max-width: 1200px) { grid-column: 1 / 3 }
+
+  @media(max-width: 992px) {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+}
+
+// RIGHT COLUMN
+@mixin grid-child() {
+  @media(max-width: 992px) { grid-column: 1 / -1 }
+}
+
+// FLEX CENTER
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// FLEX BETWEEN
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// FLEX AROUND
+@mixin flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// HORIZONTAL BAR
+@mixin hbar() {
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3rem;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+  }
+}

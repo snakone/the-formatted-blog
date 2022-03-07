@@ -34,7 +34,10 @@
           </li>  <!-- USER -->
           <ng-container *ngIf="(user$ | async); else noUser">
             <li>
-              <i [routerLink]="'/profile'" class="fas fa-user"></i>
+              <i [routerLink]="'/profile'" 
+                 routerLinkActive="active" 
+                 class="fas fa-user">
+              </i>
             </li>
           </ng-container>
           <ng-template #noUser>

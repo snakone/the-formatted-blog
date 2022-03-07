@@ -1,22 +1,4 @@
 <owl-carousel-o [options]="customOptions">
-  <!-- ADD -->
-  <ng-template carouselSlide
-               *ngIf="profile">
-    <div class="item add">
-      <figure>
-        <img src="assets/images/02-img.jpg" alt="Carrousel Image"/>
-      </figure>
-      <div class="inner">
-        <div class="info">
-          <i class="fas fa-plus-circle"></i>
-          <p>
-            <strong>¿Te sientes inspirado/a?</strong>
-            <br><span>Crea algo increíble...</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </ng-template>
   <!-- CARROUSEL -->
   <ng-template carouselSlide *ngFor="let i of items">
     <div class="item">

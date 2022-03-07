@@ -11,7 +11,6 @@ import { Post } from '@shared/types/interface.types';
 export class PostCardComponent implements OnInit {
 
   @Input() post: Post | undefined;
-
   @Input() border = true;
   @Input() alone = false;
   @Input() small = false;
