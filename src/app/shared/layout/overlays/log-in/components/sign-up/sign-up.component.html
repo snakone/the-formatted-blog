@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="form-control">
+      <label for="name">Nombre</label>
+      <input formControlName="name"
+             autocomplete="off"
+             type="text"/>
+      <app-form-error [control]="name"
+                      [validator]="['required', 
+                                    'pattern', 
+                                    'minlength']">
+      </app-form-error>
+    </div>
+
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input formControlName="email"
+              autocomplete="off"
+              type="email"/>
+      <app-form-error [control]="email"
+                      [validator]="['required', 
+                                    'email', 
+                                    'minlength']">
+      </app-form-error>
+    </div>
+
+    <div class="form-control">
+      <label for="rol">Profesión</label>
+      <input formControlName="rol"
+              autocomplete="off"
+              type="text"/>
+      <app-form-error [control]="rol"
+                      [validator]="['required']">
+      </app-form-error>
+    </div>
+
+    <div class="form-control">
+      <label for="password">Contraseña</label>
+      <input formControlName="password"
+              type="password"
+              autocomplete="off">
+      <app-form-error [control]="password"
+                      [validator]="['required', 
+                                    'minlength']">
+      </app-form-error>
+    </div>
+
+    <div class="form-control">
+      <label for="password2">Repetir Contraseña</label>
+      <input formControlName="password2"
+              type="password"
+              autocomplete="off">
+      <app-form-error [control]="password2"
+                      [validator]="['required', 
+                                    'minlength', 
+                                    'passwordMatch']">
+      </app-form-error>
+    </div>
+
+    <div class="form-control checkbox">
+      <label for="notify">Subscribirte a las notificaciones?</label>
+      <input [(ngModel)]="notify"
+              [ngModelOptions]="{standalone: true}"
+              type="checkbox">
+    </div>
+
+    <div class="form-control">
+      <label for="conditions">Aceptar <a href="#">Condiciones de Uso</a></label>
+      <input [(ngModel)]="conditions"
+              [ngModelOptions]="{standalone: true}"
+              type="checkbox">
+    </div>
+
+    <button type="submit"
+            aria-label="Registrarse"
+            [disabled]="signUpForm.invalid">
+      Registrarse
+    </button>
+
+    <div class="bottom">
+      <p>¿Ya tienes cuenta?
+        <strong (click)="signIn()">
+          Inicia sesión
+        </strong>
+      </p>
+    </div>
+  </form>
+</div>
+

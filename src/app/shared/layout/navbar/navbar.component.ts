@@ -3,6 +3,9 @@ import { StorageService } from '@services/storage/storage.service';
 import { StickyService } from '@services/sticky/sticky.service';
 import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
 import { CrafterService } from '@services/crafter/crafter.service';
+import { Observable } from 'rxjs';
+import { User } from '@shared/types/interface.types';
+import { UsersFacade } from '@core/ngrx/users/users.facade';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +18,8 @@ export class NavbarComponent implements OnInit {
   showSearchBar = false;
   mode: string | undefined;
   menuOpened = false;
+
+  user$!: Observable<User | null>;
 
   icons = [
     { icon: 'fas fa-home', route: '/home' },
@@ -36,11 +41,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private ls: StorageService,
     private stickySrv: StickyService,
-    private crafter: CrafterService
+    private crafter: CrafterService,
+    private userFcd: UsersFacade
   ) { }
 
   ngOnInit(): void {
     this.mode = this.ls.get('theme');
+    this.user$ = this.userFcd.user$;
   }
 
   public onScroll(ev: boolean): void {
@@ -51,7 +58,12 @@ export class NavbarComponent implements OnInit {
   }
 
   public openModal(): void {
-    this.crafter.dialog(LogInOverlayComponent);
+    this.crafter.dialog(
+      LogInOverlayComponent, 
+      null, 
+      'login', 
+      'login-overlay'
+    );
   }
 
   public theme(): void {

@@ -1,48 +1,8 @@
-<div class="animated fadeIn">
-  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" autocomplete="off">
-      <div class="form-control">
-        <label for="name">Email</label>
-        <input formControlName="email"
-               autocomplete="off"
-               type="email"/>
-        <app-form-error [control]="email"
-                        [validator]="['required', 'email']">
-        </app-form-error>
-      </div>
-
-      <div class="form-control">
-        <label for="password">Password</label>
-        <input formControlName="password"
-               type="password"
-               autocomplete="off">
-        <app-form-error [control]="password"
-                        [validator]="['required', 'minlength']">
-        </app-form-error>
-      </div>
-
-      <div class="form-control">
-        <label for="remember">¿Recordar?</label>
-        <input [(ngModel)]="remember"
-               [ngModelOptions]="{standalone: true}"
-               type="checkbox">
-      </div>
-
-    <button type="submit"
-            aria-label="Entrar"
-            [disabled]="signInForm.invalid">
-      Entrar
-    </button>
-
-    <div class="bottom">
-      <p>¿No tienes cuenta?
-        <strong (click)="signUp()">
-          Regístrate ahora
-        </strong>
-      </p>
-      <p class="recover"
-         (click)="recover()">
-        <i>¿Has olvidado la contraseña?</i>
-      </p>
-    </div>
-  </form>
+<div style="max-width: 361px">
+  <ng-container *ngIf="!register; else SignIn">
+    <app-sign-in (register)="register = !register"></app-sign-in>
+  </ng-container>
+  <ng-template #SignIn>
+    <app-sign-up (login)="register = !register"></app-sign-up>
+  </ng-template>
 </div>

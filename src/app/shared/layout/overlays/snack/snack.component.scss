@@ -1,0 +1,27 @@
+@import 'mixins/mixins.scss';
+
+.snack {
+  @include flex-center();
+  background: var(--dark-color);
+  color: var(--light-color);
+  height: 35px;
+  text-align: center;
+  font-weight: bold;
+  font-size: .8rem;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  min-width: var(--snack-width);
+  text-transform: uppercase;
+  font: normal 12px/15px "Merriweather", Arial, Helvetica;
+
+  &::after {
+    content: '';
+    height: 100%;
+    position: absolute;
+    background: var(--contrast-color);
+    width: 4px;
+    right: 0;
+    top: 0;
+  }
+}

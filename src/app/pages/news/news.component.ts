@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SnackService } from '@core/services/snack/snack.service';
 import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
 
 @Component({
@@ -9,12 +10,14 @@ import { NOTIFICATION_TOOLTIP } from '@shared/data/sentences';
 
 export class NewsComponent implements OnInit {
 
-  loaded = false;
   tooltip = NOTIFICATION_TOOLTIP;
+  duration = 3000;
 
-  constructor() { }
+  constructor(private snackSrv: SnackService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.snackSrv.setSnack('Cargando...', 'default', this.duration);
+  }
 
   public goTop(): void {
     window.scrollTo({top: 0, behavior: 'smooth'});

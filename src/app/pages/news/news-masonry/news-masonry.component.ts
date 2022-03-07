@@ -1,8 +1,8 @@
 import { 
   Component, 
   OnInit, 
-  Input,
-  OnDestroy
+  OnDestroy,
+  Input
  } from '@angular/core';
 
  import { 
@@ -17,6 +17,7 @@ import {
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
 
+
 @Component({
   selector: 'app-news-masonry',
   templateUrl: './news-masonry.component.html',
@@ -25,34 +26,33 @@ import { MasonryType } from '@shared/types/class.types';
 
 export class NewsMasonryComponent implements OnInit, OnDestroy {
 
-  @Input() isLoaded = false;
+  @Input() duration!: number;
+  isLoaded = false;
   grid!: HTMLElement | null;
   wrapper!: Element | null;
   $unsubscribe = new Subject<void>();
-
-  firstTime = true;
   masonry!: MasonryType;
-  duration = 3000;
   items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
 
   constructor(private masonrySrv: MasonryService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.wrapper = document.querySelector('.grid');
-      this.grid = document.getElementById('grid');
-      this.createMasonry();
-      this.hasEnded();
-    }, this.duration);
+    setTimeout(() => this.initMasonry(), this.duration);
+    this.hasEnded();
+  }
+
+  private initMasonry(): void {
+    this.wrapper = document.querySelector('.grid');
+    this.grid = document.getElementById('grid');
+    this.createMasonry();
   }
 
   private createMasonry(): void {
     if (this.wrapper) {
       this.isLoaded = true;
-      this.firstTime = false;
       setTimeout(() => {
         this.masonry = this.masonrySrv.createMasonry(this.wrapper);
-      }, 123);
+      }, 150);
     }
   }
 
@@ -84,9 +84,6 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
     this.masonry.appended(el);
     this.createMasonry();
     this.items.push(...[1, 2, 3]);
-    if (this.firstTime) {
-      setTimeout(() => this.createMasonry(), 2000);
-    }
   }
 
   public remove(el: HTMLDivElement): void {

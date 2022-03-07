@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class CrafterService {
 
   constructor(
-    private matDialog: MatDialog,
+    private matDialog: MatDialog
   ) { }
 
   public dialog<T>(

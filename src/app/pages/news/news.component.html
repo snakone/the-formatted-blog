@@ -6,15 +6,15 @@
                     [margin]="true">
     </app-action-bar>
   </div>
-    <section class="news-content">
-      <app-section [margin]="false">
-        <app-news-masonry [isLoaded]="loaded"></app-news-masonry>
-      </app-section>
-    </section>
-  </div>
+  <section class="news-content">
+    <app-section [margin]="false">
+      <app-news-masonry [duration]="duration"></app-news-masonry>
+    </app-section>
+  </section>
+</div>
 
 <div class="top">
-  <a Top class="animated" (click)="goTop()">
+  <a TopDirective class="animated" (click)="goTop()">
     <i class="fas fa-chevron-up"></i>
   </a>
 </div>

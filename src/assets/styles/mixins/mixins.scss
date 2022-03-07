@@ -15,10 +15,11 @@
 }
 
 // HOVER STATE
-@mixin hover($value) {
+@mixin hover($value, $color: inherit) {
   &:hover {
     cursor: pointer;
     filter: brightness($value);
+    color: $color
   }
 }
 
@@ -101,12 +102,12 @@
 }
 
 // TITLE LINES
-@mixin hr-title() {
+@mixin hr-title($size: 80px) {
   &::after, &::before {
     position: absolute;
     top: 50%;
     left: 100%;
-    width: 80px;
+    width: $size;
     content: '';
     display: block;
     height: 1px;
@@ -189,6 +190,13 @@
 @mixin flex-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+// FLEX AROUND
+@mixin flex-around {
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 

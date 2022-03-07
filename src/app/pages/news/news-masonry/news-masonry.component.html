@@ -8,9 +8,14 @@
             <div class="card">
               <p class="category">Lifestyle</p>
               <h4>Nesciunt aspernatur eaque similique laudantium a</h4>
-              <p class="date">
-                  <span>Sep, 17 2015</span>
-              </p>
+              <div class="flex">
+                <p class="author">
+                  <span>Jhone Albert</span>
+                </p>
+                <p class="date">
+                    <span>Sep, 17 2015</span>
+                </p>
+              </div>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                   Assumenda modi inventore, totam vero consequuntur, aut animi veritatis tempora nulla 
                   facere placeat velit illum explicabo dicta enim ipsum. Vitae ducimus, ratione.
@@ -25,11 +30,8 @@
     </div>
 </div>
 
-<ng-container *ngIf="!isLoaded">
-    <div class="progress">
-        <div class="progress-value"></div>
-    </div>
-</ng-container>
+<app-spinner [loading]="isLoaded"></app-spinner>
+
 
 
 

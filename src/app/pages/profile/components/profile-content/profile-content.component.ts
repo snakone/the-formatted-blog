@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { UsersFacade } from '@core/ngrx/users/users.facade';
 
 @Component({
   selector: 'app-profile-content',
@@ -6,11 +7,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./profile-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ProfileContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userFcd: UsersFacade) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  logOut(): void {
+    this.userFcd.logOut();
   }
 
 }

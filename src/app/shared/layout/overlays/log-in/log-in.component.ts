@@ -1,7 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -12,51 +9,10 @@ import { Router } from '@angular/router';
 
 export class LogInOverlayComponent implements OnInit {
 
-  signInForm!: FormGroup;
-  remember = false;
+  register = false;
 
-  constructor(
-    public dialogRef: MatDialogRef<LogInOverlayComponent>,
-    private router: Router
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.createSignInForm();
-  }
-
-  get email(): AbstractControl | any { return this.signInForm.get('email'); }
-  get password(): AbstractControl | any { return this.signInForm.get('password'); }
-
-  private createSignInForm(): void {
-    this.signInForm = new FormGroup({
-      email: new FormControl(null, [
-         Validators.required,
-         Validators.email,
-         Validators.minLength(5),
-         Validators.maxLength(35)
-      ]),
-      password: new FormControl(null, [
-         Validators.required,
-         Validators.minLength(5),
-         Validators.maxLength(25)
-      ])
-    });
-  }
-
-  public onSubmit(): void {
-    if (this.signInForm.invalid) { return; }
-    const { email, password } = this.signInForm.value;
-    console.log(email, password, this.remember);
-    this.dialogRef.close();
-    this.router.navigateByUrl('/profile');
-  }
-
-  public signUp(): void {
-    console.log('sign up');
-  }
-
-  public recover(): void {
-    this.dialogRef.close();
-  }
+  ngOnInit(): void { }
 
 }

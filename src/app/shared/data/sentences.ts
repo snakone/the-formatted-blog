@@ -9,6 +9,10 @@ export const LIKE_TOOLTIP = `Hazle saber a este creador/a que te gusta lo que ha
 
 export const SEARCH_SENTENCE = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';
 
+export const LOGIN_SENTENCE = '¿Inspirado/a?';
+export const LOGOUT_SENTENCE = 'Nos vemos!';
+export const REGISTER_SENTENCE = 'Bienvenido/a :)';
+
 export const POST_MESSAGE = `<p>
 Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,
 sollicitudin vel nibh. Aenean rhoncus pharetra ex. Sed facilisis interdum nunc, et

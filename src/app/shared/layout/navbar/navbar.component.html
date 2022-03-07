@@ -32,9 +32,16 @@
               </li>
             </ul>
           </li>  <!-- USER -->
-          <li (click)="openModal()">
-            <i class="fas fa-sign-in-alt"></i>
-          </li>
+          <ng-container *ngIf="(user$ | async); else noUser">
+            <li>
+              <i [routerLink]="'/profile'" class="fas fa-user"></i>
+            </li>
+          </ng-container>
+          <ng-template #noUser>
+            <li (click)="openModal()">
+              <i class="fas fa-sign-in-alt"></i>
+            </li>
+          </ng-template>
         </ul>
       </div> <!-- SEARCH BUTTON -->
       <div class="search"

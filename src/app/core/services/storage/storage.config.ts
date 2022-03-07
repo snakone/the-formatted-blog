@@ -6,11 +6,13 @@ export interface ModuleConfig {
 
 export interface StorageConfig extends ModuleConfig {
   THEME: string;
+  TOKEN: string | undefined;
 }
 
 export const STORAGE_CONSTANTS: StorageConfig = {
   KEY: 'storage',
   THEME: 'light',
+  TOKEN: undefined
 };
 
 export class Storage {

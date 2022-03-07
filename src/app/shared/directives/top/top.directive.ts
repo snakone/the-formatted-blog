@@ -2,7 +2,7 @@ import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, distinctUntilChanged, throttleTime } from 'rxjs/operators';
 
-@Directive({selector: '[Top]'})
+@Directive({selector: '[TopDirective]'})
 
 export class TopDirective implements AfterViewInit, OnDestroy {
 
