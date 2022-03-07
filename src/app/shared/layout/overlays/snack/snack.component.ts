@@ -18,24 +18,22 @@ export class SnackComponent implements AfterViewInit {
 
   @ViewChild('snack') el!: ElementRef<any>;
   data!: Snack;
+  css!: DOMTokenList;
 
   constructor(private snackSrv: SnackService) { }
 
   ngAfterViewInit(): void {
     this.snackSrv.snack$
-     .subscribe((res: Snack) => {
-      if (!res.message) {
-        const css = this.el?.nativeElement.classList || null;
-        css?.remove('fadeInLeft');
-        css?.add('fadeOutLeft');
+     .subscribe((res: Snack) => !res.message ? 
+                                this.removeCSS(res) : 
+                                this.data = res);
+  }
 
-        setTimeout(() => {
-          this.data = res;
-        }, 800);
-      } else {
-        this.data = res;
-      }
-    });
+  private removeCSS(res: Snack): void {
+    this.css = this.el?.nativeElement.classList || null;
+    this.css?.remove('fadeInLeft');
+    this.css?.add('fadeOutLeft');
+    setTimeout(() => this.data = res, 800); // Animation Delay
   }
 
 }

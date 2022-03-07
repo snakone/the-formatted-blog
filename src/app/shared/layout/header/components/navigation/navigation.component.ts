@@ -10,14 +10,14 @@ import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core
 export class NavigationComponent implements AfterViewInit {
 
   items = [
-    'Home', 'About us', 'Contact', 'Post Type', 'Lifestyle',
-    'Style & Beaty', 'Home & Living', 'Everyday life & Inspirations',
-    'Travel'
+    'Home', 'About us', 'Contact', 'Post Type', 
+    'Lifestyle', 'Style & Beaty', 'Home & Living', 
+    'Everyday life & Inspirations', 'Travel'
   ];
 
-  el: HTMLElement | undefined | null;
+  el!: HTMLElement | null;
   total = 0;
-  scrollDistance = 300;
+  distance = 300;
 
   constructor() { }
 
@@ -38,11 +38,11 @@ export class NavigationComponent implements AfterViewInit {
   public move(next: boolean): void {
     if (this.el) {
       next ? (
-        this.el.scrollLeft += this.scrollDistance,
-        this.total += this.scrollDistance
+        this.el.scrollLeft += this.distance,
+        this.total += this.distance
       ) : (
-        this.el.scrollLeft -= this.scrollDistance,
-        this.total -= this.scrollDistance
+        this.el.scrollLeft -= this.distance,
+        this.total -= this.distance
       );
     }
   }

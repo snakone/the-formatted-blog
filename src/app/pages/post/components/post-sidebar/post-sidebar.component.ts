@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-post-sidebar',
@@ -7,10 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostSidebarComponent implements OnInit {
+export class PostSidebarComponent {
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

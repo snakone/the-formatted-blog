@@ -8,9 +8,6 @@ import { Component } from '@angular/core';
 
 export class SloganComponent {
 
-  title = 'The Formatted Blog';
-  slogan = 'For Real Experiences';
-
   constructor() { }
 
 }

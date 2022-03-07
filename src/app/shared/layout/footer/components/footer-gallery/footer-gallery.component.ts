@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-footer-gallery',
@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FooterGalleryComponent implements OnInit {
+export class FooterGalleryComponent {
 
   items = [
     '20-img.jpg',
@@ -19,7 +19,5 @@ export class FooterGalleryComponent implements OnInit {
   ];
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

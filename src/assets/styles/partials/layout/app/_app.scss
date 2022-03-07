@@ -1,0 +1,21 @@
+#app {
+  @media(max-width: 377px) { display: none }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+// NOTIFICATION BR
+.jump {
+  display: none;
+  @media (min-width: 575px) and (max-width: 1200px) { display: block }
+}
+
+// CARROUSEL
+.owl-carousel.owl-theme.owl-loaded { z-index: 0 }

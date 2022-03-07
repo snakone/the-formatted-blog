@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-error',
@@ -7,13 +7,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./form-error.component.scss']
 })
 
-export class FormErrorComponent implements OnInit {
+export class FormErrorComponent {
 
-  @Input() control!: FormControl;
+  @Input() control!: AbstractControl;
   @Input() validator!: string[];
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

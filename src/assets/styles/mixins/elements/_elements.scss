@@ -1,0 +1,77 @@
+// HOVER STATE
+@mixin hover($value: 1.2, $color: inherit) {
+  &:hover {
+    cursor: pointer;
+    filter: brightness($value);
+    color: $color
+  }
+}
+
+// TITLE MAIN POST
+@mixin main-title {
+  text-transform: uppercase;
+  color: var(--text-color);
+  line-height: 1.5;
+  font-size: 32px;
+  border-top: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  margin: 0 0 20px;
+  font-style: normal;
+  text-align: center;
+  transition: border 666ms ease-in-out;
+  user-select: none;
+
+  @media (max-width: 993px) { font-size: 24px; }
+  @media (max-width: 800px) { font-size: 22px; }
+  @media (max-width: 550px) { font-size: 20px; }
+  @media (max-width: 475px) { font-size: 16px; }
+}
+
+// HOVER BUTTON
+@mixin hover-button() {
+  display: block;
+  background: var(--dark-color);
+  color: var(--light-color);
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 10px;
+  border-radius: 0;
+  font-weight: 600;
+  transition: all 666ms ease-in-out;
+  border: 0;
+  text-align: center;
+
+  @media(max-width: 992px) { font-size: 14px; }
+
+  & span {
+    position: relative;
+    top: 1px;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  }
+
+  &:hover {
+    background: var(--contrast-color);
+    cursor: pointer;
+  }
+}
+
+// TITLE LINES
+@mixin hr-title($size: 80px) {
+  &::after, &::before {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: $size;
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--contrast-color);
+    transition: background 666ms ease-in-out;
+  }
+
+  &::before {
+    left: auto;
+    right: 100%;
+  }
+}

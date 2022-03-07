@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 1. Download LTS Version of Nodejs
 2. Clone this repository
 3. Navigate to the root folder
-4. Execute `npm install`
+4. Execute `npm install` && `npm start`
 
 ## Development server
 

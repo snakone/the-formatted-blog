@@ -4,24 +4,26 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   font-size: 1rem;
   font-weight: 400;
   text-align: left;
+  overflow-x: hidden;
+  color: var(--text-color);
+  overscroll-behavior: none;
+  min-width: var(--app-width);
   overscroll-behavior-y: contain;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
-  background-color: var(--light-color);
-  color: var(--text-color);
-  font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
-  min-width: var(--app-width);
   -webkit-font-smoothing: antialiased;
-  overscroll-behavior: none;
+  background-color: var(--light-color);
+  -webkit-tap-highlight-color: transparent;
+  font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
+  transition: background 666ms ease-in-out, color 666ms ease-in-out;
 }

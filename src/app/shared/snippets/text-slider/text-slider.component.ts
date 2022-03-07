@@ -27,12 +27,9 @@ export class TextSliderComponent implements AfterContentChecked {
   }
 
   public slide(value: number, clear = false): void {
-    if (this.index + value < 0)
-      this.set(this.items.length - 1, 800);
-    else if (this.index + value >= this.items.length)
-      this.set(0, 800);
-    else
-      this.set(this.index += value, 400);
+    if (this.index + value < 0) this.set(this.items.length - 1, 800);
+    else if (this.index + value >= this.items.length) this.set(0, 800);
+    else this.set(this.index += value, 400);
 
     if (this.slider) {
       const style = this.slider.style;
@@ -40,9 +37,7 @@ export class TextSliderComponent implements AfterContentChecked {
       style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
     }
 
-    if (clear && this.interval) {
-      window.clearInterval(this.interval);
-    }
+    if (clear && this.interval) { window.clearInterval(this.interval); }
   }
 
   private set(

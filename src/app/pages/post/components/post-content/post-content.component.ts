@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { DUMMY_POST } from '@shared/data/data';
 
 @Component({
@@ -8,12 +8,10 @@ import { DUMMY_POST } from '@shared/data/data';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostContentComponent implements OnInit {
+export class PostContentComponent {
 
   item = DUMMY_POST[0];
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

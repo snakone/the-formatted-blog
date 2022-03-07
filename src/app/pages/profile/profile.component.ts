@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { LIKE_TOOLTIP } from '@shared/data/sentences';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { LIKE_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +8,11 @@ import { LIKE_TOOLTIP } from '@shared/data/sentences';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
-  tooltip = LIKE_TOOLTIP;
+  text = LIKE_TEXT;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   public like(): void {
     console.log('profile');

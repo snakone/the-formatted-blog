@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sticky-aside',
@@ -7,12 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class StickyAsideComponent implements OnInit {
+export class StickyAsideComponent {
 
   @Input() selector: string | undefined;
 
   constructor() { }
-
-  ngOnInit(): void {}
 
 }

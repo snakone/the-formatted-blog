@@ -29,9 +29,7 @@
                 border 666ms ease-in-out;
     border: 1px solid transparent;
 
-    @media (min-width: 1200px) {
-      padding: 20px 30px;
-    }
+    @media (min-width: 1200px) { padding: 20px 30px }
 
     & .inner {
       display: flex;
@@ -41,9 +39,7 @@
       height: 100%;
       width: 100%;
 
-      & h2 {
-        @include main-title();
-      }
+      & h2 { @include main-title() }
 
       & p {
         text-align: center;
@@ -80,7 +76,7 @@
           }
         }
 
-        &:first-child { padding: 0 0 20px; }
+        &:first-child { padding: 0 0 20px }
       }
     }
 
@@ -98,21 +94,17 @@
       padding: 10px;
 
       & .inner {
-        & p:first-child {
-          padding: 0 0 10px;
-        }
-
-        & h2 { margin: 0 0 12px; }
+        & p:first-child { padding: 0 0 10px }
+        & h2 { margin: 0 0 12px }
       }
     }
 
-    @media(max-width: 475px) { height: 100%; }
-
+    @media(max-width: 475px) { height: 100% }
   }
 
   &:hover {
     cursor: pointer;
-    figure img { opacity: .8; }
+    figure img { opacity: .8 }
 
     & .content {
       background: var(--light-color);

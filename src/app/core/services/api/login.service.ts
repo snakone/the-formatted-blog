@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../http/http.service';
-import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
 import { filter, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { HttpService } from '../http/http.service';
+import { environment } from '@env/environment';
 import { User, UserResponse } from '@shared/types/interface.types';
 import { StorageService } from '../storage/storage.service';
 
@@ -25,7 +26,7 @@ export class LoginService {
     return this.http
       .post<UserResponse>(this.API_LOGIN, body)
       .pipe(
-        filter(res => res && !!res.ok),
+        filter(res => !!res && res.ok),
         tap(_ => (
           this.ls.setKey('token', _?.token),
           this.ls.setKey('id', _?.user._id)
@@ -38,7 +39,7 @@ export class LoginService {
     return this.http
       .post<UserResponse>(environment.api + 'users', user)
       .pipe(
-        filter(res => res && !!res.ok),
+        filter(res => !!res && res.ok),
         map(res => res.user)
       );
   }

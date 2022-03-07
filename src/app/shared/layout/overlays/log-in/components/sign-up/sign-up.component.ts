@@ -15,7 +15,9 @@ import {
   ValidationErrors 
 } from '@angular/forms';
 
+import { Subject, takeUntil } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
+
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { NamePattern } from '@shared/data/patterns';
 import { User } from '@shared/types/interface.types';
@@ -34,9 +36,16 @@ export class SignUpComponent implements OnInit {
   @Output() login = new EventEmitter<void>();
   matchError = false;
   namePattern = NamePattern;
+  private unsubscribe$ = new Subject<void>();
   
   notify = false;
   conditions = false;
+
+  get name(): AbstractControl { return this.signUpForm.get('name') as AbstractControl; }
+  get rol(): AbstractControl { return this.signUpForm.get('rol') as AbstractControl; }
+  get email(): AbstractControl { return this.signUpForm.get('email') as AbstractControl; }
+  get password(): AbstractControl { return this.signUpForm.get('password') as AbstractControl; }
+  get password2(): AbstractControl { return this.signUpForm.get('password2') as AbstractControl; }
 
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
@@ -45,13 +54,8 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.createSignInForm();
+    this.passwordMatch();
   }
-
-  get name(): AbstractControl | any { return this.signUpForm.get('name'); }
-  get rol(): AbstractControl | any { return this.signUpForm.get('rol'); }
-  get email(): AbstractControl | any { return this.signUpForm.get('email'); }
-  get password(): AbstractControl | any { return this.signUpForm.get('password'); }
-  get password2(): AbstractControl | any { return this.signUpForm.get('password2'); }
 
   private createSignInForm(): void {
     this.signUpForm = new FormGroup({
@@ -68,7 +72,6 @@ export class SignUpComponent implements OnInit {
          Validators.maxLength(35)
       ]),
       rol: new FormControl(null, [
-        Validators.required,
         Validators.maxLength(35)
       ]),
       password: new FormControl(null, [
@@ -83,13 +86,11 @@ export class SignUpComponent implements OnInit {
         this.comparePassword()
      ])
     });
-
-    // update password -> password2
   }
 
   public onSubmit(): void {
-    if (this.signUpForm.invalid) { return; }
-    const user: User = this.signUpForm.value;
+    if (this.signUpForm.invalid || !this.conditions) { return; }
+    const user: User = { ...this.signUpForm.value };
     this.userFcd.register(user);
     this.dialogRef.close();
   }
@@ -103,8 +104,19 @@ export class SignUpComponent implements OnInit {
       const value = control.value;
       const compare = this.signUpForm?.get('password')?.value;
       if (!value || !compare) { return null; }
-      return value !== compare ? { passwordMatch: true } : null;
+      return value !== compare ? { password: true } : null;
     }
+  }
+
+  private passwordMatch(): void {
+    this.password?.valueChanges
+     .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((_: string) => this.password2?.updateValueAndValidity())
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

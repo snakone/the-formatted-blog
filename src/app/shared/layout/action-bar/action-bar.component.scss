@@ -3,15 +3,12 @@
 .action {
   width: 100%;
   margin: 30px 0;
+  display: grid;
+  grid-template-columns: 69% auto;
   background: #ffffff;
   padding: 12px 20px;
   transition: background 666ms ease-in-out;
-  display: grid;
-  grid-template-columns: 69% auto;
-
-  &.margin {
-    margin: 18px 0 35px;
-  }
+  &.margin { margin: 18px 0 35px }
 
   & .info {
     margin: auto;
@@ -49,7 +46,6 @@
       &:hover {
         background: var(--contrast-color);
         color: var(--light-color);
-        cursor: pointer;
       }
 
       @media(max-width: 750px) {
@@ -65,8 +61,6 @@
     text-align: center;
     padding: 15px 0;
 
-    & .submit {
-      justify-content: center;
-    }
+    & .submit { justify-content: center }
    }
 }

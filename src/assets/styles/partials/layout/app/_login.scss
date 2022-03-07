@@ -1,0 +1,44 @@
+@import 'mixins/mixins.scss';
+
+.login {
+  max-width: 361px;
+
+  & button {
+    @include hover-button();
+    width: 100%;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px;
+    margin: 2.5rem auto 1.6rem;
+  
+    &:disabled {
+      opacity: .4;
+      pointer-events: none;
+      filter: contrast(0.5);
+    }
+  }
+
+  & input[type="checkbox"] {
+    position: relative;
+    left: 14px;
+    top: 2px;
+    margin-top: .8rem;
+    cursor: pointer;
+  }
+
+  & .bottom {
+    text-align: center;
+  
+    & p {
+      font-size: 12px;
+      line-height: 20px;
+    }
+  
+    & strong { color: var(--contrast-color) }
+  
+    & strong  {
+      cursor: pointer;
+      &:hover { filter: brightness(1.3); }
+    }
+  }
+}

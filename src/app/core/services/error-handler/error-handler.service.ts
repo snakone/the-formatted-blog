@@ -10,20 +10,27 @@ export class ErrorHandlerService implements ErrorHandler {
   constructor() { }
 
   handleError(error: Error | HttpErrorResponse): void {
+
     switch (error.constructor) {
       case TypeError: {
         console.error('Type Error! ', error);
         break;
       }
       case Error: {
-        console.error('General Error!. ', error);
+        console.error('General Error! ', error);
         break;
       }
+    }
+
+    if (error instanceof HttpErrorResponse) {
+      console.error('HTTP Error! ', error);
     }
 
     if (this.chunkFailedMessage.test(error?.message)) {
       window.location.reload();
     }
+
+    throw error;
   }
 
 }

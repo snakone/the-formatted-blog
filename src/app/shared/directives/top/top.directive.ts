@@ -1,6 +1,6 @@
 import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, distinctUntilChanged, throttleTime } from 'rxjs/operators';
+import { Subject, fromEvent } from 'rxjs';
 
 @Directive({selector: '[TopDirective]'})
 
@@ -29,15 +29,10 @@ export class TopDirective implements AfterViewInit, OnDestroy {
 
   private onScroll(): void {
     try {
-      const scroll = document.documentElement.scrollTop;
+      const scroll = document.documentElement?.scrollTop || 0;
       if (scroll > this.scrollLimit && this.displayed) { return; }
       this.manageCSS(scroll > this.scrollLimit)
     } catch (err) { console.log(err); }
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private manageCSS(scrolled: boolean): void {
@@ -51,6 +46,11 @@ export class TopDirective implements AfterViewInit, OnDestroy {
         this.button.classList.remove('fadeInRight');
         this.button.classList.add('fadeOutRight');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

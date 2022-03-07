@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { map, concatMap, catchError, tap } from 'rxjs/operators';
 
 import * as UserActions from './users.actions';
 import { LoginService } from '@services/api/login.service';
+import { SnackService } from '@core/services/snack/snack.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
-import { Router } from '@angular/router';
-import { CrafterService } from '@core/services/crafter/crafter.service';
-import { SnackComponent } from '@shared/layout/overlays/snack/snack.component';
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
-import { SnackService } from '@core/services/snack/snack.service';
 
 @Injectable()
 
@@ -33,10 +31,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signIn(action.name, action.password)
         .pipe(
-          tap(_ => (
-            this.router.navigateByUrl('/profile'),
-            this.snakSrv.setSnack(LOGIN_SENTENCE)
-          )),
+          tap(_ => this.navigate('/profile', LOGIN_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -50,10 +45,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signUp(action.user)
         .pipe(
-          tap(_ => (
-            this.router.navigateByUrl('/profile'),
-            this.snakSrv.setSnack(REGISTER_SENTENCE)
-          )),
+          tap(_ => this.navigate('/profile', REGISTER_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -92,10 +84,18 @@ export class UserEffects {
       ofType(UserActions.userLogOut),
       tap(_ => (
         this.ls.setKey('token', null),
-        this.router.navigateByUrl('/'),
-        this.snakSrv.setSnack(LOGOUT_SENTENCE)
+        this.navigate('/', LOGOUT_SENTENCE)
       ))
     ), { dispatch: false }
   );
+
+  private navigate(
+    path: string, 
+    sentence: string,
+    type = 'info'
+  ): void {
+    this.router.navigateByUrl(path);
+    this.snakSrv.setSnack(sentence, type);
+  }
 
 }

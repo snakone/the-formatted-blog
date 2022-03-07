@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LayoutModule } from '@layout/layout.module';
+import { SnippetsModule } from '@shared/snippets/snippets.module';
 import { PostRoutingModule } from './post.routing';
 import { PostComponent } from './post.component';
-import { LayoutModule } from '@layout/layout.module';
 import { PostContentComponent } from './components/post-content/post-content.component';
 import { PostSidebarComponent } from './components/post-sidebar/post-sidebar.component';
 
@@ -16,7 +17,8 @@ import { PostSidebarComponent } from './components/post-sidebar/post-sidebar.com
   imports: [
     CommonModule,
     PostRoutingModule,
-    LayoutModule
+    LayoutModule,
+    SnippetsModule
   ]
 })
 

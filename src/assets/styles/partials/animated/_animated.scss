@@ -11,20 +11,15 @@
   }
 }
 
+// FADE IN
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.fadeIn {
-  animation-name: fadeIn;
-}
+.fadeIn { animation-name: fadeIn }
 
+// FADE IN RIGHT
 @keyframes fadeInRight {
   from {
     opacity: 0;
@@ -37,14 +32,11 @@
   }
 }
 
-.fadeInRight {
-  animation-name: fadeInRight;
-}
+.fadeInRight { animation-name: fadeInRight }
 
+// FADE OUT RIGHT
 @keyframes fadeOutRight {
-  from {
-    opacity: 1;
-  }
+  from { opacity: 1 }
 
   to {
     opacity: 0;
@@ -52,10 +44,10 @@
   }
 }
 
-.fadeOutRight {
-  animation-name: fadeOutRight;
-}
+.fadeOutRight { animation-name: fadeOutRight }
 
+
+// FADE IN LEFT
 @keyframes fadeInLeft {
   from {
     opacity: 0;
@@ -68,14 +60,11 @@
   }
 }
 
-.fadeInLeft {
-  animation-name: fadeInLeft;
-}
+.fadeInLeft { animation-name: fadeInLeft }
 
+// FADE OUT LEFT
 @keyframes fadeOutLeft {
-  from {
-    opacity: 1;
-  }
+  from { opacity: 1 }
 
   to {
     opacity: 0;
@@ -83,86 +72,62 @@
   }
 }
 
-.fadeOutLeft {
-  animation-name: fadeOutLeft;
-}
+.fadeOutLeft { animation-name: fadeOutLeft }
 
+// BOUNCE IN DOWN
 @keyframes bounceInDown {
   from,
   60%,
   75%,
   90%,
-  to {
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
+  to { animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1) }
 
   0% {
     opacity: 0;
-    transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -120px, 0);
   }
 
   60% {
     opacity: 1;
-    transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 8px, 0);
   }
 
-  75% {
-    transform: translate3d(0, -10px, 0);
-  }
-
-  90% {
-    transform: translate3d(0, 5px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+  75% { transform: translate3d(0, 5px, 0) }
+  to { transform: translate3d(0, 0, 0) }
 }
 
-.bounceInDown {
-  animation-name: bounceInDown;
-}
+.bounceInDown { animation-name: bounceInDown }
 
+// BOUNCE OUT UP
 @keyframes bounceOutUp {
-  20% {
-    transform: translate3d(0, -10px, 0);
-  }
-
+  from,
+  20%,
+  30%,
   40%,
-  45% {
-    opacity: 1;
-    transform: translate3d(0, 20px, 0);
-  }
+  to { animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1) }
 
-  60% {
-    transform: translate3d(0, -10px, 0);
-  }
+  0% { opacity: 1 }
 
-  75% {
-    transform: translate3d(0, -30px, 0);
-  }
+  20% { transform: translate3d(0, 5px, 0) }
+  30% { transform: translate3d(0, 0, 0); }
 
-  to {
-    opacity: 0;
-    transform: translate3d(0, -2000px, 0);
-  }
+  40% { transform: translate3d(0, -5px, 0) }
+  to { transform: translate3d(0, -80px, 0) }
 }
 
-.bounceOutUp {
-  animation-name: bounceOutUp;
-}
+.bounceOutUp { animation-name: bounceOutUp }
 
-// CUSTOM ANIMATIONS
+// SPIN ANIMATIONS
 @keyframes ClockwiseSpin {
-  0%  {transform: rotate(0deg);}
-  100% {transform: rotate(360deg);}
+  0%  { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @keyframes AntiClockwiseSpin {
-  0%  {transform: rotate(360deg);}
-  100% {transform: rotate(0deg);}
+  0%  { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes SpinBack {
-  to {transform: rotate(360deg);}
+  to { transform: rotate(360deg); }
 }

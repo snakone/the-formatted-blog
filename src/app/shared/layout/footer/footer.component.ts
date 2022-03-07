@@ -6,14 +6,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class FooterComponent implements OnInit {
 
-  today: string | undefined | null;
+  year: string | undefined | null;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.today = this.getYear();
+    this.year = this.getYear();
   }
 
   private getYear(): string {

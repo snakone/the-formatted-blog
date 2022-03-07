@@ -10,21 +10,20 @@
   --border-color: #ebebeb;
   --transparent-bg: rgba(255, 255, 255 , 0.85);
   --quote-bg: #fffdbd;
-  --shade-color: #b7b5b5;
   --navigation-border: #e2e1e1;
-  --navbar-border: var(--shade-color);
+  --navbar-border: #484a4a;
   --add-bg: rgba(225, 225, 225, .7);
   --button-text-color: #3b3939;
   --inverted-contrast: #ffe364;
-  --shadow-card-1: rgba(0, 0, 0, 0.12);
-  --shadow-card-2: rgba(0, 0, 0, 0.24);
-  --shadow-card-hover-1: rgba(0, 0, 0, 0.25);
-  --shadow-card-hover-2: rgba(0, 0, 0, 0.22);
+  --error-color: #ee2525;
+  --inner-border: #fbfbfb;
+  --date-color: #888888;
 
   // SIZE
   --app-width: 377px;
   --header-height: 48px;
   --text-slide-width: 228px; // Change textSliderComponent
-  --snack-width: 130px;
+  --snack-width: 135px;
+  --snack-height: 36px;
 }
 

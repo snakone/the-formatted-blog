@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  ChangeDetectionStrategy, 
+  Output, 
+  EventEmitter 
+} from '@angular/core';
+
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -18,6 +25,9 @@ export class SignInComponent implements OnInit {
   remember = false;
   @Output() register = new EventEmitter<void>();
 
+  get email(): AbstractControl { return this.signInForm.get('email') as AbstractControl; }
+  get password(): AbstractControl { return this.signInForm.get('password') as AbstractControl; }
+
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
     private userFcd: UsersFacade
@@ -26,9 +36,6 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.createSignInForm();
   }
-
-  get email(): AbstractControl | any { return this.signInForm.get('email'); }
-  get password(): AbstractControl | any { return this.signInForm.get('password'); }
 
   private createSignInForm(): void {
     this.signInForm = new FormGroup({

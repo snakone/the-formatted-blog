@@ -10,15 +10,16 @@ nav {
   @include row();
 
   & .wrapper {
+    border-bottom: 1px solid var(--navigation-border);
+    border-top: 1px solid var(--navigation-border);
+    transition: border 666ms ease-in-out;
+
     & ul {
       text-align: center;
       width: 100%;
       padding-left: 0;
       margin-bottom: 0;
       list-style: none;
-      border-bottom: 1px solid var(--navigation-border);
-      border-top: 1px solid var(--navigation-border);
-      transition: border 666ms ease-in-out;
 
       & li {
         float: none;
@@ -68,12 +69,13 @@ nav {
         & li { padding: 10px 12px; }
       }
 
-      @media(min-width: 731px) and (max-width: 1200px) {
-        & li { padding: 10px 4%; }
+      @media(min-width: 781px) and (max-width: 1200px) {
+        width: 80%;
+        & li { padding: 10px 3%; }
       }
     }
 
-    @media(max-width: 730px) {
+    @media(max-width: 780px) {
       overflow: hidden;
       z-index: 100;
       transition: all 0.5s ease-in-out;
@@ -105,12 +107,12 @@ nav {
         color: var(--contrast-color);
       }
 
-      @media(min-width: 730px) {
+      @media(min-width: 780px) {
         display: none;
       }
     }
 
-    @media(max-width: 730px) {
+    @media(max-width: 780px) {
       margin: 0 auto;
       padding-left: 0px;
     }

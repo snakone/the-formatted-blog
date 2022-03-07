@@ -13,7 +13,7 @@
   pointer-events: none;
 
   & h2 {
-    font-size: 8vw;
+    font-size: 7.5vw;
     position: relative;
     top: -1rem;
     text-align: center;
@@ -21,12 +21,11 @@
     line-height: 10vw;
     font-weight: normal;
     color: var(--dark-color);
-
     & span { font-size: inherit !important }
   }
 
   & p {
-    font-size: .9rem;
+    font-size: 4.5vw;
     color: var(--contrast-color);
     font-weight: bold;
     text-align: center;

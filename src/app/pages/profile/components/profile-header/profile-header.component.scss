@@ -25,11 +25,11 @@
       height: 100%;
       padding: 0 30px 0 30px;
       background: var(--transparent-bg);
+      border: 1px solid transparent;
       transition: background 666ms ease-in-out,
                   border 666ms ease-in-out,
                   left 333ms ease-in-out,
                   width 333ms ease-in-out;
-      border: 1px solid transparent;
   
       & .inner {
         height: 100%;
@@ -50,8 +50,8 @@
           font-style: italic;
           color: var(--text-color);
           padding: 0;
-          line-height: inherit;
           opacity: .8;
+          line-height: inherit;
           vertical-align: middle;
 
           &.role {
@@ -65,9 +65,9 @@
         }
 
         & h2 {
+          margin: 0;
           @include main-title();
           color: var(--contrast-color);
-          margin: 0;
           transition: font-size 300ms ease-in;
           transition: color, border 666ms ease-in;
         }
@@ -165,7 +165,7 @@
   
     &:hover {
       cursor: pointer;
-      figure img { opacity: .8; }
+      figure img { opacity: .8 }
   
       & .content {
         background: var(--light-color);
@@ -187,25 +187,15 @@
   .wrapper {
     & .content {
       & .inner {
-        & h2 {
-          font-size: 26px;
-        }
-
-        & p {
-          line-height: 20px;
-        }
+        & h2 { font-size: 26px }
+        & p { line-height: 20px }
 
         & .data {
-          & ul {
-            margin: 18px 0 0;
-          }
+          & ul { margin: 18px 0 0 }
 
           & .actions {
             margin: 28px 0 0 0;
-
-            & button {
-              padding: 8px;
-            }
+            & button { padding: 8px }
           }
         }
       }
@@ -217,9 +207,7 @@
   .wrapper {
     & .content {
       & .inner {
-        & h2 {
-          font-size: 24px;
-        }
+        & h2 { font-size: 24px }
       }
     }
 
@@ -234,9 +222,7 @@
 
 @media (max-width: 850px) {
   .wrapper {
-    & .content {
-      padding: 0 30px 0 30px;
-    }
+    & .content { padding: 0 30px 0 30px }
   }
 }
   

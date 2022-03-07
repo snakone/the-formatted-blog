@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-footer-nav',
@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FooterNavComponent implements OnInit {
+export class FooterNavComponent {
 
   icons = [
     'fab fa-facebook-f',
@@ -17,16 +17,6 @@ export class FooterNavComponent implements OnInit {
     'fab fa-dribbble'
   ];
 
-  // icons = [
-  //   'icons8-facebook-50.svg',
-  //   'icons8-twitter-50.svg',
-  //   'icons8-instagram-50.svg',
-  //   'icons8-pinterest-50.svg',
-  //   'icons8-linkedin-50.svg'
-  // ];
-
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

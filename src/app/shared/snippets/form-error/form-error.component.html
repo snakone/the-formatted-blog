@@ -1,29 +1,29 @@
-<div *ngIf="control.invalid && control.dirty" class="form-error">
+<div *ngIf="control.invalid && control.dirty" 
+      class="form-error">
     <!-- MIN LENGTH -->
-    <span *ngIf="validator.includes('minlength') && 
-                 control.errors?.minlength">
-      Tamaño mínimo:
+    <span *ngIf="validator.includes('minlength') && control.errors?.minlength">
+      Tamaño mínimo: 
       <strong>{{control.errors?.minlength.requiredLength}}</strong>
     </span>
+    <!-- MAX LENGTH -->
+    <span *ngIf="validator.includes('maxlength') && control.errors?.maxlength">
+      Tamaño máximo: 
+      <strong>{{control.errors?.maxlength.requiredLength}}</strong>
+    </span>
     <!-- REQUIRED -->
-    <span *ngIf="validator.includes('required') && 
-                 control.errors?.required">
+    <span *ngIf="validator.includes('required') && control.errors?.required">
       Campo requerido
     </span>
     <!-- PATTERN -->
-    <span *ngIf="validator.includes('pattern') && 
-                 control.errors?.pattern">
+    <span *ngIf="validator.includes('pattern') && control.errors?.pattern">
       Fórmato no válido
     </span>
     <!-- EMAIL -->
-    <span *ngIf="validator.includes('email') && 
-                 control.errors?.email">
-      Fórmato email no válido
+    <span *ngIf="validator.includes('email') && control.errors?.email">
+      Fórmato correo no válido
     </span>
-
     <!-- PASSWORD -->
-    <span *ngIf="validator.includes('passwordMatch') && 
-                 control.errors?.passwordMatch">
+    <span *ngIf="validator.includes('password') && control.errors?.password">
       La contraseña no coincide
     </span>
 </div>

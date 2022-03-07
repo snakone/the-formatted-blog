@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { STORAGE_CONSTANTS, Storage } from './storage.config';
 import { LocalStorage } from 'ngx-webstorage';
+import { STORAGE_CONSTANTS, Storage } from './storage.config';
 
 @Injectable({providedIn: 'root'})
 
@@ -27,9 +27,7 @@ export class StorageService {
   }
 
   private loadStorage(): void {
-    if (!this.storage) {
-      this.reset();
-    }
+    if (!this.storage) { this.reset(); }
   }
 
   public reset(): void {

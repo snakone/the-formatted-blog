@@ -1,10 +1,10 @@
 export const NO_WIDTH = `Lo sentimos. Esta aplicación sólo se puede usar
 con una pantalla superior a <strong>377px</strong> de ancho. Disculpa las molestias.`;
 
-export const NOTIFICATION_TOOLTIP = `¿Quieres enterarte de todo? Te aseguramos que no enviamos spam.
+export const NOTIFICATION_TEXT = `¿Quieres enterarte de todo? Te aseguramos que no enviamos spam.
 <br class="jump">Recibirás lo que realmente te interesa de nuestra parte.`;
 
-export const LIKE_TOOLTIP = `Hazle saber a este creador/a que te gusta lo que hace.<br class="jump">
+export const LIKE_TEXT = `Hazle saber a este creador/a que te gusta lo que hace.<br class="jump">
 ¡Esto le ayudará a que haga más contenido para todos! ¡Genial!`;
 
 export const SEARCH_SENTENCE = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';

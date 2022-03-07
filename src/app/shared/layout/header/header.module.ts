@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SnippetsModule } from '../../snippets/snippets.module';
 
+import { SnippetsModule } from '../../snippets/snippets.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SloganComponent } from './components/slogan/slogan.component';
 import { HeaderComponent } from './header.component';
