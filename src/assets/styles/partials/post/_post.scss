@@ -21,7 +21,7 @@
   & blockquote {
     width: 100%;
     margin: 36px 0 35px;
-    background: #fffce8;
+    background: var(--quote-bg);
     padding: 15px 22px 15px 25px;
     transition: background 666ms ease-in-out;
     font-style: italic;

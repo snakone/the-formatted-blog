@@ -20,4 +20,10 @@
                  control.errors?.email">
       Fórmato email no válido
     </span>
+
+    <!-- PASSWORD -->
+    <span *ngIf="validator.includes('passwordMatch') && 
+                 control.errors?.passwordMatch">
+      La contraseña no coincide
+    </span>
 </div>

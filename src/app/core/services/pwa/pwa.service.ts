@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { SwUpdate, SwPush } from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 import { filter } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
@@ -13,7 +13,7 @@ export class PWAService {
   ) { }
 
   public updateSW(): void {
-    this.swUpdate.available
+    this.swUpdate.versionUpdates
      .pipe(
        filter(event => event && !!event)
       )

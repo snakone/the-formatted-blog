@@ -22,7 +22,7 @@ export class NavDirective implements AfterViewInit {
   private stickyNavbar(): void {
     fromEvent(window, 'scroll')
      .pipe(
-       throttleTime(100),
+       throttleTime(50),
        tap(_ => setTimeout(() => this.scrolled.emit(true), 100))
      )
       .subscribe(_ => {
@@ -54,8 +54,8 @@ export class NavDirective implements AfterViewInit {
       filter((e): e is NavigationEnd => (
         e instanceof NavigationEnd && !!this.el
       )),
-     ).subscribe(_ => this.el.nativeElement.classList
-                       .remove('scroll-down'));
+     ).subscribe(_ => this.el.nativeElement.
+                              classList.remove('scroll-down'));
   }
 
 }

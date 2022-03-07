@@ -5,16 +5,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
-
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-
-.jump {
-  display: none;
-  @media (min-width: 575px) and (max-width: 1200px) {
-    display: block;
-  }
-}
+@import "@angular/material/prebuilt-themes/indigo-pink.css";

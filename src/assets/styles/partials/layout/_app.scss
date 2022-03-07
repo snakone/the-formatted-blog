@@ -19,3 +19,21 @@
 .cdk-overlay-dark-backdrop {
   background: rgba(0,0,0,0.82);
 }
+
+.login-overlay .mat-dialog-container{
+  max-width: 361px;
+}
+
+.mat-snack-bar-container {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  min-height: 35px !important;
+  min-width: 300px !important;
+}
+
+.jump {
+  display: none;
+  @media (min-width: 575px) and (max-width: 1200px) {
+    display: block;
+  }
+}

@@ -15,7 +15,7 @@ body {
     --contrast-color: #ffe364;
     --border-color: #242424;
     --transparent-bg: rgba(0, 0, 0 , 0.9);
-    --quote-bg: #ffe364;
+    --quote-bg: #fffce8;
     --shade-color: #484a4a;
     --navigation-border: #4d4d4d;
     --navbar-border: #e9e9e9;
@@ -26,5 +26,7 @@ body {
     --shadow-card-2: rgba(200, 200, 200, 0.24);
     --shadow-card-hover-1: rgba(200, 200, 200, 0.20);
     --shadow-card-hover-2: rgba(200, 200, 200, 0.16);
+
+    & a { color: rgb(0, 140, 255) }
   }
 }

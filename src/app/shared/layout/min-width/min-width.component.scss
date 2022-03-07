@@ -13,12 +13,12 @@
   pointer-events: none;
 
   & h2 {
-    font-size: 1.2rem;
+    font-size: 8vw;
     position: relative;
     top: -1rem;
     text-align: center;
     margin-bottom: 2rem;
-    line-height: 2rem;
+    line-height: 10vw;
     font-weight: normal;
     color: var(--dark-color);
 
@@ -29,6 +29,7 @@
     font-size: .9rem;
     color: var(--contrast-color);
     font-weight: bold;
+    text-align: center;
   }
 
   @media(max-width: 377px) {

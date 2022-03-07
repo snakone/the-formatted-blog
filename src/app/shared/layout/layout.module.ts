@@ -19,6 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { OverlaysModule } from './overlays/overlays.module';
 import { PostLayoutModule } from './post/post-layout.module';
 import { ActionBarComponent } from './action-bar/action-bar.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     StickyAsideComponent,
     LoaderComponent,
     SidebarComponent,
-    ActionBarComponent
+    ActionBarComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,9 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     LoaderComponent,
     SidebarComponent,
     PostLayoutModule,
-    ActionBarComponent
+    ActionBarComponent,
+    SpinnerComponent,
+    OverlaysModule
   ]
 })
 
