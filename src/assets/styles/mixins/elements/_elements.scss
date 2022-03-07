@@ -19,6 +19,7 @@
   font-style: normal;
   text-align: center;
   transition: border 666ms ease-in-out;
+  user-select: none;
 
   @media (max-width: 993px) { font-size: 24px; }
   @media (max-width: 800px) { font-size: 22px; }

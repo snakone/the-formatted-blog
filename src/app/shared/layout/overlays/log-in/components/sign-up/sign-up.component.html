@@ -28,11 +28,10 @@
     <div class="form-control">
       <label for="rol">Profesión</label>
       <input formControlName="rol"
-              autocomplete="off"
-              type="text"
-              maxlength="35"/>
+             autocomplete="off"
+             type="text"/>
       <app-form-error [control]="rol"
-                      [validator]="['required']">
+                      [validator]="['maxlength']">
       </app-form-error>
     </div>
     <!-- PASSWORD -->
