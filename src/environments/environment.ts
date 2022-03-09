@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   api: 'http://localhost:3000/',
   keys: {
-    push: 'BBLiOnKY2ZADekUk2DjlEUXM42nFWIMzJIQ98js1iMnvj8H4qcGIxKKVaKmR0GKAHYyRUMobzkXnVK-w1qhvmFc'
+    push: 'BKPDjgxW1e-5FkvRtqg9U0ppcp8vKzUCWFM6sKCZ2WPKr8X1FpC18acJYdnityvrOf6jSNtPeC-WjPcRbqoXtsU'
   }
 };
 

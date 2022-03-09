@@ -49,7 +49,7 @@ export class PWAService {
                 this.set(Object.assign({}, WELCOME_PUSH))
               ))
             )
-            .subscribe(_ => this.ls.setKey('welcome', true));
+            .subscribe(_ => null);
         }
       })
       .catch(err => console.error(err));
