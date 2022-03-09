@@ -1,30 +1,23 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="user">
   <figure> <!-- IMAGE -->
     <img src="assets/images/0111-img.jpg" alt="Post Image"/>
   </figure>
   <div class="content animated fadeIn">
     <!-- HOVER -->
     <div class="inner">
-      <h2>Marian Smith</h2>
-      <p class="role">Frontend Designer</p>
+      <h2>{{user.name}}</h2>
+      <p class="role">{{user.profesion}}</p>
       <div class="data">
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-          Quis sapiente laborum, iure quod veritatis.
-        </p>
+        <p>{{user.bio}}</p>
         <ul>
-          <li>
-            <span><i class="fas fa-pencil-alt"></i> 24</span>
-          </li>
-          <li>
-            <span><i class="far fa-heart"></i> 127</span>
-          </li>
-          <li>
-            <span><i class="fas fa-users"></i> 432</span>
+          <li *ngFor="let i of list">
+            <span>
+              <i [class]="i.icon"></i> {{user.stats[i.label]}}
+            </span>
           </li>
         </ul>
         <div class="actions">
-          <button>Contacto</button>
+          <button>Portfolio</button>
           <button>Mensaje</button>
         </div>
       </div>

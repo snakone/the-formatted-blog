@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { USER_STATS } from '@shared/data/data';
+import { User } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-profile-header',
@@ -8,6 +10,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class ProfileHeaderComponent implements OnInit {
+
+  @Input() user!: User | null;
+  list = USER_STATS;
 
   constructor() { }
 

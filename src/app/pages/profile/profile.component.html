@@ -1,14 +1,16 @@
 <div class="animated fadeIn">
   <section>
-    <app-profile-header></app-profile-header>
-        <app-action-bar [text]="text"
-                        buttonText="Like"
-                        [function]="like">
-        </app-action-bar>
+    <app-action-bar [text]="text"
+                    buttonText="Like"
+                    [function]="like">
+    </app-action-bar>
   </section>
   <section class="profile-content">
     <app-section [margin]="false">
-      <app-profile-content></app-profile-content>
+      <app-profile-sidebar></app-profile-sidebar>
+      <div class="wrapper">
+        <router-outlet></router-outlet>
+      </div>
     </app-section>
   </section>
 </div>

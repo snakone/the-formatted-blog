@@ -22,9 +22,10 @@ export interface User {
 }
 
 export interface UserStats {
+  [key: string]: number;
+  friends: number;
   posts: number;
   likes: number;
-  friends: number;
 }
 
 // SERVER RESPONSES
@@ -42,4 +43,11 @@ export interface UserResponse extends ServerResponse {
 export interface Snack {
   message: string | null;
   type?: string;
+}
+
+// LIST
+export interface IconList {
+  icon: string;
+  label: string;
+  route?: string;
 }

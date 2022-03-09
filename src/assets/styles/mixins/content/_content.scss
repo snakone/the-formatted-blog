@@ -32,6 +32,19 @@
   @media(max-width: 992px) { grid-column: 1 / -1 }
 }
 
+// INVERTED COLUMN
+@mixin grid-inverted() {
+  padding-left: 40px;
+  grid-column: 2 / -1;
+
+  @media(max-width: 1200px) { grid-column: 2 / 3 }
+
+  @media(max-width: 992px) {
+    grid-column: 1 / -1;
+    padding-left: 0;
+  }
+}
+
 // FLEX CENTER
 @mixin flex-center {
   display: flex;

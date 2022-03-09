@@ -5,3 +5,14 @@ section {
   @include row();
   margin-top: 0.666rem;
 }
+
+.wrapper {
+  @include grid-inverted();
+  background: #fff;
+  padding-left: 0;
+  margin-left: 30px;
+}
+
+app-profile-sidebar {
+  @include grid-child();
+}
