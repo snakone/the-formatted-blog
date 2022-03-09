@@ -43,10 +43,7 @@ export class PWAService {
         serverPublicKey: this.pushKey
       }).then((sub: PushSubscription) => {
         if (sub) {
-          this.save(sub)
-            .subscribe(_ => this.send(
-              this.set(Object.assign({}, WELCOME_PUSH))
-            ));
+          this.save(sub).subscribe();
         }
       })
       .catch(err => console.error(err));

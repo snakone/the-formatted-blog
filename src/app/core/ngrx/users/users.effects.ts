@@ -11,6 +11,7 @@ import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
 import { PWAService } from '@core/services/pwa/pwa.service';
+import { WELCOME_PUSH } from '@shared/data/notifications';
 
 @Injectable()
 
@@ -100,7 +101,7 @@ export class UserEffects {
     this.snakSrv.setSnack(sentence, 'info');
 
     if (sw) {
-      this.sw.showPrompt();
+      this.sw.send(WELCOME_PUSH);
     }
   }
 
