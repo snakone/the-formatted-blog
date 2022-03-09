@@ -44,12 +44,9 @@ export class PWAService {
       }).then((sub: PushSubscription) => {
         if (sub) {
           this.save(sub)
-            .pipe(
-              switchMap(_ => this.send(
-                this.set(Object.assign({}, WELCOME_PUSH))
-              ))
-            )
-            .subscribe(_ => null);
+            .subscribe(_ => this.send(
+              this.set(Object.assign({}, WELCOME_PUSH))
+            ));
         }
       })
       .catch(err => console.error(err));
@@ -85,7 +82,7 @@ export class PWAService {
   private set(
     payload: NotificationPayload
   ): NotificationPayload {
-    payload.user = this.ls.get('user');
+    payload.user = this.ls.get('id');
     return payload;
   }
 
