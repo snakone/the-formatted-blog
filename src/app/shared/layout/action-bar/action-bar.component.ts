@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-action-bar',
@@ -12,8 +12,12 @@ export class ActionBarComponent {
   @Input() margin = false;
   @Input() text!: string;
   @Input() buttonText!: string;
-  @Input() function!: Function;
+  @Output() function = new EventEmitter<void>();
 
   constructor() { }
+
+  public action(): void {
+    this.function.emit();
+  }
 
 }

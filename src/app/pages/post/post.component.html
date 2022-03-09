@@ -3,7 +3,7 @@
     <app-post-carrousel></app-post-carrousel>
     <app-action-bar [text]="text"
                     buttonText="Subscríbete"
-                    [function]="notification"
+                    (function)="notification()"
                     [margin]="true">
     </app-action-bar>
   </div>

@@ -37,7 +37,7 @@ export class PWAService {
     });
   }
 
-  public showPrompt(): void {
+  public showPrompt(timer = 10000): void {
     setTimeout(() => {
       this.swPush.requestSubscription({
         serverPublicKey: this.pushKey
@@ -53,7 +53,11 @@ export class PWAService {
         }
       })
       .catch(err => console.error(err));
-    }, 10000);
+    }, timer);
+  }
+
+  public requestNotification(): void {
+    Notification.requestPermission().then(_ => this.showPrompt(1000));
   }
 
   public save(

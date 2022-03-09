@@ -2,7 +2,7 @@
   <div class="wrapper">
     <app-action-bar [text]="text"
                     buttonText="Subscríbete"
-                    [function]="notification"
+                    (function)="notification()"
                     [margin]="true">
     </app-action-bar>
   </div>

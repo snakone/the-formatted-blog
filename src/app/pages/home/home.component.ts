@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { PWAService } from '@core/services/pwa/pwa.service';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
@@ -12,10 +13,10 @@ export class HomeComponent {
 
   text = NOTIFICATION_TEXT;
 
-  constructor() { }
+  constructor(private swPush: PWAService) { }
 
   public notification(): void {
-    console.log('home');
+    this.swPush.requestNotification();
   }
 
 }
