@@ -51,7 +51,7 @@ ul {
 
     &:hover {
       opacity: .8;
-      background: whitesmoke;
+      background: var(--li-hover);
 
       & i {
         color: var(--contrast-color);

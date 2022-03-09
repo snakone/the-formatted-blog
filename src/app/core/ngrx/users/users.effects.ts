@@ -10,6 +10,7 @@ import { SnackService } from '@core/services/snack/snack.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
+import { PWAService } from '@core/services/pwa/pwa.service';
 
 @Injectable()
 
@@ -21,7 +22,8 @@ export class UserEffects {
     private userSrv: UserService,
     private ls: StorageService,
     private router: Router,
-    private snakSrv: SnackService
+    private snakSrv: SnackService,
+    private sw: PWAService,
   ) { }
 
   // LOGIN USER
@@ -31,7 +33,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signIn(action.name, action.password)
         .pipe(
-          tap(_ => this.navigate('/profile', LOGIN_SENTENCE)),
+          tap(_ => this.navigate('/profile', LOGIN_SENTENCE, true)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -92,10 +94,14 @@ export class UserEffects {
   private navigate(
     path: string, 
     sentence: string,
-    type = 'info'
+    sw: boolean = false
   ): void {
     this.router.navigateByUrl(path);
-    this.snakSrv.setSnack(sentence, type);
+    this.snakSrv.setSnack(sentence, 'info');
+
+    if (sw) {
+      this.sw.showPrompt();
+    }
   }
 
 }

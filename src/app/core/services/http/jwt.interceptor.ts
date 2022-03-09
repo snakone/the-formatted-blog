@@ -29,7 +29,7 @@ export class JwtInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           const id = this.ls.get('id');
-          if (!id) { throw err; }
+          if (!id) throw err; 
           this.userFacade.refreshToken(id);
         }
         throw err;

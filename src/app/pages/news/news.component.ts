@@ -10,7 +10,7 @@ import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 export class NewsComponent implements OnInit {
 
   text = NOTIFICATION_TEXT;
-  duration = 3000;
+  duration = 2000;
 
   constructor() { }
 

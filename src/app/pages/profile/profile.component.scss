@@ -8,9 +8,10 @@ section {
 
 .wrapper {
   @include grid-inverted();
-  background: #fff;
+  background: var(--li-hover);
   padding-left: 0;
   margin-left: 30px;
+  transition: background 666ms ease-in-out;
 }
 
 app-profile-sidebar {

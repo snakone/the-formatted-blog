@@ -33,6 +33,7 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
   ],
   providers: [
     HttpService,
+    ErrorHandlerService,
     { provide: CORE_MODULE_CONFIG, useValue: CORE_MODULE_CONSTANTS },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
     { provide: ErrorHandler, useClass: ErrorHandlerService },

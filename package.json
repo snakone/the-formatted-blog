@@ -2,7 +2,11 @@
   "name": "formatted-blog",
   "version": "0.0.5",
   "description": "Application to create content",
-  "keywords": ["Content", "Create", "Blog"],
+  "keywords": [
+    "Content",
+    "Create",
+    "Blog"
+  ],
   "license": "MIT",
   "author": {
     "name": "Sergi Martínez",
@@ -39,6 +43,7 @@
     "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "hammerjs": "^2.0.8",
+    "ngx-device-detector": "^3.0.0",
     "ngx-owl-carousel-o": "^7.0.1",
     "ngx-webstorage": "^9.0.0",
     "rxjs": "~7.5.4",

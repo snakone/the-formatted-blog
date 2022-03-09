@@ -51,3 +51,31 @@ export interface IconList {
   label: string;
   route?: string;
 }
+
+// SERVICE WORKER
+// tslint:disable-next-line:no-empty-interface
+export interface SWResponse extends ServerResponse {}
+
+export interface NotificationPayload {
+  title?: string;
+  body: string;
+  icon?: string;
+  vibrate?: number[];
+  requireInteraction?: boolean;
+  image?: string;
+  data?: NotificationData;
+  actions: NotificationAction[];
+  user?: string;
+  broadcast?: boolean;
+  device?: string | RegExp;
+}
+
+interface NotificationData {
+  url?: string;
+  data?: any;
+}
+
+interface NotificationAction {
+  action: string;
+  title: string;
+}

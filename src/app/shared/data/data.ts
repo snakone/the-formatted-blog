@@ -79,6 +79,7 @@ export const USER_INDEX: IconList[] = [
   { icon: 'fab fa-ioxhost', label: 'Posts', route: 'posts' },
   { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
+  { icon: 'far fa-flag', label: 'Puntuaciones', route: 'ranking'},
   { icon: 'fas fa-cog', label: 'Configuración', route: 'settings' }
 ]
 

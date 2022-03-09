@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
-import { ProfileContentComponent } from './components/profile-content/profile-content.component';
-import { ProfileFavoritesComponent } from './components/profile-favorites/profile-favorites.component';
-import { ProfilePostsComponent } from './components/profile-posts/profile-posts.component';
 import { ProfileComponent } from './profile.component';
-import { ProfileFriendsComponent } from './components/profile-friends/profile-friends.component';
+
+import { 
+  ProfileSettingsComponent,
+  ProfileRankingComponent,
+  ProfileContentComponent,
+  ProfileFavoritesComponent,
+  ProfilePostsComponent,
+  ProfileFriendsComponent
+} from './profile.index';
 
 const routes: Routes = [
   {
@@ -28,6 +32,10 @@ const routes: Routes = [
       {
         path: 'favorites',
         component: ProfileFavoritesComponent
+      },
+      {
+        path: 'ranking',
+        component: ProfileRankingComponent
       },
       {
         path: 'settings',
