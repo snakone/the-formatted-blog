@@ -1,1 +1,10 @@
-<p>profile-posts works!</p>
+<div class="animated fadeIn">
+  <app-post-card *ngFor="let item of items; 
+                          let i = index; 
+                          let last = last"
+                  [small]="i >= 0"
+                  [border]="false"
+                  [last]="last"
+                  [post]="item">
+  </app-post-card>
+</div>

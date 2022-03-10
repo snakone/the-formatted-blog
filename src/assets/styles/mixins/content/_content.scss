@@ -34,10 +34,10 @@
 
 // INVERTED COLUMN
 @mixin grid-inverted() {
-  padding-left: 40px;
+  padding-left: 30px;
   grid-column: 2 / -1;
 
-  @media(max-width: 1200px) { grid-column: 2 / 3 }
+  @media(max-width: 1200px) { grid-column: 2 / 4 }
 
   @media(max-width: 992px) {
     grid-column: 1 / -1;

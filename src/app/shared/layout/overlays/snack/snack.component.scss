@@ -4,40 +4,31 @@
   @include flex-center();
   background: var(--dark-color);
   color: var(--light-color);
-  min-width: var(--snack-width);
-  height: var(--snack-height);
   text-align: center;
   font-weight: bold;
-  font-size: .85rem;
   position: fixed;
+  min-width: var(--snack-width);
   top: 80px;
   left: 0;
-  text-transform: uppercase;
-  font: normal 12px/15px "Merriweather", Arial, Helvetica;
+  font: normal 10px/14px "Merriweather", Arial, Helvetica;
+  padding: 8px 20px 8px 16px;
 
   &::after {
     content: '';
     height: 100%;
     position: absolute;
-    background: var(--contrast-color);
     width: 4px;
     right: 0;
     top: 0;
   }
 
+  &.error { &::after { background: #b40707 }}
+  &.warning { &::after { background: #e0bf04 }}
+  &.info { &::after { background: #0554ca }}
+
   @media(max-width: 700px) {
-    top: 1%;
+    top: 2%;
     z-index: 9999;
   }
 
-  &.error { border: 3px solid #b40707 }
-  &.warning { border: 3px solid #e0bf04 }
-  &.info { border: 3px solid #0554ca }
-
-  &.error, &.warning, &.info {
-    &::after {
-      content: none;
-      width: 0;
-    }
-  }
 }

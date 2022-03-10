@@ -9,9 +9,10 @@ export const LIKE_TEXT = `Hazle saber a este creador/a que te gusta lo que hace.
 
 export const SEARCH_SENTENCE = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';
 
-export const LOGIN_SENTENCE = '¿Inspirado/a?';
-export const LOGOUT_SENTENCE = 'Nos vemos!';
+export const LOGIN_SENTENCE = 'Bienvenido/a.<br> Disfruta la estancia.';
+export const LOGOUT_SENTENCE = 'Esperamos volver<br> a verte pronto.';
 export const REGISTER_SENTENCE = 'Bienvenido/a :)';
+export const SUB_UPDATED_SENTENCE = 'Tu subscripción <br>se ha actualizado';
 
 export const POST_MESSAGE = `<p>
 Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,

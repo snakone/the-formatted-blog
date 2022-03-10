@@ -80,6 +80,6 @@ export const USER_INDEX: IconList[] = [
   { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
   { icon: 'far fa-flag', label: 'Puntuaciones', route: 'ranking'},
-  { icon: 'fas fa-cog', label: 'Configuración', route: 'settings' }
+  { icon: 'fas fa-cog', label: 'Ajustes', route: 'settings' }
 ]
 

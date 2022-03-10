@@ -13,8 +13,7 @@ ul {
     color: var(--text-color);
     cursor: pointer;
     transition: background 100ms ease-in,
-                transform 200ms ease-in-out,
-                border 666ms ease-in-out;
+                transform 200ms ease-in-out;
 
     &:not(:last-child) {
       border-bottom: 1px solid var(--border-color);
@@ -23,6 +22,7 @@ ul {
     & i { 
       font-size: 1.2rem;
       padding-right: 1rem;
+      transition: color 666ms ease-in-out;
     }
 
     &.active i { color: var(--contrast-color) }
@@ -44,8 +44,9 @@ ul {
     }
 
     &:last-child {
-      &::after {
+      &::after { 
         color: var(--error-color);
+        opacity: 1;
       }
     }
 
@@ -53,20 +54,56 @@ ul {
       opacity: .8;
       background: var(--li-hover);
 
-      & i {
-        color: var(--contrast-color);
-      }
+      & i { color: var(--contrast-color) }
+      &::after { transform: translateX(3px) }
+    }
+  }
 
-      &::after {
-        transform: translateX(3px);
+  @media(max-width: 992px) {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & li {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 14px;
+      &:after { content: none }
+      &:last-child span { color: red }
+    }
+  }
+
+  @media(max-width: 805px) {
+    & li { padding: 1rem 10px }
+  }
+
+  @media(max-width: 750px) {
+    & li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 18px;
+
+      & i { 
+        padding: 0 .5rem;
+        margin-bottom: 10px;
       }
     }
   }
-}
 
-.box {
-  margin-top: 20px;
-  width: 100%;
-  height: 200px;
-  background: #343434;
+  @media(max-width: 625px) {
+    & li { padding: 1rem 10px }
+  }
+
+  @media(max-width: 625px) {
+    & li {
+      & span { display: none }
+      &:last-child i { color: #ff3c3c }
+    }
+  }
+
+  @media(max-width: 450px) {
+    & li  { padding: 1rem 6px }
+  }
 }

@@ -1,13 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { filter, Observable, switchMap } from 'rxjs';
+import { filter, Observable, of, switchMap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+
 import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { environment } from '@env/environment';
 import { SWResponse, NotificationPayload } from '@shared/types/interface.types';
 import { WELCOME_PUSH } from '@shared/data/notifications';
+import { SnackService } from '../snack/snack.service';
+import { SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 
 @Injectable({providedIn: 'root'})
 
@@ -23,7 +26,8 @@ export class PWAService {
     private ls: StorageService,
     private swUpdate: SwUpdate,
     private swPush: SwPush,
-    private deviceDetector: DeviceDetectorService
+    private deviceDetector: DeviceDetectorService,
+    private snackSrv: SnackService
   ) { }
 
   public updateSW(): void {
@@ -45,10 +49,13 @@ export class PWAService {
         if (sub) {
           this.save(sub)
             .pipe(
-              switchMap(_ => this.send(
-                this.set(Object.assign({}, WELCOME_PUSH))
-              ))
-            ).subscribe(_ => null);
+              switchMap(_ => !_.updated ? 
+                this.send(
+                  this.set(Object.assign({}, WELCOME_PUSH)
+              )) : of(null))
+            )
+          .subscribe(_ => !_ ?? 
+            this.snackSrv.setSnack(SUB_UPDATED_SENTENCE));
         }
       })
       .catch(err => console.error(err));
