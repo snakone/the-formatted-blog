@@ -40,7 +40,8 @@ nav {
   display: flex;
   column-gap: 25px;
   background: var(--light-color);
-  transition: all 666ms ease-in-out;
+  transition: background 666ms ease-in-out,
+              border-top 666ms ease-in-out;
 }
 
 .icons {
@@ -65,11 +66,11 @@ nav {
 
       & + li {
         border-left: 1px solid var(--navbar-border);
-
         &:nth-last-child(3) {
           border-left-style: double;
           border-left-width: 3px;
           border-left-color: var(--contrast-color);
+ 
 
           & i {
             position: relative;
@@ -83,6 +84,7 @@ nav {
         position: relative;
         top: -4px;
         @include hover(1.5);
+        transition: color 666ms ease-in-out;
         &.active { color: var(--contrast-color) }
        }
     }
@@ -100,10 +102,11 @@ nav {
     position: relative;
     top: 1px;
     color: var(--contrast-color);
+    transition: color 666ms ease-in-out;
   }
 
   @media (min-width: 701px) { width: 25px }
-  @media (max-width: 475px) { width: 45px }
+  @media (max-width: 475px) { width: 46px }
 }
 
 @media(max-width: 700px) {

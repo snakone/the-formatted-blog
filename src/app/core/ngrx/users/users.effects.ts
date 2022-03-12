@@ -12,6 +12,7 @@ import { StorageService } from '@services/storage/storage.service';
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { WELCOME_PUSH } from '@shared/data/notifications';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 
@@ -34,7 +35,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signIn(action.name, action.password)
         .pipe(
-          tap(_ => this.navigate('/profile', LOGIN_SENTENCE, true)),
+          tap(_ => this.navigate('/profile', LOGIN_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -48,7 +49,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signUp(action.user)
         .pipe(
-          tap(_ => this.navigate('/profile', REGISTER_SENTENCE)),
+          tap(_ => this.navigate('/profile', REGISTER_SENTENCE, true)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -86,7 +87,7 @@ export class UserEffects {
     .pipe(
       ofType(UserActions.userLogOut),
       tap(_ => (
-        this.ls.setKey('token', null),
+        this.resetUser(),
         this.navigate('/', LOGOUT_SENTENCE)
       ))
     ), { dispatch: false }
@@ -101,8 +102,13 @@ export class UserEffects {
     this.snakSrv.setSnack(sentence, 'info');
 
     if (sw) {
-      this.sw.send(WELCOME_PUSH);
+      firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
     }
+  }
+
+  private resetUser(): void {
+    this.ls.setKey('token', null);
+    this.userSrv.setUser(null);
   }
 
 }

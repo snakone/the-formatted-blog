@@ -45,11 +45,7 @@ export class SignInComponent implements OnInit {
          Validators.minLength(5),
          Validators.maxLength(35)
       ]),
-      password: new FormControl(null, [
-         Validators.required,
-         Validators.minLength(5),
-         Validators.maxLength(25)
-      ])
+      password: new FormControl(null, [Validators.required])
     });
   }
 

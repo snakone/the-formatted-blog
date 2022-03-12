@@ -5,4 +5,4 @@ export { ProfilePostsComponent } from './components/profile-posts/profile-posts.
 export { ProfileFriendsComponent } from './components/profile-friends/profile-friends.component';
 export { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 export { ProfileFavoritesComponent } from './components/profile-favorites/profile-favorites.component';
-export { ProfileRankingComponent } from './components/profile-ranking/profile-ranking.component';
+export { ProfileDraftsComponent } from './components/profile-drafts/profile-drafts.component';

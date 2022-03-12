@@ -6,6 +6,7 @@ import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
 import { User, UserResponse } from '@shared/types/interface.types';
 import { StorageService } from '../storage/storage.service';
+import { UserService } from './users.service';
 
 @Injectable({providedIn: 'root'})
 
@@ -15,7 +16,8 @@ export class LoginService {
 
   constructor(
     private http: HttpService,
-    private ls: StorageService
+    private ls: StorageService,
+    private userSrv: UserService
   ) { }
 
   public signIn(
@@ -27,10 +29,7 @@ export class LoginService {
       .post<UserResponse>(this.API_LOGIN, body)
       .pipe(
         filter(res => !!res && res.ok),
-        tap(_ => (
-          this.ls.setKey('token', _?.token),
-          this.ls.setKey('id', _?.user._id)
-        )),
+        tap(_ => this.userStorage(_)),
         map(res => res.user)
       );
   }
@@ -40,8 +39,15 @@ export class LoginService {
       .post<UserResponse>(environment.api + 'users', user)
       .pipe(
         filter(res => !!res && res.ok),
+        tap(_ => this.userStorage(_)),
         map(res => res.user)
       );
+  }
+
+  private userStorage(res: UserResponse): void {
+    this.ls.setKey('token', res?.token);
+    this.ls.setKey('id', res?.user._id);
+    this.userSrv.setUser(res?.user);
   }
 
 }

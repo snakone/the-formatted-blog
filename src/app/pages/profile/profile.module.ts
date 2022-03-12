@@ -13,7 +13,7 @@ import {
   ProfileFriendsComponent,
   ProfileSettingsComponent,
   ProfileFavoritesComponent,
-  ProfileRankingComponent
+  ProfileDraftsComponent
 } from './profile.index';
 
 @NgModule({
@@ -26,7 +26,7 @@ import {
     ProfileFriendsComponent,
     ProfileSettingsComponent,
     ProfileFavoritesComponent,
-    ProfileRankingComponent
+    ProfileDraftsComponent
   ],
   imports: [
     CommonModule,

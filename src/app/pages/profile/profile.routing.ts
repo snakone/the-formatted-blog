@@ -5,11 +5,11 @@ import { ProfileComponent } from './profile.component';
 
 import { 
   ProfileSettingsComponent,
-  ProfileRankingComponent,
   ProfileContentComponent,
   ProfileFavoritesComponent,
   ProfilePostsComponent,
-  ProfileFriendsComponent
+  ProfileFriendsComponent,
+  ProfileDraftsComponent
 } from './profile.index';
 
 const routes: Routes = [
@@ -17,30 +17,12 @@ const routes: Routes = [
     path: '',
     component: ProfileComponent,
     children: [
-      {
-        path: '',
-        component: ProfileContentComponent
-      },
-      {
-        path: 'posts',
-        component: ProfilePostsComponent
-      },
-      {
-        path: 'friends',
-        component: ProfileFriendsComponent
-      },
-      {
-        path: 'favorites',
-        component: ProfileFavoritesComponent
-      },
-      {
-        path: 'ranking',
-        component: ProfileRankingComponent
-      },
-      {
-        path: 'settings',
-        component: ProfileSettingsComponent
-      }
+      { path: '', component: ProfileContentComponent },
+      { path: 'posts', component: ProfilePostsComponent },
+      { path: 'drafts', component: ProfileDraftsComponent },
+      { path: 'friends', component: ProfileFriendsComponent },
+      { path: 'favorites', component: ProfileFavoritesComponent },
+      { path: 'settings', component: ProfileSettingsComponent }
     ]
   },
 ];

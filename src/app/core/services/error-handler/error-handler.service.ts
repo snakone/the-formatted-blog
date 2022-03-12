@@ -2,6 +2,13 @@ import { ErrorHandler, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackService } from '../snack/snack.service';
 
+import { 
+  ERROR_SERVER_SENTENCE, 
+  TOKEN_REFRESH_SENTENCE, 
+  UNKWON_ERROR_SENTENCE, 
+  WRONG_INFO_SENTENCE 
+} from '@shared/data/sentences';
+
 @Injectable()
 
 export class ErrorHandlerService implements ErrorHandler {
@@ -20,23 +27,21 @@ export class ErrorHandlerService implements ErrorHandler {
       }
     }
 
-    if (this.chunkFailedMessage
-       .test(error?.message)) { 
-         window.location.reload(); 
+    if (this.chunkFailedMessage.test(error?.message)) { 
+      window.location.reload();
     }
-
     throw error;
   }
 
   public showError(err: HttpErrorResponse): void {
     switch (err.status) {
-      case 406: this.snackSrv.setSnack('No Válido!', 'warning')
+      case 406: this.snackSrv.setSnack(WRONG_INFO_SENTENCE, 'warning')
         break;
-      case 401: this.snackSrv.setSnack('Token Actualizado', 'info');
+      case 401: this.snackSrv.setSnack(TOKEN_REFRESH_SENTENCE, 'info');
         break;
-      case 0: this.snackSrv.setSnack('Server Error!', 'error');
+      case 0: case 500: this.snackSrv.setSnack(ERROR_SERVER_SENTENCE, 'error');
         break;
-      default: console.log(err);
+      default: this.snackSrv.setSnack(UNKWON_ERROR_SENTENCE, 'error');
     }
   }
 

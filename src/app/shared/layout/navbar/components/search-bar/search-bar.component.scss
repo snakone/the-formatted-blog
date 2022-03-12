@@ -68,7 +68,7 @@
     font-size: 1.2rem;
     @include hover(1.5);
 
-    @media (min-width: 993px) and 
+    @media (min-width: 992px) and 
            (max-width: 1200px) { left: -4px }
 
     @media(max-width: 992px) and 

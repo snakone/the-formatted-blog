@@ -22,6 +22,7 @@ import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { NamePattern } from '@shared/data/patterns';
 import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../../log-in.component';
+import { PWAService } from '@core/services/pwa/pwa.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -49,7 +50,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
-    private userFcd: UsersFacade
+    private userFcd: UsersFacade,
+    private pwaSrv: PWAService
   ) { }
 
   ngOnInit(): void {
@@ -92,6 +94,12 @@ export class SignUpComponent implements OnInit {
     if (this.signUpForm.invalid || !this.conditions) { return; }
     const user: User = { ...this.signUpForm.value };
     this.userFcd.register(user);
+    
+    if (this.notify) {
+      setTimeout(() => {
+        this.pwaSrv.requestNotification();
+      }, 1000);
+    }
     this.dialogRef.close();
   }
 

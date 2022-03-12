@@ -1,5 +1,6 @@
 <div *ngIf="control.invalid && control.dirty" 
-      class="form-error">
+      class="form-error"
+      [ngClass]="{'left': left}">
     <!-- MIN LENGTH -->
     <span *ngIf="validator.includes('minlength') && control.errors?.minlength">
       Tamaño mínimo: 

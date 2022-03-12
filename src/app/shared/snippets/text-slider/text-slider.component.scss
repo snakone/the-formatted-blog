@@ -10,6 +10,7 @@
     & i {
       margin-right: 6.66px;
       color: var(--contrast-color);
+      transition: color 666ms ease-in-out;
 
       &:hover {
         cursor: pointer;

@@ -1,0 +1,25 @@
+@import 'mixins/mixins.scss';
+
+.push-denied {
+  max-width: 361px;
+
+  & h2 {
+    font: 500 20px/32px "Raleway", "Helvetica Neue", sans-serif !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  & p { 
+    font: normal 14px/24px 'Raleway', Arial, Helvetica, sans-serif;
+    line-height: 22px;
+  }
+
+  & button {
+    @include hover-button();
+    width: 35%;
+  }
+
+  & img { 
+    max-width: 100%;
+    margin-bottom: 22px;
+  }
+}

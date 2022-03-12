@@ -7,18 +7,25 @@ import { Subject } from 'rxjs';
 export class SnackService {
 
   snack$: Subject<Snack> = new Subject<Snack>();
+  time!: NodeJS.Timeout;
 
   constructor() { }
 
-  setSnack(
-    message: string,
-    type: string = 'default',
-    duration: number = 5000
+  public setSnack(
+    message: string | null,
+    type: string = 'info',
+    duration: number = 3000
   ): void {
+    this.clear();
     this.snack$.next({message, type});
-    setTimeout(() => {
+    
+    this.time = setTimeout(() => {
       this.snack$.next({message: null});
     }, duration);
   }
 
+  private clear(): void {
+    clearTimeout(this.time);
+  }
+  
 }

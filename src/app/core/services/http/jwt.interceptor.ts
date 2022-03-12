@@ -27,7 +27,7 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<T>> {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (err.status === 401) {
+        if (err.status === 401) {  // Invalid Token
           const id = this.ls.get('id');
           if (!id) throw err; 
           this.userFacade.refreshToken(id);

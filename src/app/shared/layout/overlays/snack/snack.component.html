@@ -1,6 +1,6 @@
 <div class="snack animated fadeInLeft" 
      #snack
      *ngIf="data?.message as msg"
-     [class]="data.type">
-  {{ msg }}
+     [innerHTML]="msg"
+     [class]="data?.type">
 </div>

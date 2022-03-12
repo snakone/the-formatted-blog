@@ -11,6 +11,7 @@ export class FormErrorComponent {
 
   @Input() control!: AbstractControl;
   @Input() validator!: string[];
+  @Input() left = false;
 
   constructor() { }
 
