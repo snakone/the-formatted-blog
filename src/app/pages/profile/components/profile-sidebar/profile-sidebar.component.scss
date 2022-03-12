@@ -2,6 +2,7 @@ ul {
   list-style: none;
   margin-top: 9x;
   padding: 0;
+  transition: border 666ms ease-in-out;
 
   & li {
     display: flex;
@@ -14,10 +15,6 @@ ul {
     cursor: pointer;
     transition: background 100ms ease-in,
                 transform 200ms ease-in-out;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid var(--border-color);
-    }
 
     & i { 
       font-size: 1.2rem;
@@ -64,7 +61,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    
     & li {
       border-bottom: 1px solid var(--border-color);
       padding: 1rem 14px;

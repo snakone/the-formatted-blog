@@ -10,7 +10,6 @@ import {
 
 import { StorageService } from '@services/storage/storage.service';
 import { map, filter, tap } from 'rxjs/operators';
-import { UsersFacade } from '@store/users/users.facade';
 
 @Injectable({providedIn: 'root'})
 
@@ -22,15 +21,14 @@ export class UserService {
 
   constructor(
     private http: HttpService,
-    private ls: StorageService,
-    private userFacade: UsersFacade
+    private ls: StorageService
   ) { }
 
   public getUser(): User | null {
     return this.user || null;
   }
 
-  public setUser(user: User): void {
+  public setUser(user: User | null): void {
     this.user = user;
   }
 
@@ -39,7 +37,8 @@ export class UserService {
       .get<UserResponse>(environment.api + 'token')
       .pipe(
         filter(res => !!res && res.ok),
-        map(res => res.user)
+        map(res => res.user),
+        tap(_ => this.setUser(_))
       );
   }
 
@@ -49,7 +48,8 @@ export class UserService {
       .pipe(
         filter(res => !!res && res.ok),
         tap(_ => this.ls.setKey('token', _?.token)),
-        map(res => res.user)
+        map(res => res.user),
+        tap(_ => this.setUser(_))
       );
   }
 

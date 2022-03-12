@@ -52,6 +52,7 @@
               type="password"
               autocomplete="off">
       <app-form-error [control]="password2"
+                      [left]="true"
                       [validator]="['required', 
                                     'minlength', 
                                     'password']">

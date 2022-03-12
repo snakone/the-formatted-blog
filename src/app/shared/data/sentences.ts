@@ -9,10 +9,15 @@ export const LIKE_TEXT = `Hazle saber a este creador/a que te gusta lo que hace.
 
 export const SEARCH_SENTENCE = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';
 
-export const LOGIN_SENTENCE = 'Bienvenido/a.<br> Disfruta la estancia.';
-export const LOGOUT_SENTENCE = 'Esperamos volver<br> a verte pronto.';
-export const REGISTER_SENTENCE = 'Bienvenido/a :)';
-export const SUB_UPDATED_SENTENCE = 'Tu subscripción <br>se ha actualizado';
+export const LOGIN_SENTENCE = 'Bienvenido/a. Disfruta la estancia.';
+export const LOGOUT_SENTENCE = 'Esperamos volver a verte pronto.';
+export const REGISTER_SENTENCE = 'Bienvenido/a. Es un placer!';
+export const SUB_UPDATED_SENTENCE = 'Tu subscripción se ha actualizado.';
+export const ERROR_SERVER_SENTENCE = 'Hubo un error en el servidor.';
+export const TOKEN_REFRESH_SENTENCE = 'Hemos actualizado el token.';
+export const WRONG_INFO_SENTENCE = 'Los datos no son vválidos.';
+export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';
+export const LOGIN_FIRST_SENTENCE = 'Inicia sesión primero.';
 
 export const POST_MESSAGE = `<p>
 Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,

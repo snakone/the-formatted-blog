@@ -7,7 +7,7 @@ import {
 
 import { SnackService } from '@core/services/snack/snack.service';
 import { Snack } from '@shared/types/interface.types';
-import { filter, Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-snack',
@@ -42,7 +42,8 @@ export class SnackComponent implements AfterViewInit {
     css?.add('fadeOutLeft');
 
     setTimeout(() => this.data = null, 800); // Animation Delay
-    !res.message ? this.count = 0 : setTimeout(() => (this.data = res, this.count++), 800)
+    !res.message ? this.count = 0 : 
+    setTimeout(() => (this.data = res, this.count++), 800)
   }
 
   ngOnDestroy() {

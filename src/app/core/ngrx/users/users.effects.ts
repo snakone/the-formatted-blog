@@ -87,7 +87,7 @@ export class UserEffects {
     .pipe(
       ofType(UserActions.userLogOut),
       tap(_ => (
-        this.ls.setKey('token', null),
+        this.resetUser(),
         this.navigate('/', LOGOUT_SENTENCE)
       ))
     ), { dispatch: false }
@@ -104,6 +104,11 @@ export class UserEffects {
     if (sw) {
       firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
     }
+  }
+
+  private resetUser(): void {
+    this.ls.setKey('token', null);
+    this.userSrv.setUser(null);
   }
 
 }

@@ -10,7 +10,7 @@
   min-width: var(--snack-width);
   top: 80px;
   left: 0;
-  font: normal 10px/14px "Merriweather", Arial, Helvetica;
+  font: normal 11px/14px "Merriweather", Arial, Helvetica;
   padding: 8px 20px 8px 16px;
 
   &::after {
@@ -27,7 +27,7 @@
   &.info { &::after { background: #0554ca }}
 
   @media(max-width: 700px) {
-    top: 2%;
+    top: 3%;
     z-index: 9999;
   }
 

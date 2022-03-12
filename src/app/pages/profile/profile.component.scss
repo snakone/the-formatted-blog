@@ -4,6 +4,7 @@ section {
   @include container();
   @include row();
   margin-top: 0.666rem;
+  position: relative;
 }
 
 .wrapper {
@@ -35,5 +36,10 @@ section {
 
 app-profile-sidebar {
   @include grid-child();
+}
+
+#profile-route {
+  position: absolute;
+  top: -98px;
 }
 

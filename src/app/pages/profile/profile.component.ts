@@ -33,13 +33,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.events
     .pipe(
       filter((event) => event instanceof NavigationEnd && 
-                        event.url.includes('/profile')),
+                        event.url.includes('/profile')
+            ),
       takeUntil(this.$unsubscribe))
-    .subscribe(_ => window.dispatchEvent(new Event('resize')))
+    .subscribe(_ => (
+      this.scroll(),
+      setTimeout(() => window.dispatchEvent(new Event('resize')), 200)
+    )) 
   }
 
   public like(): void {
     console.log('profile');
+  }
+
+  private scroll(): void {
+    const el = document.getElementById('profile-route');
+    if (el && document.body.clientWidth < 993) { el.scrollIntoView(); }
   }
 
   ngOnDestroy() {

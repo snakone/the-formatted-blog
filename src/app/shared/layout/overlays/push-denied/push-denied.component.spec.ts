@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileRankingComponent } from './profile-ranking.component';
+import { PushDeniedOverlayComponent } from './push-denied.component';
 
-describe('ProfileRankingComponent', () => {
-  let component: ProfileRankingComponent;
-  let fixture: ComponentFixture<ProfileRankingComponent>;
+describe('PushDeniedOverlayComponent', () => {
+  let component: PushDeniedOverlayComponent;
+  let fixture: ComponentFixture<PushDeniedOverlayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileRankingComponent ]
+      declarations: [ PushDeniedOverlayComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileRankingComponent);
+    fixture = TestBed.createComponent(PushDeniedOverlayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
