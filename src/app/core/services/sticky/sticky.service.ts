@@ -8,7 +8,7 @@ export class StickyService {
 
   // tslint:disable-next-line: variable-name
   private _sticked = false;
-  stickyElement: any | undefined;
+  stickyElement: { destroy(): () => void } | undefined;
 
   constructor() { }
 

@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    canLoad: [UserGuard],
+    canActivate: [UserGuard],
     loadChildren: () =>
       import('./pages/profile/profile.module')
        .then(mod => mod.ProfileModule), data: { name: 'Profile' }

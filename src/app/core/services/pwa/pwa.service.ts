@@ -1,18 +1,18 @@
 import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { filter, Observable, of, switchMap } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
-
-import { HttpService } from '../http/http.service';
-import { StorageService } from '../storage/storage.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+
 import { environment } from '@env/environment';
-import { SWResponse, NotificationPayload } from '@shared/types/interface.types';
-import { WELCOME_PUSH } from '@shared/data/notifications';
+import { HttpService } from '../http/http.service';
 import { SnackService } from '../snack/snack.service';
-import { SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
+import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
-import { PushDeniedOverlayComponent } from '@shared/layout/overlays/push-denied/push-denied.component';
+import { SWResponse, NotificationPayload } from '@shared/types/interface.types';
+import { SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
+import { WELCOME_PUSH } from '@shared/data/notifications';
+import { PushDeniedOverlayComponent } from '@layout/overlays/push-denied/push-denied.component';
 
 @Injectable({providedIn: 'root'})
 
@@ -56,19 +56,20 @@ export class PWAService {
                 this.send(
                   this.set(Object.assign({}, WELCOME_PUSH)
               )) : of(null))
-            )
-          .subscribe(_ => !_ ?? 
-            this.snackSrv.setSnack(SUB_UPDATED_SENTENCE));
+            ).subscribe(_ => {
+              console.log(_)
+              !_ ?? this.snackSrv.setSnack(SUB_UPDATED_SENTENCE)
+            })
         }
-      })
-      .catch(err => console.error(err));
+      }).catch(_ => console.log(_));
     }, timer);
   }
 
   public async requestNotification(): Promise<void> {
-    const permission = await Notification.requestPermission();
-    this.showPrompt(1000);
-    permission !== 'granted' ?? this.openPushModal();
+    const permission = await Notification.requestPermission()
+     .catch(_ => console.log(_));
+     console.log(permission)
+    permission !== 'granted' ? this.openPushModal() : this.showPrompt(1000);
   }
 
   public save(
