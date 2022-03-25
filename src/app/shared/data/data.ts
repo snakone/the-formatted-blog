@@ -26,7 +26,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Home & Living',
     author: 'Elisa Park',
-    date: 'Sep, 10 2019',
+    created: 'Sep, 10 2019',
     image: '05-img.jpg',
     message: POST_MESSAGE_ALONE
   },
@@ -35,7 +35,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Amazing Food',
     author: 'Marisa Hudson',
-    date: 'Jun, 26 2019',
+    created: 'Jun, 26 2019',
     image: '05-img.jpg',
     message: POST_MESSAGE
   },
@@ -44,7 +44,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Lifestyle',
     author: 'Jhone Albert',
-    date: 'Sep, 17 2015',
+    created: 'Sep, 17 2015',
     image: '05-img.jpg',
     message: POST_MESSAGE
   },
@@ -53,7 +53,7 @@ export const DUMMY_POST: Post[] = [
     title: 'Sed quis sollicitudin eros, non lobortis purus.',
     category: 'Travel',
     author: 'Albert Jhone',
-    date: 'Dec, 10 2016',
+    created: 'Dec, 10 2016',
     image: '05-img.jpg',
     message: POST_MESSAGE_ALONE
   },
@@ -62,7 +62,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Miscellenious',
     author: 'Alfred Hannog',
-    date: 'Jan, 05 2016',
+    created: 'Jan, 05 2016',
     image: '05-img.jpg',
     message: POST_MESSAGE
   }

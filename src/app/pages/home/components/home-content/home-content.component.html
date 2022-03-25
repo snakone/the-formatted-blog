@@ -1,5 +1,5 @@
 <div class="content">
-  <app-post-card *ngFor="let item of items; 
+  <app-post-card *ngFor="let item of (posts$ | async); 
                          let i = index; 
                          let last = last"
                  [small]="i >= 1"

@@ -4,10 +4,16 @@ export interface Post {
     title: string;
     category: string;
     message: string;
-    date: string;
+    created: string;
     author: string;
     image?: string;
     video?: string;
+}
+
+export interface PostResponse extends ServerResponse {
+ posts: Post[];
+ post: Post;
+ page?: number;
 }
 
 // USER
