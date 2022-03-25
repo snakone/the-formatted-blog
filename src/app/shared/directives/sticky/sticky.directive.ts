@@ -28,14 +28,13 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   private subscribeToResize(): void {
     fromEvent(window, 'resize')
       .pipe(
-        throttleTime(500),
+        throttleTime(300),
         filter(_ => !!this.selector),
         map(_ => (window.document.body.clientWidth < 992) ?? true),
         distinctUntilChanged(),
       )
-    .subscribe(_ => _ ? (
-      this.stickySrv.destroy()
-    ) : this.stickySrv.startSticky(this.selector || ''));
+    .subscribe(_ => _ ? this.stickySrv.destroy() : 
+      this.stickySrv.startSticky(this.selector || ''));
   }
 
   ngOnDestroy() {

@@ -21,7 +21,7 @@ export class TopDirective implements AfterViewInit, OnDestroy {
     fromEvent(window, 'scroll')
       .pipe(
         takeUntil(this.unsubscribe$),
-        throttleTime(100),
+        throttleTime(500),
         distinctUntilChanged()
       )
       .subscribe(() => this.onScroll());
@@ -31,6 +31,7 @@ export class TopDirective implements AfterViewInit, OnDestroy {
     try {
       const scroll = document.documentElement?.scrollTop || 0;
       if (scroll > this.scrollLimit && this.displayed) { return; }
+      if (scroll < this.scrollLimit && !this.displayed) { return; }
       this.manageCSS(scroll > this.scrollLimit)
     } catch (err) { console.log(err); }
   }

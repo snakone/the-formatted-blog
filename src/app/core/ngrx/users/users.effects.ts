@@ -35,7 +35,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signIn(action.name, action.password)
         .pipe(
-          tap(_ => this.navigate('/profile', LOGIN_SENTENCE)),
+          tap(_ => this.navigate(null, LOGIN_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -86,29 +86,24 @@ export class UserEffects {
   logOutEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.userLogOut),
-      tap(_ => (
-        this.resetUser(),
-        this.navigate('/', LOGOUT_SENTENCE)
-      ))
+      tap(_ => this.resetUser())
     ), { dispatch: false }
   );
 
   private navigate(
-    path: string, 
+    path: string | null, 
     sentence: string,
     sw: boolean = false
   ): void {
-    this.router.navigateByUrl(path);
+    if (path) this.router.navigateByUrl(path);
     this.snakSrv.setSnack(sentence, 'info');
-
-    if (sw) {
-      firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
-    }
+    if (sw) firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
   }
 
   private resetUser(): void {
     this.ls.setKey('token', null);
     this.userSrv.setUser(null);
+    this.navigate('/', LOGOUT_SENTENCE)
   }
 
 }

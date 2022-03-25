@@ -18,10 +18,7 @@ export class SnackService {
   ): void {
     this.clear();
     this.snack$.next({message, type});
-    
-    this.time = setTimeout(() => {
-      this.snack$.next({message: null});
-    }, duration);
+    this.time = setTimeout(() => this.snack$.next({message: null}), duration);
   }
 
   private clear(): void {
