@@ -15,6 +15,7 @@ article {
       width: 100%;
       border: 0;
       min-height: 163px;
+      aspect-ratio: 12/6;
     }
 
     & .inner {
@@ -152,7 +153,7 @@ article {
       &.first { 
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 40px;
-        padding-bottom: 25px;
+        padding-bottom: 35px;
 
         @media(max-width: 992px) {
           margin-top: 0;

@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { Post } from '@shared/types/interface.types';
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
+
+import { PostsFacade } from '@store/posts/posts.facade';
+import { DUMMY_POST } from '@shared/data/data';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-home-content',

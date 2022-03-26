@@ -1,10 +1,19 @@
 <div class="content">
-  <app-post-card *ngFor="let item of (posts$ | async); 
-                         let i = index; 
-                         let last = last"
-                 [small]="i >= 1"
-                 [border]="i === 0"
-                 [last]="last"
-                 [post]="item">
-  </app-post-card>
+  <!-- POSTS -->
+  <ng-container *ngIf="(posts$ | async) as posts">
+    <ng-container *ngIf="posts.length > 0; else skeleton">
+      <app-post-card *ngFor="let item of posts; 
+                             let i = index; 
+                             let last = last"
+                     [small]="i >= 1"
+                     [border]="i === 0"
+                     [last]="last"
+                     [post]="item">
+      </app-post-card>
+    </ng-container>
+  </ng-container>
+  <!-- LOADING -->
+  <ng-template #skeleton>
+    <app-home-skeleton></app-home-skeleton>
+  </ng-template>
 </div>
