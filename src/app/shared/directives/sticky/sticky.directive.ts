@@ -30,7 +30,7 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
       .pipe(
         throttleTime(300),
         filter(_ => !!this.selector),
-        map(_ => (window.document.body.clientWidth <= 982) ?? true),
+        map(_ => (window.document.body.clientWidth <= 983) ?? true),
         distinctUntilChanged(),
       )
     .subscribe(_ => _ ? this.stickySrv.destroy() : 

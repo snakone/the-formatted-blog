@@ -5,7 +5,6 @@ article {
     overflow: hidden;
     margin: 0 0 40px;
     position: relative;
-    transition: all 300ms ease-in-out;
 
     & img {
       display: block;
@@ -26,7 +25,6 @@ article {
       position: absolute;
       visibility: hidden;
       z-index: 2;
-      transition: all 300ms ease-in-out;
 
       & .content {
         position: relative;
@@ -100,6 +98,7 @@ article {
     text-align: center;
     position: relative;
 
+
     & .category {
       overflow: hidden;
       padding: 0 0 20px;
@@ -107,7 +106,6 @@ article {
       font-family: 'Merriweather', Arial, Helvetica, sans-serif;
       text-transform: uppercase;
       opacity: .9;
-      transition: all 300ms ease-in-out;
       color: var(--contrast-color);
       cursor: pointer;
     }
@@ -117,7 +115,6 @@ article {
       margin: 0 0 20px;
       line-height: 22px;
       font-size: 22px;
-      transition: all 300ms ease-in-out;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -130,6 +127,7 @@ article {
       overflow: hidden;
       padding: 0 0 20px;
       font-style: italic;
+      font-family: 'Merriweather', Arial, Helvetica, sans-serif;
 
       & span {
         padding: 0 10px;
@@ -272,7 +270,7 @@ article {
         font-size: 20px;
         line-height: initial;
 
-        @media (min-width: 992px) and 
+        @media (min-width: 993px) and 
                (max-width: 1200px) { margin: 0 0 10px }
         @media (max-width: 1200px) { font-size: 18px }
         @media (max-width: 750px) { padding-right: 1rem }
@@ -285,7 +283,7 @@ article {
         width: 100%;
         top: initial;
 
-        @media (max-width: 1200px) and (min-width: 992px) {
+        @media (max-width: 1200px) and (min-width: 993px) {
           top: 0;
           position: relative;
           margin-top: 2px;

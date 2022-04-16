@@ -56,7 +56,6 @@
         & img { 
             max-width: 100%;
             width: 100%;
-            max-width: 100%;
             border: 0;
             height: 100%;
             transition: transform 300ms ease-in-out;
@@ -103,7 +102,7 @@
             padding: 0;
             margin-bottom: 16px;
             font-style: italic;
-            font: 'Merriweather', Arial, Helvetica, sans-serif;
+            font-family: 'Merriweather', Arial, Helvetica, sans-serif;
         }
 
         &.author {

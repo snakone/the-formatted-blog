@@ -16,10 +16,12 @@ export class SnackService {
     type: string = 'info',
     duration: number = 4000
   ): void {
-    this.clear();
     setTimeout(() => {
       this.snack$.next({message, type});
-      this.time = setTimeout(() => this.snack$.next({message: null}), duration);
+      this.time = setTimeout(() => {
+        this.snack$.next({message: null});
+        this.clear();
+      }, duration);
     }, this.time ? duration : 0);
   }
 
