@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 import { UsersFacade } from '@core/ngrx/users/users.facade';

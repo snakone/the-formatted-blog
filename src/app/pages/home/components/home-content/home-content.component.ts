@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, of, Subject, takeUntil } from 'rxjs';
 
 import { PostsFacade } from '@store/posts/posts.facade';
 import { DUMMY_POST } from '@shared/data/data';
@@ -21,7 +21,8 @@ export class HomeContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkData();
-    this.posts$ = this.postFacade.posts$;
+    // this.posts$ = this.postFacade.posts$;
+    this.posts$ = of(DUMMY_POST);
   }
 
   private checkData(): void {

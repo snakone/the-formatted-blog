@@ -49,11 +49,9 @@
     display: inline-block;
     border-radius: 5px;
     height: 100%;
-    position: relative;
-    top: -1px;
 
     &[disabled] { opacity: .3; }
-    @include hover(1.2);
+    @include hover(1.2, var(--light-color));
   }
 
   @media(max-width: 900px) { width: 108%; }
