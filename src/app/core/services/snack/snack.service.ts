@@ -14,11 +14,15 @@ export class SnackService {
   public setSnack(
     message: string | null,
     type: string = 'info',
-    duration: number = 3000
+    duration: number = 4000
   ): void {
-    this.clear();
-    this.snack$.next({message, type});
-    this.time = setTimeout(() => this.snack$.next({message: null}), duration);
+    setTimeout(() => {
+      this.snack$.next({message, type});
+      this.time = setTimeout(() => {
+        this.snack$.next({message: null});
+        this.clear();
+      }, duration);
+    }, this.time ? duration : 0);
   }
 
   private clear(): void {

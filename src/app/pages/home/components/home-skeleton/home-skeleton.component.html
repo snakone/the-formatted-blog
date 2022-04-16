@@ -1,0 +1,65 @@
+<!-- MAIN POST -->
+<skeleton-image effect="wave" 
+                iconColor="var(--contrast-color)">
+</skeleton-image>
+<div class="text">
+  <skeleton-block width="225px" 
+                  height="21px" 
+                  effect="wave">
+  </skeleton-block>
+  <skeleton-block width="90%" 
+                  height="24px" 
+                  effect="wave">
+  </skeleton-block>
+  <skeleton-block width="180px" 
+                  height="20px" 
+                  effect="wave">
+  </skeleton-block>
+  <p skeleton-text effect="wave">
+    {{ sentence }}
+  </p>
+</div>
+<!-- POST GRID -->
+<div class="bottom">
+  <skeleton-block width="180px" 
+                  height="16px" 
+                  effect="wave">
+  </skeleton-block>
+  <skeleton-block width="160px" 
+                  height="16px" 
+                  effect="wave">
+  </skeleton-block>
+</div>
+<div class="skeleton" *ngFor="let i of [1,2,3]">
+    <skeleton-image effect="wave" 
+                    iconColor="var(--contrast-color)">
+    </skeleton-image>
+
+    <div class="right">
+      <skeleton-block width="150px" 
+                      height="18px" 
+                      effect="wave">
+      </skeleton-block>
+      <skeleton-block class="margin" 
+                      width="90%" 
+                      height="22px" 
+                      effect="wave">
+      </skeleton-block>
+      <skeleton-block class="margin" 
+                      width="80%" 
+                      height="22px" 
+                      effect="wave">
+      </skeleton-block>
+
+      <div class="bottom">
+        <skeleton-block width="180px" 
+                        height="16px" 
+                        effect="wave">
+        </skeleton-block>
+        <skeleton-block width="160px" 
+                        height="16px" 
+                        effect="wave">
+        </skeleton-block>
+      </div>
+    </div>
+</div>

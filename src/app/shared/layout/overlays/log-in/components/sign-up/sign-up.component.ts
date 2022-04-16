@@ -42,12 +42,6 @@ export class SignUpComponent implements OnInit {
   notify = false;
   conditions = false;
 
-  get name(): AbstractControl { return this.signUpForm.get('name') as AbstractControl; }
-  get rol(): AbstractControl { return this.signUpForm.get('rol') as AbstractControl; }
-  get email(): AbstractControl { return this.signUpForm.get('email') as AbstractControl; }
-  get password(): AbstractControl { return this.signUpForm.get('password') as AbstractControl; }
-  get password2(): AbstractControl { return this.signUpForm.get('password2') as AbstractControl; }
-
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
     private userFcd: UsersFacade,
@@ -126,5 +120,11 @@ export class SignUpComponent implements OnInit {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
+  get name(): AbstractControl { return this.signUpForm.get('name') as AbstractControl; }
+  get rol(): AbstractControl { return this.signUpForm.get('rol') as AbstractControl; }
+  get email(): AbstractControl { return this.signUpForm.get('email') as AbstractControl; }
+  get password(): AbstractControl { return this.signUpForm.get('password') as AbstractControl; }
+  get password2(): AbstractControl { return this.signUpForm.get('password2') as AbstractControl; }
 
 }

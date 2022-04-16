@@ -15,6 +15,7 @@ import { HttpService } from './services/http/http.service';
 import { StorageModule } from './services/storage/storage.module';
 import { reducers } from './ngrx/ngrx.index';
 import { UserEffects } from './ngrx/users/users.effects';
+import { PostEffects } from './ngrx/posts/posts.effects';
 import { JwtInterceptor } from './services/http/jwt.interceptor';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
     StoreModule.forFeature('AppState', reducers),
     EffectsModule.forRoot([
       UserEffects,
+      PostEffects
     ])
   ],
   providers: [

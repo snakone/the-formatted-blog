@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { StorageService } from '@services/storage/storage.service';
-import { StickyService } from '@services/sticky/sticky.service';
 import { CrafterService } from '@services/crafter/crafter.service';
 import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
@@ -39,7 +38,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private ls: StorageService,
-    private stickySrv: StickyService,
     private crafter: CrafterService,
     private userFcd: UsersFacade
   ) { }
@@ -52,7 +50,6 @@ export class NavbarComponent implements OnInit {
   public onScroll(ev: boolean): void {
     if (ev) {
       this.menuOpened ? (this.menuOpened = false) : null;
-      this.stickySrv.checkSticky();
     }
   }
 

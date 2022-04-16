@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private scroll(): void {
     const el = document.getElementById('profile-route');
-    if (el && document.body.clientWidth < 993) { el.scrollIntoView(); }
+    if (el && document.body.clientWidth <= 982) { el.scrollIntoView(); }
   }
 
   ngOnDestroy() {

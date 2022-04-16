@@ -7,6 +7,4 @@ export const getUserState = createSelector(
   (state: AppState) => state.users
 );
 
-export const get = createSelector(
-  getUserState, fromUsers.getUser
-);
+export const get = createSelector(getUserState, fromUsers.getUser);

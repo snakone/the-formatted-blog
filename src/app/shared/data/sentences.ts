@@ -19,6 +19,8 @@ export const WRONG_INFO_SENTENCE = 'Los datos no son vválidos.';
 export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';
 export const LOGIN_FIRST_SENTENCE = 'Inicia sesión primero.';
 
+export const SKELETON_SENTENCE = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga.'
+
 export const POST_MESSAGE = `<p>
 Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,
 sollicitudin vel nibh. Aenean rhoncus pharetra ex. Sed facilisis interdum nunc, et

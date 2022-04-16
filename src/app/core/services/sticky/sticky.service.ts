@@ -38,7 +38,7 @@ export class StickyService {
 
   public checkSticky(): void {
     if (
-      window.document.body.clientWidth < 992
+      window.document.body.clientWidth < 993
       && this.sticky
     ) { this.destroy(); }  // Prevent Sticky Sidebar
   }

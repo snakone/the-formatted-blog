@@ -6,7 +6,7 @@
              'last': last
             }">
     <figure>
-      <img [src]="'assets/images/' + post?.image" 
+      <img [src]="post?.image | image" 
            alt="Post Image"/>
       <!-- HOVER -->
       <div class="inner">
@@ -23,7 +23,7 @@
       <p class="category">{{post?.category}}</p>
       <h3>{{post?.title}}</h3>
       <p class="date">
-        <span>{{post?.date}}</span>
+        <span>{{post?.created}}</span>
       </p>
       <!-- MESSAGE -->
       <div class="message">

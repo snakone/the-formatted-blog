@@ -21,3 +21,19 @@
 .owl-carousel.owl-theme.owl-loaded { z-index: 0 }
 
 button { font-family: 'Raleway', Arial, Helvetica, sans-serif }
+
+// SKELETONS
+.skeleton-image svg {
+  min-height: 163px;
+  aspect-ratio: 12/6;
+}
+
+.skeleton-effect-wave {
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 100%, 
+    black 0%, 
+    transparent 100%
+  ) !important;
+}

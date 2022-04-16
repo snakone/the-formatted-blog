@@ -17,6 +17,7 @@
     --button-text-color: #202020;
     --inverted-contrast: #001c9b;
     --li-hover: #090c10;
+    --skeleton-color: var(--border-color) !important;
     & a { color: rgb(0, 140, 255) }
   }
 }

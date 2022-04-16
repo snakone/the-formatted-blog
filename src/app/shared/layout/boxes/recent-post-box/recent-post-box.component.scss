@@ -19,7 +19,7 @@
       align-items: center;
       transition: border-top 666ms ease-in-out;
 
-      @media (min-width: 992px) {
+      @media (min-width: 993px) {
         &:first-child {
           padding-top: 0;
           border: 0;
@@ -59,7 +59,7 @@
 
         & span {
           display: block;
-          font: 'Merriweather', Arial, Helvetica, sans-serif;
+          font-family: 'Merriweather', Arial, Helvetica, sans-serif;
           font-style: italic;
           font-size: 10px;
           line-height: 14px;

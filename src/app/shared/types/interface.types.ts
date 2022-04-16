@@ -1,13 +1,19 @@
 // POST
 export interface Post {
-    _id: string;
-    title: string;
-    category: string;
-    message: string;
-    date: string;
-    author: string;
-    image?: string;
-    video?: string;
+  _id: string;
+  title: string;
+  category: string;
+  message: string;
+  created: string;
+  author: string;
+  image?: string;
+  video?: string;
+}
+
+export interface PostResponse extends ServerResponse {
+ posts: Post[];
+ post: Post;
+ page?: number;
 }
 
 // USER
@@ -53,7 +59,6 @@ export interface IconList {
 }
 
 // SERVICE WORKER
-
 export interface SWResponse extends ServerResponse {
   updated?: boolean;
 }
