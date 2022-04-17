@@ -23,14 +23,10 @@ section {
     left: 0;
   }
 
-  @media(max-width: 992px) {
-    padding-bottom: 45px;
-  }
+  @media(max-width: 992px) { padding-bottom: 45px }
 
   @media(min-width: 993px) {
-    &::after {
-      content: none;
-    }
+    &::after { content: none }
   }
 }
 

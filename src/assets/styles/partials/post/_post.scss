@@ -2,10 +2,11 @@
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
   padding: 20px 15px;
-
-  &.ql-blank::before {
-    color: var(--text-color);
-  }
+  line-height: inherit;
+  overflow-y: initial;
+  min-height: 440px;
+  &.ql-blank::before { color: var(--text-color) }
+  &[contenteditable="false"] { padding: 0 }
 
   // PARAGRAPH
   & p {
@@ -39,7 +40,7 @@
       &::before {
         position: absolute;
         left: 0;
-        top: -4px;
+        top: 0;
         font-family: "Font Awesome 5 Free";
         font-weight: 900;
         content: "\f0da";
@@ -70,7 +71,7 @@
         content: counter(my-counter);
         position: absolute;
         left: 0;
-        top: -6px;
+        top: -2px;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
         font-size: 20px;
@@ -94,16 +95,11 @@
       background: var(--contrast-color);
     }
 
-    &:first-of-type {
-      margin-top: 0;
-    }
+    &:first-child { margin-top: 0 }
   }
 }
 
-.ql-container {
-  height: auto;
-}
-
+.ql-container.ql-snow { height: auto }
 .ql-container.ql-snow, 
 .ql-toolbar.ql-snow {
   border: 1px solid var(--navigation-border);
@@ -117,13 +113,12 @@
 }
 
 .ql-formats {
-  @media(min-width: 475px) {
-    margin-right: 24px !important;
-  }
-
-  &:last-of-type {
-    margin-right: 0 !important;
-  }
+  position: relative;
+  left: -2px;
+  @media(min-width: 550px) { margin-right: 24px !important }
+  @media(max-width: 549px) { margin-right: 0 !important }
+  &:first-of-type { top: -.5px }
+  &:last-of-type { margin-right: 0 !important }
 }
 
 .ql-toolbar .ql-stroke {
@@ -136,22 +131,28 @@
   stroke: none;
 }
 
-.ql-toolbar .ql-picker {
-  color: var(--text-color);
-}
-
-.ql-blockquote .ql-fill {
-  stroke: var(--text-color);
-}
+.ql-toolbar .ql-picker { color: var(--text-color) }
+.ql-blockquote .ql-fill { stroke: var(--text-color) }
 
 .ql-snow.ql-toolbar button {
   &:hover {
-    & .ql-stroke {
-      stroke: var(--contrast-color);
+    & .ql-stroke { stroke: var(--contrast-color) }
+    & .ql-fill { fill: var(--contrast-color) }
+  }
+
+  &.ql-undo, &.ql-redo {
+    &::after {
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      font-weight: 900;
+      color: var(--text-color);
+      position: relative;
+      top: .5px;
     }
 
-    & .ql-fill {
-      fill: var(--contrast-color);
-    }
+    &:hover::after { color: var(--contrast-color) }
   }
+
+  &.ql-undo::after { content: '\f0e2' }
+  &.ql-redo::after { content: '\f01e' }
 }

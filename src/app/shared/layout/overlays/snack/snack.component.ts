@@ -15,7 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./snack.component.scss']
 })
 
-export class SnackComponent implements AfterViewInit {
+export class SnackOverlayComponent implements AfterViewInit {
 
   @ViewChild('snack') el!: ElementRef<any>;
   data!: Snack | null;

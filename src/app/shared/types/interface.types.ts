@@ -16,6 +16,20 @@ export interface PostResponse extends ServerResponse {
  page?: number;
 }
 
+// DRAFT
+export interface DraftList {
+  ref: string;
+  title: string;
+  created: string;
+  badges?: DraftBadge[];
+  active?: boolean;
+}
+
+export interface DraftBadge {
+  label: string;
+  class: string;
+}
+
 // USER
 export interface User {
   _id: string;

@@ -20,7 +20,15 @@
 // CARROUSEL
 .owl-carousel.owl-theme.owl-loaded { z-index: 0 }
 
-button { font-family: 'Raleway', Arial, Helvetica, sans-serif }
+button { 
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+
+  &[disabled] {
+    pointer-events: none;
+    filter: contrast(.5);
+    opacity: .7;
+  }
+}
 
 // SKELETONS
 .skeleton-image svg {
@@ -36,4 +44,13 @@ button { font-family: 'Raleway', Arial, Helvetica, sans-serif }
     black 0%, 
     transparent 100%
   ) !important;
+}
+
+.mat-tooltip {
+  background: var(--dark-color) !important;
+  color: var(--light-color) !important;
+  padding: 2px 8px !important;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 2px !important;
 }

@@ -95,7 +95,6 @@ article {
   }
 
   & .main-content {
-    text-align: center;
     position: relative;
 
 
@@ -130,7 +129,6 @@ article {
       font-family: 'Merriweather', Arial, Helvetica, sans-serif;
 
       & span {
-        padding: 0 10px;
         position: relative;
         font-size: 16px;
         
@@ -149,7 +147,6 @@ article {
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 40px;
         padding-bottom: 35px;
-        @media(max-width: 992px) { margin-top: 0 }
       }
 
       & ul {
@@ -315,7 +312,7 @@ article:not(.small) {
     }
   }
 
-  & .main-content {
+  &.alone .main-content {
     & .date { padding: 0 0 40px }
   }
 }

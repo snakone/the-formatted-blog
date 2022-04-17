@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SnackOverlayComponent } from './snack.component';
+import { CreateSidebarComponent } from './create-sidebar.component';
 
-describe('SnackOverlayComponent', () => {
-  let component: SnackOverlayComponent;
-  let fixture: ComponentFixture<SnackOverlayComponent>;
+describe('CreateSidebarComponent', () => {
+  let component: CreateSidebarComponent;
+  let fixture: ComponentFixture<CreateSidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SnackOverlayComponent ]
+      declarations: [ CreateSidebarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SnackOverlayComponent);
+    fixture = TestBed.createComponent(CreateSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

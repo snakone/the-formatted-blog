@@ -1,0 +1,41 @@
+.toolbar {
+  border: 1px solid var(--navigation-border);
+  border-top: none;
+  transition: border 666ms ease-in-out;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 16px;
+
+  & i:not(.fa-pulse) {
+    height: 24px;
+    padding: 3px 5px;
+    width: 29px;
+    position: relative;
+    top: 1.5px;
+    cursor: pointer;
+    &:hover { color: var(--contrast-color) }
+    &:last-child { margin-left: 12px }
+
+    &.fa-check { 
+      top: 0;
+      color: var(--success-color);
+      margin-left: 12px;
+
+      & + span {
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  & i.fa-pulse {
+    margin-left: 17px;
+    margin-right: 10px;
+    position: relative;
+    top: -.5px;
+  }
+
+  @media(max-width: 992px) { margin-bottom: 30px }
+}

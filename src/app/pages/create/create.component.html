@@ -4,10 +4,12 @@
     <app-action-bar [text]="text">
     </app-action-bar>
   </section>
-  <section>
+  <section class="create-content">
     <app-section spellcheck="false">
-      <quill-editor [(ngModel)]="model"></quill-editor>
-      <div></div>
+      <app-create-content></app-create-content>
+      <app-create-sidebar></app-create-sidebar>
     </app-section>
   </section>
 </div>
+
+<app-scroll-top></app-scroll-top>

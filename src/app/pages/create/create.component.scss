@@ -5,6 +5,10 @@ section {
   @include row();
 }
 
-quill-editor {
+app-create-content {
   @include grid-component();
+}
+
+app-create-sidebar {
+  @include grid-child();
 }

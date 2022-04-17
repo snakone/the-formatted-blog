@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { LogInModule } from './log-in/log-in.module';
-import { SnackComponent } from './snack/snack.component';
+import { SnackOverlayComponent } from './snack/snack.component';
 import { PushDeniedOverlayComponent } from './push-denied/push-denied.component';
 
 const Material = [
@@ -12,7 +12,7 @@ const Material = [
 
 @NgModule({
   declarations: [
-    SnackComponent,
+    SnackOverlayComponent,
     PushDeniedOverlayComponent
   ],
   imports: [
@@ -21,7 +21,7 @@ const Material = [
     ...Material
   ],
   exports: [
-    SnackComponent,
+    SnackOverlayComponent,
     PushDeniedOverlayComponent
   ]
 })

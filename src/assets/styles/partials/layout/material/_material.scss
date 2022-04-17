@@ -8,5 +8,22 @@
 .cdk-overlay-dark-backdrop { background: rgba(0, 0, 0, .82) }
 
 // LOGIN OVERLAY
-.login-overlay 
-.mat-dialog-container { max-width: 361px }
+.login-overlay .mat-dialog-container { max-width: 361px }
+
+.cdk-overlay-pane.preview {
+  overflow: auto;
+  max-width: 65vw !important;
+  height: 80%;
+
+  @media(max-width: 550px) {
+    max-width: 100vw !important;
+  }
+
+  & .mat-dialog-container {
+    border-radius: 0 !important;
+
+    & .mat-dialog-content {
+      height: 100%;
+    }
+  }
+}

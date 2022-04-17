@@ -21,7 +21,7 @@ export class TopDirective implements AfterViewInit, OnDestroy {
     fromEvent(window, 'scroll')
       .pipe(
         takeUntil(this.unsubscribe$),
-        throttleTime(500),
+        throttleTime(300),
         distinctUntilChanged()
       )
       .subscribe(() => this.onScroll());

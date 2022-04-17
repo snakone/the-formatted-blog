@@ -1,6 +1,5 @@
 ul {
   list-style: none;
-  margin-top: 9x;
   padding: 0;
   transition: border 666ms ease-in-out;
 
@@ -8,17 +7,17 @@ ul {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 1rem 16px;
+    padding: 10px 16px;
     margin: 0;
     font-size: .8rem;
     color: var(--text-color);
     cursor: pointer;
     transition: background 100ms ease-in,
                 transform 200ms ease-in-out;
-
+                
     & i { 
-      font-size: 1.2rem;
-      padding-right: 1rem;
+      font-size: 1.1rem;
+      padding-right: 1.5rem;
       transition: color 666ms ease-in-out;
     }
 
@@ -40,6 +39,13 @@ ul {
       opacity: .7;
     }
 
+    &:first-child {
+      & i {
+        position: relative;
+        left: 2px;
+      }
+    }
+
     &:last-child {
       &::after { 
         color: var(--error-color);
@@ -54,6 +60,10 @@ ul {
       & i { color: var(--contrast-color) }
       &::after { transform: translateX(3px) }
     }
+
+    &:nth-last-child(2) {
+      margin-top: 12px;
+    }
   }
 
   @media(max-width: 992px) {
@@ -66,7 +76,7 @@ ul {
       border-bottom: 1px solid var(--border-color);
       padding: 1rem 14px;
       &:after { content: none }
-      &:last-child span { color: red }
+      &:last-child span { color: var(--error-color) }
     }
   }
 
@@ -90,13 +100,10 @@ ul {
   }
 
   @media(max-width: 625px) {
-    & li { padding: 1rem 10px }
-  }
-
-  @media(max-width: 625px) {
     & li {
+      padding: 1rem 10px;
       & span { display: none }
-      &:last-child i { color: #ff3c3c }
+      &:last-child i { color: var(--error-color) }
     }
   }
 

@@ -1,0 +1,125 @@
+@import 'mixins/mixins.scss';
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & li {
+    padding: 18px 0 27px 0;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: border 666ms ease-in-out;
+    position: relative;
+
+    & i {
+      position: absolute;
+      left: -20px;
+      top: 24px;
+      font-size: 16px;
+      color: var(--contrast-color);
+    }
+
+    & h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      padding-right: 20px;
+    }
+
+    & .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & p {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 180px;
+        overflow: hidden;
+        opacity: .8;
+      }
+
+      & span { 
+        font-size: 15px;
+        filter: brightness(1.2);
+      }
+
+      @media(max-width: 1200px) and (min-width: 993px) {
+        & p { max-width: 135px }
+      }
+    }
+
+    &:first-child { 
+      padding-top: 0;
+      & i { top: 4px }
+    }
+
+    &:last-child { 
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    & .status {
+      margin-top: 14px;
+      & span:not(:last-child) { padding-right: 5px }
+      & .badge-pending { @include badge(#FFE8C2) }
+      & .badge-success { @include badge(#98f09f) }
+      & .badge-info { @include badge(var(--light-color)) }
+    }
+
+    &:hover {
+      & h4 { filter: brightness(1.3) }
+    }
+  }
+
+  @media(max-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    margin-bottom: 1rem;
+
+    & li {
+      &:first-child { padding-top: 18px }
+      & i { top: 23px !important }
+      &:last-child { border-bottom: 1px solid var(--border-color) }
+
+      & .info {
+        & p { max-width: initial }
+      }
+    }
+  }
+
+  @media(max-width: 925px) {
+    & li i {
+      left: 90px;
+      transform: rotateY(180deg);
+    }
+  }
+
+  @media(max-width: 775px) {
+    margin-bottom: 0;
+    
+    & li {
+      & .info {
+        display: initial;
+        & p { max-width: 225px }
+        & span { text-transform: capitalize }
+      }
+    }
+  }
+
+  @media(max-width: 550px) {
+    grid-template-columns: repeat(1, 1fr);
+
+    & li {
+      & .info {
+        display: flex;
+        & p { max-width: 180px }
+        & span { text-transform: none }
+      }
+
+      &:last-child { padding-bottom: 27px }
+    }
+  }
+}

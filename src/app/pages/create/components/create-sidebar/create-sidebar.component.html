@@ -1,0 +1,21 @@
+<app-sticky-aside [selector]="'create-content'">
+  <ul>
+    <li *ngFor="let l of list.slice(1, 5).reverse()"
+        (click)="activate(l)">
+      <i *ngIf="l.active" class="fas fa-caret-right"></i>
+      <h4>{{l.ref}}</h4>
+      <div class="info">
+        <p>{{l.title}}</p>
+        <span>{{l.created}}</span>
+      </div>
+      <div class="status">
+        <span *ngFor="let b of l.badges" 
+              [class]="'badge-' + b.class">
+            {{b.label}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</app-sticky-aside>
+
+

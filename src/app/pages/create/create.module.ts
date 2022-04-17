@@ -1,22 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CreateRoutingModule } from './create.routing';
-import { CreateComponent } from './create.component';
 import { QuillModule } from 'ngx-quill';
-import { LayoutModule } from '@shared/layout/layout.module';
+
+import { LayoutModule } from '@layout/layout.module';
 import { SharedModule } from '@shared/shared.module';
+import { CreateRoutingModule } from './create.routing';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { SnippetsModule } from '@shared/snippets/snippets.module';
+
+import { CreateComponent } from './create.component';
+import { CreateContentComponent } from './components/create-content/create-content.component';
+import { CreateSidebarComponent } from './components/create-sidebar/create-sidebar.component';
+
+const Material = [
+  MatTooltipModule
+];
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    CreateContentComponent,
+    CreateSidebarComponent
   ],
   imports: [
     CommonModule,
     LayoutModule,
     CreateRoutingModule,
     QuillModule,
-    SharedModule
+    SharedModule,
+    SnippetsModule,
+    ...Material
   ]
 })
 
