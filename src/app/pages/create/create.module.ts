@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { CreateRoutingModule } from './create.routing';
 import { CreateComponent } from './create.component';
+import { QuillModule } from 'ngx-quill';
+import { LayoutModule } from '@shared/layout/layout.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +13,10 @@ import { CreateComponent } from './create.component';
   ],
   imports: [
     CommonModule,
-    CreateRoutingModule
+    LayoutModule,
+    CreateRoutingModule,
+    QuillModule,
+    SharedModule
   ]
 })
 

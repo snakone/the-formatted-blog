@@ -1,1 +1,13 @@
-<p>create works!</p>
+<div class="animated fadeIn">
+  <!-- HOME HEADER -->
+  <section>
+    <app-action-bar [text]="text">
+    </app-action-bar>
+  </section>
+  <section>
+    <app-section spellcheck="false">
+      <quill-editor [(ngModel)]="model"></quill-editor>
+      <div></div>
+    </app-section>
+  </section>
+</div>

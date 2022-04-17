@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-create',
@@ -8,6 +9,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class CreateComponent implements OnInit {
+  
+  text = NOTIFICATION_TEXT;
+  model: any;
 
   constructor() { }
 

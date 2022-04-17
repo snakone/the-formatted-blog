@@ -18,6 +18,7 @@
       display: flex;
       align-items: center;
       transition: border-top 666ms ease-in-out;
+      position: relative;
 
       @media (min-width: 993px) {
         &:first-child {
@@ -79,10 +80,23 @@
           opacity: .8;
           transform: scale(1.1);
         }
+
+        &::after {
+          right: 10px;
+        }
       }
 
-      @media(max-width: 599px) {
-        &:nth-last-child(-n+2) { display: flex; }
+      @media(max-width: 549px) {
+        &::after {
+          content: "\f105";
+          position: absolute;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          right: 13px;
+          font-size: 1.2rem;
+          transition: right 300ms ease-in-out;
+          color: var(--contrast-color);
+        }
       }
     }
 

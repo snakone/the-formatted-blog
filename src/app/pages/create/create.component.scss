@@ -1,0 +1,10 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+}
+
+quill-editor {
+  @include grid-component();
+}

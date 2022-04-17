@@ -39,10 +39,14 @@
               "src/styles.scss",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
-              "node_modules/skeleton-elements/css/skeleton-elements.css"
+              "node_modules/skeleton-elements/css/skeleton-elements.css",
+              "node_modules/highlight.js/styles/vs2015.css"
             ],
             "scripts": [
-              "node_modules/sticky-sidebar/dist/sticky-sidebar.min.js"
+              "node_modules/sticky-sidebar/dist/sticky-sidebar.min.js",
+              "src/assets/scripts/fas.js",
+              "src/assets/scripts/masonry.js",
+              "src/assets/scripts/highlight.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",

@@ -1,6 +1,6 @@
 {
   "name": "formatted-blog",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Application to create content",
   "keywords": [
     "Content",
@@ -43,9 +43,12 @@
     "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "hammerjs": "^2.0.8",
+    "highlight.js": "^11.5.1",
     "ngx-device-detector": "^3.0.0",
     "ngx-owl-carousel-o": "^7.0.1",
+    "ngx-quill": "^16.2.0",
     "ngx-webstorage": "^9.0.0",
+    "quill": "~1.3.7",
     "rxjs": "~7.5.4",
     "skeleton-elements": "^4.0.0",
     "sticky-sidebar": "^3.3.1",
@@ -59,6 +62,7 @@
     "@types/hammerjs": "^2.0.41",
     "@types/jasmine": "~3.10.3",
     "@types/node": "^17.0.21",
+    "@types/quill": "~1.3.7",
     "codelyzer": "^6.0.2",
     "jasmine-core": "~4.0.1",
     "jasmine-spec-reporter": "~7.0.0",

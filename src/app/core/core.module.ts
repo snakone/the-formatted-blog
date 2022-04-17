@@ -17,6 +17,7 @@ import { reducers } from './ngrx/ngrx.index';
 import { UserEffects } from './ngrx/users/users.effects';
 import { PostEffects } from './ngrx/posts/posts.effects';
 import { JwtInterceptor } from './services/http/jwt.interceptor';
+import { QuillFormatModule } from './services/quill/quill.module';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
     EffectsModule.forRoot([
       UserEffects,
       PostEffects
-    ])
+    ]),
+    QuillFormatModule
   ],
   providers: [
     HttpService,
@@ -39,7 +41,7 @@ import { JwtInterceptor } from './services/http/jwt.interceptor';
     { provide: CORE_MODULE_CONFIG, useValue: CORE_MODULE_CONSTANTS },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
     { provide: ErrorHandler, useClass: ErrorHandlerService },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
 })
 
