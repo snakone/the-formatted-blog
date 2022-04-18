@@ -16,7 +16,7 @@
     top: 1.5px;
     cursor: pointer;
     &:hover { color: var(--contrast-color) }
-    &:last-child { margin-left: 12px }
+    &:nth-last-child(2) { margin-left: 12px }
 
     &.fa-check { 
       top: 0;
@@ -35,6 +35,10 @@
     margin-right: 10px;
     position: relative;
     top: -.5px;
+  }
+
+  & i.fa-folder-open {
+    margin-right: 2px;
   }
 
   @media(max-width: 992px) { margin-bottom: 30px }

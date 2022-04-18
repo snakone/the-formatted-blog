@@ -16,9 +16,19 @@
       </ng-template>
     </div>
     <div>
-      <i class="fas fa-plus" matTooltip="Nuevo..."></i>
-      <i class="fas fa-trash" matTooltip="Eliminar"></i>
-      <i class="fas fa-fast-forward" matTooltip="Siguiente"></i>
+      <i class="fas fa-plus" 
+         matTooltip="Nuevo..."></i>
+      <i class="far fa-folder-open" 
+         matTooltip="Archivar"></i>
+      <i class="fas fa-trash" 
+         matTooltip="Eliminar"
+         (click)="delete()"></i>
+      <i class="far fa-question-circle" 
+         matTooltip="Ayuda"
+         (click)="openHelp()"></i>
+      <i class="fas fa-fast-forward" 
+         matTooltip="Siguiente"
+         (click)="next()"></i>
     </div>
   </div>
 </div>

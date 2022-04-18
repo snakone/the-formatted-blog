@@ -4,9 +4,10 @@
   padding: 20px 15px;
   line-height: inherit;
   overflow-y: initial;
-  min-height: 440px;
   &.ql-blank::before { color: var(--text-color) }
   &[contenteditable="false"] { padding: 0 }
+  @media(min-width: 993px) { min-height: var(--quill-height) }
+  @media(max-width: 618px) { min-height: 92px }
 
   // PARAGRAPH
   & p {
@@ -26,6 +27,8 @@
     font-size: 16px;
     border-left: 5px solid var(--contrast-color) !important;
     color: var(--button-text-color);
+
+    &:first-child { margin-top: 0 !important }
   }
 
   // UNORDER LIST
@@ -53,6 +56,8 @@
         color: var(--contrast-color);
       }
     }
+
+    &:first-child { margin-top: 0 }
   }
 
   // ORDERED LIST
@@ -78,6 +83,8 @@
         color: var(--contrast-color);
       }
     }
+
+    &:first-child { margin-top: 0 }
   }
 
   // HEADING
@@ -96,6 +103,18 @@
     }
 
     &:first-child { margin-top: 0 }
+  }
+
+  // CODE
+  & pre {
+    margin: 36px 0 35px !important;
+    &:first-child { margin-top: 0 !important }
+  }
+
+  // IMAGE
+  & img {
+    margin: 14px 0 15px;
+    &:last-child { margin-bottom: 0 }
   }
 }
 

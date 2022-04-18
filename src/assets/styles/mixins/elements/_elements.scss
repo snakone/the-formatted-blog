@@ -40,6 +40,7 @@
   transition: all 666ms ease-in-out;
   border: 0;
   text-align: center;
+  cursor: pointer;
 
   & span {
     position: relative;
@@ -47,10 +48,7 @@
     font-family: 'Raleway', Arial, Helvetica, sans-serif;
   }
 
-  &:hover {
-    background: var(--contrast-color);
-    cursor: pointer;
-  }
+  &:hover { background: var(--contrast-color) }
 }
 
 // TITLE LINES
@@ -73,11 +71,10 @@
   }
 }
 
-@mixin badge($color) {
+@mixin badge($color, $text:#424242) {
   padding: 4px 8px;
-  font-weight: bold;
   background: $color;
-  color: #424242;
+  color: $text;
   border: 1px solid var(--navigation-border);
   margin-right: 16px;
   transition: all 666ms ease-in-out;

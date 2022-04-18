@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileHeaderComponent } from './profile-header.component';
+import { QuillHelpComponent } from './quill-help.component';
 
-describe('ProfileHeaderComponent', () => {
-  let component: ProfileHeaderComponent;
-  let fixture: ComponentFixture<ProfileHeaderComponent>;
+describe('QuillHelpComponent', () => {
+  let component: QuillHelpComponent;
+  let fixture: ComponentFixture<QuillHelpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileHeaderComponent ]
+      declarations: [ QuillHelpComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileHeaderComponent);
+    fixture = TestBed.createComponent(QuillHelpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

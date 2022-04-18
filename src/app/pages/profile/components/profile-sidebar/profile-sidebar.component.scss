@@ -16,8 +16,8 @@ ul {
                 transform 200ms ease-in-out;
                 
     & i { 
-      font-size: 1.1rem;
-      padding-right: 1.5rem;
+      font-size: 1rem;
+      width: 40px;
       transition: color 666ms ease-in-out;
     }
 
@@ -42,7 +42,7 @@ ul {
     &:first-child {
       & i {
         position: relative;
-        left: 2px;
+        left: 1px;
       }
     }
 
@@ -61,8 +61,10 @@ ul {
       &::after { transform: translateX(3px) }
     }
 
-    &:nth-last-child(2) {
-      margin-top: 12px;
+    @media(min-width: 993px) {
+      &:nth-last-child(2) {
+        margin-top: 12px;
+      }
     }
   }
 

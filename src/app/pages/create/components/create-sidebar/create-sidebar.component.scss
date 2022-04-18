@@ -6,7 +6,7 @@ ul {
   margin: 0;
 
   & li {
-    padding: 18px 0 27px 0;
+    padding: 12px 0 20px 0;
     cursor: pointer;
     border-bottom: 1px solid var(--border-color);
     transition: border 666ms ease-in-out;
@@ -35,18 +35,18 @@ ul {
       & p {
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 180px;
+        max-width: 200px;
         overflow: hidden;
         opacity: .8;
       }
 
       & span { 
-        font-size: 15px;
+        font-size: 13px;
         filter: brightness(1.2);
       }
 
       @media(max-width: 1200px) and (min-width: 993px) {
-        & p { max-width: 135px }
+        & p { max-width: 150px }
       }
     }
 
@@ -63,9 +63,10 @@ ul {
     & .status {
       margin-top: 14px;
       & span:not(:last-child) { padding-right: 5px }
-      & .badge-pending { @include badge(#FFE8C2) }
-      & .badge-success { @include badge(#98f09f) }
-      & .badge-info { @include badge(var(--light-color)) }
+      & .badge-view { @include badge(var(--dark-color), var(--light-color)) }
+      & .badge-success { @include badge(var(--contrast-color), var(--light-color)) }
+      & .badge-pending { @include badge(var(--light-color), var(--dark-color)) }
+      & .badge-denied { @include badge(#943838, #f7f3f3) }
     }
 
     &:hover {
@@ -102,9 +103,15 @@ ul {
     
     & li {
       & .info {
-        display: initial;
-        & p { max-width: 225px }
-        & span { text-transform: capitalize }
+        & p { max-width: 200px }
+      }
+    }
+  }
+
+  @media(max-width: 650px) {
+    & li {
+      & .info {
+        & p { max-width: 150px }
       }
     }
   }
@@ -114,9 +121,7 @@ ul {
 
     & li {
       & .info {
-        display: flex;
-        & p { max-width: 180px }
-        & span { text-transform: none }
+        & p { max-width: initial }
       }
 
       &:last-child { padding-bottom: 27px }

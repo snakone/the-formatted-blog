@@ -68,12 +68,6 @@ export const DUMMY_POST: Post[] = [
   }
 ];
 
-export const USER_STATS: IconList[] = [
-  { icon: 'fas fa-pencil-alt', label: 'posts' },
-  { icon: 'far fa-heart', label: 'likes' },
-  { icon: 'fas fa-users', label: 'friends' }
-];
-
 export const USER_INDEX: IconList[] = [
   { icon: 'far fa-user-circle', label: 'Perfil', route: './' },
   { icon: 'fab fa-ioxhost', label: 'Posts', route: 'posts' },
@@ -81,20 +75,6 @@ export const USER_INDEX: IconList[] = [
   { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
   { icon: 'fas fa-cog', label: 'Ajustes', route: 'settings' }
-];
-
-export const QUILL_ICONS: IconList[] = [
-  { icon: 'fas fa-bold', label: 'Negrita' },
-  { icon: 'fas fa-quote-right', label: 'Blockquote' },
-  { icon: 'fas fa-code', label: 'Código' },
-  { icon: 'fas fa-heading', label: 'Encabezado 2' },
-  { icon: 'fas fa-list-ol', label: 'Lista Numerada' },
-  { icon: 'fas fa-list-ul', label: 'Lista Normal' },
-  { icon: 'fas fa-undo', label: 'Deshacer' },
-  { icon: 'fas fa-redo', label: 'Rehacer' },
-  { icon: 'fas fa-link', label: 'Enlace' },
-  { icon: 'far fa-image', label: 'Imagen' },
-  { icon: 'fas fa-film', label: 'Vídeo' }
 ];
 
 export const DRAFT_LIST: DraftList[] = [
@@ -113,8 +93,8 @@ export const DRAFT_LIST: DraftList[] = [
     title: 'Lorem ipsum dolor sit amet duaron.', 
     created: '2:32pm',
     badges: [
-      { class: 'pending', label: 'Pendiente' },
-      { class: 'info', label: 'Info' }
+      { class: 'denied', label: 'Denegado' },
+      { class: 'view', label: 'Visto' },
     ],
     active: false
   },
@@ -123,7 +103,7 @@ export const DRAFT_LIST: DraftList[] = [
     title: 'Lorem ipsum dolor sit amet duaron.', 
     created: 'hace 2 días',
     badges: [
-      { class: 'info', label: 'Info' },
+      { class: 'view', label: 'Visto' },
       { class: 'success', label: 'Correcto' }
     ],
     active: false
@@ -133,8 +113,8 @@ export const DRAFT_LIST: DraftList[] = [
     title: 'Lorem ipsum dolor amet duaron.', 
     created: '5:32pm',
     badges: [
-      { class: 'info', label: 'Info' },
-      { class: 'pending', label: 'Pendiente' }
+      { class: 'pending', label: 'Pendiente' },
+      { class: 'view', label: 'Visto' }
     ],
     active: false
   },
@@ -144,7 +124,7 @@ export const DRAFT_LIST: DraftList[] = [
     created: '2:32pm',
     badges: [
       { class: 'success', label: 'Correcto' },
-      { class: 'pending', label: 'Pendiente' }
+      { class: 'view', label: 'Visto' }
     ],
     active: false
   },
