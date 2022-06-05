@@ -1,20 +1,38 @@
 <app-sticky-aside [selector]="'create-content'">
   <ul>
-    <li *ngFor="let l of list.slice(1, 5).reverse()"
-        (click)="activate(l)">
-      <i *ngIf="l.active" class="fas fa-caret-right"></i>
-      <h4>{{l.ref}}</h4>
-      <div class="info">
-        <p>{{l.title}}</p>
-        <span>{{l.created}}</span>
-      </div>
-      <div class="status">
-        <span *ngFor="let b of l.badges" 
-              [class]="'badge-' + b.class">
-            {{b.label}}
-        </span>
-      </div>
-    </li>
+    <ng-container *ngIf="list!.length > 0; else noDraft">
+      <li *ngFor="let l of list.slice(1, 5).reverse()"
+          (click)="activate(l)" 
+          [ngClass]="{'active': l.active}">
+        <i *ngIf="l.active" class="fas fa-caret-right"></i>
+        <!-- TITLE -->
+        <input type="text" 
+              [(ngModel)]="l.ref" 
+              maxlength="30"/>
+        <div class="info">  <!-- INFO -->
+          <p>{{l.title}}</p>
+          <span>{{l.created}}</span>
+        </div>
+        <div class="status">  <!-- BADGES -->
+          <span *ngFor="let b of l.badges" 
+                [class]="'badge-' + b.class">
+              {{b.label}}
+          </span>
+        </div>
+      </li>
+    </ng-container>
+    <ng-template #noDraft>
+      <li>
+        Vaya, parece ser que aún no has escrito nada. Aunque no te preocupes, 
+        en cuánto escribas en el <b>editor</b>, se guardará automáticamente tu <b>primer</b> boceto.<br><br>
+        Después podrás <b>guardarlo y archivarlo</b> para crear bocetos adicionales.
+        Además podrás seleccionar el boceto que quieras en todo momento.<br><br>
+        Empieza a escribir en el <b>editor</b>, el boceto se irá guardando automáticamente.
+        Si ves que no te convence, tienes la opción de borrarlo y empezar de nuevo.<br><br>
+        Cuando veas <i class="fas fa-check static"></i>, quiere decir que el <b>boceto</b> se ha guardado y
+        puedes remontar la escritura cuando te apetezca, sin temor a perdidas innecesarias.
+      </li>
+    </ng-template>
   </ul>
 </app-sticky-aside>
 

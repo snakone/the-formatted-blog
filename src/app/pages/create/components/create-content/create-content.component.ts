@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
-import { CrafterService } from '@core/services/crafter/crafter.service';
-import { DUMMY_POST } from '@shared/data/data';
-import { EMPTY_QUILL } from '@shared/data/quills';
-import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { Delta } from 'quill';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
+
+import { CrafterService } from '@services/crafter/crafter.service';
+import { CREATE_ACTION_LIST, DUMMY_POST } from '@shared/data/data';
+import { EMPTY_QUILL } from '@shared/data/quills';
+import { QuillHelpComponent } from '@layout/overlays/quill-help/quill-help.component';
 
 @Component({
   selector: 'app-create-content',
@@ -20,6 +21,7 @@ export class CreateContentComponent implements OnInit, OnDestroy {
   post = DUMMY_POST[0];
   saving = false;
   private unsubscribe$ = new Subject<void>();
+  list = CREATE_ACTION_LIST;
 
   constructor(private crafter: CrafterService) { }
 
@@ -38,16 +40,26 @@ export class CreateContentComponent implements OnInit, OnDestroy {
     window.dispatchEvent(new Event('resize'));
   }
 
-  public openHelp(): void {
+  public action(v: string): void {
+    switch(v) {
+      case 'new': null;
+        break;
+      case 'archive': null;
+        break;
+      case 'delete': this.model = EMPTY_QUILL as Delta;
+        break;
+      case 'help': this.openHelp();
+        break;
+      case 'next': this.next();
+    }
+  }
+
+  private openHelp(): void {
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
   }
 
-  public next(): void {
+  private next(): void {
     console.log(this.model);
-  }
-
-  public delete(): void {
-    this.model = EMPTY_QUILL as Delta;
   }
 
   ngOnDestroy() {

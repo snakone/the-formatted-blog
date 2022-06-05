@@ -1,4 +1,4 @@
-import { DraftList, IconList, Post } from '@shared/types/interface.types';
+import { ActionList, DraftList, IconList, Post } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { POST_MESSAGE, POST_MESSAGE_ALONE } from './sentences';
 
@@ -129,4 +129,13 @@ export const DRAFT_LIST: DraftList[] = [
     active: false
   },
 ];
+
+export const CREATE_ACTION_LIST: ActionList[] = [
+  { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
+  { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
+  { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
+  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' },
+  { icon: 'fas fa-fast-forward', label: 'Siguiente', action: 'next' }
+];
+
 

@@ -72,6 +72,12 @@ export interface IconList {
   route?: string;
 }
 
+export interface ActionList {
+  icon: string;
+  label: string;
+  action: string;
+}
+
 // SERVICE WORKER
 export interface SWResponse extends ServerResponse {
   updated?: boolean;

@@ -13,6 +13,9 @@ nav {
     border-bottom: 1px solid var(--navigation-border);
     border-top: 1px solid var(--navigation-border);
     transition: border 666ms ease-in-out;
+    overflow: hidden;
+    z-index: 100;
+    transition: all 0.5s ease-in-out;
 
     & ul {
       text-align: center;
@@ -20,6 +23,7 @@ nav {
       padding-left: 0;
       margin-bottom: 0;
       list-style: none;
+      min-width: 1000px;
 
       & li {
         float: none;
@@ -68,19 +72,6 @@ nav {
         margin: 0 auto;
         & li { padding: 10px 12px; }
       }
-
-      @media(min-width: 781px) and (max-width: 1200px) {
-        width: 80%;
-        & li { padding: 10px 3%; }
-      }
-    }
-
-    @media(max-width: 780px) {
-      overflow: hidden;
-      z-index: 100;
-      transition: all 0.5s ease-in-out;
-
-      & ul { min-width: 1000px; }
     }
   }
 
@@ -107,7 +98,7 @@ nav {
         color: var(--contrast-color);
       }
 
-      @media(min-width: 780px) {
+      @media(min-width: 1200px) {
         display: none;
       }
     }

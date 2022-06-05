@@ -22,7 +22,7 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
     this.subscribeToResize();
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
-    }, 2000);
+    }, 1500);
   }
 
   private subscribeToResize(): void {
@@ -30,10 +30,12 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
       .pipe(
         throttleTime(300),
         filter(_ => !!this.selector),
-        map(_ => (window.document.body.clientWidth <= 983) ?? true),
+        map(_ => (window.document.body.clientWidth <= 983 ||
+                  document.getElementById('sticky-wrapper')!.clientHeight <= 400) ?? true),
         distinctUntilChanged(),
       )
-    .subscribe(_ => _ ? this.stickySrv.destroy() : 
+    .subscribe(_ => _ ? 
+      this.stickySrv.destroy() : 
       this.stickySrv.startSticky(this.selector || ''));
   }
 

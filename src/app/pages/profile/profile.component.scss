@@ -3,7 +3,6 @@
 section {
   @include container();
   @include row();
-  margin-top: 0.666rem;
   position: relative;
 }
 
@@ -11,6 +10,7 @@ section {
   @include grid-inverted();
   transition: background 666ms ease-in-out;
   position: relative;
+  padding: 30px 0 0 30px;
 
   &::after {
     content: '';

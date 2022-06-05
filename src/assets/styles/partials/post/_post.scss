@@ -6,8 +6,7 @@
   overflow-y: initial;
   &.ql-blank::before { color: var(--text-color) }
   &[contenteditable="false"] { padding: 0 }
-  @media(min-width: 993px) { min-height: var(--quill-height) }
-  @media(max-width: 618px) { min-height: 92px }
+  min-height: var(--quill-height);
 
   // PARAGRAPH
   & p {

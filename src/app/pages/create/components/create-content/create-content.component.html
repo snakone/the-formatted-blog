@@ -1,10 +1,10 @@
-<div class="content">
+<div class="content">  <!-- EDITOR -->
   <quill-editor [modules]="quillModules"
                 #editor
                 (onContentChanged)="stickyFix()"
                 [(ngModel)]="model">
   </quill-editor>
-  <div class="toolbar">
+  <div class="toolbar">  <!-- TOOLBAR -->
     <div>
       <ng-container *ngIf="saving; else saved">
         <i class="fas fa-spinner fa-pulse"></i> 
@@ -15,20 +15,12 @@
         <span>Guardado</span>
       </ng-template>
     </div>
-    <div>
-      <i class="fas fa-plus" 
-         matTooltip="Nuevo..."></i>
-      <i class="far fa-folder-open" 
-         matTooltip="Archivar"></i>
-      <i class="fas fa-trash" 
-         matTooltip="Eliminar"
-         (click)="delete()"></i>
-      <i class="far fa-question-circle" 
-         matTooltip="Ayuda"
-         (click)="openHelp()"></i>
-      <i class="fas fa-fast-forward" 
-         matTooltip="Siguiente"
-         (click)="next()"></i>
+    <div>  <!-- ACTIONS -->
+      <i *ngFor="let l of list"
+         [class]="l.icon"
+         [matTooltip]="l.label"
+         (click)="action(l.action)">
+      </i>
     </div>
   </div>
 </div>

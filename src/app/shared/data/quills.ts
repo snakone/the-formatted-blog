@@ -14,7 +14,7 @@ export const HELP_QUILL = {
           "insert": "\n"
       },
       {
-          "insert": "Bienvenido/a, este editor te ayudará a escribir de manera más rápida y eficaz. Tienes todo lo necesario para escribir cosas interesantes, usa la "
+          "insert": "Bienvenido/a, este editor te ayudará a escribir de manera más rápida y eficaz. Tienes todo lo necesario para escribir, usa la "
       },
       {
           "attributes": {
@@ -113,10 +113,10 @@ export const HELP_QUILL = {
         "attributes": {
             "link": "http://google.es"
         },
-        "insert": "consectetur. "
+        "insert": "consectetur."
       },
       {
-        "insert": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure modi sint, rem maiores cupiditate nesciunt? Deserunt cupiditate iure commodi consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure modi sint, rem maiores cupiditate nesciunt? Deserunt cupiditate iure commodi consequatur.\n"
+        "insert": " Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure modi sint, rem maiores cupiditate nesciunt? Deserunt cupiditate iure commodi consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure modi sint, rem maiores cupiditate nesciunt? Deserunt cupiditate iure commodi consequatur.\n"
       },
       {
           "insert": {

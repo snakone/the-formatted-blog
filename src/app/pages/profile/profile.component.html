@@ -1,15 +1,9 @@
 <div class="animated fadeIn">
-  <section>
-    <app-action-bar [text]="text"
-                    buttonText="Like"
-                    (function)="like()">
-    </app-action-bar>
-  </section>
   <section class="profile-content">
     <app-section [margin]="false">
       <app-profile-sidebar></app-profile-sidebar>
       <div id="profile-route"></div>  <!-- Navigate Trick -->
-      <div class="wrapper">
+      <div class="wrapper" id="sticky-wrapper">
         <router-outlet></router-outlet>
       </div>
     </app-section>
