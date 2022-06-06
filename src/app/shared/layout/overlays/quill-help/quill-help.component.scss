@@ -3,19 +3,38 @@ section {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  grid-template-columns: 1fr;
 
   & .top-bar {
     position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 2px;
-      right: .5rem;
-      background-color: var(--border-color);
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+}
+
+svg, i {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 14px;
+}
+
+i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ql-toolbar > div > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  & span {
+    font-size: 13px;
+    opacity: .8; 
+  }
+
+  &:last-of-type { margin-bottom: 0; }
 }

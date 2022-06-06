@@ -6,12 +6,13 @@ ul {
   margin: 0;
 
   & li {
-    padding: 12px 0 10px 0;
+    padding: 12px;
     cursor: pointer;
-    border-bottom: 1px solid transparent;
+    border: 1px solid var(--navigation-border);
     transition: border 666ms ease-in-out;
     position: relative;
-    margin-top: .8rem;
+    margin-top: 1.2rem;
+    &.active { border-right: 1px solid var(--contrast-color) !important }
 
     & i {
       position: absolute;
@@ -77,16 +78,11 @@ ul {
     }
 
     &:first-child { 
-      padding-top: 0;
       margin-top: 0;
-      & i { top: 4px }
     }
 
-    @media(min-width: 993px) {
-      &:last-child { 
-        border-bottom: 0;
-        padding-bottom: 0;
-      }
+    &:hover {
+      background-color: var(--li-hover);
     }
   }
 
@@ -97,23 +93,12 @@ ul {
     gap: 4%;
 
     & li {
-      border: 1px solid var(--border-color);
-      padding: 12px;
-
       &:first-child { 
-        padding-top: 12px;
-        margin-top: .8rem;
+        margin-top: 1.2rem;
       }
-
-      & i { display: none }
-      &.active { border-bottom: 1px solid var(--contrast-color) !important }
 
       & .info {
         & p { max-width: initial }
-      }
-
-      &:hover {
-        background-color: var(--li-hover);
       }
     }
   }

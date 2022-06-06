@@ -2,11 +2,13 @@
   <quill-editor [modules]="quillModules"
                 #editor
                 (onContentChanged)="stickyFix()"
-                [(ngModel)]="model">
+                [(ngModel)]="model"
+                (onEditorCreated)="show = !show"
+                [ngStyle]="{'display': show ? 'block' : 'none'}">
   </quill-editor>
   <div class="toolbar">  <!-- TOOLBAR -->
     <div>
-      <ng-container *ngIf="saving; else saved">
+      <ng-container *ngIf="saving$ | async; else saved">
         <i class="fas fa-spinner fa-pulse"></i> 
         <span>Guardando...</span>
       </ng-container>

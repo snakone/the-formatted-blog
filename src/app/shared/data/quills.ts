@@ -18,3 +18,4 @@ export const QUILL_HELP_TOP_BAR: IconList[] = [
   { icon: '', label: 'Insertar vídeo' },
 ];
 
+
