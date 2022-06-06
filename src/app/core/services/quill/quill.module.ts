@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { QUILL_PLACEHOLDER } from '@shared/data/sentences';
 import { QuillConfig, QuillModule } from 'ngx-quill';
 
 const config: QuillConfig = {
   format: 'object',
-  placeholder: 'Empieza escribiendo aquí... Si tienes dudas, usa el botón de ayuda en la parte inferior'
+  placeholder: QUILL_PLACEHOLDER
 }
 
 @NgModule({

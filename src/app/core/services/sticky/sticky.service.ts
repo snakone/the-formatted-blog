@@ -37,7 +37,6 @@ export class StickyService {
   }
 
   public checkSticky(): void {
-    console.log('hey')
     if (
       window.document.body.clientWidth < 993
       && this.sticky

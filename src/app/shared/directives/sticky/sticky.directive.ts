@@ -31,7 +31,7 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
         throttleTime(300),
         filter(_ => !!this.selector),
         map(_ => (window.document.body.clientWidth <= 983 ||
-                  document.getElementById('sticky-wrapper')!.clientHeight <= 400) ?? true),
+                  document.getElementById('sticky-wrapper')!.clientHeight <= 500) ?? true),
         distinctUntilChanged(),
       )
     .subscribe(_ => _ ? 

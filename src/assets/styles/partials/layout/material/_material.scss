@@ -27,10 +27,9 @@
   }
 
   &.quill-help {
-    max-width: 60vw !important;
+    max-width: 350px !important;
+    max-height: 450px !important;
     & .mat-dialog-container { padding: 26px 24px !important }
-    @media(max-width: 992px) { max-width: 80vw !important }
-    @media(max-width: 550px) { max-width: 90vw !important }
   }
 }
 

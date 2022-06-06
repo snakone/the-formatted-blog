@@ -56,10 +56,7 @@ export class PWAService {
                 this.send(
                   this.set(Object.assign({}, WELCOME_PUSH)
               )) : of(null))
-            ).subscribe(_ => {
-              console.log(_)
-              !_ ?? this.snackSrv.setSnack(SUB_UPDATED_SENTENCE)
-            })
+            ).subscribe(_ => !_ ?? this.snackSrv.setSnack(SUB_UPDATED_SENTENCE))
         }
       }).catch(_ => console.log(_));
     }, timer);
@@ -68,7 +65,6 @@ export class PWAService {
   public async requestNotification(): Promise<void> {
     const permission = await Notification.requestPermission()
      .catch(_ => console.log(_));
-     console.log(permission)
     permission !== 'granted' ? this.openPushModal() : this.showPrompt(1000);
   }
 

@@ -6,129 +6,120 @@ ul {
   margin: 0;
 
   & li {
-    padding: 12px 0 20px 0;
+    padding: 12px 0 10px 0;
     cursor: pointer;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid transparent;
     transition: border 666ms ease-in-out;
     position: relative;
+    margin-top: .8rem;
 
     & i {
       position: absolute;
       left: -16px;
-      top: 14.5px;
+      top: 15.5px;
       font-size: 16px;
       color: var(--contrast-color);
     }
 
     & input {
-      font-size: 1.1rem;
-      margin-bottom: 13px;
+      font-size: .9rem;
       display: inline-block;
+      margin-bottom: 5px;
       position: relative;
       max-width: 280px;
       overflow: hidden;
       background: transparent;
       color: var(--dark-color);
       font-family: 'Raleway', Arial, Helvetica, sans-serif;
-      @media(max-width: 1200px) and (min-width: 993px) { max-width: 239px }
       padding: 0;
       border: 0;
       border-radius: 0;
+      @media(max-width: 1200px) and (min-width: 993px) { max-width: 239px }
+      transition: color 666ms ease-in-out;
     }
 
     & .info {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: 4px;
 
       & p {
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 200px;
         overflow: hidden;
         opacity: .8;
+        font-size: 13px;
       }
 
       & span { 
         font-size: 13px;
         filter: brightness(1.2);
       }
+    }
 
-      @media(max-width: 1200px) and (min-width: 993px) {
-        & p { max-width: 150px }
+    & .date {
+      font-size: .8rem;
+      font-style: italic;
+      transition: color 666ms ease-in-out;
+
+      & .tale {
+        color: var(--contrast-color);
+        padding: 0 12px 0 8px;
+        transition: color 666ms ease-in-out;
       }
+
+      & .created { color: var(--text-color); }
+      &.seen { color: #364bbe; }
+      &.not-seen { color: #f1ad5e; }
+      &.pending { color: var(--pending-color); }
+      &.correct { color: var(--success-color); }
     }
 
     &:first-child { 
       padding-top: 0;
+      margin-top: 0;
       & i { top: 4px }
     }
 
-    &:last-child { 
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    & .status {
-      margin-top: 14px;
-      & span:not(:last-child) { padding-right: 5px }
-      & .badge-view { @include badge(var(--dark-color), var(--light-color)) }
-      & .badge-success { @include badge(var(--contrast-color), var(--light-color)) }
-      & .badge-pending { @include badge(var(--light-color), var(--dark-color)) }
-      & .badge-denied { @include badge(#943838, #f7f3f3) }
-    }
-
-    &:hover {
-      & input { filter: brightness(1.3) }
-    }
-
-    & .fa-check.static {
-      position: initial !important;
-      padding: 0 3px;
-      color: var(--success-color);
+    @media(min-width: 993px) {
+      &:last-child { 
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
     }
   }
 
   @media(max-width: 992px) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 3rem;
+    grid-template-columns: repeat(2, 48%);
     margin-bottom: 1rem;
+    gap: 4%;
 
     & li {
-      &:first-child { padding-top: 12px }
+      border: 1px solid var(--border-color);
+      padding: 12px;
+
+      &:first-child { 
+        padding-top: 12px;
+        margin-top: .8rem;
+      }
+
       & i { display: none }
-      &:last-child { border-bottom: 1px solid var(--border-color) }
       &.active { border-bottom: 1px solid var(--contrast-color) !important }
 
       & .info {
         & p { max-width: initial }
       }
-    }
-  }
 
-  @media(max-width: 775px) {
-    margin-bottom: 0;
-    
-    & li {
-      & .info {
-        & p { max-width: 200px }
-      }
-
-      & input { max-width: 250px }
-    }
-  }
-
-  @media(max-width: 650px) {
-    & li {
-      & .info {
-        & p { max-width: 150px }
+      &:hover {
+        background-color: var(--li-hover);
       }
     }
   }
 
-  @media(max-width: 550px) {
-    grid-template-columns: repeat(1, 1fr);
+  @media(max-width: 700px) {
+    display: initial;
 
     & li {
       & .info {
@@ -136,7 +127,8 @@ ul {
       }
 
       & input { max-width: 290px }
-      &:last-child { padding-bottom: 27px }
     }
+
+    margin-bottom: 2.5rem;
   }
 }

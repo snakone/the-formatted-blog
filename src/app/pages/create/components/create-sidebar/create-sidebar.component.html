@@ -9,15 +9,12 @@
         <input type="text" 
               [(ngModel)]="l.ref" 
               maxlength="30"/>
-        <div class="info">  <!-- INFO -->
+        <p [class]="'date ' + l.status">
+          {{l.status | draftStatus}} <span class="tale">|</span> <span class="created">{{l.created}}</span>
+        </p>
+        <div class="info">  
+        <!-- INFO -->
           <p>{{l.title}}</p>
-          <span>{{l.created}}</span>
-        </div>
-        <div class="status">  <!-- BADGES -->
-          <span *ngFor="let b of l.badges" 
-                [class]="'badge-' + b.class">
-              {{b.label}}
-          </span>
         </div>
       </li>
     </ng-container>
@@ -27,7 +24,6 @@
         en cuánto escribas en el <b>editor</b>, se guardará automáticamente tu <b>primer</b> boceto.<br><br>
         Después podrás <b>guardarlo y archivarlo</b> para crear bocetos adicionales.
         Además podrás seleccionar el boceto que quieras en todo momento.<br><br>
-        Empieza a escribir en el <b>editor</b>, el boceto se irá guardando automáticamente.
         Si ves que no te convence, tienes la opción de borrarlo y empezar de nuevo.<br><br>
         Cuando veas <i class="fas fa-check static"></i>, quiere decir que el <b>boceto</b> se ha guardado y
         puedes remontar la escritura cuando te apetezca, sin temor a perdidas innecesarias.

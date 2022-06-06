@@ -1,10 +1,12 @@
+$quill-padding: 30px;
+$quill-padding-sm: 20px;
+
 .ql-editor {
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
-  padding: 20px 15px;
+  padding: $quill-padding;
   line-height: inherit;
   overflow-y: initial;
-  &.ql-blank::before { color: var(--text-color) }
   &[contenteditable="false"] { padding: 0 }
   min-height: var(--quill-height);
 
@@ -13,6 +15,25 @@
     margin: 0 0 30px;
     text-align: left;
     &:last-of-type { margin: 0 }   
+  }
+
+  &.ql-blank::before {
+    top: 7px;
+    right: $quill-padding !important;
+    left: $quill-padding !important;
+    font-style: normal !important;
+    color: var(--text-color);
+    opacity: .7;
+  }
+
+  @media(max-width: 550px) {
+    padding: 23px $quill-padding-sm;
+
+    &.ql-blank::before {
+      top: 0;
+      right: $quill-padding-sm !important;
+      left: $quill-padding-sm !important;
+    }
   }
 
   // BLOCKQUOTE
@@ -115,6 +136,19 @@
     margin: 14px 0 15px;
     &:last-child { margin-bottom: 0 }
   }
+
+  @media(max-width: 1200px) and (min-width: 993px) { min-height: calc(var(--quill-height) + 70px); }
+  @media(max-width: 825px) { min-height: calc(var(--quill-height) + 26px); }
+  @media(max-width: 744px) { min-height: calc(var(--quill-height) + 75px); }
+  @media(max-width: 630px) { min-height: calc(var(--quill-height) + 110px);}
+  @media(max-width: 594px) { min-height: calc(var(--quill-height) + 150px); }
+  @media(max-width: 500px) { min-height: calc(var(--quill-height) + 168px); }
+  @media(max-width: 480px) { min-height: calc(var(--quill-height) + 202px); }
+  @media(max-width: 465px) { min-height: calc(var(--quill-height) + 224px); }
+  @media(max-width: 422px) { min-height: calc(var(--quill-height) + 248px); }
+  @media(max-width: 414px) { min-height: calc(var(--quill-height) + 270px); }
+  @media(max-width: 404px) { min-height: calc(var(--quill-height) + 302px); }
+  @media(max-width: 388px) { min-height: calc(var(--quill-height) + 344px); }
 }
 
 .ql-container.ql-snow { height: auto }
@@ -133,9 +167,11 @@
 .ql-formats {
   position: relative;
   left: -2px;
-  @media(min-width: 550px) { margin-right: 24px !important }
-  @media(max-width: 549px) { margin-right: 0 !important }
-  &:first-of-type { top: -.5px }
+  margin-right: 0 !important;
+  @media(min-width: 425px) { margin-right: 6px !important; }
+  @media(min-width: 465px) { margin-right: 12px !important; }
+  @media(min-width: 550px) { margin-right: 24px !important; }
+  &:first-of-type { top: -.5px; }
   &:last-of-type { margin-right: 0 !important }
 }
 

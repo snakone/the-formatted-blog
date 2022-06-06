@@ -1,6 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { HELP_QUILL } from '@shared/data/quills';
-import { Delta } from 'quill';
 
 @Component({
   selector: 'app-quill-help',
@@ -11,12 +9,8 @@ import { Delta } from 'quill';
 
 export class QuillHelpComponent implements OnInit {
 
-  model!: Delta;
-
   constructor() { }
 
-  ngOnInit(): void {
-    this.model = HELP_QUILL as Delta;
-  }
+  ngOnInit(): void { }
 
 }

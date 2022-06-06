@@ -13,10 +13,10 @@
     padding: 3px 5px;
     width: 29px;
     position: relative;
-    top: 1.5px;
+    top: .5px;
     cursor: pointer;
     &:hover { color: var(--contrast-color) }
-    &:nth-last-child(2) { margin-left: 12px }
+    &:nth-last-child(2) { margin-left: 24px }
 
     &.fa-check { 
       top: 0;
@@ -41,5 +41,5 @@
     margin-right: 2px;
   }
 
-  @media(max-width: 992px) { margin-bottom: 30px }
+  @media(max-width: 992px) { margin-bottom: 25px }
 }

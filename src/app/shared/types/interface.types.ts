@@ -21,14 +21,12 @@ export interface DraftList {
   ref: string;
   title: string;
   created: string;
-  badges?: DraftBadge[];
+  status?: DraftStatus;
   active?: boolean;
 }
 
-export interface DraftBadge {
-  label: string;
-  class: string;
-}
+export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
+
 
 // USER
 export interface User {

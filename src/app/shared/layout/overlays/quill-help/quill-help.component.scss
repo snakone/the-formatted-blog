@@ -1,5 +1,21 @@
-@import 'mixins/mixins.scss';
+section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 
-button {
-  @include hover-button();
+  & .top-bar {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      right: .5rem;
+      background-color: var(--border-color);
+    }
+  }
 }

@@ -80,52 +80,37 @@ export const USER_INDEX: IconList[] = [
 export const DRAFT_LIST: DraftList[] = [
   { 
     ref: 'Boceto 1', 
-    title: 'Lorem ipsum dolor sit amet duaron.', 
+    title: 'Lorem ipsum dolor sit amet duaron. Lorem ipsum dolor sit amet duaron.', 
     created: '2:32pm',
-    badges: [
-      { class: 'pending', label: 'Pendiente' },
-      { class: 'success', label: 'Correcto' }
-    ],
+    status: 'correct',
     active: false
   },
   { 
     ref: 'Boceto 2', 
-    title: 'Lorem ipsum dolor sit amet duaron.', 
+    title: 'Lorem ipsum dolor sit amet duaron. Lorem ipsum dolor sit amet duaron.', 
     created: '2:32pm',
-    badges: [
-      { class: 'denied', label: 'Denegado' },
-      { class: 'view', label: 'Visto' },
-    ],
+    status: 'not-seen',
     active: false
   },
   { 
     ref: 'Boceto 3', 
     title: 'Lorem ipsum dolor sit amet duaron.', 
     created: 'hace 2 días',
-    badges: [
-      { class: 'view', label: 'Visto' },
-      { class: 'success', label: 'Correcto' }
-    ],
+    status: 'pending',
     active: false
   },
   { 
     ref: 'Boceto 4', 
     title: 'Lorem ipsum dolor amet duaron.', 
     created: '5:32pm',
-    badges: [
-      { class: 'pending', label: 'Pendiente' },
-      { class: 'view', label: 'Visto' }
-    ],
+    status: 'correct',
     active: false
   },
   { 
     ref: 'Boceto 5', 
     title: 'Lorem ipsum dolor sit amet duaron.', 
     created: '2:32pm',
-    badges: [
-      { class: 'success', label: 'Correcto' },
-      { class: 'view', label: 'Visto' }
-    ],
+    status: 'seen',
     active: false
   },
 ];
