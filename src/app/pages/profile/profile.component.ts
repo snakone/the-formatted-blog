@@ -31,8 +31,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.events
     .pipe(
       filter((event) => event instanceof NavigationEnd && 
-                        event.url.includes('/profile')
-            ),
+                        event.url.includes('/profile')),
       takeUntil(this.$unsubscribe))
     .subscribe(_ => (
       this.scroll(),

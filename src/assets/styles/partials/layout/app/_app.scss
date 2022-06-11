@@ -49,3 +49,9 @@ button {
 .is-affixed .profile-list {
   margin-top: 0;
 }
+
+.scroll-down .actions {
+  @media(max-width: 700px) {
+    border-top: 1px solid transparent !important;
+  }
+}

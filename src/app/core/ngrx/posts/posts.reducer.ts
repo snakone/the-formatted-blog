@@ -27,7 +27,6 @@ export const inititalState: PostState = {
 const featureReducer = createReducer(
   inititalState,
   // GET POSTS
-  on(PostActions.get, state => ({ ...state, error: null })),
   on(PostActions.getSuccess, (state, { posts }) => (
     {
       ...state,

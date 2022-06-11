@@ -1,12 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
+import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy, Input, AfterContentInit } from '@angular/core';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { Delta } from 'quill';
 
 import { CrafterService } from '@services/crafter/crafter.service';
-import { CREATE_ACTION_LIST, DUMMY_POST } from '@shared/data/data';
+import { CREATE_ACTION_LIST } from '@shared/data/data';
 import { EMPTY_QUILL } from '@shared/data/quills';
 import { QuillHelpComponent } from '@layout/overlays/quill-help/quill-help.component';
+import { Post } from '@shared/types/interface.types';
+import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 
 @Component({
   selector: 'app-create-content',
@@ -15,20 +17,21 @@ import { QuillHelpComponent } from '@layout/overlays/quill-help/quill-help.compo
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CreateContentComponent implements OnInit, OnDestroy {
+export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   @ViewChild('editor', { static: true }) editor!: QuillEditorComponent;
-  model!: Delta;
-  post = DUMMY_POST[0];
+  @Input() draft: Post;
+  
   saving$ = new BehaviorSubject<boolean>(false);
   private unsubscribe$ = new Subject<void>();
   list = CREATE_ACTION_LIST;
   show = false;
 
+  model = EMPTY_QUILL as Delta;
+
   switchObj: any = {
-    new: () => null,
-    archive: () => null,
-    delete: () => this.model = EMPTY_QUILL as Delta,
+    new: () => this.new(),
+    delete: () => this.delete(),
     help: () => this.openHelp(),
     next: () => this.next()
   };
@@ -55,17 +58,32 @@ export class CreateContentComponent implements OnInit, OnDestroy {
     },
   };
 
-  constructor(private crafter: CrafterService) { }
+  constructor(
+    private crafter: CrafterService,
+    private draftsFacade: DraftsFacade
+  ) { }
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     this.editor.onContentChanged
      .pipe(
+       filter(_ => _.source !== 'api'),
        tap(_ => this.saving$.next(true)),
        debounceTime(5000),
        distinctUntilChanged(),
+       map(_ => _.content as Delta),
        takeUntil(this.unsubscribe$)
      )
-     .subscribe(_ => this.saving$.next(false));
+     .subscribe((message: Delta) => this.onChange(message));
+  }
+
+  private onChange(message: Delta): void {
+    !this.draft ? // NEW 
+      (
+        this.draft = { title: 'Boceto ', message },
+        this.draftsFacade.create(this.draft)
+      ) :  // UPDATE
+    this.draftsFacade.updateKey(this.draft._id, {key: 'message', value: message});
+    this.saving$.next(false);
   }
 
   public stickyFix(): void {
@@ -76,16 +94,42 @@ export class CreateContentComponent implements OnInit, OnDestroy {
     this.switchObj[v]();
   }
 
-  public ready(e: any): void {
-    console.log(e);
+  private new(): void {
+    if (!this.draft) { return; }
+
+    const ref = this.crafter.confirmation(
+      'Nuevo...', '¿Quieres guardar el boceto actual y crear uno nuevo?'
+    );
+
+    ref.afterClosed()
+    .pipe(
+     takeUntil(this.unsubscribe$),
+     filter(_ => _ && !!_)
+   ).subscribe(_ => {
+      this.draftsFacade.updateKey(this.draft._id, {key: 'message', value: this.draft.message});
+      this.draftsFacade.activeOff();
+   });
   }
 
   private openHelp(): void {
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
   }
 
+  private delete(): void {
+    if (!this.draft) { return; }
+    const ref = this.crafter.confirmation(
+      'Eliminar...', '¿Estás seguro que quieres eliminar este boceto?'
+    );
+
+    ref.afterClosed()
+     .pipe(
+      takeUntil(this.unsubscribe$),
+      filter(_ => _ && !!_)
+    ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
+  }
+
   private next(): void {
-    console.log(this.model);
+    console.log('next');
   }
 
   ngOnDestroy() {

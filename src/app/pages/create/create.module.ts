@@ -7,6 +7,7 @@ import { SharedModule } from '@shared/shared.module';
 import { CreateRoutingModule } from './create.routing';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SnippetsModule } from '@shared/snippets/snippets.module';
+import { DraftsAccessModule } from '@core/ngrx/drafts/data-access/drafts-access.module';
 
 import { CreateComponent } from './create.component';
 import { CreateContentComponent } from './components/create-content/create-content.component';
@@ -29,6 +30,7 @@ const Material = [
     QuillModule,
     SharedModule,
     SnippetsModule,
+    DraftsAccessModule,
     ...Material
   ]
 })

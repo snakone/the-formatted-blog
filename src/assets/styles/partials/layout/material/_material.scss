@@ -13,6 +13,8 @@
 .cdk-overlay-pane {
   overflow: auto;
   max-height: 80vh;
+
+  & .mat-dialog-container { border-radius: 0 !important }
   
   &.preview {
     overflow: auto;
@@ -27,7 +29,7 @@
   }
 
   &.quill-help {
-    & .mat-dialog-container { padding: 26px 24px !important }
+    & .mat-dialog-container { padding-right: 32px !important }
   }
 }
 
@@ -38,5 +40,9 @@
   font-weight: bold;
   font-size: 12px;
   border-radius: 2px !important;
+}
+
+.mat-dialog-actions .mat-button-base + .mat-button-base {
+  background-color: rgba(0,0,0, .2);
 }
 

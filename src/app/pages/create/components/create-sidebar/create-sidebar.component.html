@@ -1,20 +1,28 @@
 <app-sticky-aside [selector]="'create-content'">
   <ul>
-    <ng-container *ngIf="list!.length > 0; else noDraft">
-      <li *ngFor="let l of list.slice(1, 5).reverse()"
-          (click)="activate(l)" 
-          [ngClass]="{'active': l.active}">
-        <!-- TITLE -->
-        <input type="text" 
-              [(ngModel)]="l.ref" 
-              maxlength="30"/>
-        <p [class]="'date ' + l.status">
-          {{l.status | draftStatus}} <span class="tale">|</span> <span class="created">{{l.created}}</span>
-        </p>
-        <div class="info">  
-        <!-- INFO -->
-          <p>{{l.title}}</p>
-        </div>
+    <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
+      <li *ngFor="let d of drafts.slice(0, 4); let i = index"
+          (click)="activate(d); row = i"
+          [ngClass]="{'active': active && i === row}">
+          <!-- INPUT TITLE -->
+          <div class="input-field">
+              <i class="fas fa-pencil-alt"
+                 *ngIf="editable || i !== row"
+                 (click)="editable = !editable; input.focus()">
+              </i>
+            <input type="text"
+                   #input 
+                   [(ngModel)]="d!.title"
+                   maxlength="50"
+                   placeholder="Título del boceto"
+                   [readonly]="editable || i !== row"
+                   (focusout)="editable = true; change(d)"/>
+          </div>
+          <p [class]="'date ' + d!.status">
+            {{d.status | draftStatus}} 
+            <span class="tale">|</span> 
+            <span class="created">{{d!.created}}</span>
+          </p>
       </li>
     </ng-container>
     <ng-template #noDraft>

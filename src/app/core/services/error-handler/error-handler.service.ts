@@ -1,6 +1,6 @@
 import { ErrorHandler, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SnackService } from '../snack/snack.service';
+import { CrafterService } from '../crafter/crafter.service';
 
 import { 
   ERROR_SERVER_SENTENCE, 
@@ -15,7 +15,7 @@ export class ErrorHandlerService implements ErrorHandler {
 
   chunkFailedMessage = /Loading chunk [\d]+ failed/;
 
-  constructor(private snackSrv: SnackService) { }
+  constructor(private crafter: CrafterService) { }
 
   handleError(error: Error | HttpErrorResponse): void {
     switch (error.constructor) {
@@ -30,18 +30,17 @@ export class ErrorHandlerService implements ErrorHandler {
     if (this.chunkFailedMessage.test(error?.message)) { 
       window.location.reload();
     }
-    throw error;
   }
 
-  public showError(err: HttpErrorResponse): void {
+  public showHttpError(err: HttpErrorResponse): void {
     switch (err.status) {
-      case 406: this.snackSrv.setSnack(WRONG_INFO_SENTENCE, 'warning')
+      case 406: this.crafter.setSnack(WRONG_INFO_SENTENCE, 'warning')
         break;
-      case 401: this.snackSrv.setSnack(TOKEN_REFRESH_SENTENCE, 'info');
+      case 401: this.crafter.setSnack(TOKEN_REFRESH_SENTENCE, 'info');
         break;
-      case 0: case 500: this.snackSrv.setSnack(ERROR_SERVER_SENTENCE, 'error');
+      case 0: case 500: this.crafter.setSnack(ERROR_SERVER_SENTENCE, 'error');
         break;
-      default: this.snackSrv.setSnack(UNKWON_ERROR_SENTENCE, 'error');
+      default: this.crafter.setSnack(UNKWON_ERROR_SENTENCE, 'error');
     }
   }
 

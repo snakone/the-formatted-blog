@@ -1,0 +1,96 @@
+import { props, createAction } from '@ngrx/store';
+import { KeyPair, Post } from '@shared/types/interface.types';
+import { Delta } from 'quill';
+
+// GET DRAFTS BY SLUG
+export const getBySlug =
+  createAction('[Drafts API] Get Draft by Slug',
+  props<{ slug: string }>());
+
+export const getBySlugSuccess =
+  createAction('[Drafts API] Get Drafts by Slug Success',
+  props<{ draft: Post }>());
+
+export const getBySlugFailure =
+  createAction('[Drafts API] Get Draft by Slug Failure',
+  props<{ error: string }>());
+
+// GET DRAFTS BY USER
+export const getByUser =
+  createAction('[Drafts API] Get Drafts by User');
+
+export const getByUserSuccess =
+  createAction('[Drafts API] Get Drafts by User Success',
+  props<{ drafts: Post[] }>());
+
+export const getByUserFailure =
+  createAction('[Drafts API] Get Draft by User Failure',
+  props<{ error: string }>());
+
+// CREATE DRAFT
+export const create =
+  createAction('[Drafts API] Create Draft',
+  props<{ draft: Post }>());
+
+export const createSuccess =
+  createAction('[Drafts API] Create Draft Success',
+  props<{ draft: Post }>());
+
+export const createFailure =
+  createAction('[Drafts API] Create Draft Failure',
+  props<{ error: string }>());
+
+// UPDATE DRAFT
+export const update =
+  createAction('[Drafts API] Update Draft',
+  props<{ draft: Post }>());
+
+export const updateSuccess =
+  createAction('[Drafts API] Update Draft Success',
+  props<{ draft: Post }>());
+
+export const updateFailure =
+  createAction('[Drafts API] Update Draft Failure',
+  props<{ error: string }>());
+
+// UPDATE DRAFT KEY
+export const updateKey =
+  createAction('[Drafts API] Update Draft Key',
+  props<{ id: string, keys: KeyPair }>());
+
+export const updateKeySuccess =
+  createAction('[Drafts API] Update Draft Key Success',
+  props<{ draft: Post }>());
+
+export const updateKeyFailure =
+  createAction('[Drafts API] Update Draft Key Failure',
+  props<{ error: string }>());
+
+// DELETE DRAFT
+export const deleteDraft =
+  createAction('[Drafts API] Delete Draft',
+  props<{ id: string }>());
+
+export const deleteSuccess =
+  createAction('[Drafts API] Delete Draft Success',
+  props<{ id: string }>());
+
+export const deleteFailure =
+  createAction('[Drafts API] Delete Draft Failure',
+  props<{ error: string }>());
+
+// SET ACTIVE
+export const setActive =
+  createAction('[Drafts API] Set Active Draft',
+  props<{ draft: Post }>());
+
+// ACTIVE OFF
+export const activeOff =
+  createAction('[Drafts API] Set Active Off Draft');
+
+// RESET DRAFTS
+export const reset =
+  createAction('[Drafts API] Reset Drafts');
+
+export const resetSlug =
+  createAction('[Drafts API] Reset Draft Slug');

@@ -4,7 +4,7 @@ const switchObj: any = {
   "not-seen": "No visto",
   "seen": "Visto",
   "pending": "Pendiente",
-  "correct": "Correcto"
+  "approved": "Aprovado"
 };
 
 @Pipe({name: 'draftStatus'})
@@ -12,7 +12,7 @@ const switchObj: any = {
 export class DraftStatusPipe implements PipeTransform {
 
   transform(value: string | undefined): string {
-    if (!value) { return ''; }
+    if (!value) { return 'not-seen'; }
     return switchObj[value];
   }
 

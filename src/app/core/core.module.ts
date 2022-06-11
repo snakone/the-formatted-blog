@@ -13,7 +13,7 @@ import { HammerConfig } from './hammer.config';
 import { ErrorHandlerService } from './services/error-handler/error-handler.service';
 import { HttpService } from './services/http/http.service';
 import { StorageModule } from './services/storage/storage.module';
-import { reducers } from './ngrx/ngrx.index';
+import { appReducers } from './ngrx/ngrx.index';
 import { UserEffects } from './ngrx/users/users.effects';
 import { PostEffects } from './ngrx/posts/posts.effects';
 import { JwtInterceptor } from './services/http/jwt.interceptor';
@@ -28,7 +28,7 @@ import { QuillFormatModule } from './services/quill/quill.module';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     }),
-    StoreModule.forFeature('AppState', reducers),
+    StoreModule.forFeature('AppState', appReducers),
     EffectsModule.forRoot([
       UserEffects,
       PostEffects
@@ -40,7 +40,6 @@ import { QuillFormatModule } from './services/quill/quill.module';
     ErrorHandlerService,
     { provide: CORE_MODULE_CONFIG, useValue: CORE_MODULE_CONSTANTS },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
-    { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
 })

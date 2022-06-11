@@ -63,6 +63,7 @@ ul {
     
     & li {
       border-bottom: 1px solid var(--border-color);
+      transition: border 666ms ease-in-out;
       &:after { content: none }
       &:last-child span { color: var(--error-color) }
 

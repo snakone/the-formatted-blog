@@ -6,7 +6,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { environment } from '@env/environment';
 import { HttpService } from '../http/http.service';
-import { SnackService } from '../snack/snack.service';
 import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
 import { SWResponse, NotificationPayload } from '@shared/types/interface.types';
@@ -29,7 +28,6 @@ export class PWAService {
     private swUpdate: SwUpdate,
     private swPush: SwPush,
     private deviceDetector: DeviceDetectorService,
-    private snackSrv: SnackService,
     private crafter: CrafterService
   ) { }
 
@@ -56,7 +54,7 @@ export class PWAService {
                 this.send(
                   this.set(Object.assign({}, WELCOME_PUSH)
               )) : of(null))
-            ).subscribe(_ => !_ ?? this.snackSrv.setSnack(SUB_UPDATED_SENTENCE))
+            ).subscribe(_ => !_ ?? this.crafter.setSnack(SUB_UPDATED_SENTENCE))
         }
       }).catch(_ => console.log(_));
     }, timer);

@@ -1,19 +1,25 @@
+import { Delta } from "quill";
+
 // POST
 export interface Post {
-  _id: string;
-  title: string;
-  category: string;
-  message: string;
-  created: string;
-  author: string;
+  _id?: string;
+  slug?: string;
+  title?: string;
+  category?: string;
+  message?: Delta;
+  created?: string;
+  author?: string;
   image?: string;
   video?: string;
+  status?: DraftStatus;
 }
 
 export interface PostResponse extends ServerResponse {
  posts: Post[];
  post: Post;
  page?: number;
+ drafts?: Post[];
+ draft?: Post;
 }
 
 // DRAFT
@@ -103,4 +109,9 @@ interface NotificationData {
 interface NotificationAction {
   action: string;
   title: string;
+}
+
+export interface KeyPair {
+  key: string;
+  value: any;
 }

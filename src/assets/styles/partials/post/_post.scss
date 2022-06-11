@@ -1,7 +1,7 @@
 $quill-padding: 30px;
 $quill-padding-sm: 20px;
 
-.ql-editor {
+div[quill-editor-element] .ql-editor {
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
   padding: $quill-padding;
@@ -139,13 +139,26 @@ $quill-padding-sm: 20px;
     margin: 14px 0 15px;
     &:last-child { margin-bottom: 0 }
   }
-
-
 }
 
 .ql-container.ql-snow { 
   height: auto;
   overflow-y: auto;
+  // SCROLLBAR
+  &::-webkit-scrollbar { width: 8px; }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px var(--light-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 1px var(--dark-color);
+    background: var(--light-color);
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: var(--text-color);
+  }
 }
 
 .ql-container.ql-snow, 

@@ -1,4 +1,5 @@
 import { IconList } from "@shared/types/interface.types";
+import { Delta } from "quill";
 
 export const EMPTY_QUILL = {
   "ops": [{"insert": "\n"}]

@@ -2,7 +2,7 @@
   <quill-editor [modules]="quillModules"
                 #editor
                 (onContentChanged)="stickyFix()"
-                [(ngModel)]="model"
+                [ngModel]="draft ? draft.message : model"
                 (onEditorCreated)="show = !show"
                 [ngStyle]="{'display': show ? 'block' : 'none'}">
   </quill-editor>
@@ -19,9 +19,13 @@
     </div>
     <div>  <!-- ACTIONS -->
       <i *ngFor="let l of list"
-         [class]="l.icon"
-         [matTooltip]="l.label"
-         (click)="action(l.action)">
+          [class]="l.icon"
+          [matTooltip]="l.label"
+          (click)="action(l.action)">
+      </i>
+      <i class="fas fa-fast-forward"
+         matTooltip="Siguiente"
+         (click)="action('next')">
       </i>
     </div>
   </div>

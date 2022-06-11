@@ -5,7 +5,7 @@ section {
   display: grid;
   grid-template-columns: 1fr;
 
-  & .top-bar {
+  & .wrapper {
     position: relative;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,5 @@
 import { ActionList, DraftList, IconList, Post } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { POST_MESSAGE, POST_MESSAGE_ALONE } from './sentences';
 
 export const CARROUSEL_OPTS: OwlOptions = {
   loop: false,
@@ -27,8 +26,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Home & Living',
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
-    image: '05-img.jpg',
-    message: POST_MESSAGE_ALONE
+    image: '05-img.jpg'
   },
   {
     _id: '2',
@@ -36,8 +34,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Amazing Food',
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    image: '05-img.jpg'
   },
   {
     _id: '3',
@@ -45,8 +42,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    image: '05-img.jpg'
   },
   {
     _id: '4',
@@ -54,8 +50,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
-    image: '05-img.jpg',
-    message: POST_MESSAGE_ALONE
+    image: '05-img.jpg'
   },
   {
     _id: '5',
@@ -63,8 +58,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    image: '05-img.jpg'
   }
 ];
 
@@ -117,10 +111,9 @@ export const DRAFT_LIST: DraftList[] = [
 
 export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
-  { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
+  // { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
-  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' },
-  { icon: 'fas fa-fast-forward', label: 'Siguiente', action: 'next' }
+  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' }
 ];
 
 
