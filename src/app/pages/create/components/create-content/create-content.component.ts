@@ -126,6 +126,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   }
 
   private next(): void {
+    if (!this.draft) { return; }
     this.router.navigate(['form'], {relativeTo: this.route});
   }
 

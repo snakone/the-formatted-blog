@@ -1,37 +1,43 @@
 <app-sticky-aside [selector]="'create-content'">
-  <ul>
     <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
-      <li *ngFor="let d of drafts | paginate: instance; let i = index"
-          (click)="activate(d); row = i"
-          [ngClass]="{'active': active && i === row}">
-          <!-- INPUT TITLE -->
-          <div class="input-field">
-              <i class="fas fa-pencil-alt"
-                 *ngIf="editable || i !== row"
-                 (click)="editable = !editable; input.focus()">
-              </i>
-            <input type="text"
-                   #input 
-                   [(ngModel)]="d!.title"
-                   maxlength="50"
-                   placeholder="Título del boceto"
-                   [readonly]="editable || i !== row"
-                   (focusout)="editable = true; change(d)"/>
-          </div>
-          <p [class]="'date ' + d!.status">
-            {{d.status | draftStatus}} 
-            <span class="tale">|</span> 
-            <span class="created">{{d!.created}}</span>
-          </p>
-      </li>
+      <ul>
+        <li *ngFor="let d of drafts | paginate: instance; let i = index"
+            (click)="activate(d); row = i"
+            [ngClass]="{'active': active && i === row}">
+            <!-- INPUT TITLE -->
+            <div class="input-field">
+                <i class="fas fa-pencil-alt"
+                  *ngIf="editable || i !== row"
+                  (click)="editable = !editable; input.focus()">
+                </i>
+              <input type="text"
+                    #input 
+                    [(ngModel)]="d!.title"
+                    maxlength="50"
+                    placeholder="Título del boceto"
+                    [readonly]="editable || i !== row"
+                    (focusout)="editable = true; change(d)"/>
+            </div>
+            <p [class]="'date ' + d!.status">
+              {{d.status | draftStatus}} 
+              <span class="tale">|</span> 
+              <span class="created">{{d!.created}}</span>
+            </p>
+        </li>
+      </ul>
     </ng-container>
     <ng-template #noDraft>
-      <li>
-        Vaya, parece ser que aún no has escrito nada. Aunque no te preocupes, 
-        en cuánto escribas en el <b>editor</b>, se guardará automáticamente tu <b>primer</b> boceto.
-      </li>
+      <div class="empty">
+        <p>
+          Vaya, parece ser que aún no has escrito nada. Aunque no te preocupes, 
+          en cuánto escribas en el <b>editor</b>, se guardará automáticamente tu <b>primer</b> boceto.
+        </p>
+        <p>
+          Después de tener un <b>mensaje</b> preparado, podrás seleccionar una categoría, 
+          añadir una <b>foto</b> de portada, además de una introducción.
+        </p>
+      </div>
     </ng-template>
-  </ul>
   <app-pagination *ngIf="drafts && drafts!.length > 4" 
                   [instance]="instance">
   </app-pagination>

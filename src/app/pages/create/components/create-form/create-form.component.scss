@@ -41,6 +41,14 @@ form {
     border: 1px solid var(--navigation-border);
     color: var(--text-color);
     cursor: pointer;
+    width: 55px;
+    margin-left: auto;
+
+    &:hover {
+      & i {
+        color: var(--contrast-color);
+      }
+    }
   }
 
   & button[type="submit"] {
