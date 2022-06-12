@@ -9,6 +9,7 @@
   padding: 12px 20px;
   transition: background 666ms ease-in-out;
   &.margin { margin: 18px 0 35px }
+  &.no-button { grid-template-columns: auto; }
 
   & .info {
     margin: auto;

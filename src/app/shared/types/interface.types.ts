@@ -1,20 +1,29 @@
+import { Delta } from "quill";
+
 // POST
 export interface Post {
-  _id: string;
-  title: string;
-  category: string;
-  message: string;
-  created: string;
-  author: string;
-  image?: string;
+  _id?: string;
+  slug?: string;
+  title?: string;
+  category?: string;
+  message?: Delta;
+  created?: string;
+  author?: string;
+  cover?: string;
   video?: string;
+  intro?: string;
+  status?: DraftStatus;
 }
 
 export interface PostResponse extends ServerResponse {
  posts: Post[];
  post: Post;
  page?: number;
+ drafts?: Post[];
+ draft?: Post;
 }
+
+export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
 
 // USER
 export interface User {
@@ -58,6 +67,17 @@ export interface IconList {
   route?: string;
 }
 
+export interface TextList {
+  label: string;
+  key: string;
+}
+
+export interface ActionList {
+  icon: string;
+  label: string;
+  action: string;
+}
+
 // SERVICE WORKER
 export interface SWResponse extends ServerResponse {
   updated?: boolean;
@@ -85,4 +105,9 @@ interface NotificationData {
 interface NotificationAction {
   action: string;
   title: string;
+}
+
+export interface KeyPair {
+  key: string;
+  value: any;
 }

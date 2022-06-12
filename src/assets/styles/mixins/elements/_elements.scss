@@ -23,7 +23,7 @@
 
   @media (max-width: 992px) { font-size: 24px; }
   @media (max-width: 800px) { font-size: 22px; }
-  @media (max-width: 550px) { font-size: 20px; }
+  @media (max-width: 549px) { font-size: 20px; }
   @media (max-width: 475px) { font-size: 16px; }
 }
 
@@ -40,8 +40,7 @@
   transition: all 666ms ease-in-out;
   border: 0;
   text-align: center;
-
-  @media(max-width: 992px) { font-size: 14px; }
+  cursor: pointer;
 
   & span {
     position: relative;
@@ -49,10 +48,7 @@
     font-family: 'Raleway', Arial, Helvetica, sans-serif;
   }
 
-  &:hover {
-    background: var(--contrast-color);
-    cursor: pointer;
-  }
+  &:hover { background: var(--contrast-color) }
 }
 
 // TITLE LINES
@@ -73,4 +69,15 @@
     left: auto;
     right: 100%;
   }
+}
+
+@mixin badge($color, $text:#424242) {
+  padding: 4px 8px;
+  background: $color;
+  color: $text;
+  border: 1px solid var(--navigation-border);
+  margin-right: 16px;
+  transition: all 666ms ease-in-out;
+  border-radius: 3px;
+  font-size: 13px;
 }

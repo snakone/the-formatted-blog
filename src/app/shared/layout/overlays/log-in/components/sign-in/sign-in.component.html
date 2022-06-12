@@ -4,8 +4,8 @@
     <div class="form-control">
       <label for="name">Email</label>
       <input formControlName="email"
-              autocomplete="off"
-              type="email"/>
+             autocomplete="off"
+             type="email"/>
       <app-form-error [control]="email"
                       [validator]="['required', 'email']">
       </app-form-error>
@@ -14,8 +14,8 @@
     <div class="form-control">
       <label for="password">Password</label>
       <input formControlName="password"
-              type="password"
-              autocomplete="off">
+             type="password"
+             autocomplete="off">
       <app-form-error [control]="password"
                       [validator]="['required']">
       </app-form-error>

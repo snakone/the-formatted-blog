@@ -1,4 +1,3 @@
-export { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 export { ProfileContentComponent } from './components/profile-content/profile-content.component';
 export { ProfileSidebarComponent } from './components/profile-sidebar/profile-sidebar.component';
 export { ProfilePostsComponent } from './components/profile-posts/profile-posts.component';

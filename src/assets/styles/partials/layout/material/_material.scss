@@ -8,5 +8,41 @@
 .cdk-overlay-dark-backdrop { background: rgba(0, 0, 0, .82) }
 
 // LOGIN OVERLAY
-.login-overlay 
-.mat-dialog-container { max-width: 361px }
+.login-overlay .mat-dialog-container { max-width: 361px }
+
+.cdk-overlay-pane {
+  overflow: auto;
+  max-height: 80vh;
+
+  & .mat-dialog-container { border-radius: 0 !important }
+  
+  &.preview {
+    overflow: auto;
+    max-width: 65vw !important;
+    height: 80%;
+    @media(max-width: 550px) { max-width: 100vw !important }
+  
+    & .mat-dialog-container {
+      border-radius: 0 !important;
+      & .mat-dialog-content { height: 100% }
+    }
+  }
+
+  &.quill-help {
+    & .mat-dialog-container { padding-right: 32px !important }
+  }
+}
+
+.mat-tooltip {
+  background: var(--dark-color) !important;
+  color: var(--light-color) !important;
+  padding: 2px 8px !important;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 2px !important;
+}
+
+.mat-dialog-actions .mat-button-base + .mat-button-base {
+  background-color: rgba(0,0,0, .2);
+}
+

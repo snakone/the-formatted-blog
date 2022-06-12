@@ -1,6 +1,5 @@
-import { IconList, Post } from '@shared/types/interface.types';
+import { ActionList, IconList, Post, TextList } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { POST_MESSAGE, POST_MESSAGE_ALONE } from './sentences';
 
 export const CARROUSEL_OPTS: OwlOptions = {
   loop: false,
@@ -23,12 +22,11 @@ export const CARROUSEL_OPTS: OwlOptions = {
 export const DUMMY_POST: Post[] = [
   {
     _id: '1',
-    title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
+    title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING.',
     category: 'Home & Living',
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
-    image: '05-img.jpg',
-    message: POST_MESSAGE_ALONE
+    cover: '05-img.jpg'
   },
   {
     _id: '2',
@@ -36,8 +34,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Amazing Food',
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    cover: '05-img.jpg'
   },
   {
     _id: '3',
@@ -45,8 +42,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    cover: '05-img.jpg'
   },
   {
     _id: '4',
@@ -54,8 +50,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
-    image: '05-img.jpg',
-    message: POST_MESSAGE_ALONE
+    cover: '05-img.jpg'
   },
   {
     _id: '5',
@@ -63,15 +58,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
-    image: '05-img.jpg',
-    message: POST_MESSAGE
+    cover: '05-img.jpg'
   }
-];
-
-export const USER_STATS: IconList[] = [
-  { icon: 'fas fa-pencil-alt', label: 'posts' },
-  { icon: 'far fa-heart', label: 'likes' },
-  { icon: 'fas fa-users', label: 'friends' }
 ];
 
 export const USER_INDEX: IconList[] = [
@@ -81,5 +69,35 @@ export const USER_INDEX: IconList[] = [
   { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
   { icon: 'fas fa-cog', label: 'Ajustes', route: 'settings' }
-]
+];
 
+export const CREATE_ACTION_LIST: ActionList[] = [
+  { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
+  // { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
+  { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
+  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'dialog' }
+];
+
+export const SAVE_CONFIRMATION = {
+  title: 'Nuevo...',
+  message: '¿Quieres guardar el boceto actual y crear uno nuevo?'
+};
+
+export const DELETE_CONFIRMATION = {
+  title: 'Eliminar...',
+  message: '¿Estás seguro que quieres eliminar este boceto?'
+};
+
+export const POST_CATEGORIES: TextList[] = [
+  { label: 'Actualidad', key: 'news' },
+  { label: 'Naturaleza', key: 'nature' },
+  { label: 'Cultura', key: 'culture' },
+  { label: 'Ciéncia', key: 'science' },
+  { label: 'Política', key: 'politics' },
+  { label: 'Ingeniería', key: 'engine' },
+  { label: 'Humor', key: 'fun' },
+  { label: 'Internet', key: 'internet' },
+  { label: 'Videojuegos', key: 'games' },
+  { label: 'Filosofía', key: 'filosofy' },
+  { label: 'Otras...', key: 'others' }
+]

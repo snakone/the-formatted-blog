@@ -1,0 +1,11 @@
+<div class="content">  <!-- EDITOR -->
+  <quill-editor [modules]="quillModules"
+                #editor
+                (onContentChanged)="stickyFix()"
+                [ngModel]="draft ? draft.message : model"
+                (onEditorCreated)="show = !show"
+                [ngStyle]="{'display': show ? 'block' : 'none'}">
+  </quill-editor>
+
+  <app-quill-toolbar [draft]="draft"></app-quill-toolbar>
+</div>

@@ -4,8 +4,8 @@ import {
   ViewChild, 
   ElementRef 
 } from '@angular/core';
+import { CrafterService } from '@core/services/crafter/crafter.service';
 
-import { SnackService } from '@core/services/snack/snack.service';
 import { Snack } from '@shared/types/interface.types';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -15,17 +15,17 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./snack.component.scss']
 })
 
-export class SnackComponent implements AfterViewInit {
+export class SnackOverlayComponent implements AfterViewInit {
 
   @ViewChild('snack') el!: ElementRef<any>;
   data!: Snack | null;
   $unsubscribe = new Subject<void>();
   count = 0;
 
-  constructor(private snackSrv: SnackService) { }
+  constructor(private crafter: CrafterService) { }
 
   ngAfterViewInit(): void {
-    this.snackSrv.snack$
+    this.crafter.snack$
     .pipe(takeUntil(this.$unsubscribe))
      .subscribe((res: Snack) => this.removeCSS(res));
   }

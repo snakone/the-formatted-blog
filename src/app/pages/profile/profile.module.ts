@@ -6,7 +6,6 @@ import { ProfileRoutingModule } from './profile.routing';
 import { ProfileComponent } from './profile.component';
 
 import {
-  ProfileHeaderComponent,
   ProfileContentComponent,
   ProfileSidebarComponent,
   ProfilePostsComponent,
@@ -19,7 +18,6 @@ import {
 @NgModule({
   declarations: [
     ProfileComponent,
-    ProfileHeaderComponent,
     ProfileContentComponent,
     ProfileSidebarComponent,
     ProfilePostsComponent,

@@ -16,7 +16,6 @@ import { NavigationEnd, Router } from '@angular/router';
 export class ProfileComponent implements OnInit, OnDestroy {
 
   text = LIKE_TEXT;
-  user$!: Observable<User | null>;
   $unsubscribe = new Subject<void>();
 
   constructor(
@@ -25,7 +24,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.userFcd.user$;
     this.stickyFix();
   }
 
@@ -33,8 +31,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.events
     .pipe(
       filter((event) => event instanceof NavigationEnd && 
-                        event.url.includes('/profile')
-            ),
+                        event.url.includes('/profile')),
       takeUntil(this.$unsubscribe))
     .subscribe(_ => (
       this.scroll(),

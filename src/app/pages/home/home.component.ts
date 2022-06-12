@@ -2,8 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { UserService } from '@core/services/api/users.service';
-import { SnackService } from '@core/services/snack/snack.service';
 import { LOGIN_FIRST_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences';
+import { CrafterService } from '@core/services/crafter/crafter.service';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +19,13 @@ export class HomeComponent {
   constructor(
     private swPush: PWAService,
     private userService: UserService,
-    private snackSrv: SnackService
+    private crafter: CrafterService
   ) { }
 
   public notification(): void {
     this.userService.getUser() ? 
     this.swPush.requestNotification() :
-    this.snackSrv.setSnack(LOGIN_FIRST_SENTENCE, 'warning');
+    this.crafter.setSnack(LOGIN_FIRST_SENTENCE, 'warning');
   }
 
 }

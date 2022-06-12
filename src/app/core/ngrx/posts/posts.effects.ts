@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as PostsActions from './posts.actions';
-import { map, concatMap, catchError, filter } from 'rxjs/operators';
+import { map, concatMap, catchError } from 'rxjs/operators';
 import { PostService } from '@core/services/api/post.service';
 import { PostsFacade } from './posts.facade';
-import { getLoaded } from './posts.selectors';
 
 @Injectable()
 

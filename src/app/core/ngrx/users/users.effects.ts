@@ -6,13 +6,13 @@ import { map, concatMap, catchError, tap } from 'rxjs/operators';
 
 import * as UserActions from './users.actions';
 import { LoginService } from '@services/api/login.service';
-import { SnackService } from '@core/services/snack/snack.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { firstValueFrom } from 'rxjs';
+import { CrafterService } from '@core/services/crafter/crafter.service';
 
 @Injectable()
 
@@ -24,7 +24,7 @@ export class UserEffects {
     private userSrv: UserService,
     private ls: StorageService,
     private router: Router,
-    private snakSrv: SnackService,
+    private crafter: CrafterService,
     private sw: PWAService,
   ) { }
 
@@ -96,7 +96,7 @@ export class UserEffects {
     sw: boolean = false
   ): void {
     if (path) this.router.navigateByUrl(path);
-    this.snakSrv.setSnack(sentence, 'info');
+    this.crafter.setSnack(sentence, 'info');
     if (sw) firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
   }
 

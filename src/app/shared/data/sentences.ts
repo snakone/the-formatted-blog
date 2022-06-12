@@ -19,6 +19,16 @@ export const WRONG_INFO_SENTENCE = 'Los datos no son vválidos.';
 export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';
 export const LOGIN_FIRST_SENTENCE = 'Inicia sesión primero.';
 
+export const QUILL_PLACEHOLDER = `
+Estás frente a un lienzo en blanco. Tu aventura empieza aquí. Utiliza los botones de edición situados en la parte superior para dotar a tu artículo de un fórmato profesional. Tienes todo lo necesario para que tus artículos sean de gran calidad.
+
+Lo que vayas escribiendo se irá guardando automáticamente, así podrás tomarte el tiempo que quieras. Además dispones de una barra de acciones situada en la parte inferior. Si tienes alguna duda utiliza el botón de ayuda "?"
+
+Los artículos que vayas escribiendo apareceran en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y éstos se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo". Cuándo tu boceto sea aprobado, aparecerá junto con los demás artículos en la página. ¡Felicidades!
+
+Por último, muchas gracias por escribir en "The Formatted Blog". ¡Que la inspiración te acompañe!
+`;
+
 export const SKELETON_SENTENCE = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga.'
 
 export const POST_MESSAGE = `<p>

@@ -22,7 +22,7 @@ export class StorageService {
 
   public get(value: string): string | undefined {
     this.loadStorage();
-    if (this.storage[value] === undefined) { return; }
+    if (this.storage[value] === undefined) { return undefined; }
     return this.storage[value];
   }
 

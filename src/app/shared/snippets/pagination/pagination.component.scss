@@ -1,0 +1,60 @@
+@import 'mixins/mixins.scss';
+
+.pagination {
+  @include flex-center();
+  margin-top: 1px;
+  height: 44px;
+  border: 1px solid var(--navigation-border);
+  transition: border 666ms ease-in-out;
+
+  & > div {
+    @include flex-center();
+    width: 25px;
+    opacity: .8;
+    cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+      opacity: .2;
+    }
+
+    & a {
+      color: var(--text-color) !important;
+    }
+
+    &.pagination-back {
+      margin-right: 15px;
+    }
+
+    &.pagination-next {
+      margin-left: 15px;
+    }
+
+    &.pagination-first, 
+    &.pagination-last {
+      width: 20px;
+    }
+  }
+
+  & .pages {
+    position: relative;
+    top: -2px;
+
+    & span {
+      font-weight: bold;
+    }
+
+    &.current span {
+      color: var(--contrast-color);
+    }
+  }
+
+  
+  @media (max-width: 992px) {
+    margin-bottom: 2rem;
+  }
+
+  @media(max-width: 650px) {
+    margin-top: 5rem;
+  }
+}

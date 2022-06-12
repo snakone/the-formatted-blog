@@ -6,7 +6,7 @@
              'last': last
             }">
     <figure>
-      <img [src]="post?.image | image" 
+      <img [src]="post?.cover | image" 
            alt="Post Image"/>
       <!-- HOVER -->
       <div class="inner">
@@ -26,9 +26,14 @@
         <span>{{post?.created}}</span>
       </p>
       <!-- MESSAGE -->
-      <div class="message">
-        <div [innerHTML]="post?.message | shortMessage: alone : small"></div>
-      </div>
+      <ng-container *ngIf="!alone; else isAlone">
+        <div class="message">
+          <div [innerHTML]="post?.message | shortMessage: alone : small"></div>
+        </div>
+      </ng-container>
+      <ng-template #isAlone>
+        <quill-view [content]="post?.message" format="html"></quill-view>
+      </ng-template>
       <!-- BOTTOM -->
       <div class="bottom"
            [ngClass]="{'first': border}">

@@ -19,7 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { UsersFacade } from '@core/ngrx/users/users.facade';
-import { NamePattern } from '@shared/data/patterns';
+import { NAME_PATTERN } from '@shared/data/patterns';
 import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../../log-in.component';
 import { PWAService } from '@core/services/pwa/pwa.service';
@@ -36,7 +36,6 @@ export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
   @Output() login = new EventEmitter<void>();
   matchError = false;
-  namePattern = NamePattern;
   private unsubscribe$ = new Subject<void>();
   
   notify = false;
@@ -59,7 +58,7 @@ export class SignUpComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),
-        Validators.pattern(this.namePattern)
+        Validators.pattern(NAME_PATTERN)
       ]),
       email: new FormControl(null, [
          Validators.required,

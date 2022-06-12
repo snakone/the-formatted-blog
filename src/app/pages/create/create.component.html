@@ -1,1 +1,14 @@
-<p>create works!</p>
+<div class="animated fadeIn">
+  <section class="create-content">
+    <app-section spellcheck="false">
+      <div id="sticky-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      <app-create-sidebar [drafts]="drafts$ | async"
+                          [active]="active$ | async">
+      </app-create-sidebar>
+    </app-section>
+  </section>
+</div>
+
+<app-scroll-top></app-scroll-top>

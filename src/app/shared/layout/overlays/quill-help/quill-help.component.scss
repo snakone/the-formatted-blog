@@ -1,0 +1,40 @@
+section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  & .wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+svg, i {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 14px;
+}
+
+i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ql-toolbar > div > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  & span {
+    font-size: 13px;
+    opacity: .8; 
+  }
+
+  &:last-of-type { margin-bottom: 0; }
+}

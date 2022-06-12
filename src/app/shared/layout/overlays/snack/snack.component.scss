@@ -25,6 +25,7 @@
   &.error { &::after { background: #b40707 }}
   &.warning { &::after { background: #e0bf04 }}
   &.info { &::after { background: #0554ca }}
+  &.success { &::after { background: #05ca15 }}
 
   @media(max-width: 700px) {
     top: 3%;

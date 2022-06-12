@@ -20,7 +20,15 @@
 // CARROUSEL
 .owl-carousel.owl-theme.owl-loaded { z-index: 0 }
 
-button { font-family: 'Raleway', Arial, Helvetica, sans-serif }
+button { 
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+
+  &[disabled] {
+    pointer-events: none;
+    filter: contrast(.5);
+    opacity: .7;
+  }
+}
 
 // SKELETONS
 .skeleton-image svg {
@@ -36,4 +44,20 @@ button { font-family: 'Raleway', Arial, Helvetica, sans-serif }
     black 0%, 
     transparent 100%
   ) !important;
+}
+
+.is-affixed .profile-list {
+  margin-top: 0;
+}
+
+.scroll-down .actions {
+  @media(max-width: 700px) {
+    border-top: 1px solid transparent !important;
+  }
+}
+
+// FORMS
+.form-control {
+  margin-bottom: 1.6rem;
+  position: relative;
 }

@@ -1,0 +1,15 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+}
+
+#sticky-wrapper {
+  @include grid-component();
+  padding-right: 40px;
+}
+
+app-create-sidebar {
+  @include grid-child();
+}

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
@@ -7,10 +7,13 @@ import { PipesModule } from './pipes/pipes.module';
   ],
   imports: [
     FormsModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule
   ],
   exports: [
-    FormsModule
+    FormsModule,
+    PipesModule,
+    ReactiveFormsModule
   ]
 })
 

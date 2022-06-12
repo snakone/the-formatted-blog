@@ -1,0 +1,128 @@
+@import 'mixins/mixins.scss';
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-height: 426px;
+
+  & li {
+    padding: 12px;
+    cursor: pointer;
+    border: 1px solid var(--navigation-border);
+    transition: border 666ms ease-in-out;
+    position: relative;
+    margin-top: 1rem;
+
+    &.active {
+      border-right: 2px solid var(--contrast-color) !important;
+    }
+
+    & .input-field {
+      @include flex-center();
+      margin-bottom: 10px;
+      padding-left: 8px;
+
+      & input {
+        font-size: .9rem;
+        display: inline-block;
+        position: relative;
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: transparent;
+        color: var(--dark-color);
+        font-family: 'Raleway', Arial, Helvetica, sans-serif;
+        padding: 6px 12px 6px 0;
+        border: 0;
+        border-bottom: 1px solid transparent;
+        border-radius: 0;
+        transition: all 666ms ease-in-out;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        pointer-events: none;
+  
+        &:not([readonly]) {
+          border-bottom: 1px solid var(--input-focus);
+          pointer-events: all;
+        }
+      }
+
+      & i {
+        margin-right: 18px;
+        opacity: .3 !important;
+        position: relative;
+        top: 1px;
+      }
+    }
+
+    & .date {
+      font-size: .8rem;
+      font-style: italic;
+      transition: color 666ms ease-in-out;
+      padding: 0 7px;
+
+      & .tale {
+        color: var(--contrast-color);
+        padding: 0 12px 0 8px;
+        transition: color 666ms ease-in-out;
+      }
+
+      & .created { color: var(--text-color); }
+      &.seen { color: #364bbe; }
+      &.not-seen { color: #f1ad5e; }
+      &.pending { color: var(--pending-color); }
+      &.correct { color: var(--success-color); }
+    }
+
+    &:first-child { 
+      margin-top: 0;
+    }
+
+    &:hover {
+      background-color: var(--li-hover);
+    }
+
+    @media(max-width: 450px) {
+      margin-top: 0;
+    }
+  }
+
+  @media(max-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    gap: 4%;
+    min-height: initial;
+
+    & li {
+      &:first-child { 
+        margin-top: 1.2rem;
+      }
+    }
+  }
+
+  @media(max-width: 650px) {
+    grid-template-columns: 1fr;
+    margin-bottom: 5rem;
+  }
+}
+
+.empty {
+  @media(max-width: 992px) {
+    margin-top: 1rem;
+    border: 1px solid var(--navigation-border);
+    padding: 30px;
+
+    & p {
+      display: inline;
+    }
+  }
+
+  & p {
+    margin-bottom: 30px;
+    &:last-child { margin-bottom: 0 }
+  }
+}
+

@@ -63,6 +63,18 @@ export class HttpService {
     ));
   }
 
+  public delete<T>(url: string,
+                   body: any | null,
+                   headers?: HttpHeaders,
+                   params?: HttpParams): Observable<T> {
+    return this.http.delete<T>(url, { headers: this.createHeaders(headers), params, body })
+            .pipe(catchError((err: HttpErrorResponse) => {
+              this.onError(err);
+              throw err;
+            }
+    ));
+  }
+
 // tslint:disable-next-line: variable-name
   private createHeaders(_headers?: HttpHeaders): HttpHeaders {
     const contentType = _headers ? (_headers.get(this.type) || this.default) : this.default;
@@ -76,6 +88,6 @@ export class HttpService {
   }
 
   private onError(err: HttpErrorResponse): void {
-    this.error.showError(err);
+    this.error.showHttpError(err);
   }
 }

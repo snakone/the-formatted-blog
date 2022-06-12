@@ -5,7 +5,7 @@
   --shadow-color: #d4d4d4;
   --text-color: #424242;
   --primary-color: #272b41;
-  --input-bg: var(--quote-bg);
+  --input-bg: #fffdbd;
   --contrast-color: #001c9b;
   --border-color: #ebebeb;
   --transparent-bg: rgba(255, 255, 255 , 0.85);
@@ -19,13 +19,17 @@
   --inner-border: #fbfbfb;
   --date-color: #888888;
   --li-hover: #eee8e8;
+  --success-color: #4BB543;
   --skeleton-color: var(--border-color) !important;
+  --input-focus: rgba(0, 0, 0, .2);
+  --pending-color: #9558b7;
 
   // SIZE
-  --app-width: 377px;
+  --app-width: 369px;
   --header-height: 48px;
   --text-slide-width: 228px; // Change textSliderComponent
   --snack-width: 230px;
   --snack-height: 30px;
+  --quill-height: 385px;
 }
 
