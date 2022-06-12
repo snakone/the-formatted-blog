@@ -5,21 +5,26 @@ import { DirectivesModule } from '@shared/directives/directives.module';
 import { TextSliderComponent } from './text-slider/text-slider.component';
 import { FormErrorComponent } from './form-error/form-error.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     TextSliderComponent,
     FormErrorComponent,
-    ScrollTopComponent
+    ScrollTopComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
-    DirectivesModule
+    DirectivesModule,
+    NgxPaginationModule
   ],
   exports: [
     TextSliderComponent,
     FormErrorComponent,
-    ScrollTopComponent
+    ScrollTopComponent,
+    PaginationComponent
   ]
 })
 

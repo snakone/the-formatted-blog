@@ -5,9 +5,9 @@ section {
   @include row();
 }
 
-app-create-content {
+#sticky-wrapper {
   @include grid-component();
-  padding-right: 30px;
+  padding-right: 40px;
 }
 
 app-create-sidebar {

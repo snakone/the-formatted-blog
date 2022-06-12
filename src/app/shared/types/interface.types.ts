@@ -9,8 +9,9 @@ export interface Post {
   message?: Delta;
   created?: string;
   author?: string;
-  image?: string;
+  cover?: string;
   video?: string;
+  intro?: string;
   status?: DraftStatus;
 }
 
@@ -22,17 +23,7 @@ export interface PostResponse extends ServerResponse {
  draft?: Post;
 }
 
-// DRAFT
-export interface DraftList {
-  ref: string;
-  title: string;
-  created: string;
-  status?: DraftStatus;
-  active?: boolean;
-}
-
 export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
-
 
 // USER
 export interface User {
@@ -74,6 +65,11 @@ export interface IconList {
   icon: string;
   label: string;
   route?: string;
+}
+
+export interface TextList {
+  label: string;
+  key: string;
 }
 
 export interface ActionList {

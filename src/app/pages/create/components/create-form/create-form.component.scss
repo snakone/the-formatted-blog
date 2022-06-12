@@ -1,0 +1,78 @@
+@import 'mixins/mixins.scss';
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4%;
+
+  & .select {
+    position: relative;
+
+    &::after {
+      content: '\f078';
+      position: absolute;
+      right: 10px;
+      top: 3px;
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 900;
+      color: black;
+    }
+  }
+
+  & .cover, & .intro {
+    grid-column: 1 / -1;
+  }
+
+  & .intro {
+    margin-bottom: 2.75rem;
+  }
+
+  & textarea {
+    height: 200px;
+    padding: 12px;
+    resize: none;
+  }
+
+  & .back {
+    background-color: transparent;
+    border: 1px solid var(--navigation-border);
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  & button[type="submit"] {
+    @include hover-button();
+    width: 100%;
+    line-height: 16px;
+    padding: 10px;
+    grid-column: 2 / -1;
+    background-color: var(--contrast-color);
+  
+    &:disabled {
+      opacity: .6;
+      pointer-events: none;
+      filter: contrast(0.5);
+    }
+  }
+
+  @media(max-width: 992px) {
+    & .intro {
+      margin-bottom: 3rem;
+    }
+  }
+
+  @media(max-width: 650px) {
+    & .form-control {
+      grid-column: 1 / -1;
+      margin-bottom: 2rem;
+    }
+
+    & .intro {
+      margin-bottom: 3.5rem;
+    }
+  }
+}
+

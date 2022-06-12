@@ -46,6 +46,7 @@
     "highlight.js": "^11.5.1",
     "ngx-device-detector": "^3.0.0",
     "ngx-owl-carousel-o": "^7.0.1",
+    "ngx-pagination": "^6.0.1",
     "ngx-quill": "^16.2.0",
     "ngx-webstorage": "^9.0.0",
     "quill": "~1.3.7",

@@ -1,28 +1,28 @@
-import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy, Input, AfterContentInit } from '@angular/core';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
+import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { Delta } from 'quill';
 
 import { CrafterService } from '@services/crafter/crafter.service';
-import { CREATE_ACTION_LIST } from '@shared/data/data';
-import { EMPTY_QUILL } from '@shared/data/quills';
+import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
+import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
 import { QuillHelpComponent } from '@layout/overlays/quill-help/quill-help.component';
 import { Post } from '@shared/types/interface.types';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-content',
   templateUrl: './create-content.component.html',
-  styleUrls: ['./create-content.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./create-content.component.scss']
 })
 
 export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   @ViewChild('editor', { static: true }) editor!: QuillEditorComponent;
-  @Input() draft: Post;
+  draft: Post;
   
-  saving$ = new BehaviorSubject<boolean>(false);
+  saving = false;
   private unsubscribe$ = new Subject<void>();
   list = CREATE_ACTION_LIST;
   show = false;
@@ -39,41 +39,45 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   quillModules: QuillModules = {
     syntax: true,
     toolbar: {
-      container: [
-        ['bold'],
-        ['blockquote', 'code-block'],
-        [{ 'header': 2 }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        ['undo' , 'redo'],
-        ['link', 'image', 'video'],
-      ],
+      container: QUILL_CONTAINER,
       handlers: {
         'undo': () => this.editor.quillEditor.getModule('history').undo(),
         'redo': () => this.editor.quillEditor.getModule('history').redo(),
       }
     },
-    history: {
-      delay: 2000,
-      userOnly: true
-    },
+    history: { delay: 2000, userOnly: true },
   };
 
   constructor(
     private crafter: CrafterService,
-    private draftsFacade: DraftsFacade
+    private draftsFacade: DraftsFacade,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngAfterContentInit(): void {
+    this.listenEditor();
+    this.getActive();
+  }
+
+  private listenEditor(): void {
     this.editor.onContentChanged
      .pipe(
+       takeUntil(this.unsubscribe$),
        filter(_ => _.source !== 'api'),
-       tap(_ => this.saving$.next(true)),
-       debounceTime(5000),
        distinctUntilChanged(),
-       map(_ => _.content as Delta),
-       takeUntil(this.unsubscribe$)
+       tap(_ => this.saving = true),
+       debounceTime(5000),
+       tap(_ => this.saving = false),
+       map(_ => _.content as Delta)
      )
      .subscribe((message: Delta) => this.onChange(message));
+  }
+
+  private getActive(): void {
+    this.draftsFacade.active$
+    .pipe(takeUntil(this.unsubscribe$))
+     .subscribe(res => this.draft = res);
   }
 
   private onChange(message: Delta): void {
@@ -82,33 +86,29 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
         this.draft = { title: 'Boceto ', message },
         this.draftsFacade.create(this.draft)
       ) :  // UPDATE
-    this.draftsFacade.updateKey(this.draft._id, {key: 'message', value: message});
-    this.saving$.next(false);
+    this.draftsFacade.updateKey(
+      this.draft._id, { key: 'message', value: message }
+    );
   }
 
   public stickyFix(): void {
     window.dispatchEvent(new Event('resize'));
   }
 
-  public action(v: string): void {
-    this.switchObj[v]();
-  }
-
   private new(): void {
     if (!this.draft) { return; }
 
-    const ref = this.crafter.confirmation(
-      'Nuevo...', '¿Quieres guardar el boceto actual y crear uno nuevo?'
-    );
-
-    ref.afterClosed()
-    .pipe(
-     takeUntil(this.unsubscribe$),
-     filter(_ => _ && !!_)
-   ).subscribe(_ => {
-      this.draftsFacade.updateKey(this.draft._id, {key: 'message', value: this.draft.message});
-      this.draftsFacade.activeOff();
-   });
+    this.crafter.confirmation(SAVE_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(_ => _ && !!_)
+      ).subscribe(_ => {
+        this.draftsFacade.updateKey(
+          this.draft._id, { key: 'message', value: this.draft.message }
+        );
+        this.draftsFacade.activeOff();
+    });
   }
 
   private openHelp(): void {
@@ -117,19 +117,16 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   private delete(): void {
     if (!this.draft) { return; }
-    const ref = this.crafter.confirmation(
-      'Eliminar...', '¿Estás seguro que quieres eliminar este boceto?'
-    );
-
-    ref.afterClosed()
-     .pipe(
-      takeUntil(this.unsubscribe$),
-      filter(_ => _ && !!_)
-    ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
+    this.crafter.confirmation(DELETE_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(_ => _ && !!_)
+      ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
   }
 
   private next(): void {
-    console.log('next');
+    this.router.navigate(['form'], {relativeTo: this.route});
   }
 
   ngOnDestroy() {

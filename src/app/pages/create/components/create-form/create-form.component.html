@@ -1,0 +1,58 @@
+<ng-container *ngIf="draftForm">
+  <form [formGroup]="draftForm" (ngSubmit)="submit()" autocomplete="off">
+    <!-- TITLE -->
+    <div class="form-control">
+      <label for="title">Título</label>
+      <input formControlName="title"
+             type="text"/>
+      <app-form-error [control]="title"
+                      [validator]="['required', 'minlength']">
+      </app-form-error>
+    </div>
+    <!-- CATEGORY -->
+    <div class="form-control">
+      <label for="category">Categoría</label>
+      <div class="select">
+        <select formControlName="category">
+          <option *ngFor="let o of categories" 
+                  [value]="o.key">{{o.label}}
+          </option>
+        </select>
+        <app-form-error [control]="category"
+                        [validator]="['required']">
+        </app-form-error>
+      </div>
+    </div>
+    <!-- COVER -->
+    <div class="form-control cover">
+      <label for="cover">URL de la portada (.png .jpg)</label>
+      <input formControlName="cover"
+             type="text"/>
+      <app-form-error [control]="cover"
+                      [validator]="['required', 'pattern']">
+      </app-form-error>
+    </div>
+
+    <!-- INTRO -->
+    <div class="form-control intro">
+      <label for="cover">Introducción</label>
+      <textarea formControlName="intro"></textarea>
+      <app-form-error [control]="intro"
+                      [validator]="['required', 'minlength']">
+      </app-form-error>
+    </div>
+
+    <button class="back"
+            type="button"
+            aria-label="Volver"
+            [routerLink]="['../']">
+      Volver
+    </button>
+
+    <button type="submit"
+            aria-label="Aceptar"
+            [disabled]="draftForm.invalid">
+      Aceptar
+    </button>
+  </form>
+</ng-container>

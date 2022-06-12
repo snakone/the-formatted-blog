@@ -7,6 +7,7 @@ import { QuillModule } from 'ngx-quill';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostCarrouselComponent } from './post-carrousel/post-carrousel.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PostCarrouselComponent } from './post-carrousel/post-carrousel.componen
     RouterModule,
     CarouselModule,
     PipesModule,
-    QuillModule
+    QuillModule,
+    FormsModule
   ],
   exports: [
     PostCardComponent,

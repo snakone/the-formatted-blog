@@ -47,8 +47,7 @@ export class CrafterService {
   }
 
   public confirmation(
-    title: string, 
-    message: string
+    { title, message }: { title: string, message: string }
   ): MatDialogRef<ConfirmationComponent> {
     return this.matDialog.open(ConfirmationComponent, {
       data: { title, message }

@@ -27,7 +27,7 @@ const featureReducer = createReducer(
     {
       ...state,
       loaded: true,
-      drafts: [...state.drafts, ...drafts],
+      drafts,
       error: null,
       full: completed(drafts)
     }
@@ -42,14 +42,6 @@ const featureReducer = createReducer(
     }
   )),
   on(DraftActions.createFailure, (state, { error }) => ({ ...state, error })),
-  // UPDATE DRAFT
-  on(DraftActions.updateSuccess, (state, { draft }) => (
-    {
-      ...state,
-      drafts: [draft, ...state.drafts],
-    }
-  )),
-  on(DraftActions.updateFailure, (state, { error }) => ({ ...state, error })),
   // DELETE DRAFT
   on(DraftActions.deleteSuccess, (state, { id }) => (
     {

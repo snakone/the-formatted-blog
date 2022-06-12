@@ -8,7 +8,7 @@
   </quill-editor>
   <div class="toolbar">  <!-- TOOLBAR -->
     <div>
-      <ng-container *ngIf="saving$ | async; else saved">
+      <ng-container *ngIf="saving; else saved">
         <i class="fas fa-spinner fa-pulse"></i> 
         <span>Guardando...</span>
       </ng-container>
@@ -21,11 +21,11 @@
       <i *ngFor="let l of list"
           [class]="l.icon"
           [matTooltip]="l.label"
-          (click)="action(l.action)">
+          (click)="switchObj[l.action]()">
       </i>
       <i class="fas fa-fast-forward"
          matTooltip="Siguiente"
-         (click)="action('next')">
+         (click)="switchObj.next()">
       </i>
     </div>
   </div>

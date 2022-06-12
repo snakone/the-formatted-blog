@@ -17,14 +17,12 @@ import { Delta } from 'quill';
 export class DraftService {
 
   readonly API_POST = environment.api + 'drafts/';
-  public page = 0;
 
   constructor(private http: HttpService) { }
 
   public get(): Observable<Post[] | undefined> {
-    this.page++;
     return this.http
-      .get<PostResponse>(this.API_POST + '?page=' + this.page)
+      .get<PostResponse>(this.API_POST)
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.drafts)
@@ -75,9 +73,5 @@ export class DraftService {
         map(_ => _.draft)
       )
   }
-
-  public resetPage(): void {
-    this.page = 0;
-  }
-
+  
 }

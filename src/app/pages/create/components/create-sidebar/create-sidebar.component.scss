@@ -4,6 +4,7 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  min-height: 426px;
 
   & li {
     padding: 12px;
@@ -11,10 +12,10 @@ ul {
     border: 1px solid var(--navigation-border);
     transition: border 666ms ease-in-out;
     position: relative;
-    margin-top: 1.2rem;
+    margin-top: 1rem;
 
     &.active {
-      border-left: 1px solid var(--contrast-color) !important;
+      border-right: 2px solid var(--contrast-color) !important;
     }
 
     & .input-field {
@@ -32,7 +33,7 @@ ul {
         background-color: transparent;
         color: var(--dark-color);
         font-family: 'Raleway', Arial, Helvetica, sans-serif;
-        padding: 6px 12px 6px 4px;
+        padding: 6px 12px 6px 0;
         border: 0;
         border-bottom: 1px solid transparent;
         border-radius: 0;
@@ -48,7 +49,7 @@ ul {
       }
 
       & i {
-        margin-right: 16px;
+        margin-right: 18px;
         opacity: .3 !important;
         position: relative;
         top: 1px;
@@ -86,8 +87,10 @@ ul {
   @media(max-width: 992px) {
     display: grid;
     grid-template-columns: repeat(2, 48%);
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
     gap: 4%;
+    min-height: initial;
 
     & li {
       &:first-child { 
@@ -96,8 +99,8 @@ ul {
     }
   }
 
-  @media(max-width: 700px) {
-    display: initial;
-    margin-bottom: 2.5rem;
+  @media(max-width: 650px) {
+    grid-template-columns: 1fr;
+    margin-bottom: 5.5rem;
   }
 }

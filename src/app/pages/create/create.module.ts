@@ -9,19 +9,25 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SnippetsModule } from '@shared/snippets/snippets.module';
 import { DraftsAccessModule } from '@core/ngrx/drafts/data-access/drafts-access.module';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateComponent } from './create.component';
 import { CreateContentComponent } from './components/create-content/create-content.component';
 import { CreateSidebarComponent } from './components/create-sidebar/create-sidebar.component';
+import { CreateFormComponent } from './components/create-form/create-form.component';
+
+import { MatSelectModule } from '@angular/material/select';
 
 const Material = [
-  MatTooltipModule
+  MatTooltipModule,
+  MatSelectModule
 ];
 
 @NgModule({
   declarations: [
     CreateComponent,
     CreateContentComponent,
-    CreateSidebarComponent
+    CreateSidebarComponent,
+    CreateFormComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +37,7 @@ const Material = [
     SharedModule,
     SnippetsModule,
     DraftsAccessModule,
+    NgxPaginationModule,
     ...Material
   ]
 })

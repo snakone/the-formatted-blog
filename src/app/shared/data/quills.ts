@@ -1,4 +1,5 @@
 import { IconList } from "@shared/types/interface.types";
+import { QuillToolbarConfig } from "ngx-quill";
 import { Delta } from "quill";
 
 export const EMPTY_QUILL = {
@@ -17,6 +18,15 @@ export const QUILL_HELP_TOP_BAR: IconList[] = [
   { icon: '', label: 'Insertar enlace' },
   { icon: '', label: 'Insertar imagen' },
   { icon: '', label: 'Insertar vídeo' },
+];
+
+export const QUILL_CONTAINER: string | string[] | QuillToolbarConfig = [
+  ['bold'],
+  ['blockquote', 'code-block'],
+  [{ 'header': 2 }],
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  ['undo' , 'redo'],
+  ['link', 'image', 'video'],
 ];
 
 

@@ -119,4 +119,23 @@ export class DraftsEffects {
     ), { dispatch: false }
   )
 
+  alertsDraft2Effect$ = createEffect(() => this.actions
+  .pipe(
+    ofType(DraftsActions.updateSuccess),
+    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+  ), { dispatch: false }
+)
+
+  onDraftUpdateEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        DraftsActions.updateSuccess,
+        DraftsActions.updateKeySuccess,
+      ]),
+      concatMap((_) => of(DraftsActions.getByUser())),
+      catchError(error =>
+        of(DraftsActions.deleteFailure({ error: error.message }))
+      ))
+  )
+
 }

@@ -1,4 +1,4 @@
-import { ActionList, DraftList, IconList, Post } from '@shared/types/interface.types';
+import { ActionList, IconList, Post, TextList } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export const CARROUSEL_OPTS: OwlOptions = {
@@ -26,7 +26,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Home & Living',
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
-    image: '05-img.jpg'
+    cover: '05-img.jpg'
   },
   {
     _id: '2',
@@ -34,7 +34,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Amazing Food',
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
-    image: '05-img.jpg'
+    cover: '05-img.jpg'
   },
   {
     _id: '3',
@@ -42,7 +42,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
-    image: '05-img.jpg'
+    cover: '05-img.jpg'
   },
   {
     _id: '4',
@@ -50,7 +50,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
-    image: '05-img.jpg'
+    cover: '05-img.jpg'
   },
   {
     _id: '5',
@@ -58,7 +58,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
-    image: '05-img.jpg'
+    cover: '05-img.jpg'
   }
 ];
 
@@ -71,44 +71,6 @@ export const USER_INDEX: IconList[] = [
   { icon: 'fas fa-cog', label: 'Ajustes', route: 'settings' }
 ];
 
-export const DRAFT_LIST: DraftList[] = [
-  { 
-    ref: 'Boceto 1', 
-    title: 'Lorem ipsum dolor sit amet duaron. Lorem ipsum dolor sit amet duaron.', 
-    created: '2:32pm',
-    status: 'correct',
-    active: false
-  },
-  { 
-    ref: 'Boceto 2', 
-    title: 'Lorem ipsum dolor sit amet duaron. Lorem ipsum dolor sit amet duaron.', 
-    created: '2:32pm',
-    status: 'not-seen',
-    active: false
-  },
-  { 
-    ref: 'Boceto 3', 
-    title: 'Lorem ipsum dolor sit amet duaron.', 
-    created: 'hace 2 días',
-    status: 'pending',
-    active: false
-  },
-  { 
-    ref: 'Boceto 4', 
-    title: 'Lorem ipsum dolor amet duaron.', 
-    created: '5:32pm',
-    status: 'correct',
-    active: false
-  },
-  { 
-    ref: 'Boceto 5', 
-    title: 'Lorem ipsum dolor sit amet duaron.', 
-    created: '2:32pm',
-    status: 'seen',
-    active: false
-  },
-];
-
 export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
   // { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
@@ -116,4 +78,26 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' }
 ];
 
+export const SAVE_CONFIRMATION = {
+  title: 'Nuevo...',
+  message: '¿Quieres guardar el boceto actual y crear uno nuevo?'
+};
 
+export const DELETE_CONFIRMATION = {
+  title: 'Eliminar...',
+  message: '¿Estás seguro que quieres eliminar este boceto?'
+};
+
+export const POST_CATEGORIES: TextList[] = [
+  { label: 'Actualidad', key: 'news' },
+  { label: 'Naturaleza', key: 'nature' },
+  { label: 'Cultura', key: 'culture' },
+  { label: 'Ciéncia', key: 'science' },
+  { label: 'Política', key: 'politics' },
+  { label: 'Ingeniería', key: 'engine' },
+  { label: 'Humor', key: 'fun' },
+  { label: 'Internet', key: 'internet' },
+  { label: 'Videojuegos', key: 'games' },
+  { label: 'Filosofía', key: 'filosofy' },
+  { label: 'Otras...', key: 'others' }
+]

@@ -1,7 +1,7 @@
 <app-sticky-aside [selector]="'create-content'">
   <ul>
     <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
-      <li *ngFor="let d of drafts.slice(0, 4); let i = index"
+      <li *ngFor="let d of drafts | paginate: instance; let i = index"
           (click)="activate(d); row = i"
           [ngClass]="{'active': active && i === row}">
           <!-- INPUT TITLE -->
@@ -32,6 +32,9 @@
       </li>
     </ng-template>
   </ul>
+  <app-pagination *ngIf="drafts && drafts!.length > 4" 
+                  [instance]="instance">
+  </app-pagination>
 </app-sticky-aside>
 
 
