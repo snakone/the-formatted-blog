@@ -31,39 +31,9 @@ form {
   }
 
   & textarea {
-    height: 200px;
+    height: 195px;
     padding: 12px;
     resize: none;
-  }
-
-  & .back {
-    background-color: transparent;
-    border: 1px solid var(--navigation-border);
-    color: var(--text-color);
-    cursor: pointer;
-    width: 55px;
-    margin-left: auto;
-
-    &:hover {
-      & i {
-        color: var(--contrast-color);
-      }
-    }
-  }
-
-  & button[type="submit"] {
-    @include hover-button();
-    width: 100%;
-    line-height: 16px;
-    padding: 10px;
-    grid-column: 2 / -1;
-    background-color: var(--contrast-color);
-  
-    &:disabled {
-      opacity: .6;
-      pointer-events: none;
-      filter: contrast(0.5);
-    }
   }
 
   @media(max-width: 992px) {
@@ -83,4 +53,14 @@ form {
     }
   }
 }
+
+.form-control {
+  & label {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+  }
+}
+
+
 

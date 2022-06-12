@@ -6,27 +6,6 @@
                 (onEditorCreated)="show = !show"
                 [ngStyle]="{'display': show ? 'block' : 'none'}">
   </quill-editor>
-  <div class="toolbar">  <!-- TOOLBAR -->
-    <div>
-      <ng-container *ngIf="saving; else saved">
-        <i class="fas fa-spinner fa-pulse"></i> 
-        <span>Guardando...</span>
-      </ng-container>
-      <ng-template #saved>
-        <i class="fas fa-check"></i>
-        <span>Guardado</span>
-      </ng-template>
-    </div>
-    <div>  <!-- ACTIONS -->
-      <i *ngFor="let l of list"
-          [class]="l.icon"
-          [matTooltip]="l.label"
-          (click)="switchObj[l.action]()">
-      </i>
-      <i class="fas fa-fast-forward"
-         matTooltip="Siguiente"
-         (click)="switchObj.next()">
-      </i>
-    </div>
-  </div>
+
+  <app-quill-toolbar [draft]="draft"></app-quill-toolbar>
 </div>

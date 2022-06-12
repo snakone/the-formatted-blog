@@ -3,13 +3,9 @@ import { debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, ta
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { Delta } from 'quill';
 
-import { CrafterService } from '@services/crafter/crafter.service';
-import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
-import { QuillHelpComponent } from '@layout/overlays/quill-help/quill-help.component';
 import { Post } from '@shared/types/interface.types';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 
 @Component({
   selector: 'app-create-content',
@@ -21,20 +17,9 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   @ViewChild('editor', { static: true }) editor!: QuillEditorComponent;
   draft: Post;
-  
-  saving = false;
   private unsubscribe$ = new Subject<void>();
-  list = CREATE_ACTION_LIST;
   show = false;
-
   model = EMPTY_QUILL as Delta;
-
-  switchObj: any = {
-    new: () => this.new(),
-    delete: () => this.delete(),
-    help: () => this.openHelp(),
-    next: () => this.next()
-  };
 
   quillModules: QuillModules = {
     syntax: true,
@@ -48,12 +33,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     history: { delay: 2000, userOnly: true },
   };
 
-  constructor(
-    private crafter: CrafterService,
-    private draftsFacade: DraftsFacade,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private draftsFacade: DraftsFacade) { }
 
   ngAfterContentInit(): void {
     this.listenEditor();
@@ -66,9 +46,9 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        takeUntil(this.unsubscribe$),
        filter(_ => _.source !== 'api'),
        distinctUntilChanged(),
-       tap(_ => this.saving = true),
+       tap(_ => this.draftsFacade.setSaving(true)),
        debounceTime(5000),
-       tap(_ => this.saving = false),
+       tap(_ => this.draftsFacade.setSaving(false)),
        map(_ => _.content as Delta)
      )
      .subscribe((message: Delta) => this.onChange(message));
@@ -93,41 +73,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   public stickyFix(): void {
     window.dispatchEvent(new Event('resize'));
-  }
-
-  private new(): void {
-    if (!this.draft) { return; }
-
-    this.crafter.confirmation(SAVE_CONFIRMATION)
-    .afterClosed()
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => {
-        this.draftsFacade.updateKey(
-          this.draft._id, { key: 'message', value: this.draft.message }
-        );
-        this.draftsFacade.activeOff();
-    });
-  }
-
-  private openHelp(): void {
-    this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
-  }
-
-  private delete(): void {
-    if (!this.draft) { return; }
-    this.crafter.confirmation(DELETE_CONFIRMATION)
-    .afterClosed()
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
-  }
-
-  private next(): void {
-    if (!this.draft) { return; }
-    this.router.navigate(['form'], {relativeTo: this.route});
   }
 
   ngOnDestroy() {

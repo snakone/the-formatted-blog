@@ -7,24 +7,35 @@ import { FormErrorComponent } from './form-error/form-error.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+
+const Material = [
+  MatTooltipModule
+];
 
 @NgModule({
   declarations: [
     TextSliderComponent,
     FormErrorComponent,
     ScrollTopComponent,
-    PaginationComponent
+    PaginationComponent,
+    QuillToolbarComponent
   ],
   imports: [
     CommonModule,
     DirectivesModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RouterModule,
+    ...Material
   ],
   exports: [
     TextSliderComponent,
     FormErrorComponent,
     ScrollTopComponent,
-    PaginationComponent
+    PaginationComponent,
+    QuillToolbarComponent
   ]
 })
 

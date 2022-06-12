@@ -1,5 +1,5 @@
 <ng-container *ngIf="draftForm">
-  <form [formGroup]="draftForm" (ngSubmit)="submit()" autocomplete="off">
+  <form [formGroup]="draftForm" autocomplete="off">
     <!-- TITLE -->
     <div class="form-control">
       <label for="title">Título</label>
@@ -38,22 +38,12 @@
       <label for="cover">Introducción</label>
       <textarea formControlName="intro"></textarea>
       <app-form-error [control]="intro"
-                      [validator]="['required', 'minlength']">
+                      [validator]="['required', 'minlength', 'maxlength']">
       </app-form-error>
     </div>
-
-    <button class="back"
-            type="button"
-            aria-label="Volver"
-            [routerLink]="['../']"
-            matTooltip="Atrás">
-       <i class="fas fa-fast-backward"></i>
-    </button>
-
-    <button type="submit"
-            aria-label="Aceptar"
-            [disabled]="draftForm.invalid">
-      Aceptar
-    </button>
   </form>
+
+  <app-quill-toolbar [draft]="draft" 
+                     [form]="true">
+  </app-quill-toolbar>
 </ng-container>

@@ -33,7 +33,7 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
     this.draftsFacade.setActive(draft);
 
     if (document.body.clientWidth <= 642) {
-      window.scrollTo({top: 48, behavior: 'smooth'});
+      window.scrollTo({top: 0, behavior: 'smooth'});
     }
   }
 

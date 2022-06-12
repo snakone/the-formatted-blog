@@ -60,11 +60,4 @@ button {
 .form-control {
   margin-bottom: 1.6rem;
   position: relative;
-
-  & label {
-    display: inline-block;
-    margin-bottom: 1px;
-    position: relative;
-    top: -5px;
-  }
 }

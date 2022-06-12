@@ -28,6 +28,10 @@ div[quill-editor-element] .ql-editor {
     padding-bottom: $quill-padding !important;
   }
 
+  @media(max-width: 992px) {
+    min-height: 389px;
+  }
+
   @media(max-width: 550px) {
     padding: 23px $quill-padding-sm;
 

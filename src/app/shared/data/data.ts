@@ -75,7 +75,7 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
   // { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
-  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' }
+  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'dialog' }
 ];
 
 export const SAVE_CONFIRMATION = {

@@ -6,8 +6,7 @@ export interface DraftsState {
   drafts: Post[];
   loaded: boolean;
   active: Post;
-  activeLoaded: boolean;
-  full: boolean;
+  saving: boolean;
   error: string | null;
 }
 
@@ -15,8 +14,7 @@ export const inititalState: DraftsState = {
   drafts: [],
   loaded: false,
   active: null,
-  activeLoaded: false,
-  full: false,
+  saving: false,
   error: null,
 };
 
@@ -28,8 +26,7 @@ const featureReducer = createReducer(
       ...state,
       loaded: true,
       drafts,
-      error: null,
-      full: completed(drafts)
+      error: null
     }
   )),
   on(DraftActions.getByUserFailure, (state, { error }) => ({ ...state, error })),
@@ -53,6 +50,7 @@ const featureReducer = createReducer(
   // SET ACTIVE
   on(DraftActions.setActive, (state, { draft }) => ({ ...state, active: draft})),
   on(DraftActions.activeOff, (state) => ({ ...state, active: null})),
+  on(DraftActions.setSaving, (state, { value }) => ({ ...state, saving: value})),
   // RESET
   on(DraftActions.reset, (state) => (
     {
@@ -60,7 +58,6 @@ const featureReducer = createReducer(
       loaded: false,
       error: null,
       drafts: [],
-      full: false
     }
   ))
 );
@@ -71,10 +68,6 @@ export function reducer(state: DraftsState | undefined, action: Action) {
 
 export const getDrafts = (state: DraftsState) => state.drafts;
 export const getDraftsLoaded = (state: DraftsState) => state.loaded;
-export const getFull = (state: DraftsState) => state.full;
 export const getActive = (state: DraftsState) => state.active;
+export const getSaving = (state: DraftsState) => state.saving;
 
-
-function completed(posts: Post[]): boolean {
-  return posts.length === 0;
-}

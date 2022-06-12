@@ -47,7 +47,7 @@
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 0;
     height: 100%;
 
     &[disabled] { opacity: .3; }

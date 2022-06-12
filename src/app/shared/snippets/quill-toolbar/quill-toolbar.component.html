@@ -1,0 +1,30 @@
+<div class="toolbar"
+     [ngClass]="{'form': form}">  <!-- TOOLBAR -->
+  <div>
+    <ng-container *ngIf="(saving$ | async); else saved">
+      <i class="fas fa-spinner fa-pulse"></i> 
+      <span>Guardando...</span>
+    </ng-container>
+    <ng-template #saved>
+      <i class="fas fa-check"></i>
+      <span>Guardado</span>
+    </ng-template>
+  </div>
+  <div>  <!-- ACTIONS -->
+    <i *ngFor="let l of list"
+        [class]="l.icon"
+        [matTooltip]="l.label"
+        (click)="switchObj[l.action]()">
+    </i>
+    <i class="fas fa-fast-forward"
+       matTooltip="Siguiente"
+       (click)="switchObj.next()"
+       *ngIf="!form">
+    </i>
+    <i class="fas fa-fast-backward"
+       matTooltip="Atrás"
+       [routerLink]="['../']"
+       *ngIf="form">
+    </i>
+  </div>
+</div>

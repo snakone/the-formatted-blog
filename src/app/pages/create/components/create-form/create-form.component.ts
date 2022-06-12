@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
+
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { POST_CATEGORIES } from '@shared/data/data';
 import { IMAGE_PATTERN } from '@shared/data/patterns';
 import { Post } from '@shared/types/interface.types';
-import { filter, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-create-form',
@@ -32,6 +33,7 @@ export class CreateFormComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getActive();
+    this.listenValues();
   }
 
   private getActive(): void {
@@ -41,10 +43,7 @@ export class CreateFormComponent implements OnInit {
         filter(_ => _ && !!_),
         tap(draft => this.draft = draft),
       )
-      .subscribe(draft => {
-        this.draftForm.patchValue({...draft});
-        this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}))
-      });
+    .subscribe(draft => this.patchForm(draft));
   }
 
   private createForm(): void {
@@ -60,12 +59,33 @@ export class CreateFormComponent implements OnInit {
       ]),
       intro: new FormControl(null, [
         Validators.required,
-        Validators.minLength(100)
+        Validators.minLength(150),
+        Validators.maxLength(500)
       ]),
     });
   }
 
+  private listenValues(): void {
+    this.draftForm.valueChanges
+     .pipe(
+       takeUntil(this.unsubscribe$),
+       filter(_ => this.draftForm.valid && !this.draftForm.pristine),
+       distinctUntilChanged(),
+       tap(_ => this.draftsFacade.setSaving(true)),
+       debounceTime(5000),
+       tap(_ => this.draftsFacade.setSaving(false))
+    )
+     .subscribe(_ => this.submit());
+  }
+
+  private patchForm(draft: Post): void {
+    this.draftForm.markAsPristine();
+    this.draftForm.patchValue({...draft});
+    this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
+  }
+
   public submit(): void {
+    if (this.draftForm.invalid) { return; }
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
     this.draftsFacade.update(draft);

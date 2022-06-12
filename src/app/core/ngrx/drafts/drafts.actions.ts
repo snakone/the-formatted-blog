@@ -84,6 +84,11 @@ export const setActive =
   createAction('[Drafts API] Set Active Draft',
   props<{ draft: Post }>());
 
+// SET SAVING
+export const setSaving =
+  createAction('[Drafts API] Set Draft Saving',
+  props<{ value: boolean }>());
+
 // ACTIVE OFF
 export const activeOff =
   createAction('[Drafts API] Set Active Off Draft');

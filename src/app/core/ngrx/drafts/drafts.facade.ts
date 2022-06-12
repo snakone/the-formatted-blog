@@ -13,8 +13,8 @@ export class DraftsFacade {
 
   drafts$ = this.store.select(fromDrafts.get);
   loaded$ = this.store.select(fromDrafts.getLoaded);
-  getFull$ = this.store.select(fromDrafts.getFull);
   active$ = this.store.select(fromDrafts.getActive);
+  saving$ = this.store.select(fromDrafts.getSaving);
 
   constructor(private store: Store<DraftsState>) { }
 
@@ -44,6 +44,10 @@ export class DraftsFacade {
 
   public setActive(draft: Post): void {
     this.store.dispatch(DraftActions.setActive({draft}));
+  }
+
+  public setSaving(value: boolean): void {
+    this.store.dispatch(DraftActions.setSaving({value}));
   }
 
   public activeOff(): void {

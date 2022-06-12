@@ -2,7 +2,8 @@
 
 .pagination {
   @include flex-center();
-  height: 45px;
+  margin-top: 1px;
+  height: 44px;
   border: 1px solid var(--navigation-border);
   transition: border 666ms ease-in-out;
 
