@@ -29,8 +29,6 @@ Los artículos que vayas escribiendo apareceran en la lista de "Bocetos". Puedes
 Por último, muchas gracias por escribir en "The Formatted Blog". ¡Que la inspiración te acompañe!
 `;
 
-export const SKELETON_SENTENCE = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga. Tempora facere aspernatur reiciendis odio harum doloremque inventore expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit officiis, magnam laboriosam nemo, soluta consectetur quos nam asperiores reprehenderit unde fuga.'
-
 export const POST_MESSAGE = `<p>
 Sed quis sollicitudin eros, non lobortis purus. Ut enim lacus, efficitur non blandit ac,
 sollicitudin vel nibh. Aenean rhoncus pharetra ex. Sed facilisis interdum nunc, et
