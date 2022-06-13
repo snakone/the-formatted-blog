@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, filter, tap } from 'rxjs/operators';
+
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-
-import {
-  User,
-  UserResponse
- } from '@shared/types/interface.types';
-
+import { User, UserResponse } from '@shared/types/interface.types';
 import { StorageService } from '@services/storage/storage.service';
-import { map, filter, tap } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 

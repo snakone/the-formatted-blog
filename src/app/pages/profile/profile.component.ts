@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     .pipe(
       filter((event) => event instanceof NavigationEnd && 
                         event.url.includes('/profile')),
-      takeUntil(this.$unsubscribe))
+      takeUntil(this.$unsubscribe)
+    )
     .subscribe(_ => (
       this.scroll(),
       setTimeout(() => window.dispatchEvent(new Event('resize')), 200)

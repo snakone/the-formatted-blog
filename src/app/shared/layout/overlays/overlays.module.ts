@@ -9,6 +9,7 @@ import { SnackOverlayComponent } from './snack/snack.component';
 import { PushDeniedOverlayComponent } from './push-denied/push-denied.component';
 import { QuillHelpComponent } from './quill-help/quill-help.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DraftPreviewComponent } from './draft-preview/draft-preview.component';
 
 const Material = [
   MatDialogModule,
@@ -20,7 +21,8 @@ const Material = [
     SnackOverlayComponent,
     PushDeniedOverlayComponent,
     QuillHelpComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    DraftPreviewComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ const Material = [
     SnackOverlayComponent,
     PushDeniedOverlayComponent,
     QuillHelpComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    DraftPreviewComponent
   ]
 })
 

@@ -20,8 +20,7 @@ export class HomeContentComponent implements OnInit {
   constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
-    this.checkData();
-    // this.posts$ = this.postFacade.posts$;
+    // this.checkData();
     this.posts$ = of(DUMMY_POST);
   }
 

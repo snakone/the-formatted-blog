@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
 
 @Component({
@@ -7,12 +7,11 @@ import { PaginationInstance } from 'ngx-pagination';
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginationComponent implements OnInit {
+
+export class PaginationComponent {
   
   @Input() instance: PaginationInstance;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

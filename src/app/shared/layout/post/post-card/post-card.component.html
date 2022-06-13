@@ -6,29 +6,37 @@
              'last': last
             }">
     <figure>
-      <img [src]="post?.cover | image" 
-           alt="Post Image"/>
+      <img [src]="!draft ? (post?.cover | image) : post.cover" 
+           alt="Post Image"
+           #img (error)="img.src = 'assets/images/placeholder.png'"/>
       <!-- HOVER -->
-      <div class="inner">
-        <div class="content">
-          <span><i class="fas fa-link"></i></span>
-          <span [routerLink]="'/post'">
-            <i [class]="alone ? 'far fa-heart' : 'fas fa-search'"></i>
-          </span>
+      <ng-container *ngIf="!draft">
+        <div class="inner">
+          <div class="content">
+            <span><i class="fas fa-link"></i></span>
+            <span [routerLink]="'/post'">
+              <i [class]="alone ? 'far fa-heart' : 'fas fa-search'"></i>
+            </span>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </figure>
     <!-- CONTENT -->
     <div class="main-content">
       <p class="category">{{post?.category}}</p>
       <h3>{{post?.title}}</h3>
       <p class="date">
+         <!-- DRAFT STATUS -->
+        <ng-container *ngIf="draft"> 
+          <span [class]="post.status">{{post.status | draftStatus}} </span>
+          <span class="tale">-</span>
+        </ng-container>
         <span>{{post?.created}}</span>
       </p>
       <!-- MESSAGE -->
       <ng-container *ngIf="!alone; else isAlone">
         <div class="message">
-          <div [innerHTML]="post?.message | shortMessage: alone : small"></div>
+          <div [innerHTML]="post?.intro | shortMessage: alone : small"></div>
         </div>
       </ng-container>
       <ng-template #isAlone>
@@ -39,9 +47,19 @@
            [ngClass]="{'first': border}">
         <span class="author">{{post?.author}}</span>
         <ul>
-          <li *ngFor="let i of icons">
-            <i [class]="i"></i>
-          </li>
+          <ng-container *ngIf="!draft; else draftIcon">
+            <li *ngFor="let i of postIcons">
+              <i [class]="i"></i>
+            </li>
+          </ng-container>
+          <ng-template #draftIcon>
+            <li *ngFor="let i of draftIcons"
+                (click)="switchObj[i.action]()">
+              <i [class]="i.icon"
+                 [matTooltip]="i.label">
+              </i>
+            </li>
+          </ng-template>
         </ul>
       </div>
     </div>

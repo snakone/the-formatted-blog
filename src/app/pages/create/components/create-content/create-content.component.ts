@@ -38,6 +38,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   ngAfterContentInit(): void {
     this.listenEditor();
     this.getActive();
+    // console.log(this.editor.quillEditor.root.innerHTML);
   }
 
   private listenEditor(): void {

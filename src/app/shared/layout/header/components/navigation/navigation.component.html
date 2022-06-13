@@ -1,11 +1,11 @@
 <nav (pan)="panned($event)">
   <div class="indicators">
     <i class="fas fa-angle-left animated fadeIn next"
-      *ngIf="total <= 900 && total >= 40"
+      *ngIf="t <= 900 && t >= 40"
       (click)="move(false)">
     </i>
     <i class="fas fa-angle-right animated fadeIn prev"
-      *ngIf="total <= 600"
+      *ngIf="t <= 600"
       (click)="move(true)">
     </i>
   </div>

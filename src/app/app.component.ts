@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { PWAService } from '@services/pwa/pwa.service';
 import { StorageService } from '@services/storage/storage.service';
+import { QuillService } from 'ngx-quill';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   constructor(
     private ls: StorageService,
     private pwa: PWAService,
-    private userFcd: UsersFacade
+    private userFcd: UsersFacade,
+    private quill: QuillService
   ) {
     this.checkTheme();
     this.checkToken();

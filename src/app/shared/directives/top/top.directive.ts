@@ -7,9 +7,9 @@ import { Subject, fromEvent } from 'rxjs';
 export class TopDirective implements AfterViewInit, OnDestroy {
 
   displayed = false;
-  button = this.el.nativeElement;
+  b = this.el.nativeElement;  // Button
+  limit = 800;
   private unsubscribe$ = new Subject<void>();
-  scrollLimit = 800;
 
   constructor(private el: ElementRef) { }
 
@@ -30,22 +30,22 @@ export class TopDirective implements AfterViewInit, OnDestroy {
   private onScroll(): void {
     try {
       const scroll = document.documentElement?.scrollTop || 0;
-      if (scroll > this.scrollLimit && this.displayed) { return; }
-      if (scroll < this.scrollLimit && !this.displayed) { return; }
-      this.manageCSS(scroll > this.scrollLimit)
+      if (scroll > this.limit && this.displayed) { return; }
+      if (scroll < this.limit && !this.displayed) { return; }
+      this.manageCSS(scroll > this.limit)
     } catch (err) { console.log(err); }
   }
 
   private manageCSS(scrolled: boolean): void {
     if (scrolled) {
-        this.button.style.display = 'block';
+        this.b.style.display = 'block';
         this.displayed = true;
-        this.button.classList.remove('fadeOutRight');
-        this.button.classList.add('fadeInRight');
+        this.b.classList.remove('fadeOutRight');
+        this.b.classList.add('fadeInRight');
     } else { 
         this.displayed = false;
-        this.button.classList.remove('fadeInRight');
-        this.button.classList.add('fadeOutRight');
+        this.b.classList.remove('fadeInRight');
+        this.b.classList.add('fadeOutRight');
     }
   }
 

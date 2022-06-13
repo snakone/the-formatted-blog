@@ -20,12 +20,6 @@ export class CreateFormComponent implements OnInit {
   categories = POST_CATEGORIES;
   url: string;
   draft: Post;
-
-  get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }
-  get category(): AbstractControl { return this.draftForm.get('category') as AbstractControl; }
-  get cover(): AbstractControl { return this.draftForm.get('cover') as AbstractControl; }
-  get intro(): AbstractControl { return this.draftForm.get('intro') as AbstractControl; }
-
   controls = ['title', 'category', 'cover', 'intro'];
 
   constructor(private draftsFacade: DraftsFacade) { }
@@ -79,9 +73,9 @@ export class CreateFormComponent implements OnInit {
   }
 
   private patchForm(draft: Post): void {
-    this.draftForm.markAsPristine();
     this.draftForm.patchValue({...draft});
     this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
+    this.draftForm.markAsPristine();
   }
 
   public submit(): void {
@@ -90,5 +84,10 @@ export class CreateFormComponent implements OnInit {
     const draft: Post = {...this.draft, ...values};
     this.draftsFacade.update(draft);
   }
+
+  get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }
+  get category(): AbstractControl { return this.draftForm.get('category') as AbstractControl; }
+  get cover(): AbstractControl { return this.draftForm.get('cover') as AbstractControl; }
+  get intro(): AbstractControl { return this.draftForm.get('intro') as AbstractControl; }
 
 }

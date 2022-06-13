@@ -21,12 +21,9 @@ import { LogInOverlayComponent } from '../../log-in.component';
 
 export class SignInComponent implements OnInit {
 
+  @Output() register = new EventEmitter<void>();
   signInForm!: FormGroup;
   remember = false;
-  @Output() register = new EventEmitter<void>();
-
-  get email(): AbstractControl { return this.signInForm.get('email') as AbstractControl; }
-  get password(): AbstractControl { return this.signInForm.get('password') as AbstractControl; }
 
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
@@ -63,5 +60,8 @@ export class SignInComponent implements OnInit {
   public recover(): void {
     this.dialogRef.close();
   }
+
+  get email(): AbstractControl { return this.signInForm.get('email') as AbstractControl; }
+  get password(): AbstractControl { return this.signInForm.get('password') as AbstractControl; }
 
 }

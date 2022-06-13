@@ -13,6 +13,7 @@ export interface Post {
   video?: string;
   intro?: string;
   status?: DraftStatus;
+  active?: boolean;
 }
 
 export interface PostResponse extends ServerResponse {
@@ -63,7 +64,7 @@ export interface Snack {
 // LIST
 export interface IconList {
   icon: string;
-  label: string;
+  label?: string;
   route?: string;
 }
 

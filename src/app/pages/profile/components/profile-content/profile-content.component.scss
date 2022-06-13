@@ -1,1 +1,12 @@
-p { margin-bottom: 30px; }
+.wrapper {
+  padding: 10px;
+
+  & p { 
+    margin-bottom: 30px;
+    &:last-child { margin-bottom: 0 }
+  }
+
+  @media(max-width: 992px) {
+    margin-bottom: 1rem;
+  }
+}

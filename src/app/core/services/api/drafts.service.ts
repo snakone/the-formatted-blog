@@ -10,7 +10,6 @@ import {
 } from '@shared/types/interface.types';
 
 import { filter, map } from 'rxjs/operators';
-import { Delta } from 'quill';
 
 @Injectable({providedIn: 'root'})
 
@@ -56,7 +55,10 @@ export class DraftService {
       )
   }
 
-  public updateDraftKey(id: string, keys: KeyPair): Observable<Post | undefined> {
+  public updateDraftKey(
+    id: string,
+    keys: KeyPair
+  ): Observable<Post | undefined> {
     return this.http
       .put<PostResponse>(this.API_POST + 'key', {id, keys})
       .pipe(

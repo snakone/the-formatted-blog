@@ -48,7 +48,13 @@ const featureReducer = createReducer(
     }
   )),
   // SET ACTIVE
-  on(DraftActions.setActive, (state, { draft }) => ({ ...state, active: draft})),
+  on(DraftActions.setActive, (state, { draft }) => (
+    {
+      ...state,
+      drafts: [...state.drafts].map(d => (d.active = false, d)),
+      active: (draft.active = true, draft)
+    }
+  )),
   on(DraftActions.activeOff, (state) => ({ ...state, active: null})),
   on(DraftActions.setSaving, (state, { value }) => ({ ...state, saving: value})),
   // RESET

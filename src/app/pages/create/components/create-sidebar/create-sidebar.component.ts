@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
-import { Post } from '@shared/types/interface.types';
+import { Subject } from 'rxjs';
 import { PaginationInstance } from 'ngx-pagination';
-import { debounceTime, distinctUntilChanged, map, Subject, takeUntil, tap, of } from 'rxjs';
+
+import { DraftsFacade } from '@store/drafts/drafts.facade';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -14,12 +15,11 @@ import { debounceTime, distinctUntilChanged, map, Subject, takeUntil, tap, of } 
 export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   @Input() drafts!: Post[] | null;
-  @Input() active: Post;
   private unsubscribe$ = new Subject<void>();
   row = 0;
   editable = true;
   
-  public instance: PaginationInstance = {
+  instance: PaginationInstance = {
     id: 'drafts',
     itemsPerPage: 4,
     currentPage: 1

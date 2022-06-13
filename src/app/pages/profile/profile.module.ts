@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutModule } from '@layout/layout.module';
 import { ProfileRoutingModule } from './profile.routing';
 import { ProfileComponent } from './profile.component';
+import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
 
 import {
   ProfileContentComponent,
@@ -29,7 +30,8 @@ import {
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    LayoutModule
+    LayoutModule,
+    DraftsAccessModule
   ]
 })
 

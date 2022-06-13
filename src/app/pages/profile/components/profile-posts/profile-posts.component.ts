@@ -8,6 +8,7 @@ import { Post } from '@shared/types/interface.types';
   styleUrls: ['./profile-posts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ProfilePostsComponent implements OnInit {
 
   items!: Post[];

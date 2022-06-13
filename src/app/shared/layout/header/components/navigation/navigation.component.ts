@@ -16,8 +16,8 @@ export class NavigationComponent implements AfterViewInit {
   ];
 
   el!: HTMLElement | null;
-  total = 0;
-  distance = 300;
+  t = 0;  // Time
+  d = 300;  // Distance
 
   constructor() { }
 
@@ -28,22 +28,18 @@ export class NavigationComponent implements AfterViewInit {
   public panned(e: Event): void {
     if (window.innerWidth > 1199) { return; }
     const event = (e as unknown) as HammerInput;
-    this.total += (event.deltaX * -.09);
+    this.t += (event.deltaX * -.09);
 
-    if (this.total <= 0) { this.total = 0; }
-    if (this.total >= 700) { this.total = 700; }
-    if (this.el) { this.el.scrollLeft = this.total; }
+    if (this.t <= 0) { this.t = 0; }
+    if (this.t >= 700) { this.t = 700; }
+    if (this.el) { this.el.scrollLeft = this.t; }
   }
 
   public move(next: boolean): void {
     if (this.el) {
-      next ? (
-        this.el.scrollLeft += this.distance,
-        this.total += this.distance
-      ) : (
-        this.el.scrollLeft -= this.distance,
-        this.total -= this.distance
-      );
+      next ? 
+      (this.el.scrollLeft += this.d, this.t += this.d) : 
+      (this.el.scrollLeft -= this.d, this.t -= this.d)
     }
   }
 

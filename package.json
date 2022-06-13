@@ -51,7 +51,6 @@
     "ngx-webstorage": "^9.0.0",
     "quill": "~1.3.7",
     "rxjs": "~7.5.4",
-    "skeleton-elements": "^4.0.0",
     "sticky-sidebar": "^3.3.1",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.5"

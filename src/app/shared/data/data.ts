@@ -73,7 +73,6 @@ export const USER_INDEX: IconList[] = [
 
 export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
-  // { icon: 'far fa-folder-open', label: 'Archivar', action: 'archive' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
   { icon: 'far fa-question-circle', label: 'Ayuda', action: 'dialog' }
 ];
@@ -100,4 +99,49 @@ export const POST_CATEGORIES: TextList[] = [
   { label: 'Videojuegos', key: 'games' },
   { label: 'Filosofía', key: 'filosofy' },
   { label: 'Otras...', key: 'others' }
-]
+];
+
+export const POST_ICONS = [
+  'fab fa-twitter',
+  'fab fa-linkedin-in',
+  'fas fa-user-plus',
+  'far fa-envelope'
+];
+
+export const DRAFT_ICONS: ActionList[] = [
+  { 
+    icon: 'fas fa-pen-fancy',
+    label: 'Editar',
+    action: 'edit'
+  },
+  { 
+    icon: 'fas fa-external-link-alt',
+    label: 'Previsualizar',
+    action: 'preview'
+  },
+  { 
+    icon: 'fas fa-cloud-download-alt',
+    label: 'Descargar',
+    action: 'download'
+  },
+  { 
+    icon: 'fas fa-trash',
+    label: 'Eliminar',
+    action: 'delete'
+  },
+];
+
+export const NAVBAR_MENU = [
+  'Home',
+  'About us',
+  'Contact',
+  'Travel',
+  'Politics'
+];
+
+export const NAVBAR_ICONS: IconList[]  = [
+  { icon: 'fas fa-home', route: '/home' },
+  { icon: 'fas fa-feather-alt', route: '/create' },
+  { icon: 'far fa-file-alt', route: '/news' },
+  { icon: 'fas fa-question', route: '/help' }
+];

@@ -33,8 +33,8 @@ import { PWAService } from '@core/services/pwa/pwa.service';
 
 export class SignUpComponent implements OnInit {
 
-  signUpForm!: FormGroup;
   @Output() login = new EventEmitter<void>();
+  signUpForm!: FormGroup;
   matchError = false;
   private unsubscribe$ = new Subject<void>();
   
@@ -89,9 +89,7 @@ export class SignUpComponent implements OnInit {
     this.userFcd.register(user);
     
     if (this.notify) {
-      setTimeout(() => {
-        this.pwaSrv.requestNotification();
-      }, 1000);
+      setTimeout(() => this.pwaSrv.requestNotification(), 1000);
     }
     this.dialogRef.close();
   }

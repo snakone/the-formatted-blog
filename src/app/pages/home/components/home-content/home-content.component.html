@@ -1,7 +1,7 @@
 <div class="content">
   <!-- POSTS -->
   <ng-container *ngIf="(posts$ | async) as posts">
-    <ng-container *ngIf="posts.length > 0; else skeleton">
+    <ng-container *ngIf="posts.length > 0">
       <app-post-card *ngFor="let item of posts; 
                              let i = index; 
                              let last = last"
@@ -12,8 +12,4 @@
       </app-post-card>
     </ng-container>
   </ng-container>
-  <!-- LOADING -->
-  <ng-template #skeleton>
-    <app-home-skeleton></app-home-skeleton>
-  </ng-template>
 </div>

@@ -6,6 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./profile-settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ProfileSettingsComponent implements OnInit {
 
   constructor() { }

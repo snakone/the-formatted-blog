@@ -1,14 +1,10 @@
 import { Injectable} from '@angular/core';
-import { HttpService } from '../http/http.service';
 import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
-
-import {
-  PostResponse,
-  Post
-} from '@shared/types/interface.types';
-
 import { filter, map } from 'rxjs/operators';
+
+import { HttpService } from '../http/http.service';
+import { environment } from '@env/environment';
+import { PostResponse, Post } from '@shared/types/interface.types';
 
 @Injectable({providedIn: 'root'})
 

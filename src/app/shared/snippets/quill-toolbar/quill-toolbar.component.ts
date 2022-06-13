@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { takeUntil, filter, Subject, Observable } from 'rxjs';
+
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
 import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
 import { Post } from '@shared/types/interface.types';
-import { takeUntil, filter, Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -13,13 +14,15 @@ import { takeUntil, filter, Subject, Observable } from 'rxjs';
   styleUrls: ['./quill-toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   @Input() draft: Post;
   @Input() form = false;
-  list = CREATE_ACTION_LIST;
   saving$: Observable<boolean>;
   private unsubscribe$ = new Subject<void>();
+  
+  list = CREATE_ACTION_LIST;
 
   constructor(
     private crafter: CrafterService,
@@ -41,7 +44,6 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   private new(): void {
     if (!this.draft) { return; }
-
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeSkeletonComponent } from './home-skeleton.component';
+import { DraftPreviewComponent } from './draft-preview.component';
 
-describe('HomeSkeletonComponent', () => {
-  let component: HomeSkeletonComponent;
-  let fixture: ComponentFixture<HomeSkeletonComponent>;
+describe('DraftPreviewComponent', () => {
+  let component: DraftPreviewComponent;
+  let fixture: ComponentFixture<DraftPreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeSkeletonComponent ]
+      declarations: [ DraftPreviewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeSkeletonComponent);
+    fixture = TestBed.createComponent(DraftPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
