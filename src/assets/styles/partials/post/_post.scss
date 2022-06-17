@@ -9,13 +9,16 @@ $quill-padding-sm: 20px;
   overflow-y: initial;
   &[contenteditable="false"] { padding: 0 }
   min-height: var(--quill-height);
-  max-height: 500px;
+  max-height: var(--quill-height);
 
   // PARAGRAPH
   & p {
     margin: 0 0 30px;
     text-align: left;
-    &:last-of-type { margin: 0 }   
+    &:last-of-type { 
+      margin: 0;
+      padding-bottom: 35px;
+    }
   }
 
   &.ql-blank::before {
@@ -118,6 +121,7 @@ $quill-padding-sm: 20px;
   & h2 {
     margin: 45px 0 30px 0;
     position: relative;
+    scroll-margin-top: 30px;
 
     &::before {
       content: '';
@@ -129,7 +133,7 @@ $quill-padding-sm: 20px;
       background: var(--contrast-color);
     }
 
-    &:first-child { margin-top: 0 }
+    &:first-child { margin-top: 0; }
   }
 
   // CODE
@@ -140,9 +144,28 @@ $quill-padding-sm: 20px;
 
   // IMAGE
   & img {
-    margin: 14px 0 15px;
+    display: block;
+    margin: 14px auto 15px;
     &:last-child { margin-bottom: 0 }
   }
+}
+
+.alone {
+  & .ql-editor {
+    max-height: initial;
+  }
+}
+
+.quill-focus .ql-editor {
+  color: rgba(200, 200, 200, 100);
+}
+
+.quill-focus .ql-editor > * {
+  transition: color 300ms;
+}
+
+.quill-focus .focused-blot {
+  color: rgba(45, 45, 45, 255);
 }
 
 .ql-container.ql-snow { 

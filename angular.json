@@ -59,7 +59,10 @@
               "includePaths": [
                 "src/assets/styles"
               ]
-          }
+            },
+            "allowedCommonJsDependencies": [
+              "quill-delta-to-html"
+            ]
           },
           "configurations": {
             "production": {

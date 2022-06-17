@@ -28,6 +28,15 @@ export class DraftService {
       );
   }
 
+  public getAll(): Observable<Post[] | undefined> {
+    return this.http
+      .get<PostResponse>(this.API_POST + 'all')
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(_ => _.drafts)
+      );
+  }
+
   public getBySlug(slug: string): Observable<Post | undefined> {
     return this.http
       .get<PostResponse>(environment.api + 'draft/' + slug)

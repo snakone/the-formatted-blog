@@ -7,6 +7,7 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { DELETE_CONFIRMATION, DRAFT_ICONS, POST_ICONS } from '@shared/data/data';
 import { DraftPreviewComponent } from '@layout/overlays/draft-preview/draft-preview.component';
+import { QuillService } from '@core/services/quill/quill.service';
 
 @Component({
   selector: 'app-post-card',
@@ -38,7 +39,8 @@ export class PostCardComponent implements OnInit {
   constructor(
     private crafter: CrafterService,
     private draftsFacade: DraftsFacade,
-    private router: Router
+    private router: Router,
+    private quillSrv: QuillService
   ) { }
 
   ngOnInit(): void { }
@@ -49,11 +51,12 @@ export class PostCardComponent implements OnInit {
   }
 
   private preview(): void {
-    this.crafter.dialog(DraftPreviewComponent, this.post.message);
+    this.draftsFacade.setPreview(this.post);
+    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
   }
 
   private download(): void {
-
+    this.quillSrv.convertToHTML(this.post);
   }
 
   private delete(): void {

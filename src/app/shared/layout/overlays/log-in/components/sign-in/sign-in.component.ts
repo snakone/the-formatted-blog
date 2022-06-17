@@ -9,7 +9,7 @@ import {
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 import { LogInOverlayComponent } from '../../log-in.component';
 
 @Component({

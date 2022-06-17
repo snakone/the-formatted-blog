@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})

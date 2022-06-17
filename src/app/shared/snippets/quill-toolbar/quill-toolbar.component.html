@@ -1,16 +1,26 @@
 <div class="toolbar"
      [ngClass]="{'form': form}">  <!-- TOOLBAR -->
   <div>
-    <ng-container *ngIf="(saving$ | async); else saved">
-      <i class="fas fa-spinner fa-pulse"></i> 
-      <span>Guardando...</span>
+    <ng-container *ngIf="(saving$ | async) as state">
+      <ng-container [ngSwitch]="state.type">
+        <!-- SAVING -->
+        <ng-container *ngSwitchCase="'saving'">
+          <div class="animated fadeIn">
+            <i [class]="state.value ? 'fas fa-spinner fa-pulse' : 'fas fa-check'"></i> 
+            <span>{{state.value ? 'Guardando...' : 'Guardado'}}</span>
+          </div>
+        </ng-container>
+        <!-- WARNING -->
+        <ng-container *ngSwitchCase="'warning'">
+          <div class="animated fadeIn">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>No se ha podido guardar. Comprueba los datos</span>
+          </div>
+        </ng-container>
+      </ng-container>
     </ng-container>
-    <ng-template #saved>
-      <i class="fas fa-check"></i>
-      <span>Guardado</span>
-    </ng-template>
   </div>
-  <div>  <!-- ACTIONS -->
+  <div class="actions">  <!-- ACTIONS -->
     <i *ngFor="let l of list"
         [class]="l.icon"
         [matTooltip]="l.label"

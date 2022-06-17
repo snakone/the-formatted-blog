@@ -65,21 +65,28 @@ export class CreateFormComponent implements OnInit {
        takeUntil(this.unsubscribe$),
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
-       tap(_ => this.draftsFacade.setSaving(true)),
+       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: true})),
        debounceTime(5000),
-       tap(_ => this.draftsFacade.setSaving(false))
+       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: false}))
     )
      .subscribe(_ => this.submit());
   }
 
   private patchForm(draft: Post): void {
+    this.draftForm.markAsPristine();
     this.draftForm.patchValue({...draft});
     this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
-    this.draftForm.markAsPristine();
+  }
+
+  public clean(): void {
+    this.patchForm({title: '', category: '', cover: '', intro: ''});
   }
 
   public submit(): void {
-    if (this.draftForm.invalid) { return; }
+    if (this.draftForm.invalid) { 
+      this.draftsFacade.setSaving({type: 'warning', value: true})
+      return; 
+    }
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
     this.draftsFacade.update(draft);

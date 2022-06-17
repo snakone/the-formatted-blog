@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KeyPair, Post } from '@shared/types/interface.types';
-import { Delta } from 'quill';
+import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
@@ -13,13 +12,20 @@ export class DraftsFacade {
 
   drafts$ = this.store.select(fromDrafts.get);
   loaded$ = this.store.select(fromDrafts.getLoaded);
+  all$ = this.store.select(fromDrafts.getAll);
+  allLoaded$ = this.store.select(fromDrafts.getAllLoaded);
   active$ = this.store.select(fromDrafts.getActive);
   saving$ = this.store.select(fromDrafts.getSaving);
+  preview$ = this.store.select(fromDrafts.getPreview);
 
   constructor(private store: Store<DraftsState>) { }
 
   public get(): void {
     this.store.dispatch(DraftActions.getByUser());
+  }
+
+  public getAll(): void {
+    this.store.dispatch(DraftActions.getAll());
   }
 
   public getBySlug(slug: string): void {
@@ -46,8 +52,16 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.setActive({draft}));
   }
 
-  public setSaving(value: boolean): void {
-    this.store.dispatch(DraftActions.setSaving({value}));
+  public setPreview(draft: Post): void {
+    this.store.dispatch(DraftActions.setPreview({draft}));
+  }
+
+  public setSaving(data: SavingType): void {
+    this.store.dispatch(DraftActions.setSaving({data}));
+  }
+
+  public resetSaving(): void {
+    this.store.dispatch(DraftActions.resetSaving());
   }
 
   public activeOff(): void {
@@ -56,6 +70,10 @@ export class DraftsFacade {
 
   public reset(): void {
     this.store.dispatch(DraftActions.reset());
+  }
+
+  public resetPreview(): void {
+    this.store.dispatch(DraftActions.resetPreview());
   }
 
   public resetBySlug(): void {

@@ -5,16 +5,16 @@
                       [maxSize]="4">
     <div class="pagination">
       <!-- FIRST -->
-      <div class="pagination-first" [class.disabled]="p.isFirstPage()">
-        <a  (click)="p.setCurrent(1)">
-          <i class="fas fa-fast-backward"></i>
-        </a>
+      <div class="pagination-first" 
+           [class.disabled]="p.isFirstPage()"
+           (click)="p.setCurrent(1)">
+        <a><i class="fas fa-fast-backward"></i></a>
       </div>
       <!-- BACK -->
-      <div class="pagination-back" [class.disabled]="p.isFirstPage()">
-        <a  (click)="p.previous()">
-          <i class="fas fa-angle-double-left"></i>
-        </a>
+      <div class="pagination-back" 
+          [class.disabled]="p.isFirstPage()"
+          (click)="p.previous()">
+        <a><i class="fas fa-angle-double-left"></i></a>
       </div>
       <!-- PAGES -->
       <div *ngFor="let page of p.pages"
@@ -28,16 +28,16 @@
         </div>
       </div>
       <!-- NEXT -->
-      <div class="pagination-next" [class.disabled]="p.isLastPage()">
-        <a  (click)="p.next()">
-          <i class="fas fa-angle-double-right"></i>
-        </a>
+      <div class="pagination-next" 
+          [class.disabled]="p.isLastPage()"
+          (click)="p.next()">
+        <a><i class="fas fa-angle-double-right"></i></a>
       </div>
       <!-- LAST -->
-      <div class="pagination-last" [class.disabled]="p.isLastPage()">
-        <a  (click)="p.setCurrent(p.pages.length)">
-          <i class="fas fa-fast-forward"></i>
-        </a>
+      <div class="pagination-last" 
+          [class.disabled]="p.isLastPage()"
+          (click)="p.setCurrent(p.pages.length)">
+        <a><i class="fas fa-fast-forward"></i></a>
       </div>
     </div>
   </pagination-template>

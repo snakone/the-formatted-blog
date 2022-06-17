@@ -1,11 +1,12 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
-import { Delta } from 'quill';
+import { Delta, DeltaOperation } from 'quill';
 
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
-import { Post } from '@shared/types/interface.types';
+import { Post, PostHeader } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
+import { slugify } from '@core/services/quill/quill.module';
 
 @Component({
   selector: 'app-create-content',
@@ -30,7 +31,16 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
         'redo': () => this.editor.quillEditor.getModule('history').redo(),
       }
     },
-    history: { delay: 2000, userOnly: true },
+    imageCompress: {
+      quality: 0.5,
+      maxWidth: 600, 
+      maxHeight: 350, 
+      debug: false, 
+    },
+    // focus: {
+    //   focusClass: 'focused-blot'
+    // },
+    history: { delay: 2000, userOnly: false },
   };
 
   constructor(private draftsFacade: DraftsFacade) { }
@@ -47,29 +57,64 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        takeUntil(this.unsubscribe$),
        filter(_ => _.source !== 'api'),
        distinctUntilChanged(),
-       tap(_ => this.draftsFacade.setSaving(true)),
+       tap(_ => this.save(true)),
        debounceTime(5000),
-       tap(_ => this.draftsFacade.setSaving(false)),
-       map(_ => _.content as Delta)
+       map(_ => _.content as Delta),
      )
-     .subscribe((message: Delta) => this.onChange(message));
+     .subscribe((message: Delta) => 
+        this.onChange(message, this.getHeaders(message.ops))
+      );
+  }
+
+  private getHeaders(ops: DeltaOperation[]): PostHeader[] {
+    if (ops) {
+      const headers = ops.map(
+        (o: DeltaOperation, i) => {
+          if (o.attributes?.header === 2) {
+            const str = ops[i - 1].insert?.split('\n');
+            const text =  str[str.length - 1];
+            return {text, id: slugify(text)};
+          }
+
+          return null;
+        }
+      ).filter(s => Boolean(s));
+
+      return headers
+    }
+    return [];
+  }
+
+  private onChange(
+    message: Delta,
+    headers: PostHeader[]
+  ): void {
+    !this.draft ? // NEW 
+      (
+        this.draft = { title: 'Boceto ', message, headers },
+        this.draftsFacade.create(this.draft)
+      ) :  // UPDATE
+      (
+        this.draft.message = message, 
+        this.draft.headers = headers, 
+        this.draftsFacade.update(this.draft)
+      );
+
+    this.save(false);
+  }
+
+  private save(value: boolean): void {
+    this.draftsFacade.setSaving({type: 'saving', value})
+  }
+
+  public clean(): void {
+   this.editor.quillEditor.setContents(EMPTY_QUILL as Delta);
   }
 
   private getActive(): void {
     this.draftsFacade.active$
     .pipe(takeUntil(this.unsubscribe$))
      .subscribe(res => this.draft = res);
-  }
-
-  private onChange(message: Delta): void {
-    !this.draft ? // NEW 
-      (
-        this.draft = { title: 'Boceto ', message },
-        this.draftsFacade.create(this.draft)
-      ) :  // UPDATE
-    this.draftsFacade.updateKey(
-      this.draft._id, { key: 'message', value: message }
-    );
   }
 
   public stickyFix(): void {

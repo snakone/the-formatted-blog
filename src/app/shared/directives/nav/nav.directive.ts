@@ -55,7 +55,10 @@ export class NavDirective implements AfterViewInit {
         e instanceof NavigationEnd && !!this.el
       )),
      ).subscribe(_ => 
-      this.el.nativeElement.classList.remove('scroll-down')
+      (
+        this.el.nativeElement.classList.remove('scroll-down'),
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 333)  // STICKY FIX
+      )
     );
   }
 

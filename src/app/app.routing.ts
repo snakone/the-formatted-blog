@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '@core/guards/admin/admin.guard';
 import { UserGuard } from '@core/guards/user/user.guard';
 
 const routes: Routes = [
@@ -40,7 +41,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/post/post.module')
        .then(mod => mod.PostModule), data: { name: 'Post' }
-  }
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./pages/admin/admin.module')
+       .then(mod => mod.AdminModule), data: { name: 'Admin' },
+    canActivate: [AdminGuard]
+  },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

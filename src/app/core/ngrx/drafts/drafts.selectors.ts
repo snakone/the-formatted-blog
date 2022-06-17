@@ -10,5 +10,8 @@ export const getDraftsState = createSelector(
 
 export const get = createSelector(getDraftsState, fromDrafts.getDrafts);
 export const getLoaded = createSelector(getDraftsState, fromDrafts.getDraftsLoaded);
+export const getAll = createSelector(getDraftsState, fromDrafts.getAll);
+export const getAllLoaded = createSelector(getDraftsState, fromDrafts.getAllLoaded);
 export const getActive = createSelector(getDraftsState, fromDrafts.getActive);
 export const getSaving = createSelector(getDraftsState, fromDrafts.getSaving);
+export const getPreview = createSelector(getDraftsState, fromDrafts.getPreview);

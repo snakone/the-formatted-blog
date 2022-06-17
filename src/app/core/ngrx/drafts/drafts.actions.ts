@@ -1,6 +1,5 @@
 import { props, createAction } from '@ngrx/store';
-import { KeyPair, Post } from '@shared/types/interface.types';
-import { Delta } from 'quill';
+import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 // GET DRAFTS BY SLUG
 export const getBySlug =
@@ -25,6 +24,18 @@ export const getByUserSuccess =
 
 export const getByUserFailure =
   createAction('[Drafts API] Get Draft by User Failure',
+  props<{ error: string }>());
+
+// GET ALL DRAFTS
+export const getAll =
+  createAction('[Drafts API] Get All Drafts');
+
+export const getAllSuccess =
+  createAction('[Drafts API] Get All Drafts Success',
+  props<{ drafts: Post[] }>());
+
+export const getAllFailure =
+  createAction('[Drafts API] Get All Drafts Failure',
   props<{ error: string }>());
 
 // CREATE DRAFT
@@ -84,10 +95,15 @@ export const setActive =
   createAction('[Drafts API] Set Active Draft',
   props<{ draft: Post }>());
 
+// SET PREVIEW
+export const setPreview =
+  createAction('[Drafts API] Set Draft Preview',
+  props<{ draft: Post }>());
+
 // SET SAVING
 export const setSaving =
   createAction('[Drafts API] Set Draft Saving',
-  props<{ value: boolean }>());
+  props<{ data: SavingType }>());
 
 // ACTIVE OFF
 export const activeOff =
@@ -99,3 +115,11 @@ export const reset =
 
 export const resetSlug =
   createAction('[Drafts API] Reset Draft Slug');
+
+// RESET SAVING
+export const resetSaving =
+  createAction('[Drafts API] Reset Draft Saving');
+
+// RESET SAVING
+export const resetPreview =
+  createAction('[Drafts API] Reset Draft Preview');

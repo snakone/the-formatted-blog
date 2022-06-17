@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Delta } from 'quill';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { DraftsFacade } from '@store/drafts/drafts.facade';
+import { Post } from '@shared/types/interface.types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-draft-preview',
@@ -11,8 +12,12 @@ import { Delta } from 'quill';
 
 export class DraftPreviewComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Delta) { }
+  preview$: Observable<Post>;
 
-  ngOnInit(): void {}
+  constructor(private draftsFacade: DraftsFacade) { }
+
+  ngOnInit(): void {
+    this.preview$ = this.draftsFacade.preview$;
+  }
 
 }

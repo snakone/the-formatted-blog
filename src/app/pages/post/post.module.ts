@@ -7,18 +7,22 @@ import { PostRoutingModule } from './post.routing';
 import { PostComponent } from './post.component';
 import { PostContentComponent } from './components/post-content/post-content.component';
 import { PostSidebarComponent } from './components/post-sidebar/post-sidebar.component';
+import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
+import { PostIndexComponent } from './components/post-index/post-index.component';
 
 @NgModule({
   declarations: [
     PostComponent,
     PostContentComponent,
-    PostSidebarComponent
+    PostSidebarComponent,
+    PostIndexComponent
   ],
   imports: [
     CommonModule,
     PostRoutingModule,
     LayoutModule,
-    SnippetsModule
+    SnippetsModule,
+    DraftsAccessModule
   ]
 })
 

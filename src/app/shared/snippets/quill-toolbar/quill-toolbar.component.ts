@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeUntil, filter, Subject, Observable } from 'rxjs';
 
@@ -6,7 +6,9 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
 import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
-import { Post } from '@shared/types/interface.types';
+import { Post, SavingType } from '@shared/types/interface.types';
+import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { QuillService } from '@core/services/quill/quill.service';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -19,7 +21,8 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   @Input() draft: Post;
   @Input() form = false;
-  saving$: Observable<boolean>;
+  @Output() clean = new EventEmitter<void>();
+  saving$: Observable<SavingType>;
   private unsubscribe$ = new Subject<void>();
   
   list = CREATE_ACTION_LIST;
@@ -28,7 +31,8 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     private crafter: CrafterService,
     private draftsFacade: DraftsFacade,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private quillSrv: QuillService
   ) { }
 
   ngOnInit(): void {
@@ -37,8 +41,11 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   switchObj: any = {
     new: () => this.new(),
+    preview: () => this.preview(),
+    clean: () => this.clean.emit(),
     delete: () => this.delete(),
-    dialog: () => this.dialog(),
+    download: () => this.download(),
+    help: () => this.help(),
     next: () => this.next()
   };
 
@@ -58,9 +65,19 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  private dialog(): void {
+  private preview(): void {
+    if (!this.draft) { return; }
+    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+  }
+
+  private help(): void {
     this.form ? '' :
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
+  }
+
+  private download(): void {
+    if (!this.draft) { return; }
+    this.quillSrv.convertToHTML(this.draft);
   }
 
   private delete(): void {
@@ -84,6 +101,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.draftsFacade.resetSaving();
   }
 
 }

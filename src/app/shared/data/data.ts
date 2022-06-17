@@ -73,8 +73,11 @@ export const USER_INDEX: IconList[] = [
 
 export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
+  { icon: 'fas fa-external-link-alt', label: 'Previsualizar', action: 'preview' },
+  { icon: 'fas fa-broom', label: 'Limpiar', action: 'clean' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
-  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'dialog' }
+  { icon: 'fas fa-cloud-download-alt', label: 'Descargar', action: 'download' },
+  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' }
 ];
 
 export const SAVE_CONFIRMATION = {

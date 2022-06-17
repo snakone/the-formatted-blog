@@ -18,7 +18,7 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 import { NAME_PATTERN } from '@shared/data/patterns';
 import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../../log-in.component';

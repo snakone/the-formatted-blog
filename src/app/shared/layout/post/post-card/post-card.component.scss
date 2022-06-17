@@ -80,7 +80,7 @@ article {
     &.alone {
       & .main-content {
         & .bottom {
-          @media(min-width: 993px) { margin-top: 3.5rem }
+          @media(min-width: 993px) { margin-top: 1.5rem }
           @media (max-width: 992px) { margin-bottom: 70px }
         }
       }
