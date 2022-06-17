@@ -9,7 +9,6 @@ import {
   fromEvent, 
   filter, 
   takeWhile, 
-  debounceTime, 
   Subject, 
   takeUntil 
 } from 'rxjs';
@@ -28,7 +27,6 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
   @Input() duration!: number;
   isLoaded = false;
   grid!: HTMLElement | null;
-  wrapper!: Element | null;
   $unsubscribe = new Subject<void>();
   masonry!: MasonryType;
   items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
@@ -41,18 +39,15 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
   }
 
   private initMasonry(): void {
-    this.wrapper = document.querySelector('.grid');
     this.grid = document.getElementById('grid');
-    this.createMasonry();
+    if (this.grid) { this.createMasonry(); }
   }
 
   private createMasonry(): void {
-    if (this.wrapper) {
-      this.isLoaded = true;
-      setTimeout(() => {
-        this.masonry = this.masonrySrv.createMasonry(this.wrapper);
-      }, 150);
-    }
+    this.isLoaded = true;
+    setTimeout(() => {
+      this.masonry = this.masonrySrv.createMasonry(this.grid);
+    }, 150);
   }
 
   private hasEnded(): void {
@@ -81,11 +76,6 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
     this.masonry.appended(el);
     this.createMasonry();
     this.items.push(...[1, 2, 3]);
-  }
-
-  public remove(el: HTMLDivElement): void {
-    this.masonry.remove([el]);
-    this.masonry.layout();
   }
 
   ngOnDestroy() {

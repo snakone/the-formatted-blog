@@ -30,13 +30,19 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
       .pipe(
         throttleTime(300),
         filter(_ => !!this.selector),
-        map(_ => (window.document.body.clientWidth <= 983 ||
-                  document.getElementById('sticky-wrapper')!.clientHeight <= 500) ?? true),
+        map(_ => this.clientSize()),
         distinctUntilChanged(),
       )
     .subscribe(_ => _ ? 
       this.stickySrv.destroy() : 
       this.stickySrv.startSticky(this.selector || ''));
+  }
+
+  private clientSize(): boolean {
+    return (
+      window.document.body.clientWidth <= 983 ||
+      document.getElementById('sticky-wrapper')!.clientHeight <= 500
+    )
   }
 
   ngOnDestroy() {

@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 import { Post } from '@shared/types/interface.types';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -15,7 +15,6 @@ import { filter, Observable, Subject, takeUntil } from 'rxjs';
 export class CreateComponent implements OnInit, OnDestroy {
   
   drafts$!: Observable<Post[]>;
-  active$!: Observable<Post>;
   text = NOTIFICATION_TEXT;
   title!: string;
   private unsubscribe$ = new Subject<void>();
@@ -24,7 +23,6 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void { 
     this.drafts$ = this.draftsFacade.drafts$;
-    this.active$ = this.draftsFacade.active$;
     this.checkData();
   }
 

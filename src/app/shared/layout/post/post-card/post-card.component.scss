@@ -13,6 +13,7 @@ article {
       max-width: 100%;
       width: 100%;
       border: 0;
+      aspect-ratio: 16 / 9;
     }
 
     & .inner {
@@ -79,7 +80,7 @@ article {
     &.alone {
       & .main-content {
         & .bottom {
-          @media(min-width: 993px) { margin-top: 3.5rem }
+          @media(min-width: 993px) { margin-top: 1.5rem }
           @media (max-width: 992px) { margin-bottom: 70px }
         }
       }
@@ -96,7 +97,6 @@ article {
 
   & .main-content {
     position: relative;
-
 
     & .category {
       overflow: hidden;
@@ -128,10 +128,9 @@ article {
       font-style: italic;
       font-family: 'Merriweather', Arial, Helvetica, sans-serif;
 
-      & span {
+      & span:not(.tale) {
         position: relative;
         font-size: 16px;
-        
       }
     }
 
@@ -160,7 +159,7 @@ article {
 
           & i {
             display: block;
-            height: 15px;
+            height: 18px;
             line-height: 15px;
             text-align: center;
             position: relative;
@@ -249,7 +248,7 @@ article {
       & .date {
         padding: 0 0 10px;
 
-        & span {
+        & span:not(.tale) {
           padding-left: 0;
           font-size: 12px;
         }

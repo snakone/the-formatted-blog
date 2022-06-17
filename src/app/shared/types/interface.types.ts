@@ -13,6 +13,9 @@ export interface Post {
   video?: string;
   intro?: string;
   status?: DraftStatus;
+  active?: boolean;
+  headers?: PostHeader[];
+  user?: string;
 }
 
 export interface PostResponse extends ServerResponse {
@@ -23,7 +26,13 @@ export interface PostResponse extends ServerResponse {
  draft?: Post;
 }
 
+export interface PostHeader {
+  text: string;
+  id: string;
+}
+
 export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
+export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
 
 // USER
 export interface User {
@@ -33,7 +42,8 @@ export interface User {
   password?: string;
   profesion: string;
   bio: string;
-  stats: UserStats
+  stats: UserStats;
+  account?: AccountType;
 }
 
 export interface UserStats {
@@ -63,7 +73,7 @@ export interface Snack {
 // LIST
 export interface IconList {
   icon: string;
-  label: string;
+  label?: string;
   route?: string;
 }
 
@@ -110,4 +120,9 @@ interface NotificationAction {
 export interface KeyPair {
   key: string;
   value: any;
+}
+
+export interface SavingType {
+  type: 'saving' | 'warning';
+  value: boolean;
 }

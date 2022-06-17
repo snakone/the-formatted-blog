@@ -1,5 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-post',
@@ -10,11 +14,14 @@ import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 export class PostComponent implements OnInit {
 
+  draft$: Observable<Post>;
   text = NOTIFICATION_TEXT;
 
-  constructor() { }
+  constructor(private draftsFacade: DraftsFacade) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.draft$ = this.draftsFacade.active$;
+  }
 
   public notification(): void {
     console.log('home');

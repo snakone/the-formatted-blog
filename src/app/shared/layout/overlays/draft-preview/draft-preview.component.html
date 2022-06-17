@@ -1,0 +1,11 @@
+<ng-container *ngIf="(preview$ | async) as preview">
+  <h2 mat-dialog-title>
+    {{preview.title}} 
+    <button mat-button mat-dialog-close>
+      <i class="fas fa-times"></i>
+    </button>
+  </h2>
+  <mat-dialog-content>
+    <quill-view [content]="preview.message"></quill-view>
+  </mat-dialog-content>
+</ng-container>

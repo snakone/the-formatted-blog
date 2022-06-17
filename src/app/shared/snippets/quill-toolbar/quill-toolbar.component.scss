@@ -8,24 +8,22 @@
   align-items: center;
   padding-right: 16px;
 
-  &.form {
-    border-top: 1px solid var(--navigation-border);
-  }
+  &.form { border-top: 1px solid var(--navigation-border); }
 
   & i:not(.fa-pulse) {
     height: 24px;
-    padding: 3px 5px;
-    width: 29px;
+    padding: 3px 8px;
+    width: 35px;
     position: relative;
     top: .5px;
     cursor: pointer;
     &:hover { color: var(--contrast-color) }
-    &:nth-last-child(2) { margin-left: 24px }
 
     &.fa-check { 
       top: 0;
       color: var(--success-color);
       margin-left: 12px;
+      margin-right: 6px;
 
       & + span {
         position: relative;
@@ -34,17 +32,27 @@
     }
   }
 
+  & .actions i {
+    &:nth-last-child(2) { margin-left: 24px }
+  }
+
   & i.fa-pulse {
-    margin-left: 17px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  & i.fa-exclamation-triangle {
     margin-right: 10px;
-    position: relative;
-    top: -.5px;
+    margin-left: 12px;
+    color: var(--contrast-color);
+
+    & + span {
+      position: relative;
+      top: 1px;
+    }
   }
 
-  & i.fa-folder-open {
-    margin-right: 2px;
-  }
-
+  & i.fa-folder-open { margin-right: 2px; }
   @media(max-width: 992px) { margin-bottom: 1rem }
 }
 

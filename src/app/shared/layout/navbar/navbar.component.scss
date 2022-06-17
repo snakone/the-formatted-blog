@@ -127,7 +127,7 @@ nav {
 li.dropdown {
   position: relative;
 
-  @for $i from 1 to 6 {
+  @for $i from 1 to 7 {
     .dropdown-item-#{$i} {
       transform-origin: top center;
       animation: scaleZ 300ms ($i * 60ms) ease-in-out forwards
@@ -136,7 +136,7 @@ li.dropdown {
 
   & ul.dropdown-menu {
     position: absolute;
-    top: 0;
+    top: -10px;
     left: 50%;
     transform: translate(-50%, 33%);
     perspective: 1000px;

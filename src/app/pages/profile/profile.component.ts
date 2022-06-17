@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 import { LIKE_TEXT } from '@shared/data/sentences';
 import { User } from '@shared/types/interface.types';
 import { NavigationEnd, Router } from '@angular/router';
@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     .pipe(
       filter((event) => event instanceof NavigationEnd && 
                         event.url.includes('/profile')),
-      takeUntil(this.$unsubscribe))
+      takeUntil(this.$unsubscribe)
+    )
     .subscribe(_ => (
       this.scroll(),
       setTimeout(() => window.dispatchEvent(new Event('resize')), 200)

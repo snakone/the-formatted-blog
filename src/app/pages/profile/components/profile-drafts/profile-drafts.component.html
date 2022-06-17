@@ -1,1 +1,13 @@
-<p>profile-drafts works!</p>
+<div class="animated fadeIn">
+  <ng-container *ngIf="(drafts$ | async) as drafts">
+    <app-post-card *ngFor="let item of drafts; 
+                           let i = index; 
+                           let last = last"
+                    [small]="true"
+                    [border]="false"
+                    [last]="last"
+                    [post]="item"
+                    [draft]="true">
+    </app-post-card>
+  </ng-container>
+</div>

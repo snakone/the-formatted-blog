@@ -4,8 +4,7 @@
       <div id="sticky-wrapper">
         <router-outlet></router-outlet>
       </div>
-      <app-create-sidebar [drafts]="drafts$ | async"
-                          [active]="active$ | async">
+      <app-create-sidebar [drafts]="drafts$ | async">
       </app-create-sidebar>
     </app-section>
   </section>

@@ -1,7 +1,7 @@
 $quill-padding: 30px;
 $quill-padding-sm: 20px;
 
-div[quill-editor-element] .ql-editor {
+.ql-editor {
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
   padding: $quill-padding;
@@ -9,13 +9,16 @@ div[quill-editor-element] .ql-editor {
   overflow-y: initial;
   &[contenteditable="false"] { padding: 0 }
   min-height: var(--quill-height);
-  max-height: 500px;
+  max-height: var(--quill-height);
 
   // PARAGRAPH
   & p {
     margin: 0 0 30px;
     text-align: left;
-    &:last-of-type { margin: 0 }   
+    &:last-of-type { 
+      margin: 0;
+      padding-bottom: 35px;
+    }
   }
 
   &.ql-blank::before {
@@ -118,6 +121,7 @@ div[quill-editor-element] .ql-editor {
   & h2 {
     margin: 45px 0 30px 0;
     position: relative;
+    scroll-margin-top: 30px;
 
     &::before {
       content: '';
@@ -129,7 +133,7 @@ div[quill-editor-element] .ql-editor {
       background: var(--contrast-color);
     }
 
-    &:first-child { margin-top: 0 }
+    &:first-child { margin-top: 0; }
   }
 
   // CODE
@@ -140,9 +144,28 @@ div[quill-editor-element] .ql-editor {
 
   // IMAGE
   & img {
-    margin: 14px 0 15px;
+    display: block;
+    margin: 14px auto 15px;
     &:last-child { margin-bottom: 0 }
   }
+}
+
+.alone {
+  & .ql-editor {
+    max-height: initial;
+  }
+}
+
+.quill-focus .ql-editor {
+  color: rgba(200, 200, 200, 100);
+}
+
+.quill-focus .ql-editor > * {
+  transition: color 300ms;
+}
+
+.quill-focus .focused-blot {
+  color: rgba(45, 45, 45, 255);
 }
 
 .ql-container.ql-snow { 
@@ -225,3 +248,15 @@ div[quill-editor-element] .ql-editor {
   &.ql-undo::after { content: '\f0e2' }
   &.ql-redo::after { content: '\f01e' }
 }
+
+.tale {
+  color: var(--contrast-color);
+  padding: 0 8px 0 6px;
+  transition: color 666ms ease-in-out;
+}
+
+// DRAFT STATUS
+.seen { color: #364bbe; }
+.not-seen { color: #f1ad5e; }
+.pending { color: var(--pending-color); }
+.correct { color: var(--success-color); }

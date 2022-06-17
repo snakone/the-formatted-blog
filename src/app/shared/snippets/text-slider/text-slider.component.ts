@@ -8,10 +8,9 @@ import { AfterContentChecked, Component } from '@angular/core';
 
 export class TextSliderComponent implements AfterContentChecked {
 
-  index = 0;
-  time = 400;
+  i = 0;
+  t = 400;
   slider: HTMLElement | undefined | null;
-  loop = true;
   interval = this.createInterval();
 
   items: string[] = [
@@ -27,14 +26,14 @@ export class TextSliderComponent implements AfterContentChecked {
   }
 
   public slide(value: number, clear = false): void {
-    if (this.index + value < 0) this.set(this.items.length - 1, 800);
-    else if (this.index + value >= this.items.length) this.set(0, 800);
-    else this.set(this.index += value, 400);
+    if (this.i + value < 0) this.set(this.items.length - 1, 800);
+    else if (this.i + value >= this.items.length) this.set(0, 800);
+    else this.set(this.i += value, 400);
 
     if (this.slider) {
       const style = this.slider.style;
-      style.transition = `all ${this.time}ms 0`;
-      style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
+      style.transition = `all ${this.t}ms 0`;
+      style.transform = `translate3d(-${this.i * 228}px, 0, 0)`;
     }
 
     if (clear && this.interval) { window.clearInterval(this.interval); }
@@ -44,8 +43,8 @@ export class TextSliderComponent implements AfterContentChecked {
     index: number,
     time: number
   ): void {
-    this.index = index;
-    this.time = time;
+    this.i = index;
+    this.t = time;
   }
 
   private createInterval(): NodeJS.Timer {

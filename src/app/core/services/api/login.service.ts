@@ -29,7 +29,7 @@ export class LoginService {
       .post<UserResponse>(this.API_LOGIN, body)
       .pipe(
         filter(res => !!res && res.ok),
-        tap(_ => this.userStorage(_)),
+        tap(_ => this.storage(_)),
         map(res => res.user)
       );
   }
@@ -39,12 +39,12 @@ export class LoginService {
       .post<UserResponse>(environment.api + 'users', user)
       .pipe(
         filter(res => !!res && res.ok),
-        tap(_ => this.userStorage(_)),
+        tap(_ => this.storage(_)),
         map(res => res.user)
       );
   }
 
-  private userStorage(res: UserResponse): void {
+  private storage(res: UserResponse): void {
     this.ls.setKey('token', res?.token);
     this.ls.setKey('id', res?.user._id);
     this.userSrv.setUser(res?.user);

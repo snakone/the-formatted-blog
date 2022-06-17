@@ -4,8 +4,8 @@ import {
   ViewChild, 
   ElementRef 
 } from '@angular/core';
-import { CrafterService } from '@core/services/crafter/crafter.service';
 
+import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Snack } from '@shared/types/interface.types';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -42,8 +42,10 @@ export class SnackOverlayComponent implements AfterViewInit {
     css?.add('fadeOutLeft');
 
     setTimeout(() => this.data = null, 800); // Animation Delay
-    !res.message ? this.count = 0 : 
-    setTimeout(() => (this.data = res, this.count++), 800)
+
+    !res.message ? 
+      this.count = 0 : 
+      setTimeout(() => (this.data = res, this.count++), 800)
   }
 
   ngOnDestroy() {

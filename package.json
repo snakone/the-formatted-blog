@@ -17,7 +17,7 @@
     "url": "https://github.com/snakone/the-formatted-blog"
   },
   "engines": {
-    "node": ">=12.20 <=16.14.0"
+    "node": ">=12.20 <=16.15.1"
   },
   "scripts": {
     "ng": "ng",
@@ -50,8 +50,10 @@
     "ngx-quill": "^16.2.0",
     "ngx-webstorage": "^9.0.0",
     "quill": "~1.3.7",
+    "quill-focus": "^1.1.2",
+    "quill-delta-to-html": "^0.12.1",
+    "quill-image-compress": "^1.2.25",
     "rxjs": "~7.5.4",
-    "skeleton-elements": "^4.0.0",
     "sticky-sidebar": "^3.3.1",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.5"

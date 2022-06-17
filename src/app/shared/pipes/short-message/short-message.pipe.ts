@@ -6,7 +6,7 @@ import { Delta } from 'quill';
 export class ShortMessagePipe implements PipeTransform {
 
   transform(
-    value: string | Delta | undefined, 
+    value: string, 
     alone: boolean,
     small: boolean
   ): string | Delta | null {

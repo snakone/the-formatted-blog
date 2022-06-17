@@ -57,22 +57,12 @@ ul {
     }
 
     & .date {
-      font-size: .8rem;
+      font-size: 12px;
       font-style: italic;
       transition: color 666ms ease-in-out;
+      font-family: "Merriweather", Arial, Helvetica, sans-serif;
       padding: 0 7px;
-
-      & .tale {
-        color: var(--contrast-color);
-        padding: 0 12px 0 8px;
-        transition: color 666ms ease-in-out;
-      }
-
       & .created { color: var(--text-color); }
-      &.seen { color: #364bbe; }
-      &.not-seen { color: #f1ad5e; }
-      &.pending { color: var(--pending-color); }
-      &.correct { color: var(--success-color); }
     }
 
     &:first-child { 

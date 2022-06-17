@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 
 @Injectable({providedIn: 'root'})
 

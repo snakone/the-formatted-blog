@@ -9,8 +9,12 @@
   </div>
   <section class="post-content">
     <app-section [margin]="false">
-      <app-post-content id="sticky-wrapper"></app-post-content>
-      <app-post-sidebar></app-post-sidebar>
+      <ng-container *ngIf="(draft$ | async) as draft">
+        <app-post-content [draft]="draft" 
+                          id="sticky-wrapper">
+        </app-post-content>
+        <app-post-sidebar [draft]="draft"></app-post-sidebar>
+      </ng-container>
     </app-section>
   </section>
 </div>

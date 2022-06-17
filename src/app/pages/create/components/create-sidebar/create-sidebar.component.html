@@ -3,7 +3,7 @@
       <ul>
         <li *ngFor="let d of drafts | paginate: instance; let i = index"
             (click)="activate(d); row = i"
-            [ngClass]="{'active': active && i === row}">
+            [ngClass]="{'active': d?.active}">
             <!-- INPUT TITLE -->
             <div class="input-field">
                 <i class="fas fa-pencil-alt"
@@ -13,28 +13,32 @@
               <input type="text"
                     #input 
                     [(ngModel)]="d!.title"
-                    maxlength="50"
+                    maxlength="75"
                     placeholder="Título del boceto"
                     [readonly]="editable || i !== row"
                     (focusout)="editable = true; change(d)"/>
             </div>
+            <!-- STATUS -->
             <p [class]="'date ' + d!.status">
               {{d.status | draftStatus}} 
-              <span class="tale">|</span> 
+              <span class="tale">-</span> 
               <span class="created">{{d!.created}}</span>
             </p>
         </li>
       </ul>
     </ng-container>
+    <!-- NO DRAFTS -->
     <ng-template #noDraft>
       <div class="empty">
         <p>
-          Vaya, parece ser que aún no has escrito nada. Aunque no te preocupes, 
-          en cuánto escribas en el <b>editor</b>, se guardará automáticamente tu <b>primer</b> boceto.
+          Vaya, parece ser que aún no has escrito nada. 
+          Aunque no te preocupes, en cuánto escribas en el <b>editor</b>, 
+          se guardará automáticamente tu <b>primer</b> boceto.
         </p>
         <p>
-          Después de tener un <b>mensaje</b> preparado, podrás seleccionar una categoría, 
-          añadir una <b>foto</b> de portada, además de una introducción.
+          Después de tener un <b>mensaje</b> preparado, podrás 
+          seleccionar una categoría, añadir una <b>foto</b> 
+          de portada, además de una introducción.
         </p>
       </div>
     </ng-template>

@@ -44,6 +44,7 @@
   </form>
 
   <app-quill-toolbar [draft]="draft" 
-                     [form]="true">
+                     [form]="true"
+                     (clean)="clean()">
   </app-quill-toolbar>
 </ng-container>

@@ -1,8 +1,8 @@
 <div class="animated fadeIn">
   <app-post-card *ngFor="let item of items; 
-                          let i = index; 
-                          let last = last"
-                  [small]="i >= 0"
+                         let i = index; 
+                         let last = last"
+                  [small]="true"
                   [border]="false"
                   [last]="last"
                   [post]="item">

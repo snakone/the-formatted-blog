@@ -28,9 +28,8 @@ export class NavDirective implements AfterViewInit {
        tap(_ => setTimeout(() => this.scrolled.emit(true), 100))
      )
       .subscribe(_ => {
-        const current = window.pageYOffset;
-        this.checkScroll(this.css, current);
-        this.scroll = current;
+        this.checkScroll(this.css, window.pageYOffset);
+        this.scroll = window.pageYOffset;
     });
   }
 
@@ -55,8 +54,12 @@ export class NavDirective implements AfterViewInit {
       filter((e): e is NavigationEnd => (
         e instanceof NavigationEnd && !!this.el
       )),
-     ).subscribe(_ => this.el.nativeElement.
-                              classList.remove('scroll-down'));
+     ).subscribe(_ => 
+      (
+        this.el.nativeElement.classList.remove('scroll-down'),
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 333)  // STICKY FIX
+      )
+    );
   }
 
 }

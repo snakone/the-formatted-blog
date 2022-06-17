@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { QuillService } from '@core/services/quill/quill.service';
 
 const Material = [
   MatTooltipModule
@@ -36,7 +37,8 @@ const Material = [
     ScrollTopComponent,
     PaginationComponent,
     QuillToolbarComponent
-  ]
+  ],
+  providers: [QuillService]
 })
 
 export class SnippetsModule { }

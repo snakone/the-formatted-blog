@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 import { USER_INDEX } from '@shared/data/data';
 
 @Component({

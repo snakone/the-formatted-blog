@@ -30,6 +30,13 @@
               <li [class]="'dropdown-item-' + (i + 1)"
                   *ngFor="let m of dropdown; let i = index">{{m}}
               </li>
+              <ng-container *ngIf="(user$ | async) as user">
+                <li *ngIf="user.account === 'Admin' || user.account === 'Super'" 
+                     [class]="'dropdown-item-' + (dropdown.length + 1)"
+                     [routerLink]="'/admin'"
+                     (click)="menuOpened = false">Admin
+                </li>
+              </ng-container>
             </ul>
           </li>  <!-- USER -->
           <ng-container *ngIf="(user$ | async); else noUser">

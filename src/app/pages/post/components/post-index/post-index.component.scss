@@ -1,0 +1,14 @@
+ul {
+  list-style: none;
+
+  & li {
+    position: relative;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    &.active {
+      color: var(--contrast-color);
+      transition: all .3s ease-in;
+    }
+  }
+}

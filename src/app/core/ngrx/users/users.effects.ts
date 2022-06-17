@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, concatMap, catchError, tap } from 'rxjs/operators';
+import { map, concatMap, catchError, tap, switchMap } from 'rxjs/operators';
 
 import * as UserActions from './users.actions';
+import * as DraftActions from '../drafts/drafts.actions';
 import { LoginService } from '@services/api/login.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
@@ -86,8 +87,12 @@ export class UserEffects {
   logOutEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.userLogOut),
-      tap(_ => this.resetUser())
-    ), { dispatch: false }
+      tap(_ => this.resetUser()),
+      switchMap(_ => [
+        DraftActions.reset(),
+        DraftActions.activeOff()
+      ])
+    )
   );
 
   private navigate(

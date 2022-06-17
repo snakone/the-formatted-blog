@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-post-sidebar',
@@ -8,6 +9,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class PostSidebarComponent {
+
+  @Input() draft: Post;
 
   constructor() { }
 

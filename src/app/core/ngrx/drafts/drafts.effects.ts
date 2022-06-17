@@ -33,6 +33,19 @@ export class DraftsEffects {
     ))))
   );
 
+  // GET ALL DRAFTS
+  loadAllDraftsEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.getAll),
+      concatMap(() =>
+      this.draftSrv.getAll()
+        .pipe(
+          map(drafts => DraftsActions.getAllSuccess({ drafts })),
+          catchError(error =>
+              of(DraftsActions.getAllFailure({ error: error.message }))
+    ))))
+  );
+
   // GET DRAFT BY SLUG
   loadDraftBySlugEffect$ = createEffect(() => this.actions
     .pipe(
@@ -134,7 +147,7 @@ export class DraftsEffects {
       ]),
       concatMap((_) => of(DraftsActions.getByUser())),
       catchError(error =>
-        of(DraftsActions.deleteFailure({ error: error.message }))
+        of(DraftsActions.getByUserFailure({ error: error.message }))
       ))
   )
 

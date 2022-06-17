@@ -20,12 +20,6 @@ export class CreateFormComponent implements OnInit {
   categories = POST_CATEGORIES;
   url: string;
   draft: Post;
-
-  get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }
-  get category(): AbstractControl { return this.draftForm.get('category') as AbstractControl; }
-  get cover(): AbstractControl { return this.draftForm.get('cover') as AbstractControl; }
-  get intro(): AbstractControl { return this.draftForm.get('intro') as AbstractControl; }
-
   controls = ['title', 'category', 'cover', 'intro'];
 
   constructor(private draftsFacade: DraftsFacade) { }
@@ -71,9 +65,9 @@ export class CreateFormComponent implements OnInit {
        takeUntil(this.unsubscribe$),
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
-       tap(_ => this.draftsFacade.setSaving(true)),
+       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: true})),
        debounceTime(5000),
-       tap(_ => this.draftsFacade.setSaving(false))
+       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: false}))
     )
      .subscribe(_ => this.submit());
   }
@@ -84,11 +78,23 @@ export class CreateFormComponent implements OnInit {
     this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
   }
 
+  public clean(): void {
+    this.patchForm({title: '', category: '', cover: '', intro: ''});
+  }
+
   public submit(): void {
-    if (this.draftForm.invalid) { return; }
+    if (this.draftForm.invalid) { 
+      this.draftsFacade.setSaving({type: 'warning', value: true})
+      return; 
+    }
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
     this.draftsFacade.update(draft);
   }
+
+  get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }
+  get category(): AbstractControl { return this.draftForm.get('category') as AbstractControl; }
+  get cover(): AbstractControl { return this.draftForm.get('cover') as AbstractControl; }
+  get intro(): AbstractControl { return this.draftForm.get('intro') as AbstractControl; }
 
 }

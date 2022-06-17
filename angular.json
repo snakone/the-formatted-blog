@@ -39,7 +39,6 @@
               "src/styles.scss",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
-              "node_modules/skeleton-elements/css/skeleton-elements.css",
               "node_modules/highlight.js/styles/vs2015.css"
             ],
             "scripts": [
@@ -60,7 +59,10 @@
               "includePaths": [
                 "src/assets/styles"
               ]
-          }
+            },
+            "allowedCommonJsDependencies": [
+              "quill-delta-to-html"
+            ]
           },
           "configurations": {
             "production": {
@@ -77,11 +79,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

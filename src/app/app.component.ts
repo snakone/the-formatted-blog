@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { UsersFacade } from '@core/ngrx/users/users.facade';
+import { UsersFacade } from '@store/users/users.facade';
 import { PWAService } from '@services/pwa/pwa.service';
 import { StorageService } from '@services/storage/storage.service';
 

@@ -1,9 +1,10 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ConfirmationComponent } from '@shared/layout/overlays/confirmation/confirmation.component';
-import { Snack } from '@shared/types/interface.types';
 import { Subject } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
+import { Snack } from '@shared/types/interface.types';
 
 @Injectable({providedIn: 'root'})
 
@@ -34,10 +35,12 @@ export class CrafterService {
   ): void {
     setTimeout(() => {
       this.snack$.next({message, type});
+      
       this.time = setTimeout(() => {
         this.snack$.next({message: null});
         this.clearSnack();
       }, duration);
+
     }, this.time ? duration : 0);
   }
 
