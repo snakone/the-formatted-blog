@@ -1,0 +1,15 @@
+<ng-container *ngIf="draft">
+    <li (click)="activate(draft)"
+        [ngClass]="{'active': draft.active}">
+    <!-- TITLE -->
+    <h3>{{draft.title}}</h3>
+    <!-- STATUS -->
+    <p class="info">
+      <ng-container *ngIf="draft.category">
+        <span class="category">{{draft.category}}</span>
+        <span class="tale">-</span>
+      </ng-container>
+      <span class="created">{{draft.created}}</span>
+    </p>
+  </li>
+</ng-container>

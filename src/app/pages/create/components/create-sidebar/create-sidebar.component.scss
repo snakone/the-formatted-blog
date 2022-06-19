@@ -1,82 +1,11 @@
-@import 'mixins/mixins.scss';
-
 ul {
   list-style: none;
+  min-height: 431px;
   padding: 0;
   margin: 0;
-  min-height: 426px;
-
-  & li {
-    padding: 12px;
-    cursor: pointer;
-    border: 1px solid var(--navigation-border);
-    transition: border 666ms ease-in-out;
-    position: relative;
-    margin-top: 1rem;
-
-    &.active {
-      border-right: 2px solid var(--contrast-color) !important;
-    }
-
-    & .input-field {
-      @include flex-center();
-      margin-bottom: 10px;
-      padding-left: 8px;
-
-      & input {
-        font-size: .9rem;
-        display: inline-block;
-        position: relative;
-        max-width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-color: transparent;
-        color: var(--dark-color);
-        font-family: 'Raleway', Arial, Helvetica, sans-serif;
-        padding: 6px 12px 6px 0;
-        border: 0;
-        border-bottom: 1px solid transparent;
-        border-radius: 0;
-        transition: all 666ms ease-in-out;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        pointer-events: none;
-  
-        &:not([readonly]) {
-          border-bottom: 1px solid var(--input-focus);
-          pointer-events: all;
-        }
-      }
-
-      & i {
-        margin-right: 18px;
-        opacity: .3 !important;
-        position: relative;
-        top: 1px;
-      }
-    }
-
-    & .date {
-      font-size: 12px;
-      font-style: italic;
-      transition: color 666ms ease-in-out;
-      font-family: "Merriweather", Arial, Helvetica, sans-serif;
-      padding: 0 7px;
-      & .created { color: var(--text-color); }
-    }
-
-    &:first-child { 
-      margin-top: 0;
-    }
-
-    &:hover {
-      background-color: var(--li-hover);
-    }
-
-    @media(max-width: 450px) {
-      margin-top: 0;
-    }
-  }
+  padding-top: 55px;
+  border-bottom: 1px solid var(--navigation-border);
+  transition: border 666ms ease-in-out;
 
   @media(max-width: 992px) {
     display: grid;
@@ -85,12 +14,6 @@ ul {
     margin-bottom: 2.5rem;
     gap: 4%;
     min-height: initial;
-
-    & li {
-      &:first-child { 
-        margin-top: 1.2rem;
-      }
-    }
   }
 
   @media(max-width: 650px) {

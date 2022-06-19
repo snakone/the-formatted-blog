@@ -15,7 +15,7 @@
       <div class="select">
         <select formControlName="category">
           <option *ngFor="let o of categories" 
-                  [value]="o.key">{{o.label}}
+                  [value]="o.label">{{o.label}}
           </option>
         </select>
         <app-form-error [control]="category"

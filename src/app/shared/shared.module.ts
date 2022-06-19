@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from './directives/directives.module';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
@@ -8,12 +9,14 @@ import { PipesModule } from './pipes/pipes.module';
   imports: [
     FormsModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
   ],
   exports: [
     FormsModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
   ]
 })
 

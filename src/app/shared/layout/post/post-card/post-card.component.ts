@@ -60,7 +60,6 @@ export class PostCardComponent implements OnInit {
   }
 
   private delete(): void {
-    if (!this.post) { return; }
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(

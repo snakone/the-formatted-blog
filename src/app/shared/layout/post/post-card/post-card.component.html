@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="post">
   <article class="default"
            [ngClass]="{
              'alone': alone, 
@@ -6,7 +6,7 @@
              'last': last
             }">
     <figure>
-      <img [src]="!draft ? (post?.cover | image) : post.cover" 
+      <img [src]="!draft ? (post.cover | image) : post.cover" 
            alt="Post Image"
            #img (error)="img.src = 'assets/images/placeholder.png'"/>
       <!-- HOVER -->
@@ -23,29 +23,29 @@
     </figure>
     <!-- CONTENT -->
     <div class="main-content">
-      <p class="category">{{post?.category}}</p>
-      <h3>{{post?.title}}</h3>
+      <p class="category">{{post.category}}</p>
+      <h3>{{post.title}}</h3>
       <p class="date">
          <!-- DRAFT STATUS -->
         <ng-container *ngIf="draft"> 
           <span [class]="post.status">{{post.status | draftStatus}} </span>
           <span class="tale">-</span>
         </ng-container>
-        <span>{{post?.created}}</span>
+        <span>{{post.created}}</span>
       </p>
       <!-- MESSAGE -->
       <ng-container *ngIf="!alone; else isAlone">
         <div class="message">
-          <div [innerHTML]="post?.intro | shortMessage: alone : small"></div>
+          <div [innerHTML]="post.intro | shortMessage: alone : small"></div>
         </div>
       </ng-container>
       <ng-template #isAlone>
-        <quill-view [content]="post?.message" class="alone"></quill-view>
+        <quill-view [content]="post.message" class="alone"></quill-view>
       </ng-template>
       <!-- BOTTOM -->
       <div class="bottom"
            [ngClass]="{'first': border}">
-        <span class="author">{{post?.author}}</span>
+        <span class="author">{{post.author}}</span>
         <ul>
           <ng-container *ngIf="!draft; else draftIcon">
             <li *ngFor="let i of postIcons">

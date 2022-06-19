@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DirectivesModule } from '@shared/directives/directives.module';
+import { QuillService } from '@core/services/quill/quill.service';
+
 import { TextSliderComponent } from './text-slider/text-slider.component';
 import { FormErrorComponent } from './form-error/form-error.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router';
-import { QuillService } from '@core/services/quill/quill.service';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { SnackOverlayComponent } from './snack/snack.component';
 
 const Material = [
   MatTooltipModule
@@ -22,7 +25,9 @@ const Material = [
     FormErrorComponent,
     ScrollTopComponent,
     PaginationComponent,
-    QuillToolbarComponent
+    QuillToolbarComponent,
+    SpinnerComponent,
+    SnackOverlayComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +41,9 @@ const Material = [
     FormErrorComponent,
     ScrollTopComponent,
     PaginationComponent,
-    QuillToolbarComponent
+    QuillToolbarComponent,
+    SpinnerComponent,
+    SnackOverlayComponent
   ],
   providers: [QuillService]
 })

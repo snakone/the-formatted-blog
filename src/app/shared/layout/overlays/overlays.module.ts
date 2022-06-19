@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { QuillModule } from 'ngx-quill';
 
 import { LogInModule } from './log-in/log-in.module';
-import { SnackOverlayComponent } from './snack/snack.component';
 import { PushDeniedOverlayComponent } from './push-denied/push-denied.component';
 import { QuillHelpComponent } from './quill-help/quill-help.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
@@ -18,7 +17,6 @@ const Material = [
 
 @NgModule({
   declarations: [
-    SnackOverlayComponent,
     PushDeniedOverlayComponent,
     QuillHelpComponent,
     ConfirmationComponent,
@@ -31,7 +29,6 @@ const Material = [
     ...Material
   ],
   exports: [
-    SnackOverlayComponent,
     PushDeniedOverlayComponent,
     QuillHelpComponent,
     ConfirmationComponent,

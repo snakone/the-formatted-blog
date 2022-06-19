@@ -1,11 +1,11 @@
 <div class="animated fadeIn">
   <section class="create-content">
     <app-section spellcheck="false">
+      <app-create-sidebar [drafts]="drafts$ | async">
+      </app-create-sidebar>
       <div id="sticky-wrapper">
         <router-outlet></router-outlet>
       </div>
-      <app-create-sidebar [drafts]="drafts$ | async">
-      </app-create-sidebar>
     </app-section>
   </section>
 </div>

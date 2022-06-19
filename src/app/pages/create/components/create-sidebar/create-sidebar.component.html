@@ -1,31 +1,13 @@
 <app-sticky-aside [selector]="'create-content'">
     <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
       <ul>
-        <li *ngFor="let d of drafts | paginate: instance; let i = index"
-            (click)="activate(d); row = i"
-            [ngClass]="{'active': d?.active}">
-            <!-- INPUT TITLE -->
-            <div class="input-field">
-                <i class="fas fa-pencil-alt"
-                  *ngIf="editable || i !== row"
-                  (click)="editable = !editable; input.focus()">
-                </i>
-              <input type="text"
-                    #input 
-                    [(ngModel)]="d!.title"
-                    maxlength="75"
-                    placeholder="Título del boceto"
-                    [readonly]="editable || i !== row"
-                    (focusout)="editable = true; change(d)"/>
-            </div>
-            <!-- STATUS -->
-            <p [class]="'date ' + d!.status">
-              {{d.status | draftStatus}} 
-              <span class="tale">-</span> 
-              <span class="created">{{d!.created}}</span>
-            </p>
-        </li>
+        <app-draft-card *ngFor="let d of drafts | paginate: instance"
+                         [draft]="d">
+        </app-draft-card>
       </ul>
+      <app-pagination *ngIf="drafts && drafts!.length > 4" 
+                      [instance]="instance">
+      </app-pagination>
     </ng-container>
     <!-- NO DRAFTS -->
     <ng-template #noDraft>
@@ -42,9 +24,6 @@
         </p>
       </div>
     </ng-template>
-  <app-pagination *ngIf="drafts && drafts!.length > 4" 
-                  [instance]="instance">
-  </app-pagination>
 </app-sticky-aside>
 
 

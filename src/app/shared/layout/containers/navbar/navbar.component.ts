@@ -5,8 +5,8 @@ import { UsersFacade } from '@store/users/users.facade';
 import { StorageService } from '@services/storage/storage.service';
 import { CrafterService } from '@services/crafter/crafter.service';
 import { User } from '@shared/types/interface.types';
-import { LogInOverlayComponent } from '../overlays/log-in/log-in.component';
 import { NAVBAR_ICONS, NAVBAR_MENU } from '@shared/data/data';
+import { LogInOverlayComponent } from '@shared/layout/overlays/log-in/log-in.component';
 
 @Component({
   selector: 'app-navbar',
