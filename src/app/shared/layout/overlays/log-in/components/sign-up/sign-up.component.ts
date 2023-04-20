@@ -8,8 +8,8 @@ import {
 
 import { 
   AbstractControl, 
-  FormGroup, 
-  FormControl, 
+  UntypedFormGroup, 
+  UntypedFormControl, 
   Validators, 
   ValidatorFn, 
   ValidationErrors 
@@ -34,7 +34,7 @@ import { PWAService } from '@core/services/pwa/pwa.service';
 export class SignUpComponent implements OnInit {
 
   @Output() login = new EventEmitter<void>();
-  signUpForm!: FormGroup;
+  signUpForm!: UntypedFormGroup;
   matchError = false;
   private unsubscribe$ = new Subject<void>();
   
@@ -53,28 +53,28 @@ export class SignUpComponent implements OnInit {
   }
 
   private createSignInForm(): void {
-    this.signUpForm = new FormGroup({
-      name: new FormControl(null, [
+    this.signUpForm = new UntypedFormGroup({
+      name: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),
         Validators.pattern(NAME_PATTERN)
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
          Validators.required,
          Validators.email,
          Validators.minLength(5),
          Validators.maxLength(35)
       ]),
-      rol: new FormControl(null, [
+      rol: new UntypedFormControl(null, [
         Validators.maxLength(35)
       ]),
-      password: new FormControl(null, [
+      password: new UntypedFormControl(null, [
          Validators.required,
          Validators.minLength(5),
          Validators.maxLength(25)
       ]),
-      password2: new FormControl(null, [
+      password2: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(25),

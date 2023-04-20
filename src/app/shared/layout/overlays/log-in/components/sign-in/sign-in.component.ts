@@ -6,7 +6,7 @@ import {
   EventEmitter 
 } from '@angular/core';
 
-import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl, UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { UsersFacade } from '@store/users/users.facade';
@@ -22,7 +22,7 @@ import { LogInOverlayComponent } from '../../log-in.component';
 export class SignInComponent implements OnInit {
 
   @Output() register = new EventEmitter<void>();
-  signInForm!: FormGroup;
+  signInForm!: UntypedFormGroup;
   remember = false;
 
   constructor(
@@ -35,14 +35,14 @@ export class SignInComponent implements OnInit {
   }
 
   private createSignInForm(): void {
-    this.signInForm = new FormGroup({
-      email: new FormControl(null, [
+    this.signInForm = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [
          Validators.required,
          Validators.email,
          Validators.minLength(5),
          Validators.maxLength(35)
       ]),
-      password: new FormControl(null, [Validators.required])
+      password: new UntypedFormControl(null, [Validators.required])
     });
   }
 
