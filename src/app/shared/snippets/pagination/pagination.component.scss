@@ -1,16 +1,15 @@
 @import 'mixins/mixins.scss';
 
 .pagination {
-  @include flex-center();
+  @include flex-between();
   margin-top: 1px;
-  height: 44px;
-  border: 1px solid var(--navigation-border);
-  transition: border 666ms ease-in-out;
+  height: 46px;
+  padding: 12px 1.4rem 8px 1.4rem;
 
-  & > div {
+  & div:not(.pages) {
     @include flex-center();
     width: 25px;
-    opacity: .8;
+    opacity: 1;
     cursor: pointer;
 
     &.disabled {
@@ -18,17 +17,9 @@
       opacity: .2;
     }
 
-    & a {
-      color: var(--text-color) !important;
-    }
-
-    &.pagination-back {
-      margin-right: 15px;
-    }
-
-    &.pagination-next {
-      margin-left: 15px;
-    }
+    & a { color: var(--dark-color); }
+    &.pagination-back { margin-left: 15px; }
+    &.pagination-next { margin-right: 15px; }
 
     &.pagination-first, 
     &.pagination-last {
@@ -36,25 +27,33 @@
     }
   }
 
-  & .pages {
-    position: relative;
-    top: -2px;
-
-    & span {
-      font-weight: bold;
-    }
-
-    &.current span {
-      color: var(--contrast-color);
-    }
-  }
-
-  
   @media (max-width: 992px) {
     margin-bottom: 2rem;
   }
 
   @media(max-width: 650px) {
     margin-top: 5rem;
+  }
+}
+
+.pages {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  & .number {
+    width: 25px;
+    text-align: center;
+    cursor: pointer;
+
+    & a { color: var(--text-color); }
+    & span {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  
+    &.current span {
+      color: var(--contrast-color);
+    }
   }
 }

@@ -1,0 +1,75 @@
+@import 'mixins/mixins.scss';
+
+li {
+  padding: 12px 12px 8px 12px;
+  cursor: pointer;
+  transition: all 666ms ease-in-out;
+  position: relative;
+  opacity: .5;
+
+  &.active {
+    opacity: 1;
+    & h3 { font-weight: bold; }
+
+    &::after { 
+      color: var(--contrast-color);
+      right: 10px;
+    }
+  }
+
+  & h3 { padding-right: 30px; }
+
+  &::after {
+    content: "\f105";
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    right: 25px;
+    font-size: 0.8rem;
+    top: 25px;
+    transition: right 300ms ease-in-out;
+    color: var(--dark-color);
+  }
+
+  &:hover {
+    &::after {
+      right: 15px;
+    }
+
+    &.active {
+      &::after { 
+        right: 10px;
+      }
+    }
+  }
+
+  & .info {
+    font-size: 12px;
+    font-style: italic;
+    position: relative;
+    transition: color 666ms ease-in-out;
+
+    & .category { color: var(--contrast-color); }
+
+    & .icons {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      & i {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  &:first-child { 
+    margin-top: 0;
+  }
+
+  @media(max-width: 450px) {
+    margin-top: 0;
+  }
+
+}
+
+

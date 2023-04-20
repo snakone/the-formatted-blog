@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
   <section class="profile-content">
     <app-section [margin]="false">
-      <app-profile-sidebar></app-profile-sidebar>
+      <app-profile-sidebar [user]="user$ | async"></app-profile-sidebar>
       <div id="profile-route"></div>  <!-- Navigate Trick -->
       <div class="wrapper" id="sticky-wrapper">
         <router-outlet></router-outlet>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { SnippetsModule } from '@shared/snippets/snippets.module';
+import { SharedModule } from '@shared/shared.module';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInOverlayComponent } from './log-in.component';
@@ -25,8 +25,7 @@ const Material = [
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
+    SharedModule,
     SnippetsModule,
     ...Material
   ],

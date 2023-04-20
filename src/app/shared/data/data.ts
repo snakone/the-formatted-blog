@@ -143,8 +143,6 @@ export const NAVBAR_MENU = [
 ];
 
 export const NAVBAR_ICONS: IconList[]  = [
-  { icon: 'fas fa-home', route: '/home' },
-  { icon: 'fas fa-feather-alt', route: '/create' },
   { icon: 'far fa-file-alt', route: '/news' },
   { icon: 'fas fa-question', route: '/help' }
 ];

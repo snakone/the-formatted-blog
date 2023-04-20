@@ -6,8 +6,11 @@ section {
 }
 
 #sticky-wrapper {
-  @include grid-component();
-  padding-right: 40px;
+  @include grid-inverted();
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    grid-column: 2 / -1;
+  }
 }
 
 app-create-sidebar {

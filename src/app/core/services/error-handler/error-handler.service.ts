@@ -9,7 +9,7 @@ import {
   WRONG_INFO_SENTENCE 
 } from '@shared/data/sentences';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 
 export class ErrorHandlerService implements ErrorHandler {
 
@@ -27,9 +27,6 @@ export class ErrorHandlerService implements ErrorHandler {
       }
     }
 
-    if (this.chunkFailedMessage.test(error?.message)) { 
-      window.location.reload();
-    }
   }
 
   public showHttpError(err: HttpErrorResponse): void {

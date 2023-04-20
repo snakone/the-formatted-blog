@@ -1,8 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { PaginationInstance } from 'ngx-pagination';
-
-import { DraftsFacade } from '@store/drafts/drafts.facade';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { PaginationControlsDirective, PaginationInstance } from 'ngx-pagination';
 import { Post } from '@shared/types/interface.types';
 
 @Component({
@@ -12,39 +9,19 @@ import { Post } from '@shared/types/interface.types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CreateSidebarComponent implements OnInit, OnDestroy {
+export class CreateSidebarComponent implements OnInit {
 
   @Input() drafts!: Post[] | null;
-  private unsubscribe$ = new Subject<void>();
-  row = 0;
-  editable = true;
-  
+  p: PaginationControlsDirective;
+
   instance: PaginationInstance = {
     id: 'drafts',
-    itemsPerPage: 4,
+    itemsPerPage: 5,
     currentPage: 1
   };
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor() { }
 
   ngOnInit(): void { }
-
-  public activate(draft: Post): void {
-    this.draftsFacade.setActive(draft);
-
-    if (document.body.clientWidth <= 642) {
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-  }
-
-  public change(draft: Post): void {
-    if (!draft.title) { return; }
-    this.draftsFacade.updateKey(draft._id, {key: 'title', value: draft.title});
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 
 }

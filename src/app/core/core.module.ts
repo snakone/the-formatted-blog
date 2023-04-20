@@ -37,7 +37,6 @@ import { QuillFormatModule } from './services/quill/quill.module';
   ],
   providers: [
     HttpService,
-    ErrorHandlerService,
     { provide: CORE_MODULE_CONFIG, useValue: CORE_MODULE_CONSTANTS },
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },

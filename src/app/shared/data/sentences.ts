@@ -27,8 +27,6 @@ Lo que vayas escribiendo se irá guardando automáticamente, así podrás tomart
 Los artículos que vayas escribiendo apareceran en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y éstos se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo". Cuándo tu boceto sea aprobado, aparecerá junto con los demás artículos en la página. ¡Felicidades!
 
 A partir de aquí, cualquier persona podrá disfrutar de lo que hagas. Escribe y comparte el contenido, gana visitas, puntos y prestigio como escritor dentro de la aplicación. 
-
-Haz amigos, chatea, filtra el contenido que quieres ver. Por ejemplo, si quieres puedes ver sólo el contenido de tus amigos. El poder es tuyo, nosotros te ofrecemos las herramientas. Por último, muchas gracias por escribir en "The Formatted Blog". ¡Que la inspiración te acompañe!
 `;
 
 export const POST_MESSAGE = `<p>

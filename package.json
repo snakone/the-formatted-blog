@@ -1,6 +1,6 @@
 {
   "name": "formatted-blog",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Application to create content",
   "keywords": [
     "Content",
@@ -50,8 +50,8 @@
     "ngx-quill": "^16.2.0",
     "ngx-webstorage": "^9.0.0",
     "quill": "~1.3.7",
-    "quill-focus": "^1.1.2",
     "quill-delta-to-html": "^0.12.1",
+    "quill-focus": "^1.1.2",
     "quill-image-compress": "^1.2.25",
     "rxjs": "~7.5.4",
     "sticky-sidebar": "^3.3.1",

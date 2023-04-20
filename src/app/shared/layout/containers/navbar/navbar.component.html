@@ -6,6 +6,21 @@
     <div class="actions"> <!-- RIGHT SIDE -->
       <div class="icons">
         <ul>  <!-- ARRAY -->
+          <li>
+            <i class="fas fa-home"
+               routerLink="/home"
+               routerLinkActive="active">
+            </i>
+          </li>
+          <!-- CREATE -->
+          <ng-container *ngIf="user$ | async">
+            <li class="animated fadeIn">
+              <i class="fas fa-feather-alt"
+                 routerLink="/create"
+                 routerLinkActive="active">
+              </i>
+            </li>
+          </ng-container>
           <li *ngFor="let i of icons">
             <i [class]="i.icon"
                [routerLink]="i.route"

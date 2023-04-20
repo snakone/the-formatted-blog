@@ -16,6 +16,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class ProfileComponent implements OnInit, OnDestroy {
 
   text = LIKE_TEXT;
+  user$: Observable<User>;
   $unsubscribe = new Subject<void>();
 
   constructor(
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.stickyFix();
+    this.user$ = this.userFcd.user$;
   }
 
   private stickyFix(): void {

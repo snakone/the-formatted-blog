@@ -1,0 +1,96 @@
+.quill-focus .ql-editor {
+  color: rgba(200, 200, 200, 100);
+}
+
+.quill-focus .ql-editor > * {
+  transition: color 300ms;
+}
+
+.quill-focus .focused-blot {
+  color: rgba(45, 45, 45, 255);
+}
+
+.ql-container.ql-snow { 
+  height: auto;
+  overflow-y: auto;
+  border: none !important;
+
+  // SCROLLBAR
+  &::-webkit-scrollbar { width: 8px; }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px var(--light-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 1px var(--dark-color);
+    background: var(--light-color);
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: var(--text-color);
+  }
+}
+
+.ql-container.ql-snow, 
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid var(--navigation-border);
+  transition: border 666ms ease-in-out;
+}
+
+.ql-toolbar.ql-snow {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.ql-formats {
+  position: relative;
+  left: -2px;
+  margin-right: 0 !important;
+  @media(min-width: 425px) { margin-right: 6px !important; }
+  @media(min-width: 465px) { margin-right: 12px !important; }
+  @media(min-width: 550px) { margin-right: 24px !important; }
+  &:first-of-type { top: -.5px; }
+  &:last-of-type { margin-right: 0 !important }
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none;
+  stroke: var(--text-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ql-toolbar .ql-fill {
+  fill: var(--text-color);
+  stroke: none;
+}
+
+.ql-toolbar .ql-picker { color: var(--text-color) }
+.ql-blockquote .ql-fill { stroke: var(--text-color) }
+
+.ql-snow.ql-toolbar button {
+  &:hover {
+    & .ql-stroke { stroke: var(--contrast-color) }
+    & .ql-fill { fill: var(--contrast-color) }
+  }
+
+  &.ql-undo, &.ql-redo {
+    &::after {
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      font-weight: 900;
+      color: var(--text-color);
+      position: relative;
+      top: .5px;
+    }
+
+    &:hover::after { color: var(--contrast-color) }
+  }
+
+  &.ql-undo::after { content: '\f0e2' }
+  &.ql-redo::after { content: '\f01e' }
+}

@@ -7,6 +7,14 @@
       <i [class]="i.icon"></i> 
       <span>{{i.label}}</span>
     </li>
+    <li *ngIf="user && user.account === 'Super' || 
+               user.account === 'Admin'"
+               routerLink="/admin"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact: true}">
+      <i class="fas fa-unlock-alt"></i>         
+      <span>Admin</span>
+    </li>
     <li (click)="logOut()">
       <i class="fas fa-sign-out-alt"></i>
       <span>Salir</span>

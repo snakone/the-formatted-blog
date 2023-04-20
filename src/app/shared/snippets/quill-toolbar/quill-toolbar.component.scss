@@ -1,12 +1,11 @@
 .toolbar {
-  border: 1px solid var(--navigation-border);
-  border-top: none;
+  border: none;
+  border-top: 1px solid var(--navigation-border);
   transition: border 666ms ease-in-out;
-  padding: 8px;
+  padding: 12px 8px 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 16px;
 
   &.form { border-top: 1px solid var(--navigation-border); }
 
@@ -54,6 +53,18 @@
 
   & i.fa-folder-open { margin-right: 2px; }
   @media(max-width: 992px) { margin-bottom: 1rem }
+
+  @media(max-width: 550px) {
+    & .animated {
+      & span {
+        display: none;
+      }
+    }
+
+    & i:not(.fa-pulse) {
+      width: 28px;
+    }
+  }
 }
 
 
