@@ -17,6 +17,8 @@ export const STORAGE_CONSTANTS: StorageConfig = {
 
 export class Storage {
   [key: string]: string | undefined;
+
+  constructor() {}
 }
 
 export let STORAGE_CONFIG = new InjectionToken<StorageConfig>('storage.config');

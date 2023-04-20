@@ -1,4 +1,4 @@
-import { Delta } from "quill";
+import { DeltaStatic } from "quill";
 
 // POST
 export interface Post {
@@ -6,7 +6,7 @@ export interface Post {
   slug?: string;
   title?: string;
   category?: string;
-  message?: Delta;
+  message?: DeltaStatic;
   created?: string;
   author?: string;
   cover?: string;

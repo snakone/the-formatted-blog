@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
@@ -15,7 +15,7 @@ import { Post } from '@shared/types/interface.types';
 
 export class CreateFormComponent implements OnInit {
 
-  draftForm: FormGroup;
+  draftForm: UntypedFormGroup;
   private unsubscribe$ = new Subject<void>();
   categories = POST_CATEGORIES;
   url: string;
@@ -41,17 +41,17 @@ export class CreateFormComponent implements OnInit {
   }
 
   private createForm(): void {
-    this.draftForm = new FormGroup({
-       title: new FormControl(null, [
+    this.draftForm = new UntypedFormGroup({
+       title: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(10)
        ]),
-       category: new FormControl(null, [Validators.required]),
-       cover: new FormControl(null, [
+       category: new UntypedFormControl(null, [Validators.required]),
+       cover: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern(IMAGE_PATTERN)
       ]),
-      intro: new FormControl(null, [
+      intro: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(150),
         Validators.maxLength(500)
