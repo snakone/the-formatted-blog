@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { UntypedFormGroup, AbstractControl, UntypedFormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 
 import { UsersFacade } from '@store/users/users.facade';
 import { LogInOverlayComponent } from '../../log-in.component';

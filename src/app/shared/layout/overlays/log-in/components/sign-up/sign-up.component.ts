@@ -16,7 +16,7 @@ import {
 } from '@angular/forms';
 
 import { Subject, takeUntil } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 
 import { UsersFacade } from '@store/users/users.facade';
 import { NAME_PATTERN } from '@shared/data/patterns';
