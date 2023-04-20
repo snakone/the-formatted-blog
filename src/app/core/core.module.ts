@@ -21,7 +21,6 @@ import { QuillFormatModule } from './services/quill/quill.module';
 
 @NgModule({
   imports: [
-    StorageModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(CORE_MODULE_CONSTANTS.WEBSTORAGE_CONFIG),
@@ -33,7 +32,8 @@ import { QuillFormatModule } from './services/quill/quill.module';
       UserEffects,
       PostEffects
     ]),
-    QuillFormatModule
+    QuillFormatModule,
+    StorageModule,
   ],
   providers: [
     HttpService,

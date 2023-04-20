@@ -61,7 +61,9 @@
               ]
             },
             "allowedCommonJsDependencies": [
-              "quill-delta-to-html"
+              "quill-delta-to-html",
+              "quill",
+              "quill-image-compress"
             ]
           },
           "configurations": {
