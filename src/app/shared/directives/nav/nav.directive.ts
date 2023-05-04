@@ -23,10 +23,7 @@ export class NavDirective implements AfterViewInit {
 
   private stickyNavbar(): void {
     fromEvent(window, 'scroll')
-     .pipe(
-       throttleTime(50),
-       tap(_ => setTimeout(() => this.scrolled.emit(true), 100))
-     )
+     .pipe(tap(_ => this.scrolled.emit(true)))
       .subscribe(_ => {
         this.checkScroll(this.css, window.pageYOffset);
         this.scroll = window.pageYOffset;
@@ -37,7 +34,11 @@ export class NavDirective implements AfterViewInit {
     css: DOMTokenList, 
     current: number
   ): void {
-    if (current <= 0) { return; }
+    // NAV HEIGHT
+    if (current <= 48 && css.contains('scroll-down')) { 
+      css.remove('scroll-down');
+      return;
+    }
 
     if (css && (current > this.scroll) &&
        !css.contains('scroll-down')

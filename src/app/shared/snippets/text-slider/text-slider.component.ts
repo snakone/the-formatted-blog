@@ -14,7 +14,7 @@ export class TextSliderComponent implements AfterContentChecked {
   interval = this.createInterval();
 
   items: string[] = [
-    'The Latest New For Your New Post',
+    'The Latest For Your New Post',
     'The Latest New For Your',
     'The Latest New'
   ];

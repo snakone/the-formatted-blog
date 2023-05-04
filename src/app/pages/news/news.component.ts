@@ -4,13 +4,13 @@ import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
 })
 
 export class NewsComponent implements OnInit {
 
   text = NOTIFICATION_TEXT;
-  duration = 2000;
+  duration = 1500;
 
   constructor() { }
 

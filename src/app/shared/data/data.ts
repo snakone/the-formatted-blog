@@ -26,7 +26,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Home & Living',
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
-    cover: '05-img.jpg'
+    cover: '05-img.jpg',
+    intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
     _id: '2',

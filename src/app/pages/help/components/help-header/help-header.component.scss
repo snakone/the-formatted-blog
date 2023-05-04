@@ -1,0 +1,38 @@
+.main-post {
+  & figure img {
+    aspect-ratio: 12/2;
+
+    @media(max-width: 800px) {
+      aspect-ratio: 12/4;
+    }
+  }
+
+  & .content {
+    left: 25%;
+    width: 50%;
+
+    & .inner {
+      & h2 {
+        display: inherit;
+        
+        & span {
+          color: var(--contrast-color);
+        }
+      }
+
+      & p {
+        @media (max-width: 490px) { line-height: 18px; }
+      }
+    }
+
+    @media(max-width: 1200px) and (min-width: 801px) {
+      width: 64%;
+      left: 18%;
+    }
+
+    @media(max-width: 800px) {
+      left: 0;
+      width: 100%;
+    }
+  }
+}

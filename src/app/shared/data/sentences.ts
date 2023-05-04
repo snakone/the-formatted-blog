@@ -8,6 +8,7 @@ export const LIKE_TEXT = `Hazle saber a este creador/a que te gusta lo que hace.
 ¡Esto le ayudará a que haga más contenido para todos! ¡Genial!`;
 
 export const SEARCH_SENTENCE = 'Escribe aquí lo que quieras buscar, artículos, vídeos, opiniones, etc...';
+export const HELP_SENTENCE = 'The Formatted Blog te ayuda a compartir lo que más te gusta de una manera sencilla y elegante.';
 
 export const LOGIN_SENTENCE = 'Bienvenido/a. Disfruta la estancia.';
 export const LOGOUT_SENTENCE = 'Esperamos volver a verte pronto.';

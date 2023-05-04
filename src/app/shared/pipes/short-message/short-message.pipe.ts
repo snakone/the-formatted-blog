@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DeltaStatic } from 'quill';
 
 @Pipe({name: 'shortMessage'})
 
@@ -9,9 +8,9 @@ export class ShortMessagePipe implements PipeTransform {
     value: string, 
     alone: boolean,
     small: boolean
-  ): string | DeltaStatic | null {
+  ): string | null {
     if (!value) return '';
-    return alone ? value : small ? null : (value.slice(0, 650) + '...');
+    return alone ? value : small ? null : (value.slice(0, 610) + '...');
   }
 
 }
