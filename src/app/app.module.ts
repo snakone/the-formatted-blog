@@ -7,8 +7,6 @@ import { LayoutModule } from '@layout/layout.module';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './app.routing';
 import { APP_CONFIG, APP_CONSTANTS } from './app.config';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '@env/environment';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -23,8 +21,7 @@ import { environment } from '@env/environment';
         strictStateImmutability: false,
         strictActionImmutability: false
       }
-    }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    })
   ],
   providers: [{ provide: APP_CONFIG, useValue: APP_CONSTANTS }]
 })

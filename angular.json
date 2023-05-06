@@ -48,7 +48,6 @@
               "src/assets/scripts/masonry.js",
               "src/assets/scripts/highlight.js"
             ],
-            "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
             "vendorChunk": true,
             "extractLicenses": false,
