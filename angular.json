@@ -33,7 +33,8 @@
               "src/manifest.webmanifest",
               "src/robots.txt",
               "src/sitemap.xml",
-              "src/_redirects"
+              "src/_redirects",
+              "src/ngsw-worker.js"
             ],
             "styles": [
               "src/styles.scss",
