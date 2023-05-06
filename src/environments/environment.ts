@@ -7,4 +7,4 @@ export const environment = {
 };
 
 // api: 'http://localhost:3000/'
-// api: 'https://formatted-blog.herokuapp.com/'
+// api: 'https://theformattedblog-snakone.b4a.run/'

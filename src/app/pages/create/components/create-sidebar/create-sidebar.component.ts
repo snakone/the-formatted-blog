@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { PaginationControlsDirective, PaginationInstance } from 'ngx-pagination';
+import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { Post } from '@shared/types/interface.types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -12,16 +14,20 @@ import { Post } from '@shared/types/interface.types';
 export class CreateSidebarComponent implements OnInit {
 
   @Input() drafts!: Post[] | null;
-  p: PaginationControlsDirective;
+  id$: Observable<string> | undefined;
 
-  instance: PaginationInstance = {
-    id: 'drafts',
-    itemsPerPage: 5,
-    currentPage: 1
-  };
+  constructor(private createDraftService: CreateDraftService, private draftsFacade: DraftsFacade) { }
 
-  constructor() { }
+  ngOnInit(): void { 
+    this.id$ = this.createDraftService.onDraftDelete$;
+  }
 
-  ngOnInit(): void { }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      if (this.drafts && this.drafts.length === 1) {
+        this.draftsFacade.setActive(this.drafts[0]);
+      }
+    }, 999);
+  }
 
 }

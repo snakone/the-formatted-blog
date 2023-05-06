@@ -3,7 +3,7 @@
   width: 100%;
   @media (min-width: 865px) { width: 850px }
   @media (min-width: 993px) { width: 970px }
-  @media (min-width: 1200px) { width: 1170px }
+  @media (min-width: 1201px) { width: 1170px }
 }
 
 // CENTER CONTENT
@@ -61,6 +61,13 @@
 @mixin flex-around {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+
+// FLEX AROUND
+@mixin flex-start {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 

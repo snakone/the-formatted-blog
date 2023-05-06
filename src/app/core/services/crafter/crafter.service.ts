@@ -31,7 +31,7 @@ export class CrafterService {
   public setSnack(
     message: string | null,
     type: snackType = 'info',
-    duration: number = 4000
+    duration: number = 2000
   ): void {
     setTimeout(() => {
       this.snack$.next({message, type});

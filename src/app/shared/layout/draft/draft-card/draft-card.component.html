@@ -1,15 +1,19 @@
 <ng-container *ngIf="draft">
-    <li (click)="activate(draft)"
-        [ngClass]="{'active': draft.active}">
-    <!-- TITLE -->
-    <h3>{{draft.title}}</h3>
-    <!-- STATUS -->
-    <p class="info">
-      <ng-container *ngIf="draft.category">
-        <span class="category">{{draft.category}}</span>
-        <span class="tale">-</span>
-      </ng-container>
-      <span class="created">{{draft.created}}</span>
-    </p>
+  <li (click)="activate(draft)"
+      class="animated"
+      [ngClass]="{'active': draft.active, 'zoomOutLeft': id === draft._id}">
+    <img src="assets/images/pencil.png" alt="pencil_icon"/>
+    <div>
+      <!-- TITLE -->
+      <h3>{{draft.title}}</h3>
+      <!-- STATUS -->
+      <p class="info">
+        <ng-container *ngIf="draft.category">
+          <span class="category">{{draft.category}}</span>
+          <span class="tale">-</span>
+        </ng-container>
+        <span class="created">{{draft.created}}</span>
+      </p>
+    </div>
   </li>
 </ng-container>

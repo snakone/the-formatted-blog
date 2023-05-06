@@ -16,12 +16,12 @@
     position: relative;
     top: .5px;
     cursor: pointer;
-    &:hover { color: var(--contrast-color) }
+    transition: filter 200ms ease-in;
+    &:hover:not(.disabled):not(.fa-check) { color: var(--contrast-color) }
 
     &.fa-check { 
       top: 0;
       color: var(--success-color);
-      margin-left: 12px;
       margin-right: 6px;
 
       & + span {
@@ -33,6 +33,11 @@
 
   & .actions i {
     &:nth-last-child(2) { margin-left: 24px }
+
+    &.disabled {
+      filter: invert(1);
+      cursor: not-allowed;
+    }
   }
 
   & i.fa-pulse {

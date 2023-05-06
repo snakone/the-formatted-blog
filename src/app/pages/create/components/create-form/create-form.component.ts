@@ -18,9 +18,11 @@ export class CreateFormComponent implements OnInit {
   draftForm: UntypedFormGroup;
   private unsubscribe$ = new Subject<void>();
   categories = POST_CATEGORIES;
+  emptyDraft: Post = {title: '', category: '', cover: '', intro: ''};
   url: string;
   draft: Post;
   controls = ['title', 'category', 'cover', 'intro'];
+  timer = 5000;
 
   constructor(private draftsFacade: DraftsFacade) { }
 
@@ -34,7 +36,7 @@ export class CreateFormComponent implements OnInit {
     this.draftsFacade.active$
      .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_),
+        filter(_ => !!_),
         tap(draft => this.draft = draft),
       )
     .subscribe(draft => this.patchForm(draft));
@@ -66,7 +68,7 @@ export class CreateFormComponent implements OnInit {
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
        tap(_ => this.draftsFacade.setSaving({type: 'saving', value: true})),
-       debounceTime(5000),
+       debounceTime(this.timer),
        tap(_ => this.draftsFacade.setSaving({type: 'saving', value: false}))
     )
      .subscribe(_ => this.submit());
@@ -79,7 +81,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   public clean(): void {
-    this.patchForm({title: '', category: '', cover: '', intro: ''});
+    this.patchForm({...this.emptyDraft});
   }
 
   public submit(): void {

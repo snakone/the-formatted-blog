@@ -16,10 +16,11 @@ import { slugify } from '@core/services/quill/quill.module';
 export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   @ViewChild('editor', { static: true }) editor!: QuillEditorComponent;
-  draft: Post;
+  draft!: Post;
   private unsubscribe$ = new Subject<void>();
   show = false;
   model = EMPTY_QUILL as DeltaStatic;
+  timer = 5000;
 
   quillModules: QuillModules = {
     syntax: true,
@@ -36,9 +37,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
       maxHeight: 350, 
       debug: false, 
     },
-    // focus: {
-    //   focusClass: 'focused-blot'
-    // },
     history: { delay: 2000, userOnly: false },
   };
 
@@ -47,7 +45,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   ngAfterContentInit(): void {
     this.listenEditor();
     this.getActive();
-    // console.log(this.editor.quillEditor.root.innerHTML);
   }
 
   private listenEditor(): void {
@@ -57,11 +54,11 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        filter(_ => _.source !== 'api'),
        distinctUntilChanged(),
        tap(_ => this.save(true)),
-       debounceTime(5000),
+       debounceTime(this.timer),
        map(_ => _.content as DeltaStatic),
      )
-     .subscribe((message) => 
-        this.onChange(message, this.getHeaders(message.ops))
+     .subscribe((delta) => 
+        this.onChange(delta, this.getHeaders(delta.ops))
       );
   }
 
@@ -72,7 +69,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
           if (o.attributes?.header === 2) {
             const str = ops[i - 1].insert?.split('\n');
             const text =  str[str.length - 1];
-            return {text, id: slugify(text)};
+            return {text, id: slugify(text)} as PostHeader;
           }
 
           return null;
@@ -84,21 +81,26 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   }
 
   private onChange(
-    message: DeltaStatic,
+    delta: DeltaStatic,
     headers: PostHeader[]
   ): void {
+    let temporalDraft: Post | undefined;
+
     !this.draft ? // NEW 
       (
-        this.draft = { title: 'Boceto ', message, headers },
-        this.draftsFacade.create(this.draft)
+        temporalDraft = { title: 'Boceto ', message: delta, headers },
+        this.draftsFacade.create(temporalDraft)
       ) :  // UPDATE
       (
-        this.draft.message = message, 
-        this.draft.headers = headers, 
-        this.draftsFacade.update(this.draft)
+        temporalDraft = Object.assign({}, this.draft),
+        temporalDraft.message = delta, 
+        temporalDraft.headers = headers, 
+        this.draftsFacade.update(temporalDraft)
       );
 
+    this.draftsFacade.setPreview(temporalDraft);
     this.save(false);
+    setTimeout(() => this.focusQuill(), 10);
   }
 
   private save(value: boolean): void {
@@ -111,17 +113,39 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   private getActive(): void {
     this.draftsFacade.active$
-    .pipe(takeUntil(this.unsubscribe$))
-     .subscribe(res => this.draft = res);
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      tap(res => this.draft = res),
+      debounceTime(10)
+    )
+     .subscribe(_ => this.focusQuill(true));
   }
 
   public stickyFix(): void {
     window.dispatchEvent(new Event('resize'));
   }
 
+  private focusQuill(scroll = false): void {
+    if (!this.draft) { return; }
+
+    const text = this.editor.quillEditor?.getLength();
+    if (text) {
+      this.editor.quillEditor?.setSelection(text, text);
+    }
+
+    if (scroll) {
+      const bounds = this.editor.quillEditor?.getBounds(text, text);
+      const container = this.editor.quillEditor['container'];
+      if (bounds && container) {
+        container.scrollTop = bounds.top;
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.draftsFacade.resetPreview();
   }
 
 }

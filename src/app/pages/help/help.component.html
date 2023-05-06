@@ -1,1 +1,16 @@
-<p>help works!</p>
+<div class="animated fadeIn">
+  <section class="help-content">
+    <app-help-header></app-help-header>
+    <app-action-bar [text]="text">
+    </app-action-bar>
+  </section>
+
+  <section class="help-content">
+    <app-section>
+      <app-help-content id="sticky-wrapper"></app-help-content>
+      <app-help-sidebar></app-help-sidebar>
+    </app-section>
+  </section>
+</div>
+
+<app-scroll-top></app-scroll-top>

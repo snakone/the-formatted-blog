@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { HELP_SENTENCE } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-help',
@@ -8,6 +9,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 
 export class HelpComponent implements OnInit {
+
+  text = HELP_SENTENCE;
 
   constructor() { }
 

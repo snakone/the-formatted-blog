@@ -9,6 +9,7 @@ import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-hel
 import { Post, SavingType } from '@shared/types/interface.types';
 import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
+import { CreateDraftService } from '@pages/create/services/create-draft.service';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -32,7 +33,8 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     private draftsFacade: DraftsFacade,
     private router: Router,
     private route: ActivatedRoute,
-    private quillSrv: QuillService
+    private quillSrv: QuillService,
+    private createDraftSrv: CreateDraftService
   ) { }
 
   ngOnInit(): void {
@@ -40,17 +42,17 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   }
 
   switchObj: any = {
-    new: () => this.new(),
-    preview: () => this.preview(),
-    clean: () => this.clean.emit(),
-    delete: () => this.delete(),
-    download: () => this.download(),
-    help: () => this.help(),
+    new: (sv: boolean) => this.new(sv),
+    preview: (sv: boolean) => this.preview(sv),
+    clean: (sv: boolean) => {if (!sv) this.clean.emit()},
+    delete: (sv: boolean) => this.delete(sv),
+    download: (sv: boolean) => this.download(sv),
+    help: (sv: boolean) => this.help(sv),
     next: () => this.next()
   };
 
-  private new(): void {
-    if (!this.draft) { return; }
+  private new(sv: boolean): void {
+    if (!this.draft || sv) { return; }
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(
@@ -60,28 +62,29 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
         this.draftsFacade.updateKey(
           this.draft._id, { key: 'message', value: this.draft.message }
         );
-        this.draftsFacade.activeOff();
+        this.draftsFacade.resetActive();
         this.router.navigateByUrl('/create');
     });
   }
 
-  private preview(): void {
-    if (!this.draft) { return; }
+  private preview(sv: boolean): void {
+    if (!this.draft || sv) { return; }
     this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
   }
 
-  private help(): void {
+  private help(sv: boolean): void {
+    if (sv) { return; }
     this.form ? '' :
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
   }
 
-  private download(): void {
-    if (!this.draft) { return; }
+  private download(sv: boolean): void {
+    if (!this.draft || sv) { return; }
     this.quillSrv.convertToHTML(this.draft);
   }
 
-  private delete(): void {
-    if (!this.draft) { return; }
+  private delete(sv: boolean): void {
+    if (!this.draft || sv) { return; }
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
@@ -89,7 +92,8 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
         filter(_ => _ && !!_)
       ).subscribe(_ => (
         this.draftsFacade.delete(this.draft._id),
-        this.router.navigateByUrl('/create')
+        this.router.navigateByUrl('/create'),
+        this.createDraftSrv.onDeleteDraft(this.draft._id)
     ));
   }
 

@@ -106,7 +106,7 @@ export const setSaving =
   props<{ data: SavingType }>());
 
 // ACTIVE OFF
-export const activeOff =
+export const resetActive =
   createAction('[Drafts API] Set Active Off Draft');
 
 // RESET DRAFTS

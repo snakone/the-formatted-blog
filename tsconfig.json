@@ -16,6 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2022",
     "module": "es2020",
+    "strict": false,
     "lib": [
       "es2018",
       "dom"

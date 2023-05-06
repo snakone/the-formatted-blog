@@ -5,7 +5,7 @@
   margin: 30px 0;
   display: grid;
   grid-template-columns: 69% auto;
-  background: #ffffff;
+  background: var(--action-bar-bg);
   padding: 12px 20px;
   transition: background 666ms ease-in-out;
   &.margin { margin: 18px 0 35px }
@@ -18,12 +18,12 @@
       font-size: .8rem;
       text-align: center;
       line-height: 14px;
-      color: #303030;
+      color: var(--action-bar-text);
       font-style: italic;
     }
 
     @media(max-width: 750px) { 
-      max-width: 82%;
+      max-width: 92%;
 
       & p {
         margin-bottom: 4px;

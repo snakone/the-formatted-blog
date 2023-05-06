@@ -80,7 +80,7 @@ const featureReducer = createReducer(
     }
   )),
   on(DraftActions.setPreview, (state, { draft }) => ({ ...state, preview: draft})),
-  on(DraftActions.activeOff, (state) => ({ ...state, active: null})),
+  on(DraftActions.resetActive, (state) => ({ ...state, active: null})),
   on(DraftActions.setSaving, (state, { data }) => ({ ...state, saving: data})),
   // RESET
   on(DraftActions.reset, (state) => (

@@ -30,7 +30,7 @@
 
       &:hover {
         cursor: pointer;
-        font-weight: bold;
+        filter: brightness(1.5);
 
         & i {
           color: var(--contrast-color);

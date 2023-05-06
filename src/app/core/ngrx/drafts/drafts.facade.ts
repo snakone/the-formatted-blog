@@ -64,8 +64,8 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.resetSaving());
   }
 
-  public activeOff(): void {
-    this.store.dispatch(DraftActions.activeOff());
+  public resetActive(): void {
+    this.store.dispatch(DraftActions.resetActive());
   }
 
   public reset(): void {

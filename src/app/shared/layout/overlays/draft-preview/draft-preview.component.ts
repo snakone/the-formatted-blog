@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.types';
 import { Observable } from 'rxjs';

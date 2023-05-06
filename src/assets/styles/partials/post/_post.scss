@@ -19,7 +19,6 @@ $quill-padding-sm: 20px;
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
   padding: $quill-padding;
-  padding-left: 14px;
   line-height: inherit;
   overflow-y: initial;
   &[contenteditable="false"] { padding: 0 }
@@ -41,7 +40,7 @@ $quill-padding-sm: 20px;
   &.ql-blank::before {
     top: 7px;
     right: $quill-padding !important;
-    left: 14px !important;
+    left: $quill-padding !important;
     font-style: normal !important;
     color: var(--text-color);
     opacity: .7;
@@ -162,7 +161,7 @@ $quill-padding-sm: 20px;
   // IMAGE
   & img {
     display: block;
-    margin: 14px auto 15px;
+    margin: 14px 0 30px;
     &:last-child { margin-bottom: 0 }
   }
 }
