@@ -34,7 +34,8 @@ export class PWAService {
   public updateSW(): void {
     this.swUpdate.versionUpdates
      .pipe(
-       filter(event => event && !!event)
+       filter(event => !!event && (event.type !== 'NO_NEW_VERSION_DETECTED' && 
+                                   event.type !== 'VERSION_INSTALLATION_FAILED'))
       )
       .subscribe(_ => {
         this.swUpdate.activateUpdate()
