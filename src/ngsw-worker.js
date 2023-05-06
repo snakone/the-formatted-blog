@@ -1346,30 +1346,25 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       var _a, _b, _c;
       notification.close();
       const options = {};
-
-      console.log({notification, action});
       
       // ********************** //        
       // CUSTOM CODE START HERE //
       // ********************** //
               
       // URL for browser tab already opened
-      const windowURL = notification?.data?.url || null;
+      const windowURL = notification.data && notification.data.url ? 
+                        notification.data.url : null;
       // URL for a new browser tab
-      const workerURL = notification.data.url || 'https://formatted-blog.netlify.app/';
+      const workerURL = notification.data && notification.data.url ? 
+                        notification.data.url : 'https://formatted-blog.netlify.app/';
 
-      const windowList = await clients.matchAll({type: 'window'});
-
-      if (windowList?.length > 0) {
-        windowList.forEach(clientWindow => {
-          windowURL ? client.navigate(windowURL) && clientWindow.focus() : null;
-        });
-      } else {
-        const workerWindow = await clients.openWindow(workerURL);
-        if (workerWindow) {
-          workerWindow.focus();
-        }
-      }
+      clients.matchAll({type: 'window'})
+        .then(clientsList => clientsList.length > 0 ?
+        clientsList.forEach(client => 
+          windowURL ? client.navigate(windowURL) && client.focus() : null) :
+          clients.openWindow(workerURL)
+            .then(client => client ? client.focus() : null)
+      );
 
       // ********************** //        
       //   END OF CUSTOM CODE   //
