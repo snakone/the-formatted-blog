@@ -25,28 +25,39 @@
   } as pipe">  
     <!-- ACTIONS -->
     <ng-container *ngFor="let l of list">
-      <i [class]="l.icon"
-         [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
-         (click)="switchObj[l.action](pipe.saving?.value)"
-         [ngClass]="{'disabled': pipe.saving?.value || !draft}"
-         *ngIf="!form">
+      <ng-container *ngIf="!form">
+        <i [class]="l.icon"
+          [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
+          (click)="switchObj[l.action](pipe.saving?.value)"
+          [ngClass]="{'disabled': pipe.saving?.value || !draft}">
+        </i>
+      </ng-container>
+    </ng-container>
+    <!-- HELP -->
+    <ng-container *ngIf="!form">
+      <i class="far fa-question-circle" 
+        matTooltip="Ayuda" 
+        (click)="switchObj.help()">
+      </i>
+      <!-- NEXT -->
+      <i class="fab fa-wpforms"
+        [matTooltip]="(!pipe.saving?.value && draft) ? 'Formulario' : null"
+        [ngClass]="{'disabled': pipe.saving?.value || !draft}"
+        (click)="switchObj.next()">
       </i>
     </ng-container>
-    <i class="far fa-question-circle" 
-       matTooltip="Ayuda" 
-       (click)="switchObj.help()" 
-       *ngIf="!form">
-    </i>
-    <i class="fas fa-fast-forward"
-       [matTooltip]="(!pipe.saving?.value && draft) ? 'Siguiente' : null"
-       [ngClass]="{'disabled': pipe.saving?.value || !draft}"
-       (click)="switchObj.next()"
-       *ngIf="!form">
-    </i>
-    <i class="fas fa-fast-backward"
-       matTooltip="Atrás"
-       [routerLink]="['../']"
-       *ngIf="form">
-    </i>
+    <ng-container *ngIf="form">
+      <!-- CLEAN -->
+      <i class="fas fa-broom"
+        matTooltip="Limpiar"
+        (click)="switchObj.clean()">
+      </i>
+      <!-- BACK -->
+      <i class="fas fa-fast-backward"
+        matTooltip="Lienzo"
+        [routerLink]="['../']"
+        *ngIf="form">
+      </i>
+    </ng-container>
   </div>
 </div>

@@ -81,3 +81,20 @@
   border-radius: 3px;
   font-size: 13px;
 }
+
+@mixin scrollbar($width) {
+  // SCROLLBAR
+  ::-webkit-scrollbar { width: $width; }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--dark-color);
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+}

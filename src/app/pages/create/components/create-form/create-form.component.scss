@@ -2,8 +2,9 @@
 
 form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 4%;
+  margin-top: 6px;
+  height: 581px;
+  max-height: 581px;
 
   & .select {
     position: relative;
@@ -55,10 +56,29 @@ form {
 }
 
 .form-control {
+  position: relative;
+  margin-bottom: 2rem;
+
   & label {
     display: inline-block;
     position: relative;
     top: -4px;
+  }
+
+  & .hint {
+    position: absolute;
+    bottom: -13px;
+    left: 3px;
+    opacity: 0.5;
+    font-size: 11px;
+  }
+
+  select + .hint {
+    bottom: -25px;
+  }
+
+  textarea + .hint {
+    bottom: -5px;
   }
 }
 

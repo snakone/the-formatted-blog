@@ -5,6 +5,7 @@
       <label for="title">Título</label>
       <input formControlName="title"
              type="text"/>
+      <span class="hint">Piensa bien el título, luego será el identificador único.</span>
       <app-form-error [control]="title"
                       [validator]="['required', 'minlength']">
       </app-form-error>
@@ -18,6 +19,7 @@
                   [value]="o.label">{{o.label}}
           </option>
         </select>
+        <span class="hint">Una buena introducción hace que el lector entre a tu artículo.</span>
         <app-form-error [control]="category"
                         [validator]="['required']">
         </app-form-error>
@@ -28,6 +30,7 @@
       <label for="cover">URL de la portada (.png .jpg)</label>
       <input formControlName="cover"
              type="text"/>
+      <span class="hint">No alojamos imágenes. Utiliza una URL de internet.</span>
       <app-form-error [control]="cover"
                       [validator]="['required', 'pattern']">
       </app-form-error>
@@ -37,6 +40,7 @@
     <div class="form-control intro">
       <label for="cover">Introducción</label>
       <textarea formControlName="intro"></textarea>
+      <span class="hint">Una buena introducción hace que el lector entre a tu artículo.</span>
       <app-form-error [control]="intro"
                       [validator]="['required', 'minlength', 'maxlength']">
       </app-form-error>

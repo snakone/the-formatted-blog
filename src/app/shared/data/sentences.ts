@@ -25,9 +25,11 @@ Estás frente a un lienzo en blanco. Tu aventura empieza aquí. Utiliza los boto
 
 Lo que vayas escribiendo se irá guardando automáticamente, así podrás tomarte el tiempo que quieras. Además dispones de una barra de acciones situada en la parte inferior. Si tienes alguna duda utiliza el botón de ayuda "?"
 
-Los artículos que vayas escribiendo apareceran en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y éstos se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo". Cuándo tu boceto sea aprobado, aparecerá junto con los demás artículos en la página. ¡Felicidades!
+Los artículos que vayas escribiendo aparecerán en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y estos se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo" de verdad. Cuando tu boceto sea aprobado por el equipo de moderación, aparecerá junto con todos los demás artículos de la aplicación. ¡Felicidades!
 
-A partir de aquí, cualquier persona podrá disfrutar de lo que hagas. Escribe y comparte el contenido, gana visitas, puntos y prestigio como escritor dentro de la aplicación. 
+A partir de aquí, cualquier persona podrá disfrutar de lo que hagas. Escribe y comparte el contenido que más te gusta, gana visitas, puntos y prestigio como escritor dentro de la aplicación, diviértete, saca tu lado más creativo y no lo olvides: 
+
+¡Nunca pierdas la curiosidad ni la imaginación!
 `;
 
 export const POST_MESSAGE = `<p>

@@ -77,7 +77,7 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-external-link-alt', label: 'Previsualizar', action: 'preview' },
   { icon: 'fas fa-broom', label: 'Limpiar', action: 'clean' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
-  { icon: 'fas fa-cloud-download-alt', label: 'Descargar', action: 'download' },
+  { icon: 'fas fa-cloud-download-alt', label: 'Descargar en HTML', action: 'download' },
 ];
 
 export const SAVE_CONFIRMATION = {

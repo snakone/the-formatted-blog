@@ -84,18 +84,21 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     delta: DeltaStatic,
     headers: PostHeader[]
   ): void {
+    let temporalDraft: Post | undefined;
+
     !this.draft ? // NEW 
       (
-        this.draft = { title: 'Boceto ', message: delta, headers },
-        this.draftsFacade.create(this.draft)
+        temporalDraft = { title: 'Boceto ', message: delta, headers },
+        this.draftsFacade.create(temporalDraft)
       ) :  // UPDATE
       (
-        this.draft.message = delta, 
-        this.draft.headers = headers, 
-        this.draftsFacade.update(this.draft)
+        temporalDraft = Object.assign({}, this.draft),
+        temporalDraft.message = delta, 
+        temporalDraft.headers = headers, 
+        this.draftsFacade.update(temporalDraft)
       );
 
-    this.draftsFacade.setPreview(this.draft);
+    this.draftsFacade.setPreview(temporalDraft);
     this.save(false);
     setTimeout(() => this.focusQuill(), 10);
   }

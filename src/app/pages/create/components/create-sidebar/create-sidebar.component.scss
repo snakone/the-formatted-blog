@@ -1,11 +1,13 @@
+@import 'mixins/mixins.scss';
+
 ul {
   list-style: none;
-  min-height: 431px;
-  max-height: 581px;
+  height: 553px;
+  max-height: 553px;
   padding: 0;
   margin: 0;
-  padding-top: 9px;
   overflow-y: scroll;
+  position: relative;
 
   @media(max-width: 992px) {
     display: grid;
@@ -20,10 +22,24 @@ ul {
     grid-template-columns: 1fr;
     margin-bottom: 5rem;
   }
-  &::-webkit-scrollbar { display: none; }
+  
+  @include scrollbar(8px);
+}
+
+p.total {
+  opacity: .6;
+  margin-bottom: 12px;
 }
 
 .empty {
+  
+  & p {
+    margin-bottom: 26px;
+    padding-right: 1rem;
+    &:first-child { margin-top: 20px }
+    &:last-child { margin-bottom: 0 }
+  }
+
   @media(max-width: 992px) {
     margin-top: 1rem;
     border: 1px solid var(--navigation-border);
@@ -34,14 +50,7 @@ ul {
     }
   }
 
-  & p {
-    margin-bottom: 30px;
-    &:last-child { margin-bottom: 0 }
-  }
+
 }
 
-
-
-.removed {
-  border: red 2px solid;
-}
+i { margin: 0 4px }
