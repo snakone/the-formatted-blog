@@ -1,6 +1,6 @@
 {
   "name": "formatted-blog",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Application to create content",
   "keywords": [
     "Content",
@@ -22,7 +22,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng run formatted-blog:build --configuration=production",
+    "build": "ng run formatted-blog:build:production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
