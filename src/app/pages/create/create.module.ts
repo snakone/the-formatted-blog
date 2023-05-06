@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 import { CreateComponent } from './create.component';
 
@@ -16,6 +15,7 @@ import { CreateContentComponent } from './components/create-content/create-conte
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { CreateSidebarComponent } from './components/create-sidebar/create-sidebar.component';
 import { CreateFormComponent } from './components/create-form/create-form.component';
+import { CreateDraftService } from './services/create-draft.service';
 
 const Material = [
   MatTooltipModule,
@@ -37,9 +37,11 @@ const Material = [
     SharedModule,
     SnippetsModule,
     DraftsAccessModule,
-    NgxPaginationModule,
     DraftLayoutModule,
     ...Material
+  ],
+  providers: [
+    CreateDraftService
   ]
 })
 

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class ActiveGuard implements CanActivate {
+export class ActiveGuard {
 
   constructor(
     private draftsFacade: DraftsFacade,

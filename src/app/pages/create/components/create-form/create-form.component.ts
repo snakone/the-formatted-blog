@@ -21,6 +21,7 @@ export class CreateFormComponent implements OnInit {
   url: string;
   draft: Post;
   controls = ['title', 'category', 'cover', 'intro'];
+  timer = 5000;
 
   constructor(private draftsFacade: DraftsFacade) { }
 
@@ -66,7 +67,7 @@ export class CreateFormComponent implements OnInit {
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
        tap(_ => this.draftsFacade.setSaving({type: 'saving', value: true})),
-       debounceTime(5000),
+       debounceTime(this.timer),
        tap(_ => this.draftsFacade.setSaving({type: 'saving', value: false}))
     )
      .subscribe(_ => this.submit());

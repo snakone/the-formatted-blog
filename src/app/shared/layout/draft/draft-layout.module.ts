@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 
 import { DraftCardComponent } from './draft-card/draft-card.component';
@@ -20,7 +19,6 @@ const Material = [
   imports: [
     CommonModule,
     SharedModule,
-    NgxPaginationModule,
     DraftsAccessModule,
     ...Material
   ],

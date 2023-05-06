@@ -44,7 +44,7 @@ h4 {
   position: relative;
   padding-top: 30px;
 
-  &::before {
+  &:not(.create)::before {
     content: '';
     position: absolute;
     width: 100%;

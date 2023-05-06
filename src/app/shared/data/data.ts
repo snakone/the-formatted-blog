@@ -78,7 +78,6 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-broom', label: 'Limpiar', action: 'clean' },
   { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
   { icon: 'fas fa-cloud-download-alt', label: 'Descargar', action: 'download' },
-  { icon: 'far fa-question-circle', label: 'Ayuda', action: 'help' }
 ];
 
 export const SAVE_CONFIRMATION = {

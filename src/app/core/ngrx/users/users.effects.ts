@@ -90,7 +90,7 @@ export class UserEffects {
       tap(_ => this.resetUser()),
       switchMap(_ => [
         DraftActions.reset(),
-        DraftActions.activeOff()
+        DraftActions.resetActive()
       ])
     )
   );

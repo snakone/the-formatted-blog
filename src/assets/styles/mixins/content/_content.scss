@@ -64,6 +64,13 @@
   align-items: center;
 }
 
+// FLEX AROUND
+@mixin flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 // HORIZONTAL BAR
 @mixin hbar() {
   &::before {

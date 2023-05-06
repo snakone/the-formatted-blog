@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as DraftsActions from './drafts.actions';
-import { map, concatMap, catchError, withLatestFrom, filter } from 'rxjs/operators';
+import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime } from 'rxjs/operators';
 import { DraftService } from '@core/services/api/drafts.service';
 import * as fromDrafts from './drafts.selectors';
 import { Store } from '@ngrx/store';
@@ -108,6 +108,7 @@ export class DraftsEffects {
   deleteDraftEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.deleteDraft),
+      debounceTime(600), // Delete Animation
       concatMap((action) =>
       this.draftSrv.deleteDraft(action.id)
         .pipe(

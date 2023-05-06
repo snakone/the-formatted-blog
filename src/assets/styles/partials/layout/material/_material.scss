@@ -51,6 +51,7 @@
 }
 
 .mat-dialog-actions .mat-button-base + .mat-button-base {
-  background-color: rgba(0,0,0, .2);
+  background-color: var(--contrast-color);
+  color: var(--light-color);
 }
 

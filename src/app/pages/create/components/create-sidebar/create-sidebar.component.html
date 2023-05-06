@@ -1,13 +1,11 @@
 <app-sticky-aside [selector]="'create-content'">
     <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
       <ul>
-        <app-draft-card *ngFor="let d of drafts | paginate: instance"
-                         [draft]="d">
+        <app-draft-card *ngFor="let d of drafts"
+                        [draft]="d"
+                        [id]="id$ | async">
         </app-draft-card>
       </ul>
-      <app-pagination *ngIf="drafts && drafts!.length > 4" 
-                      [instance]="instance">
-      </app-pagination>
     </ng-container>
     <!-- NO DRAFTS -->
     <ng-template #noDraft>
@@ -24,6 +22,6 @@
         </p>
       </div>
     </ng-template>
-</app-sticky-aside>
+  </app-sticky-aside>
 
 

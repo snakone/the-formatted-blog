@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Post } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 
@@ -8,13 +8,12 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
   styleUrls: ['./draft-card.component.scss']
 })
 
-export class DraftCardComponent implements OnInit {
+export class DraftCardComponent {
 
-  @Input() draft: Post;
+  @Input() draft: Post | undefined;
+  @Input() id: string | undefined; // DELETE
 
   constructor(private draftsFacade: DraftsFacade) { }
-
-  ngOnInit(): void { }
 
   public activate(draft: Post): void {
     this.draftsFacade.setActive(draft);

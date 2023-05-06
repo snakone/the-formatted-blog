@@ -20,14 +20,26 @@
       </ng-container>
     </ng-container>
   </div>
-  <div class="actions">  <!-- ACTIONS -->
-    <i *ngFor="let l of list"
-        [class]="l.icon"
-        [matTooltip]="l.label"
-        (click)="switchObj[l.action]()">
+  <div class="actions" *ngIf="{
+    saving: saving$ | async
+  } as pipe">  
+    <!-- ACTIONS -->
+    <ng-container *ngFor="let l of list">
+      <i [class]="l.icon"
+         [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
+         (click)="switchObj[l.action](pipe.saving?.value)"
+         [ngClass]="{'disabled': pipe.saving?.value || !draft}"
+         *ngIf="!form">
+      </i>
+    </ng-container>
+    <i class="far fa-question-circle" 
+       matTooltip="Ayuda" 
+       (click)="switchObj.help()" 
+       *ngIf="!form">
     </i>
     <i class="fas fa-fast-forward"
-       matTooltip="Siguiente"
+       [matTooltip]="(!pipe.saving?.value && draft) ? 'Siguiente' : null"
+       [ngClass]="{'disabled': pipe.saving?.value || !draft}"
        (click)="switchObj.next()"
        *ngIf="!form">
     </i>

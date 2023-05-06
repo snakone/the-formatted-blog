@@ -1,11 +1,11 @@
 ul {
   list-style: none;
   min-height: 431px;
+  max-height: 581px;
   padding: 0;
   margin: 0;
-  padding-top: 55px;
-  border-bottom: 1px solid var(--navigation-border);
-  transition: border 666ms ease-in-out;
+  padding-top: 9px;
+  overflow-y: scroll;
 
   @media(max-width: 992px) {
     display: grid;
@@ -20,6 +20,7 @@ ul {
     grid-template-columns: 1fr;
     margin-bottom: 5rem;
   }
+  &::-webkit-scrollbar { display: none; }
 }
 
 .empty {
@@ -39,3 +40,8 @@ ul {
   }
 }
 
+
+
+.removed {
+  border: red 2px solid;
+}
