@@ -12,6 +12,7 @@ export class DraftCardComponent {
 
   @Input() draft: Post | undefined;
   @Input() id: string | undefined; // DELETE
+  @Input() last: boolean | undefined;
 
   constructor(private draftsFacade: DraftsFacade) { }
 

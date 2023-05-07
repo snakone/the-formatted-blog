@@ -4,9 +4,10 @@
 
 <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
   <ul>
-    <app-draft-card *ngFor="let d of drafts"
+    <app-draft-card *ngFor="let d of drafts; let last = last"
                     [draft]="d"
-                    [id]="id$ | async">
+                    [id]="id$ | async"
+                    [last]="last">
     </app-draft-card>
   </ul>
 </ng-container>
@@ -15,7 +16,7 @@
   <div class="empty">
     <p>
       Parece ser que aún no has escrito nada. 
-      ¡Aunque no te preocupes! En cuánto escribas en el <b>lienzo</b> de la derecha, 
+      ¡Aunque no te preocupes! En cuánto escribas en el <b>lienzo</b>, 
       se guardará automáticamente lo que hayas escrito y se creará tu <b>primer</b> boceto. 
       <br><br>
       ¿No es genial? Eso no es todo...
@@ -30,9 +31,6 @@
       Recuerda que el formulario se guardará una vez sea <b>válido</b> y que los botones de la barra inferior solamente 
       estarán activos cuando tengas un lienzo seleccionado. Por último, el icono 
       <i class="far fa-question-circle"></i> muestra las herramientas que puedes usar en tu lienzo
-    </p>
-    <p>
-      
     </p>
   </div>
 </ng-template>

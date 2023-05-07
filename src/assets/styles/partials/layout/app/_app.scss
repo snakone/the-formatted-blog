@@ -187,3 +187,7 @@ button {
     }
   }
 }
+
+textarea + span + app-form-error > .form-error {
+  margin-top: -5px !important;
+}

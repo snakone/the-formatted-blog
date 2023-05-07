@@ -76,7 +76,6 @@
       font-weight: 900;
       color: var(--text-color);
       position: relative;
-      top: .5px;
     }
 
     &:hover::after { color: var(--contrast-color) }
@@ -84,4 +83,8 @@
 
   &.ql-undo::after { content: '\f0e2' }
   &.ql-redo::after { content: '\f01e' }
+
+  &.ql-video, &.ql-link, &.ql-image {
+    margin: 0 1.5px;
+  }
 }

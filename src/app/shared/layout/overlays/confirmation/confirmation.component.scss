@@ -5,3 +5,24 @@ h1 {
 div[mat-dialog-content] {
   margin-bottom: .8rem;
 }
+
+@media(max-width: 550px) {
+  h1 {
+    font-size: 21px;
+  }
+
+  button {
+    font-size: 13px;
+    min-width: 48px;
+    line-height: 28px;
+  }
+
+  div[mat-dialog-content] {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  div[mat-dialog-actions] {
+    padding-top: 0;
+  }
+}

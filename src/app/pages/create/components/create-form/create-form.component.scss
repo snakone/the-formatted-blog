@@ -2,7 +2,6 @@
 
 form {
   display: grid;
-  margin-top: 6px;
   height: 581px;
   max-height: 581px;
 
@@ -37,20 +36,33 @@ form {
     resize: none;
   }
 
-  @media(max-width: 992px) {
-    & .intro {
-      margin-bottom: 3rem;
-    }
+  @media(min-width: 993px) {
+    margin-top: 6px;
   }
 
-  @media(max-width: 650px) {
-    & .form-control {
-      grid-column: 1 / -1;
-      margin-bottom: 2rem;
+  @media(max-width: 992px) {
+    & .intro {
+      margin-bottom: 2rem !important;
     }
 
-    & .intro {
-      margin-bottom: 3.5rem;
+    height: 494px;
+    max-height: 494px;
+
+    & .form-control {
+      grid-column: 1 / -1;
+      margin-bottom: 1rem;
+
+      & .hint {
+        bottom: 2px;
+      }
+
+      & textarea + .hint {
+        bottom: 5px;
+      }
+    }
+
+    & textarea {
+      height: 130px;
     }
   }
 }
@@ -73,11 +85,11 @@ form {
     font-size: 11px;
   }
 
-  select + .hint {
+  & select + .hint {
     bottom: -25px;
   }
 
-  textarea + .hint {
+  & textarea + .hint {
     bottom: -5px;
   }
 }

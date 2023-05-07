@@ -1,7 +1,7 @@
 @import 'mixins/mixins.scss';
 
 li {
-  padding: 12px 0 8px 0;
+  padding: 12px 0 10px 0;
   cursor: pointer;
   position: relative;
   opacity: .5;
@@ -32,6 +32,19 @@ li {
     line-height: 14px;
 
     & .category { color: var(--contrast-color); }
+  }
+
+  &.last {
+    margin-bottom: 0;
+  }
+
+  @media(max-width: 992px) {
+    border: 1px solid var(--navigation-border);
+    padding: 12px 0 14px 16px;
+  }
+
+  @media(max-width: 650px) {
+    margin-bottom: 12px;
   }
 
   @media(max-width: 450px) {

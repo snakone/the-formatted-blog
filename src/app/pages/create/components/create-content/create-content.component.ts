@@ -20,7 +20,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   private unsubscribe$ = new Subject<void>();
   show = false;
   model = EMPTY_QUILL as DeltaStatic;
-  timer = 5000;
+  timer = 1000;
 
   quillModules: QuillModules = {
     syntax: true,

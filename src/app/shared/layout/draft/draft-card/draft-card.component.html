@@ -1,7 +1,7 @@
 <ng-container *ngIf="draft">
   <li (click)="activate(draft)"
       class="animated"
-      [ngClass]="{'active': draft.active, 'zoomOutLeft': id === draft._id}">
+      [ngClass]="{'active': draft.active, 'zoomOutLeft': id === draft._id, 'last': last}">
     <img src="assets/images/pencil.png" alt="pencil_icon"/>
     <div>
       <!-- TITLE -->
