@@ -25,8 +25,6 @@ $quill-padding-sm: 20px;
   min-height: var(--quill-height);
   max-height: var(--quill-height);
 
-
-
   // PARAGRAPH
   & p {
     margin: 0 0 30px;
@@ -34,6 +32,10 @@ $quill-padding-sm: 20px;
     &:last-of-type { 
       margin: 0;
       padding-bottom: 35px;
+    }
+
+    & + ul, & + ol {
+      margin-top: 0;
     }
   }
 
