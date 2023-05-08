@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, map, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation, DeltaStatic } from 'quill';
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
@@ -21,6 +21,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   show = false;
   model = EMPTY_QUILL as DeltaStatic;
   timer = 5000;
+  active$: Observable<Post> | undefined;
 
   quillModules: QuillModules = {
     syntax: true,
@@ -100,7 +101,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
     this.draftsFacade.setPreview(temporalDraft);
     this.save(false);
-    setTimeout(() => this.focusQuill(), 10);
   }
 
   private save(value: boolean): void {
@@ -112,35 +112,11 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   }
 
   private getActive(): void {
-    this.draftsFacade.active$
-    .pipe(
-      takeUntil(this.unsubscribe$),
-      tap(res => this.draft = res),
-      debounceTime(10),
-      filter(_ => document.body.clientWidth >= 642)
-    )
-     .subscribe(_ => this.focusQuill(true));
+    this.active$ = this.draftsFacade.active$.pipe(tap(res => this.draft = res));
   }
 
   public stickyFix(): void {
     window.dispatchEvent(new Event('resize'));
-  }
-
-  private focusQuill(scroll = false): void {
-    if (!this.draft) { return; }
-
-    const text = this.editor.quillEditor?.getLength();
-    if (text) {
-      this.editor.quillEditor?.setSelection(text, text);
-    }
-
-    if (scroll) {
-      const bounds = this.editor.quillEditor?.getBounds(text, text);
-      const container = this.editor.quillEditor['container'];
-      if (bounds && container) {
-        container.scrollTop = bounds.top;
-      }
-    }
   }
 
   ngOnDestroy() {

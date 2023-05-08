@@ -27,11 +27,21 @@
   }
 
   & .actions i {
-    &:nth-last-child(2) { margin-left: 24px }
+    &:nth-last-child(2) { 
+      margin-left: 24px;
+
+      @media(max-width: 450px) {
+        margin-left: 12px;
+      }
+     }
 
     &:nth-child(3) {
       margin-left: 24px;
       margin-right: 5px;
+
+      @media(max-width: 450px) {
+        margin-left: 12px;
+      }
     }
 
     &.disabled {
