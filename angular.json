@@ -33,9 +33,7 @@
               "src/manifest.webmanifest",
               "src/robots.txt",
               "src/sitemap.xml",
-              "src/_redirects",
-              "src/ngsw-worker.js",
-              "src/ngsw-config.json"
+              "src/_redirects"
             ],
             "styles": [
               "src/styles.scss",
@@ -49,7 +47,8 @@
               "src/assets/scripts/masonry.js",
               "src/assets/scripts/highlight.js"
             ],
-            "ngswConfigPath": "src/ngsw-config.json",
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
