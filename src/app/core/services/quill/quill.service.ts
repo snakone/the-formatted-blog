@@ -154,7 +154,7 @@ const POST_STYLES_STRING = `
     }
 
     h1 {
-      margin: 32px 0 2px 0;
+      margin: 28px 0 2px 0;
     }
 
     h2 {
@@ -193,7 +193,6 @@ const POST_STYLES_STRING = `
     img:last-child { margin-bottom: 0 }
 
     footer {
-      position: fixed;
       width: 100%;
       bottom: 0;
       left: 0;
