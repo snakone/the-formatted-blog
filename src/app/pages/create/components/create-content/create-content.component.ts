@@ -20,7 +20,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   private unsubscribe$ = new Subject<void>();
   show = false;
   model = EMPTY_QUILL as DeltaStatic;
-  timer = 1000;
+  timer = 5000;
 
   quillModules: QuillModules = {
     syntax: true,
@@ -116,7 +116,8 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     .pipe(
       takeUntil(this.unsubscribe$),
       tap(res => this.draft = res),
-      debounceTime(10)
+      debounceTime(10),
+      filter(_ => document.body.clientWidth >= 642)
     )
      .subscribe(_ => this.focusQuill(true));
   }

@@ -193,6 +193,10 @@ const POST_STYLES_STRING = `
     img:last-child { margin-bottom: 0 }
 
     footer {
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
       text-align: center;
       margin: 30px 0 15px 0;
       font-size: 12px;

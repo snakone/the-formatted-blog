@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, filter, Subject, Observable } from 'rxjs';
+import { takeUntil, filter, Subject, Observable, map, tap } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
@@ -25,6 +25,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   @Output() clean = new EventEmitter<void>();
   saving$: Observable<SavingType>;
   private unsubscribe$ = new Subject<void>();
+  total$: Observable<number> | undefined;
   
   list = CREATE_ACTION_LIST;
 
@@ -39,6 +40,9 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.saving$ = this.draftsFacade.saving$;
+    this.total$ = this.draftsFacade.drafts$.pipe(
+      map(drafts => drafts?.length || 0)
+    );
   }
 
   switchObj: any = {

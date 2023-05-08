@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
-import { Post } from '@shared/types/interface.types';
-import { Observable } from 'rxjs';
+import { Post, SavingType } from '@shared/types/interface.types';
+import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -15,11 +15,19 @@ export class CreateSidebarComponent implements OnInit {
 
   @Input() drafts!: Post[] | null;
   id$: Observable<string> | undefined;
+  saving$: Observable<SavingType> | undefined;
 
-  constructor(private createDraftService: CreateDraftService, private draftsFacade: DraftsFacade) { }
+  constructor(
+    private createDraftService: CreateDraftService,
+    private draftsFacade: DraftsFacade
+  ) { }
 
   ngOnInit(): void { 
     this.id$ = this.createDraftService.onDraftDelete$;
+    this.saving$ = this.draftsFacade.saving$.pipe(
+      filter(res => !!res), 
+      distinctUntilKeyChanged('value')
+    );
   }
 
   ngAfterViewInit() {

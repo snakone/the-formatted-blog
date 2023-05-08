@@ -49,10 +49,6 @@ $quill-padding-sm: 20px;
     padding-bottom: $quill-padding !important;
   }
 
-  @media(max-width: 992px) {
-    min-height: 389px;
-  }
-
   @media(max-width: 550px) {
     padding: 20px 12px;
     font-size: 13px;

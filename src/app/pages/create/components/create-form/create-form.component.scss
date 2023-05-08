@@ -41,28 +41,24 @@ form {
   }
 
   @media(max-width: 992px) {
+    height: 587px;
+    max-height: 587px;
+
     & .intro {
       margin-bottom: 2rem !important;
     }
-
-    height: 494px;
-    max-height: 494px;
 
     & .form-control {
       grid-column: 1 / -1;
       margin-bottom: 1rem;
 
       & .hint {
-        bottom: 2px;
+        bottom: 5px;
       }
 
       & textarea + .hint {
-        bottom: 5px;
+        bottom: 10px;
       }
-    }
-
-    & textarea {
-      height: 130px;
     }
   }
 }

@@ -17,6 +17,11 @@ li {
     & h3 { font-weight: bold; }
   }
 
+  &.disabled {
+    cursor: not-allowed;
+    opacity: .3;
+  }
+
   & h3 { 
     white-space: nowrap;
     overflow: hidden;
