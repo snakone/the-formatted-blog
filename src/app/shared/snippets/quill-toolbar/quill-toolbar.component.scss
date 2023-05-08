@@ -9,30 +9,30 @@
 
   &.form { border-top: 1px solid var(--navigation-border); }
 
-  & i:not(.fa-pulse) {
+  & i:not(.fa-pulse):not(.fa-check) {
     height: 24px;
     padding: 3px 8px;
-    width: 35px;
+    width: 28px;
     position: relative;
     top: .5px;
     cursor: pointer;
     transition: filter 200ms ease-in;
-    &:hover:not(.disabled):not(.fa-check) { color: var(--contrast-color) }
+    &:hover:not(.disabled):not(.fa-newspaper) { color: var(--contrast-color) }
+  }
 
-    &.fa-check { 
-      top: 0;
-      color: var(--success-color);
-      margin-right: 6px;
-
-      & + span {
-        position: relative;
-        top: 1px;
-      }
-    }
+  & i.fa-check { 
+    top: 0;
+    color: var(--success-color);
+    margin-right: .8rem;
   }
 
   & .actions i {
     &:nth-last-child(2) { margin-left: 24px }
+
+    &:nth-child(3) {
+      margin-left: 24px;
+      margin-right: 5px;
+    }
 
     &.disabled {
       filter: invert(1);
@@ -41,8 +41,9 @@
   }
 
   & i.fa-pulse {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-right: .8rem;
+    position: relative;
+    top: -1px;
   }
 
   & i.fa-exclamation-triangle {
@@ -56,8 +57,30 @@
     }
   }
 
-  & i.fa-folder-open { margin-right: 2px; }
-  @media(max-width: 992px) { margin-bottom: 1rem }
+  & i.fa-newspaper {
+    top: 2px !important;
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  & i.fa-wpforms, & i.fa-question-circle {
+    font-size: 15px;
+    top: 1.5px !important;
+  }
+
+  & i.fa-wpforms {
+    margin-left: 3px;
+  }
+
+  & i.fa-external-link-alt {
+    margin-left: 2px;
+  }
+
+  & .animated {
+    margin-left: 28px;
+  }
+
+  @media(max-width: 992px) { margin-bottom: 1.4rem }
 
   @media(max-width: 550px) {
     & .animated {
@@ -65,10 +88,16 @@
         display: none;
       }
     }
+  }
+}
 
-    & i:not(.fa-pulse) {
-      width: 28px;
-    }
+.flex {
+  display: flex;
+  align-items: center;
+
+  & span {
+    position: relative;
+    top: -1px;
   }
 }
 

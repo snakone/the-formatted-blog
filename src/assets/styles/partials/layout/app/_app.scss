@@ -187,3 +187,40 @@ button {
     }
   }
 }
+
+// FORM ERROR
+textarea + span + app-form-error > .form-error,
+input + span + app-form-error > .form-error,
+select + span + app-form-error > .form-error
+ {
+  margin-top: -5px !important;
+
+  @media(max-width: 520px) {
+    position: relative !important;
+
+    & span {
+      position: absolute;
+      top: 16px;
+      left: 6px;
+    }
+  }
+}
+
+textarea + span + app-form-error > .form-error
+ {
+  @media(max-width: 520px) {
+    & span {
+      top: 15px;
+    }
+  }
+}
+
+input + span + app-form-error > .form-error,
+select + span + app-form-error > .form-error
+ {
+  @media(max-width: 520px) {
+    & span {
+      top: 20px;
+    }
+  }
+}

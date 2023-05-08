@@ -1,6 +1,10 @@
 <div class="toolbar"
      [ngClass]="{'form': form}">  <!-- TOOLBAR -->
-  <div>
+  <div class="flex">
+    <!-- TOTAL -->
+    <span>
+      <i class="far fa-newspaper"></i> {{total$ | async}}
+    </span>
     <ng-container *ngIf="(saving$ | async) as state">
       <ng-container [ngSwitch]="state.type">
         <!-- SAVING -->

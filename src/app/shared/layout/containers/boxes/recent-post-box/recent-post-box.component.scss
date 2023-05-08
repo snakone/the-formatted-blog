@@ -3,7 +3,7 @@
 .recent {
   position: relative;
   text-align: center;
-  @media(max-width: 992px) { margin-bottom: 35px }
+  @media(max-width: 992px) { margin-bottom: 21px }
 
   & ul {
     margin: 0;
@@ -130,15 +130,4 @@
     transition: all 666ms ease-in-out;
   }
 
-  @media(max-width: 992px) {
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -35px;
-      width: 100%;
-      left: 0;
-      border-bottom: 1px solid var(--border-color);
-      transition: all 666ms ease-in-out;
-    }
-  }
 }

@@ -116,7 +116,8 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     .pipe(
       takeUntil(this.unsubscribe$),
       tap(res => this.draft = res),
-      debounceTime(10)
+      debounceTime(10),
+      filter(_ => document.body.clientWidth >= 642)
     )
      .subscribe(_ => this.focusQuill(true));
   }

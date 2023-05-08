@@ -4,7 +4,6 @@ import { QuillConfig, QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import ImageCompress from 'quill-image-compress';
 import { QuillService } from './quill.service';
-import Focus from 'quill-focus';
 
 const Header = Quill.import('formats/header');
 
@@ -23,7 +22,6 @@ class CustomHeader extends Header {
 
 Quill.register(CustomHeader, true);
 Quill.register('modules/imageCompress', ImageCompress, true);
-// Quill.register('modules/focus', Focus);
 
 const config: QuillConfig = {
   format: 'object',

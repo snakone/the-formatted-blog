@@ -21,7 +21,7 @@ import { APP_CONFIG, APP_CONSTANTS } from './app.config';
         strictStateImmutability: false,
         strictActionImmutability: false
       }
-    }),
+    })
   ],
   providers: [{ provide: APP_CONFIG, useValue: APP_CONSTANTS }]
 })

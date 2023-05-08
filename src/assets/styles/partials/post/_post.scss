@@ -1,4 +1,4 @@
-$quill-padding: 30px;
+$quill-padding: 24px;
 $quill-padding-sm: 20px;
 
 // FADE IN
@@ -18,14 +18,12 @@ $quill-padding-sm: 20px;
 .ql-editor {
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
   font-size: 14px;
-  padding: $quill-padding;
+  padding: $quill-padding $quill-padding-sm;
   line-height: inherit;
   overflow-y: initial;
   &[contenteditable="false"] { padding: 0 }
   min-height: var(--quill-height);
   max-height: var(--quill-height);
-
-
 
   // PARAGRAPH
   & p {
@@ -35,29 +33,30 @@ $quill-padding-sm: 20px;
       margin: 0;
       padding-bottom: 35px;
     }
+
+    & + ul, & + ol {
+      margin-top: 0;
+    }
   }
 
   &.ql-blank::before {
-    top: 7px;
-    right: $quill-padding !important;
-    left: $quill-padding !important;
+    top: 1px;
+    right: $quill-padding-sm !important;
+    left: $quill-padding-sm !important;
     font-style: normal !important;
     color: var(--text-color);
     opacity: .7;
     padding-bottom: $quill-padding !important;
   }
 
-  @media(max-width: 992px) {
-    min-height: 389px;
-  }
-
   @media(max-width: 550px) {
-    padding: 23px $quill-padding-sm;
+    padding: 20px 12px;
+    font-size: 13px;
 
     &.ql-blank::before {
-      top: 0;
-      right: $quill-padding-sm !important;
-      left: $quill-padding-sm !important;
+      top: -4px;
+      right: 12px !important;
+      left: 12px !important;
       padding-bottom: $quill-padding-sm !important;
     }
   }

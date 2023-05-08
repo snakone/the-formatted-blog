@@ -21,11 +21,13 @@ export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';
 export const LOGIN_FIRST_SENTENCE = 'Inicia sesión primero.';
 
 export const QUILL_PLACEHOLDER = `
-Estás frente a un lienzo en blanco. Tu aventura empieza aquí. Utiliza los botones de edición situados en la parte superior para dotar a tu artículo de un fórmato profesional. Tienes todo lo necesario para que tus artículos sean de gran calidad.
+Estás frente a un lienzo en blanco. Utiliza los botones de edición situados en la parte superior para dotar a tu artículo de un fórmato profesional.
 
 Lo que vayas escribiendo se irá guardando automáticamente, así podrás tomarte el tiempo que quieras. Además dispones de una barra de acciones situada en la parte inferior. Si tienes alguna duda utiliza el botón de ayuda "?"
 
-Los artículos que vayas escribiendo aparecerán en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y estos se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo" de verdad. Cuando tu boceto sea aprobado por el equipo de moderación, aparecerá junto con todos los demás artículos de la aplicación. ¡Felicidades!
+Los artículos que vayas escribiendo aparecerán en la lista de "Bocetos". Puedes cambiar de boceto en cualquier momento y se guardarán automáticamente si realizas algún cambio. No olvides comprobar el estado de tu boceto a menudo para saber que le falta para convertirse en "Artículo".
+
+Cuando tu boceto sea aprobado por el equipo de moderación, aparecerá junto con todos los demás artículos de la aplicación. ¡Felicidades!
 
 A partir de aquí, cualquier persona podrá disfrutar de lo que hagas. Escribe y comparte el contenido que más te gusta, gana visitas, puntos y prestigio como escritor dentro de la aplicación, diviértete, saca tu lado más creativo y no lo olvides: 
 
