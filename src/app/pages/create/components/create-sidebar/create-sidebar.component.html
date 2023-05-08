@@ -2,12 +2,11 @@
   <ul *ngIf="{
     saving: saving$ | async
   } as pipe">
-    <app-draft-card *ngFor="let d of drafts; let last = last; let i = index"
+    <app-draft-card *ngFor="let d of drafts; let last = last"
                     [draft]="d"
                     [id]="id$ | async"
                     [last]="last"
-                    [saving]="pipe.saving"
-                    [index]="i">
+                    [saving]="pipe.saving">
     </app-draft-card>
   </ul>
 </ng-container>

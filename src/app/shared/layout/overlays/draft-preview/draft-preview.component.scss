@@ -1,14 +1,27 @@
+.header-preview {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--light-color);
+  z-index: 1000;
+}
+
 h2 {
   font-size: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--navigation-border);
   margin-bottom: 2rem;
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 4rem;
+  padding-top: 1.8rem;
 
   & button {
     position: absolute;
-    top: -6px;
-    right: -4px;
+    top: 26px;
+    right: 0;
     border-radius: 100%;
     margin-top: -1px;
     width: 38px;
@@ -20,11 +33,10 @@ h2 {
     background-color: transparent;
 
     & i {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       color: var(--dark-color);
       position: relative;
       top: -2px;
-      right: -.5px;
     }
   }
 }

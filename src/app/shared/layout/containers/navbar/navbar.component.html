@@ -9,13 +9,15 @@
           <li>
             <i class="fas fa-home"
                routerLink="/home"
-               routerLinkActive="active">
+               routerLinkActive="active"
+               aria-label="home">
             </i>
           </li>
           <!-- CREATE -->
           <ng-container *ngIf="user$ | async">
             <li class="animated fadeIn">
               <i class="fas fa-feather-alt"
+                 aria-label="create"
                  routerLink="/create"
                  routerLinkActive="active">
               </i>
@@ -23,23 +25,25 @@
           </ng-container>
           <li *ngFor="let i of icons">
             <i [class]="i.icon"
+               [attr.aria-label]="i.icon"
                [routerLink]="i.route"
                routerLinkActive="active">
             </i>
           </li>
           <ng-container *ngIf="mode === 'dark'; else light">
             <li (click)="theme()">
-              <i class="far fa-lightbulb"></i>
+              <i class="far fa-lightbulb" aria-label="light"></i>
             </li>
           </ng-container>
           <ng-template #light> <!-- THEME -->
             <li (click)="theme()">
-              <i class="far fa-moon"></i>
+              <i class="far fa-moon" aria-label="dark"></i>
             </li>
           </ng-template>
           <li class="dropdown"> <!-- DROPDOWN -->
             <i class="fas fa-align-justify"
-               (click)="menuOpened = !menuOpened">
+               (click)="menuOpened = !menuOpened"
+               aria-label="dropwdown">
             </i>
             <ul class="dropdown-menu" *ngIf="menuOpened">
               <li [class]="'dropdown-item-' + (i + 1)"
@@ -58,13 +62,14 @@
             <li>
               <i [routerLink]="'/profile'" 
                  routerLinkActive="active" 
-                 class="fas fa-user">
+                 class="fas fa-user"
+                 aria-label="user">
               </i>
             </li>
           </ng-container>
           <ng-template #noUser>
             <li (click)="openModal()">
-              <i class="fas fa-sign-in-alt"></i>
+              <i class="fas fa-sign-in-alt" aria-label="sign"></i>
             </li>
           </ng-template>
         </ul>

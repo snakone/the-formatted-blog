@@ -3,10 +3,9 @@
       class="animated"
       [ngClass]="{
         'active': draft.active,
-        'zoomOutLeft': id === draft._id && (!_index || _index % 2 === 0),
-        'zoomOutRight': id === draft._id && _index && _index % 2 !== 0,
+        'zoomOutLeft': id === draft._id,
         'last': last,
-        'disabled': saving
+        'disabled': saving?.value
       }">
     <img src="assets/images/pencil.png" alt="pencil_icon"/>
     <div>

@@ -47,7 +47,7 @@
         position: relative;
         top: -2px;
 
-        & h5 {
+        & h1 {
           color: var(--text-color);
           font-style: normal;
           font-family: 'Raleway', Arial, Helvetica, sans-serif;
@@ -74,7 +74,7 @@
 
       &:hover {
         cursor: pointer;
-        & h5 { filter: contrast(1.5); }
+        & h1 { filter: contrast(1.5); }
 
         & img {
           opacity: .8;
@@ -106,7 +106,7 @@
       column-gap: 2rem;
 
       & li {
-        & .info h5 { font-size: 14px; }
+        & .info h1 { font-size: 14px; }
         &:nth-last-child(-n+1) { display: flex; }
       }
     }
