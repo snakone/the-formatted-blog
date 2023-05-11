@@ -8,7 +8,7 @@ import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.modu
 
 import {
   ProfileContentComponent,
-  ProfileSidebarComponent,
+  ProfileHeaderComponent,
   ProfilePostsComponent,
   ProfileFriendsComponent,
   ProfileSettingsComponent,
@@ -16,16 +16,19 @@ import {
   ProfileDraftsComponent
 } from './profile.index';
 
+import { ProfilePostSidebarComponent } from './components/profile-posts/components/profile-post-sidebar/profile-post-sidebar.component';
+
 @NgModule({
   declarations: [
     ProfileComponent,
     ProfileContentComponent,
-    ProfileSidebarComponent,
+    ProfileHeaderComponent,
     ProfilePostsComponent,
     ProfileFriendsComponent,
     ProfileSettingsComponent,
     ProfileFavoritesComponent,
-    ProfileDraftsComponent
+    ProfileDraftsComponent,
+    ProfilePostSidebarComponent
   ],
   imports: [
     CommonModule,

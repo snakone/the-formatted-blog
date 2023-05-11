@@ -19,7 +19,7 @@ export class ProfileDraftsComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkData();
-    this.drafts$ = this.draftsFacade.drafts$;
+    this.drafts$ = this.draftsFacade.filtered$;
   }
 
   private checkData(): void {
@@ -34,6 +34,7 @@ export class ProfileDraftsComponent implements OnInit {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.draftsFacade.resetFilter();
   }
 
 }

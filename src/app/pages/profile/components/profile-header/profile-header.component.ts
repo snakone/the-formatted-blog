@@ -4,13 +4,13 @@ import { USER_INDEX } from '@shared/data/data';
 import { User } from '@shared/types/interface.types';
 
 @Component({
-  selector: 'app-profile-sidebar',
-  templateUrl: './profile-sidebar.component.html',
-  styleUrls: ['./profile-sidebar.component.scss'],
+  selector: 'app-profile-header',
+  templateUrl: './profile-header.component.html',
+  styleUrls: ['./profile-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileSidebarComponent implements OnInit {
+export class ProfileHeaderComponent implements OnInit {
 
   @Input() user: User;
   list = USER_INDEX;

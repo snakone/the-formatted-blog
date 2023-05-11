@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { FilterType, KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
@@ -11,6 +11,7 @@ import * as fromDrafts from './drafts.selectors';
 export class DraftsFacade {
 
   drafts$ = this.store.select(fromDrafts.get);
+  filtered$ = this.store.select(fromDrafts.getFiltered);
   loaded$ = this.store.select(fromDrafts.getLoaded);
   all$ = this.store.select(fromDrafts.getAll);
   allLoaded$ = this.store.select(fromDrafts.getAllLoaded);
@@ -78,6 +79,14 @@ export class DraftsFacade {
 
   public resetBySlug(): void {
     this.store.dispatch(DraftActions.resetSlug());
+  }
+
+  public setFilter(value: FilterType): void {
+    this.store.dispatch(DraftActions.setFilter({value}));
+  }
+
+  public resetFilter(): void {
+    this.store.dispatch(DraftActions.resetFilter());
   }
 
 }

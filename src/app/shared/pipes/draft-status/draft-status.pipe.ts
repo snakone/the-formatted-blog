@@ -4,7 +4,7 @@ const switchObj: any = {
   "not-seen": "No visto",
   "seen": "Visto",
   "pending": "Pendiente",
-  "approved": "Aprovado"
+  "correct": "Aprobado"
 };
 
 @Pipe({name: 'draftStatus'})

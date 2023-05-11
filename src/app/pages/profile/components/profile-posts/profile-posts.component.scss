@@ -1,0 +1,32 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+}
+
+#sticky-wrapper {
+  @include grid-inverted();
+  padding-left: 0 !important;
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    grid-column: 2 / -1;
+  }
+
+
+  @media (max-width: 992px) {
+    grid-row: 1/-1;
+  }
+}
+
+app-profile-post-sidebar {
+  @include grid-child();
+
+  @media (max-width: 992px) {
+    margin-top: 16px;
+  }
+}
+
+p {
+  margin-top: 3px;
+}

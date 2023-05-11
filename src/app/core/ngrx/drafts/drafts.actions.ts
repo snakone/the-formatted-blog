@@ -1,5 +1,5 @@
 import { props, createAction } from '@ngrx/store';
-import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { FilterType, KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 // GET DRAFTS BY SLUG
 export const getBySlug =
@@ -123,3 +123,11 @@ export const resetSaving =
 // RESET SAVING
 export const resetPreview =
   createAction('[Drafts API] Reset Draft Preview');
+
+// SET FILTER
+export const setFilter =
+  createAction('[Drafts API] Set Filter',
+  props<{ value: FilterType }>());
+
+export const resetFilter =
+  createAction('[Drafts API] Reset Filter');

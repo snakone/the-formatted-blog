@@ -1,0 +1,14 @@
+<ul class="profile-list">  <!-- LIST -->
+  <li *ngFor="let i of list" 
+        [routerLink]="i.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+    <i [class]="i.icon"></i> 
+    <span>{{i.label}}</span>
+  </li>
+  <li (click)="logOut()">
+    <i class="fas fa-sign-out-alt"></i>
+    <span>Salir</span>
+  </li>
+</ul>
+

@@ -126,3 +126,7 @@ export interface SavingType {
   type: 'saving' | 'warning';
   value: boolean;
 }
+
+export interface FilterType {
+  [key: string]: string | number | boolean;
+}

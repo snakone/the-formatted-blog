@@ -1,5 +1,5 @@
 import { props, createAction } from '@ngrx/store';
-import { Post } from '@shared/types/interface.types';
+import { FilterType, Post } from '@shared/types/interface.types';
 
 // GET POSTS
 export const get =
@@ -41,3 +41,11 @@ export const resetSlug =
 
 export const resetByUser =
   createAction('[Posts API] Reset Posts By User');
+
+// SET FILTER
+export const setFilter =
+  createAction('[Posts API] Set Filter',
+  props<{ value: FilterType }>());
+
+export const resetFilter =
+  createAction('[Posts API] Reset Filter');

@@ -8,8 +8,9 @@
   </quill-editor>
 
   <app-quill-toolbar [draft]="draft" 
-                     (clean)="clean()">
+                      (clean)="clean()">
   </app-quill-toolbar>
 </div>
+
 
 <ng-container *ngIf="active$ | async"></ng-container>

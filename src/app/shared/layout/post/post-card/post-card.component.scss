@@ -167,6 +167,10 @@ article {
             &.fa-envelope { top: 1px }
           }
         }
+
+        &.small {
+          top: 13px;
+        }
       }
 
       & .author {
@@ -204,6 +208,7 @@ article {
 
     @media (max-width: 750px) { 
       grid-template-columns: 1fr;
+      margin-bottom: 40px;
     }
 
     @media (min-width: 751px) and (max-width: 992px) { 
@@ -246,7 +251,9 @@ article {
 
     & .main-content {
       & .date {
-        padding: 0 0 10px;
+        padding: 0;
+        position: relative;
+        top: 2px;
 
         & span:not(.tale) {
           padding-left: 0;
@@ -275,15 +282,9 @@ article {
       & .bottom {
         padding: 0;
         position: absolute;
-        bottom: 2px;
+        bottom: -3px;
         width: 100%;
         top: initial;
-
-        @media (max-width: 1200px) and (min-width: 993px) {
-          top: 0;
-          position: relative;
-          margin-top: 2px;
-        }
 
         @media (max-width: 750px) {
           top: 0;
@@ -313,5 +314,28 @@ article:not(.small) {
 
   &.alone .main-content {
     & .date { padding: 0 0 40px }
+  }
+}
+
+@media(max-width: 1200px) {
+  .intro {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+  }
+}
+
+@media(max-width: 992px) and (min-width: 751px) {
+  .intro {
+    display: none;
+  }
+}
+
+@media(max-width: 750px) {
+  .intro {
+    margin-bottom: 20px;
+    -webkit-line-clamp: 3;
   }
 }

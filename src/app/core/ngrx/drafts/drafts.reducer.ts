@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as DraftActions from './drafts.actions';
-import { Post, SavingType } from '@shared/types/interface.types';
+import { FilterType, Post, SavingType } from '@shared/types/interface.types';
 
 export interface DraftsState {
   drafts: Post[];
@@ -11,6 +11,7 @@ export interface DraftsState {
   preview: Post;
   saving: SavingType;
   error: string | null;
+  filter: FilterType;
 }
 
 export const inititalState: DraftsState = {
@@ -22,6 +23,7 @@ export const inititalState: DraftsState = {
   preview: null,
   saving: null,
   error: null,
+  filter: {title: ''}
 };
 
 const featureReducer = createReducer(
@@ -93,11 +95,29 @@ const featureReducer = createReducer(
   )),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),
   on(DraftActions.resetPreview, (state) => ({ ...state, preview: null})),
+  on(DraftActions.setFilter, (state, { value }) => (
+    { ...state, filter: { ...state.filter, ...value }}
+  )),
+  on(DraftActions.resetFilter, (state) => (
+    { ...state, filter: { ...inititalState.filter }}
+  ))
 );
 
 export function reducer(state: DraftsState | undefined, action: Action) {
   return featureReducer(state, action);
 }
+
+const filtered = (state: DraftsState) =>
+ state.drafts.filter((draft) => 
+  Object.entries(state.filter).some(
+    ([
+      key,
+      value
+    ]) => {
+      return draft[key].toLowerCase().includes(String(value).toLowerCase())
+    }
+  )
+);
 
 export const getDrafts = (state: DraftsState) => state.drafts;
 export const getDraftsLoaded = (state: DraftsState) => state.loaded;
@@ -106,4 +126,5 @@ export const getAllLoaded = (state: DraftsState) => state.allLoaded;
 export const getActive = (state: DraftsState) => state.active;
 export const getSaving = (state: DraftsState) => state.saving;
 export const getPreview = (state: DraftsState) => state.preview;
+export const getFiltered = (state: DraftsState) => filtered(state);
 
