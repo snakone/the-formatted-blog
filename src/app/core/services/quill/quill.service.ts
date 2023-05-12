@@ -32,13 +32,14 @@ export class QuillService {
 
 }
 
-const addTitle = (draft: Post) => `<body><h1>${draft.title}</h1><span class="title">Escrito por ${draft.author}</span>`;
+const addTitle = (draft: Post) => `<body><div id="draft" style="width: 100%"> <h1>${draft.title}</h1><span class="title">Escrito por ${draft.author}</span>`;
 
-const addFooter = () => `
+const addFooter = () => `  
+  </div>
   <footer>
-    <b>The Formatted Blog</b>. 
-    Copyright © ${new Date().getFullYear().toString()} - 
-    All Rights Reserved - ${environment.version}
+      <b>The Formatted Blog</b>. 
+      Copyright © ${new Date().getFullYear().toString()} - 
+      All Rights Reserved - ${environment.version}
   </footer>
 </body></html>`;
 
@@ -61,6 +62,10 @@ const POST_STYLES_STRING = `
       max-width: 950px;
       margin: 0 auto;
       font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
     }
 
     p, ul, ol, span.title, h1, h2, footer {
@@ -193,15 +198,16 @@ const POST_STYLES_STRING = `
     img:last-child { margin-bottom: 0 }
 
     footer {
+      position: relative;
       width: 100%;
       bottom: 0;
       left: 0;
       text-align: center;
-      margin: 30px 0 15px 0;
+      margin: auto 0 0 0;
       font-size: 12px;
       font-weight: 400;
+      padding-bottom: 12px;
     }
-
   </style>
 </head>
 `;

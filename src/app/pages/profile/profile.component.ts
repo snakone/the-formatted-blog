@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { UsersFacade } from '@store/users/users.facade';
 import { LIKE_TEXT } from '@shared/data/sentences';
 import { User } from '@shared/types/interface.types';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,47 +12,17 @@ import { NavigationEnd, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
 
   text = LIKE_TEXT;
   user$: Observable<User>;
-  $unsubscribe = new Subject<void>();
 
   constructor(
-    private userFcd: UsersFacade,
-    private route: Router
+    private userFcd: UsersFacade
   ) { }
 
   ngOnInit(): void {
-    this.stickyFix();
     this.user$ = this.userFcd.user$;
-  }
-
-  private stickyFix(): void {
-    this.route.events
-    .pipe(
-      filter((event) => event instanceof NavigationEnd && 
-                        event.url.includes('/profile')),
-      takeUntil(this.$unsubscribe)
-    )
-    .subscribe(_ => (
-      this.scroll(),
-      setTimeout(() => window.dispatchEvent(new Event('resize')), 200)
-    )) 
-  }
-
-  public like(): void {
-    console.log('profile');
-  }
-
-  private scroll(): void {
-    const el = document.getElementById('profile-route');
-    if (el && document.body.clientWidth <= 982) { el.scrollIntoView(); }
-  }
-
-  ngOnDestroy() {
-    this.$unsubscribe.next();
-    this.$unsubscribe.complete();
   }
 
 }

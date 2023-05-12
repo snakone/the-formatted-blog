@@ -1,38 +1,41 @@
-<ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
-  <ul *ngIf="{
-    saving: saving$ | async
-  } as pipe">
-    <app-draft-card *ngFor="let d of drafts; let last = last"
-                    [draft]="d"
-                    [id]="id$ | async"
-                    [last]="last"
-                    [saving]="pipe.saving">
-    </app-draft-card>
-  </ul>
-</ng-container>
-<!-- NO DRAFTS -->
-<ng-template #noDraft>
-  <div class="empty">
-    <p>
-      Parece ser que aún no has escrito nada. 
-      ¡Aunque no te preocupes! En cuánto escribas en el <b>lienzo</b>, 
-      se guardará automáticamente lo que hayas escrito y se creará tu <b>primer</b> boceto. 
-      <br><br>
-      ¿No es genial? Eso no es todo...
-    </p>
-    <p>
-      Después de tener el <b>mensaje</b> listo, presiona el icono 
-      <i class="fab fa-wpforms"></i> situado en la barra inferior del lienzo, para 
-      seleccionar una categoría, añadir una <b>foto</b> 
-      de portada, además de una introducción.
-    </p>
-    <p>
-      Recuerda que el formulario se guardará una vez sea <b>válido</b> y que los botones de la barra inferior solamente 
-      estarán activos cuando tengas un lienzo seleccionado. Por último, el icono 
-      <i class="far fa-question-circle"></i> muestra las herramientas que puedes usar en tu lienzo.
-    </p>
-  </div>
-</ng-template>
+<app-sticky-aside [selector]="'create-content'">
+  <ng-container *ngIf="drafts && drafts!.length > 0; else noDraft">
+    <ul *ngIf="{
+      saving: saving$ | async
+    } as pipe">
+      <app-draft-card *ngFor="let d of drafts; let last = last"
+                      [draft]="d"
+                      [id]="id$ | async"
+                      [last]="last"
+                      [saving]="pipe.saving">
+      </app-draft-card>
+    </ul>
+  </ng-container>
+  <!-- NO DRAFTS -->
+  <ng-template #noDraft>
+    <div class="empty">
+      <p>
+        Parece ser que aún no has escrito nada. 
+        ¡Aunque no te preocupes! En cuánto escribas en el <b>lienzo</b>, 
+        se guardará automáticamente lo que hayas escrito y se creará tu <b>primer</b> boceto. 
+        <br><br>
+        ¿No es genial? Eso no es todo...
+      </p>
+      <p>
+        Después de tener el <b>mensaje</b> listo, presiona el icono 
+        <i class="fab fa-wpforms"></i> situado en la barra inferior del lienzo, para 
+        seleccionar una categoría, añadir una <b>foto</b> 
+        de portada, además de una introducción.
+      </p>
+      <p>
+        Recuerda que el formulario se guardará una vez sea <b>válido</b> y que los botones de la barra inferior solamente 
+        estarán activos cuando tengas un lienzo seleccionado. Por último, el icono 
+        <i class="far fa-question-circle"></i> muestra las herramientas que puedes usar en tu lienzo.
+      </p>
+    </div>
+  </ng-template>
+</app-sticky-aside>
+
 
 
 

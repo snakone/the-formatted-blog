@@ -4,12 +4,14 @@ import { AppState } from '../ngrx.index';
 
 import * as PostActions from './posts.actions';
 import * as fromPosts from './posts.selectors';
+import { FilterType } from '@shared/types/interface.types';
 
 @Injectable({providedIn: 'root'})
 
 export class PostsFacade {
 
   posts$ = this.store.select(fromPosts.get);
+  filtered$ = this.store.select(fromPosts.getFiltered);
   loaded$ = this.store.select(fromPosts.getLoaded);
   getFull$ = this.store.select(fromPosts.getFull);
   byUser$ = this.store.select(fromPosts.getByUser);
@@ -41,6 +43,14 @@ export class PostsFacade {
 
   public resetByUser(): void {
     this.store.dispatch(PostActions.resetByUser());
+  }
+
+  public setFilter(value: FilterType): void {
+    this.store.dispatch(PostActions.setFilter({value}));
+  }
+
+  public resetFilter(): void {
+    this.store.dispatch(PostActions.resetFilter());
   }
 
 }

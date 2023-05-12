@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { DUMMY_POST } from '@shared/data/data';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-posts',
@@ -11,12 +12,16 @@ import { Post } from '@shared/types/interface.types';
 
 export class ProfilePostsComponent implements OnInit {
 
-  items!: Post[];
+  items$: Observable<Post[]>;
 
-  constructor() { }
+  constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
-    this.items = DUMMY_POST;
+    this.items$ = this.postFacade.filtered$;
+  }
+
+  ngOnDestroy() {
+    this.postFacade.resetFilter();
   }
 
 }

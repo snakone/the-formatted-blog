@@ -74,8 +74,8 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private addElements(el: Element[]): void {
     this.masonry.appended(el);
-    this.createMasonry();
     this.items.push(...[1, 2, 3]);
+    this.createMasonry();
   }
 
   ngOnDestroy() {

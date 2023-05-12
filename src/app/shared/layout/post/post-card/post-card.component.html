@@ -25,7 +25,7 @@
     <div class="main-content">
       <p class="category">{{post.category}}</p>
       <h3>{{post.title}}</h3>
-      <p class="date">
+      <p class="date" *ngIf="!small">
          <!-- DRAFT STATUS -->
         <ng-container *ngIf="draft"> 
           <span [class]="post.status">{{post.status | draftStatus}} </span>
@@ -35,9 +35,7 @@
       </p>
       <!-- MESSAGE -->
       <ng-container *ngIf="!alone; else isAlone">
-        <div class="message">
-          <div [innerHTML]="post.intro | shortMessage: alone : small"></div>
-        </div>
+        <div [ngClass]="{'intro': post.intro}" [innerHTML]="post.intro | shortMessage: alone : small"></div>
       </ng-container>
       <ng-template #isAlone>
         <quill-view [content]="post.message" class="alone"></quill-view>
@@ -45,8 +43,19 @@
       <!-- BOTTOM -->
       <div class="bottom"
            [ngClass]="{'first': border}">
-        <span class="author">{{post.author}}</span>
-        <ul>
+        <div *ngIf="small">
+          <!-- DRAFT STATUS -->
+          <p class="date">
+            <ng-container *ngIf="draft"> 
+              <span [class]="post.status">{{post.status | draftStatus}} </span>
+              <span class="tale">-</span>
+            </ng-container>
+            <span>{{post.created}}</span>
+          </p>
+          <span class="author">{{post.author}}</span>
+        </div>
+        <span *ngIf="!small" class="author">{{post.author}}</span>
+        <ul [ngClass]="{'small': small}">
           <ng-container *ngIf="!draft; else draftIcon">
             <li *ngFor="let i of postIcons">
               <i [class]="i"></i>

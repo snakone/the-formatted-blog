@@ -14,3 +14,4 @@ export const getBySlug = createSelector(getPostsState, fromPosts.getSlug);
 export const getByUser = createSelector(getPostsState, fromPosts.getByUser);
 export const getByUserLoaded = createSelector(getPostsState, fromPosts.getByUserLoaded);
 export const getFull = createSelector(getPostsState, fromPosts.getFull);
+export const getFiltered = createSelector(getPostsState, fromPosts.getFiltered);

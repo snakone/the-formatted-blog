@@ -10,7 +10,7 @@ export class ShortMessagePipe implements PipeTransform {
     small: boolean
   ): string | null {
     if (!value) return '';
-    return alone ? value : small ? null : (value.slice(0, 610) + '...');
+    return alone ? value : small ? (value.slice(0, 325) + '...') : (value.slice(0, 610) + '...');
   }
 
 }

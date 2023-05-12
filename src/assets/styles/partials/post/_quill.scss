@@ -88,3 +88,11 @@
     margin: 0 1.5px;
   }
 }
+
+.ql-snow .ql-tooltip {
+  left: 5% !important;
+
+  @media(min-width: 550px) {
+    left: 25% !important;
+  }
+}

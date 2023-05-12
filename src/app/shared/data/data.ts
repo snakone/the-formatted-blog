@@ -27,6 +27,7 @@ export const DUMMY_POST: Post[] = [
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
     cover: '05-img.jpg',
+    status: 'not-seen',
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
@@ -35,6 +36,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Amazing Food',
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
+    status: 'not-seen',
     cover: '05-img.jpg'
   },
   {
@@ -43,6 +45,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
+    status: 'pending',
     cover: '05-img.jpg'
   },
   {
@@ -51,6 +54,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
+    status: 'correct',
     cover: '05-img.jpg'
   },
   {
@@ -59,6 +63,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
+    status: 'seen',
     cover: '05-img.jpg'
   }
 ];

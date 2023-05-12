@@ -1,23 +1,27 @@
+@import 'mixins/mixins.scss';
+
 ul {
   list-style: none;
   padding: 0;
   transition: border 666ms ease-in-out;
-  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+  transition: border 666ms ease-in-out;
 
   & li {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 10px 16px;
+    padding: 10px 20px;
     margin: 0;
-    font-size: .8rem;
+    font-size: 12px;
     color: var(--text-color);
     cursor: pointer;
-    transition: background 100ms ease-in,
-                transform 200ms ease-in-out;
-                
+
     & i { 
-      font-size: 1rem;
+      font-size: 16px;
       transition: color 666ms ease-in-out;
       padding-right: 1rem;
     }
@@ -26,31 +30,13 @@ ul {
       & i { color: var(--contrast-color) }
     }
 
-    &::after {
-      content: '\f054';
-      font-family: "Font Awesome 5 Free";
-      display: inline-block;
-      font-style: normal;
-      font-variant: normal;
-      font-weight: 900;
-      width: 10px;
-      height: 10px;
-      color: var(--text-color);
-      position: absolute;
-      right: 1rem;
-      top: calc(50% - 11px);
-      opacity: .7;
-    }
-
     &:last-child {
         & i { color: var(--error-color); }
     }
 
     &:hover {
-      opacity: .8;
-      background: var(--li-hover);
+      filter: brightness(1.1);
       & i { color: var(--contrast-color) }
-      &::after { transform: translateX(3px) }
     }
   }
 
@@ -62,41 +48,50 @@ ul {
     justify-content: center;
     
     & li {
-      border-bottom: 1px solid var(--border-color);
-      transition: border 666ms ease-in-out;
-      &:after { content: none }
-      &:last-child span { color: var(--error-color) }
+      padding: 10px 16px;
 
+      &:last-child span { color: var(--error-color) }
       & i { padding-right: 10px; }
     }
   }
 
-  @media(max-width: 750px) {
+  @media(max-width: 780px) {
     & li {
-      display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      padding: 10px 18px;
 
       & i { 
         padding: 0 .5rem 4px .5rem;
+        font-size: 15px;
         position: relative;
         left: -1px;
+        margin-bottom: 2px;
       }
 
-      & span { font-size: .8rem; }
+      & span { font-size: 11px; }
     }
   }
 
   @media(max-width: 600px) {
     & li {
-      padding: .8rem 10px;
+      padding: .8rem 14px;
       & span { display: none }
       &:last-child i { color: var(--error-color) }
+
+      & i {
+        padding: 0 .3rem 4px .3rem;
+      }
     }
   }
 
   @media(max-width: 450px) {
-    & li { padding: .8rem 6px; }
+    & li { 
+      padding: .8rem 8px;
+
+      & i {
+        font-size: 15px;
+      }
+    }
   }
 }

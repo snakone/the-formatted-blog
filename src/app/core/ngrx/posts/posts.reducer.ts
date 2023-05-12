@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as PostActions from './posts.actions';
-import { Post } from '@shared/types/interface.types';
+import { FilterType, Post } from '@shared/types/interface.types';
+import { DUMMY_POST } from '@shared/data/data';
 
 export interface PostState {
   posts: Post[];
@@ -11,10 +12,11 @@ export interface PostState {
   slugLoaded: boolean;
   full: boolean;
   error: string | null;
+  filter: FilterType;
 }
 
 export const inititalState: PostState = {
-  posts: [],
+  posts: [...DUMMY_POST, ...DUMMY_POST],
   postsLoaded: false,
   user: [],
   userLoaded: false,
@@ -22,6 +24,7 @@ export const inititalState: PostState = {
   slugLoaded: false,
   full: false,
   error: null,
+  filter: {title: ''}
 };
 
 const featureReducer = createReducer(
@@ -61,6 +64,12 @@ const featureReducer = createReducer(
   )),
   on(PostActions.resetByUser, (state) => (
     { ...state, userLoaded: false, error: null, user: null }
+  )),
+  on(PostActions.setFilter, (state, { value }) => (
+    { ...state, filter: { ...state.filter, ...value }}
+  )),
+  on(PostActions.resetFilter, (state) => (
+    { ...state, filter: { ...inititalState.filter }}
   ))
 );
 
@@ -68,12 +77,25 @@ export function reducer(state: PostState | undefined, action: Action) {
   return featureReducer(state, action);
 }
 
+const filtered = (state: PostState) =>
+ state.posts.filter((post) => 
+  Object.entries(state.filter).some(
+    ([
+      key,
+      value
+    ]) => {
+      return post[key].toLowerCase().includes(String(value).toLowerCase())
+    }
+  )
+);
+
 export const getPosts = (state: PostState) => state.posts;
 export const getPostsLoaded = (state: PostState) => state.postsLoaded;
 export const getByUser = (state: PostState) => state.user;
 export const getByUserLoaded = (state: PostState) => state.userLoaded;
 export const getFull = (state: PostState) => state.full;
 export const getSlug = (state: PostState) => state.slug;
+export const getFiltered = (state: PostState) => filtered(state);
 
 
 function completed(posts: Post[]): boolean {
