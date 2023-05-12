@@ -16,12 +16,14 @@ export class HomeContentComponent implements OnInit {
 
   posts$!: Observable<Post[]>;
   private unsubscribe$ = new Subject<void>();
-
+  favoritesID$: Observable<string[]> | undefined;
+  
   constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
     // this.checkData();
-    this.posts$ = of(DUMMY_POST);
+    this.posts$ = this.postFacade.posts$;
+    this.favoritesID$ = this.postFacade.favoritesID$;
   }
 
   private checkData(): void {

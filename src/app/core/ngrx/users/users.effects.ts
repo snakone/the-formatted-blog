@@ -6,6 +6,7 @@ import { map, concatMap, catchError, tap, switchMap } from 'rxjs/operators';
 
 import * as UserActions from './users.actions';
 import * as DraftActions from '../drafts/drafts.actions';
+import * as PostsActions from '../posts/posts.actions';
 import { LoginService } from '@services/api/login.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
@@ -14,6 +15,7 @@ import { PWAService } from '@core/services/pwa/pwa.service';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { firstValueFrom } from 'rxjs';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { FavoriteService } from '@core/services/api/favorite.service';
 
 @Injectable()
 
@@ -27,6 +29,7 @@ export class UserEffects {
     private router: Router,
     private crafter: CrafterService,
     private sw: PWAService,
+    private favService: FavoriteService
   ) { }
 
   // LOGIN USER
@@ -93,6 +96,19 @@ export class UserEffects {
         DraftActions.resetActive()
       ])
     )
+  );
+
+  // GET FAVORITES ON LOGIN
+  getFavoritesOnLogin$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.loginSuccess),
+      concatMap(_ => 
+        this.favService.getFavoritesByUser()
+         .pipe(
+            map((favorites: string[]) => PostsActions.setFavorite({favorites})),
+            catchError(error =>
+              of(PostsActions.getFavoritesFailure({ error: error.message }))
+    ))))
   );
 
   private navigate(

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.types';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-profile-posts',
@@ -13,11 +13,16 @@ import { Observable } from 'rxjs';
 export class ProfilePostsComponent implements OnInit {
 
   items$: Observable<Post[]>;
+  favoritesID$: Observable<string[]> | undefined;
 
   constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
-    this.items$ = this.postFacade.filtered$;
+    this.favoritesID$ = this.postFacade.favoritesID$;
+
+    this.items$ = this.postFacade.filtered$.pipe(
+      map(res => res.filter(post => post.type === 'post'))
+    );
   }
 
   ngOnDestroy() {

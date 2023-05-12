@@ -8,6 +8,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { DELETE_CONFIRMATION, DRAFT_ICONS, POST_ICONS } from '@shared/data/data';
 import { DraftPreviewComponent } from '@layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({
   selector: 'app-post-card',
@@ -24,23 +25,33 @@ export class PostCardComponent implements OnInit {
   @Input() small = false;  // Small Card
   @Input() last!: boolean;
   @Input() draft!: boolean;  // Draft Card
+  @Input() favoritesID: string[] = [];
 
   postIcons = POST_ICONS;
   draftIcons = DRAFT_ICONS;
   private unsubscribe$ = new Subject<void>();
 
-  switchObj: any = {
+  switchObjDraft: any = {
     edit: () => this.edit(),
     preview: () => this.preview(),
     download: () => this.download(),
-    delete: () => this.delete()
+    delete: () => this.delete(),
+    favorite: () => this.favorite()
+  };
+
+  switchObjPost: any = {
+    share: () => this.share(),
+    friend: () => this.friend(),
+    message: () => this.message(),
+    favorite: () => this.favorite()
   };
 
   constructor(
     private crafter: CrafterService,
     private draftsFacade: DraftsFacade,
     private router: Router,
-    private quillSrv: QuillService
+    private quillSrv: QuillService,
+    private postFacade: PostsFacade
   ) { }
 
   ngOnInit(): void { }
@@ -59,6 +70,14 @@ export class PostCardComponent implements OnInit {
     this.quillSrv.convertToHTML(this.post);
   }
 
+  public favorite(): void {
+    this.postFacade.addFavorite(this.post._id);
+  }
+
+  public removeFavorite(): void {
+    this.postFacade.removeFavorite(this.post._id);
+  }
+
   private delete(): void {
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
@@ -66,6 +85,18 @@ export class PostCardComponent implements OnInit {
         takeUntil(this.unsubscribe$),
         filter(_ => _ && !!_)
       ).subscribe(_ => this.draftsFacade.delete(this.post._id));
+  }
+
+  private share(): void {
+    console.log('share');
+  }
+
+  private message(): void {
+    console.log('message');
+  }
+
+  private friend(): void {
+    console.log('friend');
   }
 
   ngOnDestroy() {

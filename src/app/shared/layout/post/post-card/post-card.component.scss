@@ -165,6 +165,14 @@ article {
             position: relative;
             @include hover(1.5, var(--contrast-color));
             &.fa-envelope { top: 1px }
+
+            &.favorite {
+              color: var(--contrast-color);
+
+              &:hover {
+                filter: brightness(1.2);
+              }
+            }
           }
         }
 
