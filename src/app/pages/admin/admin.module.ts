@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { AdminContentComponent } from './components/admin-content/admin-content.component';
 import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
+import { DraftLayoutModule } from '@shared/layout/draft/draft-layout.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.modu
     CommonModule,
     AdminRoutingModule,
     LayoutModule,
-    DraftsAccessModule
+    DraftsAccessModule,
+    DraftLayoutModule
   ]
 })
 

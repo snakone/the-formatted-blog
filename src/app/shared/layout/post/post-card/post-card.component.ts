@@ -26,6 +26,7 @@ export class PostCardComponent implements OnInit {
   @Input() last!: boolean;
   @Input() draft!: boolean;  // Draft Card
   @Input() favoritesID: string[] = [];
+  @Input() showIntro: boolean = true;
 
   postIcons = POST_ICONS;
   draftIcons = DRAFT_ICONS;

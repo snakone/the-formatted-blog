@@ -35,7 +35,7 @@
       </p>
       <!-- MESSAGE -->
       <ng-container *ngIf="!alone; else isAlone">
-        <div [ngClass]="{'intro': post.intro}" [innerHTML]="post.intro | shortMessage: alone : small"></div>
+        <div [ngClass]="{'intro': post.intro}" [innerHTML]="post.intro | shortMessage: alone : small : showIntro"></div>
       </ng-container>
       <ng-template #isAlone>
         <quill-view [content]="post.message" class="alone"></quill-view>

@@ -1,1 +1,17 @@
-<p>admin-draft-card works!</p>
+<div class="card"
+     *ngIf="draft">
+     <h6>{{ draft.title }}</h6>
+     <div class="card-data">
+        <span class="bold">{{ draft.author }}</span>
+        <span>{{ draft.created }}</span>
+        <div class="category">
+          {{draft.category}}
+        </div>
+        <span>
+          <button outline
+                  [class]="draft.status">
+            {{ draft.status | draftStatus }}
+          </button>
+        </span>
+     </div>
+</div>

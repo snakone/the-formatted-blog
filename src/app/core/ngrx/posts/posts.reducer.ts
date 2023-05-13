@@ -116,7 +116,6 @@ const switchObj = {
 };
 
 const filterAll = (statePost: PostState, stateDraft: DraftsState) => {
-  console.log(statePost.filter)
   return switchObj[statePost.filter.type || 'any'](statePost, stateDraft)
     .filter((post) => 
       Object.entries(statePost.filter)

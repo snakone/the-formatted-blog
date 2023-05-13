@@ -110,6 +110,7 @@ export interface NotificationPayload {
   user?: string;
   broadcast?: boolean;
   device?: string | RegExp;
+  admin?: boolean;
 }
 
 interface NotificationData {

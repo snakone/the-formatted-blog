@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, filter, Subject, Observable, map, tap } from 'rxjs';
+import { takeUntil, filter, Subject, Observable, map } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
@@ -67,7 +67,6 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
           this.draft._id, { key: 'message', value: this.draft.message }
         );
         this.draftsFacade.resetActive();
-        this.router.navigateByUrl('/create');
     });
   }
 
@@ -96,7 +95,6 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
         filter(_ => _ && !!_)
       ).subscribe(_ => (
         this.draftsFacade.delete(this.draft._id),
-        this.router.navigateByUrl('/create'),
         this.createDraftSrv.onDeleteDraft(this.draft._id)
     ));
   }

@@ -1,11 +1,13 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation, DeltaStatic } from 'quill';
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
 import { Post, PostHeader } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { slugify } from '@core/services/quill/quill.module';
+import { DRAFT_PUSH } from '@shared/data/notifications';
+import { PWAService } from '@core/services/pwa/pwa.service';
 
 @Component({
   selector: 'app-create-content',
@@ -41,7 +43,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     history: { delay: 2000, userOnly: false },
   };
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(private draftsFacade: DraftsFacade, private sw: PWAService) { }
 
   ngAfterContentInit(): void {
     this.listenEditor();
@@ -91,6 +93,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
       (
         temporalDraft = { title: 'Boceto ', message: delta, headers },
         this.draftsFacade.create(temporalDraft)
+        // firstValueFrom(this.sw.send(DRAFT_PUSH)).then()
       ) :  // UPDATE
       (
         temporalDraft = Object.assign({}, this.draft),

@@ -7,8 +7,6 @@
   justify-content: space-between;
   align-items: center;
 
-  &.form { border-top: 1px solid var(--navigation-border); }
-
   & i:not(.fa-pulse):not(.fa-check) {
     height: 24px;
     padding: 3px 8px;
@@ -68,7 +66,7 @@
   }
 
   & i.fa-newspaper {
-    top: 2px !important;
+    top: 1px !important;
     margin-right: 5px;
     font-size: 16px;
   }
@@ -89,8 +87,6 @@
   & .animated {
     margin-left: 28px;
   }
-
-  @media(max-width: 992px) { margin-bottom: 1.4rem }
 
   @media(max-width: 550px) {
     & .animated {

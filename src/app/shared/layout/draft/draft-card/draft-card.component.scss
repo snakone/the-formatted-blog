@@ -1,20 +1,66 @@
 @import 'mixins/mixins.scss';
 
 li {
-  padding: 12px 0 10px 0;
-  cursor: pointer;
+  padding: 1rem 1rem 1rem .8rem;
+  border-radius: 4px;
   position: relative;
   opacity: .5;
   @include flex-start();
   gap: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  outline: none;
+  min-height: 72.19px;
+  margin-bottom: 5px;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25), 0 5px 8px rgba(0,0,0,0.22);
+  }
 
   & > div {
     overflow: hidden;
+    transition: transform 100ms ease;
+    position: relative;
+    top: -1px;
   }
 
   &.active {
     opacity: 1;
-    & h3 { font-weight: bold; }
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25), 0 5px 8px rgba(0,0,0,0.22);
+
+    @media(min-width: 993px) {
+      & > div {
+        transform: translateX(8px);
+      }
+    }
+
+    & h3 { 
+      font-weight: bold;
+    }
+
+    & .capital {
+      color: var(--contrast-color);
+    }
+  }
+
+  & .icons {
+    display: none;
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    & i {
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @media(max-width: 992px) {
+      display: block;
+    }
   }
 
   &.disabled {
@@ -22,12 +68,24 @@ li {
     opacity: .3;
   }
 
+  &.first {
+    &::before {
+      height: 0;
+    }
+  }
+
   & h3 { 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-right: 26px;
-    font-size: 15px;
+    padding-right: 40px;
+    font-size: 14px;
+    position: relative;
+    transition: transform 200ms ease-in;
+
+    @media(max-width: 992px) {
+      padding-right: 95px;
+    }
   }
 
   & .info {
@@ -39,13 +97,25 @@ li {
     & .category { color: var(--contrast-color); }
   }
 
+  & .capital {
+    font-size: 20px;
+    display: block;
+    text-transform: capitalize;
+    position: inherit;
+    position: relative;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    left: 2px;
+  }
+
   &.last {
     margin-bottom: 0;
   }
 
   @media(max-width: 992px) {
-    border: 1px solid var(--navigation-border);
-    padding: 12px 0 14px 16px;
+    padding: 12px 0 12px 16px;
   }
 
   @media(max-width: 650px) {

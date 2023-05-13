@@ -5,8 +5,8 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { fromEvent } from 'rxjs';
-import { distinctUntilChanged, filter, map, throttleTime } from 'rxjs/operators';
+import { Subject, fromEvent } from 'rxjs';
+import { distinctUntilChanged, filter, map, takeUntil, throttleTime } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
 
 // tslint:disable-next-line:directive-selector
@@ -15,6 +15,7 @@ import { StickyService } from '@services/sticky/sticky.service';
 export class StickyDirective implements AfterContentInit, OnDestroy {
 
   @Input() selector: string | undefined;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(private stickySrv: StickyService) { }
 
@@ -28,6 +29,7 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   private subscribeToResize(): void {
     fromEvent(window, 'resize')
       .pipe(
+        takeUntil(this.unsubscribe$),
         throttleTime(300),
         filter(_ => !!this.selector),
         map(_ => this.clientSize()),
@@ -46,6 +48,8 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
     this.stickySrv.destroy();
     this.selector = undefined;
   }

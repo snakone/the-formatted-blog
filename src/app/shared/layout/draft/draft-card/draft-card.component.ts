@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { CrafterService } from '@core/services/crafter/crafter.service';
+import { CreateDraftService } from '@pages/create/services/create-draft.service';
+import { DELETE_CONFIRMATION } from '@shared/data/data';
+import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { Post, SavingType } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
+import { takeUntil, filter, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-draft-card',
@@ -14,13 +20,38 @@ export class DraftCardComponent {
   @Input() id: string | undefined; // DELETE
   @Input() last: boolean | undefined;
   @Input() saving: SavingType | undefined;
+  @Input() first: boolean;
+  @Input() collapsed = false;
+  private unsubscribe$ = new Subject<void>();
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(private draftsFacade: DraftsFacade, private crafter: CrafterService, private createDraftSrv: CreateDraftService, private router: Router) { }
 
   public activate(draft: Post): void {
     if (this.saving?.value) { return; }
     this.draftsFacade.setActive(draft);
   }
 
+  public preview(): void {
+    if (!this.draft || this.saving) { return; }
+    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+  }
+
+  public delete(): void {
+    if (!this.draft || this.saving) { return; }
+    this.crafter.confirmation(DELETE_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(_ => _ && !!_)
+      ).subscribe(_ => (
+        this.draftsFacade.delete(this.draft._id),
+        this.createDraftSrv.onDeleteDraft(this.draft._id)
+    ));
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
 }
