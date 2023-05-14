@@ -7,7 +7,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--navigation-border);
   transition: border 666ms ease-in-out;
 
   & li {
@@ -75,7 +75,7 @@ ul {
 
   @media(max-width: 600px) {
     & li {
-      padding: .8rem 14px;
+      padding: .7rem 14px;
       & span { display: none }
       &:last-child i { color: var(--error-color) }
 
@@ -87,7 +87,7 @@ ul {
 
   @media(max-width: 450px) {
     & li { 
-      padding: .8rem 8px;
+      padding: .7rem 6px;
 
       & i {
         font-size: 15px;

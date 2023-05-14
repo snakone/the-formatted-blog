@@ -9,7 +9,7 @@ import { LOGIN_FIRST_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences'
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class HomeComponent {

@@ -1,19 +1,11 @@
+@import 'mixins/mixins.scss';
+
 .card {
   width: calc(100% - 2rem);
   padding: 1.2rem;
   margin: 1.5rem 0;
   border-radius: 4px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  outline: none;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.25), 0 5px 8px rgba(0,0,0,0.22);
-
-    & h6::after {
-      width: 2rem;
-    }
-  }
+  @include shadow-card();
 
   &:last-child {
     margin-bottom: 0;
@@ -23,18 +15,6 @@
     font-size: 1.666rem;
     margin-bottom: .888rem;
     position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      background: var(--primary-color);
-      height: .3rem;
-      left: 0;
-      bottom: -6px;
-      border-radius: 4px;
-      transition: all .5s ease;
-    }
   }
 
   &-data {

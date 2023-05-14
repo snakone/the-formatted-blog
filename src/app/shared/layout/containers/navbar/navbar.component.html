@@ -5,8 +5,8 @@
     </div>
     <div class="actions"> <!-- RIGHT SIDE -->
       <div class="icons">
-        <ul>  <!-- ARRAY -->
-          <li>
+        <ul aria-hidden="false">  <!-- ARRAY -->
+          <li aria-hidden="false">
             <i class="fas fa-home"
                routerLink="/home"
                routerLinkActive="active"
@@ -15,7 +15,7 @@
           </li>
           <!-- CREATE -->
           <ng-container *ngIf="user$ | async">
-            <li class="animated fadeIn">
+            <li class="animated fadeIn" aria-hidden="false">
               <i class="fas fa-feather-alt"
                  aria-label="create"
                  routerLink="/create"
@@ -23,7 +23,7 @@
               </i>
             </li>
           </ng-container>
-          <li *ngFor="let i of icons">
+          <li *ngFor="let i of icons" aria-hidden="false">
             <i [class]="i.icon"
                [attr.aria-label]="i.icon"
                [routerLink]="i.route"
@@ -31,35 +31,36 @@
             </i>
           </li>
           <ng-container *ngIf="mode === 'dark'; else light">
-            <li (click)="theme()">
+            <li (click)="theme()" aria-hidden="false">
               <i class="far fa-lightbulb" aria-label="light"></i>
             </li>
           </ng-container>
           <ng-template #light> <!-- THEME -->
-            <li (click)="theme()">
+            <li (click)="theme()" aria-hidden="false">
               <i class="far fa-moon" aria-label="dark"></i>
             </li>
           </ng-template>
-          <li class="dropdown"> <!-- DROPDOWN -->
+          <li class="dropdown" aria-hidden="false"> <!-- DROPDOWN -->
             <i class="fas fa-align-justify"
                (click)="menuOpened = !menuOpened"
                aria-label="dropwdown">
             </i>
             <ul class="dropdown-menu" *ngIf="menuOpened">
-              <li [class]="'dropdown-item-' + (i + 1)"
+              <li [class]="'dropdown-item-' + (i + 1)" aria-hidden="false"
                   *ngFor="let m of dropdown; let i = index">{{m}}
               </li>
               <ng-container *ngIf="(user$ | async) as user">
                 <li *ngIf="user.account === 'Admin' || user.account === 'Super'" 
                      [class]="'dropdown-item-' + (dropdown.length + 1)"
                      [routerLink]="'/admin'"
-                     (click)="menuOpened = false">Admin
+                     (click)="menuOpened = false"
+                     aria-label="admin">Admin
                 </li>
               </ng-container>
             </ul>
           </li>  <!-- USER -->
           <ng-container *ngIf="(user$ | async); else noUser">
-            <li>
+            <li aria-hidden="false">
               <i [routerLink]="'/profile'" 
                  routerLinkActive="active" 
                  class="fas fa-user"
@@ -68,15 +69,15 @@
             </li>
           </ng-container>
           <ng-template #noUser>
-            <li (click)="openModal()">
+            <li (click)="openModal()" aria-hidden="false">
               <i class="fas fa-sign-in-alt" aria-label="sign"></i>
             </li>
           </ng-template>
         </ul>
       </div> <!-- SEARCH BUTTON -->
       <div class="search"
-           (click)="showSearchBar = !showSearchBar">
-        <i class="fas fa-search"></i>
+           (click)="showSearchBar = !showSearchBar" aria-hidden="false">
+        <i class="fas fa-search" aria-label="search"></i>
       </div>
     </div>
   </div>
