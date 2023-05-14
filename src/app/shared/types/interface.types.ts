@@ -32,7 +32,7 @@ export interface PostHeader {
   id: string;
 }
 
-export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
+export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'approved';
 export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
 
 // USER
@@ -139,3 +139,8 @@ export interface FilterType {
 }
 
 export type SearchType = 'post' | 'draft' | 'favorite';
+
+export interface StatusButtons {
+  status: string;
+  active: boolean;
+}

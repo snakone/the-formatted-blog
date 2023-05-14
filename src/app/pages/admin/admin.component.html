@@ -1,9 +1,9 @@
 <div class="animated fadeIn">
   <section class="admin-content">
-    <app-section>
-      <app-admin-content id="sticky-wrapper"
-                         [drafts]="drafts$ | async">
-      </app-admin-content>
+    <app-section spellcheck="false">
+      <div id="sticky-wrapper">
+        <router-outlet></router-outlet>
+      </div>
       <app-admin-sidebar></app-admin-sidebar>
     </app-section>
   </section>

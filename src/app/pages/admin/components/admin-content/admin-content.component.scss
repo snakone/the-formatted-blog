@@ -1,0 +1,15 @@
+@import 'mixins/mixins.scss';
+
+.buttons {
+  @include flex-start();
+
+  & button {
+    position: relative !important;
+    margin-right: 10px;
+    border: 0 !important;
+
+    &.active {
+      filter: drop-shadow(2px 5px 5px #3333336e);
+    }
+  }
+}

@@ -58,7 +58,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
-    status: 'correct',
+    status: 'approved',
     type: 'post',
     cover: '05-img.jpg'
   },

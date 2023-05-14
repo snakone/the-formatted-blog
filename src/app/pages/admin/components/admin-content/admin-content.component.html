@@ -1,4 +1,11 @@
-<ng-container *ngIf="drafts?.length > 0">
-  <app-admin-draft-card *ngFor="let d of drafts" [draft]="d">
+<ng-container *ngIf="filteredDrafts?.length > 0">
+  <div>
+    <div class="buttons">
+      <button *ngFor="let b of status" [class]="b.status" (click)="sort(b)" [ngClass]="{'active': b.active}">
+        {{ b.status | draftStatus}}
+      </button>
+    </div>
+  </div>
+  <app-admin-draft-card *ngFor="let d of filteredDrafts" [draft]="d">
   </app-admin-draft-card>
 </ng-container>

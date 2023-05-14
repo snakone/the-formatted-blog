@@ -18,13 +18,16 @@
     --inverted-contrast: #001c9b;
     --li-hover: #090c10;
     --success-color: #4bb543;
-    --pending-color: #ddf558;
     --input-focus: rgba(255, 255, 255, .2);
     --action-bar-bg: #ffffff;
     --action-bar-text: #555555;
     --light-gradient: #0A0C0F;
     --quill-bg: #0c0e11;
     --scrollbar-bg: #f7f3f305;
+    --not-seen-color: #d2d2ff;
+    --seen-color: #fdf5e2;
+    --pending-color: #fbdfee;
+    --approved-color: #81bd9a;
 
     & a { color: rgb(0, 140, 255) }
   }

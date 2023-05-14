@@ -17,6 +17,7 @@ export class DraftsFacade {
   active$ = this.store.select(fromDrafts.getActive);
   saving$ = this.store.select(fromDrafts.getSaving);
   preview$ = this.store.select(fromDrafts.getPreview);
+  byID$ = (id: string) => this.store.select(fromDrafts.getById(id));
 
   constructor(private store: Store<DraftsState>) { }
 

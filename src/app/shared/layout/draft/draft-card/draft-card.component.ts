@@ -18,7 +18,6 @@ export class DraftCardComponent {
 
   @Input() draft: Post | undefined;
   @Input() id: string | undefined; // DELETE
-  @Input() last: boolean | undefined;
   @Input() saving: SavingType | undefined;
   @Input() first: boolean;
   @Input() collapsed = false;

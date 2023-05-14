@@ -181,10 +181,10 @@ $quill-padding-sm: 20px;
 .seen { color: #364bbe; }
 .not-seen { color: #f1ad5e; }
 .pending { color: var(--pending-color); }
-.correct { color: var(--success-color); }
+.approved { color: var(--success-color); }
 
 button {
-  &.seen, &.not-seen, &.pending, &.correct {
+  &.seen, &.not-seen, &.pending, &.approved, &.all {
     appearance: none;
     text-align: center;
     display: inline-flex;
@@ -203,8 +203,25 @@ button {
     right: 0px;
     top: -4px;
     padding: 5px 12px;
+    color: #313235;
+    border: 1px solid var(--navigation-border);
+    transition: border 666ms ease-in-out, 
+                background 666ms ease-in-out;
   }
 
-  &.seen { background-color: #364bbe; }
-  &.not-seen { background-color: #ff452c5e; }
+  &.seen { 
+    background-color: var(--seen-color);
+  }
+
+  &.not-seen { 
+    background-color: var(--not-seen-color);
+  }
+
+  &.pending {
+    background-color: var(--pending-color);
+  }
+
+  &.approved {
+    background-color: var(--approved-color);
+  }
 }
