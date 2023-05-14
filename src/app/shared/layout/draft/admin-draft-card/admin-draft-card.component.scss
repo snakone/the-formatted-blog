@@ -1,0 +1,49 @@
+@import 'mixins/mixins.scss';
+
+.card {
+  width: calc(100% - 2rem);
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  @include shadow-card();
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  & h6 {
+    font-size: 1.666rem;
+    margin-bottom: .888rem;
+    position: relative;
+  }
+
+  &-data {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    top: 5px;
+
+    & span {
+      margin-right: 2.5rem;
+
+      &:last-child {
+        text-align: right;
+        margin-right: 0;
+        flex: 2;
+      }
+    }
+  }
+}
+
+.category {
+  overflow: hidden;
+  padding: 0;
+  font-style: italic;
+  font-family: 'Merriweather', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  opacity: .9;
+  color: var(--contrast-color);
+  cursor: pointer;
+  transition: color 666ms ease-in-out;
+}

@@ -16,8 +16,6 @@ import {
   ProfileDraftsComponent
 } from './profile.index';
 
-import { ProfilePostSidebarComponent } from './components/profile-posts/components/profile-post-sidebar/profile-post-sidebar.component';
-
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -27,8 +25,7 @@ import { ProfilePostSidebarComponent } from './components/profile-posts/componen
     ProfileFriendsComponent,
     ProfileSettingsComponent,
     ProfileFavoritesComponent,
-    ProfileDraftsComponent,
-    ProfilePostSidebarComponent
+    ProfileDraftsComponent
   ],
   imports: [
     CommonModule,

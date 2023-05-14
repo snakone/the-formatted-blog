@@ -2,6 +2,10 @@
   display: grid;
   position: relative;
   grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+  transition: all 200ms ease-in-out;
 
   &.margin {  margin-top: 30px }
+  &.collapsed {
+    grid-template-columns: repeat(auto-fit, minmax(5%, auto));
+  }
 }

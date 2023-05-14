@@ -5,7 +5,7 @@ import { CARROUSEL_OPTS } from '@shared/data/data';
   selector: 'app-post-carrousel',
   templateUrl: './post-carrousel.component.html',
   styleUrls: ['./post-carrousel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class PostCarrouselComponent implements OnInit {

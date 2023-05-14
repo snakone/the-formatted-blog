@@ -12,6 +12,8 @@ export class PostsFacade {
 
   posts$ = this.store.select(fromPosts.get);
   filtered$ = this.store.select(fromPosts.getFiltered);
+  favorites$ = this.store.select(fromPosts.getFavorites);
+  favoritesID$ = this.store.select(fromPosts.getFavoritesID);
   loaded$ = this.store.select(fromPosts.getLoaded);
   getFull$ = this.store.select(fromPosts.getFull);
   byUser$ = this.store.select(fromPosts.getByUser);
@@ -51,6 +53,14 @@ export class PostsFacade {
 
   public resetFilter(): void {
     this.store.dispatch(PostActions.resetFilter());
+  }
+
+  public addFavorite(id: string): void {
+    this.store.dispatch(PostActions.addFavorite({id}));
+  }
+
+  public removeFavorite(id: string): void {
+    this.store.dispatch(PostActions.removeFavorite({id}));
   }
 
 }

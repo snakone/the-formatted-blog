@@ -8,3 +8,14 @@ export const WELCOME_PUSH: NotificationPayload = {
   ],
   broadcast: false
 };
+
+export const DRAFT_PUSH: NotificationPayload = {
+  body: 'Nuevo borrador publicado',
+  requireInteraction: false,
+  actions: [
+    { action: 'explore', title: 'Recibido' }
+  ],
+  broadcast: false,
+  admin: true,
+  data: {}
+};

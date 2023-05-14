@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.types';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({
   selector: 'app-profile-drafts',
@@ -14,12 +15,17 @@ export class ProfileDraftsComponent implements OnInit {
 
   drafts$!: Observable<Post[]>;
   private unsubscribe$ = new Subject<void>();
+  favoritesID$: Observable<string[]> | undefined;
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(private draftsFacade: DraftsFacade, private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
     this.checkData();
-    this.drafts$ = this.draftsFacade.filtered$;
+    this.favoritesID$ = this.postFacade.favoritesID$;
+
+    this.drafts$ = this.postFacade.filtered$.pipe(
+      map(res => res.filter(post => post.type === 'draft'))
+    );
   }
 
   private checkData(): void {
@@ -34,7 +40,7 @@ export class ProfileDraftsComponent implements OnInit {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.draftsFacade.resetFilter();
+    this.postFacade.resetFilter();
   }
 
 }

@@ -8,7 +8,9 @@
                      [small]="i >= 1"
                      [border]="i === 0"
                      [last]="last"
-                     [post]="item">
+                     [post]="item"
+                     [favoritesID]="favoritesID$ | async"
+                     [showIntro]="i === 0">
       </app-post-card>
     </ng-container>
   </ng-container>

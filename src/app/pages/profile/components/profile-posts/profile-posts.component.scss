@@ -30,3 +30,7 @@ app-profile-post-sidebar {
 p {
   margin-top: 3px;
 }
+
+.content {
+  @media (max-width: 992px) { margin-bottom: 30px }
+}

@@ -11,6 +11,7 @@ export class SectionComponent {
 
   @Input() margin = true;
   @Input() auto = false;
+  @Input() collapsed = false;
 
   constructor() { }
 

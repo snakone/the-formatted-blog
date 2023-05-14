@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { Post, SavingType } from '@shared/types/interface.types';
@@ -8,7 +8,7 @@ import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
   selector: 'app-create-sidebar',
   templateUrl: './create-sidebar.component.html',
   styleUrls: ['./create-sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class CreateSidebarComponent implements OnInit {
@@ -16,18 +16,22 @@ export class CreateSidebarComponent implements OnInit {
   @Input() drafts!: Post[] | null;
   id$: Observable<string> | undefined;
   saving$: Observable<SavingType> | undefined;
+  isCollapsed = false;
+  @Input() originalCollapsed: boolean;
 
   constructor(
     private createDraftService: CreateDraftService,
-    private draftsFacade: DraftsFacade
+    private draftsFacade: DraftsFacade,
+    private changeRef: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.checkCollapseResize();
     this.id$ = this.createDraftService.onDraftDelete$;
     this.saving$ = this.draftsFacade.saving$.pipe(
       filter(res => !!res), 
       distinctUntilKeyChanged('value')
-    );
+    ); 
   }
 
   ngAfterViewInit() {
@@ -35,7 +39,24 @@ export class CreateSidebarComponent implements OnInit {
       if (this.drafts && this.drafts.length === 1) {
         this.draftsFacade.setActive(this.drafts[0]);
       }
-    }, 999);
+    }, 666);
+  }
+
+  public collapse(): void {
+    this.isCollapsed = !this.isCollapsed;
+    this.createDraftService.onCollapse(this.isCollapsed);
+  }
+
+  private async checkCollapseResize(): Promise<void> {
+    window.addEventListener('resize', async () => {
+      if (document.body.clientWidth < 984) { 
+        this.isCollapsed = false;
+        this.changeRef.detectChanges();
+      } else {
+        this.isCollapsed = this.originalCollapsed;
+        this.changeRef.detectChanges();
+      }
+    })
   }
 
 }

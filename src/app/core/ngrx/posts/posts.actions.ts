@@ -49,3 +49,23 @@ export const setFilter =
 
 export const resetFilter =
   createAction('[Posts API] Reset Filter');
+
+// ADD FAVORITE
+export const addFavorite =
+  createAction('[Posts API] Add Favorite',
+  props<{ id: string }>());
+
+// REMOVE FAVORITE
+export const removeFavorite =
+  createAction('[Posts API] Remove Favorite',
+  props<{ id: string }>());
+
+// SET FAVORITE
+export const setFavorite =
+  createAction('[Posts API] Set Favorite',
+  props<{ favorites: string[] }>());
+
+// GET FAVORITE FAILURE
+export const getFavoritesFailure =
+  createAction('[Posts API] Get Favorites Failure',
+  props<{ error: string }>());

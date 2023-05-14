@@ -38,11 +38,13 @@ form {
 
   @media(min-width: 993px) {
     margin-top: 6px;
+    padding-left: 30px;
   }
 
   @media(max-width: 992px) {
     height: 587px;
     max-height: 587px;
+    margin-top: 16px;
 
     & .intro {
       margin-bottom: 2rem !important;

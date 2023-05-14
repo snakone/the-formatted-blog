@@ -1,7 +1,5 @@
-.wrapper {
-  padding: 10px;
-
-  & p { 
+.container {
+   & p { 
     margin-bottom: 30px;
     &:last-child { margin-bottom: 0 }
   }

@@ -9,12 +9,13 @@ import { LOGIN_FIRST_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences'
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class HomeComponent {
 
   text = NOTIFICATION_TEXT;
+  show = false;
 
   constructor(
     private swPush: PWAService,
@@ -26,6 +27,10 @@ export class HomeComponent {
     this.userService.getUser() ? 
     this.swPush.requestNotification() :
     this.crafter.setSnack(LOGIN_FIRST_SENTENCE, 'warning');
+  }
+
+  ngOnInit() {
+    setTimeout(() => this.show = true, 1000);
   }
 
 }

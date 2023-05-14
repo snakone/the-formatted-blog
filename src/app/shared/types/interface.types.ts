@@ -16,6 +16,7 @@ export interface Post {
   active?: boolean;
   headers?: PostHeader[];
   user?: string;
+  type?: 'draft' | 'post';
 }
 
 export interface PostResponse extends ServerResponse {
@@ -93,6 +94,10 @@ export interface SWResponse extends ServerResponse {
   updated?: boolean;
 }
 
+export interface FavoriteResponse extends ServerResponse { 
+  favorites?: string[];
+}
+
 export interface NotificationPayload {
   title?: string;
   body: string;
@@ -105,6 +110,7 @@ export interface NotificationPayload {
   user?: string;
   broadcast?: boolean;
   device?: string | RegExp;
+  admin?: boolean;
 }
 
 interface NotificationData {
@@ -129,4 +135,7 @@ export interface SavingType {
 
 export interface FilterType {
   [key: string]: string | number | boolean;
+  type?: SearchType;
 }
+
+export type SearchType = 'post' | 'draft' | 'favorite';

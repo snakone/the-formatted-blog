@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { FilterType } from '@shared/types/interface.types';
+import { FilterType, SearchType } from '@shared/types/interface.types';
 import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil } from 'rxjs';
 
 @Component({
@@ -15,12 +15,7 @@ export class PostSearchComponent {
 
   @ViewChild('input', {static: true}) input: ElementRef;
   private unsubscribe$ = new Subject<void>();
-  @Input() type: 'draft' | 'post';
-
-  switchObj = {
-    draft: (value: FilterType) => this.draftsFacade.setFilter(value),
-    post: (value: FilterType) => this.postFacade.setFilter(value)
-  }
+  @Input() type: SearchType;
 
   constructor(private postFacade: PostsFacade, private draftsFacade: DraftsFacade) { }
 
@@ -31,7 +26,7 @@ export class PostSearchComponent {
       debounceTime(500),
       distinctUntilChanged(),
       takeUntil(this.unsubscribe$)
-     ).subscribe((value: string) => this.switchObj[this.type](this.createFilter(value)));
+     ).subscribe((value: string) => this.postFacade.setFilter(this.createFilter(value)));
   }
 
   private createFilter(value: string): FilterType {
@@ -39,6 +34,7 @@ export class PostSearchComponent {
       title: value,
       category: value,
       author: value,
+      type: this.type
     }
   }
 

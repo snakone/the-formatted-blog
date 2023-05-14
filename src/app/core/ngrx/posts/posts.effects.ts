@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as PostsActions from './posts.actions';
-import { map, concatMap, catchError } from 'rxjs/operators';
+import * as fromPosts from './posts.selectors';
+import { map, concatMap, catchError, debounceTime, withLatestFrom } from 'rxjs/operators';
 import { PostService } from '@core/services/api/post.service';
-import { PostsFacade } from './posts.facade';
+import { PostState } from './posts.reducer';
+import { Store } from '@ngrx/store';
+import { FavoriteService } from '@core/services/api/favorite.service';
 
 @Injectable()
 
@@ -13,7 +16,8 @@ export class PostEffects {
   constructor(
     private actions: Actions,
     private postSrv: PostService,
-    private postFacade: PostsFacade
+    private store: Store<PostState>,
+    private favService: FavoriteService
   ) { }
 
   // GET POSTS
@@ -53,6 +57,23 @@ export class PostEffects {
           catchError(error =>
               of(PostsActions.getFailure({ error: error.message }))
     ))))
+  );
+
+  // SAVE FAVORITES
+  saveFavoritesEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        PostsActions.addFavorite,
+        PostsActions.removeFavorite,
+      ]),
+      debounceTime(1000),
+      withLatestFrom(this.store.select(fromPosts.getFavoritesID)),
+      concatMap(([_, ids]) =>
+      this.favService.addFavorites(ids)
+        .pipe(
+          catchError(error =>
+              of(PostsActions.getFailure({ error: error.message }))
+    )))), {dispatch: false}
   );
 
 }

@@ -28,6 +28,7 @@ export const DUMMY_POST: Post[] = [
     created: 'Sep, 10 2019',
     cover: '05-img.jpg',
     status: 'not-seen',
+    type: 'post',
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
@@ -37,7 +38,9 @@ export const DUMMY_POST: Post[] = [
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
     status: 'not-seen',
-    cover: '05-img.jpg'
+    type: 'post',
+    cover: '05-img.jpg',
+    intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
     _id: '3',
@@ -46,6 +49,7 @@ export const DUMMY_POST: Post[] = [
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
     status: 'pending',
+    type: 'post',
     cover: '05-img.jpg'
   },
   {
@@ -55,6 +59,7 @@ export const DUMMY_POST: Post[] = [
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
     status: 'correct',
+    type: 'post',
     cover: '05-img.jpg'
   },
   {
@@ -64,6 +69,7 @@ export const DUMMY_POST: Post[] = [
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
     status: 'seen',
+    type: 'post',
     cover: '05-img.jpg'
   }
 ];
@@ -109,11 +115,22 @@ export const POST_CATEGORIES: TextList[] = [
   { label: 'Otras...', key: 'others' }
 ];
 
-export const POST_ICONS = [
-  'fab fa-twitter',
-  'fab fa-linkedin-in',
-  'fas fa-user-plus',
-  'far fa-envelope'
+export const POST_ICONS: ActionList[] = [
+  { 
+    icon: 'fab fa-twitter',
+    label: 'Compartir',
+    action: 'share'
+  },
+  { 
+    icon: 'fas fa-user-plus',
+    label: 'Añadir',
+    action: 'friend'
+  },
+  { 
+    icon: 'far fa-envelope',
+    label: 'Mensaje',
+    action: 'message'
+  }
 ];
 
 export const DRAFT_ICONS: ActionList[] = [
@@ -136,7 +153,7 @@ export const DRAFT_ICONS: ActionList[] = [
     icon: 'fas fa-trash',
     label: 'Eliminar',
     action: 'delete'
-  },
+  }
 ];
 
 export const NAVBAR_MENU = [

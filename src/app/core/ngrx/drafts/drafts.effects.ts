@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as DraftsActions from './drafts.actions';
-import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime } from 'rxjs/operators';
+import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime, tap } from 'rxjs/operators';
 import { DraftService } from '@core/services/api/drafts.service';
 import * as fromDrafts from './drafts.selectors';
 import { Store } from '@ngrx/store';
 import { DraftsState } from './drafts.reducer';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { CreateDraftService } from '@pages/create/services/create-draft.service';
 
 @Injectable()
 
@@ -17,7 +18,8 @@ export class DraftsEffects {
     private actions: Actions,
     private draftSrv: DraftService,
     private store: Store<DraftsState>,
-    private crafter: CrafterService
+    private crafter: CrafterService,
+    private createDraftSrv: CreateDraftService
   ) { }
 
   // GET DRAFTS
@@ -151,5 +153,15 @@ export class DraftsEffects {
         of(DraftsActions.getByUserFailure({ error: error.message }))
       ))
   )
+
+  removeCollapsedEffect$ = createEffect(() => this.actions
+  .pipe(
+    ofType(DraftsActions.deleteSuccess),
+    withLatestFrom(this.store.select(fromDrafts.get)),
+    tap((res) => console.log(res)),
+    filter(([_, drafts]) => drafts.length === 0),
+    concatMap((_) => of(this.createDraftSrv.onCollapse(false)))
+  ), { dispatch: false }
+)
 
 }

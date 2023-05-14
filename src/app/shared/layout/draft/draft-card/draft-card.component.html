@@ -5,20 +5,30 @@
         'active': draft.active,
         'zoomOutLeft': id === draft._id,
         'last': last,
-        'disabled': saving?.value
+        'disabled': saving?.value,
+        'first': first
       }">
-    <img src="assets/images/pencil.png" alt="pencil_icon"/>
-    <div>
-      <!-- TITLE -->
-      <h3>{{draft.title}}</h3>
-      <!-- STATUS -->
-      <p class="info">
-        <ng-container *ngIf="draft.category">
-          <span class="category">{{draft.category}}</span>
-          <span class="tale">-</span>
-        </ng-container>
-        <span class="created">{{draft.created}}</span>
-      </p>
+    <ng-container *ngIf="!collapsed; else isCollapsed">
+      <div>
+        <!-- TITLE -->
+        <h3>{{draft.title}}</h3>
+        <!-- STATUS -->
+        <p class="info">
+          <ng-container *ngIf="draft.category">
+            <span class="category">{{draft.category}}</span>
+            <span class="tale">-</span>
+          </ng-container>
+          <span class="created">{{draft.created}}</span>
+        </p>
+      </div>
+    </ng-container>
+    <ng-template #isCollapsed>
+      <span class="capital">{{draft.title?.charAt(0)}}</span>
+    </ng-template>
+    
+    <div class="icons animated fadeIn" *ngIf="draft.active">
+      <i class="fas fa-external-link-alt" (click)="preview()"></i>
+      <i class="fas fa-trash" (click)="delete()"></i>
     </div>
   </li>
 </ng-container>
