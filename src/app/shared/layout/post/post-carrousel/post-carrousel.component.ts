@@ -11,7 +11,6 @@ import { CARROUSEL_OPTS } from '@shared/data/data';
 export class PostCarrouselComponent implements OnInit {
 
   customOptions = CARROUSEL_OPTS;
-  show = false;
 
   items = [
     '02-img.jpg',
@@ -22,8 +21,6 @@ export class PostCarrouselComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    setTimeout(() => this.show = true, 500);
-  }
+  ngOnInit(): void { }
 
 }

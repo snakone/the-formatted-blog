@@ -9,12 +9,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 export class MainPostComponent implements OnInit {
 
-  show = false;
-
   constructor() { }
 
-  ngOnInit(): void {
-    setTimeout(() => this.show = true, 500);
-  }
+  ngOnInit(): void { }
 
 }
