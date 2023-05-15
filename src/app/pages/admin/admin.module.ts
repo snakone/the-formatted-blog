@@ -10,6 +10,16 @@ import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.modu
 import { DraftLayoutModule } from '@shared/layout/draft/draft-layout.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { AdminDraftComponent } from './components/admin-draft/admin-draft.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_LEGACY_DIALOG_DATA } from '@angular/material/legacy-dialog';
+
+const Material = [
+  MatFormFieldModule,
+  MatDialogModule
+];
 
 @NgModule({
   declarations: [
@@ -24,7 +34,13 @@ import { AdminDraftComponent } from './components/admin-draft/admin-draft.compon
     LayoutModule,
     DraftsAccessModule,
     DraftLayoutModule,
-    PipesModule
+    PipesModule,
+    ...Material,
+    FormsModule
+  ],
+  providers: [
+    {provide: MAT_LEGACY_DIALOG_DATA, useValue: {}},
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 

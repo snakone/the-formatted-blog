@@ -54,13 +54,6 @@ const featureReducer = createReducer(
       active: (draft.active = true, draft)
     }
   )),
-  // UPDATE KEY
-  on(DraftActions.updateKeySuccess, (state, { draft }) => (
-    {
-      ...state,
-      preview: draft
-    }
-  )),
   on(DraftActions.createFailure, (state, { error }) => ({ ...state, error })),
   // DELETE DRAFT
   on(DraftActions.deleteSuccess, (state, { id }) => (

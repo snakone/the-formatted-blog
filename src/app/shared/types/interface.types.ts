@@ -10,12 +10,13 @@ export interface Post {
   created?: string;
   author?: string;
   cover?: string;
-  video?: string;
   intro?: string;
   status?: DraftStatus;
   active?: boolean;
   headers?: PostHeader[];
   user?: string;
+  check?: DraftCheck;
+  adminSeenOnce?: boolean;
   type?: 'draft' | 'post';
 }
 
@@ -143,4 +144,34 @@ export type SearchType = 'post' | 'draft' | 'favorite';
 export interface StatusButtons {
   status: string;
   active: boolean;
+}
+
+// CHECK
+export interface DraftCheck {
+  hasGoodTitle?: CheckStatus;
+  hasGoodCategory?: CheckStatus;
+  hasGoodCover?: CheckStatus;
+  hasGoodIntro?: CheckStatus;
+  hasGoodMessage?: CheckStatus;
+}
+
+export interface CheckStatus {
+  ok?: boolean;
+  cause?: string;
+}
+
+export interface CheckStatusList {
+  name: string;
+  hint: string;
+  icon: string;
+  prop: string;
+  desc: string;
+  checkProp: string;
+  checkMessage: string;
+  cause: string;
+}
+
+export interface DraftPreviewDialogData {
+  updateStatus?: boolean;
+  draft?: Post;
 }

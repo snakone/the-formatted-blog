@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { DELETE_CONFIRMATION } from '@shared/data/data';
@@ -23,10 +22,14 @@ export class DraftCardComponent {
   @Input() collapsed = false;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private draftsFacade: DraftsFacade, private crafter: CrafterService, private createDraftSrv: CreateDraftService, private router: Router) { }
+  constructor(
+    private draftsFacade: DraftsFacade,
+    private crafter: CrafterService,
+    private createDraftSrv: CreateDraftService
+  ) { }
 
   public activate(draft: Post): void {
-    if (this.saving?.value) { return; }
+    if (this.saving?.value || draft.status === 'pending') { return; }
     this.draftsFacade.setActive(draft);
   }
 

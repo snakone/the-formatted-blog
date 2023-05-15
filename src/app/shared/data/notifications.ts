@@ -6,14 +6,26 @@ export const WELCOME_PUSH: NotificationPayload = {
   actions: [
     { action: 'explore', title: 'Gracias por visitarnos' }
   ],
-  broadcast: false
+  broadcast: false,
+  data: {}
 };
 
 export const DRAFT_PUSH: NotificationPayload = {
-  body: 'Nuevo borrador publicado',
+  body: 'Nuevo boceto publicado',
   requireInteraction: false,
   actions: [
-    { action: 'explore', title: 'Recibido' }
+    { action: 'explore', title: 'Entendido' }
+  ],
+  broadcast: false,
+  admin: true,
+  data: {}
+};
+
+export const PUBLISH_PUSH: NotificationPayload = {
+  body: 'Nuevo artículo publicado',
+  requireInteraction: true,
+  actions: [
+    { action: 'explore', title: 'Ver Artículo' }
   ],
   broadcast: false,
   admin: true,

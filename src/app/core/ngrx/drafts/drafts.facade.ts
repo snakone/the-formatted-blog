@@ -41,8 +41,8 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.update({draft}));
   }
 
-  public updateKey(id: string, keys: KeyPair): void {
-    this.store.dispatch(DraftActions.updateKey({id, keys}));
+  public updateKey(id: string, keys: KeyPair, all?: boolean): void {
+    this.store.dispatch(DraftActions.updateKey({id, keys, all}));
   }
 
   public delete(id: string): void {

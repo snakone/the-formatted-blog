@@ -8,7 +8,7 @@
     <figure>
       <img [src]="!draft ? (post.cover | image) : post.cover" 
            alt="Post Image"
-           #img (error)="img.src = 'assets/images/placeholder.png'"/>
+           #img (error)="img.src = 'assets/images/placeholder.png'" img.alt='No Image'/>
       <!-- HOVER -->
       <ng-container *ngIf="!draft">
         <div class="inner">
@@ -74,7 +74,8 @@
             <li *ngFor="let i of draftIcons"
                 (click)="switchObjDraft[i.action]()">
               <i [class]="i.icon"
-                 [matTooltip]="i.label">
+                 [matTooltip]="i.label"
+                 [ngClass]="{'disabled': i.action === 'edit' && post.status === 'pending'}">
               </i>
             </li>
             <li>

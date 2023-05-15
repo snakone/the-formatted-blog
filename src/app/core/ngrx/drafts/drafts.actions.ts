@@ -67,11 +67,11 @@ export const updateFailure =
 // UPDATE DRAFT KEY
 export const updateKey =
   createAction('[Drafts API] Update Draft Key',
-  props<{ id: string, keys: KeyPair }>());
+  props<{ id: string, keys: KeyPair, all?: boolean }>());
 
 export const updateKeySuccess =
   createAction('[Drafts API] Update Draft Key Success',
-  props<{ draft: Post }>());
+  props<{ draft: Post, all?: boolean }>());
 
 export const updateKeyFailure =
   createAction('[Drafts API] Update Draft Key Failure',

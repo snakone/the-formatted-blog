@@ -95,12 +95,10 @@ export class DraftsEffects {
   updateDraftKeyEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.updateKey),
-      withLatestFrom(this.store.select(fromDrafts.getActive)),
-      filter(([_, active]) => !!active),
-      concatMap(([action]) =>
+      concatMap((action) =>
       this.draftSrv.updateDraftKey(action.id, {...action.keys})
         .pipe(
-          map(draft => DraftsActions.updateKeySuccess({ draft })),
+          map(draft => DraftsActions.updateKeySuccess({ draft, all: action.all })),
           catchError(error =>
               of(DraftsActions.updateKeyFailure({ error: error.message }))
     ))))
@@ -136,8 +134,16 @@ export class DraftsEffects {
   )
 
   alertsDraft2Effect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.updateSuccess),
+      concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+    ), { dispatch: false }
+  )
+
+  alertsDraft3Effect$ = createEffect(() => this.actions
   .pipe(
-    ofType(DraftsActions.updateSuccess),
+    ofType(DraftsActions.updateKeySuccess),
+    filter(_ => _.all),
     concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
   ), { dispatch: false }
 )
@@ -148,20 +154,20 @@ export class DraftsEffects {
         DraftsActions.updateSuccess,
         DraftsActions.updateKeySuccess,
       ]),
-      concatMap((_) => of(DraftsActions.getByUser())),
+      concatMap((_: any) => _.all ? of(DraftsActions.getAll()) : of(DraftsActions.getByUser())),
       catchError(error =>
         of(DraftsActions.getByUserFailure({ error: error.message }))
       ))
   )
 
   removeCollapsedEffect$ = createEffect(() => this.actions
-  .pipe(
-    ofType(DraftsActions.deleteSuccess),
-    withLatestFrom(this.store.select(fromDrafts.get)),
-    tap((res) => console.log(res)),
-    filter(([_, drafts]) => drafts.length === 0),
-    concatMap((_) => of(this.createDraftSrv.onCollapse(false)))
-  ), { dispatch: false }
-)
+    .pipe(
+      ofType(DraftsActions.deleteSuccess),
+      withLatestFrom(this.store.select(fromDrafts.get)),
+      tap((res) => console.log(res)),
+      filter(([_, drafts]) => drafts.length === 0),
+      concatMap((_) => of(this.createDraftSrv.onCollapse(false)))
+    ), { dispatch: false }
+  )
 
 }

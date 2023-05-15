@@ -8,6 +8,10 @@ section {
 
 #sticky-wrapper {
   @include grid-component();
+
+  @media(max-width: 992px) {
+    margin-bottom: 2rem;
+  }
 }
 
 app-admin-sidebar {

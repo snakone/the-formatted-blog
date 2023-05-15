@@ -1,11 +1,16 @@
-<ng-container *ngIf="filteredDrafts?.length > 0">
-  <div>
-    <div class="buttons">
-      <button *ngFor="let b of status" [class]="b.status" (click)="sort(b)" [ngClass]="{'active': b.active}">
-        {{ b.status | draftStatus}}
-      </button>
-    </div>
-  </div>
+<div class="buttons">
+  <button *ngFor="let b of status" [class]="b.status" (click)="sort(b)" [ngClass]="{'active': b.active}">
+    {{ b.status | draftStatus}}
+  </button>
+</div>
+
+<ng-container *ngIf="filteredDrafts?.length > 0; else noResult">
   <app-admin-draft-card *ngFor="let d of filteredDrafts" [draft]="d">
   </app-admin-draft-card>
 </ng-container>
+
+<ng-template #noResult>
+  <div class="empty">
+    No se han encontrado bocetos.
+  </div>
+</ng-template>

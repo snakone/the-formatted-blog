@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { Post, StatusButtons } from '@shared/types/interface.types';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, filter, map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-content',
@@ -20,7 +20,6 @@ export class AdminContentComponent implements OnInit {
     {status: 'not-seen', active: false},
     {status: 'seen', active: false}, 
     {status: 'pending', active: false},
-    {status: 'approved', active: false}, 
     {status: 'all', active: false}
   ];
 
@@ -28,7 +27,8 @@ export class AdminContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.draftsFacade.all$.pipe(
-      takeUntil(this.unsubscribe$)
+      takeUntil(this.unsubscribe$),
+      map(drafts => drafts.filter(d => d.status !== 'approved'))
     ).subscribe(res => {
       this.drafts = res;
       this.filteredDrafts = res;
@@ -41,12 +41,13 @@ export class AdminContentComponent implements OnInit {
     
     if (value.status === 'all') {
       this.filteredDrafts = this.drafts;
+      window.dispatchEvent(new Event('resize'));
       return;
     }
     this.filteredDrafts = this.drafts
-    .filter((draft: Post) => {
-      return draft.status === value.status;
-    });
+    .filter((draft: Post) => draft.status === value.status);
+
+    window.dispatchEvent(new Event('resize'));
   }
 
   ngOnDestroy(): void {

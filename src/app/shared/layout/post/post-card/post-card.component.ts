@@ -58,6 +58,7 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void { }
 
   private edit(): void {
+    if (this.post.status === 'pending') { return; }
     this.draftsFacade.setActive(this.post);
     this.router.navigateByUrl('/create');
   }

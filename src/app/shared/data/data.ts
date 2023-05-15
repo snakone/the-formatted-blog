@@ -1,4 +1,4 @@
-import { ActionList, IconList, Post, TextList } from '@shared/types/interface.types';
+import { ActionList, CheckStatusList, IconList, Post, TextList } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export const CARROUSEL_OPTS: OwlOptions = {
@@ -167,4 +167,67 @@ export const NAVBAR_MENU = [
 export const NAVBAR_ICONS: IconList[]  = [
   { icon: 'far fa-file-alt', route: '/news' },
   { icon: 'fas fa-question', route: '/help' }
+];
+
+// DRAFT CHECK
+export const CHECKSTATUS: CheckStatusList[] = [
+  {
+    name: 'Título',
+    hint: 'Título claro y conciso.',
+    icon: 'fas fa-hashtag',
+    prop: 'title',
+    checkProp: 'hasGoodTitle',
+    checkMessage: 'El boceto cumple con los requisitos de un buen <strong>título</strong>.',
+    cause: '¿Por qué el título no cumple los requisitos?',
+    desc: `<p>
+              Un buen <strong>título</strong> es corto y descriptivo. Solo con leerlo deberías
+              ser capaz de identificar que tipo de contenido vas a encontrar dentro.
+              También puedes dar una idea del título con una pregunta. "¿Es la ciberseguridad una
+              opción segura?", "¿Es ChatGPT el futuro?". No olvides que el lector decide si seguir
+              leyendo después de leer el título.
+           </p>`
+  },
+  {
+    name: 'Categoría',
+    hint: 'Categoría acorde al tema.',
+    icon: 'far fa-folder',
+    prop: 'category',
+    checkProp: 'hasGoodCategory',
+    checkMessage: 'El boceto tiene una <strong>categoría</strong> relacionada.',
+    cause: '¿Por qué la categoría no cumple los requisitos?',
+    desc: `<p>
+              Después de echar un ojo al boceto podrás decidir si la <strong>categoría</strong>
+              corresponde con la proporcionada. Ten en cuenta que es posible que un tema
+              abarque dos o más categorías, intenta aprobar la más acorde.
+           </p>`
+  },
+  {
+    name: 'Imagen',
+    hint: 'Formato de la imagen correcto.',
+    icon: 'far fa-image',
+    prop: 'cover',
+    checkProp: 'hasGoodCover',
+    checkMessage: 'El boceto tiene una buena <strong>imagen</strong> de portada y pesa menos de <strong>100kb</strong>.',
+    cause: '¿Por qué la imagen no cumple los requisitos?',
+    desc: `<p>
+            ¿Te gusta la <strong>imagen</strong> que ves? Esta imagen se usará como portada para el Artículo
+            y será lo primero que verá el lector. Es muy importante que esté relacionada
+            con el boceto de alguna manera. Además no podrá superar los 100kb. Esto es
+            así para que la página cargue lo más rápido posible.
+          </p>`
+  },
+  {
+    name: 'Introducción',
+    hint: 'Introducción cumple los requisitos.',
+    icon: 'fas fa-address-card',
+    prop: 'intro',
+    checkProp: 'hasGoodIntro',
+    checkMessage: 'El boceto tiene una <strong>introducción</strong> correcta.',
+    cause: '¿Por qué la introducción no cumple los requisitos?',
+    desc: `<p>
+            Escribir una buena <strong>introducción</strong> es esencial para que el lector haga
+            click en el Artículo para leerlo entero. Son las primeras letras del Artículo, así
+            que tienen que atraer al lector de una manera rápida y directa.
+          </p>`
+  }
 ];
