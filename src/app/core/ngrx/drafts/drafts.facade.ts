@@ -37,6 +37,10 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.create({draft}));
   }
 
+  public publish(draft: Post): void {
+    this.store.dispatch(DraftActions.publish({draft}));
+  }
+
   public update(draft: Post): void {
     this.store.dispatch(DraftActions.update({draft}));
   }
@@ -79,6 +83,14 @@ export class DraftsFacade {
 
   public resetBySlug(): void {
     this.store.dispatch(DraftActions.resetSlug());
+  }
+
+  public addTemporal(post: Post): void {
+    this.store.dispatch(DraftActions.addTemporal({post}));
+  }
+
+  public removeTemporal(post: Post): void {
+    this.store.dispatch(DraftActions.removeTemporal({post}));
   }
 
 }

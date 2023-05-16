@@ -1,6 +1,7 @@
 <article>
   <app-post-card [border]="false"
                  [alone]="true"
-                 [post]="draft">
+                 [post]="post"
+                 [favoritesID]="favoritesID$ | async">
   </app-post-card>
 </article>

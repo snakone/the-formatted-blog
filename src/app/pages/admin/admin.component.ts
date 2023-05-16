@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { Subject, debounceTime, filter, startWith, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -14,21 +13,19 @@ export class AdminComponent {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private draftsFacade: DraftsFacade, private router: Router) { }
+  constructor(private draftsFacade: DraftsFacade) { }
 
   ngOnInit(): void {
-    this.draftsFacade.getAll();
+    this.checkData();
+  }
 
-    this.router.events.pipe(
-      startWith(this.router),
-      takeUntil(this.unsubscribe$),
-      debounceTime(500),
-      filter((_: any) =>
-         _.routerEvent instanceof NavigationEnd &&
-         _.routerEvent.url?.includes('#reload')),
-    ).subscribe(_ => {
-      this.draftsFacade.getAll();
-    })
+  private checkData(): void {
+    this.draftsFacade.allLoaded$
+     .pipe(
+       filter(res => !res),
+       takeUntil(this.unsubscribe$)
+      )
+     .subscribe(_ => this.draftsFacade.getAll());
   }
 
   ngOnDestroy(): void {

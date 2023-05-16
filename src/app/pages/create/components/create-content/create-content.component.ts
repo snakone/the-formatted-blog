@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation, DeltaStatic } from 'quill';
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
@@ -8,6 +8,10 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { slugify } from '@core/services/quill/quill.module';
 import { DRAFT_PUSH } from '@shared/data/notifications';
 import { PWAService } from '@core/services/pwa/pwa.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { CrafterService } from '@core/services/crafter/crafter.service';
+import { EDIT_POST_CONFIRMATION } from '@shared/data/data';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({
   selector: 'app-create-content',
@@ -24,6 +28,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   model = EMPTY_QUILL as DeltaStatic;
   timer = 5000;
   active$: Observable<Post> | undefined;
+  isPostTemporal = false;
 
   quillModules: QuillModules = {
     syntax: true,
@@ -43,11 +48,24 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     history: { delay: 2000, userOnly: false },
   };
 
-  constructor(private draftsFacade: DraftsFacade, private sw: PWAService) { }
+  constructor(
+    private draftsFacade: DraftsFacade,
+    private sw: PWAService,
+    private router: Router,
+    private crafter: CrafterService,
+    private postFacade: PostsFacade
+  ) { }
+
+  ngOnInit() {
+    this.getActive();
+  }
 
   ngAfterContentInit(): void {
     this.listenEditor();
-    this.getActive();
+  }
+
+  private getActive(): void {
+    this.active$ = this.draftsFacade.active$.pipe(tap(res => this.draft = res));
   }
 
   private listenEditor(): void {
@@ -89,18 +107,28 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   ): void {
     let temporalDraft: Post | undefined;
 
-    !this.draft ? // NEW 
-      (
-        temporalDraft = { title: 'Boceto ', message: delta, headers },
-        this.draftsFacade.create(temporalDraft)
-        // firstValueFrom(this.sw.send(DRAFT_PUSH)).then()
-      ) :  // UPDATE
-      (
-        temporalDraft = Object.assign({}, this.draft),
-        temporalDraft.message = delta, 
-        temporalDraft.headers = headers, 
+    // CREATE
+    if (!this.draft) {
+      temporalDraft = { title: 'Boceto ', message: delta, headers };
+      this.draftsFacade.create(temporalDraft);
+      // firstValueFrom(this.sw.send(DRAFT_PUSH)).then();
+    } else {
+      temporalDraft = Object.assign({}, this.draft);
+      temporalDraft.message = delta;
+      temporalDraft.headers = headers;
+
+      // TEMPORAL - UNPUBLISH
+      if (this.draft.temporal) {
+        this.crafter.confirmation(EDIT_POST_CONFIRMATION)
+        .afterClosed()
+          .pipe(
+            takeUntil(this.unsubscribe$),
+            filter(_ => _ && !!_)
+        ).subscribe(_ => this.postFacade.unPublish(temporalDraft));
+      } else { // UPDATE
         this.draftsFacade.update(temporalDraft)
-      );
+      }
+    }
 
     this.draftsFacade.setPreview(temporalDraft);
     this.save(false);
@@ -112,10 +140,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   public clean(): void {
    this.editor.quillEditor.setContents(null);
-  }
-
-  private getActive(): void {
-    this.active$ = this.draftsFacade.active$.pipe(tap(res => this.draft = res));
   }
 
   public stickyFix(): void {

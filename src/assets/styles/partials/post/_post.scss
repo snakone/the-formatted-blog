@@ -168,6 +168,7 @@ $quill-padding-sm: 20px;
 .alone {
   & .ql-editor {
     max-height: initial;
+    min-height: initial;
   }
 }
 

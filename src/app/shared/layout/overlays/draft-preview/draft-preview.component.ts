@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/cor
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { DraftPreviewDialogData, Post } from '@shared/types/interface.types';
 import { Observable } from 'rxjs';
-import { MAT_LEGACY_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 
 const TIME_TO_SEEN = 5000;
 
@@ -19,7 +19,7 @@ export class DraftPreviewComponent implements OnInit {
   timer: NodeJS.Timer;
 
   constructor(
-    @Inject(MAT_LEGACY_DIALOG_DATA) public data: DraftPreviewDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DraftPreviewDialogData,
     private draftsFacade: DraftsFacade
   ) { }
 

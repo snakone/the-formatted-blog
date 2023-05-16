@@ -41,6 +41,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.draftsFacade.resetActive();
   }
 
 }

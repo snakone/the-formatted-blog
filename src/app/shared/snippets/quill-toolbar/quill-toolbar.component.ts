@@ -56,7 +56,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   };
 
   private new(sv: boolean): void {
-    if (!this.draft || sv) { return; }
+    if (!this.draft || sv || this.draft.temporal) { return; }
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(

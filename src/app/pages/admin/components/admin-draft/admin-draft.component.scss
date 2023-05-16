@@ -8,6 +8,7 @@
 
   & .draft-card {
     width: 100%;
+    overflow: hidden;
     padding: 1.2rem;
     margin: 1.2rem 0;
     border-radius: 2px;
@@ -20,6 +21,7 @@
   font-weight: bold;
   color: var(--contrast-color);
   margin: 1rem 0;
+  @include text-ellipsis(30px);
 
   & span {
     color: #ff7171;
@@ -55,6 +57,7 @@ h3 {
   font-size: 24px;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  @include text-ellipsis(30px);
 }
 
 h4 {
@@ -115,5 +118,41 @@ button {
   &.preview {
     max-width: 200px;
     margin: 1.2rem auto 1.5rem 0;
+  }
+}
+
+@media(max-width: 650px) {
+  h1 {
+    font-size: 1.6rem;
+
+    & i {
+      font-size: 16px;
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    margin-top: 1.2rem;
+  }
+
+  p, .desc, .form-control, input, mat-label {
+    font-size: 13px;
+  }
+
+  button.preview {
+    padding: 6px 8px;
+  }
+
+  .grid {
+    gap: 10px;
+
+    & .draft-card {
+      padding: 0 !important;
+      box-shadow: none !important;
+
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
   }
 }

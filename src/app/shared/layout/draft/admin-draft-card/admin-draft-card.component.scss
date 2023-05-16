@@ -1,7 +1,7 @@
 @import 'mixins/mixins.scss';
 
 .card {
-  width: calc(100% - 2rem);
+  width: 100%;
   padding: 1.2rem;
   margin: 1.5rem 0;
   border-radius: 4px;
@@ -15,7 +15,7 @@
   & h6 {
     font-size: 1.666rem;
     margin-bottom: .888rem;
-    position: relative;
+    @include text-ellipsis(130px);
   }
 
   &-data {
@@ -33,6 +33,23 @@
         margin-right: 0;
         flex: 2;
       }
+    }
+  }
+
+  @media(max-width: 625px) {
+    &-data {
+      flex-direction: column;
+      align-items: flex-start;
+
+      & button {
+        bottom: 4px;
+        top: initial
+      }
+    }
+
+    & h6 {
+      padding-right: 0;
+      font-size: 1.3rem;
     }
   }
 }

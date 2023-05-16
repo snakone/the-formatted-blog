@@ -33,7 +33,7 @@
         <i [class]="l.icon"
           [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
           (click)="switchObj[l.action](pipe.saving?.value)"
-          [ngClass]="{'disabled': pipe.saving?.value || !draft}">
+          [ngClass]="{'disabled': pipe.saving?.value || !draft || (draft.temporal && (l.action === 'new'))}">
         </i>
       </ng-container>
     </ng-container>

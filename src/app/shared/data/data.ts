@@ -1,4 +1,4 @@
-import { ActionList, CheckStatusList, IconList, Post, TextList } from '@shared/types/interface.types';
+import { ActionList, CheckStatusList, ConfirmationDialogProps, IconList, Post, TextList } from '@shared/types/interface.types';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export const CARROUSEL_OPTS: OwlOptions = {
@@ -26,7 +26,7 @@ export const DUMMY_POST: Post[] = [
     category: 'Home & Living',
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
-    cover: '05-img.jpg',
+    cover: 'assets/images/05-img.jpg',
     status: 'not-seen',
     type: 'post',
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
@@ -39,7 +39,8 @@ export const DUMMY_POST: Post[] = [
     created: 'Jun, 26 2019',
     status: 'not-seen',
     type: 'post',
-    cover: '05-img.jpg',
+    cover: 'assets/images/05-img.jpg',
+    user: '62262ead2aed27b93083e607',
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
@@ -50,7 +51,7 @@ export const DUMMY_POST: Post[] = [
     created: 'Sep, 17 2015',
     status: 'pending',
     type: 'post',
-    cover: '05-img.jpg'
+    cover: 'assets/images/05-img.jpg'
   },
   {
     _id: '4',
@@ -60,7 +61,7 @@ export const DUMMY_POST: Post[] = [
     created: 'Dec, 10 2016',
     status: 'approved',
     type: 'post',
-    cover: '05-img.jpg'
+    cover: 'assets/images/05-img.jpg'
   },
   {
     _id: '5',
@@ -70,7 +71,7 @@ export const DUMMY_POST: Post[] = [
     created: 'Jan, 05 2016',
     status: 'seen',
     type: 'post',
-    cover: '05-img.jpg'
+    cover: 'assets/images/05-img.jpg'
   }
 ];
 
@@ -91,14 +92,24 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-cloud-download-alt', label: 'Descargar en HTML', action: 'download' },
 ];
 
-export const SAVE_CONFIRMATION = {
+export const SAVE_CONFIRMATION: ConfirmationDialogProps = {
   title: 'Nuevo...',
   message: '¿Quieres guardar el boceto actual y crear uno nuevo?'
 };
 
-export const DELETE_CONFIRMATION = {
+export const DELETE_CONFIRMATION: ConfirmationDialogProps = {
   title: 'Eliminar...',
   message: '¿Estás seguro que quieres eliminar este boceto?'
+};
+
+export const PUBLISH_CONFIRMATION: ConfirmationDialogProps = {
+  title: 'Publicar...',
+  message: '¿Estás seguro que quieres publicar este boceto?'
+};
+
+export const EDIT_POST_CONFIRMATION: ConfirmationDialogProps = {
+  title: 'Editar artículo...',
+  message: '¿Estás seguro que quieres editar este artículo? Recuerda que si lo editas, volverá al estado de boceto.'
 };
 
 export const POST_CATEGORIES: TextList[] = [

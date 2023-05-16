@@ -2,21 +2,22 @@ import { DeltaStatic } from "quill";
 
 // POST
 export interface Post {
-  _id?: string;
+  _id?: string; // Mongo ID
   slug?: string;
   title?: string;
   category?: string;
-  message?: DeltaStatic;
-  created?: string;
+  message?: DeltaStatic; // Quill Delta
+  created?: string; // Date
   author?: string;
-  cover?: string;
+  cover?: string; // Image
   intro?: string;
   status?: DraftStatus;
-  active?: boolean;
-  headers?: PostHeader[];
-  user?: string;
-  check?: DraftCheck;
-  adminSeenOnce?: boolean;
+  active?: boolean; // Current Post
+  headers?: PostHeader[]; // Index
+  user?: string; // User ID of the Post
+  check?: DraftCheck; // Draft Check to become Post
+  adminSeenOnce?: boolean; // Admin saw the Post at least once since the last edit
+  temporal?: boolean; // When a Post is editing but still it's not a Draft
   type?: 'draft' | 'post';
 }
 
@@ -174,4 +175,9 @@ export interface CheckStatusList {
 export interface DraftPreviewDialogData {
   updateStatus?: boolean;
   draft?: Post;
+}
+
+export interface ConfirmationDialogProps {
+  title: string;
+  message: string;
 }

@@ -5,7 +5,8 @@
         'active': draft.active,
         'zoomOutLeft': id === draft._id,
         'disabled': saving?.value || draft.status === 'pending',
-        'first': first
+        'first': first,
+        'temporal': draft.temporal
       }">
     <ng-container *ngIf="!collapsed; else isCollapsed">
       <div>
@@ -20,6 +21,10 @@
           <span class="created">{{draft.created}}</span>
           <span class="pending" *ngIf="draft.status === 'pending'">
             <span class="tale">-</span> {{draft.status | draftStatus}}
+          </span>
+          <!-- TEMPORAL -->
+          <span *ngIf="draft.temporal" class="temp">
+            <span class="tale">-</span>Temporal
           </span>
         </p>
       </div>

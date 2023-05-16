@@ -73,19 +73,9 @@ li {
     }
   }
 
-  &.first {
-    &::before {
-      height: 0;
-    }
-  }
-
   & h3 { 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 40px;
+    @include text-ellipsis(40px);
     font-size: 14px;
-    position: relative;
     transition: transform 200ms ease-in;
 
     @media(max-width: 992px) {
@@ -100,6 +90,19 @@ li {
     line-height: 14px;
 
     & .category { color: var(--contrast-color); }
+
+    & .temp {
+      color: var(--error-color);
+    }
+
+    @media(min-width: 993px) and (max-width: 1200px) {
+      display: flex;
+      gap: 10px;
+
+      & .tale {
+        display: none;
+      }
+    }
   }
 
   & .capital {
@@ -125,6 +128,21 @@ li {
 
   @media(max-width: 450px) {
     margin-top: 0;
+  }
+}
+
+.temporal {
+  & .capital {
+    &::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--error-color);
+      position: absolute;
+      top: -5px;
+      right: -5px;
+    }
   }
 }
 

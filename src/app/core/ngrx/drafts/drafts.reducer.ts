@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as DraftActions from './drafts.actions';
-import { FilterType, Post, SavingType } from '@shared/types/interface.types';
+import { Post, SavingType } from '@shared/types/interface.types';
 
 export interface DraftsState {
   drafts: Post[];
@@ -11,6 +11,7 @@ export interface DraftsState {
   preview: Post;
   saving: SavingType;
   error: string | null;
+  temporal: Post[];
 }
 
 export const inititalState: DraftsState = {
@@ -21,20 +22,26 @@ export const inititalState: DraftsState = {
   active: null,
   preview: null,
   saving: null,
-  error: null
+  error: null,
+  temporal: []
 };
 
 const featureReducer = createReducer(
   inititalState,
   // GET DRAFTS BY USER
-  on(DraftActions.getByUserSuccess, (state, { drafts }) => (
-    {
-      ...state,
-      loaded: true,
-      drafts: [...drafts].map(d => d._id === state.active?._id ? (d.active = true, d) : d),
-      error: null
+  on(DraftActions.getByUserSuccess, (state, { drafts }) => {
+    if (state.temporal.length > 0) {
+      drafts.unshift(...state.temporal);
     }
-  )),
+    return (
+      {
+        ...state,
+        loaded: true,
+        drafts: [...drafts].map(d => d._id === state.active?._id ? (d.active = true, d) : d),
+        error: null
+      }
+    )
+  }),
   on(DraftActions.getByUserFailure, (state, { error }) => ({ ...state, error, loaded: false })),
   // GET ALL DRAFTS
   on(DraftActions.getAllSuccess, (state, { drafts }) => (
@@ -73,7 +80,12 @@ const featureReducer = createReducer(
     }
   )),
   on(DraftActions.setPreview, (state, { draft }) => ({ ...state, preview: draft})),
-  on(DraftActions.resetActive, (state) => ({ ...state, active: null})),
+  on(DraftActions.resetActive, (state) => (
+    {
+      ...state,
+      active: null,
+      drafts: [...state.drafts.map(d => (d.active = false, d))]
+    })),
   on(DraftActions.setSaving, (state, { data }) => ({ ...state, saving: data})),
   // RESET
   on(DraftActions.reset, (state) => (
@@ -82,10 +94,32 @@ const featureReducer = createReducer(
       loaded: false,
       error: null,
       drafts: [],
+      allLoaded: false,
+      temporal: []
     }
   )),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),
-  on(DraftActions.resetPreview, (state) => ({ ...state, preview: null}))
+  on(DraftActions.resetPreview, (state) => ({ ...state, preview: null})),
+  // PUBLISH
+  on(DraftActions.publishFailure, (state, {error}) => ({ ...state, error })),
+  // TEMPORAL
+  on(DraftActions.addTemporal, (state, {post}) => {
+    if (state.temporal.find(t => t._id === post._id)) {
+      return ({...state});
+    }
+    return (
+    { 
+      ...state,
+      temporal: [...state.temporal, post],
+      drafts: [post, ...state.drafts] 
+    }
+  )}),
+  on(DraftActions.removeTemporal, (state, {post}) => (
+    { 
+      ...state, 
+      drafts: [...state.drafts.filter(d => !d.temporal || d._id !== post?._id)],
+      temporal: [...state.temporal.filter(t => t._id !== post?._id)]
+    }))
 );
 
 export function reducer(state: DraftsState | undefined, action: Action) {

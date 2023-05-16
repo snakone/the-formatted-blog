@@ -131,3 +131,25 @@ export const setFilter =
 
 export const resetFilter =
   createAction('[Drafts API] Reset Filter');
+
+// PUBLISH DRAFT
+export const publish =
+  createAction('[Drafts API] Publish Draft',
+  props<{ draft: Post }>());
+
+export const publishSuccess =
+  createAction('[Drafts API] Publish Draft Success',
+  props<{ draft: Post }>());
+
+export const publishFailure =
+  createAction('[Drafts API] Publish Draft Failure',
+  props<{ error: string }>());
+
+// ADD TEMPORAL
+export const addTemporal =
+  createAction('[Drafts API] Add Temporal Post to Drafts',
+  props<{ post: Post }>());
+
+export const removeTemporal =
+  createAction('[Drafts API] Remove Temporal Post to Drafts',
+  props<{ post: Post }>());

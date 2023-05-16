@@ -10,7 +10,7 @@ import { Post } from '@shared/types/interface.types';
 
 export class PostSidebarComponent {
 
-  @Input() draft: Post;
+  @Input() post: Post;
 
   constructor() { }
 

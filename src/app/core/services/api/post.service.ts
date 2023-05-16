@@ -18,7 +18,7 @@ export class PostService {
   public get(): Observable<Post[]> {
     this.page++;
     return this.http
-      .get<PostResponse>(this.API_POST + '?page=' + this.page)
+      .get<PostResponse>(this.API_POST + '?page=' + 1)
       .pipe(
         filter(res => res && !!res.ok && !!res.posts),
         map(_ => _.posts)
@@ -40,6 +40,15 @@ export class PostService {
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.post)
+      );
+  }
+
+  public unPublishPost(post: Post): Observable<Post> {
+    return this.http
+      .post<PostResponse>(this.API_POST + 'unpublish', post)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.post)
       );
   }
 

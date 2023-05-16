@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { CHECKSTATUS } from '@shared/data/data';
+import { PWAService } from '@core/services/pwa/pwa.service';
+import { CHECKSTATUS, PUBLISH_CONFIRMATION } from '@shared/data/data';
+import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { DraftCheck, Post } from '@shared/types/interface.types';
-import { Subject, takeUntil, switchMap, filter } from 'rxjs';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-admin-draft',
@@ -29,7 +31,8 @@ export class AdminDraftComponent {
     private draftsFacade: DraftsFacade,
     private route: ActivatedRoute,
     private crafter: CrafterService,
-    private router: Router
+    private router: Router,
+    private sw: PWAService
   ) {}
 
   ngOnInit() {
@@ -64,11 +67,22 @@ export class AdminDraftComponent {
       }
     });
 
+    // Publish DRAFT
     if (ok) {
-      // Publish DRAFT
-      console.log(this.draft, 'all OK')
-    } else {
-      // Update draft check
+      this.crafter.confirmation(PUBLISH_CONFIRMATION)
+       .afterClosed()
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          filter(_ => !!_)
+      ).subscribe(_ => {
+        this.draftsFacade.publish(this.draft);
+
+        firstValueFrom(this.sw.send(
+          this.sw.set(Object.assign({}, PUBLISH_PUSH), this.draft)
+        )).then(_ => this.navigate());
+      });
+    } // UPDATE DRAFT
+    else {
       this.draftsFacade.updateKey(this.draft?._id, {key: 'check', value: this.draft.check}, true);
 
       if (this.markAsPending) {
@@ -77,7 +91,7 @@ export class AdminDraftComponent {
         )
       }
 
-      this.router.navigate(['../'], {relativeTo: this.route, replaceUrl: true, fragment: 'reload'});
+      this.navigate();
     }
   }
 
@@ -120,6 +134,10 @@ export class AdminDraftComponent {
 
   public isEverythingOK(value: DraftCheck): boolean {
     return Object.values(value).every(i => i.ok)
+  }
+
+  private navigate(): void {
+    this.router.navigate(['../'], {relativeTo: this.route, replaceUrl: true, fragment: 'reload'});
   }
 
   ngOnDestroy(): void {

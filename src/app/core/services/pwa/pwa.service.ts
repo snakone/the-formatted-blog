@@ -90,7 +90,7 @@ export class PWAService {
       );
   }
 
-  private set(
+  public set(
     payload: NotificationPayload,
     draft?: Post
   ): NotificationPayload {

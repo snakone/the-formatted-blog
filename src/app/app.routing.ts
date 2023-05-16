@@ -38,7 +38,7 @@ const routes: Routes = [
        .then(mod => mod.ProfileModule), data: { name: 'Profile' }
   },
   {
-    path: 'post',
+    path: 'post/:slug',
     loadChildren: () =>
       import('./pages/post/post.module')
        .then(mod => mod.PostModule), data: { name: 'Post' }

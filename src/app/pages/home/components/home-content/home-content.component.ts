@@ -4,6 +4,7 @@ import { filter, Observable, of, Subject, takeUntil } from 'rxjs';
 import { PostsFacade } from '@store/posts/posts.facade';
 import { DUMMY_POST } from '@shared/data/data';
 import { Post } from '@shared/types/interface.types';
+import { PostService } from '@core/services/api/post.service';
 
 @Component({
   selector: 'app-home-content',
@@ -18,10 +19,10 @@ export class HomeContentComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
   favoritesID$: Observable<string[]> | undefined;
   
-  constructor(private postFacade: PostsFacade) { }
+  constructor(private postFacade: PostsFacade, private postsSrv: PostService) { }
 
   ngOnInit(): void {
-    // this.checkData();
+    this.checkData();
     this.posts$ = this.postFacade.posts$;
     this.favoritesID$ = this.postFacade.favoritesID$;
   }
