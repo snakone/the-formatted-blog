@@ -218,7 +218,7 @@ export const CHECKSTATUS: CheckStatusList[] = [
     icon: 'far fa-image',
     prop: 'cover',
     checkProp: 'hasGoodCover',
-    checkMessage: 'El boceto tiene una buena <strong>imagen</strong> de portada y pesa menos de <strong>100kb</strong>.',
+    checkMessage: 'El boceto tiene una buena <strong>imagen</strong> de portada y pesa menos de <strong>150kb</strong>.',
     cause: '¿Por qué la imagen no cumple los requisitos?',
     desc: `<p>
             ¿Te gusta la <strong>imagen</strong> que ves? Esta imagen se usará como portada para el Artículo

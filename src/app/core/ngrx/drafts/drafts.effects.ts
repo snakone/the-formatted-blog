@@ -99,7 +99,7 @@ export class DraftsEffects {
       concatMap((action) =>
       this.draftSrv.updateDraftKey(action.id, {...action.keys})
         .pipe(
-          map(draft => DraftsActions.updateKeySuccess({ draft, all: action.all })),
+          map(draft => DraftsActions.updateKeySuccess({ draft, toast: action.toast })),
           catchError(error =>
               of(DraftsActions.updateKeyFailure({ error: error.message }))
     ))))
@@ -132,6 +132,18 @@ export class DraftsEffects {
     ))))
   );
 
+  onDraftUpdateEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        DraftsActions.updateSuccess,
+        DraftsActions.updateKeySuccess,
+      ]),
+      concatMap((_) => of(DraftsActions.getByUser())),
+      catchError(error =>
+        of(DraftsActions.deleteFailure({ error: error.message }))
+      ))
+  )
+
   // ALERT DRAFTS
   alertsDraftEffect$ = createEffect(() => this.actions
     .pipe(
@@ -157,7 +169,7 @@ export class DraftsEffects {
   alertsDraft3Effect$ = createEffect(() => this.actions
   .pipe(
     ofType(DraftsActions.updateKeySuccess),
-    filter(_ => _.all),
+    filter(_ => _.toast),
     concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
     ), { dispatch: false }
   )

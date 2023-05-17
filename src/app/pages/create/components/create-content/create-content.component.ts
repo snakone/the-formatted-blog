@@ -124,14 +124,14 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
           .pipe(
             takeUntil(this.unsubscribe$),
             filter(_ => _ && !!_)
-        ).subscribe(_ => this.postFacade.unPublish(temporalDraft));
+        ).subscribe(_ => (this.save(false), this.postFacade.unPublish(temporalDraft)));
       } else { // UPDATE
-        this.draftsFacade.update(temporalDraft)
+        this.draftsFacade.update(temporalDraft);
+        this.save(false);
       }
     }
 
     this.draftsFacade.setPreview(temporalDraft);
-    this.save(false);
   }
 
   private save(value: boolean): void {

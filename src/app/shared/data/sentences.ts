@@ -20,7 +20,8 @@ export const WRONG_INFO_SENTENCE = 'Los datos no son válidos.';
 export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';
 export const LOGIN_FIRST_SENTENCE = 'Inicia sesión primero.';
 export const ADMIN_DRAFT_MESSAGE_DESC = '<p>Seguramente el <strong>mensaje</strong> es la parte más importante del boceto. No estamos para corregir faltas de ortografía pero sí para detectar contenido inhadecuado, ofensivo, en resumen... cualquier contenido inhapropiado. Tómate tu tiempo, no hay prisa para llenar el bául de Artículos publicados. Preferimos calidad por encima de cantidad.</p>'
-
+export const BAD_COVER_SIZE = 'Esta imagen exede el tamaño requerido.';
+export const BAD_COVER_CAUSE = 'Parece que la imagen tiene un mal formato. Intenta subir otra.';
 export const QUILL_PLACEHOLDER = `
 Estás frente a un lienzo en blanco. Utiliza los botones de edición situados en la parte superior para dotar a tu artículo de un fórmato profesional.
 

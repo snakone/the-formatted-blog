@@ -5,7 +5,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { CHECKSTATUS, PUBLISH_CONFIRMATION } from '@shared/data/data';
 import { PUBLISH_PUSH } from '@shared/data/notifications';
-import { ADMIN_DRAFT_MESSAGE_DESC, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
+import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { DraftCheck, Post } from '@shared/types/interface.types';
 import { Subject, takeUntil, switchMap, filter, firstValueFrom } from 'rxjs';
@@ -26,6 +26,7 @@ export class AdminDraftComponent {
   adminDraftMessageDesc = ADMIN_DRAFT_MESSAGE_DESC;
   eveythingOK: boolean;
   markAsPending = false;
+  maxImageSize = 150;
 
   constructor(
     private draftsFacade: DraftsFacade,
@@ -102,13 +103,15 @@ export class AdminDraftComponent {
       this.sendRequest(draft.cover || '', (sizeInBytes) => {
         this.coverSize = (sizeInBytes / 1024).toFixed(2);
         
-        if (Number(this.coverSize) > 100) {
+        if (Number(this.coverSize) > this.maxImageSize) {
           this.draft.check.hasGoodCover.ok = false;
+          this.draft.check.hasGoodCover.cause = BAD_COVER_SIZE
         }
   
         if (isNaN(sizeInBytes)) {
           this.coverSize = '0';
           this.draft.check.hasGoodCover.ok = false;
+          this.draft.check.hasGoodCover.cause = BAD_COVER_CAUSE;
         }
       });
     } catch (err) {
