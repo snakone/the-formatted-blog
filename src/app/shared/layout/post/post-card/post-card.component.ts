@@ -112,7 +112,7 @@ export class PostCardComponent implements OnInit {
   }
 
   public editPost(): void {
-    if (this.post.type !== 'post' || this.post.status !== 'approved') { return; }
+    if (this.post.type !== 'post') { return; }
 
     this.crafter.confirmation(EDIT_POST_CONFIRMATION)
     .afterClosed()

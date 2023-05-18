@@ -41,10 +41,20 @@
 
     & .ql-container.ql-snow {
       background-color: initial !important;
+      
     }
 
     & .mat-dialog-container { 
       padding-top: 0 !important;
+    }
+
+    & .mat-dialog-container::-webkit-scrollbar { width: 6px !important; }
+    & .mat-dialog-container::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-bg) !important;
+    }
+
+    & .mat-dialog-container::-webkit-scrollbar-track-piece {
+      background: transparent;
     }
 
     & .mat-dialog-content {

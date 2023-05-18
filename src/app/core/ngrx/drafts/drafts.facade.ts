@@ -15,6 +15,8 @@ export class DraftsFacade {
   all$ = this.store.select(fromDrafts.getAll);
   allLoaded$ = this.store.select(fromDrafts.getAllLoaded);
   active$ = this.store.select(fromDrafts.getActive);
+  bySlug$ = this.store.select(fromDrafts.getBySlug);
+  bySlugLoaded$ = this.store.select(fromDrafts.getBySlugLoaded);
   saving$ = this.store.select(fromDrafts.getSaving);
   preview$ = this.store.select(fromDrafts.getPreview);
   byID$ = (id: string) => this.store.select(fromDrafts.getById(id));

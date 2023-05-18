@@ -1,0 +1,64 @@
+.draft-status {
+  & h1 {
+    font-size: 17px;
+    margin-bottom: 1rem;
+  }
+
+  & p {
+    margin-bottom: 1rem;
+    font-size: 13px;
+
+    &:first-of-type {
+      margin-bottom: 1.6rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & + h1 {
+      margin-top: 2rem;
+    }
+  }
+
+  @media(max-width: 992px) {
+    margin: 1.4rem 0 2rem 0;
+  }
+}
+
+.form-control {
+  & span {
+    font-size: 13px;
+  }
+
+  i {
+    margin-right: 18px;
+    font-size: 18px;
+    width: 18px;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+
+    &.fa-check {
+      color: #5abb66;
+    }
+
+    &.fa-times {
+      font-size: 20px;
+      color: #c44c4c;
+      position: relative;
+      left: 1px;
+    }
+  }
+}
+
+.progress {
+  text-align: center;
+
+  & mat-progress-bar {
+    text-align: initial;
+    margin-top: 50px;
+    margin-bottom: 12px;
+  }
+}
+

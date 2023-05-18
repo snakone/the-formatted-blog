@@ -42,3 +42,13 @@ h2 {
     font-size: 1.8rem;
   }
 }
+
+::-webkit-scrollbar { width: 4px !important;  }
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-bg) !important;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}

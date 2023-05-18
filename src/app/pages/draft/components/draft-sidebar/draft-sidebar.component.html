@@ -1,0 +1,43 @@
+<app-sticky-aside [selector]="'draft-content'">
+  <ng-container *ngIf="draft">
+    <div class="draft-status">
+      <h1>Estado del boceto</h1>
+      <p>
+        A continuación se muestran las <strong>condiciones</strong> que debe
+        seguir el boceto para que se convierta en <b>artículo</b>, una vez con eso, podrá ser visto, leido y disfrutado por todo el mundo.
+        Se paciente, la comprobación está en camino.
+      </p>
+      <ng-container *ngIf="check.length > 0 && status">
+        <div class="item" *ngFor="let c of status; let i = index">
+          <!-- CHECKBOX -->
+          <div class="form-control"
+               [ngClass]="{'valid': check[i].ok}">
+            <ng-container *ngIf="check[i].ok; else notOk">
+              <i class="fas fa-check"></i>
+            </ng-container>
+            <ng-template #notOk>
+              <i class="fas fa-times" [matTooltip]="check[i].cause"></i>
+            </ng-template>
+            <span [innerHTML]="c.hint"></span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="form-control"
+               [ngClass]="{'valid': check[4].ok}">
+            <ng-container *ngIf="check[4].ok; else notOk">
+              <i class="fas fa-check"></i>
+            </ng-container>
+            <ng-template #notOk>
+              <i class="fas fa-times" [matTooltip]="check[4].cause"></i>
+            </ng-template>
+            <span [innerHTML]="'El boceto tiene un mensaje correcto.'"></span>
+          </div>
+        </div>
+      </ng-container>
+      <div class="progress">
+        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        {{progress + '%'}}
+      </div>
+    </div>
+  </ng-container>
+</app-sticky-aside>

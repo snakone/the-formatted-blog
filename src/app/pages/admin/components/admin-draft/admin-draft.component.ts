@@ -85,14 +85,13 @@ export class AdminDraftComponent {
     } // UPDATE DRAFT
     else {
       this.draftsFacade.updateKey(this.draft?._id, {key: 'check', value: this.draft.check}, true);
+      this.navigate();
 
       if (this.markAsPending) {
         this.draftsFacade.updateKey(
           this.draft?._id, {key: 'status', value: 'pending'}
         )
       }
-
-      this.navigate();
     }
   }
 

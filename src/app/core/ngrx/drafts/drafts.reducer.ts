@@ -12,6 +12,8 @@ export interface DraftsState {
   saving: SavingType;
   error: string | null;
   temporal: Post[];
+  bySlug: Post;
+  bySlugLoaded: boolean;
 }
 
 export const inititalState: DraftsState = {
@@ -23,7 +25,9 @@ export const inititalState: DraftsState = {
   preview: null,
   saving: null,
   error: null,
-  temporal: []
+  temporal: [],
+  bySlug: null,
+  bySlugLoaded: false
 };
 
 const featureReducer = createReducer(
@@ -53,6 +57,10 @@ const featureReducer = createReducer(
     }
   )),
   on(DraftActions.getAllFailure, (state, { error }) => ({ ...state, error, allLoaded: false })),
+  // DRAFT BY SLUG
+  on(DraftActions.getBySlug, (state) => ({...state, bySlug: null, bySlugLoaded: false})),
+  on(DraftActions.getBySlugSuccess, (state, {draft}) => ({...state, bySlug: draft, bySlugLoaded: true})),
+  on(DraftActions.getBySlugFailure, (state, {error}) => ({...state, bySlug: null, error, loaded: false, bySlugLoaded: false})),
   // CREATE DRAFT
   on(DraftActions.createSuccess, (state, { draft }) => (
     {
@@ -99,6 +107,7 @@ const featureReducer = createReducer(
     }
   )),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),
+  on(DraftActions.resetSlug, (state) => ({ ...state, bySlug: null, bySlugLoaded: false})),
   on(DraftActions.resetPreview, (state) => ({ ...state, preview: null})),
   // PUBLISH
   on(DraftActions.publishFailure, (state, {error}) => ({ ...state, error })),
@@ -133,4 +142,6 @@ export const getAllLoaded = (state: DraftsState) => state.allLoaded;
 export const getActive = (state: DraftsState) => state.active;
 export const getSaving = (state: DraftsState) => state.saving;
 export const getPreview = (state: DraftsState) => state.preview;
+export const getBySlug = (state: DraftsState) => state.bySlug;
+export const getBySlugLoaded = (state: DraftsState) => state.bySlugLoaded;
 

@@ -77,7 +77,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   private help(sv: boolean): void {
     if (sv) { return; }
-    this.form ? '' :
+    this.form ? null :
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
   }
 

@@ -1,8 +1,8 @@
-<ng-container *ngIf="draft">
+<ng-container *ngIf="draft; else noDraft">
   <div class="header animated fadeIn">
     <h1>
       Aprobación del Artículo
-      <i class="fas fa-step-backward" [routerLink]="'../'" [fragment]="'reload'"></i>
+      <i class="fas fa-step-backward" [routerLink]="'../'"></i>
     </h1>
     <!-- TITLE -->
     <h3>{{draft.title}}</h3>
@@ -110,3 +110,9 @@
           {{isEverythingOK(draft.check) ? 'Publicar' : 'Actualizar'}}
   </button>
 </ng-container>
+
+<ng-template #noDraft>
+  <div class="empty">
+    Parece ser que el contenido que buscas no existe. Comprueba la URL.
+  </div>
+</ng-template>

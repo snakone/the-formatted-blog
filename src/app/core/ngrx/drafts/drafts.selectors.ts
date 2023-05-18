@@ -15,4 +15,6 @@ export const getAllLoaded = createSelector(getDraftsState, fromDrafts.getAllLoad
 export const getActive = createSelector(getDraftsState, fromDrafts.getActive);
 export const getSaving = createSelector(getDraftsState, fromDrafts.getSaving);
 export const getPreview = createSelector(getDraftsState, fromDrafts.getPreview);
+export const getBySlug = createSelector(getDraftsState, fromDrafts.getBySlug);
+export const getBySlugLoaded = createSelector(getDraftsState, fromDrafts.getBySlugLoaded);
 export const getById = (id: string) => createSelector(getAll, (drafts) => drafts.find(d => d._id === id));

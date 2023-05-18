@@ -9,7 +9,7 @@ import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
 import { SWResponse, NotificationPayload, Post } from '@shared/types/interface.types';
-import { SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
+import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { PushDeniedOverlayComponent } from '@layout/overlays/push-denied/push-denied.component';
 import { URI } from 'app/app.config';
@@ -58,13 +58,19 @@ export class PWAService {
               )) : of(null))
             ).subscribe(_ => !_ ?? this.crafter.setSnack(SUB_UPDATED_SENTENCE))
         }
-      }).catch(_ => console.log(_));
+      }).catch(_ => {
+        this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+        console.error(_);
+      });
     }, timer);
   }
 
   public async requestNotification(): Promise<void> {
     const permission = await Notification.requestPermission()
-     .catch(_ => console.log(_));
+     .catch(_ => {
+      this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+      console.log(_);
+    });
     permission !== 'granted' ? this.openPushModal() : this.showPrompt(1000);
   }
 

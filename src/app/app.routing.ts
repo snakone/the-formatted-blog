@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '@core/guards/admin/admin.guard';
+import { SameUserGuard } from '@core/guards/same-user/same-user.guard';
 import { UserGuard } from '@core/guards/user/user.guard';
 
 const routes: Routes = [
@@ -42,6 +43,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/post/post.module')
        .then(mod => mod.PostModule), data: { name: 'Post' }
+  },
+  {
+    path: 'draft/:slug',
+    canActivate: [SameUserGuard],
+    loadChildren: () =>
+      import('./pages/draft/draft.module')
+       .then(mod => mod.DraftModule), data: { name: 'Draft' }
   },
   {
     path: 'admin',

@@ -131,7 +131,7 @@ export interface KeyPair {
 }
 
 export interface SavingType {
-  type: 'saving' | 'warning';
+  type: 'saving' | 'warning' | 'temporal';
   value: boolean;
 }
 

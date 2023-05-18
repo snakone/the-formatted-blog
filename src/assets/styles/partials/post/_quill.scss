@@ -29,6 +29,16 @@
   transition: background 666ms ease-in-out;
 }
 
+.ql-container.ql-snow::-webkit-scrollbar { width: 4px !important;  }
+
+.ql-container.ql-snow::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-bg) !important;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
 .ql-toolbar.ql-snow {
   text-align: center;
   display: flex;

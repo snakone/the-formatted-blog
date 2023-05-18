@@ -138,7 +138,11 @@ export class DraftsEffects {
         DraftsActions.updateSuccess,
         DraftsActions.updateKeySuccess,
       ]),
-      concatMap((_) => of(DraftsActions.getByUser())),
+      concatMap((_) => of(...[
+        DraftsActions.getByUser(),
+        DraftsActions.getAll(),
+        DraftsActions.setActive({draft: _?.draft})
+      ])),
       catchError(error =>
         of(DraftsActions.deleteFailure({ error: error.message }))
       ))

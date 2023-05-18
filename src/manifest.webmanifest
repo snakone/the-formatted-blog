@@ -7,7 +7,7 @@
   "theme_color": "#f7f3f3",
   "description": "Create and share content",
   "dir": "ltr",
-  "categories": "Education, Entertainment, Personalization, Social, Utilities",
+  "categories": "[Education, Entertainment, Personalization, Social, Utilities]",
   "lang": "es",
   "orientation": "portrait",
   "scope": "./",

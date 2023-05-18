@@ -5,7 +5,7 @@
     ondeleteID: id$ | async
   } as pipe" class="draft-list" 
             [ngClass]="{'collapsed': isCollapsed}">
-    <app-draft-card *ngFor="let d of drafts; let last = last; let first = first"
+    <app-draft-card *ngFor="let d of drafts; let first = first"
                     [draft]="d"
                     [id]="pipe.ondeleteID"
                     [saving]="pipe.saving"

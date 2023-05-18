@@ -16,9 +16,15 @@
         </ng-container>
         <!-- WARNING -->
         <ng-container *ngSwitchCase="'warning'">
-          <div class="animated fadeIn">
+          <div class="animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
             <span>No se ha podido guardar. Comprueba los datos</span>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'temporal'">
+          <div class="animated fadeIn warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>No se guardarán los datos hasta que aceptes.</span>
           </div>
         </ng-container>
       </ng-container>
