@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UsersFacade } from '@store/users/users.facade';
 import { USER_INDEX } from '@shared/data/data';
-import { User } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-profile-header',
@@ -12,7 +11,6 @@ import { User } from '@shared/types/interface.types';
 
 export class ProfileHeaderComponent implements OnInit {
 
-  @Input() user: User;
   list = USER_INDEX;
 
   constructor(private userFcd: UsersFacade) { }

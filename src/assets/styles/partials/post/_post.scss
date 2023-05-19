@@ -28,7 +28,7 @@ $quill-padding-sm: 20px;
   // PARAGRAPH
   & p {
     margin: 0 0 30px;
-    text-align: left;
+    text-align: justify;
     &:last-of-type { 
       margin: 0;
       padding-bottom: 35px;
@@ -39,6 +39,7 @@ $quill-padding-sm: 20px;
     }
   }
 
+  // PLACEHOLDER
   &.ql-blank::before {
     top: 6px;
     right: $quill-padding !important;
@@ -47,6 +48,7 @@ $quill-padding-sm: 20px;
     color: var(--text-color);
     opacity: .7;
     padding-bottom: $quill-padding !important;
+    text-align: justify;
   }
 
   @media(max-width: 550px) {
@@ -72,6 +74,7 @@ $quill-padding-sm: 20px;
     font-size: 16px;
     border-left: 5px solid var(--contrast-color) !important;
     color: var(--button-text-color);
+    text-align: justify;
 
     &:first-child { margin-top: 0 !important }
   }

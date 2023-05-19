@@ -75,7 +75,7 @@ export interface Snack {
 
 // LIST
 export interface IconList {
-  icon: string;
+  icon?: string;
   label?: string;
   route?: string;
 }
@@ -180,4 +180,9 @@ export interface DraftPreviewDialogData {
 export interface ConfirmationDialogProps {
   title: string;
   message: string;
+}
+
+export interface FQAItem {
+  label: string;
+  content: string[];
 }

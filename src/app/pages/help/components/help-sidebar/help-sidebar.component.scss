@@ -1,0 +1,27 @@
+.side {
+  padding-left: 10px;
+}
+
+p {
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+button {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+@media(max-width: 992px) {
+  .side {
+    padding-left: 0;
+  }
+
+  button {
+    margin-bottom: 2rem;
+  }
+
+  p {
+    text-align: justify;
+  }
+}

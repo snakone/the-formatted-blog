@@ -37,7 +37,7 @@ const addTitle = (post: Post) =>
   <div id="draft" style="width: 100%">
     <h1>${post.title}</h1>
     <span class="title">Escrito por ${post.author}</span>
-    <img src="${post.cover}"/>`;
+    <img onerror="this.src='https://th.bing.com/th/id/OIP.vDf037OKUo0H03weRxdWuAHaHa?pid=ImgDet&rs=1'" alt="Post Image" src="${post.cover}"/>`;
 
 const addFooter = () => `  
   </div>

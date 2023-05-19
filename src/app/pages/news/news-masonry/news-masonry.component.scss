@@ -68,7 +68,17 @@
     }
   }
 
-  & .card { padding: 18px 0 20px }
+  & .card { 
+    padding: 18px 0 20px;
+
+    & p {
+      margin-bottom: 1rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
 
   & h4 {
     text-transform: uppercase;

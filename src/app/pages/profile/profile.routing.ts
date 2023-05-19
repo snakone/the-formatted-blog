@@ -5,7 +5,7 @@ import { ProfileComponent } from './profile.component';
 
 import { 
   ProfileSettingsComponent,
-  ProfileContentComponent,
+  ProfileHomeComponent,
   ProfileFavoritesComponent,
   ProfilePostsComponent,
   ProfileFriendsComponent,
@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '',
     component: ProfileComponent,
     children: [
-      { path: '', component: ProfileContentComponent },
+      { path: '', component: ProfileHomeComponent },
       { path: 'posts', component: ProfilePostsComponent },
       { path: 'drafts', component: ProfileDraftsComponent },
       { path: 'friends', component: ProfileFriendsComponent },

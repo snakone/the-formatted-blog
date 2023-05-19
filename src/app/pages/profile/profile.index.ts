@@ -1,4 +1,4 @@
-export { ProfileContentComponent } from './components/profile-content/profile-content.component';
+export { ProfileHomeComponent } from './components/profile-home/profile-home.component';
 export { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 export { ProfilePostsComponent } from './components/profile-posts/profile-posts.component';
 export { ProfileFriendsComponent } from './components/profile-friends/profile-friends.component';

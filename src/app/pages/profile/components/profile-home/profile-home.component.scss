@@ -1,0 +1,9 @@
+@import 'mixins/mixins.scss';
+
+app-profile-home-content {
+  @include grid-component();
+}
+
+app-profile-home-sidebar {
+  @include grid-child();
+}

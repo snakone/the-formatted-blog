@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile.component';
 import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
 
 import {
-  ProfileContentComponent,
+  ProfileHomeComponent,
   ProfileHeaderComponent,
   ProfilePostsComponent,
   ProfileFriendsComponent,
@@ -16,16 +16,21 @@ import {
   ProfileDraftsComponent
 } from './profile.index';
 
+import { ProfileHomeContentComponent } from './components/profile-home/components/profile-home-content/profile-home-content.component';
+import { ProfileHomeSidebarComponent } from './components/profile-home/components/profile-home-sidebar/profile-home-sidebar.component';
+
 @NgModule({
   declarations: [
     ProfileComponent,
-    ProfileContentComponent,
+    ProfileHomeComponent,
     ProfileHeaderComponent,
     ProfilePostsComponent,
     ProfileFriendsComponent,
     ProfileSettingsComponent,
     ProfileFavoritesComponent,
-    ProfileDraftsComponent
+    ProfileDraftsComponent,
+    ProfileHomeContentComponent,
+    ProfileHomeSidebarComponent
   ],
   imports: [
     CommonModule,

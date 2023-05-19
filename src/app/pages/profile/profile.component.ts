@@ -1,9 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
-import { UsersFacade } from '@store/users/users.facade';
 import { LIKE_TEXT } from '@shared/data/sentences';
-import { User } from '@shared/types/interface.types';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 
@@ -17,17 +15,14 @@ import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 export class ProfileComponent implements OnInit {
 
   text = LIKE_TEXT;
-  user$: Observable<User>;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private userFcd: UsersFacade,
     private postFacade: PostsFacade,
     private draftsFacade: DraftsFacade
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.userFcd.user$;
     this.checkData();
   }
 

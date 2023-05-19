@@ -29,7 +29,13 @@
         margin-bottom: 4px;
         line-height: 16px;
       }
-     }
+    }
+
+    @media(max-width: 550px) {
+      & p {
+        font-size: .7rem;
+      }
+    }
   }
 
   & .submit {

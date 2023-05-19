@@ -50,7 +50,9 @@
             </i>
             <ul class="dropdown-menu" *ngIf="menuOpened">
               <li [class]="'dropdown-item-' + (i + 1)" aria-hidden="false"
-                  *ngFor="let m of dropdown; let i = index">{{m}}
+                  *ngFor="let m of dropdown; let i = index"
+                  [routerLink]="m.route"
+                  (click)="menuOpened = false">{{m.label}}
               </li>
               <ng-container *ngIf="(user$ | async) as user">
                 <li *ngIf="user.account === 'Admin' || user.account === 'Super'" 
