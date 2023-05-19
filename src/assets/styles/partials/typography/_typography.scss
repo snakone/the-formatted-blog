@@ -19,3 +19,7 @@ input, select, textarea {
     border: 1px solid red;
   }
 }
+
+a {
+  transition: color 666ms ease-in-out;
+}

@@ -193,7 +193,7 @@ export class DraftsEffects {
       ofType(DraftsActions.publishSuccess),
       tap(_ => this.crafter.setSnack('Boceto publicado!', 'success')),
       switchMap((_) => of(...[
-        DraftsActions.reset(),
+        DraftsActions.reset(null),
         PostsActions.reset()
       ]))
     )

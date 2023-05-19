@@ -10,7 +10,9 @@ import {
   filter, 
   takeWhile, 
   Subject, 
-  takeUntil 
+  takeUntil, 
+  debounceTime,
+  throttleTime
 } from 'rxjs';
 
 import { MasonryService } from '@core/services/masonry/masonry.service';
@@ -56,6 +58,7 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
         takeUntil(this.$unsubscribe),
         filter(_ => !!this.items.length && !!this.masonry),
         takeWhile(() => this.items.length <= 50),
+        throttleTime(100),
         filter((_: any) => (
           this.grid!.offsetHeight - 
           _.target.scrollingElement.scrollTop <= 450

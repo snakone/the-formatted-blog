@@ -96,16 +96,21 @@ const featureReducer = createReducer(
     })),
   on(DraftActions.setSaving, (state, { data }) => ({ ...state, saving: data})),
   // RESET
-  on(DraftActions.reset, (state) => (
+  on(DraftActions.reset, (state, {draft}) => {
+
+    if (draft) {
+      state.temporal = state.temporal.filter(t => t._id !== draft._id);
+    }
+    
+    return (
     {
       ...state,
       loaded: false,
       error: null,
       drafts: [],
-      allLoaded: false,
-      temporal: []
+      allLoaded: false
     }
-  )),
+  )}),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),
   on(DraftActions.resetSlug, (state) => ({ ...state, bySlug: null, bySlugLoaded: false})),
   on(DraftActions.resetPreview, (state) => ({ ...state, preview: null})),

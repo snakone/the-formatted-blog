@@ -92,7 +92,7 @@ export class UserEffects {
       ofType(UserActions.userLogOut),
       tap(_ => this.resetUser()),
       switchMap(_ => [
-        DraftActions.reset(),
+        DraftActions.reset(null),
         DraftActions.resetActive()
       ])
     )

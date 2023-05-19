@@ -25,3 +25,9 @@ button {
     text-align: justify;
   }
 }
+
+a {
+  text-decoration: none;
+  color: var(--light-color) !important;
+  transition: color 666ms ease-in-out;
+}

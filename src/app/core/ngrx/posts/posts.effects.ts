@@ -97,10 +97,10 @@ export class PostEffects {
     .pipe(
       ofType(PostsActions.unPublishSuccess),
       tap(_ => this.crafter.setSnack('Boceto archivado!', 'success')),
-      switchMap((_) => of(...[
-        DraftActions.reset(),
+      switchMap((res) => of(...[
+        DraftActions.reset({draft: res.post}),
         PostsActions.reset(),
-        DraftActions.setActive({draft: _.post})
+        DraftActions.setActive({draft: res.post})
       ]))
     )
   );

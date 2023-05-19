@@ -76,7 +76,7 @@ export class DraftsFacade {
   }
 
   public reset(): void {
-    this.store.dispatch(DraftActions.reset());
+    this.store.dispatch(DraftActions.reset(null));
   }
 
   public resetPreview(): void {

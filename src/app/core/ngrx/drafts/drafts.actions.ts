@@ -111,7 +111,8 @@ export const resetActive =
 
 // RESET DRAFTS
 export const reset =
-  createAction('[Drafts API] Reset Drafts');
+  createAction('[Drafts API] Reset Drafts',
+  props<{ draft?: Post }>());
 
 export const resetSlug =
   createAction('[Drafts API] Reset Draft Slug');
