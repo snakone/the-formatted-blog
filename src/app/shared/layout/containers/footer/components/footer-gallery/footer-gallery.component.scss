@@ -32,7 +32,7 @@
       width: 100%;
       height: 100%;
       transition: transform 300ms ease-in-out;
-      @media(min-width: 1201px) { aspect-ratio: 3/2.7 }
+      @media(min-width: 1201px) { aspect-ratio: 260 / 250 }
 
       &:hover {
         cursor: pointer;

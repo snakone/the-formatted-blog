@@ -45,6 +45,8 @@ const featureReducer = createReducer(
   on(PostActions.getFailure, (state, { error }) => ({...state, postsLoaded: false, error})),
   // POST BY SLUG
   on(PostActions.getBySlug, (state) => ({...state, slugLoaded: false, error: null, slug: null})),
+  on(PostActions.getBySlugSuccess, (state, {post}) => ({...state, slugLoaded: true, error: null, slug: post})),
+  on(PostActions.getBySlugFailure, (state, {error}) => ({...state, slugLoaded: false, error, slug: null})),
   // POSTS BY USER
   on(PostActions.getByUser, (state) => ({...state, userLoaded: false, error: null})),
   // RESET
@@ -53,8 +55,10 @@ const featureReducer = createReducer(
       ...state,
       postsLoaded: false,
       error: null,
-      posts: [],
-      full: false
+      posts: [...inititalState.posts],
+      full: false,
+      userLoaded: false,
+      user: []
     }
   )),
   on(PostActions.resetSlug, (state) => (
@@ -112,7 +116,7 @@ const switchObj = {
   draft: (statePost: PostState, stateDraft: DraftsState) => stateDraft.drafts,
   post: (statePost: PostState, stateDraft: DraftsState) => statePost.posts,
   favorite: (statePost: PostState, stateDraft: DraftsState) => getFavorites(statePost, stateDraft),
-  any: (statePost: PostState, stateDraft: DraftsState) => [...statePost.posts, ...stateDraft.drafts],
+  any: (statePost: PostState, stateDraft: DraftsState) => [...statePost.posts, ...stateDraft.drafts.filter(d => !d.temporal)],
 };
 
 const filterAll = (statePost: PostState, stateDraft: DraftsState) => {

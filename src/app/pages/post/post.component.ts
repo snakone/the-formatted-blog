@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, filter, map, switchMap, takeUntil } from 'rxjs';
 
-import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 import { Post } from '@shared/types/interface.types';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({
   selector: 'app-post',
@@ -14,17 +15,33 @@ import { Post } from '@shared/types/interface.types';
 
 export class PostComponent implements OnInit {
 
-  draft$: Observable<Post>;
+  post$: Observable<Post>;
   text = NOTIFICATION_TEXT;
+  private unsubscribe$ = new Subject<void>();
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(private postsFacade: PostsFacade, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.draft$ = this.draftsFacade.active$;
+    this.post$ = this.postsFacade.bySlug$;
+    this.getPostBySlug();
+  }
+
+  private getPostBySlug(): void {
+    this.route.paramMap
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      filter(res => !!res && !!res.get('slug')),
+      map(res => res.get('slug')),
+    ).subscribe((slug: string) => this.postsFacade.getBySlug(slug));
   }
 
   public notification(): void {
     console.log('home');
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

@@ -10,6 +10,10 @@
   color: rgba(45, 45, 45, 255);
 }
 
+.alone .ql-container.ql-snow {
+  background: initial !important;
+}
+
 .ql-container.ql-snow, 
 .ql-toolbar.ql-snow {
   border: none;
@@ -23,6 +27,16 @@
   border: none !important;
   background: var(--quill-bg);
   transition: background 666ms ease-in-out;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar { width: 4px !important;  }
+
+.ql-container.ql-snow::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-bg) !important;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar-track-piece {
+  background: transparent;
 }
 
 .ql-toolbar.ql-snow {
@@ -87,7 +101,7 @@
   &.ql-redo::after { content: '\f01e' }
 
   &.ql-video, &.ql-link, &.ql-image {
-    margin: 0 1.5px;
+    margin: 0 2px;
   }
 }
 

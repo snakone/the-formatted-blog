@@ -4,9 +4,9 @@
       [ngClass]="{
         'active': draft.active,
         'zoomOutLeft': id === draft._id,
-        'last': last,
-        'disabled': saving?.value,
-        'first': first
+        'disabled': saving?.value || draft.status === 'pending',
+        'first': first,
+        'temporal': draft.temporal
       }">
     <ng-container *ngIf="!collapsed; else isCollapsed">
       <div>
@@ -19,11 +19,18 @@
             <span class="tale">-</span>
           </ng-container>
           <span class="created">{{draft.created}}</span>
+          <span class="pending" *ngIf="draft.status === 'pending'">
+            <span class="tale">-</span> {{draft.status | draftStatus}}
+          </span>
+          <!-- TEMPORAL -->
+          <span *ngIf="draft.temporal" class="temp">
+            <span class="tale">-</span>Temporal
+          </span>
         </p>
       </div>
     </ng-container>
     <ng-template #isCollapsed>
-      <span class="capital">{{draft.title?.charAt(0)}}</span>
+      <span class="capital" [ngClass]="{'pending': draft.status === 'pending'}">{{draft.title?.charAt(0)}}</span>
     </ng-template>
     
     <div class="icons animated fadeIn" *ngIf="draft.active">

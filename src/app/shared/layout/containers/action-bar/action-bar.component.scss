@@ -36,25 +36,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    & button {
-      width: 75%;
-      @include hover-button();
-      transition: all 333ms ease-in-out;
-      background: #090b0e;
-      color: #ffffff;
-
-      &:hover {
-        background: var(--contrast-color);
-        color: var(--light-color);
-      }
-
-      @media(max-width: 750px) {
-        padding: 10px 82px;
-        margin-left: inherit;
-        margin-top: 10px;
-      }
-    }
   }
 
   @media(max-width: 750px) { 
@@ -64,4 +45,9 @@
 
     & .submit { justify-content: center }
    }
+}
+
+button {
+  background: #090b0e;
+  color: #ffffff;
 }

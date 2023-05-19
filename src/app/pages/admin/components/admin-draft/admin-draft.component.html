@@ -1,0 +1,118 @@
+<ng-container *ngIf="draft; else noDraft">
+  <div class="header animated fadeIn">
+    <h1>
+      Aprobación del Artículo
+      <i class="fas fa-step-backward" [routerLink]="'../'"></i>
+    </h1>
+    <!-- TITLE -->
+    <h3>{{draft.title}}</h3>
+
+    <!-- PREVIEW-->
+    <button class="formatted preview" (click)="preview()">Ver boceto</button>
+
+    <div class="form-control">
+      <input type="checkbox" 
+             [(ngModel)]="markAsPending"/>
+            <span>Marcar como pendiente</span>
+    </div>
+
+    <p>A continuación se muestran los criterios que un <b>Boceto</b> debe cumplir,
+      cada uno de ellos acompañado de la información pertinente.
+      Añade una causa para el usuario si algo no es correcto.
+    </p>
+  </div>
+  <div class="grid">
+    <div class="draft-card animated fadeIn" *ngFor="let c of checkStatus">
+      <h4>
+        <i [class]="c.icon"></i> {{c.name}}
+      </h4>
+      <p>{{c.hint}}</p>
+
+      <!-- DRAFT PROPERTY EXAMPLE -->
+      <p class="example">
+        {{draft[c.prop]}}
+        <ng-container *ngIf="!draft[c.prop]">
+          <span>{{draft.author}} aún no ha añadido la {{c.name.toLowerCase()}}</span>
+        </ng-container>
+      </p>
+
+      <ng-container *ngIf="c.prop === 'cover'">
+        <img class="cover"
+           alt="cover"
+           #img
+           (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'"
+           [src]="draft.cover"/>
+      </ng-container>
+
+      <!-- DESCRIPTION -->
+      <div [innerHTML]="c.desc" class="desc"></div>
+
+      <ng-container *ngIf="c.prop === 'cover'">
+        <p class="size">Tamaño de la imagen: <strong>{{coverSize}} Kb</strong></p>
+      </ng-container>
+
+      <!-- CHECKBOX -->
+      <div class="form-control">
+        <input type="checkbox" 
+               [(ngModel)]="draft.check[c.checkProp].ok"
+               [checked]="draft.check[c.checkProp].ok"/>
+              <span [innerHTML]="c.checkMessage"></span>
+      </div>
+
+      <!-- CAUSE -->
+      <div class="input-group"
+           [ngClass]="{'disabled': draft.check[c.checkProp].ok}">
+        <mat-label>Causa</mat-label>
+        <input type="text"
+               [placeholder]="c.cause"
+               [(ngModel)]="draft.check[c.checkProp].cause"/>
+      </div>
+    </div>
+    <!-- MESSAGE -->
+    <div class="draft-card animated fadeIn">
+      <h4>
+        <i class="fas fa-file-alt"></i> Mensaje
+      </h4>
+      <p>Mensaje cumple todos los requisitos</p>
+
+      <!-- DRAFT PROPERTY EXAMPLE -->
+      <p class="example">
+        <ng-container *ngIf="draft.message.ops[0] && draft.message.ops[0].insert === '\n'">
+          <span>{{draft.author}} aún no ha añadido el mensaje.</span>
+        </ng-container>
+      </p>
+
+      <!-- DESCRIPTION -->
+      <div [innerHTML]="adminDraftMessageDesc" class="desc"></div>
+
+      <!-- CHECKBOX -->
+      <div class="form-control">
+        <input type="checkbox" 
+               [(ngModel)]="draft.check.hasGoodMessage.ok"
+               [checked]="draft.check.hasGoodMessage.ok"/>
+              <span>El boceto tiene un <strong>mensaje</strong> correcto. Asegúrate de comprobar el boceto primero.</span>
+      </div>
+
+      <!-- CAUSE -->
+      <div class="input-group"
+           [ngClass]="{'disabled' : draft.check.hasGoodMessage.ok}">
+        <mat-label>Causa</mat-label>
+        <input type="text"
+              [placeholder]="'¿Por qué el mensaje no cumple los requisitos?'"
+              [(ngModel)]="draft.check.hasGoodMessage.cause"/>
+      </div>
+    </div>
+  </div>
+  <!-- SUBMIT -->
+  <button class="formatted"
+          (click)="publish()"
+          [disabled]="!draft.category || !draft.intro">
+          {{isEverythingOK(draft.check) ? 'Publicar' : 'Actualizar'}}
+  </button>
+</ng-container>
+
+<ng-template #noDraft>
+  <div class="empty">
+    Parece ser que el contenido que buscas no existe. Comprueba la URL.
+  </div>
+</ng-template>

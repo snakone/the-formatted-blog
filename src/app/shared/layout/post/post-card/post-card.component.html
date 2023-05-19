@@ -6,16 +6,17 @@
              'last': last
             }">
     <figure>
-      <img [src]="!draft ? (post.cover | image) : post.cover" 
+      <img [src]="post.cover"
+           [routerLink]="isDraft ? '/draft/' + post.slug : null"
            alt="Post Image"
-           #img (error)="img.src = 'assets/images/placeholder.png'"/>
+           #img (error)="img.src = 'assets/images/placeholder.png'" img.alt='No Image'/>
       <!-- HOVER -->
-      <ng-container *ngIf="!draft">
+      <ng-container *ngIf="!isDraft && !alone">
         <div class="inner">
           <div class="content">
             <span><i class="fas fa-link"></i></span>
-            <span [routerLink]="'/post'">
-              <i [class]="alone ? 'far fa-heart' : 'fas fa-search'"></i>
+            <span [routerLink]="'/post/' + post.slug">
+              <i class="fas fa-search"></i>
             </span>
           </div>
         </div>
@@ -24,19 +25,22 @@
     <!-- CONTENT -->
     <div class="main-content">
       <p class="category">{{post.category}}</p>
-      <h3>{{post.title}}</h3>
+      <h3 [routerLink]="isDraft ? ('/draft/' + post.slug) : ('/post/' + post.slug)">{{post.title}}</h3>
       <p class="date" *ngIf="!small">
          <!-- DRAFT STATUS -->
-        <ng-container *ngIf="draft"> 
+        <ng-container *ngIf="isDraft"> 
           <span [class]="post.status">{{post.status | draftStatus}} </span>
           <span class="tale">-</span>
         </ng-container>
         <span>{{post.created}}</span>
       </p>
-      <!-- MESSAGE -->
+      <!-- INTRO -->
       <ng-container *ngIf="!alone; else isAlone">
-        <div [ngClass]="{'intro': post.intro}" [innerHTML]="post.intro | shortMessage: alone : small : showIntro"></div>
+        <div [ngClass]="{'intro': post.intro}" 
+             [innerHTML]="post.intro | shortMessage: alone : small : showIntro">
+        </div>
       </ng-container>
+      <!-- FULL MESSAGE -->
       <ng-template #isAlone>
         <quill-view [content]="post.message" class="alone"></quill-view>
       </ng-template>
@@ -46,7 +50,7 @@
         <div *ngIf="small">
           <!-- DRAFT STATUS -->
           <p class="date">
-            <ng-container *ngIf="draft"> 
+            <ng-container *ngIf="isDraft"> 
               <span [class]="post.status">{{post.status | draftStatus}} </span>
               <span class="tale">-</span>
             </ng-container>
@@ -55,8 +59,13 @@
           <span class="author">{{post.author}}</span>
         </div>
         <span *ngIf="!small" class="author">{{post.author}}</span>
+        <!-- ICONS -->
         <ul [ngClass]="{'small': small}">
-          <ng-container *ngIf="!draft; else draftIcon">
+          <!-- POST ICONS -->
+          <ng-container *ngIf="!isDraft; else draftIcon">
+            <li (click)="editPost()" *ngIf="post.user === user?._id">
+              <i class="fas fa-pen-fancy"></i>
+            </li>
             <li *ngFor="let i of postIcons"
                 (click)="switchObjPost[i.action]()">
               <i [class]="i.icon"></i>
@@ -70,11 +79,13 @@
               </ng-template>
             </li>
           </ng-container>
+          <!-- DRAFT ICONS -->
           <ng-template #draftIcon>
             <li *ngFor="let i of draftIcons"
                 (click)="switchObjDraft[i.action]()">
               <i [class]="i.icon"
-                 [matTooltip]="i.label">
+                 [matTooltip]="i.label"
+                 [ngClass]="{'disabled': i.action === 'edit' && post.status === 'pending'}">
               </i>
             </li>
             <li>

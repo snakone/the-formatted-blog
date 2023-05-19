@@ -36,7 +36,7 @@ export class CreateSidebarComponent implements OnInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      if (this.drafts && this.drafts.length === 1) {
+      if (this.drafts && this.drafts.length === 1 && this.drafts[0].status !== 'pending') {
         this.draftsFacade.setActive(this.drafts[0]);
       }
     }, 666);

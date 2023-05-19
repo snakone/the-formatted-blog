@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 
 export class PostIndexComponent implements AfterContentInit {
 
-  @Input() draft: Post;
+  @Input() post: Post;
   scrollSpy$ = new Subject<string>();
 
   constructor() { }
@@ -26,7 +26,7 @@ export class PostIndexComponent implements AfterContentInit {
   }
 
   private listenToScroll(): void {
-    if (!this.draft.headers) { return; }
+    if (!this.post.headers) { return; }
     setTimeout(() => {
       const headers = document.querySelectorAll('h2');
       try {

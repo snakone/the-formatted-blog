@@ -17,6 +17,12 @@ export class PostSearchComponent {
   private unsubscribe$ = new Subject<void>();
   @Input() type: SearchType;
 
+  switchObj = {
+    'pendiente': 'pending',
+    'visto': 'seen',
+    'no visto': 'not-seen'
+  };
+
   constructor(private postFacade: PostsFacade, private draftsFacade: DraftsFacade) { }
 
   ngAfterViewInit() {
@@ -34,8 +40,13 @@ export class PostSearchComponent {
       title: value,
       category: value,
       author: value,
+      status: this.convertStatus(value),
       type: this.type
     }
+  }
+
+  private convertStatus(value: string): string {
+    return this.switchObj[value.toLowerCase().trim()];
   }
 
   ngOnDestroy(): void {

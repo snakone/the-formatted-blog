@@ -15,22 +15,19 @@ import { LOGIN_FIRST_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences'
 export class HomeComponent {
 
   text = NOTIFICATION_TEXT;
-  show = false;
 
   constructor(
-    private swPush: PWAService,
+    private pwaSrv: PWAService,
     private userService: UserService,
     private crafter: CrafterService
   ) { }
 
   public notification(): void {
     this.userService.getUser() ? 
-    this.swPush.requestNotification() :
+    this.pwaSrv.requestNotification() :
     this.crafter.setSnack(LOGIN_FIRST_SENTENCE, 'warning');
   }
 
-  ngOnInit() {
-    setTimeout(() => this.show = true, 1000);
-  }
+  ngOnInit() { }
 
 }

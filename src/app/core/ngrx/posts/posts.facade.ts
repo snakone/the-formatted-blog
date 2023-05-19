@@ -4,7 +4,7 @@ import { AppState } from '../ngrx.index';
 
 import * as PostActions from './posts.actions';
 import * as fromPosts from './posts.selectors';
-import { FilterType } from '@shared/types/interface.types';
+import { FilterType, Post } from '@shared/types/interface.types';
 
 @Injectable({providedIn: 'root'})
 
@@ -19,7 +19,7 @@ export class PostsFacade {
   byUser$ = this.store.select(fromPosts.getByUser);
   byUserLoaded$ = this.store.select(fromPosts.getByUserLoaded);
   bySlug$ = this.store.select(fromPosts.getBySlug);
-
+  byID$ = (id: string) => this.store.select(fromPosts.getById(id));
 
   constructor(private store: Store<AppState>) { }
 
@@ -61,6 +61,10 @@ export class PostsFacade {
 
   public removeFavorite(id: string): void {
     this.store.dispatch(PostActions.removeFavorite({id}));
+  }
+
+  public unPublish(post: Post): void {
+    this.store.dispatch(PostActions.unPublish({post}));
   }
 
 }

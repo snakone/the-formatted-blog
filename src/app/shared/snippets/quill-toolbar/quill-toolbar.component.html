@@ -16,9 +16,15 @@
         </ng-container>
         <!-- WARNING -->
         <ng-container *ngSwitchCase="'warning'">
-          <div class="animated fadeIn">
+          <div class="animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
             <span>No se ha podido guardar. Comprueba los datos</span>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'temporal'">
+          <div class="animated fadeIn warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>No se guardarán los datos hasta que aceptes.</span>
           </div>
         </ng-container>
       </ng-container>
@@ -33,7 +39,7 @@
         <i [class]="l.icon"
           [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
           (click)="switchObj[l.action](pipe.saving?.value)"
-          [ngClass]="{'disabled': pipe.saving?.value || !draft}">
+          [ngClass]="{'disabled': pipe.saving?.value || !draft || (draft.temporal && (l.action === 'new'))}">
         </i>
       </ng-container>
     </ng-container>

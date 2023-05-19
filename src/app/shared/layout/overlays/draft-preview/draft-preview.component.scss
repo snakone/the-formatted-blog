@@ -1,3 +1,5 @@
+@import 'mixins/mixins.scss';
+
 .header-preview {
   position: sticky;
   top: 0;
@@ -11,17 +13,13 @@ h2 {
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--navigation-border);
   margin-bottom: 2rem;
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 4rem;
+  @include text-ellipsis(4rem);
   padding-top: 1.8rem;
 
   & button {
     position: absolute;
     top: 26px;
-    right: 0;
+    right: -10px;
     border-radius: 100%;
     margin-top: -1px;
     width: 38px;
@@ -39,4 +37,18 @@ h2 {
       top: -2px;
     }
   }
+
+  @media(max-width: 550px) {
+    font-size: 1.8rem;
+  }
+}
+
+::-webkit-scrollbar { width: 4px !important;  }
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-bg) !important;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
 }

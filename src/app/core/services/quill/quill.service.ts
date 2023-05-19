@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Post } from '@shared/types/interface.types';
-import { QuillDeltaToHtmlConverter,  } from 'quill-delta-to-html';
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 
 @Injectable()
 
@@ -9,8 +9,8 @@ export class QuillService {
 
   constructor() { }
 
-  public convertToHTML(draft: Post): void {
-    var converter = new QuillDeltaToHtmlConverter(draft.message.ops, {
+  public convertToHTML(post: Post): void {
+    const converter = new QuillDeltaToHtmlConverter(post.message.ops, {
       multiLineParagraph: false
     });
 
@@ -18,21 +18,26 @@ export class QuillService {
     const converted = converter.convert();
     const input = document.createElement('a');
     const doc = parser.parseFromString(converted, "text/html");
-    const styled = this.addStyles(doc.documentElement.outerHTML, draft);
+    const styled = this.addStyles(doc.documentElement.outerHTML, post);
     input.setAttribute('href', 'data:html; charset=utf-8,' + styled)
-    input.setAttribute('download', `${draft.title}.html`);
+    input.setAttribute('download', `${post.title}.html`);
     input.click();
   }
 
-  private addStyles(html: string, draft: Post): string {
-    return html.replace('<body>', addTitle(draft))
+  private addStyles(html: string, post: Post): string {
+    return html.replace('<body>', addTitle(post))
                .replace('<head></head>', POST_STYLES_STRING)
                .replace('</body></html>', addFooter());
   }
 
 }
 
-const addTitle = (draft: Post) => `<body><div id="draft" style="width: 100%"> <h1>${draft.title}</h1><span class="title">Escrito por ${draft.author}</span>`;
+const addTitle = (post: Post) => 
+`<body>
+  <div id="draft" style="width: 100%">
+    <h1>${post.title}</h1>
+    <span class="title">Escrito por ${post.author}</span>
+    <img src="${post.cover}"/>`;
 
 const addFooter = () => `  
   </div>
@@ -79,7 +84,7 @@ const POST_STYLES_STRING = `
 
     p:last-of-type { 
       margin: 0;
-      padding-bottom: 35px;
+      padding-bottom: 70px;
     }
 
     blockquote {
@@ -191,6 +196,7 @@ const POST_STYLES_STRING = `
     pre:first-child { margin-top: 0; }
   
     img {
+      max-width: 100%;
       display: block;
       margin: 14px 0 30px;
     }

@@ -63,11 +63,8 @@ button {
     & img {
       display: block;
       width: 100%;
-      height: auto;
       z-index: 1;
-      max-width: 100%;
       border: 1px solid transparent;
-      aspect-ratio: inherit;
       transition: aspect-ratio 100ms ease-in;
     }
   }
@@ -193,7 +190,7 @@ textarea + span + app-form-error > .form-error,
 input + span + app-form-error > .form-error,
 select + span + app-form-error > .form-error
  {
-  margin-top: -5px !important;
+  margin-top: -2px !important;
 
   @media(max-width: 520px) {
     position: relative !important;
@@ -208,19 +205,34 @@ select + span + app-form-error > .form-error
 
 textarea + span + app-form-error > .form-error
  {
-  @media(max-width: 520px) {
-    & span {
-      top: 15px;
-    }
-  }
+  margin-top: -9px !important;
 }
 
 input + span + app-form-error > .form-error,
-select + span + app-form-error > .form-error
+select + span + app-form-error > .form-error,
+textarea + span + app-form-error > .form-error
  {
   @media(max-width: 520px) {
     & span {
       top: 20px;
     }
+  }
+}
+
+// BUTTON 
+button.formatted {
+  width: 75%;
+  @include hover-button();
+  transition: all 333ms ease-in-out;
+
+  &:hover {
+    background: var(--contrast-color);
+    color: var(--light-color);
+  }
+
+  @media(max-width: 750px) {
+    padding: 10px 14px;
+    margin-left: inherit;
+    margin-top: 10px;
   }
 }

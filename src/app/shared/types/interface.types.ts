@@ -2,20 +2,22 @@ import { DeltaStatic } from "quill";
 
 // POST
 export interface Post {
-  _id?: string;
+  _id?: string; // Mongo ID
   slug?: string;
   title?: string;
   category?: string;
-  message?: DeltaStatic;
-  created?: string;
+  message?: DeltaStatic; // Quill Delta
+  created?: string; // Date
   author?: string;
-  cover?: string;
-  video?: string;
+  cover?: string; // Image
   intro?: string;
   status?: DraftStatus;
-  active?: boolean;
-  headers?: PostHeader[];
-  user?: string;
+  active?: boolean; // Current Post
+  headers?: PostHeader[]; // Index
+  user?: string; // User ID of the Post
+  check?: DraftCheck; // Draft Check to become Post
+  adminSeenOnce?: boolean; // Admin saw the Post at least once since the last edit
+  temporal?: boolean; // When a Post is editing but still it's not a Draft
   type?: 'draft' | 'post';
 }
 
@@ -32,7 +34,7 @@ export interface PostHeader {
   id: string;
 }
 
-export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'correct';
+export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'approved';
 export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
 
 // USER
@@ -129,7 +131,7 @@ export interface KeyPair {
 }
 
 export interface SavingType {
-  type: 'saving' | 'warning';
+  type: 'saving' | 'warning' | 'temporal';
   value: boolean;
 }
 
@@ -139,3 +141,43 @@ export interface FilterType {
 }
 
 export type SearchType = 'post' | 'draft' | 'favorite';
+
+export interface StatusButtons {
+  status: string;
+  active: boolean;
+}
+
+// CHECK
+export interface DraftCheck {
+  hasGoodTitle?: CheckStatus;
+  hasGoodCategory?: CheckStatus;
+  hasGoodCover?: CheckStatus;
+  hasGoodIntro?: CheckStatus;
+  hasGoodMessage?: CheckStatus;
+}
+
+export interface CheckStatus {
+  ok?: boolean;
+  cause?: string;
+}
+
+export interface CheckStatusList {
+  name: string;
+  hint: string;
+  icon: string;
+  prop: string;
+  desc: string;
+  checkProp: string;
+  checkMessage: string;
+  cause: string;
+}
+
+export interface DraftPreviewDialogData {
+  updateStatus?: boolean;
+  draft?: Post;
+}
+
+export interface ConfirmationDialogProps {
+  title: string;
+  message: string;
+}

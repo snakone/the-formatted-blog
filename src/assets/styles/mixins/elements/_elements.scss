@@ -98,3 +98,12 @@
     background: transparent;
   }
 }
+
+// OVERFLOW TEXT
+@mixin text-ellipsis($padding) {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: $padding;
+}

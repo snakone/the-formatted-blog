@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as DraftsActions from './drafts.actions';
-import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime, tap } from 'rxjs/operators';
+import * as PostsActions from '../posts/posts.actions';
+import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime, tap, switchMap } from 'rxjs/operators';
 import { DraftService } from '@core/services/api/drafts.service';
 import * as fromDrafts from './drafts.selectors';
 import { Store } from '@ngrx/store';
@@ -95,12 +96,10 @@ export class DraftsEffects {
   updateDraftKeyEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.updateKey),
-      withLatestFrom(this.store.select(fromDrafts.getActive)),
-      filter(([_, active]) => !!active),
-      concatMap(([action]) =>
+      concatMap((action) =>
       this.draftSrv.updateDraftKey(action.id, {...action.keys})
         .pipe(
-          map(draft => DraftsActions.updateKeySuccess({ draft })),
+          map(draft => DraftsActions.updateKeySuccess({ draft, toast: action.toast })),
           catchError(error =>
               of(DraftsActions.updateKeyFailure({ error: error.message }))
     ))))
@@ -120,6 +119,35 @@ export class DraftsEffects {
     ))))
   );
 
+  // PUBLISH DRAFT
+  publishDraftsEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.publish),
+      concatMap((action) =>
+      this.draftSrv.publishDraft(action.draft)
+        .pipe(
+          map(draft => DraftsActions.publishSuccess({ draft })),
+          catchError(error =>
+              of(DraftsActions.publishFailure({ error: error.message }))
+    ))))
+  );
+
+  onDraftUpdateEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        DraftsActions.updateSuccess,
+        DraftsActions.updateKeySuccess,
+      ]),
+      concatMap((_) => of(...[
+        DraftsActions.getByUser(),
+        DraftsActions.getAll(),
+        DraftsActions.setActive({draft: _?.draft})
+      ])),
+      catchError(error =>
+        of(DraftsActions.deleteFailure({ error: error.message }))
+      ))
+  )
+
   // ALERT DRAFTS
   alertsDraftEffect$ = createEffect(() => this.actions
     .pipe(
@@ -136,32 +164,39 @@ export class DraftsEffects {
   )
 
   alertsDraft2Effect$ = createEffect(() => this.actions
-  .pipe(
-    ofType(DraftsActions.updateSuccess),
-    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
-  ), { dispatch: false }
-)
-
-  onDraftUpdateEffect$ = createEffect(() => this.actions
     .pipe(
-      ofType(...[
-        DraftsActions.updateSuccess,
-        DraftsActions.updateKeySuccess,
-      ]),
-      concatMap((_) => of(DraftsActions.getByUser())),
-      catchError(error =>
-        of(DraftsActions.getByUserFailure({ error: error.message }))
-      ))
+      ofType(DraftsActions.updateSuccess),
+      concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+    ), { dispatch: false }
   )
 
-  removeCollapsedEffect$ = createEffect(() => this.actions
+  alertsDraft3Effect$ = createEffect(() => this.actions
   .pipe(
-    ofType(DraftsActions.deleteSuccess),
-    withLatestFrom(this.store.select(fromDrafts.get)),
-    tap((res) => console.log(res)),
-    filter(([_, drafts]) => drafts.length === 0),
-    concatMap((_) => of(this.createDraftSrv.onCollapse(false)))
-  ), { dispatch: false }
-)
+    ofType(DraftsActions.updateKeySuccess),
+    filter(_ => _.toast),
+    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+    ), { dispatch: false }
+  )
+
+  // ON COLLAPSE CREATE
+  removeCollapsedEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.deleteSuccess),
+      withLatestFrom(this.store.select(fromDrafts.get)),
+      filter(([_, drafts]) => drafts.length === 0),
+      concatMap((_) => of(this.createDraftSrv.onCollapse(false)))
+    ), { dispatch: false }
+  )
+
+  onPublishDraftEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.publishSuccess),
+      tap(_ => this.crafter.setSnack('Boceto publicado!', 'success')),
+      switchMap((_) => of(...[
+        DraftsActions.reset(),
+        PostsActions.reset()
+      ]))
+    )
+  )
 
 }

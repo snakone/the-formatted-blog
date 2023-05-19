@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as PostsActions from './posts.actions';
+import * as DraftActions from '../drafts/drafts.actions';
 import * as fromPosts from './posts.selectors';
-import { map, concatMap, catchError, debounceTime, withLatestFrom } from 'rxjs/operators';
+import { map, concatMap, catchError, debounceTime, withLatestFrom, switchMap, tap } from 'rxjs/operators';
 import { PostService } from '@core/services/api/post.service';
 import { PostState } from './posts.reducer';
 import { Store } from '@ngrx/store';
 import { FavoriteService } from '@core/services/api/favorite.service';
+import { CrafterService } from '@core/services/crafter/crafter.service';
 
 @Injectable()
 
@@ -17,7 +19,8 @@ export class PostEffects {
     private actions: Actions,
     private postSrv: PostService,
     private store: Store<PostState>,
-    private favService: FavoriteService
+    private favService: FavoriteService,
+    private crafter: CrafterService
   ) { }
 
   // GET POSTS
@@ -74,6 +77,32 @@ export class PostEffects {
           catchError(error =>
               of(PostsActions.getFailure({ error: error.message }))
     )))), {dispatch: false}
+  );
+
+  // UNPUBLISH POST
+  unPublishPostEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(PostsActions.unPublish),
+      concatMap((action) =>
+      this.postSrv.unPublishPost(action.post)
+        .pipe(
+          map(post => PostsActions.unPublishSuccess({ post })),
+          catchError(error =>
+              of(PostsActions.unPublishFailure({ error: error.message }))
+    ))))
+  );
+
+  onUnPublishPostEffect$ = createEffect(() => 
+    this.actions
+    .pipe(
+      ofType(PostsActions.unPublishSuccess),
+      tap(_ => this.crafter.setSnack('Boceto archivado!', 'success')),
+      switchMap((_) => of(...[
+        DraftActions.reset(),
+        PostsActions.reset(),
+        DraftActions.setActive({draft: _.post})
+      ]))
+    )
   );
 
 }

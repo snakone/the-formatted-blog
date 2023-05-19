@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
+import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime, startWith, map } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { POST_CATEGORIES } from '@shared/data/data';
+import { EDIT_POST_CONFIRMATION, POST_CATEGORIES } from '@shared/data/data';
 import { IMAGE_PATTERN } from '@shared/data/patterns';
 import { Post } from '@shared/types/interface.types';
+import { NavigationEnd, Router } from '@angular/router';
+import { CrafterService } from '@core/services/crafter/crafter.service';
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({
   selector: 'app-create-form',
@@ -24,7 +27,11 @@ export class CreateFormComponent implements OnInit {
   controls = ['title', 'category', 'cover', 'intro'];
   timer = 5000;
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(
+    private draftsFacade: DraftsFacade,
+    private crafter: CrafterService,
+    private postFacade: PostsFacade
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -91,7 +98,18 @@ export class CreateFormComponent implements OnInit {
     }
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
-    this.draftsFacade.update(draft);
+
+    // TEMPORAL - UNPUBLISH
+    if (this.draft.temporal) {
+      this.crafter.confirmation(EDIT_POST_CONFIRMATION)
+      .afterClosed()
+        .pipe(
+          takeUntil(this.unsubscribe$),
+          filter(_ => _ && !!_)
+      ).subscribe(_ => this.postFacade.unPublish(draft));
+    } else {
+      this.draftsFacade.update(draft);
+    }
   }
 
   get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }

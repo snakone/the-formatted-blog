@@ -1,6 +1,7 @@
-<ng-container *ngIf="draft.headers?.length > 0">
+<h1>Índice del artículo</h1>
+<ng-container *ngIf="post.headers?.length > 0">
   <ul>
-    <li *ngFor="let h of draft.headers"
+    <li *ngFor="let h of post.headers"
         (click)="scroll(h.id)"
         [ngClass]="{'active' : h.id === (scrollSpy$ | async)}">
         {{h.text}}

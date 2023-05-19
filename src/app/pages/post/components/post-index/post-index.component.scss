@@ -1,14 +1,36 @@
+h1 {
+  font-size: 17px;
+  margin-bottom: 2rem;
+}
+
 ul {
   list-style: none;
 
   & li {
     position: relative;
-    font-size: 1rem;
+    font-size: 15px;
     margin-bottom: 1rem;
+    transition: all .3s ease-in;
+    font-style: italic;
 
     &.active {
       color: var(--contrast-color);
-      transition: all .3s ease-in;
+      transform: translateX(5px);
+      font-weight: bold;
+
+      &::before {
+        content: "\f105";
+        position: absolute;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        right: 13px;
+        font-size: 0.8rem;
+        transition: right 300ms ease-in-out;
+        color: var(--dark-color);
+        left: -14px;
+        top: 1px;
+        font-style: normal;
+      }
     }
   }
 }

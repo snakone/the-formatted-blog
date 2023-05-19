@@ -6,8 +6,12 @@ section {
   margin-top: 0.666rem;
 }
 
-app-admin-content {
+#sticky-wrapper {
   @include grid-component();
+
+  @media(max-width: 992px) {
+    margin-bottom: 2rem;
+  }
 }
 
 app-admin-sidebar {

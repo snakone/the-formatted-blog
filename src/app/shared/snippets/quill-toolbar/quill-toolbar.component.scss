@@ -85,10 +85,14 @@
   }
 
   & .animated {
-    margin-left: 28px;
+    font-size: 13px;
+
+    &:not(.warning) {
+      margin-left: 28px;
+    }
   }
 
-  @media(max-width: 550px) {
+  @media(max-width: 710px) {
     & .animated {
       & span {
         display: none;

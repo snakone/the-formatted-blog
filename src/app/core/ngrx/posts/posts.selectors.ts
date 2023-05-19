@@ -18,3 +18,4 @@ export const getFull = createSelector(getPostsState, fromPosts.getFull);
 export const getFiltered = createSelector(getPostsState, getDraftsState, fromPosts.getFiltered);
 export const getFavoritesID = createSelector(getPostsState, fromPosts.getFavoritesID);
 export const getFavorites = createSelector(getPostsState, getDraftsState, fromPosts.getFavorites);
+export const getById = (id: string) => createSelector(get, (posts) => posts.find(p => p._id === id));

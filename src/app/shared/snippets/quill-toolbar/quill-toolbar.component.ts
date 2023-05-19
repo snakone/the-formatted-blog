@@ -56,7 +56,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   };
 
   private new(sv: boolean): void {
-    if (!this.draft || sv) { return; }
+    if (!this.draft || sv || this.draft.temporal) { return; }
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(
@@ -77,7 +77,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   private help(sv: boolean): void {
     if (sv) { return; }
-    this.form ? '' :
+    this.form ? null :
     this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
   }
 

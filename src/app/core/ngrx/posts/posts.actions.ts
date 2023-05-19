@@ -69,3 +69,16 @@ export const setFavorite =
 export const getFavoritesFailure =
   createAction('[Posts API] Get Favorites Failure',
   props<{ error: string }>());
+
+// UNPUBLISH POST
+export const unPublish =
+  createAction('[Posts API] Unpublish Post',
+  props<{ post: Post }>());
+
+export const unPublishSuccess =
+  createAction('[Posts API] Unpublish Post Success',
+  props<{ post: Post }>());
+
+export const unPublishFailure =
+  createAction('[Posts API] Unpublish Post Failure',
+  props<{ error: string }>());

@@ -1,0 +1,15 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+  margin-top: 0.666rem;
+}
+
+app-draft-content {
+  @include grid-component();
+}
+
+app-draft-sidebar {
+  @include grid-child();
+}

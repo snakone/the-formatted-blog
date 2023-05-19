@@ -84,5 +84,14 @@ export class DraftService {
         map(_ => _.draft)
       )
   }
-  
+
+  public publishDraft(draft: Post): Observable<Post> {
+    return this.http
+      .post<PostResponse>(this.API_POST + 'publish', draft)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.draft)
+      );
+  }
+
 }

@@ -42,8 +42,8 @@ form {
   }
 
   @media(max-width: 992px) {
-    height: 587px;
-    max-height: 587px;
+    height: 571px;
+    max-height: 571px;
     margin-top: 16px;
 
     & .intro {
@@ -55,11 +55,17 @@ form {
       margin-bottom: 1rem;
 
       & .hint {
-        bottom: 5px;
+        bottom: 3px;
       }
 
       & textarea + .hint {
-        bottom: 10px;
+        bottom: 8px;
+      }
+
+      @media(max-width: 520px) {
+        & textarea + .hint {
+          bottom: 4px;
+        }
       }
     }
   }
