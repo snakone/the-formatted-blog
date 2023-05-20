@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { DraftService } from '@core/services/api/drafts.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
@@ -7,7 +7,7 @@ import { Observable, catchError, filter, map, switchMap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class SameUserGuard implements CanActivate {
+export class SameUserGuard  {
 
   constructor(
     private userFcd: UsersFacade,

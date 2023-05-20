@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsersFacade } from '@store/users/users.facade';
 import { User } from '@shared/types/interface.types';
 import { filter, map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class AdminGuard implements CanActivate {
+export class AdminGuard  {
 
   constructor(
     private userFcd: UsersFacade,

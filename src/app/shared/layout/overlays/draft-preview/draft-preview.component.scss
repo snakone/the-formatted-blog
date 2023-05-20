@@ -14,12 +14,12 @@ h2 {
   border-bottom: 1px solid var(--navigation-border);
   margin-bottom: 2rem;
   @include text-ellipsis(4rem);
-  padding-top: 1.8rem;
+  padding-top: 1.4rem;
 
   & button {
     position: absolute;
-    top: 26px;
-    right: -10px;
+    top: 20px;
+    right: -6px;
     border-radius: 100%;
     margin-top: -1px;
     width: 38px;
