@@ -125,14 +125,14 @@ export class UserEffects {
     ))))
   );
 
-  private navigate(
+  private async navigate(
     path: string | null, 
     sentence: string,
     sw: boolean = false
-  ): void {
+  ): Promise<void> {
     if (path) this.router.navigateByUrl(path);
     this.crafter.setSnack(sentence, 'info');
-    if (sw) this.sw.send(WELCOME_PUSH).subscribe();
+    if (sw) await firstValueFrom(this.sw.send(WELCOME_PUSH));
   }
 
   private resetUser(): void {
