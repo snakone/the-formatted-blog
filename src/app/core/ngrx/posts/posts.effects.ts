@@ -56,7 +56,7 @@ export class PostEffects {
       concatMap((action) =>
       this.postSrv.getByUser(action.id)
         .pipe(
-          map(posts => PostsActions.getSuccess({ posts })),
+          map(posts => PostsActions.getByUserSuccess({ posts })),
           catchError(error =>
               of(PostsActions.getFailure({ error: error.message }))
     ))))

@@ -4,6 +4,7 @@ import { Subject, filter, takeUntil } from 'rxjs';
 import { LIKE_TEXT } from '@shared/data/sentences';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { UserService } from '@core/services/api/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private postFacade: PostsFacade,
-    private draftsFacade: DraftsFacade
+    private draftsFacade: DraftsFacade,
+    private userSrv: UserService
   ) { }
 
   ngOnInit(): void {
@@ -27,12 +29,12 @@ export class ProfileComponent implements OnInit {
   }
 
   private checkData(): void {
-    this.postFacade.loaded$
+    this.postFacade.byUserLoaded$
      .pipe(
        filter(res => !res),
        takeUntil(this.unsubscribe$)
       )
-     .subscribe(_ => this.postFacade.get());
+     .subscribe(_ => this.postFacade.getByUser(this.userSrv.getUser()._id));
 
     this.draftsFacade.loaded$
     .pipe(

@@ -31,6 +31,10 @@ export const getByUser =
   createAction('[Posts API] Get Posts by User',
   props<{ id: string }>());
 
+export const getByUserSuccess =
+  createAction('[Posts API] Get Posts by User Success',
+  props<{ posts: Post[] }>());
+
 
 // RESET POSTS
 export const reset =

@@ -24,8 +24,8 @@
   @include text-ellipsis(30px);
 
   & span {
-    color: #ff7171;
-    opacity: .6;
+    color: #fd4c4c;
+    opacity: .9;
     font-size: 1rem;
   }
 }
@@ -53,14 +53,14 @@ h1 {
   }
 }
 
-h3 {
+h2 {
   font-size: 24px;
   margin-top: 2rem;
   margin-bottom: 1rem;
   @include text-ellipsis(30px);
 }
 
-h4 {
+h3 {
   margin-top: 0;
   margin-bottom: 5px;
   font-size: 18px;
@@ -131,7 +131,7 @@ button {
     }
   }
 
-  h3 {
+  h2 {
     font-size: 20px;
     margin-top: 1.2rem;
   }

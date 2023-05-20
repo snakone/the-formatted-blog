@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { EMPTY_RECENT_POST } from '@shared/data/data';
+import { Post } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-recent-post-box',
@@ -9,14 +11,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 export class RecentPostBoxComponent {
 
-  items = [
-    '06-img.jpg',
-    '07-img.jpg',
-    '08-img.jpg',
-    '09-img.jpg',
-    '12-img.jpg',
-    '13-img.jpg',
-  ];
+  @Input() posts: Post[] = EMPTY_RECENT_POST;
 
   constructor() { }
 

@@ -2,6 +2,10 @@
 
 app-profile-home-content {
   @include grid-component();
+
+  @media (max-width: 992px) {
+    grid-row: 2;
+  }
 }
 
 app-profile-home-sidebar {

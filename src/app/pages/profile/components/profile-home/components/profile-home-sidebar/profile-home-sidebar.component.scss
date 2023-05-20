@@ -1,35 +1,125 @@
 @import 'mixins/mixins.scss';
 
-ul {
-  margin-top: 15px;
+.info {
+  @include flex-start();
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.user-card {
+  position: relative;
+  margin-bottom: 4.4rem;
+
+  & h1 {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  & .profesion {
+    opacity: .7;
+    position: relative;
+    top: 2px;
+  }
+
+  & img {
+    max-width: 100%;
+    z-index: 10;
+    margin: 0;
+    position: relative;
+    display: block;
+    margin-top: 6px;
+    margin-right: 12px;
+  }
+
+  @media(max-width: 992px) {
+    top: -30px;
+    margin-bottom: 3rem;
+  }
+}
+
+.bio {
+  margin-top: 1rem;
+}
+
+.title {
+  display: flex;
+  gap: 16px;
+}
+
+ul:not(.social) {
   list-style: none;
-  @include flex-center();
+  @include flex-start();
+  width: 100%;
+  position: relative;
+  margin-top: 12px;
 
   & li {
-    padding: 0 10px;
+    padding: 0 12px;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    font-size: 13px;
 
     & i {
-      color: var(--contrast-color);
       transition: color 666ms ease-in-out;
+      font-size: 12px;
+      margin-right: 4px;
+    }
+
+    &::after {
+      content: "";
+      height: 50%;
+      right: 0;
+      top: 24%;
+      position: absolute;
+      transition: all 0.5s ease-in-out 0s;
+      width: 1px;
+      z-index: 3;
+      border-left: 1px solid var(--shadow-color);
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      &::after {
+        width: 0;
+        content: none;
+      }
     }
   }
 }
 
-.avatar {
-  & img {
-    z-index: 10;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem auto;
-    transition: border 666ms ease-in-out;
-    position: relative;
-    display: block;
-  }
+ul.social {
+  list-style: none;
+  margin-top: 1.8rem;
 
-  & h1 {
-    margin-top: .6rem;
-    font-size: 18px;
-    text-align: center;
+  & li {
+    margin-bottom: 10px;
+    @include text-ellipsis(10px);
+
+    & i {
+      font-size: 15px;
+      margin-right: 10px;
+      position: relative;
+      top: 1px;
+    }
+
+    & span {
+      opacity: .7;
+    }
   }
 }
+
+button {
+  width: 100%;
+  margin-top: 2rem;
+}
+

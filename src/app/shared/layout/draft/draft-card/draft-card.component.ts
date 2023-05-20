@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { DELETE_CONFIRMATION } from '@shared/data/data';
-import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { Post, SavingType } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { takeUntil, filter, Subject } from 'rxjs';
@@ -35,7 +35,7 @@ export class DraftCardComponent {
 
   public preview(): void {
     if (!this.draft || this.saving) { return; }
-    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
   }
 
   public delete(): void {

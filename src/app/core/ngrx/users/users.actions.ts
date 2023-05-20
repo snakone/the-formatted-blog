@@ -26,5 +26,14 @@ export const verifyToken = createAction('[Users API] Verify Token');
 
 // REFRESH TOKEN
 export const refreshToken =
-createAction('[Users API] Refresh Token',
-props<{ id: string }>());
+  createAction('[Users API] Refresh Token',
+  props<{ id: string }>());
+
+// UPDATE
+export const update =
+  createAction('[Users API] Update User',
+  props<{ user: User }>());
+
+export const updateFailure =
+  createAction('[Users API] Update User Failure',
+  props<{ error: string }>());

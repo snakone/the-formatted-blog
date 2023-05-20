@@ -18,7 +18,7 @@ export interface PostState {
 }
 
 export const inititalState: PostState = {
-  posts: [...DUMMY_POST],
+  posts: [],
   postsLoaded: false,
   user: [],
   userLoaded: false,
@@ -48,7 +48,13 @@ const featureReducer = createReducer(
   on(PostActions.getBySlugSuccess, (state, {post}) => ({...state, slugLoaded: true, error: null, slug: post})),
   on(PostActions.getBySlugFailure, (state, {error}) => ({...state, slugLoaded: false, error, slug: null})),
   // POSTS BY USER
-  on(PostActions.getByUser, (state) => ({...state, userLoaded: false, error: null})),
+  on(PostActions.getByUserSuccess, (state, {posts}) => (
+    {
+      ...state,
+      userLoaded: true,
+      error: null,
+      user: posts
+  })),
   // RESET
   on(PostActions.reset, (state) => (
     {

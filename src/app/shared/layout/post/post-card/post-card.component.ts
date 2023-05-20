@@ -6,7 +6,7 @@ import { Post, User } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { DELETE_CONFIRMATION, DRAFT_ICONS, EDIT_POST_CONFIRMATION, POST_ICONS } from '@shared/data/data';
-import { DraftPreviewComponent } from '@layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
@@ -75,7 +75,7 @@ export class PostCardComponent implements OnInit {
 
   private preview(): void {
     this.draftsFacade.setPreview(this.post);
-    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
   }
 
   private download(): void {

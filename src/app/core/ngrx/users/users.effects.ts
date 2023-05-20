@@ -10,7 +10,7 @@ import * as PostsActions from '../posts/posts.actions';
 import { LoginService } from '@services/api/login.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
-import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
+import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } from '@shared/data/sentences';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { firstValueFrom } from 'rxjs';
@@ -86,6 +86,20 @@ export class UserEffects {
     ))))
   );
 
+  // UPDATE
+  updateUserEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.update),
+      concatMap((action) =>
+      this.userSrv.update(action.user)
+        .pipe(
+          tap(_ => this.navigate(null, UPDATED_SENTENCE)),
+          map(user => UserActions.loginSuccess({ user })),
+          catchError(error =>
+              of(UserActions.updateFailure({ error: error.message }))
+    ))))
+  );
+
   // USER LOGOUT
   logOutEffect$ = createEffect(() => this.actions
     .pipe(
@@ -118,7 +132,7 @@ export class UserEffects {
   ): void {
     if (path) this.router.navigateByUrl(path);
     this.crafter.setSnack(sentence, 'info');
-    if (sw) firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
+    if (sw) this.sw.send(WELCOME_PUSH).subscribe();
   }
 
   private resetUser(): void {

@@ -1,0 +1,87 @@
+<ng-container *ngIf="data.user">
+  <div class="header-preview">
+    <h2 mat-dialog-title>
+      Editar Perfil
+      <button mat-button mat-dialog-close>
+        <i class="fas fa-times"></i>
+      </button>
+    </h2>
+  </div>
+  <div class="edit-profile">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label for="name">Nombre</label>
+        <input formControlName="name"
+               autocomplete="off"
+               type="text"/>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="name"
+                        [validator]="['pattern', 
+                                      'minlength',
+                                      'maxlength']">
+        </app-form-error>
+      </div>
+      <div class="form-control">
+        <label for="name">Profesión</label>
+        <input formControlName="role"
+               autocomplete="off"
+               type="text"/>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="role"
+                        [validator]="['maxlength']">
+        </app-form-error>
+      </div>
+  
+      <div class="form-control">
+        <label for="name">Twitter</label>
+        <input formControlName="twitter"
+               autocomplete="off"
+               type="text"/>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="twitter"
+                        [validator]="['pattern']">
+        </app-form-error>
+      </div>
+      <div class="form-control">
+        <label for="name">Github</label>
+        <input formControlName="github"
+               autocomplete="off"
+               type="text"/>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="github"
+                        [validator]="['pattern']">
+        </app-form-error>
+      </div>
+      <div class="form-control">
+        <label for="name">Portfolio</label>
+        <input formControlName="portfolio"
+               autocomplete="off"
+               type="text"/>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="portfolio"
+                        [validator]="['pattern']">
+        </app-form-error>
+      </div>
+      <div class="form-control">
+        <label for="name">Sobre ti</label>
+        <textarea formControlName="bio"
+               autocomplete="off"
+               type="text">
+        </textarea>
+        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <app-form-error [control]="bio"
+                        [validator]="['minlength']">
+        </app-form-error>
+      </div>
+  
+      <button type="submit"
+              mat-button
+              class="formatted"
+              aria-label="Edit"
+              [disabled]="form.invalid">
+              Editar
+      </button>
+    </form>
+  </div>
+</ng-container>
+

@@ -34,4 +34,8 @@ export class UsersFacade {
     this.store.dispatch(UserActions.refreshToken({id}));
   }
 
+  public update(user: User): void {
+    this.store.dispatch(UserActions.update({user}));
+  }
+
 }

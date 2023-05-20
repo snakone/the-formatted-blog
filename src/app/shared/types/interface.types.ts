@@ -19,15 +19,21 @@ export interface Post {
   adminSeenOnce?: boolean; // Admin saw the Post at least once since the last edit
   temporal?: boolean; // When a Post is editing but still it's not a Draft
   type?: 'draft' | 'post';
+  likes?: number;
+  views?: number;
+  published?: string; // When the Post was published
 }
 
 export interface PostResponse extends ServerResponse {
  posts: Post[];
  post: Post;
  page?: number;
- drafts?: Post[];
- draft?: Post;
 }
+
+export interface DraftResponse extends ServerResponse {
+  drafts?: Post[];
+  draft?: Post;
+ }
 
 export interface PostHeader {
   text: string;
@@ -43,17 +49,24 @@ export interface User {
   name: string;
   email: string;
   password?: string;
-  profesion: string;
-  bio: string;
+  profile?: UserProfile;
   stats: UserStats;
   account?: AccountType;
 }
 
+export interface UserProfile {
+  role?: string;
+  bio?: string;
+  twitter?: string;
+  github?: string;
+  portfolio?: string;
+  location?: string;
+}
+
 export interface UserStats {
-  [key: string]: number;
   friends: number;
-  posts: number;
   likes: number;
+  views?: number;
 }
 
 // SERVER RESPONSES

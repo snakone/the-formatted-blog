@@ -351,3 +351,42 @@ export const FQA_ITEMS: FQAItem[] = [
     ]
   }
 ];
+
+export const EMPTY_RECENT_POST: Post[] = [
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/06-img.jpg'
+  },
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/07-img.jpg'
+  },
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/08-img.jpg'
+  },
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/09-img.jpg'
+  },
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/12-img.jpg'
+  },
+  {
+    title: 'Beauty of Nature',
+    author: 'Rick Allenson',
+    created: 'Sep, 05 2019',
+    cover: 'assets/images/13-img.jpg'
+  },
+]

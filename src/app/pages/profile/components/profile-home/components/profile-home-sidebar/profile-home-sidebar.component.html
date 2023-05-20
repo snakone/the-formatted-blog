@@ -1,15 +1,40 @@
 <app-sticky-aside [selector]="'profile-home-content'">
   <div class="user-card">
-    <div class="avatar">
-      <img class="" src="https://i.pinimg.com/originals/bf/98/fd/bf98fd31b711d530dc637070dfae3c3b.png">
-
-      <h1>{{user.name}}</h1>
+    <div class="info">
+      <div class="title">
+        <div>
+          <h1>{{user.name}}</h1>
+          <div class="flex">
+            <img src="assets/images/pixel.png/">
+            <div class="profesion">
+              <p *ngIf="user.profile?.role">{{user.profile?.role}}</p>
+              <p *ngIf="user.profile?.location">{{user.profile?.location}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <li><i class="far fa-newspaper"></i> {{(recentPost$ | async).length}}</li>
+        <li><i class="far fa-eye"></i> {{user.stats?.views}}</li>
+        <li><i class="far fa-heart"></i> {{user.stats?.likes}}</li>
+        <li><i class="fas fa-user-friends"></i>{{user.stats?.friends}}</li>
+      </ul>
     </div>
-    <ul>
-      <li><i class="far fa-newspaper"></i> 10</li>
-      <li><i class="far fa-eye"></i> 803</li>
-      <li><i class="far fa-heart"></i> 40</li>
+    <p class="bio">{{user.profile?.bio}}</p>
+    <ul class="social">
+      <li *ngIf="user.profile?.twitter as twitter">
+        <i class="fab fa-twitter"></i> <a [href]="twitter" target="_blank">{{twitter}}</a>
+      </li>
+      <li *ngIf="user.profile?.github as github">
+        <i class="fab fa-github"></i> <a [href]="github" target="_blank">{{github}}</a>
+      </li>
+      <li *ngIf="user.profile?.portfolio as portfolio">
+        <i class="fas fa-link"></i> <a [href]="portfolio" target="_blank">{{portfolio}}</a>
+      </li>
     </ul>
+    <button class="formatted" type="button" (click)="edit()">
+      Editar
+    </button>
   </div>
+  <app-recent-post-box [posts]="recentPost$ | async"></app-recent-post-box>
 </app-sticky-aside>
-

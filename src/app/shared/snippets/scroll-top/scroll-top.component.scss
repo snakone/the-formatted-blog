@@ -1,11 +1,12 @@
 .top { opacity: .6 }
 
-a {
+button {
   display: none;
   position: fixed;
   bottom: 15px;
   right: 14px;
   z-index: 99;
+  height: 25px;
   border: none;
   outline: none;
   font-weight: bold;

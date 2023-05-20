@@ -1,14 +1,18 @@
-<div class="recent">
-  <ul>
-    <li *ngFor="let i of items">
-      <div class="wrapper">
-        <img [src]="'assets/images/' + i" alt="Post Image"/>
-      </div>
-      <div class="info">
-        <h1>Beauty of Nature</h1>
-        <span>By: Rick Allenson</span>
-        <span class="date">Sep, 05 2019</span>
-      </div>
-    </li>
-  </ul>
-</div>
+<ng-container *ngIf="posts.length > 0">
+  <div class="recent">
+    <ul>
+      <li *ngFor="let p of posts" [routerLink]="'/post/' + p.slug">
+        <div class="wrapper">
+          <img [src]="p.cover" alt="Post Image" 
+          #img
+          (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'"/>
+        </div>
+        <div class="info">
+          <h1>{{p.title}}</h1>
+          <span>Por: {{p.author}}</span>
+          <span class="date">{{p.created}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-container>

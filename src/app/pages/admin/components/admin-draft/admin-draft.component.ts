@@ -6,7 +6,7 @@ import { PWAService } from '@core/services/pwa/pwa.service';
 import { CHECKSTATUS, PUBLISH_CONFIRMATION } from '@shared/data/data';
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
-import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { DraftCheck, Post } from '@shared/types/interface.types';
 import { Subject, takeUntil, switchMap, filter, firstValueFrom } from 'rxjs';
 
@@ -54,7 +54,7 @@ export class AdminDraftComponent {
     if (!this.draft) { return; }
     this.draftsFacade.setPreview(this.draft);
 
-    this.crafter.dialog(DraftPreviewComponent, {
+    this.crafter.dialog(DraftPreviewDialogComponent, {
       updateStatus: true,
       draft: this.draft
     }, undefined, 'preview');

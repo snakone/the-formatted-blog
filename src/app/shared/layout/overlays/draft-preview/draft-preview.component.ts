@@ -13,7 +13,7 @@ const TIME_TO_SEEN = 5000;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class DraftPreviewComponent implements OnInit {
+export class DraftPreviewDialogComponent implements OnInit {
 
   preview$: Observable<Post>;
   timer: NodeJS.Timer;
