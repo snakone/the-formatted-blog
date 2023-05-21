@@ -9,4 +9,4 @@ export const environment = {
 };
 
 // api: 'http://localhost:3000/'
-// api: 'https://theformattedblog-snakone.b4a.run/'
+// api: 'https://the-formatted-blog.onrender.com/'
