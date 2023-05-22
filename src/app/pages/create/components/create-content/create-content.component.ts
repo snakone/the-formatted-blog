@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation, DeltaStatic } from 'quill';
 import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
@@ -74,9 +74,10 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        takeUntil(this.unsubscribe$),
        filter(_ => _.source !== 'api'),
        distinctUntilChanged(),
-       tap(_ => this.save(true)),
+       withLatestFrom(this.draftsFacade.saving$),
+       tap(([_, saving]) => !saving?.value ? this.save(true) : null),
        debounceTime(this.timer),
-       map(_ => _.content as DeltaStatic),
+       map(([_, sv]) => _.content as DeltaStatic)
      )
      .subscribe((delta) => 
         this.onChange(delta, this.getHeaders(delta.ops))

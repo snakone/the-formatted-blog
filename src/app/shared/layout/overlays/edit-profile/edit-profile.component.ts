@@ -73,7 +73,7 @@ export class EditProfileDialogComponent {
   public onSubmit(): void {
     if (this.form.invalid) { return; }
     const { name, role, bio, twitter, github, portfolio } = this.form.value;
-    this.data.user.profile = { bio, role, twitter, github, portfolio};
+    this.data.user.profile = { bio, role, twitter, github, portfolio, location: this.data.user.profile.location};
     this.data.user.name = name;
 
     this.userFacade.update(this.data.user);

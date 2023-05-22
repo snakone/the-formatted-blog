@@ -31,14 +31,14 @@ export class ProfileComponent implements OnInit {
   private checkData(): void {
     this.postFacade.byUserLoaded$
      .pipe(
-       filter(res => !res),
+       filter(res => !res && !!this.userSrv.getUser()),
        takeUntil(this.unsubscribe$)
       )
-     .subscribe(_ => this.postFacade.getByUser(this.userSrv.getUser()._id));
+     .subscribe(_ => this.postFacade.getByUser(this.userSrv.getUser()?._id));
 
     this.draftsFacade.loaded$
     .pipe(
-      filter(res => !res),
+      filter(res => !res && !!this.userSrv.getUser()),
       takeUntil(this.unsubscribe$)
     )
     .subscribe(_ => this.draftsFacade.get());

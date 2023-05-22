@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { User } from '@shared/types/interface.types';
+import { User, UserActivity } from '@shared/types/interface.types';
 
 @Component({
   selector: 'app-profile-home-content',
@@ -11,5 +11,6 @@ import { User } from '@shared/types/interface.types';
 export class ProfileHomeContentComponent {
 
   @Input() user: User | undefined;
+  @Input() activities: UserActivity[] | undefined;
 
 }

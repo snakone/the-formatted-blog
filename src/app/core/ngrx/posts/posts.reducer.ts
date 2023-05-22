@@ -1,7 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as PostActions from './posts.actions';
 import { FilterType, Post } from '@shared/types/interface.types';
-import { DUMMY_POST } from '@shared/data/data';
 import { DraftsState } from '../drafts/drafts.reducer';
 
 export interface PostState {
@@ -76,7 +75,7 @@ const featureReducer = createReducer(
     }
   )),
   on(PostActions.resetByUser, (state) => (
-    {...state, userLoaded: false, error: null, user: null}
+    {...state, userLoaded: false, error: null, user: []}
   )),
   on(PostActions.setFilter, (state, { value }) => (
     {...state, filter: { ...state.filter, ...value }}
@@ -93,6 +92,9 @@ const featureReducer = createReducer(
   )),
   on(PostActions.setFavorite, (state, { favorites }) => (
     {...state, favorites }
+  )),
+  on(PostActions.resetFavorite, (state) => (
+    {...state, favorites: [] }
   )),
 );
 

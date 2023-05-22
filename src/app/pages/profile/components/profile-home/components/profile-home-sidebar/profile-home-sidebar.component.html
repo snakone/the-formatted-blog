@@ -5,7 +5,7 @@
         <div>
           <h1>{{user.name}}</h1>
           <div class="flex">
-            <img src="assets/images/pixel.png/">
+            <img [src]="user.avatar">
             <div class="profesion">
               <p *ngIf="user.profile?.role">{{user.profile?.role}}</p>
               <p *ngIf="user.profile?.location">{{user.profile?.location}}</p>
@@ -36,5 +36,5 @@
       Editar
     </button>
   </div>
-  <app-recent-post-box [posts]="recentPost$ | async"></app-recent-post-box>
+  <app-recent-post-box [posts]="recentPost$ | async" [margin]="true"></app-recent-post-box>
 </app-sticky-aside>

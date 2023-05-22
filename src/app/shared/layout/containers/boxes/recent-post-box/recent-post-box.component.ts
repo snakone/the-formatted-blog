@@ -12,6 +12,7 @@ import { Post } from '@shared/types/interface.types';
 export class RecentPostBoxComponent {
 
   @Input() posts: Post[] = EMPTY_RECENT_POST;
+  @Input() margin: boolean | undefined;
 
   constructor() { }
 

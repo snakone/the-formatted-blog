@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FilterType, KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
@@ -47,8 +47,8 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.update({draft}));
   }
 
-  public updateKey(id: string, keys: KeyPair, toast?: boolean): void {
-    this.store.dispatch(DraftActions.updateKey({id, keys, toast}));
+  public updateKey(id: string, keys: KeyPair, admin?: boolean): void {
+    this.store.dispatch(DraftActions.updateKey({id, keys, admin}));
   }
 
   public delete(id: string): void {

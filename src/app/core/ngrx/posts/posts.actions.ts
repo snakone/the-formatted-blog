@@ -59,6 +59,10 @@ export const addFavorite =
   createAction('[Posts API] Add Favorite',
   props<{ id: string }>());
 
+// RESET FAVORITE
+export const resetFavorite =
+  createAction('[Posts API] Reset Favorite');
+
 // REMOVE FAVORITE
 export const removeFavorite =
   createAction('[Posts API] Remove Favorite',

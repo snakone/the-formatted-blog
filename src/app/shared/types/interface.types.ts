@@ -52,6 +52,7 @@ export interface User {
   profile?: UserProfile;
   stats: UserStats;
   account?: AccountType;
+  avatar?: string;
 }
 
 export interface UserProfile {
@@ -111,6 +112,10 @@ export interface SWResponse extends ServerResponse {
 
 export interface FavoriteResponse extends ServerResponse { 
   favorites?: string[];
+}
+
+export interface ActivitiesResponse extends ServerResponse { 
+  activities?: UserActivity[];
 }
 
 export interface NotificationPayload {
@@ -198,4 +203,14 @@ export interface ConfirmationDialogProps {
 export interface FQAItem {
   label: string;
   content: string[];
+}
+
+// ACTIVITY
+export interface UserActivity {
+  message: string;
+  title: string;
+  date: string;
+  type?: 'create' | 'delete' | 'update';
+  admin: boolean;
+  newUser?: boolean;
 }

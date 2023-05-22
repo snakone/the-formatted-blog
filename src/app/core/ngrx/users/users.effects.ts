@@ -4,18 +4,19 @@ import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { map, concatMap, catchError, tap, switchMap } from 'rxjs/operators';
 
-import * as UserActions from './users.actions';
-import * as DraftActions from '../drafts/drafts.actions';
-import * as PostsActions from '../posts/posts.actions';
 import { LoginService } from '@services/api/login.service';
 import { UserService } from '@services/api/users.service';
 import { StorageService } from '@services/storage/storage.service';
-import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } from '@shared/data/sentences';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { WELCOME_PUSH } from '@shared/data/notifications';
-import { firstValueFrom } from 'rxjs';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { FavoriteService } from '@core/services/api/favorite.service';
+
+import * as UserActions from './users.actions';
+import * as DraftActions from '../drafts/drafts.actions';
+import * as PostsActions from '../posts/posts.actions';
+import * as ActivitiesActions from '../activities/activities.actions';
+
+import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } from '@shared/data/sentences';
 
 @Injectable()
 
@@ -53,7 +54,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signUp(action.user)
         .pipe(
-          tap(_ => this.navigate('/profile', REGISTER_SENTENCE, true)),
+          tap(_ => this.navigate('/profile', REGISTER_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -107,8 +108,18 @@ export class UserEffects {
       tap(_ => this.resetUser()),
       switchMap(_ => [
         DraftActions.reset(null),
-        DraftActions.resetActive()
+        DraftActions.resetActive(),
+        PostsActions.resetByUser(),
+        PostsActions.resetFavorite()
       ])
+    )
+  );
+
+  // USER UPDATE ACTIVITIES
+  userUpdateActivitiesEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.loginSuccess),
+      concatMap(_ => of(ActivitiesActions.get()))
     )
   );
 
@@ -127,12 +138,10 @@ export class UserEffects {
 
   private async navigate(
     path: string | null, 
-    sentence: string,
-    sw: boolean = false
+    sentence: string
   ): Promise<void> {
     if (path) this.router.navigateByUrl(path);
     this.crafter.setSnack(sentence, 'info');
-    if (sw) await firstValueFrom(this.sw.send(WELCOME_PUSH));
   }
 
   private resetUser(): void {

@@ -1,25 +1,17 @@
+<h1>Actividad reciente</h1>
+<p class="reset">La actividad se borra cada 30 días.</p>
 <div class="profile-content">
-  <!-- HERO IMAGE -->
-  <div class="content">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda architecto hic quasi accusamus ratione quisquam quia ex aliquam aliquid. 
-      Vel deleniti eaque nihil praesentium quod ducimus autem ipsam, natus impedit doloribus at nam atque tempore omnis, dolorem repudiandae temporibus repellat!
-    </p>
-  </div>
+  <ng-container *ngIf="user">
+    <article *ngFor="let a of activities" [ngClass]="{'admin': a.admin}" [class]="a.type">
+      <div class="content">
+        <span [innerHTML]="a.message"></span>
+        <p class="title">
+          <ng-container *ngIf="!a.newUser">Título: </ng-container>
+          <b>{{a.title}}</b> - {{a.date}}
+        </p>
+      </div>
+    </article>
+  </ng-container>
 </div>
+
+
