@@ -19,7 +19,7 @@ export class AdminGuard  {
        filter(user => !!user),
        map((user: User | null) => 
         user?.account === 'Admin' || 
-        user?.account === 'Super' ? true : 
+        user?.account === 'Super' || 
         (this.router.navigateByUrl('/home'), false)
       )
     )

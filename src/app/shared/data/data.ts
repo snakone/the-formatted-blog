@@ -77,7 +77,7 @@ export const DUMMY_POST: Post[] = [
 
 export const USER_INDEX: IconList[] = [
   { icon: 'far fa-user-circle', label: 'Perfil', route: './' },
-  { icon: 'fab fa-ioxhost', label: 'Posts', route: 'posts' },
+  { icon: 'fab fa-ioxhost', label: 'Artículos', route: 'posts' },
   { icon: 'fas fa-file-signature', label: 'Bocetos', route: 'drafts' },
   { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
@@ -127,11 +127,6 @@ export const POST_CATEGORIES: TextList[] = [
 ];
 
 export const POST_ICONS: ActionList[] = [
-  { 
-    icon: 'fab fa-twitter',
-    label: 'Compartir',
-    action: 'share'
-  },
   { 
     icon: 'fas fa-user-plus',
     label: 'Añadir',

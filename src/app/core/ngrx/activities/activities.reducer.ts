@@ -6,12 +6,14 @@ export interface ActivitiesState {
   activities: UserActivity[] | null;
   error: string | null;
   loaded: boolean;
+  public: UserActivity[] | null;
 }
 
 export const inititalState: ActivitiesState = {
   activities: [],
   error: null,
-  loaded: false
+  loaded: false,
+  public: []
 };
 
 const featureReducer = createReducer(
@@ -21,6 +23,8 @@ const featureReducer = createReducer(
   on(ActivitiesActions.getFailure, (state, {error}) => ({ ...state, error, loaded: false })),
   // RESET
   on(ActivitiesActions.reset, (state) => ({ ...state, activities: [], loaded: false })),
+  // SET
+  on(ActivitiesActions.setPublic, (state, {activities}) => ({ ...state, loaded: true, public: activities })),
 );
 
 export function reducer(state: ActivitiesState | undefined, action: Action) {
@@ -29,3 +33,4 @@ export function reducer(state: ActivitiesState | undefined, action: Action) {
 
 export const getActivities = (state: ActivitiesState) => state.activities;
 export const getLoaded = (state: ActivitiesState) => state.loaded;
+export const getPublic = (state: ActivitiesState) => state.public;

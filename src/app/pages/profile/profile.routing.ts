@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { PublicProfileGuard } from '@core/guards/public-profile/public-profile.guard';
 import { ProfileComponent } from './profile.component';
 
 import { 
@@ -9,7 +9,8 @@ import {
   ProfileFavoritesComponent,
   ProfilePostsComponent,
   ProfileFriendsComponent,
-  ProfileDraftsComponent
+  ProfileDraftsComponent,
+  ProfilePublicComponent
 } from './profile.index';
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
       { path: 'settings', component: ProfileSettingsComponent }
     ]
   },
+  {
+    path: ':id',
+    component: ProfilePublicComponent,
+    canActivate: [PublicProfileGuard]
+  }
 ];
 
 @NgModule({

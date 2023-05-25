@@ -1,0 +1,10 @@
+<div class="animated fadeIn">
+  <section class="profile-public-content">
+    <app-section>
+      <ng-container *ngIf="(public$ | async) as user">
+        <app-profile-home-content id="sticky-wrapper" [user]="user" [activities]="activities$ | async"></app-profile-home-content>
+        <app-profile-home-sidebar [user]="user" [isPublic]="true" [selector]="'profile-public-content'"></app-profile-home-sidebar>
+      </ng-container>
+    </app-section>
+  </section>
+</div>

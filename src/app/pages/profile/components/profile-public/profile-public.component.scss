@@ -1,0 +1,30 @@
+@import 'mixins/mixins.scss';
+
+section {
+  @include container();
+  @include row();
+  position: relative;
+}
+
+.wrapper {
+  transition: background 666ms ease-in-out;
+  position: relative;
+  padding-top: 10px;
+}
+
+app-profile-home-content {
+  @include grid-component();
+
+  @media (max-width: 992px) {
+    grid-row: 2;
+  }
+}
+
+app-profile-home-sidebar {
+  @include grid-child();
+
+  @media (max-width: 992px) {
+    display: block;
+    margin-top: 30px;
+  }
+}

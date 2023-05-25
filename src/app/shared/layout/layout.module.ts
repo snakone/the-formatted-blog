@@ -19,6 +19,7 @@ import { ActionBarComponent } from './containers/action-bar/action-bar.component
 import { MinWidthComponent } from './containers/min-width/min-width.component';
 import { SectionComponent } from './containers/section/section.component';
 import { DraftLayoutModule } from './draft/draft-layout.module';
+import { ShareService } from '@core/services/share/share.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,9 @@ import { DraftLayoutModule } from './draft/draft-layout.module';
     PostLayoutModule,
     HeaderModule,
     SnippetsModule
+  ],
+  providers: [
+    ShareService
   ]
 })
 

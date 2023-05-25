@@ -11,6 +11,8 @@ import * as fromUsers from './users.selectors';
 export class UsersFacade {
 
   public user$ = this.store.select(fromUsers.get);
+  public friends$ = this.store.select(fromUsers.getFriends);
+  public public$ = this.store.select(fromUsers.getPublic);
 
   constructor(private store: Store<AppState>) { }
 
@@ -36,6 +38,18 @@ export class UsersFacade {
 
   public update(user: User): void {
     this.store.dispatch(UserActions.update({user}));
+  }
+
+  public addFriend(friend: User): void {
+    this.store.dispatch(UserActions.addFriend({friend}));
+  }
+
+  public removeFriend(id: string): void {
+    this.store.dispatch(UserActions.removeFriend({id}));
+  }
+
+  public setPublic(user: User): void {
+    this.store.dispatch(UserActions.setPublic({user}));
   }
 
 }

@@ -13,7 +13,8 @@ import {
   ProfileFriendsComponent,
   ProfileSettingsComponent,
   ProfileFavoritesComponent,
-  ProfileDraftsComponent
+  ProfileDraftsComponent,
+  ProfilePublicComponent
 } from './profile.index';
 
 import { ProfileHomeContentComponent } from './components/profile-home/components/profile-home-content/profile-home-content.component';
@@ -31,7 +32,8 @@ import { ActivitiesAccessModule } from '@core/ngrx/activities/data-access/activi
     ProfileFavoritesComponent,
     ProfileDraftsComponent,
     ProfileHomeContentComponent,
-    ProfileHomeSidebarComponent
+    ProfileHomeSidebarComponent,
+    ProfilePublicComponent
   ],
   imports: [
     CommonModule,

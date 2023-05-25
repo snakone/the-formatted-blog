@@ -58,6 +58,7 @@ const featureReducer = createReducer(
   )),
   on(DraftActions.getAllFailure, (state, { error }) => ({ ...state, error, allLoaded: false })),
   // DRAFT BY SLUG
+  on(DraftActions.setBySlug, (state, {draft}) => ({...state, bySlug: draft, bySlugLoaded: true})),
   on(DraftActions.getBySlug, (state) => ({...state, bySlug: null, bySlugLoaded: false})),
   on(DraftActions.getBySlugSuccess, (state, {draft}) => ({...state, bySlug: draft, bySlugLoaded: true})),
   on(DraftActions.getBySlugFailure, (state, {error}) => ({...state, bySlug: null, error, loaded: false, bySlugLoaded: false})),

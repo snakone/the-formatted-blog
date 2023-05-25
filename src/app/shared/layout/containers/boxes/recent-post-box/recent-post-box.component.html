@@ -5,11 +5,11 @@
         <div class="wrapper">
           <img [src]="p.cover" alt="Post Image" 
           #img
-          (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'"/>
+          (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'; img.className='no-image'"/>
         </div>
         <div class="info">
           <h1>{{p.title}}</h1>
-          <span>Por: {{p.author}}</span>
+          <span>{{p.author}}</span>
           <span class="date">{{p.created}}</span>
         </div>
       </li>

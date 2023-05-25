@@ -14,7 +14,7 @@
       <ng-container *ngIf="!isDraft && !alone">
         <div class="inner">
           <div class="content">
-            <span><i class="fas fa-link"></i></span>
+            <span (click)="share()"><i class="fas fa-link"></i></span>
             <span [routerLink]="'/post/' + post.slug">
               <i class="fas fa-search"></i>
             </span>
@@ -36,12 +36,13 @@
       </p>
       <!-- INTRO -->
       <ng-container *ngIf="!alone; else isAlone">
-        <div [ngClass]="{'intro': post.intro}" 
+        <div [ngClass]="{'intro': !!post.intro}" 
              [innerHTML]="post.intro | shortMessage: alone : small : showIntro">
         </div>
       </ng-container>
       <!-- FULL MESSAGE -->
       <ng-template #isAlone>
+        <div class="alone-intro" [innerHTML]="post.intro | shortMessage: alone"></div>
         <quill-view [content]="post.message" class="alone"></quill-view>
       </ng-template>
       <!-- BOTTOM -->
@@ -63,6 +64,7 @@
         <ul [ngClass]="{'small': small}">
           <!-- POST ICONS -->
           <ng-container *ngIf="!isDraft; else draftIcon">
+            <li *ngIf="alone" (click)="share()"><i class="fas fa-link"></i></li>
             <li (click)="editPost()" *ngIf="post.user === user?._id">
               <i class="fas fa-pen-fancy"></i>
             </li>

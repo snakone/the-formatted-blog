@@ -7,7 +7,7 @@ import {
 
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Snack } from '@shared/types/interface.types';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, debounceTime, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-snack',
@@ -26,7 +26,7 @@ export class SnackOverlayComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.crafter.snack$
-    .pipe(takeUntil(this.$unsubscribe))
+    .pipe(takeUntil(this.$unsubscribe), debounceTime(100))
      .subscribe((res: Snack) => this.removeCSS(res));
   }
 

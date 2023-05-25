@@ -95,6 +95,11 @@ export const setActive =
   createAction('[Drafts API] Set Active Draft',
   props<{ draft: Post }>());
 
+// SET BY SLUG
+export const setBySlug =
+  createAction('[Drafts API] Set Draft by Slug',
+  props<{ draft: Post }>());
+
 // SET PREVIEW
 export const setPreview =
   createAction('[Drafts API] Set Draft Preview',

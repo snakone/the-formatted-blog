@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, concatMap, catchError, tap, switchMap } from 'rxjs/operators';
+import { map, concatMap, catchError, tap, switchMap, debounceTime, withLatestFrom } from 'rxjs/operators';
 
 import { LoginService } from '@services/api/login.service';
 import { UserService } from '@services/api/users.service';
@@ -15,8 +15,13 @@ import * as UserActions from './users.actions';
 import * as DraftActions from '../drafts/drafts.actions';
 import * as PostsActions from '../posts/posts.actions';
 import * as ActivitiesActions from '../activities/activities.actions';
+import * as fromUsers from './users.selectors';
 
 import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } from '@shared/data/sentences';
+import { UserState } from './users.reducer';
+import { Store } from '@ngrx/store';
+import { FriendsService } from '@core/services/api/friends.service';
+import { User } from '@shared/types/interface.types';
 
 @Injectable()
 
@@ -30,7 +35,9 @@ export class UserEffects {
     private router: Router,
     private crafter: CrafterService,
     private sw: PWAService,
-    private favService: FavoriteService
+    private favService: FavoriteService,
+    private store: Store<UserState>,
+    private friendsSrv: FriendsService
   ) { }
 
   // LOGIN USER
@@ -134,6 +141,36 @@ export class UserEffects {
             catchError(error =>
               of(PostsActions.getFavoritesFailure({ error: error.message }))
     ))))
+  );
+
+  // GET FRIENDS ON LOGIN
+  getFriendsOnLogin$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.loginSuccess),
+      concatMap(_ => 
+        this.friendsSrv.getFriendsByUser()
+         .pipe(
+            map((friends: User[]) => UserActions.setFriends({friends})),
+            catchError(error =>
+              of(UserActions.getFriendsFailure({ error: error.message }))
+    ))))
+  );
+
+  // FRIENDS
+  saveFriendsEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        UserActions.addFriend,
+        UserActions.removeFriend,
+      ]),
+      debounceTime(1000),
+      withLatestFrom(this.store.select(fromUsers.getFriends)),
+      concatMap(([_, users]) =>
+      this.friendsSrv.addFriends(users.map(u => u._id))
+        .pipe(
+          catchError(error =>
+              of(UserActions.getFriendsFailure({ error: error.message }))
+    )))), {dispatch: false}
   );
 
   private async navigate(

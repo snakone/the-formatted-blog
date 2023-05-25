@@ -60,4 +60,12 @@ export class UserService {
       );
   }
 
+  public getById(id: string): Observable<UserResponse> {
+    return this.http
+      .get<UserResponse>(this.API_USER + '/' + id)
+      .pipe(
+        filter(res => !!res && res.ok)
+      );
+  }
+
 }

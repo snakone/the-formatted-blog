@@ -16,3 +16,8 @@ export const getFailure =
 // RESET ACTIVITIES
 export const reset =
   createAction('[Activities API] Reset Activities');
+
+// SET ACTIVITIES
+export const setPublic =
+  createAction('[Activities API] Set Public Activities',
+  props<{ activities: UserActivity[] }>());

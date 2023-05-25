@@ -18,10 +18,9 @@
     & li {
       list-style: none;
       overflow: hidden;
-      padding: 10px 0;
+      padding: 4px 0;
       display: flex;
       align-items: center;
-      transition: border-top 666ms ease-in-out;
       position: relative;
 
       @media (min-width: 993px) {
@@ -38,24 +37,27 @@
       }
 
       & .wrapper {
-        overflow: hidden;
-        margin-right: 20px;
-        width: 90px;
-        height: 75px;
+        margin-right: 18px;
       }
 
       & img {
         transition: all 300ms ease-in-out;
         width: 90px;
-        height: 75px;
+        height: 70px;
+
+        &:not(.no-image) {
+          object-fit: cover;
+        }
       }
 
       & .info {
         text-align: left;
         position: relative;
-        top: -2px;
+        top: -4px;
+        overflow: hidden;
 
         & h1 {
+          @include text-ellipsis(16px);
           color: var(--text-color);
           font-style: normal;
           font-family: 'Raleway', Arial, Helvetica, sans-serif;
@@ -63,7 +65,7 @@
           line-height: 1.5;
           margin: 0px 0px 8px 0px;
           text-transform: capitalize;
-          font-size: 16px;
+          font-size: 15px;
         }
 
         & span {
@@ -86,7 +88,7 @@
 
         & img {
           opacity: .8;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
 
         &::after {

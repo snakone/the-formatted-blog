@@ -8,3 +8,5 @@ export const getUserState = createSelector(
 );
 
 export const get = createSelector(getUserState, fromUsers.getUser);
+export const getFriends = createSelector(getUserState, fromUsers.getFriends);
+export const getPublic = createSelector(getUserState, fromUsers.getPublic);

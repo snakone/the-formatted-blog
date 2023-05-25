@@ -14,7 +14,7 @@
         <input formControlName="name"
                autocomplete="off"
                type="text"/>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">El nombre que te identifica en la aplicación.</span>
         <app-form-error [control]="name"
                         [validator]="['pattern', 
                                       'minlength',
@@ -26,7 +26,7 @@
         <input formControlName="role"
                autocomplete="off"
                type="text"/>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">Indica tu profesión (opcional).</span>
         <app-form-error [control]="role"
                         [validator]="['maxlength']">
         </app-form-error>
@@ -37,7 +37,7 @@
         <input formControlName="twitter"
                autocomplete="off"
                type="text"/>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">Añade el link a tu perfil de Twitter.</span>
         <app-form-error [control]="twitter"
                         [validator]="['pattern']">
         </app-form-error>
@@ -47,7 +47,7 @@
         <input formControlName="github"
                autocomplete="off"
                type="text"/>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">Añade tu repositorio de Github.</span>
         <app-form-error [control]="github"
                         [validator]="['pattern']">
         </app-form-error>
@@ -57,7 +57,7 @@
         <input formControlName="portfolio"
                autocomplete="off"
                type="text"/>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">Añade el link a tu Portfolio personal.</span>
         <app-form-error [control]="portfolio"
                         [validator]="['pattern']">
         </app-form-error>
@@ -68,7 +68,7 @@
                autocomplete="off"
                type="text">
         </textarea>
-        <span class="hint">Piensa bien el título, luego será el identificador único.</span>
+        <span class="hint">Escribe algo sobre ti para que los demás te conozcan un poco.</span>
         <app-form-error [control]="bio"
                         [validator]="['minlength']">
         </app-form-error>

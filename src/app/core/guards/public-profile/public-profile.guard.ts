@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { ActivitiesFacade } from '@core/ngrx/activities/activities.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
-import { DraftService } from '@core/services/api/drafts.service';
+import { UserService } from '@core/services/api/users.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { Observable, catchError, filter, map, switchMap } from 'rxjs';
+import { WRONG_CONTENT_SENTENCE } from '@shared/data/sentences';
+import { Observable, catchError, filter, map, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class SameUserGuard  {
+export class PublicProfileGuard  {
 
   constructor(
-    private userFcd: UsersFacade,
     private router: Router,
-    private DraftSrv: DraftService,
+    private userSrv: UserService,
     private crafter: CrafterService,
-    private draftsFacade: DraftsFacade
+    private userFacade: UsersFacade,
+    private activityFacade: ActivitiesFacade
   ) { }
   
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-      return this.DraftSrv.getBySlug(route.params.slug)
+      return this.userSrv.getById(route.params.id)
       .pipe(
         filter(res => !!res),
-        switchMap(draft => this.userFcd.user$.pipe(map(user => {
-          if (user._id === draft.user) {
-            this.draftsFacade.setBySlug(draft);
-            return true;
-          }
-          return false;
-        }))),
+        tap(res => (
+          this.userFacade.setPublic(res.user),
+          this.activityFacade.setPublic(res.activities)
+        )),
+        map(res => !!res.user),
         map((res: boolean) => res || (this.router.navigateByUrl('/home'), false)),
         catchError(err => {
-          this.crafter.setSnack('Parece ser que el contenido que buscas no existe', 'error');
+          this.crafter.setSnack(WRONG_CONTENT_SENTENCE, 'error');
           this.router.navigateByUrl('/home');
           throw err;
       }))

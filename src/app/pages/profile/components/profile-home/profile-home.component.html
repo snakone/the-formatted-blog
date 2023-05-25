@@ -2,7 +2,7 @@
   <ng-container *ngIf="(user$ | async) as user">
     <app-section>
       <app-profile-home-content id="sticky-wrapper" [user]="user" [activities]="activities$ | async"></app-profile-home-content>
-      <app-profile-home-sidebar [user]="user"></app-profile-home-sidebar>
+      <app-profile-home-sidebar [user]="user" [selector]="'profile-home-content'"></app-profile-home-sidebar>
     </app-section>
   </ng-container>
 </section>

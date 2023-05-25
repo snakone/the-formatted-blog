@@ -80,6 +80,7 @@ interface ServerResponse {
 export interface UserResponse extends ServerResponse {
   user: User;
   token?: string;
+  activities?: UserActivity[];
 }
 
 export interface Snack {
@@ -112,6 +113,10 @@ export interface SWResponse extends ServerResponse {
 
 export interface FavoriteResponse extends ServerResponse { 
   favorites?: string[];
+}
+
+export interface FriendsResponse extends ServerResponse { 
+  friends?: User[];
 }
 
 export interface ActivitiesResponse extends ServerResponse { 
@@ -212,5 +217,8 @@ export interface UserActivity {
   date: string;
   type?: 'create' | 'delete' | 'update';
   admin: boolean;
-  newUser?: boolean;
+  userAction?: boolean;
+  route?: string;
+  slug?: string;
+  user?: string;
 }

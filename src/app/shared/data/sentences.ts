@@ -17,6 +17,7 @@ export const UPDATED_SENTENCE = 'Perfil actualizado!';
 export const SUB_UPDATED_SENTENCE = 'Tu subscripción se ha actualizado.';
 export const ERROR_SERVER_SENTENCE = 'Hubo un error en el servidor.';
 export const ERROR_SERVICE_WORKER = 'Hubo un error con el Service Worker.'
+export const WRONG_CONTENT_SENTENCE = 'Parece ser que el contenido que buscas no existe';
 export const TOKEN_REFRESH_SENTENCE = 'Hemos actualizado el token.';
 export const WRONG_INFO_SENTENCE = 'Los datos no son válidos.';
 export const UNKWON_ERROR_SENTENCE = 'Hubo un error desconocido.';

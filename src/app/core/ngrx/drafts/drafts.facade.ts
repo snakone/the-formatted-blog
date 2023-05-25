@@ -59,6 +59,10 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.setActive({draft}));
   }
 
+  public setBySlug(draft: Post): void {
+    this.store.dispatch(DraftActions.setBySlug({draft}));
+  }
+
   public setPreview(draft: Post): void {
     this.store.dispatch(DraftActions.setPreview({draft}));
   }

@@ -1,4 +1,4 @@
-<app-sticky-aside [selector]="'profile-home-content'">
+<app-sticky-aside [selector]="selector">
   <div class="user-card">
     <div class="info">
       <div class="title">
@@ -32,9 +32,16 @@
         <i class="fas fa-link"></i> <a [href]="portfolio" target="_blank">{{portfolio}}</a>
       </li>
     </ul>
-    <button class="formatted" type="button" (click)="edit()">
-      Editar
-    </button>
+    <ng-container *ngIf="isPublic; else private">
+      <button class="formatted" type="button" (click)="addFriend()">
+        Añadir
+      </button>
+    </ng-container>
+    <ng-template #private>
+      <button class="formatted" type="button" (click)="edit()">
+        Editar
+      </button>
+    </ng-template>
   </div>
   <app-recent-post-box [posts]="recentPost$ | async" [margin]="true"></app-recent-post-box>
 </app-sticky-aside>

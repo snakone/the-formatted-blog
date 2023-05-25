@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.types';
-import { Subject, takeUntil, filter, map, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-draft',
@@ -20,16 +20,6 @@ export class DraftComponent {
 
   ngOnInit() {
     this.draft$ = this.draftFacade.bySlug$;
-    this.getDraftBySlug();
-  }
-
-  private getDraftBySlug(): void {
-    this.route.paramMap
-    .pipe(
-      takeUntil(this.unsubscribe$),
-      filter(res => !!res && !!res.get('slug')),
-      map(res => res.get('slug')),
-    ).subscribe((slug: string) => this.draftFacade.getBySlug(slug));
   }
 
   ngOnDestroy(): void {

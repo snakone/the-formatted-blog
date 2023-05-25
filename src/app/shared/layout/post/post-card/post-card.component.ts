@@ -10,6 +10,7 @@ import { DraftPreviewDialogComponent } from '@layout/overlays/draft-preview/draf
 import { QuillService } from '@core/services/quill/quill.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
+import { ShareService } from '@core/services/share/share.service';
 
 @Component({
   selector: 'app-post-card',
@@ -44,7 +45,6 @@ export class PostCardComponent implements OnInit {
   };
 
   switchObjPost: any = {
-    share: () => this.share(),
     friend: () => this.friend(),
     message: () => this.message(),
     favorite: () => this.favorite()
@@ -56,7 +56,8 @@ export class PostCardComponent implements OnInit {
     private router: Router,
     private quillSrv: QuillService,
     private postFacade: PostsFacade,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private shareSrv: ShareService
   ) { }
 
   ngOnInit(): void { 
@@ -99,8 +100,9 @@ export class PostCardComponent implements OnInit {
     ).subscribe(_ => this.draftsFacade.delete(this.post._id));
   }
 
-  private share(): void {
-    console.log('share');
+  public async share(): Promise<void> {
+    await this.shareSrv.share(this.post)
+     .catch(err => console.log(err));
   }
 
   private message(): void {
@@ -108,7 +110,7 @@ export class PostCardComponent implements OnInit {
   }
 
   private friend(): void {
-    console.log('friend');
+    this.router.navigateByUrl('/profile/' + this.post.user);
   }
 
   public editPost(): void {

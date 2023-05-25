@@ -42,7 +42,6 @@
     "@angular/service-worker": "^16.0.2",
     "@ngrx/effects": "^16.0.0",
     "@ngrx/store": "^16.0.0",
-    "@ngrx/store-devtools": "^16.0.0",
     "hammerjs": "^2.0.8",
     "highlight.js": "^11.8.0",
     "ngx-device-detector": "^6.0.0",
@@ -75,6 +74,7 @@
     "protractor": "^7.0.0",
     "ts-node": "~10.9.1",
     "tslint": "~6.1.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "@ngrx/store-devtools": "^16.0.0"
   }
 }
