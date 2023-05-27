@@ -2,26 +2,37 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Post } from '@shared/types/interface.types';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import { CrafterService } from '../crafter/crafter.service';
+import { ERROR_CONVERT_HTML_SENTENCE, NO_DATA_CONVERT_HTML_SENTENCE } from '@shared/data/sentences';
 
 @Injectable()
 
 export class QuillService {
 
-  constructor() { }
+  constructor(private crafter: CrafterService) { }
 
   public convertToHTML(post: Post): void {
+    if (!post.message.ops) {
+      this.crafter.setSnack(NO_DATA_CONVERT_HTML_SENTENCE, 'warning');
+      return;
+    }
+
     const converter = new QuillDeltaToHtmlConverter(post.message.ops, {
       multiLineParagraph: false
     });
 
-    const parser = new DOMParser();
-    const converted = converter.convert();
-    const input = document.createElement('a');
-    const doc = parser.parseFromString(converted, "text/html");
-    const styled = this.addStyles(doc.documentElement.outerHTML, post);
-    input.setAttribute('href', 'data:html; charset=utf-8,' + styled)
-    input.setAttribute('download', `${post.title}.html`);
-    input.click();
+    try {
+      const parser = new DOMParser();
+      const converted = converter.convert();
+      const input = document.createElement('a');
+      const doc = parser.parseFromString(converted, "text/html");
+      const styled = this.addStyles(doc.documentElement.outerHTML, post);
+      input.setAttribute('href', 'data:html; charset=utf-8,' + styled)
+      input.setAttribute('download', `${post.title}.html`);
+      input.click();
+    } catch (err) {
+      this.crafter.setSnack(ERROR_CONVERT_HTML_SENTENCE, 'error');
+    }
   }
 
   private addStyles(html: string, post: Post): string {

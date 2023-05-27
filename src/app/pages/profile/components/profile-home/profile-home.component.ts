@@ -8,7 +8,7 @@ import { Observable, Subject, filter, takeUntil } from 'rxjs';
   selector: 'app-profile-home',
   templateUrl: './profile-home.component.html',
   styleUrls: ['./profile-home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class ProfileHomeComponent implements OnInit {

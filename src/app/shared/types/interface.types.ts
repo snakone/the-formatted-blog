@@ -119,6 +119,10 @@ export interface FriendsResponse extends ServerResponse {
   friends?: User[];
 }
 
+export interface NewsResponse extends ServerResponse { 
+  news?: FormattedNew[];
+}
+
 export interface ActivitiesResponse extends ServerResponse { 
   activities?: UserActivity[];
 }
@@ -221,4 +225,14 @@ export interface UserActivity {
   route?: string;
   slug?: string;
   user?: string;
+}
+
+export interface FormattedNew {
+  author?: string;
+  title?: string;
+  description?: string;
+  category?: string;
+  url?: string;
+  image?: string;
+  published_at: Date;
 }

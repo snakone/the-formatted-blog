@@ -22,7 +22,10 @@ export class ProfilePostsComponent implements OnInit {
   ngOnInit(): void {
     this.checkData();
     this.favoritesID$ = this.postFacade.favoritesID$;
-    this.items$ = this.postFacade.byUser$
+    
+    this.items$ = this.postFacade.filtered$.pipe(
+      map(res => res.filter(post => post.type === 'post'))
+    );
   }
 
   private checkData(): void {
@@ -39,7 +42,5 @@ export class ProfilePostsComponent implements OnInit {
     this.unsubscribe$.complete();
     this.postFacade.resetFilter();
   }
-
-
 
 }

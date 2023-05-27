@@ -34,7 +34,7 @@ export class DraftPreviewDialogComponent implements OnInit {
       this.data.draft?.status === 'not-seen'
     ) {
       this.timer = setTimeout(() => {
-        this.draftsFacade.updateKey(this.data?.draft?._id, {key: 'status', value: 'seen'});
+        this.draftsFacade.updateKey(this.data?.draft?._id, {key: 'status', value: 'seen'}, true);
       }, TIME_TO_SEEN);
     }
   }

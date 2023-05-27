@@ -20,6 +20,7 @@ import {
 import { ProfileHomeContentComponent } from './components/profile-home/components/profile-home-content/profile-home-content.component';
 import { ProfileHomeSidebarComponent } from './components/profile-home/components/profile-home-sidebar/profile-home-sidebar.component';
 import { ActivitiesAccessModule } from '@core/ngrx/activities/data-access/activities-access.module';
+import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ActivitiesAccessModule } from '@core/ngrx/activities/data-access/activi
     ProfileRoutingModule,
     LayoutModule,
     DraftsAccessModule,
-    ActivitiesAccessModule
+    ActivitiesAccessModule,
+    SkeletonModule
   ]
 })
 

@@ -10,7 +10,7 @@ export interface ActivitiesState {
 }
 
 export const inititalState: ActivitiesState = {
-  activities: [],
+  activities: null,
   error: null,
   loaded: false,
   public: []

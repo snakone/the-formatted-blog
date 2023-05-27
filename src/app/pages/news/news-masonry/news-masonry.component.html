@@ -3,34 +3,34 @@
     <div class="grid-item" *ngFor="let item of items; let i = index">
         <div class="content">
             <div class="inner">
-                <img src="https://picsum.photos/450/325?image={{item * 4}}" alt="News Image">
+                <img [src]="item.image" 
+                      alt="News Image" 
+                      loading="lazy"
+                      #img
+                      (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
             </div>
             <div class="card">
-              <p class="category">Lifestyle</p>
-              <h4>Nesciunt aspernatur eaque similique laudantium a</h4>
+              <p class="category">{{item.category}}</p>
+              <h4>
+                <a [href]="item.url" target="_blank">{{item.title}}</a></h4>
               <div class="flex">
                 <p class="author">
-                  <span>Jhone Albert</span>
+                  <span>{{item.author}}</span>
                 </p>
                 <p class="date">
-                    <span>Sep, 17 2015</span>
+                    <span>{{item.published_at | date}}</span>
                 </p>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                  Assumenda modi inventore, totam vero consequuntur, aut animi veritatis tempora nulla 
-                  facere placeat velit illum explicabo dicta enim ipsum. Vitae ducimus, ratione.
-              </p>
-              <p *ngIf="i % 3.5 === 0">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus nam illum temporibus 
-                  delectus quo praesentium incidunt, quasi itaque at ratione asperiores est obcaecati odio 
-                  sapiente doloribus culpa aliquam assumenda voluptatem dignissimos error!
-              </p>
+              <p>{{item.description}}</p>
             </div>
         </div>
     </div>
+    <ng-container *ngIf="items && items.length === 0">
+      <p class="empty">No se han encontrado noticias. Prueba de nuevo más tarde.</p>
+    </ng-container>
 </div>
 
-<app-spinner [loading]="isLoaded"></app-spinner>
+<app-spinner [loading]="!isLoaded"></app-spinner>
 
 
 

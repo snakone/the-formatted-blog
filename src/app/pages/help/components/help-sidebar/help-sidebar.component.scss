@@ -26,7 +26,15 @@ button {
   }
 }
 
+button {
+  padding: 0;
+}
+
 a {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: block;
   text-decoration: none;
   color: var(--light-color) !important;
   transition: color 666ms ease-in-out;

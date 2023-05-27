@@ -1,0 +1,19 @@
+<article [ngClass]="{'small': small, 'last': last}">
+  <figure></figure>
+  <div class="main-content">
+    <p class="category"></p>
+    <h1 class="title"></h1>
+    <p class="date"></p>
+    <ng-container *ngIf="showIntro">
+      <div class="intro" ></div>
+    </ng-container>
+    <div class="bottom" [ngClass]="{'first': showIntro}">
+      <span class="author"></span>
+      <ul class="icons">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</article>

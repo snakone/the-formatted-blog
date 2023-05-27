@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
 import { EditProfileDialogComponent } from '@shared/layout/overlays/edit-profile/edit-profile.component';
 import { Post, User } from '@shared/types/interface.types';
 import { Observable, map, tap } from 'rxjs';
@@ -19,6 +20,9 @@ export class ProfileHomeSidebarComponent {
   @Input() isPublic: boolean = false;
   @Input() selector: string;
   recentPost$: Observable<Post[]> | undefined;
+
+  statsList = STATS_LIST;
+  socialList = SOCIAL_LIST;
 
   constructor(private crafter: CrafterService, private postFacade: PostsFacade, private userFacade: UsersFacade) { }
 

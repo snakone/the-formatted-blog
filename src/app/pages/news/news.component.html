@@ -8,7 +8,7 @@
   </div>
   <section class="news-content">
     <app-section [margin]="false">
-      <app-news-masonry [duration]="duration"></app-news-masonry>
+      <app-news-masonry [duration]="duration" [news]="news$ | async"></app-news-masonry>
     </app-section>
   </section>
 </div>

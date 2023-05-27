@@ -6,13 +6,14 @@ import { Post } from '@shared/types/interface.types';
   selector: 'app-recent-post-box',
   templateUrl: './recent-post-box.component.html',
   styleUrls: ['./recent-post-box.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class RecentPostBoxComponent {
 
   @Input() posts: Post[] = EMPTY_RECENT_POST;
   @Input() margin: boolean | undefined;
+  @Input() limit: number;
 
   constructor() { }
 

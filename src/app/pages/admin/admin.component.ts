@@ -31,6 +31,7 @@ export class AdminComponent {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.draftsFacade.reset();
   }
 
 }

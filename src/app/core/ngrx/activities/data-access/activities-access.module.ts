@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { activitiesReducers } from '../../ngrx.index';
 import { ActivitiesEffects } from '../activities.effects';
 import { ActivitiesFacade } from '../activities.facade';
+import { ActivitiesService } from '@core/services/api/activities.service';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { ActivitiesFacade } from '../activities.facade';
       ActivitiesEffects
     ]),
   ],
-  providers: [ActivitiesFacade]
+  providers: [ActivitiesFacade, ActivitiesService]
 })
 
 export class ActivitiesAccessModule { }

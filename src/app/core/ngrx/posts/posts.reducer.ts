@@ -17,9 +17,9 @@ export interface PostState {
 }
 
 export const inititalState: PostState = {
-  posts: [],
+  posts: null,
   postsLoaded: false,
-  user: [],
+  user: null,
   userLoaded: false,
   slug: null,
   slugLoaded: false,
@@ -36,7 +36,7 @@ const featureReducer = createReducer(
     {
       ...state,
       postsLoaded: true,
-      posts: [...state.posts, ...posts],
+      posts: state.posts ? [...state.posts, ...posts] : posts,
       error: null,
       full: completed(posts)
     }
@@ -111,20 +111,19 @@ export const getSlug = (state: PostState) => state.slug;
 export const getFavoritesID = (state: PostState) => state.favorites;
 
 function completed(posts: Post[]): boolean {
-  return posts.length === 0;
+  return posts?.length === 0;
 }
 
-export const getFavorites = (statePost: PostState, stateDraft: DraftsState) => ({ 
-  data: [...stateDraft.drafts, ...statePost.posts]
-}).data.filter(post => statePost.favorites.includes(post?._id));
+export const getFavorites = (statePost: PostState, stateDraft: DraftsState) =>
+  [...stateDraft.drafts, ...statePost.posts].filter(post => statePost.favorites.includes(post?._id));
 
 export const getFiltered = (statePost: PostState, stateDraft: DraftsState) => filterAll(statePost, stateDraft);
 
 const switchObj = {
-  draft: (statePost: PostState, stateDraft: DraftsState) => stateDraft.drafts,
-  post: (statePost: PostState, stateDraft: DraftsState) => statePost.posts,
+  draft: (_: PostState, stateDraft: DraftsState) => stateDraft.drafts,
+  post: (statePost: PostState, _: DraftsState) => statePost.user,
   favorite: (statePost: PostState, stateDraft: DraftsState) => getFavorites(statePost, stateDraft),
-  any: (statePost: PostState, stateDraft: DraftsState) => [...statePost.posts, ...stateDraft.drafts.filter(d => !d.temporal)],
+  any: (statePost: PostState, stateDraft: DraftsState) => !statePost.user || !stateDraft.drafts ? [] : [...statePost.user, ...stateDraft.drafts?.filter(d => !d.temporal)],
 };
 
 const filterAll = (statePost: PostState, stateDraft: DraftsState) => {

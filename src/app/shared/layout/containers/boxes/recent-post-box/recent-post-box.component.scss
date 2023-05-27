@@ -123,18 +123,21 @@
     @media(min-width: 550px) and (max-width: 749px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-
     }
   }
 
   &:before {
     content: "";
     position: absolute;
-    top: -35px;
+    top: -40px;
     width: 100%;
     left: 0;
     border-top: 1px solid var(--border-color);
     transition: all 666ms ease-in-out;
+
+    @media(min-width: 993px) {
+      top: -35px;
+    }
   }
 
 }

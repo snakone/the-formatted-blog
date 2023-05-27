@@ -128,15 +128,15 @@ export const POST_CATEGORIES: TextList[] = [
 
 export const POST_ICONS: ActionList[] = [
   { 
-    icon: 'fas fa-user-plus',
-    label: 'Añadir',
-    action: 'friend'
-  },
-  { 
     icon: 'far fa-envelope',
     label: 'Mensaje',
     action: 'message'
-  }
+  },
+  { 
+    icon: 'fas fa-cloud-download-alt',
+    label: 'Descargar',
+    action: 'download'
+  },
 ];
 
 export const DRAFT_ICONS: ActionList[] = [
@@ -328,6 +328,16 @@ export const FQA_ITEMS: FQAItem[] = [
     ]
   },
   {
+    label: 'Uno de mis bocetos está pendiente ¿Qué significa?',
+    content: [
+      `Un administrador puede marca un boceto como 'pendiente' siempre que lo vea necesario. Esto significa que el administrador ve bien el boceto, 
+      aunque necesita más tiempo para revisarlo. Mientras el boceto esté en este estado, el autor no podrá editarlo. Esto sirve para que el administrador no 
+      tenga que estar revisando a cada nuevo cambio del autor.`,
+      `En resumen, si ves que alguno de tus bocetos esta en 'pendiente', es por que un adminitrador lo está revisando y ha bloqueado la edición para que no
+      haya nuevos cambios y pueda resivar el boceto tranquilamente.`
+    ]
+  },
+  {
     label: '¿Qué otras características ofrece The Formatted Blog a parte de crear contenido?',
     content: [
       `El principal objetivo de la aplicación consiste en eso, crear contenido. Aunque eso no significa que no se puedan hacer otras cosas. Recuerda que estas características 
@@ -384,4 +394,16 @@ export const EMPTY_RECENT_POST: Post[] = [
     created: 'Sep, 05 2019',
     cover: 'assets/images/13-img.jpg'
   },
-]
+];
+
+export const STATS_LIST: IconList[] = [
+  { label: 'views', icon: 'far fa-eye' },
+  { label: 'likes', icon: 'far fa-heart' },
+  { label: 'friends', icon: 'fas fa-user-friends' },
+];
+
+export const SOCIAL_LIST: IconList[] = [
+  { label: 'twitter', icon: 'fab fa-twitter' },
+  { label: 'github', icon: 'fab fa-github' },
+  { label: 'portfolio', icon: 'fas fa-link' },
+];

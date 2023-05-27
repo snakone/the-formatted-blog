@@ -5,12 +5,12 @@ $duration: 1.5s;
   height: 16px;
   padding: 0;
   position: relative;
-  margin: 37px 0 5px 0;
+  margin: 35px 0 35px 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: rgba(255, 255, 255, 0.1);
-  @media(min-width: 993px) { margin: 37px 0 -15px 0 }
+  @media(min-width: 993px) { margin: 35px 0 -12px 0 }
 }
 
 .progress-value {

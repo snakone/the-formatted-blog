@@ -1,47 +1,48 @@
 <app-sticky-aside [selector]="selector">
-  <div class="user-card">
-    <div class="info">
-      <div class="title">
-        <div>
-          <h1>{{user.name}}</h1>
-          <div class="flex">
-            <img [src]="user.avatar">
-            <div class="profesion">
-              <p *ngIf="user.profile?.role">{{user.profile?.role}}</p>
-              <p *ngIf="user.profile?.location">{{user.profile?.location}}</p>
+  <ng-container *ngIf="user">
+    <div class="user-card">
+      <div class="info">
+        <div class="title">
+          <!-- INFO -->
+          <div>
+            <h1>{{user.name}}</h1>
+            <div class="flex">
+              <img [src]="user.avatar">
+              <div class="profesion">
+                <p *ngIf="user.profile?.role">{{user.profile?.role}}</p>
+                <p *ngIf="user.profile?.location">{{user.profile?.location}}</p>
+              </div>
             </div>
           </div>
         </div>
+        <!-- STATS -->
+        <ul>
+          <li><i class="far fa-newspaper"></i> {{(recentPost$ | async)?.length}}</li>
+          <li *ngFor="let s of statsList"><i [class]="s.icon"></i> {{user.stats[s.label]}}</li>
+        </ul>
       </div>
-      <ul>
-        <li><i class="far fa-newspaper"></i> {{(recentPost$ | async).length}}</li>
-        <li><i class="far fa-eye"></i> {{user.stats?.views}}</li>
-        <li><i class="far fa-heart"></i> {{user.stats?.likes}}</li>
-        <li><i class="fas fa-user-friends"></i>{{user.stats?.friends}}</li>
+      <p class="bio">{{user.profile?.bio}}</p>
+      <!-- SOCIAL -->
+      <ul class="social">
+        <ng-container *ngFor="let s of socialList">
+          <li *ngIf="user.profile[s.label] as value">
+            <i [class]="s.icon"></i> <a [href]="value" target="_blank">{{value}}</a>
+          </li>
+        </ng-container>
       </ul>
+      <!-- BUTTONS -->
+      <ng-container *ngIf="isPublic; else private">
+        <button class="formatted" type="button" (click)="addFriend()">
+          Añadir
+        </button>
+      </ng-container>
+      <ng-template #private>
+        <button class="formatted" type="button" (click)="edit()">
+          Editar
+        </button>
+      </ng-template>
     </div>
-    <p class="bio">{{user.profile?.bio}}</p>
-    <ul class="social">
-      <li *ngIf="user.profile?.twitter as twitter">
-        <i class="fab fa-twitter"></i> <a [href]="twitter" target="_blank">{{twitter}}</a>
-      </li>
-      <li *ngIf="user.profile?.github as github">
-        <i class="fab fa-github"></i> <a [href]="github" target="_blank">{{github}}</a>
-      </li>
-      <li *ngIf="user.profile?.portfolio as portfolio">
-        <i class="fas fa-link"></i> <a [href]="portfolio" target="_blank">{{portfolio}}</a>
-      </li>
-    </ul>
-    <ng-container *ngIf="isPublic; else private">
-      <button class="formatted" type="button" (click)="addFriend()">
-        Añadir
-      </button>
-    </ng-container>
-    <ng-template #private>
-      <button class="formatted" type="button" (click)="edit()">
-        Editar
-      </button>
-    </ng-template>
-  </div>
-  <app-recent-post-box [posts]="recentPost$ | async" [margin]="true"></app-recent-post-box>
+  </ng-container>
+
+  <app-recent-post-box [posts]="recentPost$ | async" [margin]="true" [limit]="3"></app-recent-post-box>
 </app-sticky-aside>

@@ -25,7 +25,7 @@
     <!-- CONTENT -->
     <div class="main-content">
       <p class="category">{{post.category}}</p>
-      <h3 [routerLink]="isDraft ? ('/draft/' + post.slug) : ('/post/' + post.slug)">{{post.title}}</h3>
+      <h1 [routerLink]="isDraft ? ('/draft/' + post.slug) : ('/post/' + post.slug)">{{post.title}}</h1>
       <p class="date" *ngIf="!small">
          <!-- DRAFT STATUS -->
         <ng-container *ngIf="isDraft"> 
@@ -46,8 +46,7 @@
         <quill-view [content]="post.message" class="alone"></quill-view>
       </ng-template>
       <!-- BOTTOM -->
-      <div class="bottom"
-           [ngClass]="{'first': border}">
+      <div class="bottom" [ngClass]="{'first': border}">
         <div *ngIf="small">
           <!-- DRAFT STATUS -->
           <p class="date">
@@ -68,8 +67,12 @@
             <li (click)="editPost()" *ngIf="post.user === user?._id">
               <i class="fas fa-pen-fancy"></i>
             </li>
+            <li (click)="friend()" *ngIf="post.user !== user?._id">
+              <i class="fas fa-user-plus"></i>
+            </li>
             <li *ngFor="let i of postIcons"
-                (click)="switchObjPost[i.action]()">
+                (click)="switchObjPost[i.action]()"
+                [ngClass]="{'disabled': (i.action === 'download' && !alone) || (i.action === 'message' && post.user === user?._id)}">
               <i [class]="i.icon"></i>
             </li>
             <li>

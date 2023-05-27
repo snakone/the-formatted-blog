@@ -6,7 +6,7 @@ import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
 import { ActivitiesResponse, UserActivity } from '@shared/types/interface.types';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 
 export class ActivitiesService {
 

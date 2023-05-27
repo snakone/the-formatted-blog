@@ -28,7 +28,7 @@ export class AdminContentComponent implements OnInit {
   ngOnInit(): void {
     this.draftsFacade.all$.pipe(
       takeUntil(this.unsubscribe$),
-      map(drafts => drafts.filter(d => d.status !== 'approved'))
+      map(drafts => drafts?.filter(d => d.status !== 'approved'))
     ).subscribe(res => {
       this.drafts = res;
       this.filteredDrafts = res;

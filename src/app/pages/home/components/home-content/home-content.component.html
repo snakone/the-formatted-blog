@@ -1,6 +1,6 @@
 <div class="content">
   <!-- POSTS -->
-  <ng-container *ngIf="(posts$ | async) as posts">
+  <ng-container *ngIf="(posts$ | async) as posts; else loading">
     <ng-container *ngIf="posts.length > 0">
       <app-post-card *ngFor="let item of posts; 
                              let i = index; 
@@ -9,9 +9,15 @@
                      [border]="i === 0"
                      [last]="last"
                      [post]="item"
+                     [alone]="false"
                      [favoritesID]="favoritesID$ | async"
                      [showIntro]="i === 0">
       </app-post-card>
     </ng-container>
   </ng-container>
+  <ng-template #loading>
+    <ng-container *ngFor="let card of [1,2,3,4]; let i = index; let last = last">
+      <app-post-card-skeleton [small]="i >= 1" [showIntro]="i === 0" [last]="last"></app-post-card-skeleton>
+    </ng-container>
+  </ng-template>
 </div>

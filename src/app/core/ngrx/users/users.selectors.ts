@@ -4,7 +4,7 @@ import * as fromUsers from './users.reducer';
 
 export const getUserState = createSelector(
   getAppState,
-  (state: AppState) => state.users
+  (state: AppState) => state.user
 );
 
 export const get = createSelector(getUserState, fromUsers.getUser);

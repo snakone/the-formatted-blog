@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 
 import {
-  PostResponse,
   Post,
   KeyPair,
   DraftResponse

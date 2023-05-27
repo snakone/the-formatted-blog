@@ -47,6 +47,7 @@ export class PostCardComponent implements OnInit {
   switchObjPost: any = {
     friend: () => this.friend(),
     message: () => this.message(),
+    download: () => this.download(),
     favorite: () => this.favorite()
   };
 
@@ -109,7 +110,7 @@ export class PostCardComponent implements OnInit {
     console.log('message');
   }
 
-  private friend(): void {
+  public friend(): void {
     this.router.navigateByUrl('/profile/' + this.post.user);
   }
 

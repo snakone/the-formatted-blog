@@ -12,6 +12,7 @@ export class CrafterService {
 
   snack$: Subject<Snack> = new Subject<Snack>();
   time!: NodeJS.Timeout;
+  alreadySnack: boolean;
 
   constructor(
     private matDialog: MatDialog
@@ -33,12 +34,15 @@ export class CrafterService {
     type: snackType = 'info',
     duration: number = 3000
   ): void {
+    if (this.alreadySnack) { return; }
     setTimeout(() => {
       this.snack$.next({message, type});
+      this.alreadySnack = true;
       
       this.time = setTimeout(() => {
         this.snack$.next({message: null});
         this.clearSnack();
+        this.alreadySnack = false;
       }, duration);
 
     }, this.time ? duration : 0);

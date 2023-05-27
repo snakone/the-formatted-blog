@@ -132,24 +132,14 @@ export class DraftsEffects {
     ))))
   );
 
+  // ON UPDATE && KEY UPDATE
   onDraftUpdateEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(...[
         DraftsActions.updateSuccess,
         DraftsActions.updateKeySuccess,
       ]),
-      concatMap((_) => of(DraftsActions.getByUser())),
-      catchError(error =>
-        of(DraftsActions.updateKeyFailure({ error: error.message }))
-      ))
-  )
-
-   // ADMIN UPDATE
-   onAdminDraftUpdateEffect$ = createEffect(() => this.actions
-    .pipe(
-      ofType(DraftsActions.updateKeySuccess),
-      filter(_ => _?.admin),
-      concatMap((_) => of(DraftsActions.getAll())),
+      concatMap((_: any) => _.admin ? of(DraftsActions.getAll()) : of(DraftsActions.getByUser())),
       catchError(error =>
         of(DraftsActions.updateKeyFailure({ error: error.message }))
       ))

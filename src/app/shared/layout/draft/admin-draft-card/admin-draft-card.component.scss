@@ -13,8 +13,9 @@
   }
 
   & h6 {
-    font-size: 1.666rem;
+    font-size: 1.5rem;
     margin-bottom: .888rem;
+    line-height: 30px;
     @include text-ellipsis(130px);
   }
 

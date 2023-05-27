@@ -6,7 +6,7 @@ import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
 import * as fromDrafts from './drafts.selectors';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 
 export class DraftsFacade {
 

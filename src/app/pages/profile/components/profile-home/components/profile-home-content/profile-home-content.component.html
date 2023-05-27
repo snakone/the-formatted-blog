@@ -2,19 +2,24 @@
 <p class="reset">La actividad se borra cada 30 días.</p>
 <div class="profile-content">
   <ng-container *ngIf="user">
-    <article *ngFor="let a of activities" 
-            [ngClass]="{'admin': a.admin, 'route': canVisit(a)}" 
-            [class]="a.type"
-            [routerLink]="canVisit(a) ? ('/' + a.route + '/' + a.slug) : null">
-      <div class="content">
-        <span [innerHTML]="a.message" [ngClass]="{'link': canVisit(a)}"></span>
-        <p class="title">
-          <ng-container *ngIf="!a.userAction">Título: </ng-container>
-          <b>{{a.title}}</b> - {{a.date}}
-        </p>
-      </div>
-    </article>
-    <ng-container *ngIf="activities.length === 0">
+    <ng-container *ngIf="activities; else loading">
+      <article *ngFor="let a of activities" 
+              [ngClass]="{'admin': a.admin, 'route': canVisit(a)}" 
+              [class]="a.type"
+              [routerLink]="canVisit(a) ? ('/' + a.route + '/' + a.slug) : null">
+        <div class="content">
+          <span [innerHTML]="a.message" [ngClass]="{'link': canVisit(a)}"></span>
+          <p class="title">
+            <ng-container *ngIf="!a.userAction">Título: </ng-container>
+            <b>{{a.title}}</b> - {{a.date}}
+          </p>
+        </div>
+      </article>
+    </ng-container>
+    <ng-template #loading>
+      <app-activity-skeleton *ngFor="let i of [1,2,3,4]; let last = last" [last]="last"></app-activity-skeleton>
+    </ng-template>
+    <ng-container *ngIf="activities && activities.length === 0">
       Aún no se han registrado actividades. Realiza acciones dentro de la aplicación para registrar actividades.
     </ng-container>
   </ng-container>

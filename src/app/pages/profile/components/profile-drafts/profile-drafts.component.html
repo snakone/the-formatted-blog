@@ -1,6 +1,6 @@
 <div class="content animated fadeIn">
   <app-post-search [type]="'draft'"></app-post-search>
-  <ng-container *ngIf="(drafts$ | async) as items">
+  <ng-container *ngIf="(drafts$ | async) as items; else loading">
     <app-post-card *ngFor="let item of items; 
                            let i = index; 
                            let last = last"
@@ -17,4 +17,9 @@
       </p>
     </ng-container>
   </ng-container>
+  <ng-template #loading>
+    <ng-container *ngFor="let card of [1,2,3,4]; let i = index; let last = last">
+      <app-post-card-skeleton [small]="true" [showIntro]="false" [last]="last"></app-post-card-skeleton>
+    </ng-container>
+  </ng-template>
 </div>

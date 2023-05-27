@@ -84,9 +84,14 @@
     text-transform: uppercase;
     margin: 0 0 1.1rem;
     line-height: 22px;
-    font-size: 19px;
+    font-size: 18px;
     padding-right: 10px;
     @include hover(1.5);
+
+    & a {
+      text-decoration: none;
+      color: unset;
+    }
   }
   
   & .category {
@@ -118,12 +123,22 @@
     &.author {
       margin-bottom: 0;
       padding-right: 30px;
+      text-transform: uppercase;
+      @include hr-title(20px);
+      position: relative;
+
+      &::after {
+        right: 14px;
+        left: unset;
+      }
       
       & span {
         padding: 0 10px 0 0;
         position: relative;
         font-size: 12px;
-        @include hr-title(20px);
+        max-width: 245px;
+        display: block;
+        @include text-ellipsis(20px);
       }
     }
 
@@ -135,4 +150,12 @@
     align-items: center;
     margin-bottom: .9rem;
   }
+}
+
+.empty {
+  height: 16px;
+  margin-bottom: 23px;
+  display: block;
+  position: relative;
+  top: 8px;
 }
