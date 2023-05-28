@@ -1,18 +1,35 @@
 @import 'mixins/mixins.scss';
 
 .grid {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  margin-top: 2rem;
 
   & .draft-card {
     width: 100%;
-    overflow: hidden;
     padding: 1.2rem;
-    margin: 1.2rem 0;
+    margin: 2rem 0;
     border-radius: 2px;
     @include shadow-card();
+    position: relative;
+
+    @media(max-width: 650px) {
+      margin-bottom: 4rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        width: 100%;
+        left: 0;
+        border-top: 1px solid var(--border-color);
+        transition: all 666ms ease-in-out;
+      }
+
+      &:first-of-type {
+        &::before {
+          content: unset;
+        }
+      }
+    }
   }
 }
 
@@ -33,7 +50,7 @@
 h1 {
   font-size: 2rem;
   color: var(--contrast-color);
-  margin-top: 1rem;
+  margin-top: .8rem;
   margin-bottom: 1rem;
   position: relative;
 
@@ -41,7 +58,7 @@ h1 {
     position: absolute;
     right: 1px;
     font-size: 18px;
-    top: 3px;
+    top: 4px;
     cursor: pointer;
     color: var(--dark-color);
     opacity: .7;
@@ -124,10 +141,11 @@ button {
 @media(max-width: 650px) {
   h1 {
     font-size: 1.6rem;
+    margin-top: 0;
 
     & i {
       font-size: 16px;
-      top: 7px;
+      top: 6px;
     }
   }
 

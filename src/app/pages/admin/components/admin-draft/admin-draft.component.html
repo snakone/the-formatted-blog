@@ -1,5 +1,5 @@
 <ng-container *ngIf="draft; else noDraft">
-  <div class="header animated fadeIn">
+  <div class="header">
     <h1>
       Aprobación del Artículo
       <i class="fas fa-step-backward" [routerLink]="'../'" [replaceUrl]="true"></i>
@@ -22,7 +22,7 @@
     </p>
   </div>
   <div class="grid">
-    <div class="draft-card animated fadeIn" *ngFor="let c of checkStatus">
+    <div class="draft-card" *ngFor="let c of checkStatus">
       <h3>
         <i [class]="c.icon"></i> {{c.name}}
       </h3>

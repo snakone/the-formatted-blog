@@ -80,6 +80,8 @@
 .ql-blockquote .ql-fill { stroke: var(--text-color) }
 
 .ql-snow.ql-toolbar button {
+  width: 30px !important;
+  
   &:hover {
     & .ql-stroke { stroke: var(--contrast-color) }
     & .ql-fill { fill: var(--contrast-color) }

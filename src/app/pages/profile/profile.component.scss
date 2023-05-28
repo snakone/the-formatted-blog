@@ -10,5 +10,9 @@ section {
   transition: background 666ms ease-in-out;
   position: relative;
   padding-top: 10px;
+
+  @media(max-width: 550px) {
+    padding-top: 0;
+  }
 }
 

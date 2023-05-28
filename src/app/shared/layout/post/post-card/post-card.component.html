@@ -43,7 +43,7 @@
       <!-- FULL MESSAGE -->
       <ng-template #isAlone>
         <div class="alone-intro" [innerHTML]="post.intro | shortMessage: alone"></div>
-        <quill-view [content]="post.message" class="alone"></quill-view>
+        <quill-view [content]="post.message" [modules]="quillModules" class="alone"></quill-view>
       </ng-template>
       <!-- BOTTOM -->
       <div class="bottom" [ngClass]="{'first': border}">

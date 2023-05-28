@@ -7,8 +7,8 @@
               [ngClass]="{'admin': a.admin, 'route': canVisit(a)}" 
               [class]="a.type"
               [routerLink]="canVisit(a) ? ('/' + a.route + '/' + a.slug) : null">
-        <div class="content">
-          <span [innerHTML]="a.message" [ngClass]="{'link': canVisit(a)}"></span>
+        <div class="content" [ngClass]="{'link': canVisit(a)}">
+          <span [innerHTML]="a.message"></span>
           <p class="title">
             <ng-container *ngIf="!a.userAction">Título: </ng-container>
             <b>{{a.title}}</b> - {{a.date}}

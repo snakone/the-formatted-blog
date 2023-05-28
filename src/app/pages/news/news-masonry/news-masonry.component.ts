@@ -90,10 +90,13 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private addElements(): void {
     const skip = this.currentPage * this.multiply;
-    const end = skip 
     this.items.push(...this.news.slice(skip, skip + this.multiply));
     this.currentPage++;
     this.createMasonry(true);
+
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 2000);
   }
 
   ngOnDestroy() {

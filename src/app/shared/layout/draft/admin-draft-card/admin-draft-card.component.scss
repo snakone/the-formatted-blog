@@ -38,19 +38,33 @@
   }
 
   @media(max-width: 625px) {
+    padding: .8rem;
+
     &-data {
       flex-direction: column;
       align-items: flex-start;
 
       & button {
         bottom: 4px;
-        top: initial
+        top: initial;
+        padding: 3px 8px;
+      }
+
+      & span {
+        font-size: 13px;
+        line-height: 16px;
+      }
+
+      & .category {
+        margin-top: 2px;
+        font-size: 13px;
       }
     }
 
     & h6 {
       padding-right: 0;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
     }
   }
 }

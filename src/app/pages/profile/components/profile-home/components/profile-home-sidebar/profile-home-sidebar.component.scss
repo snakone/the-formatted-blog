@@ -20,6 +20,10 @@
     font-size: 22px;
     line-height: 26px;
     margin-bottom: 5px;
+
+    @media(max-width: 992px) {
+      padding-top: 5px;
+    }
   }
 
   & .profesion {

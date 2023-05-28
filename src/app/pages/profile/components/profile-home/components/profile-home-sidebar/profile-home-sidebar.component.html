@@ -10,7 +10,7 @@
               <img [src]="user.avatar">
               <div class="profesion">
                 <p *ngIf="user.profile?.role">{{user.profile?.role}}</p>
-                <p *ngIf="user.profile?.location">{{user.profile?.location}}</p>
+                <p>{{user.profile?.location || 'Lugar desconocido'}}</p>
               </div>
             </div>
           </div>

@@ -60,7 +60,7 @@ const featureReducer = createReducer(
       ...state,
       postsLoaded: false,
       error: null,
-      posts: [...inititalState.posts],
+      posts: null,
       full: false,
       userLoaded: false,
       user: []

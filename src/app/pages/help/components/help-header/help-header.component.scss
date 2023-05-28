@@ -23,7 +23,10 @@
       }
 
       & p {
-        @media (max-width: 490px) { line-height: 18px; }
+        @media (max-width: 550px) { 
+          line-height: 18px;
+          font-size: 13px;
+        }
       }
     }
 

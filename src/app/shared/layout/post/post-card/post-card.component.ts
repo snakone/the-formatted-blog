@@ -11,6 +11,7 @@ import { QuillService } from '@core/services/quill/quill.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
 import { ShareService } from '@core/services/share/share.service';
+import { QuillModules } from 'ngx-quill';
 
 @Component({
   selector: 'app-post-card',
@@ -35,6 +36,10 @@ export class PostCardComponent implements OnInit {
   postIcons = POST_ICONS;
   draftIcons = DRAFT_ICONS;
   private unsubscribe$ = new Subject<void>();
+
+  quillModules: QuillModules = {
+    syntax: true,
+  };
 
   switchObjDraft: any = {
     edit: () => this.edit(),

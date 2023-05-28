@@ -26,7 +26,14 @@
   width: 106%;
   text-align: center;
   transition: width 666ms ease-in-out;
-  & input { width: 50%; }
+
+  & input { 
+    width: 50%;
+
+    @media(max-width: 550px) {
+      font-size: 13px;
+    }
+  }
 
   & i {
     font-size: 1rem;
@@ -55,7 +62,7 @@
   }
 
   @media(max-width: 900px) { width: 108%; }
-  @media(max-width: 549px) { width: 100%; }
+  @media(max-width: 550px) { width: 100%; }
 }
 
 .close {

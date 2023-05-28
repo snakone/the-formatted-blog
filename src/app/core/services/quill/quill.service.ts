@@ -17,13 +17,12 @@ export class QuillService {
       return;
     }
 
-    const converter = new QuillDeltaToHtmlConverter(post.message.ops, {
+    const converted = new QuillDeltaToHtmlConverter(post.message.ops, {
       multiLineParagraph: false
-    });
+    }).convert();
 
     try {
       const parser = new DOMParser();
-      const converted = converter.convert();
       const input = document.createElement('a');
       const doc = parser.parseFromString(converted, "text/html");
       const styled = this.addStyles(doc.documentElement.outerHTML, post);
@@ -38,7 +37,7 @@ export class QuillService {
   private addStyles(html: string, post: Post): string {
     return html.replace('<body>', addTitle(post))
                .replace('<head></head>', POST_STYLES_STRING)
-               .replace('</body></html>', addFooter());
+               .replace('</body>', addFooter());
   }
 
 }
@@ -57,7 +56,7 @@ const addFooter = () => `
       Copyright © ${new Date().getFullYear().toString()} - 
       All Rights Reserved - ${environment.version}
   </footer>
-</body></html>`;
+</body>`;
 
 const POST_STYLES_STRING = `
 <head>
@@ -91,11 +90,6 @@ const POST_STYLES_STRING = `
     p {
       margin: 0 0 30px;
       text-align: left;
-    }
-
-    p:last-of-type { 
-      margin: 0;
-      padding-bottom: 70px;
     }
 
     blockquote {
@@ -169,7 +163,7 @@ const POST_STYLES_STRING = `
     span.title {
       font-size: 11px;
       opacity: .8;
-      margin-bottom: 35px;
+      margin-bottom: 12px;
       display: inline-block;
       padding-left: 3px;
     }

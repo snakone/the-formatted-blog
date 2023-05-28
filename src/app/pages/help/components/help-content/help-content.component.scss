@@ -6,7 +6,11 @@
 
 h1 {
   font-size: 24px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
+
+  @media (max-width: 550px) {
+    margin-top: 8px;
+  }
 }
 
 p {

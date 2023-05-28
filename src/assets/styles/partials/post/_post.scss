@@ -1,5 +1,5 @@
-$quill-padding: 30px;
-$quill-padding-sm: 20px;
+$quill-padding: 24px;
+$quill-padding-sm: 16px;
 
 // FADE IN
 @keyframes fadeIn {
@@ -25,17 +25,27 @@ $quill-padding-sm: 20px;
   min-height: var(--quill-height);
   max-height: var(--quill-height);
 
+  &[contenteditable="true"] { 
+    & h2:first-child {
+      margin-top: 6px;
+    }
+   }
+
   // PARAGRAPH
   & p {
     margin: 0 0 30px;
     text-align: justify;
     &:last-of-type { 
       margin: 0;
-      padding-bottom: 35px;
+      padding-bottom: 10px;
     }
 
     & + ul, & + ol {
       margin-top: 0;
+    }
+
+    @media(max-width: 550px) {
+      margin-bottom: 20px;
     }
   }
 
@@ -52,26 +62,39 @@ $quill-padding-sm: 20px;
   }
 
   @media(max-width: 550px) {
-    padding: 20px;
+    padding: 16px;
     font-size: 13px;
 
     &.ql-blank::before {
-      top: -4px;
+      top: -8px;
       right: $quill-padding-sm !important;
       left: $quill-padding-sm !important;
       padding-bottom: $quill-padding-sm !important;
+    }
+
+    & blockquote {
+      font-size: 14px !important;
+      margin: 25px 0 25px !important;
+    }
+
+    & pre {
+      margin: 25px 0 25px !important;
+    }
+
+    & h2 {
+      margin: 30px 0 25px 0 !important;
     }
   }
 
   // BLOCKQUOTE
   & blockquote {
     width: 100%;
-    margin: 36px 0 35px !important;
+    margin: 36px 0 35px;
     background: var(--quote-bg);
     padding: 15px 22px 15px 25px !important;
     transition: background 666ms ease-in-out;
     font-style: italic;
-    font-size: 16px;
+    font-size: 15px;
     border-left: 5px solid var(--contrast-color) !important;
     color: var(--button-text-color);
     text-align: justify;
@@ -148,15 +171,14 @@ $quill-padding-sm: 20px;
       left: 0;
       width: 20px;
       height: 3px;
-      background: var(--contrast-color);
+      background-color: var(--contrast-color);
+      transition: background-color 666ms ease-in-out;
     }
-
-    &:first-child { margin-top: 0; }
   }
 
   // CODE
   & pre {
-    margin: 36px 0 35px !important;
+    margin: 36px 0 35px;
     &:first-child { margin-top: 0 !important }
   }
 

@@ -8,7 +8,7 @@ import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { DraftCheck, Post } from '@shared/types/interface.types';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime } from 'rxjs';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
 
 @Component({
   selector: 'app-admin-draft',
@@ -47,7 +47,9 @@ export class AdminDraftComponent {
     .pipe(
       takeUntil(this.unsubscribe$),
       switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get('id'))),
-      throttleTime(100)
+      throttleTime(100),
+      tap(res => !res ? this.draftsFacade.getAll() : null),
+      retry(1)
     ).pipe(filter(res => !!res))
     .subscribe((res: Post) => (this.draft = res, this.checkCover(res)));
   }
@@ -147,7 +149,7 @@ export class AdminDraftComponent {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.xhr.abort();
+    this.xhr?.abort();
   }
 
 }

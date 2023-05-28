@@ -3,7 +3,7 @@
 .recent {
   position: relative;
   text-align: center;
-  @media(max-width: 992px) { margin-bottom: 21px }
+  @media(max-width: 992px) { margin-bottom: 25px }
 
   &.margin {
     margin-top: 3rem;
@@ -64,7 +64,6 @@
           font-weight: 600;
           line-height: 1.5;
           margin: 0px 0px 8px 0px;
-          text-transform: capitalize;
           font-size: 15px;
         }
 
@@ -93,19 +92,6 @@
 
         &::after {
           right: 10px;
-        }
-      }
-
-      @media(max-width: 549px) {
-        &::after {
-          content: "\f105";
-          position: absolute;
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          right: 13px;
-          font-size: .8rem;
-          transition: right 300ms ease-in-out;
-          color: var(--dark-color);
         }
       }
     }
