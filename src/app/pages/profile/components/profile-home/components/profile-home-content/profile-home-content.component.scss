@@ -12,7 +12,7 @@ h1 {
 }
 
 .profile-content {
-  max-height: 622px;
+  max-height: 750px;
   overflow-y: auto;
   padding-bottom: 8px;
 
@@ -75,11 +75,11 @@ h1 {
         content: "";
         height: 100%;
         width: 2px;
-        background-color: var(--contrast-color);
+        background-color: #f64ea8;
         position: absolute;
         top: 0;
         left: 0;
-        opacity: .5;
+        opacity: .6;
       }
     }
 
@@ -98,7 +98,7 @@ h1 {
       position: absolute;
       top: 0;
       left: 0;
-      opacity: .4;
+      opacity: .6;
     }
 
     &.create::after {

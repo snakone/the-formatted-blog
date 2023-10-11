@@ -51,7 +51,7 @@ $quill-padding-sm: 16px;
 
   // PLACEHOLDER
   &.ql-blank::before {
-    top: 6px;
+    top: 0;
     right: $quill-padding !important;
     left: $quill-padding !important;
     font-style: normal !important;

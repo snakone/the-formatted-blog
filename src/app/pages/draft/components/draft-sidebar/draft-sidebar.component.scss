@@ -50,6 +50,14 @@
       left: 1px;
     }
   }
+
+  & .cause {
+    margin-left: 36px;
+    font-size: 12px;
+    opacity: 0.8;
+    color: var(--text-color);
+    line-height: 16px;
+  }
 }
 
 .progress {

@@ -112,6 +112,11 @@ export const EDIT_POST_CONFIRMATION: ConfirmationDialogProps = {
   message: '¿Estás seguro que quieres editar este artículo? Recuerda que si lo editas, volverá al estado de boceto.'
 };
 
+export const REMOVE_FRIEND_CONFIRMATION: ConfirmationDialogProps = {
+  title: 'Eliminar amigo...',
+  message: '¿Estás seguro que quieres eliminar a este usuario de tu lista de amigos?'
+};
+
 export const POST_CATEGORIES: TextList[] = [
   { label: 'Actualidad', key: 'news' },
   { label: 'Naturaleza', key: 'nature' },

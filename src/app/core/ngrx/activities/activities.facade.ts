@@ -6,7 +6,7 @@ import * as fromActivities from './activities.selectors';
 import { ActivitiesState } from './activities.reducer';
 import { UserActivity } from '@shared/types/interface.types';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 
 export class ActivitiesFacade {
 

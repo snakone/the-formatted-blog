@@ -1,5 +1,6 @@
 h1 {
   margin-bottom: 1rem;
+  font-size: 21px;
 }
 
 div[mat-dialog-content] {
@@ -7,10 +8,6 @@ div[mat-dialog-content] {
 }
 
 @media(max-width: 550px) {
-  h1 {
-    font-size: 21px;
-  }
-
   button {
     font-size: 13px;
     min-width: 48px;

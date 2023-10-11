@@ -32,9 +32,18 @@
       </ul>
       <!-- BUTTONS -->
       <ng-container *ngIf="isPublic; else private">
-        <button class="formatted" type="button" (click)="addFriend()">
-          Añadir
-        </button>
+        <ng-container *ngIf="(friends$ | async) as friends">
+          <ng-container *ngIf="isUserMyFriend(friends); else add">
+            <button class="formatted remove" type="button" (click)="removeFriend()">
+              Eliminar de amigo
+            </button>
+          </ng-container>
+          <ng-template #add>
+            <button class="formatted" type="button" (click)="addFriend()">
+              Añadir
+            </button>
+          </ng-template>
+        </ng-container>
       </ng-container>
       <ng-template #private>
         <button class="formatted" type="button" (click)="edit()">

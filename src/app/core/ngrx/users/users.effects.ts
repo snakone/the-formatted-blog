@@ -173,6 +173,22 @@ export class UserEffects {
     )))), {dispatch: false}
   );
 
+  // ALERT USER
+  alertsUserEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.addFriend),
+      concatMap((_) => of(this.crafter.setSnack('Amigo añadido!', 'success')))
+    ), { dispatch: false }
+  )
+
+    // ALERT USER
+  alertsUser1Effect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.removeFriend),
+      concatMap((_) => of(this.crafter.setSnack('Amigo eliminado!', 'info')))
+    ), { dispatch: false }
+  )
+
   private async navigate(
     path: string | null, 
     sentence: string

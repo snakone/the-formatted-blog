@@ -28,9 +28,18 @@ const featureReducer = createReducer(
   // USER LOG OUT
   on(UserActions.userLogOut, (state) => ({ ...state, error: null, user: null, loaded: false })),
   // FRIENDS
-  on(UserActions.addFriend, (state, { friend }) => (
-    {...state, friends: Array.from(new Set([...state.friends, friend]))}
-  )),
+  on(UserActions.addFriend, (state, { friend }) => {
+    const unique = state.friends?.length === 0 ? [friend] : state.friends.reduce((curr, acc) => {
+      const exist = curr.find(friend => friend._id === acc._id);
+      if (!exist) { curr = [...curr, friend]; }
+      return curr;
+    }, [] as User[]);
+    return (
+      {
+        ...state, 
+        friends: unique
+      }
+  )}),
   on(UserActions.removeFriend, (state, { id }) => (
     {...state, friends: [...state.friends].filter(frd => frd._id !== id)}
   )),
