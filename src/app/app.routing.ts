@@ -58,6 +58,12 @@ const routes: Routes = [
        .then(mod => mod.AdminModule), data: { name: 'Admin' },
     canActivate: [AdminGuard]
   },
+  {
+    path: 'conditions',
+    loadChildren: () =>
+      import('./pages/conditions/conditions.module')
+       .then(mod => mod.ConditionsModule), data: { name: 'Conditions' }
+  },
   { path: '**', redirectTo: 'home' },
 ];
 

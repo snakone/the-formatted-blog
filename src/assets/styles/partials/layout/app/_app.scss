@@ -10,7 +10,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 0;
+  z-index: 100;
 }
 
 // NOTIFICATION BAR
@@ -186,21 +186,10 @@ button {
 }
 
 // FORM ERROR
-textarea + span + app-form-error > .form-error,
 input + span + app-form-error > .form-error,
 select + span + app-form-error > .form-error
  {
   margin-top: -2px !important;
-
-  @media(max-width: 520px) {
-    position: relative !important;
-
-    & span {
-      position: absolute;
-      top: 16px;
-      left: 6px;
-    }
-  }
 }
 
 textarea + span + app-form-error > .form-error
@@ -213,8 +202,13 @@ select + span + app-form-error > .form-error,
 textarea + span + app-form-error > .form-error
  {
   @media(max-width: 520px) {
+    position: relative !important;
+
     & span {
       top: 20px;
+      position: absolute;
+      left: 6px;
+      margin-left: 0 !important;
     }
   }
 }
@@ -234,5 +228,86 @@ button.formatted {
     padding: 10px 14px;
     margin-left: inherit;
     margin-top: 10px;
+  }
+
+  @media(max-width: 550px) {
+    font-size: 13px;
+  }
+}
+
+// CONDITIONS
+.conditions {
+  & .mat-mdc-tab {
+
+    &.mdc-tab--active {
+      & .mdc-tab__content .mdc-tab__text-label {
+        opacity: 1;
+      }
+    }
+
+    & .mdc-tab__content .mdc-tab__text-label {
+      opacity: .5;
+      color: var(--contrast-color) !important;
+    }
+
+    & .mdc-tab-indicator__content {
+      border-color: var(--contrast-color) !important;
+    }
+
+    & .mdc-tab-indicator__content--underline {
+      border-top-width: 1px !important;
+    }
+  }
+}
+
+.accordion {
+  & p {
+    & i {
+      padding: 0 4px;
+
+      &.fa-check {
+        color: var(--success-color);
+      }
+    }
+  }
+
+  & ol, & ul {
+    padding-left: 12px;
+    font-size: 13px;
+  }
+}
+
+h2[mat-dialog-title] {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--navigation-border);
+  margin-bottom: 2rem;
+  @include text-ellipsis(4rem);
+  padding-top: 1.4rem;
+
+  & button {
+    position: absolute;
+    top: 20px;
+    right: -6px;
+    border-radius: 100%;
+    margin-top: -1px;
+    width: 38px;
+    height: 38px;
+    min-width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+    & i {
+      font-size: 1.6rem;
+      color: var(--dark-color);
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  @media(max-width: 550px) {
+    font-size: 1.8rem;
   }
 }

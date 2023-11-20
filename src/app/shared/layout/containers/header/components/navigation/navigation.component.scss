@@ -24,11 +24,13 @@ nav {
       margin-bottom: 0;
       list-style: none;
       min-width: 1000px;
+      display: grid;
+      grid-auto-flow: column;
+      scroll-snap-type: x mandatory;
 
       & li {
         float: none;
         padding: 15px 12px;
-        display: inline-block;
         line-height: normal;
         position: relative;
         background: none;
@@ -36,6 +38,7 @@ nav {
         outline: 0 none;
         border-right: 1px solid transparent;
         border-left: 1px solid transparent;
+        scroll-snap-align: start;
 
         &:hover {
           @include hover(1.5);

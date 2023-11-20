@@ -7,7 +7,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
 import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
 import { Post, SavingType } from '@shared/types/interface.types';
-import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 
@@ -72,7 +72,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   private preview(sv: boolean): void {
     if (!this.draft || sv) { return; }
-    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
   }
 
   private help(sv: boolean): void {

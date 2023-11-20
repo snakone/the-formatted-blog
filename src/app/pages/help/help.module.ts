@@ -7,6 +7,11 @@ import { HelpComponent } from './help.component';
 import { HelpHeaderComponent } from './components/help-header/help-header.component';
 import { HelpContentComponent } from './components/help-content/help-content.component';
 import { HelpSidebarComponent } from './components/help-sidebar/help-sidebar.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+const Material = [
+  MatExpansionModule
+];
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ import { HelpSidebarComponent } from './components/help-sidebar/help-sidebar.com
   imports: [
     CommonModule,
     HelpRoutingModule,
-    LayoutModule
+    LayoutModule,
+    ...Material
   ]
 })
 

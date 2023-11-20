@@ -3,12 +3,12 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { CHECKSTATUS, PUBLISH_CONFIRMATION } from '@shared/data/data';
+import { CHECKSTATUS, DELETE_CONFIRMATION, PUBLISH_CONFIRMATION } from '@shared/data/data';
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
-import { DraftPreviewComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { DraftCheck, Post } from '@shared/types/interface.types';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom } from 'rxjs';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
 
 @Component({
   selector: 'app-admin-draft',
@@ -28,6 +28,8 @@ export class AdminDraftComponent {
   markAsPending = false;
   maxImageSize = 150;
 
+  xhr: XMLHttpRequest;
+
   constructor(
     private draftsFacade: DraftsFacade,
     private route: ActivatedRoute,
@@ -44,8 +46,10 @@ export class AdminDraftComponent {
     this.route.paramMap
     .pipe(
       takeUntil(this.unsubscribe$),
-      switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get('id'))
-      )
+      switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get('id'))),
+      throttleTime(100),
+      tap(res => !res ? this.draftsFacade.getAll() : null),
+      retry(1)
     ).pipe(filter(res => !!res))
     .subscribe((res: Post) => (this.draft = res, this.checkCover(res)));
   }
@@ -54,7 +58,7 @@ export class AdminDraftComponent {
     if (!this.draft) { return; }
     this.draftsFacade.setPreview(this.draft);
 
-    this.crafter.dialog(DraftPreviewComponent, {
+    this.crafter.dialog(DraftPreviewDialogComponent, {
       updateStatus: true,
       draft: this.draft
     }, undefined, 'preview');
@@ -84,12 +88,12 @@ export class AdminDraftComponent {
       });
     } // UPDATE DRAFT
     else {
+      setTimeout(() => this.navigate(), 1000);
       this.draftsFacade.updateKey(this.draft?._id, {key: 'check', value: this.draft.check}, true);
-      this.navigate();
 
       if (this.markAsPending) {
         this.draftsFacade.updateKey(
-          this.draft?._id, {key: 'status', value: 'pending'}
+          this.draft?._id, {key: 'status', value: 'pending'}, true
         )
       }
     }
@@ -120,18 +124,18 @@ export class AdminDraftComponent {
   }
 
   private sendRequest(cover: string, callback: (size: number) => void) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('HEAD', cover, true);
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === xhr.DONE) {
+    this.xhr = new XMLHttpRequest();
+    this.xhr.open('HEAD', cover, true);
+    this.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    this.xhr.onreadystatechange = () => {
+      if (this.xhr.readyState === this.xhr.DONE) {
         if (callback) {
-          const size = parseInt(xhr.getResponseHeader('Content-Length')!, 10);
+          const size = parseInt(this.xhr.getResponseHeader('Content-Length')!, 10);
           callback(size);
         }
       }
     };
-    xhr.send();
+    this.xhr.send();
   }
 
   public isEverythingOK(value: DraftCheck): boolean {
@@ -139,12 +143,26 @@ export class AdminDraftComponent {
   }
 
   private navigate(): void {
-    this.router.navigate(['../'], {relativeTo: this.route, replaceUrl: true, fragment: 'reload'});
+    this.router.navigate(['../'], {relativeTo: this.route, replaceUrl: true});
+  }
+
+  public deleteDraftByID(): void {
+    if (!this.draft) { return; }
+    this.crafter.confirmation(DELETE_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(_ => _ && !!_)
+      ).subscribe(_ => (
+        this.draftsFacade.delete(this.draft._id, true),
+        this.navigate()
+    ));
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.xhr?.abort();
   }
 
 }

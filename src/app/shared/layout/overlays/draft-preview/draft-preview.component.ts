@@ -13,7 +13,7 @@ const TIME_TO_SEEN = 5000;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class DraftPreviewComponent implements OnInit {
+export class DraftPreviewDialogComponent implements OnInit {
 
   preview$: Observable<Post>;
   timer: NodeJS.Timer;
@@ -34,7 +34,7 @@ export class DraftPreviewComponent implements OnInit {
       this.data.draft?.status === 'not-seen'
     ) {
       this.timer = setTimeout(() => {
-        this.draftsFacade.updateKey(this.data?.draft?._id, {key: 'status', value: 'seen'});
+        this.draftsFacade.updateKey(this.data?.draft?._id, {key: 'status', value: 'seen'}, true);
       }, TIME_TO_SEEN);
     }
   }

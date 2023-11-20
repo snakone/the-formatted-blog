@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation, DeltaStatic } from 'quill';
-import { EMPTY_QUILL, QUILL_CONTAINER } from '@shared/data/quills';
+import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_CONTAINER } from '@shared/data/quills';
 import { Post, PostHeader } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { slugify } from '@core/services/quill/quill.module';
@@ -12,6 +12,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/data';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
+import Quill from 'quill';
+
+const Quill_Icons = Quill.import('ui/icons');
 
 @Component({
   selector: 'app-create-content',
@@ -58,6 +61,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   ngOnInit() {
     this.getActive();
+    this.addHeader3ToQuill();
   }
 
   ngAfterContentInit(): void {
@@ -74,9 +78,10 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        takeUntil(this.unsubscribe$),
        filter(_ => _.source !== 'api'),
        distinctUntilChanged(),
-       tap(_ => this.save(true)),
+       withLatestFrom(this.draftsFacade.saving$),
+       tap(([_, saving]) => !saving?.value ? this.save(true) : null),
        debounceTime(this.timer),
-       map(_ => _.content as DeltaStatic),
+       map(([_, sv]) => _.content as DeltaStatic)
      )
      .subscribe((delta) => 
         this.onChange(delta, this.getHeaders(delta.ops))
@@ -146,6 +151,10 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
   public stickyFix(): void {
     window.dispatchEvent(new Event('resize'));
+  }
+
+  private addHeader3ToQuill(): void {
+    Quill_Icons.header[3] = HEADER_3_QUILL_ICON;
   }
 
   ngOnDestroy() {

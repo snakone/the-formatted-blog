@@ -2,20 +2,26 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, concatMap, catchError, tap, switchMap } from 'rxjs/operators';
+import { map, concatMap, catchError, tap, switchMap, debounceTime, withLatestFrom } from 'rxjs/operators';
+
+import { LoginService } from '@services/api/login.service';
+import { UserService } from '@services/api/users.service';
+import { StorageService } from '@services/storage/storage.service';
+import { PWAService } from '@core/services/pwa/pwa.service';
+import { CrafterService } from '@core/services/crafter/crafter.service';
+import { FavoriteService } from '@core/services/api/favorite.service';
 
 import * as UserActions from './users.actions';
 import * as DraftActions from '../drafts/drafts.actions';
 import * as PostsActions from '../posts/posts.actions';
-import { LoginService } from '@services/api/login.service';
-import { UserService } from '@services/api/users.service';
-import { StorageService } from '@services/storage/storage.service';
-import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE } from '@shared/data/sentences';
-import { PWAService } from '@core/services/pwa/pwa.service';
-import { WELCOME_PUSH } from '@shared/data/notifications';
-import { firstValueFrom } from 'rxjs';
-import { CrafterService } from '@core/services/crafter/crafter.service';
-import { FavoriteService } from '@core/services/api/favorite.service';
+import * as ActivitiesActions from '../activities/activities.actions';
+import * as fromUsers from './users.selectors';
+
+import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } from '@shared/data/sentences';
+import { UserState } from './users.reducer';
+import { Store } from '@ngrx/store';
+import { FriendsService } from '@core/services/api/friends.service';
+import { User } from '@shared/types/interface.types';
 
 @Injectable()
 
@@ -29,7 +35,9 @@ export class UserEffects {
     private router: Router,
     private crafter: CrafterService,
     private sw: PWAService,
-    private favService: FavoriteService
+    private favService: FavoriteService,
+    private store: Store<UserState>,
+    private friendsSrv: FriendsService
   ) { }
 
   // LOGIN USER
@@ -53,7 +61,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signUp(action.user)
         .pipe(
-          tap(_ => this.navigate('/profile', REGISTER_SENTENCE, true)),
+          tap(_ => this.navigate('/profile', REGISTER_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -86,15 +94,39 @@ export class UserEffects {
     ))))
   );
 
+  // UPDATE
+  updateUserEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.update),
+      concatMap((action) =>
+      this.userSrv.update(action.user)
+        .pipe(
+          tap(_ => this.navigate(null, UPDATED_SENTENCE)),
+          map(user => UserActions.loginSuccess({ user })),
+          catchError(error =>
+              of(UserActions.updateFailure({ error: error.message }))
+    ))))
+  );
+
   // USER LOGOUT
   logOutEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.userLogOut),
       tap(_ => this.resetUser()),
       switchMap(_ => [
-        DraftActions.reset(),
-        DraftActions.resetActive()
+        DraftActions.reset(null),
+        DraftActions.resetActive(),
+        PostsActions.resetByUser(),
+        PostsActions.resetFavorite()
       ])
+    )
+  );
+
+  // USER UPDATE ACTIVITIES
+  userUpdateActivitiesEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.loginSuccess),
+      concatMap(_ => of(ActivitiesActions.get()))
     )
   );
 
@@ -111,14 +143,58 @@ export class UserEffects {
     ))))
   );
 
-  private navigate(
+  // GET FRIENDS ON LOGIN
+  getFriendsOnLogin$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.loginSuccess),
+      concatMap(_ => 
+        this.friendsSrv.getFriendsByUser()
+         .pipe(
+            map((friends: User[]) => UserActions.setFriends({friends})),
+            catchError(error =>
+              of(UserActions.getFriendsFailure({ error: error.message }))
+    ))))
+  );
+
+  // FRIENDS
+  saveFriendsEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(...[
+        UserActions.addFriend,
+        UserActions.removeFriend,
+      ]),
+      debounceTime(1000),
+      withLatestFrom(this.store.select(fromUsers.getFriends)),
+      concatMap(([_, users]) =>
+      this.friendsSrv.addFriends(users.map(u => u._id))
+        .pipe(
+          catchError(error =>
+              of(UserActions.getFriendsFailure({ error: error.message }))
+    )))), {dispatch: false}
+  );
+
+  // ALERT USER
+  alertsUserEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.addFriend),
+      concatMap((_) => of(this.crafter.setSnack('Amigo añadido!', 'success')))
+    ), { dispatch: false }
+  )
+
+    // ALERT USER
+  alertsUser1Effect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(UserActions.removeFriend),
+      concatMap((_) => of(this.crafter.setSnack('Amigo eliminado!', 'info')))
+    ), { dispatch: false }
+  )
+
+  private async navigate(
     path: string | null, 
-    sentence: string,
-    sw: boolean = false
-  ): void {
+    sentence: string
+  ): Promise<void> {
     if (path) this.router.navigateByUrl(path);
     this.crafter.setSnack(sentence, 'info');
-    if (sw) firstValueFrom(this.sw.send(WELCOME_PUSH)).then();
   }
 
   private resetUser(): void {

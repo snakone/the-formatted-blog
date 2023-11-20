@@ -84,10 +84,23 @@
 
 // CARD
 @mixin shadow-card() {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.23);
+  box-shadow: inset 1px 0 6px rgba(0,0,0,0.22);
   outline: none;
 
   &:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.25), 0 5px 8px rgba(0,0,0,0.22);
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.26);
   }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@mixin skeleton() {
+  opacity: .7;
+  background: linear-gradient(110deg, var(--skeleton-color) 8%, #dcdcdceb 18%, var(--skeleton-color) 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
 }

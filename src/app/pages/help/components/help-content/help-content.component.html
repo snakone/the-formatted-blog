@@ -1,1 +1,18 @@
-<p>help-content works!</p>
+<div class="wrapper">
+  <h1>Preguntas frecuentes</h1>
+  <p>
+    Si es tu primera vez aquí y no sabes muy bien de que va todo esto, estás en el sitio indicado. Aunque si ya has pasado por aquí, nunca esta 
+    demás repasar algunos conceptos. Este es el mejor sitio para resolver dudas y darte un buen empujón antes de empezar a crear contenido.
+  </p>
+  <p>
+    Para hacer un resumen, <b>The Formatted Blog</b> es un blog en línea interactivo donde puedes compartir texto de una manera rápida y elegante. 
+    Aunque la idea es muy general y no está inspirada en ella, hay una página conocida similar que sigue el mismo concepto, 
+    <a href="https://medium.com" target="_blank">https://medium.com</a>. Básicamente es algo parecido hecho desde cero.
+  </p>
+  <details *ngFor="let i of items">
+    <summary (click)="stickyFix()">{{i.label}}</summary>
+    <div class="accordion">
+      <p *ngFor="let p of i.content" [innerHTML]="p"></p>
+    </div>
+  </details>
+</div>

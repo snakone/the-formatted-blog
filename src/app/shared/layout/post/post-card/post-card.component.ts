@@ -6,10 +6,12 @@ import { Post, User } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { DELETE_CONFIRMATION, DRAFT_ICONS, EDIT_POST_CONFIRMATION, POST_ICONS } from '@shared/data/data';
-import { DraftPreviewComponent } from '@layout/overlays/draft-preview/draft-preview.component';
+import { DraftPreviewDialogComponent } from '@layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
+import { ShareService } from '@core/services/share/share.service';
+import { QuillModules } from 'ngx-quill';
 
 @Component({
   selector: 'app-post-card',
@@ -35,6 +37,10 @@ export class PostCardComponent implements OnInit {
   draftIcons = DRAFT_ICONS;
   private unsubscribe$ = new Subject<void>();
 
+  quillModules: QuillModules = {
+    syntax: true,
+  };
+
   switchObjDraft: any = {
     edit: () => this.edit(),
     preview: () => this.preview(),
@@ -44,9 +50,9 @@ export class PostCardComponent implements OnInit {
   };
 
   switchObjPost: any = {
-    share: () => this.share(),
     friend: () => this.friend(),
     message: () => this.message(),
+    download: () => this.download(),
     favorite: () => this.favorite()
   };
 
@@ -56,7 +62,8 @@ export class PostCardComponent implements OnInit {
     private router: Router,
     private quillSrv: QuillService,
     private postFacade: PostsFacade,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private shareSrv: ShareService
   ) { }
 
   ngOnInit(): void { 
@@ -75,7 +82,7 @@ export class PostCardComponent implements OnInit {
 
   private preview(): void {
     this.draftsFacade.setPreview(this.post);
-    this.crafter.dialog(DraftPreviewComponent, null, undefined, 'preview');
+    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
   }
 
   private download(): void {
@@ -99,16 +106,17 @@ export class PostCardComponent implements OnInit {
     ).subscribe(_ => this.draftsFacade.delete(this.post._id));
   }
 
-  private share(): void {
-    console.log('share');
+  public async share(): Promise<void> {
+    await this.shareSrv.share(this.post)
+     .catch(err => console.log(err));
   }
 
   private message(): void {
     console.log('message');
   }
 
-  private friend(): void {
-    console.log('friend');
+  public friend(): void {
+    this.router.navigateByUrl('/profile/' + this.post.user);
   }
 
   public editPost(): void {

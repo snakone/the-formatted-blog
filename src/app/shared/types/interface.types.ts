@@ -19,15 +19,21 @@ export interface Post {
   adminSeenOnce?: boolean; // Admin saw the Post at least once since the last edit
   temporal?: boolean; // When a Post is editing but still it's not a Draft
   type?: 'draft' | 'post';
+  likes?: number;
+  views?: number;
+  published?: string; // When the Post was published
 }
 
 export interface PostResponse extends ServerResponse {
  posts: Post[];
  post: Post;
  page?: number;
- drafts?: Post[];
- draft?: Post;
 }
+
+export interface DraftResponse extends ServerResponse {
+  drafts?: Post[];
+  draft?: Post;
+ }
 
 export interface PostHeader {
   text: string;
@@ -43,17 +49,25 @@ export interface User {
   name: string;
   email: string;
   password?: string;
-  profesion: string;
-  bio: string;
+  profile?: UserProfile;
   stats: UserStats;
   account?: AccountType;
+  avatar?: string;
+}
+
+export interface UserProfile {
+  role?: string;
+  bio?: string;
+  twitter?: string;
+  github?: string;
+  portfolio?: string;
+  location?: string;
 }
 
 export interface UserStats {
-  [key: string]: number;
   friends: number;
-  posts: number;
   likes: number;
+  views?: number;
 }
 
 // SERVER RESPONSES
@@ -66,6 +80,7 @@ interface ServerResponse {
 export interface UserResponse extends ServerResponse {
   user: User;
   token?: string;
+  activities?: UserActivity[];
 }
 
 export interface Snack {
@@ -75,7 +90,7 @@ export interface Snack {
 
 // LIST
 export interface IconList {
-  icon: string;
+  icon?: string;
   label?: string;
   route?: string;
 }
@@ -98,6 +113,18 @@ export interface SWResponse extends ServerResponse {
 
 export interface FavoriteResponse extends ServerResponse { 
   favorites?: string[];
+}
+
+export interface FriendsResponse extends ServerResponse { 
+  friends?: User[];
+}
+
+export interface NewsResponse extends ServerResponse { 
+  news?: FormattedNew[];
+}
+
+export interface ActivitiesResponse extends ServerResponse { 
+  activities?: UserActivity[];
 }
 
 export interface NotificationPayload {
@@ -180,4 +207,32 @@ export interface DraftPreviewDialogData {
 export interface ConfirmationDialogProps {
   title: string;
   message: string;
+}
+
+export interface FQAItem {
+  label: string;
+  content: string[];
+}
+
+// ACTIVITY
+export interface UserActivity {
+  message: string;
+  title: string;
+  date: string;
+  type?: 'create' | 'delete' | 'update';
+  admin: boolean;
+  userAction?: boolean;
+  route?: string;
+  slug?: string;
+  user?: string;
+}
+
+export interface FormattedNew {
+  author?: string;
+  title?: string;
+  description?: string;
+  category?: string;
+  url?: string;
+  image?: string;
+  published_at: Date;
 }

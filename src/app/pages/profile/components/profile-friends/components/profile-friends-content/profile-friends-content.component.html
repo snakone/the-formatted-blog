@@ -1,0 +1,18 @@
+<h1>Lista de amigos</h1>
+<ng-container *ngIf="friends?.length > 0">
+  <div class="grid">
+    <ng-container *ngFor="let f of friends">
+      <article *ngIf="f">
+        <img [src]="f.avatar" alt="user-avatar"/>
+        <h2>{{f.name}}</h2>
+        <p *ngIf="f.profile?.role">{{f.profile?.role}}</p>
+        <p>{{f.profile?.location || 'Lugar desconocido'}}</p>
+        <!-- STATS -->
+        <ul>
+          <li *ngFor="let s of statsList"><i [class]="s.icon"></i> {{f.stats[s.label]}}</li>
+        </ul>
+      </article>
+    </ng-container>
+  </div>
+</ng-container>
+

@@ -7,6 +7,7 @@ import { HomeComponent } from './home.component';
 import { MainPostComponent } from './components/main-post/main-post.component';
 import { HomeContentComponent } from './components/home-content/home-content.component';
 import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.component';
+import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeSidebarComponent } from './components/home-sidebar/home-sidebar.com
   imports: [
     CommonModule,
     HomeRoutingModule,
-    LayoutModule
+    LayoutModule,
+    SkeletonModule
   ]
 })
 

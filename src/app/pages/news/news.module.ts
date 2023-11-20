@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LayoutModule } from '@shared/layout/layout.module';
+import { NewsAccessModule } from '@core/ngrx/news/data-access/news-access.module';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { SnippetsModule } from '@shared/snippets/snippets.module';
@@ -20,7 +21,8 @@ import { NewsMasonryComponent } from './news-masonry/news-masonry.component';
     NewsRoutingModule,
     LayoutModule,
     DirectivesModule,
-    SnippetsModule
+    SnippetsModule,
+    NewsAccessModule
   ],
   providers: [
     MasonryService

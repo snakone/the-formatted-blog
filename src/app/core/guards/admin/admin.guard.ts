@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsersFacade } from '@store/users/users.facade';
 import { User } from '@shared/types/interface.types';
 import { filter, map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class AdminGuard implements CanActivate {
+export class AdminGuard  {
 
   constructor(
     private userFcd: UsersFacade,
@@ -19,7 +19,7 @@ export class AdminGuard implements CanActivate {
        filter(user => !!user),
        map((user: User | null) => 
         user?.account === 'Admin' || 
-        user?.account === 'Super' ? true : 
+        user?.account === 'Super' || 
         (this.router.navigateByUrl('/home'), false)
       )
     )

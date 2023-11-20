@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 
 import {
-  PostResponse,
   Post,
-  KeyPair
+  KeyPair,
+  DraftResponse
 } from '@shared/types/interface.types';
 
 import { filter, map } from 'rxjs/operators';
@@ -21,7 +21,7 @@ export class DraftService {
 
   public get(): Observable<Post[] | undefined> {
     return this.http
-      .get<PostResponse>(this.API_POST)
+      .get<DraftResponse>(this.API_POST)
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.drafts)
@@ -30,7 +30,7 @@ export class DraftService {
 
   public getAll(): Observable<Post[] | undefined> {
     return this.http
-      .get<PostResponse>(this.API_POST + 'all')
+      .get<DraftResponse>(this.API_POST + 'all')
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.drafts)
@@ -39,7 +39,7 @@ export class DraftService {
 
   public getBySlug(slug: string): Observable<Post | undefined> {
     return this.http
-      .get<PostResponse>(environment.api + 'draft/' + slug)
+      .get<DraftResponse>(environment.api + 'draft/' + slug)
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.draft)
@@ -48,7 +48,7 @@ export class DraftService {
 
   public createDraft(draft: Post): Observable<Post | undefined> {
     return this.http
-      .post<PostResponse>(this.API_POST, draft)
+      .post<DraftResponse>(this.API_POST, draft)
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.draft)
@@ -57,7 +57,7 @@ export class DraftService {
 
   public updateDraft(draft: Post): Observable<Post | undefined> {
     return this.http
-      .put<PostResponse>(this.API_POST, draft)
+      .put<DraftResponse>(this.API_POST, draft)
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.draft)
@@ -69,7 +69,7 @@ export class DraftService {
     keys: KeyPair
   ): Observable<Post | undefined> {
     return this.http
-      .put<PostResponse>(this.API_POST + 'key', {id, keys})
+      .put<DraftResponse>(this.API_POST + 'key', {id, keys})
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.draft)
@@ -78,7 +78,7 @@ export class DraftService {
 
   public deleteDraft(id: string): Observable<Post | undefined> {
     return this.http
-      .delete<PostResponse>(this.API_POST, {id})
+      .delete<DraftResponse>(this.API_POST, {id})
       .pipe(
         filter(res => res && !!res.ok),
         map(_ => _.draft)
@@ -87,7 +87,7 @@ export class DraftService {
 
   public publishDraft(draft: Post): Observable<Post> {
     return this.http
-      .post<PostResponse>(this.API_POST + 'publish', draft)
+      .post<DraftResponse>(this.API_POST + 'publish', draft)
       .pipe(
         filter(res => res && !!res.ok),
         map(res => res.draft)

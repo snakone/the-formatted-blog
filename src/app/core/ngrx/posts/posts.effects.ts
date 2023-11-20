@@ -10,6 +10,7 @@ import { PostState } from './posts.reducer';
 import { Store } from '@ngrx/store';
 import { FavoriteService } from '@core/services/api/favorite.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -20,7 +21,8 @@ export class PostEffects {
     private postSrv: PostService,
     private store: Store<PostState>,
     private favService: FavoriteService,
-    private crafter: CrafterService
+    private crafter: CrafterService,
+    private router: Router
   ) { }
 
   // GET POSTS
@@ -44,8 +46,10 @@ export class PostEffects {
       this.postSrv.getBySlug(action.slug)
         .pipe(
           map(post => PostsActions.getBySlugSuccess({ post })),
-          catchError(error =>
-              of(PostsActions.getBySlugFailure({ error: error.message }))
+          catchError(error => {
+            this.router.navigateByUrl('/home');
+            return of(PostsActions.getBySlugFailure({ error: error.message }))
+          }
     ))))
   );
 
@@ -56,7 +60,7 @@ export class PostEffects {
       concatMap((action) =>
       this.postSrv.getByUser(action.id)
         .pipe(
-          map(posts => PostsActions.getSuccess({ posts })),
+          map(posts => PostsActions.getByUserSuccess({ posts })),
           catchError(error =>
               of(PostsActions.getFailure({ error: error.message }))
     ))))
@@ -97,10 +101,10 @@ export class PostEffects {
     .pipe(
       ofType(PostsActions.unPublishSuccess),
       tap(_ => this.crafter.setSnack('Boceto archivado!', 'success')),
-      switchMap((_) => of(...[
-        DraftActions.reset(),
+      switchMap((res) => of(...[
+        DraftActions.reset({draft: res.post}),
         PostsActions.reset(),
-        DraftActions.setActive({draft: _.post})
+        DraftActions.setActive({draft: res.post})
       ]))
     )
   );

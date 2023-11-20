@@ -27,3 +27,7 @@ body {
   transition: background 666ms ease-in-out, color 666ms ease-in-out;
   color-scheme: light dark;
 }
+
+html {
+  scroll-padding-top: 2rem;
+}

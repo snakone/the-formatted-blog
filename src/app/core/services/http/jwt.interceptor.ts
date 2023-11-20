@@ -8,7 +8,7 @@ import {
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { StorageService } from '@services/storage/storage.service';
 import { UsersFacade } from '@store/users/users.facade';
 

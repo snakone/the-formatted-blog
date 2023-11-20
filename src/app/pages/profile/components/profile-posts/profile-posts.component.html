@@ -1,14 +1,14 @@
 <div class="content animated fadeIn">
   <app-post-search [type]="'post'"></app-post-search>
-  <div id="sticky-wrapper">
-    <ng-container *ngIf="items$ | async as items">
+    <ng-container *ngIf="items$ | async as items; else loading">
       <app-post-card *ngFor="let item of items; 
-                             let i = index; 
-                             let last = last"
+                              let i = index; 
+                              let last = last"
                       [small]="true"
                       [border]="false"
                       [last]="last"
                       [post]="item"
+                      [alone]="false"
                       [favoritesID]="favoritesID$ | async">
       </app-post-card>
       <ng-container *ngIf="items && items.length === 0">
@@ -16,8 +16,12 @@
           No se han encontrado artículos.
         </p>
       </ng-container>
+  </ng-container>
+  <ng-template #loading>
+    <ng-container *ngFor="let card of [1,2,3,4]; let i = index; let last = last">
+      <app-post-card-skeleton [small]="true" [showIntro]="false" [last]="last"></app-post-card-skeleton>
     </ng-container>
-  </div>
+  </ng-template>
 </div>
 
 

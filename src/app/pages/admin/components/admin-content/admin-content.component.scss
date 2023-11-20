@@ -11,6 +11,10 @@
     &.active {
       filter: drop-shadow(2px 5px 5px #3333336e);
     }
+
+    &.all {
+      border: 1px solid var(--navigation-border) !important;
+    }
   }
 }
 

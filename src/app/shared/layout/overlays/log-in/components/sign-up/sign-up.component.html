@@ -26,11 +26,11 @@
     </div>
     <!-- PROFESIÓN -->
     <div class="form-control">
-      <label for="rol">Profesión (opcional)</label>
-      <input formControlName="rol"
+      <label for="role">Profesión (opcional)</label>
+      <input formControlName="role"
              autocomplete="off"
              type="text"/>
-      <app-form-error [control]="rol"
+      <app-form-error [control]="role"
                       [validator]="['maxlength']">
       </app-form-error>
     </div>
@@ -41,7 +41,8 @@
               type="password"
               autocomplete="off">
       <app-form-error [control]="password"
-                      [validator]="['required', 
+                      [validator]="['required',
+                                    'maxlength', 
                                     'minlength']">
       </app-form-error>
     </div>
@@ -52,9 +53,9 @@
               type="password"
               autocomplete="off">
       <app-form-error [control]="password2"
-                      [left]="true"
                       [validator]="['required', 
-                                    'minlength', 
+                                    'minlength',
+                                    'maxlength', 
                                     'password']">
       </app-form-error>
     </div>

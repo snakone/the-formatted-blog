@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import * as DraftsActions from './drafts.actions';
 import * as PostsActions from '../posts/posts.actions';
-import { map, concatMap, catchError, withLatestFrom, filter, throttleTime, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { map, concatMap, catchError, withLatestFrom, filter, debounceTime, tap, switchMap } from 'rxjs/operators';
 import { DraftService } from '@core/services/api/drafts.service';
 import * as fromDrafts from './drafts.selectors';
 import { Store } from '@ngrx/store';
@@ -99,7 +99,7 @@ export class DraftsEffects {
       concatMap((action) =>
       this.draftSrv.updateDraftKey(action.id, {...action.keys})
         .pipe(
-          map(draft => DraftsActions.updateKeySuccess({ draft, toast: action.toast })),
+          map(draft => DraftsActions.updateKeySuccess({ draft, admin: action.admin })),
           catchError(error =>
               of(DraftsActions.updateKeyFailure({ error: error.message }))
     ))))
@@ -113,7 +113,7 @@ export class DraftsEffects {
       concatMap((action) =>
       this.draftSrv.deleteDraft(action.id)
         .pipe(
-          map(_ => DraftsActions.deleteSuccess({ id: action.id })),
+          map(_ => DraftsActions.deleteSuccess({ id: action.id, reload: action.reload })),
           catchError(error =>
               of(DraftsActions.deleteFailure({ error: error.message }))
     ))))
@@ -132,21 +132,27 @@ export class DraftsEffects {
     ))))
   );
 
+  // ON UPDATE && KEY UPDATE
   onDraftUpdateEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(...[
         DraftsActions.updateSuccess,
         DraftsActions.updateKeySuccess,
       ]),
-      concatMap((_) => of(...[
-        DraftsActions.getByUser(),
-        DraftsActions.getAll(),
-        DraftsActions.setActive({draft: _?.draft})
-      ])),
+      concatMap((_: any) => _.admin ? of(DraftsActions.getAll()) : of(DraftsActions.getByUser())),
       catchError(error =>
-        of(DraftsActions.deleteFailure({ error: error.message }))
+        of(DraftsActions.updateKeyFailure({ error: error.message }))
       ))
   )
+
+  // GET ALL DRAFT AFTER DELETE
+  getDraftsAfterDelete$ = createEffect(() => this.actions
+  .pipe(
+    ofType(DraftsActions.deleteSuccess),
+    filter(_ => _.reload),
+    concatMap((_) => of(DraftsActions.getAll()))
+  )
+)
 
   // ALERT DRAFTS
   alertsDraftEffect$ = createEffect(() => this.actions
@@ -173,7 +179,7 @@ export class DraftsEffects {
   alertsDraft3Effect$ = createEffect(() => this.actions
   .pipe(
     ofType(DraftsActions.updateKeySuccess),
-    filter(_ => _.toast),
+    filter(_ => _.admin),
     concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
     ), { dispatch: false }
   )
@@ -193,7 +199,7 @@ export class DraftsEffects {
       ofType(DraftsActions.publishSuccess),
       tap(_ => this.crafter.setSnack('Boceto publicado!', 'success')),
       switchMap((_) => of(...[
-        DraftsActions.reset(),
+        DraftsActions.reset(null),
         PostsActions.reset()
       ]))
     )

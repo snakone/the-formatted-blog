@@ -16,4 +16,8 @@
   input {
     padding-left: 35px;
   }
+
+  @media(min-width: 993px) {
+    margin-top: 10px;
+  }
 }

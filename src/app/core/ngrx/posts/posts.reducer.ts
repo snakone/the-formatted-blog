@@ -1,7 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as PostActions from './posts.actions';
 import { FilterType, Post } from '@shared/types/interface.types';
-import { DUMMY_POST } from '@shared/data/data';
 import { DraftsState } from '../drafts/drafts.reducer';
 
 export interface PostState {
@@ -18,9 +17,9 @@ export interface PostState {
 }
 
 export const inititalState: PostState = {
-  posts: [...DUMMY_POST],
+  posts: null,
   postsLoaded: false,
-  user: [],
+  user: null,
   userLoaded: false,
   slug: null,
   slugLoaded: false,
@@ -37,7 +36,7 @@ const featureReducer = createReducer(
     {
       ...state,
       postsLoaded: true,
-      posts: [...state.posts, ...posts],
+      posts: state.posts ? [...state.posts, ...posts] : posts,
       error: null,
       full: completed(posts)
     }
@@ -48,14 +47,20 @@ const featureReducer = createReducer(
   on(PostActions.getBySlugSuccess, (state, {post}) => ({...state, slugLoaded: true, error: null, slug: post})),
   on(PostActions.getBySlugFailure, (state, {error}) => ({...state, slugLoaded: false, error, slug: null})),
   // POSTS BY USER
-  on(PostActions.getByUser, (state) => ({...state, userLoaded: false, error: null})),
+  on(PostActions.getByUserSuccess, (state, {posts}) => (
+    {
+      ...state,
+      userLoaded: true,
+      error: null,
+      user: posts
+  })),
   // RESET
   on(PostActions.reset, (state) => (
     {
       ...state,
       postsLoaded: false,
       error: null,
-      posts: [...inititalState.posts],
+      posts: null,
       full: false,
       userLoaded: false,
       user: []
@@ -70,7 +75,7 @@ const featureReducer = createReducer(
     }
   )),
   on(PostActions.resetByUser, (state) => (
-    {...state, userLoaded: false, error: null, user: null}
+    {...state, userLoaded: false, error: null, user: []}
   )),
   on(PostActions.setFilter, (state, { value }) => (
     {...state, filter: { ...state.filter, ...value }}
@@ -88,6 +93,9 @@ const featureReducer = createReducer(
   on(PostActions.setFavorite, (state, { favorites }) => (
     {...state, favorites }
   )),
+  on(PostActions.resetFavorite, (state) => (
+    {...state, favorites: [] }
+  )),
 );
 
 export function reducer(state: PostState | undefined, action: Action) {
@@ -103,20 +111,19 @@ export const getSlug = (state: PostState) => state.slug;
 export const getFavoritesID = (state: PostState) => state.favorites;
 
 function completed(posts: Post[]): boolean {
-  return posts.length === 0;
+  return posts?.length === 0;
 }
 
-export const getFavorites = (statePost: PostState, stateDraft: DraftsState) => ({ 
-  data: [...stateDraft.drafts, ...statePost.posts]
-}).data.filter(post => statePost.favorites.includes(post?._id));
+export const getFavorites = (statePost: PostState, stateDraft: DraftsState) =>
+  [...stateDraft.drafts, ...statePost.posts].filter(post => statePost.favorites.includes(post?._id));
 
 export const getFiltered = (statePost: PostState, stateDraft: DraftsState) => filterAll(statePost, stateDraft);
 
 const switchObj = {
-  draft: (statePost: PostState, stateDraft: DraftsState) => stateDraft.drafts,
-  post: (statePost: PostState, stateDraft: DraftsState) => statePost.posts,
+  draft: (_: PostState, stateDraft: DraftsState) => stateDraft.drafts,
+  post: (statePost: PostState, _: DraftsState) => statePost.user,
   favorite: (statePost: PostState, stateDraft: DraftsState) => getFavorites(statePost, stateDraft),
-  any: (statePost: PostState, stateDraft: DraftsState) => [...statePost.posts, ...stateDraft.drafts.filter(d => !d.temporal)],
+  any: (statePost: PostState, stateDraft: DraftsState) => !statePost.user || !stateDraft.drafts ? [] : [...statePost.user, ...stateDraft.drafts?.filter(d => !d.temporal)],
 };
 
 const filterAll = (statePost: PostState, stateDraft: DraftsState) => {

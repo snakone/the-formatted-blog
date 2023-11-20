@@ -1,0 +1,63 @@
+@import 'mixins/mixins.scss';
+
+.edit-profile {
+  min-width: 450px;
+
+  @media(max-width: 675px) {
+    min-width: 380px;
+  }
+
+  @media(max-width: 550px) {
+    min-width: 0;
+  }
+}
+
+textarea {
+  width: 100% !important;
+  min-height: 100px;
+  resize: none !important;
+}
+
+.form-control {
+  width: 100%;
+  position: relative;
+
+  &:nth-child(2) { margin-bottom: 2.6rem }
+  &:nth-child(5) { margin-bottom: 2.6rem }
+
+  & .hint {
+    bottom: -22px;
+    left: 2px;
+    position: absolute;
+    opacity: 0.5;
+    font-size: 11px;
+  }
+
+  & textarea + .hint {
+    bottom: -16px;
+  }
+}
+
+button { 
+  margin: 3rem auto 0;
+  width: 100%;
+}
+
+input {
+  user-select: all;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+}
+
+@media(max-width: 550px) {
+  .form-control {
+    &:nth-child(2) { margin-bottom: 4rem }
+    &:nth-child(5) { margin-bottom: 4rem }
+  }
+
+  button {
+    margin-top: 6rem;
+  }
+}

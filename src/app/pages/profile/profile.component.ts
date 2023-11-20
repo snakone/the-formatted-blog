@@ -1,47 +1,44 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
-import { UsersFacade } from '@store/users/users.facade';
 import { LIKE_TEXT } from '@shared/data/sentences';
-import { User } from '@shared/types/interface.types';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
+import { UserService } from '@core/services/api/users.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class ProfileComponent implements OnInit {
 
   text = LIKE_TEXT;
-  user$: Observable<User>;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private userFcd: UsersFacade,
     private postFacade: PostsFacade,
-    private draftsFacade: DraftsFacade
+    private draftsFacade: DraftsFacade,
+    private userSrv: UserService
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.userFcd.user$;
     this.checkData();
   }
 
   private checkData(): void {
-    this.postFacade.loaded$
+    this.postFacade.byUserLoaded$
      .pipe(
-       filter(res => !res),
+       filter(res => !res && !!this.userSrv.getUser()),
        takeUntil(this.unsubscribe$)
       )
-     .subscribe(_ => this.postFacade.get());
+     .subscribe(_ => this.postFacade.getByUser(this.userSrv.getUser()?._id));
 
     this.draftsFacade.loaded$
     .pipe(
-      filter(res => !res),
+      filter(res => !res && !!this.userSrv.getUser()),
       takeUntil(this.unsubscribe$)
     )
     .subscribe(_ => this.draftsFacade.get());

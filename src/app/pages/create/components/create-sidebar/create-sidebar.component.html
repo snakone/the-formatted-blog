@@ -1,5 +1,9 @@
 <aside>
-  <i class="fas fa-sign-out-alt" [ngClass]="{'collapsed': isCollapsed}" (click)="collapse()"></i>
+  <i class="fas fa-sign-out-alt" 
+     [ngClass]="{'collapsed': isCollapsed}" 
+     (click)="collapse()" 
+     [matTooltip]="isCollapsed ? 'Expandir' : 'Contraer'">
+  </i>
   <ul *ngIf="{
     saving: saving$ | async,
     ondeleteID: id$ | async

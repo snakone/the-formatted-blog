@@ -31,6 +31,10 @@ export const getByUser =
   createAction('[Posts API] Get Posts by User',
   props<{ id: string }>());
 
+export const getByUserSuccess =
+  createAction('[Posts API] Get Posts by User Success',
+  props<{ posts: Post[] }>());
+
 
 // RESET POSTS
 export const reset =
@@ -54,6 +58,10 @@ export const resetFilter =
 export const addFavorite =
   createAction('[Posts API] Add Favorite',
   props<{ id: string }>());
+
+// RESET FAVORITE
+export const resetFavorite =
+  createAction('[Posts API] Reset Favorite');
 
 // REMOVE FAVORITE
 export const removeFavorite =

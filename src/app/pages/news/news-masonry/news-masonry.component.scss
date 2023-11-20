@@ -19,6 +19,10 @@
     & .grid-item {
       height: auto;
       margin-bottom: 25px;
+
+      @media(max-width: 550px) {
+        margin-bottom: 20px;
+      }
     }
 
     & .content { height: auto }
@@ -45,20 +49,15 @@
 
   & .inner {
     overflow: hidden;
-    height: 240px;
+    height: 220px;
     transition: all 100ms ease-in-out;
-
-    @media (max-width: 1200px) { height: 200px; }
-    @media (max-width: 992px) { height: 240px; }
-    @media (max-width: 810px) { height: 210px; }
-    @media (max-width: 603px) { height: 280px; }
       
     & img { 
       max-width: 100%;
       width: 100%;
-      border: 0;
       height: 100%;
-      transition: transform 300ms ease-in-out;
+      border: 1px solid var(--border-color);
+      transition: transform 300ms ease-in-out, border 666ms ease-in-out;
   
       &:hover {
         cursor: pointer;
@@ -66,17 +65,41 @@
         transform: scale(1.1);
       }
     }
+
+    @media(min-width: 800px) {
+      height: 190px !important;
+    }
+
+    
+    @media(min-width: 604px) {
+      height: 175px;
+    }
   }
 
-  & .card { padding: 18px 0 20px }
+  & .card { 
+    padding: 18px 0 20px;
+
+    & p {
+      margin-bottom: 1rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
 
   & h4 {
     text-transform: uppercase;
     margin: 0 0 1.1rem;
     line-height: 22px;
-    font-size: 19px;
+    font-size: 18px;
     padding-right: 10px;
     @include hover(1.5);
+
+    & a {
+      text-decoration: none;
+      color: unset;
+    }
   }
   
   & .category {
@@ -108,12 +131,26 @@
     &.author {
       margin-bottom: 0;
       padding-right: 30px;
+      text-transform: uppercase;
+      @include hr-title(20px);
+      position: relative;
+
+      &::after {
+        right: 14px;
+        left: unset;
+      }
       
       & span {
         padding: 0 10px 0 0;
         position: relative;
         font-size: 12px;
-        @include hr-title(20px);
+        max-width: 245px;
+        display: block;
+        @include text-ellipsis(20px);
+
+        @media(min-width: 604px) and (max-width: 1200px) {
+          max-width: 165px;
+        }
       }
     }
 
@@ -124,5 +161,23 @@
     display: flex;
     align-items: center;
     margin-bottom: .9rem;
+  }
+}
+
+.empty {
+  height: 16px;
+  margin-bottom: 23px;
+  display: block;
+  position: relative;
+  top: 8px;
+}
+
+@media(max-width: 550px) {
+  p {
+    font-size: 13px;
+  }
+
+  h4 {
+    font-size: 17px !important;
   }
 }

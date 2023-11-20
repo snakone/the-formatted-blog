@@ -7,7 +7,7 @@
   --primary-color: #272b41;
   --input-bg: #fffdbd;
   --contrast-color: #001c9b;
-  --border-color: #ebebeb;
+  --border-color: #c9c9c9;
   --transparent-bg: rgba(255, 255, 255 , 0.85);
   --quote-bg: #fffdbd;
   --navigation-border: #e2e1e1;
@@ -16,6 +16,7 @@
   --button-text-color: #3b3939;
   --inverted-contrast: #ffe364;
   --error-color: #ee2525;
+  --error-light: #fc6c6c;
   --inner-border: #fbfbfb;
   --date-color: #616161;
   --li-hover: #eee8e8;
@@ -31,6 +32,8 @@
   --seen-color: #fdf5e2;
   --pending-color: #fbdfee;
   --approved-color: #81bd9a;
+  --info-color: #0e67bb;
+  --skeleton-color: #ececec;
 
   // SIZE
   --app-width: 369px;

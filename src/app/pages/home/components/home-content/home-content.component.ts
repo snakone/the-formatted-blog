@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { filter, Observable, of, Subject, takeUntil } from 'rxjs';
+import { debounceTime, filter, Observable, of, Subject, takeUntil } from 'rxjs';
 
 import { PostsFacade } from '@store/posts/posts.facade';
 import { DUMMY_POST } from '@shared/data/data';
@@ -19,7 +19,7 @@ export class HomeContentComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
   favoritesID$: Observable<string[]> | undefined;
   
-  constructor(private postFacade: PostsFacade, private postsSrv: PostService) { }
+  constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
     this.checkData();

@@ -49,4 +49,23 @@ export class UserService {
       );
   }
 
+  public update(user: User): Observable<User> {
+    return this.http
+      .put<UserResponse>(this.API_USER, user)
+      .pipe(
+        filter(res => res && !!res.ok),
+        tap(_ => this.ls.setKey('token', _?.token)),
+        map(res => res.user),
+        tap(_ => this.setUser(_))
+      );
+  }
+
+  public getById(id: string): Observable<UserResponse> {
+    return this.http
+      .get<UserResponse>(this.API_USER + '/' + id)
+      .pipe(
+        filter(res => !!res && res.ok)
+      );
+  }
+
 }

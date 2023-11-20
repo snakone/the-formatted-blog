@@ -67,11 +67,11 @@ export const updateFailure =
 // UPDATE DRAFT KEY
 export const updateKey =
   createAction('[Drafts API] Update Draft Key',
-  props<{ id: string, keys: KeyPair, toast?: boolean }>());
+  props<{ id: string, keys: KeyPair, admin?: boolean }>());
 
 export const updateKeySuccess =
   createAction('[Drafts API] Update Draft Key Success',
-  props<{ draft: Post, toast?: boolean }>());
+  props<{ draft: Post, admin?: boolean }>());
 
 export const updateKeyFailure =
   createAction('[Drafts API] Update Draft Key Failure',
@@ -80,11 +80,11 @@ export const updateKeyFailure =
 // DELETE DRAFT
 export const deleteDraft =
   createAction('[Drafts API] Delete Draft',
-  props<{ id: string }>());
+  props<{ id: string, reload?: boolean }>());
 
 export const deleteSuccess =
   createAction('[Drafts API] Delete Draft Success',
-  props<{ id: string }>());
+  props<{ id: string, reload?: boolean }>());
 
 export const deleteFailure =
   createAction('[Drafts API] Delete Draft Failure',
@@ -93,6 +93,11 @@ export const deleteFailure =
 // SET ACTIVE
 export const setActive =
   createAction('[Drafts API] Set Active Draft',
+  props<{ draft: Post }>());
+
+// SET BY SLUG
+export const setBySlug =
+  createAction('[Drafts API] Set Draft by Slug',
   props<{ draft: Post }>());
 
 // SET PREVIEW
@@ -111,7 +116,8 @@ export const resetActive =
 
 // RESET DRAFTS
 export const reset =
-  createAction('[Drafts API] Reset Drafts');
+  createAction('[Drafts API] Reset Drafts',
+  props<{ draft?: Post }>());
 
 export const resetSlug =
   createAction('[Drafts API] Reset Draft Slug');

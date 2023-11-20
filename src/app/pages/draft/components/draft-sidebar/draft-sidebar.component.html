@@ -16,9 +16,12 @@
               <i class="fas fa-check"></i>
             </ng-container>
             <ng-template #notOk>
-              <i class="fas fa-times" [matTooltip]="check[i].cause"></i>
+              <i class="fas fa-times"></i>
             </ng-template>
             <span [innerHTML]="c.hint"></span>
+            <p *ngIf="!check[i].ok" class="cause">
+              {{check[i].cause}}
+            </p>
           </div>
         </div>
         <div class="item">
@@ -28,9 +31,12 @@
               <i class="fas fa-check"></i>
             </ng-container>
             <ng-template #notOk>
-              <i class="fas fa-times" [matTooltip]="check[4].cause"></i>
+              <i class="fas fa-times"></i>
             </ng-template>
             <span [innerHTML]="'El boceto tiene un mensaje correcto.'"></span>
+            <p *ngIf="!check[4].ok" class="cause">
+              {{check[4].cause}}
+            </p>
           </div>
         </div>
       </ng-container>

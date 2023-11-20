@@ -10,6 +10,7 @@ import { LogInOverlayComponent } from './log-in.component';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { UtilsService } from '@core/services/utils/utils.service';
 
 const Material = [
   MatCheckboxModule,
@@ -31,6 +32,9 @@ const Material = [
   ],
   exports: [
     LogInOverlayComponent
+  ],
+  providers: [
+    UtilsService
   ]
 })
 

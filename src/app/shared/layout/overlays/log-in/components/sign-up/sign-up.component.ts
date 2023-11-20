@@ -19,10 +19,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 
 import { UsersFacade } from '@store/users/users.facade';
-import { NAME_PATTERN } from '@shared/data/patterns';
 import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../../log-in.component';
 import { PWAService } from '@core/services/pwa/pwa.service';
+import { UtilsService } from '@core/services/utils/utils.service';
+import { UserProfile } from '@shared/types/class.types';
 
 @Component({
   selector: 'app-sign-up',
@@ -44,7 +45,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LogInOverlayComponent>,
     private userFcd: UsersFacade,
-    private pwaSrv: PWAService
+    private pwaSrv: PWAService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -56,17 +58,17 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = new UntypedFormGroup({
       name: new UntypedFormControl(null, [
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-        Validators.pattern(NAME_PATTERN)
+        Validators.minLength(6),
+        Validators.maxLength(25),
+        Validators.pattern(/^[a-zA-ZáéíóúüñçÁÉÍÓÚÜÑÇ][a-zA-ZáéíóúüñçÁÉÍÓÚÜÑÇ\s]*[a-zA-ZáéíóúüñçÁÉÍÓÚÜÑÇ]$/)
       ]),
       email: new UntypedFormControl(null, [
          Validators.required,
          Validators.email,
-         Validators.minLength(5),
+         Validators.minLength(6),
          Validators.maxLength(35)
       ]),
-      rol: new UntypedFormControl(null, [
+      role: new UntypedFormControl(null, [
         Validators.maxLength(35)
       ]),
       password: new UntypedFormControl(null, [
@@ -83,14 +85,32 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
+  public async onSubmit(): Promise<void> {
     if (this.signUpForm.invalid || !this.conditions) { return; }
-    const user: User = { ...this.signUpForm.value };
-    this.userFcd.register(user);
+    const { role } = this.signUpForm.value;
+    const user = { 
+      ...this.signUpForm.value, 
+      profile: new UserProfile(role)
+    } satisfies User;
+
+    delete user.password2;
+    delete user.role;
+
+    try {
+      user.profile.location = await this.utils
+        .getFriendlyLocation().catch(err => {
+        return null;
+      });
+
+      this.userFcd.register(user as User);
+    } catch (err) {
+      user.profile.location = null;
+    }
     
     if (this.notify) {
       setTimeout(() => this.pwaSrv.requestNotification(), 1000);
     }
+
     this.dialogRef.close();
   }
 
@@ -119,7 +139,7 @@ export class SignUpComponent implements OnInit {
   }
 
   get name(): AbstractControl { return this.signUpForm.get('name') as AbstractControl; }
-  get rol(): AbstractControl { return this.signUpForm.get('rol') as AbstractControl; }
+  get role(): AbstractControl { return this.signUpForm.get('role') as AbstractControl; }
   get email(): AbstractControl { return this.signUpForm.get('email') as AbstractControl; }
   get password(): AbstractControl { return this.signUpForm.get('password') as AbstractControl; }
   get password2(): AbstractControl { return this.signUpForm.get('password2') as AbstractControl; }

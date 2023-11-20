@@ -2,32 +2,42 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Post } from '@shared/types/interface.types';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import { CrafterService } from '../crafter/crafter.service';
+import { ERROR_CONVERT_HTML_SENTENCE, NO_DATA_CONVERT_HTML_SENTENCE } from '@shared/data/sentences';
 
 @Injectable()
 
 export class QuillService {
 
-  constructor() { }
+  constructor(private crafter: CrafterService) { }
 
   public convertToHTML(post: Post): void {
-    const converter = new QuillDeltaToHtmlConverter(post.message.ops, {
-      multiLineParagraph: false
-    });
+    if (!post.message.ops) {
+      this.crafter.setSnack(NO_DATA_CONVERT_HTML_SENTENCE, 'warning');
+      return;
+    }
 
-    const parser = new DOMParser();
-    const converted = converter.convert();
-    const input = document.createElement('a');
-    const doc = parser.parseFromString(converted, "text/html");
-    const styled = this.addStyles(doc.documentElement.outerHTML, post);
-    input.setAttribute('href', 'data:html; charset=utf-8,' + styled)
-    input.setAttribute('download', `${post.title}.html`);
-    input.click();
+    const converted = new QuillDeltaToHtmlConverter(post.message.ops, {
+      multiLineParagraph: false
+    }).convert();
+
+    try {
+      const parser = new DOMParser();
+      const input = document.createElement('a');
+      const doc = parser.parseFromString(converted, "text/html");
+      const styled = this.addStyles(doc.documentElement.outerHTML, post);
+      input.setAttribute('href', 'data:html; charset=utf-8,' + styled)
+      input.setAttribute('download', `${post.title}.html`);
+      input.click();
+    } catch (err) {
+      this.crafter.setSnack(ERROR_CONVERT_HTML_SENTENCE, 'error');
+    }
   }
 
   private addStyles(html: string, post: Post): string {
     return html.replace('<body>', addTitle(post))
                .replace('<head></head>', POST_STYLES_STRING)
-               .replace('</body></html>', addFooter());
+               .replace('</body>', addFooter());
   }
 
 }
@@ -37,7 +47,7 @@ const addTitle = (post: Post) =>
   <div id="draft" style="width: 100%">
     <h1>${post.title}</h1>
     <span class="title">Escrito por ${post.author}</span>
-    <img src="${post.cover}"/>`;
+    <img onerror="this.src='https://th.bing.com/th/id/OIP.vDf037OKUo0H03weRxdWuAHaHa?pid=ImgDet&rs=1'" alt="Post Image" src="${post.cover}"/>`;
 
 const addFooter = () => `  
   </div>
@@ -46,7 +56,7 @@ const addFooter = () => `
       Copyright © ${new Date().getFullYear().toString()} - 
       All Rights Reserved - ${environment.version}
   </footer>
-</body></html>`;
+</body>`;
 
 const POST_STYLES_STRING = `
 <head>
@@ -73,18 +83,13 @@ const POST_STYLES_STRING = `
       height: 100%;
     }
 
-    p, ul, ol, span.title, h1, h2, footer {
+    p, ul, ol, span.title, h1, h2, h3, footer {
       font-family: 'Raleway', sans-serif;
     }
     
     p {
       margin: 0 0 30px;
       text-align: left;
-    }
-
-    p:last-of-type { 
-      margin: 0;
-      padding-bottom: 70px;
     }
 
     blockquote {
@@ -158,7 +163,7 @@ const POST_STYLES_STRING = `
     span.title {
       font-size: 11px;
       opacity: .8;
-      margin-bottom: 35px;
+      margin-bottom: 12px;
       display: inline-block;
       padding-left: 3px;
     }

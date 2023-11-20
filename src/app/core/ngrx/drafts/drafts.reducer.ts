@@ -19,7 +19,7 @@ export interface DraftsState {
 export const inititalState: DraftsState = {
   drafts: [],
   loaded: false,
-  all: [],
+  all: null,
   allLoaded: false,
   active: null,
   preview: null,
@@ -58,6 +58,7 @@ const featureReducer = createReducer(
   )),
   on(DraftActions.getAllFailure, (state, { error }) => ({ ...state, error, allLoaded: false })),
   // DRAFT BY SLUG
+  on(DraftActions.setBySlug, (state, {draft}) => ({...state, bySlug: draft, bySlugLoaded: true})),
   on(DraftActions.getBySlug, (state) => ({...state, bySlug: null, bySlugLoaded: false})),
   on(DraftActions.getBySlugSuccess, (state, {draft}) => ({...state, bySlug: draft, bySlugLoaded: true})),
   on(DraftActions.getBySlugFailure, (state, {error}) => ({...state, bySlug: null, error, loaded: false, bySlugLoaded: false})),
@@ -96,16 +97,21 @@ const featureReducer = createReducer(
     })),
   on(DraftActions.setSaving, (state, { data }) => ({ ...state, saving: data})),
   // RESET
-  on(DraftActions.reset, (state) => (
+  on(DraftActions.reset, (state, {draft}) => {
+
+    if (draft) {
+      state.temporal = state.temporal.filter(t => t._id !== draft._id);
+    }
+    
+    return (
     {
       ...state,
       loaded: false,
       error: null,
       drafts: [],
-      allLoaded: false,
-      temporal: []
+      allLoaded: false
     }
-  )),
+  )}),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),
   on(DraftActions.resetSlug, (state) => ({ ...state, bySlug: null, bySlugLoaded: false})),
   on(DraftActions.resetPreview, (state) => ({ ...state, preview: null})),

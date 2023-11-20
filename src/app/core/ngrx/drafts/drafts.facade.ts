@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FilterType, KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
 import * as fromDrafts from './drafts.selectors';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 
 export class DraftsFacade {
 
@@ -24,6 +24,10 @@ export class DraftsFacade {
   constructor(private store: Store<DraftsState>) { }
 
   public get(): void {
+    this.store.dispatch(DraftActions.getByUser());
+  }
+
+  public getByID(): void {
     this.store.dispatch(DraftActions.getByUser());
   }
 
@@ -47,16 +51,20 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.update({draft}));
   }
 
-  public updateKey(id: string, keys: KeyPair, toast?: boolean): void {
-    this.store.dispatch(DraftActions.updateKey({id, keys, toast}));
+  public updateKey(id: string, keys: KeyPair, admin?: boolean): void {
+    this.store.dispatch(DraftActions.updateKey({id, keys, admin}));
   }
 
-  public delete(id: string): void {
-    this.store.dispatch(DraftActions.deleteDraft({id}));
+  public delete(id: string, reload = false): void {
+    this.store.dispatch(DraftActions.deleteDraft({id, reload}));
   }
 
   public setActive(draft: Post): void {
     this.store.dispatch(DraftActions.setActive({draft}));
+  }
+
+  public setBySlug(draft: Post): void {
+    this.store.dispatch(DraftActions.setBySlug({draft}));
   }
 
   public setPreview(draft: Post): void {
@@ -76,7 +84,7 @@ export class DraftsFacade {
   }
 
   public reset(): void {
-    this.store.dispatch(DraftActions.reset());
+    this.store.dispatch(DraftActions.reset(null));
   }
 
   public resetPreview(): void {

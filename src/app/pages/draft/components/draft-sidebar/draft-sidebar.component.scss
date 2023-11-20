@@ -1,6 +1,6 @@
 .draft-status {
   & h1 {
-    font-size: 17px;
+    font-size: 20px;
     margin-bottom: 1rem;
   }
 
@@ -49,6 +49,14 @@
       position: relative;
       left: 1px;
     }
+  }
+
+  & .cause {
+    margin-left: 36px;
+    font-size: 12px;
+    opacity: 0.8;
+    color: var(--text-color);
+    line-height: 16px;
   }
 }
 

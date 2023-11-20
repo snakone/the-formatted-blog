@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DraftPreviewComponent } from './draft-preview.component';
+import { DraftPreviewDialogComponent } from './draft-preview.component';
 
-describe('DraftPreviewComponent', () => {
-  let component: DraftPreviewComponent;
-  let fixture: ComponentFixture<DraftPreviewComponent>;
+describe('DraftPreviewDialogComponent', () => {
+  let component: DraftPreviewDialogComponent;
+  let fixture: ComponentFixture<DraftPreviewDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DraftPreviewComponent ]
+      declarations: [ DraftPreviewDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DraftPreviewComponent);
+    fixture = TestBed.createComponent(DraftPreviewDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
