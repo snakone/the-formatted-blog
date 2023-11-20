@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { Subject, Observable } from 'rxjs';
 
 @Component({

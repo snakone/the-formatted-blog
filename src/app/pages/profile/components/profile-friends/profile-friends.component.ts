@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
-import { User } from '@shared/types/interface.types';
+import { User } from '@shared/types/interface.user';
 import { Observable } from 'rxjs';
 
 @Component({

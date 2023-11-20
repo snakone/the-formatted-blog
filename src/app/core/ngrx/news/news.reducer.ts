@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as NewsActions from './news.actions';
-import { FormattedNew } from '@shared/types/interface.types';
+import { FormattedNew } from '@shared/types/interface.app';
 
 export interface NewsState {
   news: FormattedNew[] | null;

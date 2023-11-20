@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { STATS_LIST } from '@shared/data/data';
-import { User } from '@shared/types/interface.types';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-profile-friends-content',

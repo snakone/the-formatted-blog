@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
-import { Post, StatusButtons } from '@shared/types/interface.types';
+import { StatusButtons } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
 import { Subject, filter, map, takeUntil } from 'rxjs';
 
 @Component({

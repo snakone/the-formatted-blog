@@ -4,15 +4,19 @@ import { SwUpdate, SwPush } from '@angular/service-worker';
 import { filter, Observable, of, switchMap } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-import { environment } from '@env/environment';
 import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
-import { SWResponse, NotificationPayload, Post } from '@shared/types/interface.types';
-import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
-import { WELCOME_PUSH } from '@shared/data/notifications';
 import { PushDeniedOverlayComponent } from '@layout/overlays/push-denied/push-denied.component';
+import { NotificationPayload } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
+import { SWResponse } from '@shared/types/interface.server';
+
 import { URI } from 'app/app.config';
+import { USER_ID_KEY } from '@shared/data/constants';
+import { WELCOME_PUSH } from '@shared/data/notifications';
+import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
+import { environment } from '@env/environment';
 
 @Injectable({providedIn: 'root'})
 
@@ -100,7 +104,7 @@ export class PWAService {
     payload: NotificationPayload,
     draft?: Post
   ): NotificationPayload {
-    payload.user = this.ls.get('id');
+    payload.user = this.ls.get(USER_ID_KEY);
     if (draft) {
       payload.image = draft.cover;
       payload.data.url = `${URI}/article/${draft.slug}`;

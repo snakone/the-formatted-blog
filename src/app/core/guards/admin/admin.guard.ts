@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@shared/types/interface.user';
 import { UsersFacade } from '@store/users/users.facade';
-import { User } from '@shared/types/interface.types';
 import { filter, map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})

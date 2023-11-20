@@ -3,7 +3,7 @@ import { debounceTime, filter, Observable, of, Subject, takeUntil } from 'rxjs';
 
 import { PostsFacade } from '@store/posts/posts.facade';
 import { DUMMY_POST } from '@shared/data/data';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { PostService } from '@core/services/api/post.service';
 
 @Component({

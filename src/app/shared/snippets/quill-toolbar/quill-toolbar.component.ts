@@ -6,10 +6,11 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
 import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
-import { Post, SavingType } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
+import { SavingType } from '@shared/types/interface.app';
 
 @Component({
   selector: 'app-quill-toolbar',

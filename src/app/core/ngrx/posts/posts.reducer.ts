@@ -1,7 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as PostActions from './posts.actions';
-import { FilterType, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { DraftsState } from '../drafts/drafts.reducer';
+import { FilterType } from '@shared/types/interface.app';
 
 export interface PostState {
   posts: Post[];

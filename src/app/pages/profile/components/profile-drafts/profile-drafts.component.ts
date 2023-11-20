@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 @Component({

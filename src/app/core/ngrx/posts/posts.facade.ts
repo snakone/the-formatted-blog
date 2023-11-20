@@ -4,7 +4,8 @@ import { AppState } from '../ngrx.index';
 
 import * as PostActions from './posts.actions';
 import * as fromPosts from './posts.selectors';
-import { FilterType, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { FilterType } from '@shared/types/interface.app';
 
 @Injectable({providedIn: 'root'})
 

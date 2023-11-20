@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { UserActivity } from "@shared/types/interface.types";
+import { UserActivity } from "@shared/types/interface.user";
 
 // GET ACTIVITIES
 export const get =

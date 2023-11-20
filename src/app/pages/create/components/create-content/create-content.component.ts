@@ -4,7 +4,7 @@ import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import { DeltaOperation } from 'quill';
 import { DeltaStatic } from 'quill';
 import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_CONTAINER } from '@shared/data/quills';
-import { Post, PostHeader } from '@shared/types/interface.types';
+import { Post, PostHeader } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { slugify } from '@core/services/quill/quill.module';
 import { DRAFT_PUSH } from '@shared/data/notifications';

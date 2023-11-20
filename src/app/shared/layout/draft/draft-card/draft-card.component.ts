@@ -3,7 +3,8 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { DELETE_CONFIRMATION } from '@shared/data/data';
 import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
-import { Post, SavingType } from '@shared/types/interface.types';
+import { SavingType } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { takeUntil, filter, Subject } from 'rxjs';
 

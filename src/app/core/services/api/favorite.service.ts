@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-import { FavoriteResponse } from '@shared/types/interface.types';
+import { FavoriteResponse } from '@shared/types/interface.server';
 
 @Injectable({providedIn: 'root'})
 

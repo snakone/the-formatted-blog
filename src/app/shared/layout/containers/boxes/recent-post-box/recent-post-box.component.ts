@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { EMPTY_RECENT_POST } from '@shared/data/data';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 
 @Component({
   selector: 'app-recent-post-box',

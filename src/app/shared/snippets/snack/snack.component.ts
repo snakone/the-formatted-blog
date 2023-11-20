@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { Snack } from '@shared/types/interface.types';
+import { Snack } from '@shared/types/interface.app';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ import { Subject, debounceTime, takeUntil } from 'rxjs';
 
 export class SnackOverlayComponent implements AfterViewInit {
 
-  @ViewChild('snack') el!: ElementRef<any>;
+  @ViewChild('snack', {static: false}) el!: ElementRef<any>;
   data!: Snack | null;
   $unsubscribe = new Subject<void>();
   count = 0;

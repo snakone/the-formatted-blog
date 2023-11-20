@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 
 @Component({
   selector: 'app-admin-draft-card',

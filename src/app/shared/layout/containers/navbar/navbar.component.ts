@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { User } from '@shared/types/interface.user';
 import { UsersFacade } from '@store/users/users.facade';
 import { StorageService } from '@services/storage/storage.service';
 import { CrafterService } from '@services/crafter/crafter.service';
-import { User } from '@shared/types/interface.types';
-import { NAVBAR_ICONS, NAVBAR_MENU } from '@shared/data/data';
 import { LogInOverlayComponent } from '@shared/layout/overlays/log-in/log-in.component';
+
+import { NAVBAR_ICONS, NAVBAR_MENU } from '@shared/data/data';
+import { THEME_KEY } from '@shared/data/constants';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +33,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.mode = this.ls.get('theme');
+    this.mode = this.ls.get(THEME_KEY);
     this.user$ = this.userFcd.user$;
   }
 
@@ -53,7 +55,7 @@ export class NavbarComponent implements OnInit {
   public theme(): void {
     const res = document.body.classList.toggle('dark');
     res ? this.mode = 'dark' : this.mode = 'light';
-    this.ls.setKey('theme', this.mode);
+    this.ls.setKey(THEME_KEY, this.mode);
   }
 
 }

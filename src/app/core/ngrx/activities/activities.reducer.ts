@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ActivitiesActions from './activities.actions';
-import { UserActivity } from '@shared/types/interface.types';
+import { UserActivity } from '@shared/types/interface.user';
 
 export interface ActivitiesState {
   activities: UserActivity[] | null;

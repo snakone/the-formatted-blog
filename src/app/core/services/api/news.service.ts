@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-import { FormattedNew, NewsResponse } from '@shared/types/interface.types';
+import { FormattedNew } from '@shared/types/interface.app';
+import { NewsResponse } from '@shared/types/interface.server';
 
 @Injectable()
 

@@ -1,5 +1,6 @@
 import { props, createAction } from '@ngrx/store';
-import { FilterType, Post } from '@shared/types/interface.types';
+import { FilterType } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
 
 // GET POSTS
 export const get =

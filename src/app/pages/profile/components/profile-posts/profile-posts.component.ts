@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
 
 @Component({

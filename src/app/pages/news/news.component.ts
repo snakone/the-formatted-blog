@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NewsFacade } from '@core/ngrx/news/news.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
-import { FormattedNew } from '@shared/types/interface.types';
+import { FormattedNew } from '@shared/types/interface.app';
 import { Observable, Subject, filter, takeUntil, tap } from 'rxjs';
 
 @Component({

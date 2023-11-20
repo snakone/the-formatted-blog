@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
 import * as fromDrafts from './drafts.selectors';
+import { KeyPair, SavingType } from '@shared/types/interface.app';
 
 @Injectable()
 

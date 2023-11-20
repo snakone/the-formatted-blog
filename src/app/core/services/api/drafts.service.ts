@@ -5,11 +5,11 @@ import { environment } from '@env/environment';
 
 import {
   Post,
-  KeyPair,
-  DraftResponse
-} from '@shared/types/interface.types';
+} from '@shared/types/interface.post';
 
 import { filter, map } from 'rxjs/operators';
+import { DraftResponse } from '@shared/types/interface.server';
+import { KeyPair } from '@shared/types/interface.app';
 
 @Injectable({providedIn: 'root'})
 

@@ -8,9 +8,10 @@ import { AfterContentChecked, Component } from '@angular/core';
 
 export class TextSliderComponent implements AfterContentChecked {
 
-  i = 0;
-  t = 400;
+  index = 0;
+  time = 400;
   slider: HTMLElement | undefined | null;
+  timeouts: NodeJS.Timer[] = [];
   interval = this.createInterval();
 
   items: string[] = [
@@ -25,30 +26,34 @@ export class TextSliderComponent implements AfterContentChecked {
     this.slider = document.getElementById('slides');
   }
 
-  public slide(value: number, clear = false): void {
-    if (this.i + value < 0) this.set(this.items.length - 1, 800);
-    else if (this.i + value >= this.items.length) this.set(0, 800);
-    else this.set(this.i += value, 400);
-
-    if (this.slider) {
-      const style = this.slider.style;
-      style.transition = `all ${this.t}ms 0`;
-      style.transform = `translate3d(-${this.i * 228}px, 0, 0)`;
-    }
-
-    if (clear && this.interval) { window.clearInterval(this.interval as unknown as number); }
-  }
-
-  private set(
-    index: number,
-    time: number
-  ): void {
-    this.i = index;
-    this.t = time;
-  }
-
   private createInterval(): NodeJS.Timer {
+    this.timeouts.forEach((out: unknown) => window.clearTimeout(out as number))
     return setInterval(() => this.slide(1), 5000);
   }
 
+  public slide(value: number, clear = false): void {
+    if (this.index + value < 0) this.set(this.items.length - 1, 800);
+    else if (this.index + value >= this.items.length) this.set(0, 800);
+    else this.set(this.index += value, 400);
+
+    if (this.slider) {
+      const style = this.slider.style;
+      style.transition = `all ${this.time}ms 0`;
+      style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
+    }
+
+    if (clear && this.interval) { 
+      window.clearInterval(this.interval as unknown as number);
+      this.timeouts.push(setTimeout(() => this.createInterval(), 5000));
+    }
+  }
+
+  private set(
+    i: number,
+    time: number
+  ): void {
+    this.index = i;
+    this.time = time;
+  }
+  
 }

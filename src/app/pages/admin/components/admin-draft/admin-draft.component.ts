@@ -7,7 +7,8 @@ import { CHECKSTATUS, DELETE_CONFIRMATION, PUBLISH_CONFIRMATION } from '@shared/
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
-import { DraftCheck, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { DraftCheck } from '@shared/types/interface.server';
 import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivitiesFacade } from '@core/ngrx/activities/activities.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
-import { User, UserActivity } from '@shared/types/interface.types';
+import { User, UserActivity } from '@shared/types/interface.user';
 import { Observable, Subject, filter, takeUntil } from 'rxjs';
 
 @Component({

@@ -18,12 +18,12 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { UsersFacade } from '@store/users/users.facade';
-import { User } from '@shared/types/interface.types';
 import { LogInOverlayComponent } from '../../log-in.component';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { UtilsService } from '@core/services/utils/utils.service';
 import { UserProfile } from '@shared/types/class.types';
 import { MatDialogRef } from '@angular/material/dialog';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-sign-up',

@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
-import { Post, SavingType } from '@shared/types/interface.types';
+import { SavingType } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
 import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
 
 @Component({

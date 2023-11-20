@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as DraftActions from './drafts.actions';
-import { Post, SavingType } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { SavingType } from '@shared/types/interface.app';
 
 export interface DraftsState {
   drafts: Post[];

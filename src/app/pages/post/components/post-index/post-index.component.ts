@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, AfterContentInit } from '@angular/core';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { Subject } from 'rxjs';
 
 @Component({

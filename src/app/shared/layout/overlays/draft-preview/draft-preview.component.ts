@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { DraftPreviewDialogData, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DraftPreviewDialogData } from '@shared/types/interface.app';
 
 const TIME_TO_SEEN = 5000;
 

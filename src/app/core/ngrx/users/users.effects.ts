@@ -21,7 +21,8 @@ import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } 
 import { UserState } from './users.reducer';
 import { Store } from '@ngrx/store';
 import { FriendsService } from '@core/services/api/friends.service';
-import { User } from '@shared/types/interface.types';
+import { TOKEN_KEY } from '@shared/data/constants';
+import { User } from '@shared/types/interface.user';
 
 @Injectable()
 
@@ -198,7 +199,7 @@ export class UserEffects {
   }
 
   private resetUser(): void {
-    this.ls.setKey('token', null);
+    this.ls.setKey(TOKEN_KEY, null);
     this.userSrv.setUser(null);
     this.navigate('/', LOGOUT_SENTENCE)
   }

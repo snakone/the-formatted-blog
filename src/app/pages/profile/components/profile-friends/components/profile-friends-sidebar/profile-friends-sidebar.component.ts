@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { User } from '@shared/types/interface.types';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-profile-friends-sidebar',

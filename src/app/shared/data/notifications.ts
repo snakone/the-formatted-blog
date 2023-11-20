@@ -1,4 +1,4 @@
-import { NotificationPayload } from '../types/interface.types';
+import { NotificationPayload } from "@shared/types/interface.app";
 
 export const WELCOME_PUSH: NotificationPayload = {
   body: 'Bienvenido/a',

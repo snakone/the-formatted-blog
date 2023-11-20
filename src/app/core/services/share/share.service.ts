@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 
 @Injectable()
 

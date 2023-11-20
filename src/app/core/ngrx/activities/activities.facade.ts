@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as ActivityActions from './activities.actions';
 import * as fromActivities from './activities.selectors';
 import { ActivitiesState } from './activities.reducer';
-import { UserActivity } from '@shared/types/interface.types';
+import { UserActivity } from '@shared/types/interface.user';
 
 @Injectable({providedIn: 'root'})
 

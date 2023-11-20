@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 
 @Component({

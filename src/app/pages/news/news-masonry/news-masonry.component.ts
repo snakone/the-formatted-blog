@@ -16,7 +16,7 @@ import {
 
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
-import { FormattedNew } from '@shared/types/interface.types';
+import { FormattedNew } from '@shared/types/interface.app';
 
 @Component({
   selector: 'app-news-masonry',

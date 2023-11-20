@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { FormattedNew } from "@shared/types/interface.types";
+import { FormattedNew } from "@shared/types/interface.app";
 
 // GET NEWS
 export const get =

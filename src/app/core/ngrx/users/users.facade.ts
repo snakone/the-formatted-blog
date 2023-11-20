@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { User } from '@shared/types/interface.types';
 import { AppState } from '../ngrx.index';
 import * as UserActions from './users.actions';
 import * as fromUsers from './users.selectors';
+import { User } from '@shared/types/interface.user';
 
 @Injectable({providedIn: 'root'})
 

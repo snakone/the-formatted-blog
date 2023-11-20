@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { URL_PATTERN } from '@shared/data/patterns';
-import { User } from '@shared/types/interface.types';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-edit-profile',

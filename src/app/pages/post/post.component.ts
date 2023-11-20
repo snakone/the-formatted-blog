@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subject, filter, map, switchMap, takeUntil } from 'rxjs';
 
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 

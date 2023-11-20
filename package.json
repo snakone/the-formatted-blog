@@ -1,6 +1,6 @@
 {
   "name": "formatted-blog",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Application to create content",
   "keywords": [
     "Content",
@@ -17,7 +17,7 @@
     "url": "https://github.com/snakone/the-formatted-blog"
   },
   "engines": {
-    "node": ">=16.15.1 <=18.18-0"
+    "node": ">=16.15.1 <=18.18.0"
   },
   "scripts": {
     "ng": "ng",

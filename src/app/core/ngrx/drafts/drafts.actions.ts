@@ -1,5 +1,6 @@
 import { props, createAction } from '@ngrx/store';
-import { FilterType, KeyPair, Post, SavingType } from '@shared/types/interface.types';
+import { KeyPair, SavingType, FilterType } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
 
 // GET DRAFTS BY SLUG
 export const getBySlug =

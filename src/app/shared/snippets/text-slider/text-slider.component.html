@@ -11,7 +11,9 @@
    <!-- SLIDES -->
   <div class="wrapper">
     <div class="items" id="slides">
-      <p *ngFor="let i of items">{{i}}</p>
+      @for(i of items; track i) {
+        <p>{{i}}</p>
+      }
     </div>
   </div>
 </div>

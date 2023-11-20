@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-import { FriendsResponse, User } from '@shared/types/interface.types';
+import { FriendsResponse } from '@shared/types/interface.server';
+import { User } from '@shared/types/interface.user';
 
 @Injectable({providedIn: 'root'})
 

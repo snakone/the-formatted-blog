@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { FilterType, SearchType } from '@shared/types/interface.types';
+import { SearchType, FilterType } from '@shared/types/interface.app';
 import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil } from 'rxjs';
 
 @Component({

@@ -1,5 +1,5 @@
 import { props, createAction } from '@ngrx/store';
-import { User } from '@shared/types/interface.types';
+import { User } from '@shared/types/interface.user';
 
 // LOGIN USER
 export const login =

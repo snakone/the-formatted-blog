@@ -5,7 +5,7 @@ import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime, st
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { EDIT_POST_CONFIRMATION, POST_CATEGORIES } from '@shared/data/data';
 import { IMAGE_PATTERN } from '@shared/data/patterns';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { NavigationEnd, Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';

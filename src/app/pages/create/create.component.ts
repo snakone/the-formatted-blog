@@ -3,7 +3,7 @@ import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { CreateDraftService } from './services/create-draft.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
 
-const APP_VERSION = '0.0.7';
+const APP_VERSION = '0.1.1';
 export const URI = 'https://formatted-blog.netlify.app/';
 
 export interface AppConfig {

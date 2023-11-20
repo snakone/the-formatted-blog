@@ -4,7 +4,8 @@ import { filter, map } from 'rxjs/operators';
 
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-import { PostResponse, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { PostResponse } from '@shared/types/interface.server';
 
 @Injectable({providedIn: 'root'})
 

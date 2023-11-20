@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
-import { ActivitiesResponse, UserActivity } from '@shared/types/interface.types';
+import { ActivitiesResponse } from '@shared/types/interface.server';
+import { UserActivity } from '@shared/types/interface.user';
 
 @Injectable()
 

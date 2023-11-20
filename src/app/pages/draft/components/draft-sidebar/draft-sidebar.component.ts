@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CHECKSTATUS } from '@shared/data/data';
-import { CheckStatus, Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { CheckStatus } from '@shared/types/interface.server';
 
 @Component({
   selector: 'app-draft-sidebar',

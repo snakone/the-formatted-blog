@@ -3,10 +3,13 @@ import { filter, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { HttpService } from '../http/http.service';
-import { environment } from '@env/environment';
-import { User, UserResponse } from '@shared/types/interface.types';
 import { StorageService } from '../storage/storage.service';
 import { UserService } from './users.service';
+import { UserResponse } from '@shared/types/interface.server';
+import { User } from '@shared/types/interface.user';
+
+import { TOKEN_KEY, USER_ID_KEY } from '@shared/data/constants';
+import { environment } from '@env/environment';
 
 @Injectable({providedIn: 'root'})
 
@@ -45,8 +48,8 @@ export class LoginService {
   }
 
   private storage(res: UserResponse): void {
-    this.ls.setKey('token', res?.token);
-    this.ls.setKey('id', res?.user._id);
+    this.ls.setKey(TOKEN_KEY, res?.token);
+    this.ls.setKey(USER_ID_KEY, res?.user._id);
     this.userSrv.setUser(res?.user);
   }
 

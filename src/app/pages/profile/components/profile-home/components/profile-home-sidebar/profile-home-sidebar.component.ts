@@ -4,7 +4,8 @@ import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { REMOVE_FRIEND_CONFIRMATION, SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
 import { EditProfileDialogComponent } from '@shared/layout/overlays/edit-profile/edit-profile.component';
-import { Post, User } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
+import { User } from '@shared/types/interface.user';
 import { Observable, Subject, filter, map, takeUntil, tap } from 'rxjs';
 
 @Component({

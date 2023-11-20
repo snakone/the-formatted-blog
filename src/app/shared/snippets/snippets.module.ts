@@ -11,6 +11,7 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SnackOverlayComponent } from './snack/snack.component';
+
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 const Material = [

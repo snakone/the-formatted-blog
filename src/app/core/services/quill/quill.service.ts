@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Post } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { CrafterService } from '../crafter/crafter.service';
 import { ERROR_CONVERT_HTML_SENTENCE, NO_DATA_CONVERT_HTML_SENTENCE } from '@shared/data/sentences';

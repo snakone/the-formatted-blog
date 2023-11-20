@@ -1,4 +1,6 @@
-import { ActionList, CheckStatusList, ConfirmationDialogProps, FQAItem, IconList, Post, TextList } from '@shared/types/interface.types';
+import { IconList, ActionList, ConfirmationDialogProps, TextList, FQAItem } from '@shared/types/interface.app';
+import { Post } from '@shared/types/interface.post';
+import { CheckStatusList } from '@shared/types/interface.server';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export const CARROUSEL_OPTS: OwlOptions = {

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { Router } from '@angular/router';
 import { Subject, takeUntil, filter } from 'rxjs';
 
-import { Post, User } from '@shared/types/interface.types';
+import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { DELETE_CONFIRMATION, DRAFT_ICONS, EDIT_POST_CONFIRMATION, POST_ICONS } from '@shared/data/data';
@@ -12,6 +12,7 @@ import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
 import { ShareService } from '@core/services/share/share.service';
 import { QuillModules } from 'ngx-quill';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-post-card',

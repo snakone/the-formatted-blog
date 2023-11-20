@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserService } from '@core/services/api/users.service';
-import { User, UserActivity } from '@shared/types/interface.types';
+import { User, UserActivity } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-profile-home-content',

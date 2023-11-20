@@ -11,6 +11,7 @@ import { Observable} from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '../error-handler/error-handler.service';
+import { TOKEN_KEY } from '@shared/data/constants';
 
 @Injectable()
 
@@ -82,7 +83,7 @@ export class HttpService {
     const headers = _headers || new HttpHeaders();
 
     return headers
-      .set(this.auth, this.ls.get('token') || '')
+      .set(this.auth, this.ls.get(TOKEN_KEY) || '')
       .set(this.content, contentType)
       .set(this.accept, accept)
   }

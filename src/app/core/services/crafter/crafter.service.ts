@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
-import { Snack } from '@shared/types/interface.types';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Snack } from '@shared/types/interface.app';
 
 @Injectable({providedIn: 'root'})
 
