@@ -36,7 +36,7 @@ export class TextSliderComponent implements AfterContentChecked {
       style.transform = `translate3d(-${this.i * 228}px, 0, 0)`;
     }
 
-    if (clear && this.interval) { window.clearInterval(this.interval); }
+    if (clear && this.interval) { window.clearInterval(this.interval as unknown as number); }
   }
 
   private set(

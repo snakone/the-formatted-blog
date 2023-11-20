@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { QuillService } from '@core/services/quill/quill.service';
@@ -12,6 +11,7 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SnackOverlayComponent } from './snack/snack.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const Material = [
   MatTooltipModule

@@ -1,10 +1,10 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 
 import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
 import { Snack } from '@shared/types/interface.types';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({providedIn: 'root'})
 

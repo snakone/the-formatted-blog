@@ -1,7 +1,8 @@
 import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, firstValueFrom, map, Observable, startWith, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
-import { DeltaOperation, DeltaStatic } from 'quill';
+import { DeltaOperation } from 'quill';
+import { DeltaStatic } from 'quill';
 import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_CONTAINER } from '@shared/data/quills';
 import { Post, PostHeader } from '@shared/types/interface.types';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
@@ -28,7 +29,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   draft!: Post;
   private unsubscribe$ = new Subject<void>();
   show = false;
-  model = EMPTY_QUILL as DeltaStatic;
+  model = EMPTY_QUILL as unknown as DeltaStatic;
   timer = 5000;
   active$: Observable<Post> | undefined;
   isPostTemporal = false;
@@ -81,7 +82,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        withLatestFrom(this.draftsFacade.saving$),
        tap(([_, saving]) => !saving?.value ? this.save(true) : null),
        debounceTime(this.timer),
-       map(([_, sv]) => _.content as DeltaStatic)
+       map(([_, sv]) => _.content as any)
      )
      .subscribe((delta) => 
         this.onChange(delta, this.getHeaders(delta.ops))

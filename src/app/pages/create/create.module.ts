@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 import { CreateComponent } from './create.component';
 
 import { LayoutModule } from '@layout/layout.module';
@@ -12,10 +11,11 @@ import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.modu
 import { DraftLayoutModule } from '@shared/layout/draft/draft-layout.module';
 
 import { CreateContentComponent } from './components/create-content/create-content.component';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { CreateSidebarComponent } from './components/create-sidebar/create-sidebar.component';
 import { CreateFormComponent } from './components/create-form/create-form.component';
 import { CreateDraftService } from './services/create-draft.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
 
 const Material = [
   MatTooltipModule,

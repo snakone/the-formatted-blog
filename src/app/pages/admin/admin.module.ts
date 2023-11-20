@@ -13,8 +13,7 @@ import { AdminDraftComponent } from './components/admin-draft/admin-draft.compon
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MAT_LEGACY_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 const Material = [
@@ -42,7 +41,7 @@ const Material = [
     FormsModule
   ],
   providers: [
-    {provide: MAT_LEGACY_DIALOG_DATA, useValue: {}},
+    {provide: MAT_DIALOG_DATA, useValue: {}},
     { provide: MatDialogRef, useValue: {} }
   ]
 })

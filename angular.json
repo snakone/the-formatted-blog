@@ -101,18 +101,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "formatted-blog:build"
+            "buildTarget": "formatted-blog:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "formatted-blog:build:production"
+              "buildTarget": "formatted-blog:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "formatted-blog:build"
+            "buildTarget": "formatted-blog:build"
           }
         },
         "test": {
