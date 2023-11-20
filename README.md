@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
 
+Visit the project here [The Formatted Blog](https://formatted-blog.netlify.app/home)
+
 ## Installation
 
 1. Download LTS Version of Nodejs
