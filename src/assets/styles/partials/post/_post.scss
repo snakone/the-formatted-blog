@@ -176,6 +176,12 @@ $quill-padding-sm: 16px;
     }
   }
 
+  & h3 {
+    margin: 35px 0 20px 0;
+    position: relative;
+    scroll-margin-top: 30px;
+  }
+
   // CODE
   & pre {
     margin: 36px 0 35px;
@@ -224,7 +230,6 @@ button {
     cursor: pointer;
     color: #fff;
     border-radius: .25rem;
-    border: 0;
     position: absolute;
     right: 0px;
     top: -4px;

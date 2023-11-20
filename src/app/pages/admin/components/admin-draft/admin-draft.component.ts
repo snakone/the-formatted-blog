@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { CHECKSTATUS, PUBLISH_CONFIRMATION } from '@shared/data/data';
+import { CHECKSTATUS, DELETE_CONFIRMATION, PUBLISH_CONFIRMATION } from '@shared/data/data';
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
@@ -144,6 +144,19 @@ export class AdminDraftComponent {
 
   private navigate(): void {
     this.router.navigate(['../'], {relativeTo: this.route, replaceUrl: true});
+  }
+
+  public deleteDraftByID(): void {
+    if (!this.draft) { return; }
+    this.crafter.confirmation(DELETE_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(_ => _ && !!_)
+      ).subscribe(_ => (
+        this.draftsFacade.delete(this.draft._id, true),
+        this.navigate()
+    ));
   }
 
   ngOnDestroy(): void {

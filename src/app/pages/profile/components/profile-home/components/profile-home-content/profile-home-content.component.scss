@@ -14,7 +14,7 @@ h1 {
 .profile-content {
   max-height: 750px;
   overflow-y: auto;
-  padding-bottom: 8px;
+  padding-bottom: 0;
 
   & article {
     @include shadow-card();
@@ -41,7 +41,7 @@ h1 {
         &::after {
           content: "\f35d";
           position: absolute;
-          font-size: 12px;
+          font-size: 13px;
           font-family: "Font Awesome 5 Free";
           font-weight: 900;
           display: inline-block;
@@ -74,7 +74,7 @@ h1 {
       &::before {
         content: "";
         height: 100%;
-        width: 2px;
+        width: 6px;
         background-color: #f64ea8;
         position: absolute;
         top: 0;
@@ -94,7 +94,7 @@ h1 {
     &.update::after {
       content: "";
       height: 100%;
-      width: 2px;
+      width: 6px;
       position: absolute;
       top: 0;
       left: 0;

@@ -2,7 +2,8 @@
   <div class="header">
     <h1>
       Aprobación del Artículo
-      <i class="fas fa-step-backward" [routerLink]="'../'" [replaceUrl]="true"></i>
+      <i class="fas fa-step-backward" [routerLink]="'../'" [replaceUrl]="true" [matTooltip]="'Volver'"></i>
+      <i class="fas fa-trash" [matTooltip]="'Eliminar'" (click)="deleteDraftByID()"></i>
     </h1>
     <!-- TITLE -->
     <h2>{{draft.title}}</h2>

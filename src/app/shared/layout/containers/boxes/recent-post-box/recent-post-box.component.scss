@@ -57,7 +57,7 @@
         overflow: hidden;
 
         & h1 {
-          @include text-ellipsis(16px);
+          @include text-ellipsis(0);
           color: var(--text-color);
           font-style: normal;
           font-family: 'Raleway', Arial, Helvetica, sans-serif;

@@ -11,7 +11,12 @@ export class ShortMessagePipe implements PipeTransform {
     showIntro?: boolean
   ): string | null {
     if (!value) return '';
-    return alone ? value : small && showIntro ? (value.slice(0, 325) + '...') : showIntro ? (value.slice(0, 610) + '...') : '';
+    return alone ? 
+            value : 
+              small && showIntro ? 
+                (value.slice(0, 325) + '...') : 
+              showIntro ? (value.slice(0, 610) + '...') : 
+                '';
   }
 
 }

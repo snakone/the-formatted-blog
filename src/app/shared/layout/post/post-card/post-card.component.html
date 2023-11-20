@@ -63,24 +63,24 @@
         <ul [ngClass]="{'small': small}">
           <!-- POST ICONS -->
           <ng-container *ngIf="!isDraft; else draftIcon">
-            <li *ngIf="alone" (click)="share()"><i class="fas fa-link"></i></li>
+            <li *ngIf="alone" (click)="share()"><i class="fas fa-link" [matTooltip]="'Compartir'"></i></li>
             <li (click)="editPost()" *ngIf="post.user === user?._id">
-              <i class="fas fa-pen-fancy"></i>
+              <i class="fas fa-pen-fancy" [matTooltip]="'Editar'"></i>
             </li>
             <li (click)="friend()" *ngIf="post.user !== user?._id">
-              <i class="fas fa-user-plus"></i>
+              <i class="fas fa-user-plus" [matTooltip]="'Añadir'"></i>
             </li>
             <li *ngFor="let i of postIcons"
                 (click)="switchObjPost[i.action]()"
                 [ngClass]="{'disabled': (i.action === 'download' && !alone) || (i.action === 'message' && post.user === user?._id)}">
-              <i [class]="i.icon"></i>
+              <i [class]="i.icon" [matTooltip]="i.label"></i>
             </li>
             <li>
               <ng-container *ngIf="favoritesID.includes(post._id); else noFavorite">
-                <i class="fas fa-star favorite" (click)="removeFavorite()"></i>
+                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
               </ng-container>
               <ng-template #noFavorite>
-                <i class="far fa-star" (click)="favorite()"></i>
+                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
               </ng-template>
             </li>
           </ng-container>
@@ -95,10 +95,10 @@
             </li>
             <li>
               <ng-container *ngIf="favoritesID?.includes(post._id); else noFavorite">
-                <i class="fas fa-star favorite" (click)="removeFavorite()"></i>
+                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
               </ng-container>
               <ng-template #noFavorite>
-                <i class="far fa-star" (click)="favorite()"></i>
+                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
               </ng-template>
             </li>
           </ng-template>

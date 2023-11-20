@@ -83,7 +83,7 @@ const POST_STYLES_STRING = `
       height: 100%;
     }
 
-    p, ul, ol, span.title, h1, h2, footer {
+    p, ul, ol, span.title, h1, h2, h3, footer {
       font-family: 'Raleway', sans-serif;
     }
     

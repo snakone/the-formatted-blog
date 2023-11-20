@@ -113,7 +113,7 @@ export class DraftsEffects {
       concatMap((action) =>
       this.draftSrv.deleteDraft(action.id)
         .pipe(
-          map(_ => DraftsActions.deleteSuccess({ id: action.id })),
+          map(_ => DraftsActions.deleteSuccess({ id: action.id, reload: action.reload })),
           catchError(error =>
               of(DraftsActions.deleteFailure({ error: error.message }))
     ))))
@@ -144,6 +144,15 @@ export class DraftsEffects {
         of(DraftsActions.updateKeyFailure({ error: error.message }))
       ))
   )
+
+  // GET ALL DRAFT AFTER DELETE
+  getDraftsAfterDelete$ = createEffect(() => this.actions
+  .pipe(
+    ofType(DraftsActions.deleteSuccess),
+    filter(_ => _.reload),
+    concatMap((_) => of(DraftsActions.getAll()))
+  )
+)
 
   // ALERT DRAFTS
   alertsDraftEffect$ = createEffect(() => this.actions

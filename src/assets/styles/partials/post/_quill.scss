@@ -47,12 +47,20 @@
   padding-bottom: 12px;
 }
 
+
+// FIX SCROLL AFTER PASTER
+.ql-clipboard {
+  position: fixed !important;
+  display: none;
+  left: 50%;
+  top: 50%;
+}
+
 .ql-formats {
   position: relative;
   left: -2px;
+  display: inline-flex !important;
   margin-right: 0 !important;
-  @media(min-width: 425px) { margin-right: 6px !important; }
-  @media(min-width: 465px) { margin-right: 12px !important; }
   @media(min-width: 550px) { margin-right: 24px !important; }
   &:first-of-type { top: -.5px; }
   &:last-of-type { margin-right: 0 !important }

@@ -80,11 +80,11 @@ export const updateKeyFailure =
 // DELETE DRAFT
 export const deleteDraft =
   createAction('[Drafts API] Delete Draft',
-  props<{ id: string }>());
+  props<{ id: string, reload?: boolean }>());
 
 export const deleteSuccess =
   createAction('[Drafts API] Delete Draft Success',
-  props<{ id: string }>());
+  props<{ id: string, reload?: boolean }>());
 
 export const deleteFailure =
   createAction('[Drafts API] Delete Draft Failure',

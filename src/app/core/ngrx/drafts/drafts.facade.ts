@@ -27,6 +27,10 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.getByUser());
   }
 
+  public getByID(): void {
+    this.store.dispatch(DraftActions.getByUser());
+  }
+
   public getAll(): void {
     this.store.dispatch(DraftActions.getAll());
   }
@@ -51,8 +55,8 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.updateKey({id, keys, admin}));
   }
 
-  public delete(id: string): void {
-    this.store.dispatch(DraftActions.deleteDraft({id}));
+  public delete(id: string, reload = false): void {
+    this.store.dispatch(DraftActions.deleteDraft({id, reload}));
   }
 
   public setActive(draft: Post): void {

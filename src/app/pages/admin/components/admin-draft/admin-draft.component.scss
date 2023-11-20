@@ -58,7 +58,7 @@ h1 {
     position: absolute;
     right: 1px;
     font-size: 18px;
-    top: 4px;
+    top: 5px;
     cursor: pointer;
     color: var(--dark-color);
     opacity: .7;
@@ -66,6 +66,10 @@ h1 {
     &:hover {
       color: var(--contrast-color);
       filter: brightness(1.1);
+    }
+
+    &.fa-trash {
+      right: 36px;
     }
   }
 }
@@ -145,7 +149,7 @@ button {
 
     & i {
       font-size: 16px;
-      top: 6px;
+      top: 5px;
     }
   }
 
@@ -173,5 +177,11 @@ button {
         box-shadow: none !important;
       }
     }
+  }
+}
+
+@media(max-width: 450px) {
+  h1 {
+    font-size: 1.5rem;
   }
 }

@@ -17,7 +17,7 @@ export interface DraftsState {
 }
 
 export const inititalState: DraftsState = {
-  drafts: null,
+  drafts: [],
   loaded: false,
   all: null,
   allLoaded: false,
