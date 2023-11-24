@@ -8,6 +8,7 @@ import { HelpHeaderComponent } from './components/help-header/help-header.compon
 import { HelpContentComponent } from './components/help-content/help-content.component';
 import { HelpSidebarComponent } from './components/help-sidebar/help-sidebar.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { PipesModule } from '@shared/pipes/pipes.module';
 
 const Material = [
   MatExpansionModule
@@ -24,6 +25,7 @@ const Material = [
     CommonModule,
     HelpRoutingModule,
     LayoutModule,
+    PipesModule,
     ...Material
   ]
 })

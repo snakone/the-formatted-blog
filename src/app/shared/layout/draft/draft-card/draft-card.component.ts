@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
-import { DELETE_CONFIRMATION } from '@shared/data/data';
-import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
 import { SavingType } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
@@ -36,7 +35,7 @@ export class DraftCardComponent {
 
   public preview(): void {
     if (!this.draft || this.saving) { return; }
-    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
+    this.crafter.dialog(PREVIEW_DRAFT_DIALOG);
   }
 
   public delete(): void {

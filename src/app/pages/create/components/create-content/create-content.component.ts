@@ -11,9 +11,9 @@ import { DRAFT_PUSH } from '@shared/data/notifications';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { EDIT_POST_CONFIRMATION } from '@shared/data/data';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import Quill from 'quill';
+import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
 
 const Quill_Icons = Quill.import('ui/icons');
 

@@ -7,7 +7,7 @@ import { Subject, fromEvent } from 'rxjs';
 export class TopDirective implements AfterViewInit, OnDestroy {
 
   displayed = false;
-  b = this.el.nativeElement;  // Button
+  button = this.el.nativeElement;  // Button
   limit = 800;
   private unsubscribe$ = new Subject<void>();
 
@@ -38,14 +38,14 @@ export class TopDirective implements AfterViewInit, OnDestroy {
 
   private manageCSS(scrolled: boolean): void {
     if (scrolled) {
-        this.b.style.display = 'block';
+        this.button.style.display = 'block';
         this.displayed = true;
-        this.b.classList.remove('fadeOutRight');
-        this.b.classList.add('fadeInRight');
+        this.button.classList.remove('fadeOutRight');
+        this.button.classList.add('fadeInRight');
     } else { 
         this.displayed = false;
-        this.b.classList.remove('fadeInRight');
-        this.b.classList.add('fadeOutRight');
+        this.button.classList.remove('fadeInRight');
+        this.button.classList.add('fadeOutRight');
     }
   }
 

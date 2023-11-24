@@ -9,6 +9,7 @@ import { LogInOverlayComponent } from '@shared/layout/overlays/log-in/log-in.com
 
 import { NAVBAR_ICONS, NAVBAR_MENU } from '@shared/data/data';
 import { THEME_KEY } from '@shared/data/constants';
+import { LOGIN_DIALOG } from '@shared/data/dialogs';
 
 @Component({
   selector: 'app-navbar',
@@ -44,12 +45,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public openModal(): void {
-    this.crafter.dialog(
-      LogInOverlayComponent, 
-      null, 
-      'login', 
-      'login-overlay'
-    );
+    this.crafter.dialog(LOGIN_DIALOG);
   }
 
   public theme(): void {

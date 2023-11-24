@@ -2,13 +2,15 @@
   <!-- HEADER -->
   <app-navbar></app-navbar>
   <app-header></app-header>
-  <!-- MAIN -->
-  <main> 
-    <router-outlet></router-outlet>
-  </main>
+  @defer {
+    <!-- MAIN -->
+    <main> 
+      <router-outlet></router-outlet>
+    </main>
+  }
   <app-footer></app-footer>
 </div>
-@defer () {
+@defer {
   <app-snack></app-snack>
   <app-min-width></app-min-width>
 }

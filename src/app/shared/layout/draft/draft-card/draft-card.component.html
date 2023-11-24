@@ -20,11 +20,11 @@
           </ng-container>
           <span class="created">{{draft.created}}</span>
           <span class="pending" *ngIf="draft.status === 'pending'">
-            <span class="tale">-</span> {{draft.status | draftStatus}}
+            <span class="tale">-</span> Pendiente
           </span>
           <!-- TEMPORAL -->
           <span *ngIf="draft.temporal" class="temp">
-            <span class="tale">-</span>Temporal
+            <span class="tale">-</span> Temporal
           </span>
         </p>
       </div>

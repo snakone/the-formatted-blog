@@ -262,9 +262,12 @@ button.formatted {
 
 .accordion {
   & p {
-    & i {
-      padding: 0 4px;
+    text-wrap: pretty;
 
+    & i {
+      padding: 0 6px;
+      font-size: 18px;
+    
       &.fa-check {
         color: var(--success-color);
       }
@@ -274,6 +277,11 @@ button.formatted {
   & ol, & ul {
     padding-left: 12px;
     font-size: 13px;
+    margin: 20px 0;
+
+    & li {
+      padding-left: 8px;
+    }
   }
 }
 

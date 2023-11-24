@@ -1,18 +1,20 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil, filter } from 'rxjs';
+import { QuillModules } from 'ngx-quill';
 
 import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { DELETE_CONFIRMATION, DRAFT_ICONS, EDIT_POST_CONFIRMATION, POST_ICONS } from '@shared/data/data';
-import { DraftPreviewDialogComponent } from '@layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
 import { ShareService } from '@core/services/share/share.service';
-import { QuillModules } from 'ngx-quill';
 import { User } from '@shared/types/interface.user';
+
+import { DRAFT_ICONS, POST_ICONS } from '@shared/data/data';
+import { DELETE_CONFIRMATION, EDIT_POST_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
+import { CREATE_ROUTE, PENDING_KEY, POST_KEY, PROFILE_ROUTE } from '@shared/data/constants';
 
 @Component({
   selector: 'app-post-card',
@@ -42,7 +44,7 @@ export class PostCardComponent implements OnInit {
     syntax: true,
   };
 
-  switchObjDraft: any = {
+  switchObjDraft: {[key: string]: () => void} = {
     edit: () => this.edit(),
     preview: () => this.preview(),
     download: () => this.download(),
@@ -50,7 +52,7 @@ export class PostCardComponent implements OnInit {
     favorite: () => this.favorite()
   };
 
-  switchObjPost: any = {
+  switchObjPost: {[key: string]: () => void} = {
     friend: () => this.friend(),
     message: () => this.message(),
     download: () => this.download(),
@@ -76,14 +78,14 @@ export class PostCardComponent implements OnInit {
   }
 
   private edit(): void {
-    if (this.post.status === 'pending') { return; }
+    if (this.post.status === PENDING_KEY) { return; }
     this.draftsFacade.setActive(this.post);
-    this.router.navigateByUrl('/create');
+    this.router.navigateByUrl(CREATE_ROUTE);
   }
 
   private preview(): void {
     this.draftsFacade.setPreview(this.post);
-    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
+    this.crafter.dialog(PREVIEW_DRAFT_DIALOG);
   }
 
   private download(): void {
@@ -117,23 +119,25 @@ export class PostCardComponent implements OnInit {
   }
 
   public friend(): void {
-    this.router.navigateByUrl('/profile/' + this.post.user);
+    this.router.navigateByUrl(PROFILE_ROUTE + '/' + this.post.user);
   }
 
   public editPost(): void {
-    if (this.post.type !== 'post') { return; }
+    if (this.post.type !== POST_KEY) { return; }
 
     this.crafter.confirmation(EDIT_POST_CONFIRMATION)
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
         filter(_ => _ && !!_)
-    ).subscribe(_ => {
-      this.post.temporal = true;
-      this.draftsFacade.setActive(this.post);
-      this.draftsFacade.addTemporal(this.post);
-      this.router.navigate(['/create'], {replaceUrl: true});
-    });
+    ).subscribe(_ => this.editSuccess());
+  }
+
+  private editSuccess(): void {
+    this.post.temporal = true;
+    this.draftsFacade.setActive(this.post);
+    this.draftsFacade.addTemporal(this.post);
+    this.router.navigate([CREATE_ROUTE], {replaceUrl: true});
   }
 
   ngOnDestroy() {

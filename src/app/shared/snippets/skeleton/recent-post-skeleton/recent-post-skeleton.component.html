@@ -1,6 +1,6 @@
-
-  <div class="recent">
-    <div class="item" *ngFor="let i of items; let first = first">
+<div class="recent">
+  @for(index of items; track index) {
+    <div class="item">
       <div class="wrapper">
         <figure></figure>
         <div class="info">
@@ -10,4 +10,5 @@
         </div>
       </div>
     </div>
-  </div>
+  }
+</div>

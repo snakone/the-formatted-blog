@@ -4,9 +4,9 @@
     <p class="category"></p>
     <h1 class="title"></h1>
     <p class="date"></p>
-    <ng-container *ngIf="showIntro">
-      <div class="intro" ></div>
-    </ng-container>
+    @if(showIntro) {
+      <div class="intro"></div>
+    }
     <div class="bottom" [ngClass]="{'first': showIntro}">
       <span class="author"></span>
       <ul class="icons">

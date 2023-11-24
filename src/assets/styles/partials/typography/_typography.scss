@@ -20,6 +20,10 @@ input, select, textarea {
   }
 }
 
+p {
+  text-wrap: pretty;
+}
+
 a {
   transition: color 666ms ease-in-out;
 }

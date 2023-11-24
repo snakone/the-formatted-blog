@@ -45,7 +45,7 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private initMasonry(): void {
     this.grid = document.getElementById('grid');
-    if (this.grid) { 
+    if (this.grid && this.news) { 
       this.createMasonry();
       this.items.push(...this.news.slice(0, 7));
       this.currentPage = this.multiply;
@@ -54,7 +54,6 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private createMasonry(update = false): void {
     this.isLoaded = true;
-
     try {
       setTimeout(() => {
         this.masonry = this.masonrySrv.createMasonry(this.grid);
@@ -90,9 +89,11 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private addElements(): void {
     const skip = this.currentPage * this.multiply;
-    this.items.push(...this.news.slice(skip, skip + this.multiply));
-    this.currentPage++;
-    this.createMasonry(true);
+    if (this.news) {
+      this.items.push(...this.news.slice(skip, skip + this.multiply));
+      this.currentPage++;
+      this.createMasonry(true);
+    }
 
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));

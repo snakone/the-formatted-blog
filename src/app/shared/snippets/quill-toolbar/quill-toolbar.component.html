@@ -1,73 +1,66 @@
-<div class="toolbar"
-     [ngClass]="{'form': form}">  <!-- TOOLBAR -->
+<div class="toolbar" [ngClass]="{'form': form}">  <!-- TOOLBAR -->
   <div class="flex">
-    <!-- TOTAL -->
-    <span>
-      <i class="far fa-newspaper"></i> {{total$ | async}}
-    </span>
-    <ng-container *ngIf="(saving$ | async) as state">
-      <ng-container [ngSwitch]="state.type">
-        <!-- SAVING -->
-        <ng-container *ngSwitchCase="'saving'">
+    <span><i class="far fa-newspaper"></i> {{totalDrafts$ | async}}</span> <!-- TOTAL -->
+    @if(saving$ | async; as state) {
+      @switch(state.type) {
+        @case(saveTypes.SAVING) {
           <div class="animated fadeIn">
             <i [class]="state.value ? 'fas fa-spinner fa-pulse' : 'fas fa-check'"></i> 
             <span>{{state.value ? 'Guardando...' : 'Guardado'}}</span>
           </div>
-        </ng-container>
-        <!-- WARNING -->
-        <ng-container *ngSwitchCase="'warning'">
+        }
+        @case(saveTypes.WARNING) {
           <div class="animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
             <span>No se ha podido guardar. Comprueba los datos</span>
           </div>
-        </ng-container>
-        <ng-container *ngSwitchCase="'temporal'">
+        }
+        @case(saveTypes.TEMPORAL) {
           <div class="animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
             <span>No se guardarán los datos hasta que aceptes.</span>
           </div>
-        </ng-container>
-      </ng-container>
-    </ng-container>
+        }
+      }
+    }
   </div>
-  <div class="actions" *ngIf="{
-    saving: saving$ | async
-  } as pipe">  
-    <!-- ACTIONS -->
-    <ng-container *ngFor="let l of list">
-      <ng-container *ngIf="!form">
-        <i [class]="l.icon"
-          [matTooltip]="(!pipe.saving?.value && draft) ? l.label : null"
-          (click)="switchObj[l.action](pipe.saving?.value)"
-          [ngClass]="{'disabled': pipe.saving?.value || !draft || (draft.temporal && (l.action === 'new'))}">
+  @if({saving: saving$ | async}; as obs) {
+    <div class="actions">
+      @if(!form) {
+        <!-- ACTIONS -->
+        @for(item of iconList; track item.label) {
+          <i [class]="item.icon"
+             [matTooltip]="(!obs.saving?.value && draft) ? item.label : null"
+             (click)="switchAction[item.action](obs.saving?.value)"
+             [ngClass]="{'disabled': 
+                obs.saving?.value || !draft || (draft.temporal && (item.action === 'new'))
+             }">
+          </i>
+        }
+        <i class="far fa-question-circle" 
+          matTooltip="Ayuda" 
+          (click)="switchAction.help()">
         </i>
-      </ng-container>
-    </ng-container>
-    <!-- HELP -->
-    <ng-container *ngIf="!form">
-      <i class="far fa-question-circle" 
-        matTooltip="Ayuda" 
-        (click)="switchObj.help()">
-      </i>
-      <!-- NEXT -->
-      <i class="fab fa-wpforms"
-        [matTooltip]="(!pipe.saving?.value && draft) ? 'Formulario' : null"
-        [ngClass]="{'disabled': pipe.saving?.value || !draft}"
-        (click)="switchObj.next()">
-      </i>
-    </ng-container>
-    <ng-container *ngIf="form">
-      <!-- CLEAN -->
-      <i class="fas fa-broom"
-        matTooltip="Limpiar"
-        (click)="switchObj.clean()">
-      </i>
-      <!-- BACK -->
-      <i class="fas fa-fast-backward"
-        matTooltip="Lienzo"
-        [routerLink]="['../']"
-        *ngIf="form">
-      </i>
-    </ng-container>
-  </div>
+        <!-- FORM -->
+        <i class="fab fa-wpforms"
+          [matTooltip]="(!obs.saving?.value && draft) ? 'Formulario' : null"
+          [ngClass]="{'disabled': obs.saving?.value || !draft}"
+          (click)="switchAction.form()">
+        </i>
+      }
+      @if(form) {
+        <!-- CLEAN -->
+        <i class="fas fa-broom"
+          matTooltip="Limpiar"
+          (click)="switchAction.clean()">
+        </i>
+        <!-- BACK -->
+        <i class="fas fa-fast-backward"
+          matTooltip="Lienzo"
+          [routerLink]="['../']"
+          *ngIf="form">
+        </i>
+      }
+    </div>
+  }
 </div>

@@ -11,6 +11,7 @@ import { FQA_ITEMS } from '@shared/data/data';
 export class HelpContentComponent {
 
   items = FQA_ITEMS;
+  trigger = false;
 
   ngOnInit() { }
 

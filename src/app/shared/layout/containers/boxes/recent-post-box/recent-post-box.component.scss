@@ -47,6 +47,7 @@
 
         &:not(.no-image) {
           object-fit: cover;
+          display: block;
         }
       }
 

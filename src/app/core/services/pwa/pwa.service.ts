@@ -17,6 +17,7 @@ import { USER_ID_KEY } from '@shared/data/constants';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 import { environment } from '@env/environment';
+import { PUSH_DENIED_DIALOG } from '@shared/data/dialogs';
 
 @Injectable({providedIn: 'root'})
 
@@ -119,9 +120,7 @@ export class PWAService {
   }
 
   private openPushModal(): void {
-    setTimeout(() => {
-      this.crafter.dialog(PushDeniedOverlayComponent);
-    }, 333);
+    setTimeout(() => this.crafter.dialog(PUSH_DENIED_DIALOG), 333);
   }
 
 }

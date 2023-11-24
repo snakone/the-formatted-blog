@@ -1,3 +1,5 @@
+import { AccountType, UserActivityType } from "./interface.app";
+
 // USER
 export interface User {
   _id: string;
@@ -38,9 +40,4 @@ export interface UserActivity {
   user?: string;
 }
 
-export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'approved';
-export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
-export type UserActivityType = 'create' | 'delete' | 'update';
-export type SearchType = 'post' | 'draft' | 'favorite';
-export type SavingDraftType = 'saving' | 'warning' | 'temporal';
 

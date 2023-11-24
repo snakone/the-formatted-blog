@@ -1,30 +1,26 @@
-<div *ngIf="control.invalid && control.dirty" 
-      class="form-error"
-      [ngClass]="{'left': left}">
-    <!-- MIN LENGTH -->
-    <span *ngIf="validator.includes('minlength') && control.errors?.minlength">
-      Tamaño mínimo: 
-      <strong>{{control.errors?.minlength.requiredLength}}</strong>
-    </span>
-    <!-- MAX LENGTH -->
-    <span *ngIf="validator.includes('maxlength') && control.errors?.maxlength">
-      Tamaño máximo: 
-      <strong>{{control.errors?.maxlength.requiredLength}}</strong>
-    </span>
-    <!-- REQUIRED -->
-    <span *ngIf="validator.includes('required') && control.errors?.required">
-      Campo requerido
-    </span>
-    <!-- PATTERN -->
-    <span *ngIf="validator.includes('pattern') && control.errors?.pattern">
-      Fórmato no válido
-    </span>
-    <!-- EMAIL -->
-    <span *ngIf="validator.includes('email') && control.errors?.email">
-      Fórmato correo no válido
-    </span>
-    <!-- PASSWORD -->
-    <span *ngIf="validator.includes('password') && control.errors?.password">
-      La contraseña no coincide
-    </span>
-</div>
+@if(control && control.valid && control.dirty) {
+  <div class="form-error" [ngClass]="{'left': left}">
+    @if(validator.includes('minlength') && control.errors?.minlength) {
+      <span>Tamaño mínimo: 
+        <strong>{{control.errors?.minlength.requiredLength}}</strong>
+      </span>
+    }
+    @if(validator.includes('maxlength') && control.errors?.maxlength) {
+      <span> Tamaño máximo: 
+        <strong>{{control.errors?.maxlength.requiredLength}}</strong>
+      </span>
+    }
+    @if(validator.includes('required') && control.errors?.required) {
+      <span>Campo requerido</span>
+    }
+    @if(validator.includes('pattern') && control.errors?.pattern) {
+      <span>Fórmato no válido</span>
+    }
+    @if(validator.includes('email') && control.errors?.email) {
+      <span>Fórmato correo no válido</span>
+    }
+    @if(validator.includes('password') && control.errors?.password) {
+      <span>La contraseña no coincide</span>
+    }
+  </div>
+}

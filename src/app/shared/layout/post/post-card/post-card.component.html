@@ -1,9 +1,9 @@
-<ng-container *ngIf="post">
+@defer (when post) {
   <article class="default"
-           [ngClass]="{
-             'alone': alone, 
-             'small': small, 
-             'last': last
+            [ngClass]="{
+              'alone': alone, 
+              'small': small, 
+              'last': last
             }">
     <figure>
       <img [src]="post.cover"
@@ -11,7 +11,7 @@
            alt="Post Image"
            #img (error)="img.src = 'assets/images/placeholder.png'" img.alt='No Image'/>
       <!-- HOVER -->
-      <ng-container *ngIf="!isDraft && !alone">
+      @if(!isDraft && !alone) {
         <div class="inner">
           <div class="content">
             <span (click)="share()"><i class="fas fa-link"></i></span>
@@ -20,90 +20,107 @@
             </span>
           </div>
         </div>
-      </ng-container>
+      }
     </figure>
     <!-- CONTENT -->
     <div class="main-content">
       <p class="category">{{post.category}}</p>
       <h1 [routerLink]="isDraft ? ('/draft/' + post.slug) : ('/post/' + post.slug)">{{post.title}}</h1>
-      <p class="date" *ngIf="!small">
-         <!-- DRAFT STATUS -->
-        <ng-container *ngIf="isDraft"> 
-          <span [class]="post.status">{{post.status | draftStatus}} </span>
-          <span class="tale">-</span>
-        </ng-container>
-        <span>{{post.created}}</span>
-      </p>
-      <!-- INTRO -->
-      <ng-container *ngIf="!alone; else isAlone">
-        <div [ngClass]="{'intro': !!post.intro}" 
-             [innerHTML]="post.intro | shortMessage: alone : small : showIntro">
-        </div>
-      </ng-container>
-      <!-- FULL MESSAGE -->
-      <ng-template #isAlone>
+      
+      @if(!small) {
+        <p class="date">
+        <!-- DRAFT STATUS -->
+          @if(isDraft) {
+            <span [class]="post.status">{{post.status | draftStatus}} </span>
+            <span class="tale">-</span>
+          }
+          <span>{{post.created}}</span>
+        </p>
+      }
+
+      @if(alone) {
+         <!-- FULL MESSAGE -->
         <div class="alone-intro" [innerHTML]="post.intro | shortMessage: alone"></div>
         <quill-view [content]="post.message" [modules]="quillModules" class="alone"></quill-view>
-      </ng-template>
+      } @else {
+        <div [ngClass]="{'intro': !!post.intro}" 
+             [innerHTML]="(post.intro | shortMessage: alone : small : showIntro) | Sanitizer: 'html'">
+        </div>
+      }
       <!-- BOTTOM -->
       <div class="bottom" [ngClass]="{'first': border}">
-        <div *ngIf="small">
-          <!-- DRAFT STATUS -->
-          <p class="date">
-            <ng-container *ngIf="isDraft"> 
-              <span [class]="post.status">{{post.status | draftStatus}} </span>
-              <span class="tale">-</span>
-            </ng-container>
-            <span>{{post.created}}</span>
-          </p>
+        @if(small) {
+          <div>
+            <p class="date">
+              @if(isDraft) {
+                <span [class]="post.status">{{post.status | draftStatus}} </span>
+                <span class="tale">-</span> 
+              }
+              <span>{{post.created}}</span>
+            </p>
+            <span class="author">{{post.author}}</span>
+          </div>
+        } @else {
           <span class="author">{{post.author}}</span>
-        </div>
-        <span *ngIf="!small" class="author">{{post.author}}</span>
+        }
+
         <!-- ICONS -->
         <ul [ngClass]="{'small': small}">
-          <!-- POST ICONS -->
-          <ng-container *ngIf="!isDraft; else draftIcon">
-            <li *ngIf="alone" (click)="share()"><i class="fas fa-link" [matTooltip]="'Compartir'"></i></li>
-            <li (click)="editPost()" *ngIf="post.user === user?._id">
-              <i class="fas fa-pen-fancy" [matTooltip]="'Editar'"></i>
-            </li>
-            <li (click)="friend()" *ngIf="post.user !== user?._id">
-              <i class="fas fa-user-plus" [matTooltip]="'Añadir'"></i>
-            </li>
-            <li *ngFor="let i of postIcons"
-                (click)="switchObjPost[i.action]()"
-                [ngClass]="{'disabled': (i.action === 'download' && !alone) || (i.action === 'message' && post.user === user?._id)}">
-              <i [class]="i.icon" [matTooltip]="i.label"></i>
-            </li>
-            <li>
-              <ng-container *ngIf="favoritesID.includes(post._id); else noFavorite">
-                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
-              </ng-container>
-              <ng-template #noFavorite>
-                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
-              </ng-template>
-            </li>
-          </ng-container>
           <!-- DRAFT ICONS -->
-          <ng-template #draftIcon>
-            <li *ngFor="let i of draftIcons"
-                (click)="switchObjDraft[i.action]()">
-              <i [class]="i.icon"
-                 [matTooltip]="i.label"
-                 [ngClass]="{'disabled': i.action === 'edit' && post.status === 'pending'}">
-              </i>
-            </li>
+          @if(isDraft) {
+            @for(item of draftIcons; track item.icon) {
+              <li (click)="switchObjDraft[item.action]()">
+                <i [class]="item.icon"
+                    [matTooltip]="item.label"
+                    [ngClass]="{'hide': item.action === 'edit' && post.status === 'pending'}">
+                </i>
+              </li>
+            }
+            <!-- FAVORITE -->
             <li>
-              <ng-container *ngIf="favoritesID?.includes(post._id); else noFavorite">
+              @if(favoritesID?.includes(post._id)) {
                 <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
-              </ng-container>
-              <ng-template #noFavorite>
+              } @else {
                 <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
-              </ng-template>
+              }
             </li>
-          </ng-template>
+          } @else {
+            <!-- SHARE -->
+            @if(alone) {
+              <li (click)="share()"><i class="fas fa-link" [matTooltip]="'Compartir'"></i></li>
+            }
+            <!-- EDIT -->
+            @if(post.user === user?._id) {
+              <li (click)="editPost()">
+                <i class="fas fa-pen-fancy" [matTooltip]="'Editar'"></i>
+              </li>
+            }
+            <!-- ADD FRIEND -->
+            @if(post.user !== user?._id) {
+              <li (click)="friend()">
+                <i class="fas fa-user-plus" [matTooltip]="'Añadir'"></i>
+              </li>
+            }
+
+            @for(item of postIcons; track item.icon) {
+              <li (click)="switchObjPost[item.action]()"
+                  [ngClass]="{'hide': (item.action === 'download' && !alone) || (item.action === 'message' && post.user === user?._id)}">
+                <i [class]="item.icon" [matTooltip]="item.label"></i>
+              </li>
+            }
+            <!-- FAVORITE -->
+            <li>
+              @if(favoritesID?.includes(post._id)) {
+                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
+              } @else {
+                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
+              }
+            </li>
+          }
         </ul>
       </div>
     </div>
   </article>
-</ng-container>
+} @placeholder {
+  <div>LOADING</div>
+}

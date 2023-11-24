@@ -3,13 +3,15 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { CHECKSTATUS, DELETE_CONFIRMATION, PUBLISH_CONFIRMATION } from '@shared/data/data';
-import { PUBLISH_PUSH } from '@shared/data/notifications';
-import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
-import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
+
 import { Post } from '@shared/types/interface.post';
 import { DraftCheck } from '@shared/types/interface.server';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
+
+import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE } from '@shared/data/dialogs';
+import { PUBLISH_PUSH } from '@shared/data/notifications';
+import { CHECKSTATUS } from '@shared/data/data';
+import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-admin-draft',
@@ -58,23 +60,19 @@ export class AdminDraftComponent {
   public preview(): void {
     if (!this.draft) { return; }
     this.draftsFacade.setPreview(this.draft);
-
-    this.crafter.dialog(DraftPreviewDialogComponent, {
-      updateStatus: true,
-      draft: this.draft
-    }, undefined, 'preview');
+    this.crafter.dialog(PREVIEW_DRAFT_DIALOG_UPDATE(this.draft));
   }
 
   public publish(): void {
-    const ok = this.isEverythingOK(this.draft.check);
+    const allCheckOK = this.isEverythingOK(this.draft.check);
     Object.values(this.draft.check).forEach(c => {
       if (c.ok) {
         c.cause = null;
       }
     });
 
-    // Publish DRAFT
-    if (ok) {
+    // PUBLISH DRAFT
+    if (allCheckOK) {
       this.crafter.confirmation(PUBLISH_CONFIRMATION)
        .afterClosed()
         .pipe(

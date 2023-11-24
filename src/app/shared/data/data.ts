@@ -94,30 +94,6 @@ export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-cloud-download-alt', label: 'Descargar en HTML', action: 'download' },
 ];
 
-export const SAVE_CONFIRMATION: ConfirmationDialogProps = {
-  title: 'Nuevo...',
-  message: '¿Quieres guardar el boceto actual y crear uno nuevo?'
-};
-
-export const DELETE_CONFIRMATION: ConfirmationDialogProps = {
-  title: 'Eliminar...',
-  message: '¿Estás seguro que quieres eliminar este boceto?'
-};
-
-export const PUBLISH_CONFIRMATION: ConfirmationDialogProps = {
-  title: 'Publicar...',
-  message: '¿Estás seguro que quieres publicar este boceto?'
-};
-
-export const EDIT_POST_CONFIRMATION: ConfirmationDialogProps = {
-  title: 'Editar artículo...',
-  message: '¿Estás seguro que quieres editar este artículo? Recuerda que si lo editas, volverá al estado de boceto.'
-};
-
-export const REMOVE_FRIEND_CONFIRMATION: ConfirmationDialogProps = {
-  title: 'Eliminar amigo...',
-  message: '¿Estás seguro que quieres eliminar a este usuario de tu lista de amigos?'
-};
 
 export const POST_CATEGORIES: TextList[] = [
   { label: 'Actualidad', key: 'news' },

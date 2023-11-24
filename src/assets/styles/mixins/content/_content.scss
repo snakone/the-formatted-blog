@@ -64,7 +64,7 @@
   align-items: center;
 }
 
-// FLEX AROUND
+// FLEX START
 @mixin flex-start {
   display: flex;
   justify-content: flex-start;
@@ -84,7 +84,7 @@
 
 // CARD
 @mixin shadow-card() {
-  box-shadow: inset 1px 0 6px rgba(0,0,0,0.22);
+  box-shadow: inset 1px 0 6px var(--shadow-card-border);
   outline: none;
 
   &:hover {

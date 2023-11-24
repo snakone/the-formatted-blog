@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { REMOVE_FRIEND_CONFIRMATION, SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
+import { SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
+import { EDIT_PROFILE_DIALOG, REMOVE_FRIEND_CONFIRMATION } from '@shared/data/dialogs';
 import { EditProfileDialogComponent } from '@shared/layout/overlays/edit-profile/edit-profile.component';
 import { Post } from '@shared/types/interface.post';
 import { User } from '@shared/types/interface.user';
@@ -28,7 +29,11 @@ export class ProfileHomeSidebarComponent {
   socialList = SOCIAL_LIST;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private crafter: CrafterService, private postFacade: PostsFacade, private userFacade: UsersFacade) { }
+  constructor(
+    private crafter: CrafterService,
+    private postFacade: PostsFacade,
+    private userFacade: UsersFacade
+  ) { }
 
   ngOnInit() {
     this.recentPost$ = this.postFacade.byUser$;
@@ -42,7 +47,7 @@ export class ProfileHomeSidebarComponent {
   }
 
   public edit(): void {
-    this.crafter.dialog(EditProfileDialogComponent, {user: this.user}, null, 'edit-profile')
+    this.crafter.dialog(EDIT_PROFILE_DIALOG(this.user));
   }
 
   public isUserMyFriend(friends: User[]): boolean {
@@ -55,7 +60,7 @@ export class ProfileHomeSidebarComponent {
       .pipe(
         takeUntil(this.unsubscribe$),
         filter(_ => _ && !!_)
-      ).subscribe(_ =>     this.userFacade.removeFriend(this.user._id));
+      ).subscribe(_ => this.userFacade.removeFriend(this.user._id));
   }
 
   public addFriend(): void {

@@ -21,6 +21,9 @@ export class SnackOverlayComponent implements AfterViewInit {
   data!: Snack | null;
   $unsubscribe = new Subject<void>();
   count = 0;
+  animationDelay = 800;
+  classIn = 'fadeInLeft';
+  classOut = 'fadeOutLeft';
 
   constructor(private crafter: CrafterService) { }
 
@@ -38,14 +41,17 @@ export class SnackOverlayComponent implements AfterViewInit {
     }
 
     const css: DOMTokenList = this.el?.nativeElement.classList || null;
-    css?.remove('fadeInLeft');
-    css?.add('fadeOutLeft');
+    css?.remove(this.classIn);
+    css?.add(this.classOut);
+    this.waitAndSetSnack(res);
+  }
 
-    setTimeout(() => this.data = null, 800); // Animation Delay
+  private waitAndSetSnack(res: Snack): void {
+    setTimeout(() => this.data = null, this.animationDelay);
 
     !res.message ? 
       this.count = 0 : 
-      setTimeout(() => (this.data = res, this.count++), 800)
+      setTimeout(() => (this.data = res, this.count++), this.animationDelay);
   }
 
   ngOnDestroy() {

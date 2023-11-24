@@ -2,6 +2,13 @@ import { FormattedNew } from "./interface.app";
 import { Post } from "./interface.post";
 import { User, UserActivity } from "./interface.user";
 
+// SERVER RESPONSES
+interface ServerResponse {
+  ok: boolean;
+  message?: string;
+  err?: any;
+}
+
 export interface PostResponse extends ServerResponse {
  posts: Post[];
  post: Post;
@@ -11,13 +18,6 @@ export interface PostResponse extends ServerResponse {
 export interface DraftResponse extends ServerResponse {
   drafts?: Post[];
   draft?: Post;
-}
-
-// SERVER RESPONSES
-interface ServerResponse {
-  ok: boolean;
-  message?: string;
-  err?: any;
 }
 
 export interface UserResponse extends ServerResponse {

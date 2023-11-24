@@ -1,10 +1,9 @@
-import { ComponentType } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Snack } from '@shared/types/interface.app';
+import { FormattedDialog, Snack } from '@shared/types/interface.app';
 
 @Injectable({providedIn: 'root'})
 
@@ -18,34 +17,31 @@ export class CrafterService {
     private matDialog: MatDialog
   ) { }
 
-  public dialog<T>(
-    component: ComponentType<T>,
-    data?: any,
-    id?: string,
-    css?: string
-  ): MatDialogRef<T> {
-    return this.matDialog.open(component, {
-      data, id: id || '', panelClass: css
+  public dialog<T>({...args}: FormattedDialog<T>): MatDialogRef<T> {
+    return this.matDialog.open(args.component, {
+      data: args.data, id: args.id || '', panelClass: args.css
     });
   }
 
   public setSnack(
     message: string | null,
-    type: snackType = 'info',
+    type: SnackType = 'info',
     duration: number = 3000
   ): void {
     if (this.alreadySnack) { return; }
     setTimeout(() => {
       this.snack$.next({message, type});
       this.alreadySnack = true;
-      
-      this.time = setTimeout(() => {
-        this.snack$.next({message: null});
-        this.clearSnack();
-        this.alreadySnack = false;
-      }, duration);
-
+      this.removeSnack(duration);
     }, this.time ? duration : 0);
+  }
+
+  private removeSnack(duration: number): void {
+    this.time = setTimeout(() => {
+      this.snack$.next({message: null});
+      this.clearSnack();
+      this.alreadySnack = false;
+    }, duration);
   }
 
   private clearSnack(): void {
@@ -63,4 +59,4 @@ export class CrafterService {
 
 }
 
-type snackType = 'success' | 'info' | 'warning' | 'error';
+type SnackType = 'success' | 'info' | 'warning' | 'error';

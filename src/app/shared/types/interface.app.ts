@@ -1,3 +1,4 @@
+import { ComponentType } from "@angular/cdk/portal";
 import { Post } from "./interface.post";
 
 export interface PostHeader {
@@ -98,8 +99,22 @@ export interface FormattedNew {
   published_at: Date;
 }
 
+export interface FormattedDialog<T> {
+  component: ComponentType<T>,
+  data?: any,
+  id?: string,
+  css?: string
+}
+
 export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'approved';
+export type DraftTypes = 'draft' | 'post';
 export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
 export type UserActivityType = 'create' | 'delete' | 'update';
 export type SearchType = 'post' | 'draft' | 'favorite';
 export type SavingDraftType = 'saving' | 'warning' | 'temporal';
+
+export enum SavingTypeEnum {
+  SAVING = 'saving',
+  WARNING = 'warning',
+  TEMPORAL = 'temporal'
+}

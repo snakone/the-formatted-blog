@@ -15,8 +15,7 @@ export class ShortMessagePipe implements PipeTransform {
             value : 
               small && showIntro ? 
                 (value.slice(0, 325) + '...') : 
-              showIntro ? (value.slice(0, 610) + '...') : 
-                '';
+              showIntro ? (value.slice(0, 610) + '...') : '';
   }
 
 }

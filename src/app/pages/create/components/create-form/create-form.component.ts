@@ -3,12 +3,13 @@ import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } fro
 import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime, startWith, map } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { EDIT_POST_CONFIRMATION, POST_CATEGORIES } from '@shared/data/data';
+import { POST_CATEGORIES } from '@shared/data/data';
 import { IMAGE_PATTERN } from '@shared/data/patterns';
 import { Post } from '@shared/types/interface.post';
 import { NavigationEnd, Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
+import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
 
 @Component({
   selector: 'app-create-form',
