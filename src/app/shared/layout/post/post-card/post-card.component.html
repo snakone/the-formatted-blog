@@ -1,4 +1,4 @@
-@defer (when post) {
+@defer(when post) {
   <article class="default"
             [ngClass]="{
               'alone': alone, 
@@ -72,22 +72,32 @@
               <li (click)="switchObjDraft[item.action]()">
                 <i [class]="item.icon"
                     [matTooltip]="item.label"
-                    [ngClass]="{'hide': item.action === 'edit' && post.status === 'pending'}">
+                    [ngClass]="{'hide': item.action === 'edit' && 
+                                        post.status === draftStatus.PENDING
+                               }">
                 </i>
               </li>
             }
             <!-- FAVORITE -->
             <li>
               @if(favoritesID?.includes(post._id)) {
-                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
+                <i class="fas fa-star favorite" 
+                   (click)="removeFavorite()" 
+                   [matTooltip]="'Eliminar favorito'">
+                </i>
               } @else {
-                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
+                <i class="far fa-star" 
+                  (click)="favorite()" 
+                  [matTooltip]="'Añadir favorito'">
+                </i>
               }
             </li>
           } @else {
             <!-- SHARE -->
             @if(alone) {
-              <li (click)="share()"><i class="fas fa-link" [matTooltip]="'Compartir'"></i></li>
+              <li (click)="share()">
+                <i class="fas fa-link" [matTooltip]="'Compartir'"></i>
+              </li>
             }
             <!-- EDIT -->
             @if(post.user === user?._id) {
@@ -104,16 +114,25 @@
 
             @for(item of postIcons; track item.icon) {
               <li (click)="switchObjPost[item.action]()"
-                  [ngClass]="{'hide': (item.action === 'download' && !alone) || (item.action === 'message' && post.user === user?._id)}">
+                  [ngClass]="{
+                    'hide': (item.action === 'download' && !alone) || 
+                            (item.action === 'message' && post.user === user?._id)
+                    }">
                 <i [class]="item.icon" [matTooltip]="item.label"></i>
               </li>
             }
             <!-- FAVORITE -->
             <li>
               @if(favoritesID?.includes(post._id)) {
-                <i class="fas fa-star favorite" (click)="removeFavorite()" [matTooltip]="'Eliminar favorito'"></i>
+                <i class="fas fa-star favorite" 
+                   (click)="removeFavorite()" 
+                   [matTooltip]="'Eliminar favorito'">
+                </i>
               } @else {
-                <i class="far fa-star" (click)="favorite()" [matTooltip]="'Añadir favorito'"></i>
+                <i class="far fa-star" 
+                   (click)="favorite()" 
+                   [matTooltip]="'Añadir favorito'">
+                </i>
               }
             </li>
           }
@@ -121,6 +140,4 @@
       </div>
     </div>
   </article>
-} @placeholder {
-  <div>LOADING</div>
 }

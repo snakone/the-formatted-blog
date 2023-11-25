@@ -9,10 +9,13 @@ import { AfterContentChecked, Component } from '@angular/core';
 export class TextSliderComponent implements AfterContentChecked {
 
   index = 0;
-  time = 400;
+  transitionTime = 400;
+  overlapIndexTime = 800;
+  intervalTime = 5000;
   slider: HTMLElement | undefined | null;
   timeouts: NodeJS.Timer[] = [];
   interval = this.createInterval();
+  itemWidth = 228;
 
   items: string[] = [
     'The Latest For Your New Post',
@@ -28,24 +31,45 @@ export class TextSliderComponent implements AfterContentChecked {
 
   private createInterval(): NodeJS.Timer {
     this.timeouts.forEach((out: unknown) => window.clearTimeout(out as number))
-    return setInterval(() => this.slide(1), 5000);
+    return setInterval(() => this.slide(1), this.intervalTime);
   }
 
   public slide(value: number, clear = false): void {
-    if (this.index + value < 0) this.set(this.items.length - 1, 800);
-    else if (this.index + value >= this.items.length) this.set(0, 800);
-    else this.set(this.index += value, 400);
-
-    if (this.slider) {
-      const style = this.slider.style;
-      style.transition = `all ${this.time}ms 0`;
-      style.transform = `translate3d(-${this.index * 228}px, 0, 0)`;
-    }
-
+    this.updateIndex(value);
+    this.updateSliderStyles();
+  
     if (clear && this.interval) { 
       window.clearInterval(this.interval as unknown as number);
-      this.timeouts.push(setTimeout(() => this.createInterval(), 5000));
+      this.timeouts.push(setTimeout(() => this.createInterval(), this.intervalTime));
     }
+  }
+  
+  private updateIndex(value: number): void {
+    const newIndex = this.index + value;
+  
+    if (newIndex < 0) {
+      this.set(this.items.length - 1, this.overlapIndexTime);
+    } else if (newIndex >= this.items.length) {
+      this.set(0, this.overlapIndexTime);
+    } else {
+      this.set(newIndex, this.transitionTime);
+    }
+  }
+  
+  private updateSliderStyles(): void {
+    if (this.slider) {
+      const style = this.slider.style;
+      style.transition = this.createTransitionStyle();
+      style.transform = this.createTransformStyle();
+    }
+  }
+
+  private createTransitionStyle(): string {
+    return `all ${this.transitionTime}ms 0`;
+  }
+
+  private createTransformStyle(): string {
+    return `translate3d(-${this.index * this.itemWidth}px, 0, 0)`;
   }
 
   private set(
@@ -53,7 +77,7 @@ export class TextSliderComponent implements AfterContentChecked {
     time: number
   ): void {
     this.index = i;
-    this.time = time;
+    this.transitionTime = time;
   }
   
 }

@@ -8,11 +8,11 @@
   --input-bg: #fffdbd;
   --contrast-color: #001c9b;
   --border-color: #c9c9c9;
-  --transparent-bg: rgba(255, 255, 255 , 0.85);
+  --transparent-bg: rgba(255 255 255 / 85%);
   --quote-bg: #fffdbd;
   --navigation-border: #e2e1e1;
   --navbar-border: #484a4a;
-  --add-bg: rgba(225, 225, 225, .7);
+  --add-bg: rgba(225 225 225 / 70%);
   --button-text-color: #3b3939;
   --inverted-contrast: #ffe364;
   --error-color: #ee2525;
@@ -21,7 +21,7 @@
   --date-color: #616161;
   --li-hover: #eee8e8;
   --success-color: #4BB543;
-  --input-focus: rgba(0, 0, 0, .2);
+  --input-focus: rgba(0 0 0 / 20%);
   --pending-color: #9558b7;
   --action-bar-bg: #e4e0e0;
   --action-bar-text: #4a4a4a;
@@ -33,8 +33,9 @@
   --pending-color: #fbdfee;
   --approved-color: #81bd9a;
   --info-color: #0e67bb;
-  --skeleton-color: #ececec;
-  --shadow-card-border: rgba(0, 0, 0, 0.22);
+  --skeleton-color: #cdcdcf;
+  --shadow-card-border: rgba(28 28 28 / 22%);
+  --mdc-dialog-container-color: #f7f3f3;
 
   // SIZE
   --app-width: 369px;

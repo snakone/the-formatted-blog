@@ -1,5 +1,5 @@
 <div class="content animated fadeIn">
-  <app-post-search [type]="'draft'"></app-post-search>
+  <app-post-search [type]="searchType.DRAFT"></app-post-search>
   <ng-container *ngIf="(drafts$ | async) as items; else loading">
     <app-post-card *ngFor="let item of items; 
                            let i = index; 

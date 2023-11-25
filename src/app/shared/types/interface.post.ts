@@ -1,6 +1,6 @@
 import { DeltaStatic } from "quill";
 import { DraftCheck } from "./interface.server";
-import { DraftStatus, DraftTypes } from "./interface.app";
+import { DraftStatus, DraftTypes } from "./types.enums";
 
 // POST
 export interface Post {
@@ -29,4 +29,10 @@ export interface Post {
 export interface PostHeader {
   text: string;
   id: string;
+}
+
+export interface QuillHelpItem {
+  icon: string;
+  label: string;
+  class?: string;
 }

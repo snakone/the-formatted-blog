@@ -12,8 +12,7 @@ import { NotificationPayload } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { SWResponse } from '@shared/types/interface.server';
 
-import { URI } from 'app/app.config';
-import { USER_ID_KEY } from '@shared/data/constants';
+import { URI, USER_ID_KEY } from '@shared/data/constants';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 import { environment } from '@env/environment';

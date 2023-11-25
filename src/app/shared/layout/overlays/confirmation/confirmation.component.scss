@@ -1,10 +1,23 @@
 h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 21px;
 }
 
-div[mat-dialog-content] {
+.message {
   margin-bottom: .8rem;
+}
+
+.actions {
+  margin-top: 1rem;
+
+  & button {
+    color: var(--dark-color);
+
+    &[cdkFocusInitial] {
+      color: var(--light-color);
+      background-color: var(--contrast-color);
+    }
+  }
 }
 
 @media(max-width: 550px) {
@@ -14,12 +27,12 @@ div[mat-dialog-content] {
     line-height: 28px;
   }
 
-  div[mat-dialog-content] {
+  .message {
     font-size: 13px;
     margin-bottom: 0;
   }
 
-  div[mat-dialog-actions] {
+  .actions {
     padding-top: 0;
   }
 }

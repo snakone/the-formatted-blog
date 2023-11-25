@@ -14,6 +14,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import Quill from 'quill';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
+import { SavingTypeEnum, SavingDraftType } from '@shared/types/types.enums';
 
 const Quill_Icons = Quill.import('ui/icons');
 
@@ -129,7 +130,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
         this.crafter.confirmation(EDIT_POST_CONFIRMATION)
         .afterClosed()
           .pipe(
-            tap(res => !res ? this.save(false, 'temporal') : null),
+            tap(res => !res ? this.save(false, SavingTypeEnum.TEMPORAL) : null),
             takeUntil(this.unsubscribe$),
             filter(_ => _ && !!_)
         ).subscribe(_ => (this.save(false), this.postFacade.unPublish(temporalDraft)));
@@ -142,7 +143,11 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     this.draftsFacade.setPreview(temporalDraft);
   }
 
-  private save(value: boolean, type: 'saving' | 'warning' | 'temporal' = 'saving'): void {
+  private save(
+    value: boolean, 
+    type: SavingDraftType | 
+          SavingTypeEnum.TEMPORAL = SavingTypeEnum.SAVING
+  ): void {
     this.draftsFacade.setSaving({type, value})
   }
 

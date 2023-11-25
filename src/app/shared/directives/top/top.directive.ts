@@ -2,13 +2,16 @@ import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { takeUntil, distinctUntilChanged, throttleTime } from 'rxjs/operators';
 import { Subject, fromEvent } from 'rxjs';
 
+const limit = 800;
+const addClass = 'fadeInRight';
+const outClass = 'fadeOutRight'
+
 @Directive({selector: '[TopDirective]'})
 
 export class TopDirective implements AfterViewInit, OnDestroy {
 
   displayed = false;
   button = this.el.nativeElement;  // Button
-  limit = 800;
   private unsubscribe$ = new Subject<void>();
 
   constructor(private el: ElementRef) { }
@@ -29,23 +32,26 @@ export class TopDirective implements AfterViewInit, OnDestroy {
 
   private onScroll(): void {
     try {
-      const scroll = document.documentElement?.scrollTop || 0;
-      if (scroll > this.limit && this.displayed) { return; }
-      if (scroll < this.limit && !this.displayed) { return; }
-      this.manageCSS(scroll > this.limit)
-    } catch (err) { console.log(err); }
+      const scroll = window.scrollY || document.documentElement.scrollTop || 0;
+      if ((scroll > limit && this.displayed) || (scroll < limit && !this.displayed)) {
+        return;
+      }
+      this.manageCSS(scroll > limit);
+    } catch (err) {
+      console.error('Error al manejar el desplazamiento:', err);
+    }
   }
 
   private manageCSS(scrolled: boolean): void {
     if (scrolled) {
         this.button.style.display = 'block';
         this.displayed = true;
-        this.button.classList.remove('fadeOutRight');
-        this.button.classList.add('fadeInRight');
+        this.button.classList.remove(outClass);
+        this.button.classList.add(addClass);
     } else { 
         this.displayed = false;
-        this.button.classList.remove('fadeInRight');
-        this.button.classList.add('fadeOutRight');
+        this.button.classList.remove(addClass);
+        this.button.classList.add(outClass);
     }
   }
 

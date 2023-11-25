@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
-import { DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
 import { SavingType } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { takeUntil, filter, Subject } from 'rxjs';
+import { takeUntil, filter, Subject, tap } from 'rxjs';
+
+import { DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-draft-card',
@@ -16,11 +18,12 @@ import { takeUntil, filter, Subject } from 'rxjs';
 export class DraftCardComponent {
 
   @Input() draft: Post | undefined;
-  @Input() id: string | undefined; // DELETE
+  @Input() deletedDraftID: string | undefined; // DELETE
   @Input() saving: SavingType | undefined;
   @Input() first: boolean;
   @Input() collapsed = false;
   private unsubscribe$ = new Subject<void>();
+  draftStatus = DraftStatusEnum;
 
   constructor(
     private draftsFacade: DraftsFacade,
@@ -29,7 +32,7 @@ export class DraftCardComponent {
   ) { }
 
   public activate(draft: Post): void {
-    if (this.saving?.value || draft.status === 'pending') { return; }
+    if (this.saving?.value || draft.status === DraftStatusEnum.PENDING) { return; }
     this.draftsFacade.setActive(draft);
   }
 
@@ -44,11 +47,9 @@ export class DraftCardComponent {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => (
-        this.draftsFacade.delete(this.draft._id),
-        this.createDraftSrv.onDeleteDraft(this.draft._id)
-    ));
+        filter(Boolean),
+        tap(_ => this.createDraftSrv.onDeleteDraft(this.draft._id))
+    ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
   }
 
   ngOnDestroy() {

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime, startWith, map } from 'rxjs';
+import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { POST_CATEGORIES } from '@shared/data/data';
 import { IMAGE_PATTERN } from '@shared/data/patterns';
 import { Post } from '@shared/types/interface.post';
-import { NavigationEnd, Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
+import { SavingTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-create-form',
@@ -75,9 +75,9 @@ export class CreateFormComponent implements OnInit {
        takeUntil(this.unsubscribe$),
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
-       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: true})),
+       tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: true})),
        debounceTime(this.timer),
-       tap(_ => this.draftsFacade.setSaving({type: 'saving', value: false}))
+       tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: false}))
     )
      .subscribe(_ => this.submit());
   }
@@ -94,7 +94,7 @@ export class CreateFormComponent implements OnInit {
 
   public submit(): void {
     if (this.draftForm.invalid) { 
-      this.draftsFacade.setSaving({type: 'warning', value: true})
+      this.draftsFacade.setSaving({type: SavingTypeEnum.WARNING, value: true})
       return; 
     }
     const values = this.draftForm.value;

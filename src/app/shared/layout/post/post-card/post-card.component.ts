@@ -14,7 +14,8 @@ import { User } from '@shared/types/interface.user';
 
 import { DRAFT_ICONS, POST_ICONS } from '@shared/data/data';
 import { DELETE_CONFIRMATION, EDIT_POST_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
-import { CREATE_ROUTE, PENDING_KEY, POST_KEY, PROFILE_ROUTE } from '@shared/data/constants';
+import { CREATE_ROUTE, POST_KEY, PROFILE_ROUTE } from '@shared/data/constants';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-post-card',
@@ -38,6 +39,7 @@ export class PostCardComponent implements OnInit {
 
   postIcons = POST_ICONS;
   draftIcons = DRAFT_ICONS;
+  draftStatus = DraftStatusEnum;
   private unsubscribe$ = new Subject<void>();
 
   quillModules: QuillModules = {
@@ -78,7 +80,7 @@ export class PostCardComponent implements OnInit {
   }
 
   private edit(): void {
-    if (this.post.status === PENDING_KEY) { return; }
+    if (this.post.status === DraftStatusEnum.PENDING) { return; }
     this.draftsFacade.setActive(this.post);
     this.router.navigateByUrl(CREATE_ROUTE);
   }
@@ -110,8 +112,7 @@ export class PostCardComponent implements OnInit {
   }
 
   public async share(): Promise<void> {
-    await this.shareSrv.share(this.post)
-     .catch(err => console.log(err));
+    await this.shareSrv.share(this.post).catch(err => console.log(err));
   }
 
   private message(): void {

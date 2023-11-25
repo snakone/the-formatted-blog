@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { StatusButtons } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 import { Subject, filter, map, takeUntil } from 'rxjs';
 
 @Component({
@@ -18,10 +19,10 @@ export class AdminContentComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
   status: StatusButtons[] = [
-    {status: 'not-seen', active: false},
-    {status: 'seen', active: false}, 
-    {status: 'pending', active: false},
-    {status: 'all', active: false}
+    {status: DraftStatusEnum.NOT_SEEN, active: false},
+    {status: DraftStatusEnum.SEEN, active: false}, 
+    {status: DraftStatusEnum.PENDING, active: false},
+    {status: DraftStatusEnum.ALL, active: false}
   ];
 
   constructor(private draftsFacade: DraftsFacade) { }

@@ -189,6 +189,7 @@ article {
             &.fa-envelope { top: 1px }
 
             &.favorite {
+              transition: color 666ms ease-in-out;
               color: var(--contrast-color);
 
               &:hover {

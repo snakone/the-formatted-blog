@@ -85,6 +85,7 @@ nav {
       position: absolute;
       transition: all 0.4s ease-in-out;
       color: var(--contrast-color);
+      font-size: 16px;
 
       &.next {
         left: 0;

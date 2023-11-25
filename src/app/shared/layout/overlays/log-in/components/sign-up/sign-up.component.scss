@@ -1,19 +1,39 @@
 button { margin: 1.5rem auto }
 
+.checkbox-wrapper {
+  margin-top: 3.8rem;
+}
+
 .form-control {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.6rem;
   position: relative;
 
-  &:nth-child(3) { margin-bottom: 2.6rem }
-
   &.checkbox {
-    margin-top: 2.5rem;
-    margin-bottom: -8px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & label {
+      font-style: italic;
+    }
   }
 
   & label[for="notify"],
     label[for="conditions"] {
     font-size: .8rem;
+  }
+
+  & .hint {
+    bottom: -24px;
+    left: 2px;
+    position: absolute;
+    opacity: 0.5;
+    font-size: 12px;
+  }
+
+  & textarea + .hint {
+    bottom: -18px;
   }
 }
 

@@ -26,7 +26,7 @@ $quill-padding-sm: 16px;
   max-height: var(--quill-height);
 
   &[contenteditable="true"] { 
-    & h2:first-child {
+    & h2:first-child, h3:first-child {
       margin-top: 6px;
     }
    }
@@ -83,6 +83,10 @@ $quill-padding-sm: 16px;
 
     & h2 {
       margin: 30px 0 25px 0 !important;
+    }
+
+    & h2 {
+      margin: 25px 0 20px 0 !important;
     }
   }
 

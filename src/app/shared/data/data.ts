@@ -1,6 +1,7 @@
-import { IconList, ActionList, ConfirmationDialogProps, TextList, FQAItem } from '@shared/types/interface.app';
+import { IconList, ActionList, TextList, FQAItem } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { CheckStatusList } from '@shared/types/interface.server';
+import { DraftStatusEnum, DraftTypeEnum } from '@shared/types/types.enums';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export const CARROUSEL_OPTS: OwlOptions = {
@@ -29,8 +30,8 @@ export const DUMMY_POST: Post[] = [
     author: 'Elisa Park',
     created: 'Sep, 10 2019',
     cover: 'assets/images/05-img.jpg',
-    status: 'not-seen',
-    type: 'post',
+    status: DraftStatusEnum.NOT_SEEN,
+    type: DraftTypeEnum.POST,
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
   },
   {
@@ -39,8 +40,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Amazing Food',
     author: 'Marisa Hudson',
     created: 'Jun, 26 2019',
-    status: 'not-seen',
-    type: 'post',
+    status: DraftStatusEnum.NOT_SEEN,
+    type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg',
     user: '62262ead2aed27b93083e607',
     intro: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum. Integer sem dui, porttitor ac mi in, consequat imperdiet lacus. Maecenas ornare orci sit amet leo dictum, a aliquet magna cursus. Curabitur et ligula gravida, dapibus lectus et, gravida eros. Aenean lacinia sapien vel tortor dignissim, commodo tincidunt dolor eleifend. Vestibulum tempor semper ipsum, nec tincidunt eros consectetur quis. Curabitur luctus ex at massa tincidunt, sit amet tincidunt libero dapibus. Cras hendrerit nulla quam. Ut ex sapien, facilisis nec pellentesque vitae, consectetur sed ipsum.' 
@@ -51,8 +52,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Lifestyle',
     author: 'Jhone Albert',
     created: 'Sep, 17 2015',
-    status: 'pending',
-    type: 'post',
+    status: DraftStatusEnum.PENDING,
+    type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
   },
   {
@@ -61,8 +62,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Travel',
     author: 'Albert Jhone',
     created: 'Dec, 10 2016',
-    status: 'approved',
-    type: 'post',
+    status: DraftStatusEnum.APPROVED,
+    type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
   },
   {
@@ -71,8 +72,8 @@ export const DUMMY_POST: Post[] = [
     category: 'Miscellenious',
     author: 'Alfred Hannog',
     created: 'Jan, 05 2016',
-    status: 'seen',
-    type: 'post',
+    status: DraftStatusEnum.SEEN,
+    type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
   }
 ];

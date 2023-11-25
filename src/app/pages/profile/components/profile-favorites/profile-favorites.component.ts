@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.post';
+import { SearchTypeEnum } from '@shared/types/types.enums';
 import { Observable, map, switchMap } from 'rxjs';
 
 @Component({
@@ -14,6 +15,7 @@ export class ProfileFavoritesComponent implements OnInit {
 
   favorites$: Observable<Post[]> | undefined;
   favoritesID$: Observable<string[]> | undefined;
+  searchType = SearchTypeEnum;
 
   constructor(private postFacade: PostsFacade) { }
 

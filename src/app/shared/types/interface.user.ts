@@ -1,13 +1,13 @@
-import { AccountType, UserActivityType } from "./interface.app";
+import { AccountType, UserActivityType } from "./types.enums";
 
 // USER
 export interface User {
-  _id: string;
+  _id?: string;
   name: string;
   email: string;
   password?: string;
   profile?: UserProfile;
-  stats: UserStats;
+  stats?: UserStats;
   account?: AccountType;
   avatar?: string;
 }

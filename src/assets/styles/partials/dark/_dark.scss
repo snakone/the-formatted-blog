@@ -9,7 +9,7 @@
     --input-bg: rgb(255, 255, 255);
     --contrast-color: #ffe364;
     --border-color: #242424;
-    --transparent-bg: rgba(0, 0, 0 , 0.9);
+    --transparent-bg: rgba(0, 0, 0 , 90%);
     --quote-bg: #fffce8;
     --navigation-border: #4d4d4d;
     --navbar-border: #e9e9e9;
@@ -18,7 +18,7 @@
     --inverted-contrast: #001c9b;
     --li-hover: #090c10;
     --success-color: #4bb543;
-    --input-focus: rgba(255, 255, 255, .2);
+    --input-focus: rgba(255, 255, 255, 20%);
     --action-bar-bg: #ffffff;
     --action-bar-text: #555555;
     --light-gradient: #0A0C0F;
@@ -28,7 +28,9 @@
     --seen-color: #fdf5e2;
     --pending-color: #fbdfee;
     --approved-color: #81bd9a;
-    --shadow-card-border: rgba(70, 70, 70, 0.22);
+    --skeleton-color: #adadad;
+    --shadow-card-border: rgba(28 28 28 / 22%);
+    --mdc-dialog-container-color: #090b0e;
 
     & a { color: rgb(0, 140, 255) }
   }

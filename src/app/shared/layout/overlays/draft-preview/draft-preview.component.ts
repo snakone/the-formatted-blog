@@ -4,8 +4,10 @@ import { Post } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DraftPreviewDialogData } from '@shared/types/interface.app';
+import { STATUS_KEY } from '@shared/data/constants';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 
-const TIME_TO_SEEN = 5000;
+const TIME_TO_BE_SEEN = 10000;
 
 @Component({
   selector: 'app-draft-preview',
@@ -29,20 +31,22 @@ export class DraftPreviewDialogComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (
-      this.data && 
-      this.data.updateStatus && 
-      this.data.draft?.status === 'not-seen'
-    ) {
+    if (!this.data?.updateStatus) { return; }
+    const status = this.data.draft?.status;
+    
+    if (status === DraftStatusEnum.NOT_SEEN) {
       this.timer = setTimeout(() => {
-        this.draftsFacade.updateKey(this.data?.draft?._id, {key: 'status', value: 'seen'}, true);
-      }, TIME_TO_SEEN);
+        this.draftsFacade.updateKey(
+          this.data?.draft?._id, 
+          { key: STATUS_KEY, value: DraftStatusEnum.SEEN }, true
+        );
+      }, TIME_TO_BE_SEEN);
     }
   }
 
   ngOnDestroy() {
     if (this.timer) {
-      window.clearTimeout(this.timer as any);
+      clearTimeout(this.timer as any);
     }
   }
 

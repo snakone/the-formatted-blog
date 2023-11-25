@@ -11,7 +11,7 @@
             [ngClass]="{'collapsed': isCollapsed}">
     <app-draft-card *ngFor="let d of drafts; let first = first"
                     [draft]="d"
-                    [id]="pipe.ondeleteID"
+                    [deletedDraftID]="pipe.ondeleteID"
                     [saving]="pipe.saving"
                     [first]="first"
                     [collapsed]="isCollapsed">

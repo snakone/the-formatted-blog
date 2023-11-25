@@ -7,9 +7,9 @@
       so blinded by desire, that they cannot foresee the pain and trouble.
     </p>
     <ul>
-      <li *ngFor="let i of icons">
-        <i [class]="i"></i>
-      </li>
+      @for(icon of icons; track icon) {
+        <li><i [class]="icon"></i></li>
+      }
     </ul>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { ValidatorEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-form-error',
@@ -11,8 +12,25 @@ export class FormErrorComponent {
 
   @Input() control!: AbstractControl;
   @Input() validator!: string[];
-  @Input() left = false;
 
   constructor() { }
+
+  swichError: {[key: string]: () => boolean} = {
+    INVALID: () => !!this.control && this.control.invalid && this.control.dirty,
+    MIN_LENGTH: () => this.haveError(ValidatorEnum.MIN_LENGTH, 'minlength'),
+    MAX_LENGTH: () => this.haveError(ValidatorEnum.MAX_LENGTH, 'maxlength'),
+    REQUIRED: () => this.haveError(ValidatorEnum.REQUIRED, 'required'),
+    PATTERN: () => this.haveError(ValidatorEnum.PATTERN, 'pattern'),
+    EMAIL: () => this.haveError(ValidatorEnum.EMAIL, 'email'),
+    PASSWORD: () => this.haveError(ValidatorEnum.PASSWORD, 'password')
+  }
+
+  private haveError(
+    validator: ValidatorEnum, 
+    prop: string
+  ): boolean {
+    return !!this.control && this.validator.includes(validator) && 
+           !!this.control.errors && !!this.control.errors[prop]
+  }
 
 }

@@ -1,20 +1,24 @@
 // DIALOG CONTAINER
-.mat-dialog-container {
+.mdc-dialog__container {
   background: var(--light-color);
   color: var(--text-color);
+}
+
+.mat-mdc-dialog-surface {
+  padding: 24px;
 }
 
 // OVERLAY BACKDROP
 .cdk-overlay-dark-backdrop { background: rgba(0, 0, 0, .82) }
 
 // LOGIN OVERLAY
-.login-overlay .mat-dialog-container { max-width: 361px }
+.login-overlay .mdc-dialog__container { max-width: 361px }
 
 .cdk-overlay-pane {
   overflow: auto;
   max-height: 82vh;
 
-  & .mat-dialog-container { 
+  & .mdc-dialog__container { 
     border-radius: 0 !important;
     & .mat-dialog-content { height: 100% }
   }
@@ -43,20 +47,20 @@
       background-color: initial !important;
     }
 
-    & .mat-dialog-container { 
+    & .mdc-dialog__container { 
       padding-top: 0 !important;
     }
 
-    & .mat-dialog-container::-webkit-scrollbar { width: 6px !important; }
-    & .mat-dialog-container::-webkit-scrollbar-thumb {
+    & .mdc-dialog__container::-webkit-scrollbar { width: 6px !important; }
+    & .mdc-dialog__container::-webkit-scrollbar-thumb {
       background: var(--scrollbar-bg) !important;
     }
 
-    & .mat-dialog-container::-webkit-scrollbar-track-piece {
+    & .mdc-dialog__container::-webkit-scrollbar-track-piece {
       background: transparent;
     }
 
-    & .mat-dialog-content {
+    & .mat-mdc-dialog-surface {
       max-height: 100% !important;
     }
 
@@ -76,7 +80,7 @@
       min-height: 100vh !important;
     }
 
-    & .mat-dialog-container {
+    & .mdc-dialog__container {
       position: relative;
       padding-top: 0 !important;
       max-height: 100% !important;
@@ -84,7 +88,7 @@
   }
 
   &.quill-help {
-    & .mat-dialog-container { padding-right: 32px !important }
+    & .mdc-dialog__containerr { padding-right: 32px !important }
   }
 }
 
@@ -107,4 +111,3 @@
     overflow-y: visible;
   }
 }
-

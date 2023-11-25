@@ -40,18 +40,20 @@ export class SnackOverlayComponent implements AfterViewInit {
       return;
     }
 
-    const css: DOMTokenList = this.el?.nativeElement.classList || null;
-    css?.remove(this.classIn);
-    css?.add(this.classOut);
+    this.el?.nativeElement.classList?.remove(this.classIn);
+    this.el?.nativeElement.classList?.add(this.classOut);
     this.waitAndSetSnack(res);
   }
 
   private waitAndSetSnack(res: Snack): void {
     setTimeout(() => this.data = null, this.animationDelay);
 
-    !res.message ? 
-      this.count = 0 : 
-      setTimeout(() => (this.data = res, this.count++), this.animationDelay);
+    if (!res.message) {
+      this.count = 0;
+      return;
+    }
+
+    setTimeout(() => (this.data = res, this.count++), this.animationDelay * 2); 
   }
 
   ngOnDestroy() {

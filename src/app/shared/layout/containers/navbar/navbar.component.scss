@@ -84,7 +84,7 @@ nav {
         position: relative;
         top: -4px;
         @include hover(1.5);
-        transition: color 666ms ease-in-out;
+        transition: color 0 ease-in-out;
         &.active { color: var(--contrast-color) }
        }
     }
@@ -102,7 +102,7 @@ nav {
     position: relative;
     top: 1px;
     color: var(--contrast-color);
-    transition: color 666ms ease-in-out;
+    transition: color 0 ease-in-out;
   }
 
   @media (min-width: 701px) { width: 25px }

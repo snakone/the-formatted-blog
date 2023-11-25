@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from
 import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil } from 'rxjs';
 
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { SearchType, FilterType, DraftStatus } from '@shared/types/interface.app';
-import { NOT_SEEN_KEY, PENDING_KEY, SEEN_KEY } from '@shared/data/constants';
+import { FilterType } from '@shared/types/interface.app';
+import { SearchType, DraftStatus, DraftStatusEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-post-search',
@@ -15,13 +15,13 @@ import { NOT_SEEN_KEY, PENDING_KEY, SEEN_KEY } from '@shared/data/constants';
 export class PostSearchComponent {
 
   @ViewChild('input', {static: true}) input: ElementRef;
-  private unsubscribe$ = new Subject<void>();
   @Input() type: SearchType;
+  private unsubscribe$ = new Subject<void>();
 
-  switchObj: {[key: string]: DraftStatus} = {
-    'pendiente': PENDING_KEY,
-    'visto': SEEN_KEY,
-    'no visto': NOT_SEEN_KEY
+  switchSearch: {[key: string]: DraftStatus} = {
+    'pendiente': DraftStatusEnum.PENDING,
+    'visto': DraftStatusEnum.SEEN,
+    'no visto': DraftStatusEnum.NOT_SEEN
   };
 
   constructor(private postFacade: PostsFacade) { }
@@ -47,7 +47,7 @@ export class PostSearchComponent {
   }
 
   private convertStatus(value: string): DraftStatus {
-    return this.switchObj[value.toLowerCase().trim()];
+    return this.switchSearch[value.toLowerCase().trim()];
   }
 
   ngOnDestroy(): void {

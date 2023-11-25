@@ -21,26 +21,42 @@ textarea {
 .form-control {
   width: 100%;
   position: relative;
+  margin-bottom: 2.2rem;
 
   &:nth-child(2) { margin-bottom: 2.6rem }
   &:nth-child(5) { margin-bottom: 2.6rem }
 
   & .hint {
-    bottom: -22px;
+    bottom: -24px;
     left: 2px;
     position: absolute;
     opacity: 0.5;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   & textarea + .hint {
-    bottom: -16px;
+    bottom: -18px;
   }
 }
 
-button { 
+button:not(.close) { 
   margin: 3rem auto 0;
   width: 100%;
+}
+
+.close {
+  background-color: transparent;
+  position: absolute;
+  right: 22px;
+  top: 23px;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+
+  & i {
+    font-size: 20px;
+    color: var(--dark-color);
+  }
 }
 
 input {
@@ -57,7 +73,7 @@ h2 {
     &:nth-child(5) { margin-bottom: 4rem }
   }
 
-  button {
+  button:not(.close) {
     margin-top: 6rem;
   }
 }

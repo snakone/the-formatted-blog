@@ -1,4 +1,7 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, HostListener } from '@angular/core';
+
+const distance = 300;
+const minWidth = 1199; 
 
 @Component({
   selector: 'app-navigation',
@@ -16,8 +19,9 @@ export class NavigationComponent implements AfterViewInit {
   ];
 
   el!: HTMLElement | null;
-  t = 0;  // Time
-  d = 300;  // Distance
+  panned = 0;
+  minWidthPanned = 600;
+  maxWidthPanned = 900;
 
   constructor() { }
 
@@ -25,21 +29,22 @@ export class NavigationComponent implements AfterViewInit {
     this.el = document.getElementById('pan-nav');
   }
 
-  public panned(e: Event): void {
-    if (window.innerWidth > 1199) { return; }
-    const event = (e as unknown) as HammerInput;
-    this.t += (event.deltaX * -.09);
+  @HostListener('pan', ['$event']) onPan(e: HammerInput): void {
+    if (window.innerWidth > minWidth) { return; }
+    const event = e as unknown as HammerInput;
+    this.panned += event.deltaX * -0.09;
+    this.panned = Math.max(0, Math.min(700, this.panned));
 
-    if (this.t <= 0) { this.t = 0; }
-    if (this.t >= 700) { this.t = 700; }
-    if (this.el) { this.el.scrollLeft = this.t; }
+    if (this.el) {
+      this.el.scrollLeft = this.panned;
+    }
   }
 
   public move(next: boolean): void {
     if (this.el) {
       next ? 
-      (this.el.scrollLeft += this.d, this.t += this.d) : 
-      (this.el.scrollLeft -= this.d, this.t -= this.d)
+      (this.el.scrollLeft += distance, this.panned += distance) : 
+      (this.el.scrollLeft -= distance, this.panned -= distance)
     }
   }
 

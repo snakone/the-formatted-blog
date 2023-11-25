@@ -1,17 +1,24 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, filter, Subject, Observable, map } from 'rxjs';
+import { takeUntil, filter, Subject, Observable, map, tap } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Post } from '@shared/types/interface.post';
 import { QuillService } from '@core/services/quill/quill.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
-import { SavingType, SavingTypeEnum } from '@shared/types/interface.app';
+import { SavingType } from '@shared/types/interface.app';
 
-import { CREATE_ACTION_LIST } from '@shared/data/data';
-import { SAVE_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG, QUILL_HELP_DIALOG } from '@shared/data/dialogs';
 import { MESSAGE_KEY } from '@shared/data/constants';
+import { SavingTypeEnum } from '@shared/types/types.enums';
+import { CREATE_ACTION_LIST } from '@shared/data/data';
+
+import { 
+  SAVE_CONFIRMATION, 
+  DELETE_CONFIRMATION, 
+  PREVIEW_DRAFT_DIALOG, 
+  QUILL_HELP_DIALOG 
+} from '@shared/data/dialogs';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -64,13 +71,11 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => {
-        this.draftsFacade.updateKey(
+        filter(Boolean),
+        tap(_ => this.draftsFacade.updateKey(
           this.draft._id, { key: MESSAGE_KEY, value: this.draft.message }
-        );
-        this.draftsFacade.resetActive();
-    });
+        ))
+    ).subscribe(_ => this.draftsFacade.resetActive());
   }
 
   private preview(saving: boolean): void {
@@ -94,11 +99,9 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => (
-        this.draftsFacade.delete(this.draft._id),
-        this.createDraftSrv.onDeleteDraft(this.draft._id)
-    ));
+        filter(Boolean),
+        tap(_ => this.createDraftSrv.onDeleteDraft(this.draft._id))
+    ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
   }
 
   private goToForm(): void {

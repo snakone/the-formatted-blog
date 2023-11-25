@@ -13,6 +13,8 @@ export class SearchBarComponent implements OnInit {
   value = '';
   placeholder = '';
   index = 0;
+  typeDelay = 1000;
+  closeDelay = 800;
   sentence = SEARCH_SENTENCE;
 
   constructor(private renderer: Renderer2) { }
@@ -29,14 +31,13 @@ export class SearchBarComponent implements OnInit {
   public close(): void {
     const el = document.getElementById('search-bar') || null;
     if (el) {
-      this.renderer.removeClass(el, 'bounceInDown');
-      this.renderer.addClass(el, 'bounceOutUp');
-      setTimeout(() => this.closed.emit(), 800);
+      this.applyAnimationClasses(el);
+      setTimeout(() => this.closed.emit(), this.closeDelay);
     }
   }
 
   private autoType(): void {
-    setTimeout(() => this.typing(), 1000);
+    setTimeout(() => this.typing(), this.typeDelay);
   }
 
   private typing(): void {
@@ -44,6 +45,11 @@ export class SearchBarComponent implements OnInit {
       this.placeholder = this.sentence.slice(0, this.index++);
       setTimeout(() => this.typing(), 30);
     }
+  }
+
+  private applyAnimationClasses(el: HTMLElement): void {
+    this.renderer.removeClass(el, 'bounceInDown');
+    this.renderer.addClass(el, 'bounceOutUp');
   }
 
 }

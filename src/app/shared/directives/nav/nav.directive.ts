@@ -1,6 +1,10 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { fromEvent, throttleTime, tap, filter, from } from 'rxjs';
+import { fromEvent, tap, filter, from } from 'rxjs';
+
+const NAV_HEIGHT = 48;
+const RESIZE_DELAY = 333;
+const SCROLL_CLASS = 'scroll-down'
 
 @Directive({selector: '[StickyNav]'})
 
@@ -25,42 +29,34 @@ export class NavDirective implements AfterViewInit {
     fromEvent(window, 'scroll')
      .pipe(tap(_ => this.scrolled.emit(true)))
       .subscribe(_ => {
-        this.checkScroll(this.css, window.pageYOffset);
-        this.scroll = window.pageYOffset;
+        this.checkScroll(this.css, window.scrollY);
+        this.scroll = window.scrollY;
     });
   }
 
   private checkScroll(
-    css: DOMTokenList, 
-    current: number
+    classList: DOMTokenList, 
+    scrollY: number
   ): void {
-    // NAV HEIGHT
-    if (current <= 48 && css.contains('scroll-down')) { 
-      css.remove('scroll-down');
+    const shouldRemove = (scrollY <= NAV_HEIGHT && classList.contains(SCROLL_CLASS)) || scrollY < this.scroll;
+    const shouldAdd = (scrollY > this.scroll) && !classList.contains(SCROLL_CLASS);
+
+    if (shouldRemove) { 
+      classList.remove(SCROLL_CLASS);
       return;
     }
 
-    if (css && (current > this.scroll) &&
-       !css.contains('scroll-down')
-       ) { css.add('scroll-down'); }
-
-    if (css && current < this.scroll) { 
-      css.remove('scroll-down'); 
+    if (shouldAdd) { 
+      classList.add(SCROLL_CLASS);
     }
   }
 
   private showNavOnNavigation(): void {
     from(this.router.events)
      .pipe(
-      filter((e): e is NavigationEnd => (
-        e instanceof NavigationEnd && !!this.el
-      )),
-     ).subscribe(_ => 
-      (
-        this.el.nativeElement.classList.remove('scroll-down'),
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 333)  // STICKY FIX
-      )
-    );
+      filter((e): e is NavigationEnd => (e instanceof NavigationEnd && !!this.el)),
+      tap(_ => this.el.nativeElement.classList.remove(SCROLL_CLASS))
+     ).subscribe(_ => setTimeout(() => window.dispatchEvent(new Event('resize')), RESIZE_DELAY));
   }
 
 }

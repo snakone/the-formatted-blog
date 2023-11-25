@@ -1,26 +1,15 @@
-@if(control && control.valid && control.dirty) {
-  <div class="form-error" [ngClass]="{'left': left}">
-    @if(validator.includes('minlength') && control.errors?.minlength) {
-      <span>Tamaño mínimo: 
-        <strong>{{control.errors?.minlength.requiredLength}}</strong>
-      </span>
+@if(swichError.INVALID()) {
+  <div class="form-error">
+    @if(swichError.MIN_LENGTH()) {
+      <span>Tamaño mínimo: <strong>{{ control.errors?.minlength.requiredLength }}</strong></span>
     }
-    @if(validator.includes('maxlength') && control.errors?.maxlength) {
-      <span> Tamaño máximo: 
-        <strong>{{control.errors?.maxlength.requiredLength}}</strong>
-      </span>
+    @if(swichError.MAX_LENGTH()) {
+      <span>Tamaño máximo: <strong>{{ control.errors?.maxlength.requiredLength }}</strong></span>
     }
-    @if(validator.includes('required') && control.errors?.required) {
-      <span>Campo requerido</span>
-    }
-    @if(validator.includes('pattern') && control.errors?.pattern) {
-      <span>Fórmato no válido</span>
-    }
-    @if(validator.includes('email') && control.errors?.email) {
-      <span>Fórmato correo no válido</span>
-    }
-    @if(validator.includes('password') && control.errors?.password) {
-      <span>La contraseña no coincide</span>
-    }
+    @if(swichError.REQUIRED()) { <span>Campo requerido</span> }
+    @if(swichError.PATTERN()) { <span>Formato no válido</span> }
+    @if(swichError.EMAIL()) { <span>Formato de correo no válido</span> }
+    @if(swichError.PASSWORD()) { <span>La contraseña no coincide</span> }
   </div>
 }
+
