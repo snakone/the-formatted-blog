@@ -1,6 +1,6 @@
 # The Formatted Blog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
 Visit the project here [The Formatted Blog](https://formatted-blog.netlify.app/home)
 
