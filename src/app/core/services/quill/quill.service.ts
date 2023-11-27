@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@env/environment';
 import { Post } from '@shared/types/interface.post';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { CrafterService } from '../crafter/crafter.service';
 import { ERROR_CONVERT_HTML_SENTENCE, NO_DATA_CONVERT_HTML_SENTENCE } from '@shared/data/sentences';
+import { APP_CONSTANTS } from 'app/app.config';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable()
 
@@ -13,7 +14,7 @@ export class QuillService {
 
   public convertToHTML(post: Post): void {
     if (!post.message.ops) {
-      this.crafter.setSnack(NO_DATA_CONVERT_HTML_SENTENCE, 'warning');
+      this.crafter.setSnack(NO_DATA_CONVERT_HTML_SENTENCE, SnackTypeEnum.WARNING);
       return;
     }
 
@@ -30,7 +31,7 @@ export class QuillService {
       input.setAttribute('download', `${post.title}.html`);
       input.click();
     } catch (err) {
-      this.crafter.setSnack(ERROR_CONVERT_HTML_SENTENCE, 'error');
+      this.crafter.setSnack(ERROR_CONVERT_HTML_SENTENCE, SnackTypeEnum.ERROR);
     }
   }
 
@@ -54,7 +55,7 @@ const addFooter = () => `
   <footer>
       <b>The Formatted Blog</b>. 
       Copyright © ${new Date().getFullYear().toString()} - 
-      All Rights Reserved - ${environment.version}
+      All Rights Reserved - ${APP_CONSTANTS.APP_VERSION}
   </footer>
 </body>`;
 
@@ -176,6 +177,12 @@ const POST_STYLES_STRING = `
       margin: 45px 0 30px 0;
       position: relative;
       scroll-margin-top: 30px;
+    }
+
+    h3 {
+      margin: 30px 0 25px 0;
+      position: relative;
+      scroll-margin-top: 25px;
     }
 
     h2::before {

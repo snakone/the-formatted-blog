@@ -14,6 +14,7 @@ article {
       width: 100%;
       border: 0;
       aspect-ratio: 870/450;
+      object-fit: cover;
     }
 
     & .inner {
@@ -185,8 +186,10 @@ article {
             line-height: 15px;
             text-align: center;
             position: relative;
+            font-size: 15px;
             @include hover(1.5, var(--contrast-color));
-            &.fa-envelope { top: 1px }
+            &.fa-envelope { top: 1px; }
+            &.fa-user-plus { top: -1px; }
 
             &.favorite {
               transition: color 666ms ease-in-out;
@@ -217,6 +220,7 @@ article {
         font-size: 12px;
         position: relative;
         transition: color 666ms ease-in-out;
+        cursor: pointer;
 
         &::after {
           content: "";

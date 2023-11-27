@@ -3,6 +3,7 @@ import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { DraftPreviewDialogData } from '@shared/types/interface.app';
 import { STATUS_KEY } from '@shared/data/constants';
 import { DraftStatusEnum } from '@shared/types/types.enums';
@@ -32,14 +33,14 @@ export class DraftPreviewDialogComponent implements OnInit {
 
   ngAfterViewInit() {
     if (!this.data?.updateStatus) { return; }
-    const status = this.data.draft?.status;
+    
+    const draft = this.data.draft;
+    const status = draft?.status;
     
     if (status === DraftStatusEnum.NOT_SEEN) {
       this.timer = setTimeout(() => {
         this.draftsFacade.updateKey(
-          this.data?.draft?._id, 
-          { key: STATUS_KEY, value: DraftStatusEnum.SEEN }, true
-        );
+         draft?._id, { key: STATUS_KEY, value: DraftStatusEnum.SEEN }, true);
       }, TIME_TO_BE_SEEN);
     }
   }

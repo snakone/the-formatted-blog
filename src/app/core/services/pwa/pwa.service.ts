@@ -17,6 +17,7 @@ import { WELCOME_PUSH } from '@shared/data/notifications';
 import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 import { environment } from '@env/environment';
 import { PUSH_DENIED_DIALOG } from '@shared/data/dialogs';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable({providedIn: 'root'})
 
@@ -63,7 +64,7 @@ export class PWAService {
             ).subscribe(_ => !_ ?? this.crafter.setSnack(SUB_UPDATED_SENTENCE))
         }
       }).catch(_ => {
-        this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+        this.crafter.setSnack(ERROR_SERVICE_WORKER, SnackTypeEnum.ERROR);
         console.error(_);
       });
     }, timer);
@@ -72,7 +73,7 @@ export class PWAService {
   public async requestNotification(): Promise<void> {
     const permission = await Notification.requestPermission()
      .catch(_ => {
-      this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+      this.crafter.setSnack(ERROR_SERVICE_WORKER,  SnackTypeEnum.ERROR);
       console.log(_);
     });
     permission !== 'granted' ? this.openPushModal() : this.showPrompt(1000);

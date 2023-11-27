@@ -1,10 +1,10 @@
 <div class="toolbar" [ngClass]="{'form': form}">  <!-- TOOLBAR -->
   <div class="flex">
-    <span><i class="far fa-newspaper"></i> {{totalDrafts$ | async}}</span> <!-- TOTAL -->
+    <span class="total"><i class="far fa-paper-plane"></i> {{totalDrafts$ | async}}</span> <!-- TOTAL -->
     @if(saving$ | async; as state) {
       @switch(state.type) {
         @case(saveTypes.SAVING) {
-          <div class="animated fadeIn">
+          <div class="animated fadeIn saving">
             <i [class]="state.value ? 'fas fa-spinner fa-pulse' : 'fas fa-check'"></i> 
             <span>{{state.value ? 'Guardando...' : 'Guardado'}}</span>
           </div>
@@ -12,13 +12,13 @@
         @case(saveTypes.WARNING) {
           <div class="animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
-            <span>No se ha podido guardar. Comprueba los datos</span>
+            <span>Error al guardar. Comprueba los datos</span>
           </div>
         }
         @case(saveTypes.TEMPORAL) {
-          <div class="animated fadeIn warning">
+          <div class="animated fadeIn temporal">
             <i class="fas fa-exclamation-triangle"></i>
-            <span>No se guardarán los datos hasta que aceptes.</span>
+            <span>No se guardará hasta que los aceptes.</span>
           </div>
         }
       }
@@ -37,25 +37,30 @@
              }">
           </i>
         }
-        <i class="far fa-question-circle" 
+        <!-- HELP -->
+        <i class="fas fa-question-circle" 
           matTooltip="Ayuda" 
           (click)="switchAction.help()">
         </i>
         <!-- FORM -->
-        <i class="fab fa-wpforms"
+        <i class="fas fa-spell-check"
           [matTooltip]="(!obs.saving?.value && draft) ? 'Formulario' : null"
           [ngClass]="{'disabled': obs.saving?.value || !draft}"
           (click)="switchAction.form()">
         </i>
-      }
-      @if(form) {
+      } @else {
         <!-- CLEAN -->
         <i class="fas fa-broom"
           matTooltip="Limpiar"
           (click)="switchAction.clean()">
         </i>
+        <!-- HELP -->
+        <i class="fas fa-question-circle" 
+          matTooltip="Ayuda" 
+          (click)="switchAction.help()">
+        </i>
         <!-- BACK -->
-        <i class="fas fa-fast-backward"
+        <i class="fas fa-pen-nib"
           matTooltip="Lienzo"
           [routerLink]="['../']"
           *ngIf="form">

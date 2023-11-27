@@ -1,22 +1,23 @@
 <aside>
-  <i class="fas fa-sign-out-alt" 
-     [ngClass]="{'collapsed': isCollapsed}" 
-     (click)="collapse()" 
-     [matTooltip]="isCollapsed ? 'Expandir' : 'Contraer'">
+  <i class="fas fa-long-arrow-alt-left" 
+     [ngClass]="{'collapsed': collaped}" 
+     (click)="collapseSidebar()" 
+     [matTooltip]="collaped ? 'Expandir' : 'Contraer'">
   </i>
-  <ul *ngIf="{
+  @if({
     saving: saving$ | async,
-    ondeleteID: id$ | async
-  } as pipe" class="draft-list" 
-            [ngClass]="{'collapsed': isCollapsed}">
-    <app-draft-card *ngFor="let d of drafts; let first = first"
-                    [draft]="d"
-                    [deletedDraftID]="pipe.ondeleteID"
-                    [saving]="pipe.saving"
-                    [first]="first"
-                    [collapsed]="isCollapsed">
-    </app-draft-card>
-  </ul>
+    ondeleteID: deletedID$ | async
+  }; as obs) {
+    <ul class="draft-list" [ngClass]="{'collapsed': collaped}">
+      @for(draft of drafts; track draft._id; let first = $first) {
+        <app-draft-card [draft]="draft"
+                        [deletedDraftID]="obs.ondeleteID"
+                        [saving]="obs.saving"
+                        [collapsed]="collaped">
+        </app-draft-card>
+      }
+    </ul>
+  }
 </aside>
 
 

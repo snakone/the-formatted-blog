@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { QUILL_HELP_ITEMS } from '@shared/data/quills';
+import { QUILL_HELP_ITEMS_ACTIONS, QUILL_HELP_ITEMS_TOOLBAR } from '@shared/data/quills';
 
 @Component({
   selector: 'app-quill-help',
@@ -10,7 +10,8 @@ import { QUILL_HELP_ITEMS } from '@shared/data/quills';
 
 export class QuillHelpComponent {
 
-  items = QUILL_HELP_ITEMS;
+  toolbarItems = QUILL_HELP_ITEMS_TOOLBAR;
+  actionItems = QUILL_HELP_ITEMS_ACTIONS;
 
   constructor() { }
 

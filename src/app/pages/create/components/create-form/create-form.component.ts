@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup} from '@angular/forms';
 import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { POST_CATEGORIES } from '@shared/data/data';
-import { IMAGE_PATTERN } from '@shared/data/patterns';
 import { Post } from '@shared/types/interface.post';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
+
 import { SavingTypeEnum } from '@shared/types/types.enums';
+import { CATEGORY_KEY, COVER_KEY, INTRO_KEY, TITLE_KEY } from '@shared/data/constants';
+import { POST_CATEGORIES } from '@shared/data/data';
+import { CREATE_DRAFT_FORM } from '@shared/data/forms';
+import { CreateDraftForm } from '@shared/types/interface.form';
+import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
+
+const timer = 5000;
 
 @Component({
   selector: 'app-create-form',
@@ -19,14 +24,12 @@ import { SavingTypeEnum } from '@shared/types/types.enums';
 
 export class CreateFormComponent implements OnInit {
 
-  draftForm: UntypedFormGroup;
+  draftForm: FormGroup<CreateDraftForm>;
   private unsubscribe$ = new Subject<void>();
   categories = POST_CATEGORIES;
-  emptyDraft: Post = {title: '', category: '', cover: '', intro: ''};
   url: string;
   draft: Post;
-  controls = ['title', 'category', 'cover', 'intro'];
-  timer = 5000;
+  controls = [TITLE_KEY, CATEGORY_KEY, COVER_KEY, INTRO_KEY];
 
   constructor(
     private draftsFacade: DraftsFacade,
@@ -44,40 +47,24 @@ export class CreateFormComponent implements OnInit {
     this.draftsFacade.active$
      .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => !!_),
+        filter(Boolean),
         tap(draft => this.draft = draft),
       )
     .subscribe(draft => this.patchForm(draft));
   }
 
   private createForm(): void {
-    this.draftForm = new UntypedFormGroup({
-       title: new UntypedFormControl(null, [
-        Validators.required,
-        Validators.minLength(10)
-       ]),
-       category: new UntypedFormControl(null, [Validators.required]),
-       cover: new UntypedFormControl(null, [
-        Validators.required,
-        Validators.pattern(IMAGE_PATTERN)
-      ]),
-      intro: new UntypedFormControl(null, [
-        Validators.required,
-        Validators.minLength(150),
-        Validators.maxLength(500)
-      ]),
-    });
+    this.draftForm = CREATE_DRAFT_FORM();
   }
 
   private listenValues(): void {
     this.draftForm.valueChanges
      .pipe(
        takeUntil(this.unsubscribe$),
-       filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        distinctUntilChanged(),
+       filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: true})),
-       debounceTime(this.timer),
-       tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: false}))
+       debounceTime(timer),
     )
      .subscribe(_ => this.submit());
   }
@@ -85,11 +72,14 @@ export class CreateFormComponent implements OnInit {
   private patchForm(draft: Post): void {
     this.draftForm.markAsPristine();
     this.draftForm.patchValue({...draft});
-    this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
+    this.controls
+      .filter(c => Boolean(this[c].value))
+      .forEach(c => this[c].markAsDirty({onlySelf: true}));
   }
 
   public clean(): void {
-    this.patchForm({...this.emptyDraft});
+    this.createForm();
+    this.controls.forEach(c => this[c].markAsDirty({onlySelf: true}));
   }
 
   public submit(): void {
@@ -106,16 +96,23 @@ export class CreateFormComponent implements OnInit {
       .afterClosed()
         .pipe(
           takeUntil(this.unsubscribe$),
-          filter(_ => _ && !!_)
+          filter(Boolean)
       ).subscribe(_ => this.postFacade.unPublish(draft));
     } else {
       this.draftsFacade.update(draft);
     }
+
+    this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: false})
   }
 
-  get title(): AbstractControl { return this.draftForm.get('title') as AbstractControl; }
-  get category(): AbstractControl { return this.draftForm.get('category') as AbstractControl; }
-  get cover(): AbstractControl { return this.draftForm.get('cover') as AbstractControl; }
-  get intro(): AbstractControl { return this.draftForm.get('intro') as AbstractControl; }
+  private getControl(name: string): AbstractControl | null {
+    return this.draftForm?.get(name);
+  }
+
+
+  get title(): AbstractControl { return this.getControl(TITLE_KEY); }
+  get category(): AbstractControl { return this.getControl(CATEGORY_KEY); }
+  get cover(): AbstractControl { return this.getControl(COVER_KEY); }
+  get intro(): AbstractControl { return this.getControl(INTRO_KEY); }
 
 }

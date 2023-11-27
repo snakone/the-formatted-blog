@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { FavoriteService } from '@core/services/api/favorite.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Router } from '@angular/router';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable()
 
@@ -100,7 +101,7 @@ export class PostEffects {
     this.actions
     .pipe(
       ofType(PostsActions.unPublishSuccess),
-      tap(_ => this.crafter.setSnack('Boceto archivado!', 'success')),
+      tap(_ => this.crafter.setSnack('Boceto archivado!', SnackTypeEnum.SUCCESS)),
       switchMap((res) => of(...[
         DraftActions.reset({draft: res.post}),
         PostsActions.reset(),

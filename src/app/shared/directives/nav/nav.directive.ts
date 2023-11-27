@@ -38,7 +38,11 @@ export class NavDirective implements AfterViewInit {
     classList: DOMTokenList, 
     scrollY: number
   ): void {
-    const shouldRemove = (scrollY <= NAV_HEIGHT && classList.contains(SCROLL_CLASS)) || scrollY < this.scroll;
+    const shouldRemove = (
+      scrollY <= NAV_HEIGHT && 
+      classList.contains(SCROLL_CLASS)
+    ) || scrollY < this.scroll;
+    
     const shouldAdd = (scrollY > this.scroll) && !classList.contains(SCROLL_CLASS);
 
     if (shouldRemove) { 

@@ -33,7 +33,8 @@ export class PostSearchComponent {
       debounceTime(100),
       distinctUntilChanged(),
       takeUntil(this.unsubscribe$)
-     ).subscribe((value: string) => this.postFacade.setFilter(this.createFilter(value)));
+     ).subscribe((value: string) => 
+     this.postFacade.setFilter(this.createFilter(value)));
   }
 
   private createFilter(value: string): FilterType {
@@ -47,7 +48,7 @@ export class PostSearchComponent {
   }
 
   private convertStatus(value: string): DraftStatus {
-    return this.switchSearch[value.toLowerCase().trim()];
+    return this.switchSearch[(value || '').toLowerCase().trim()];
   }
 
   ngOnDestroy(): void {

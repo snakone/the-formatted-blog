@@ -6,8 +6,11 @@ import {
 } from '@angular/core';
 
 import { CrafterService } from '@core/services/crafter/crafter.service';
+import { FADE_IN_LEFT_CLASS, FADE_OUT_LEFT_CLASS } from '@shared/data/constants';
 import { Snack } from '@shared/types/interface.app';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
+
+const delay = 800;
 
 @Component({
   selector: 'app-snack',
@@ -21,39 +24,36 @@ export class SnackOverlayComponent implements AfterViewInit {
   data!: Snack | null;
   $unsubscribe = new Subject<void>();
   count = 0;
-  animationDelay = 800;
-  classIn = 'fadeInLeft';
-  classOut = 'fadeOutLeft';
 
   constructor(private crafter: CrafterService) { }
 
   ngAfterViewInit(): void {
     this.crafter.snack$
     .pipe(takeUntil(this.$unsubscribe), debounceTime(100))
-     .subscribe((res: Snack) => this.removeCSS(res));
+     .subscribe((res: Snack) => this.handleCSS(res));
   }
 
-  private removeCSS(res: Snack): void {
+  private handleCSS(res: Snack): void {
     if (!this.count) {
       this.data = res;
       this.count++;
       return;
     }
 
-    this.el?.nativeElement.classList?.remove(this.classIn);
-    this.el?.nativeElement.classList?.add(this.classOut);
+    this.el?.nativeElement.classList?.remove(FADE_IN_LEFT_CLASS);
+    this.el?.nativeElement.classList?.add(FADE_OUT_LEFT_CLASS);
     this.waitAndSetSnack(res);
   }
 
   private waitAndSetSnack(res: Snack): void {
-    setTimeout(() => this.data = null, this.animationDelay);
+    setTimeout(() => this.data = null, delay);
 
     if (!res.message) {
       this.count = 0;
       return;
     }
 
-    setTimeout(() => (this.data = res, this.count++), this.animationDelay * 2); 
+    setTimeout(() => (this.data = res, this.count++), delay * 2); 
   }
 
   ngOnDestroy() {

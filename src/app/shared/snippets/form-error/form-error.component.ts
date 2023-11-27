@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { ValidatorEnum } from '@shared/types/types.enums';
+import { ValidatorEnum, ValidatorType } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-form-error',
@@ -26,10 +26,10 @@ export class FormErrorComponent {
   }
 
   private haveError(
-    validator: ValidatorEnum, 
+    type: ValidatorType, 
     prop: string
   ): boolean {
-    return !!this.control && this.validator.includes(validator) && 
+    return !!this.control && this.validator.includes(type) && 
            !!this.control.errors && !!this.control.errors[prop]
   }
 

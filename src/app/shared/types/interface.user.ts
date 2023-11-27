@@ -40,4 +40,9 @@ export interface UserActivity {
   user?: string;
 }
 
+export interface SameIDUser {
+  public: User;
+  current: User;
+}
+
 

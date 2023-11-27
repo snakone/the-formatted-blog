@@ -23,6 +23,7 @@ import { Store } from '@ngrx/store';
 import { FriendsService } from '@core/services/api/friends.service';
 import { TOKEN_KEY } from '@shared/data/constants';
 import { User } from '@shared/types/interface.user';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable()
 
@@ -178,7 +179,7 @@ export class UserEffects {
   alertsUserEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.addFriend),
-      concatMap((_) => of(this.crafter.setSnack('Amigo añadido!', 'success')))
+      concatMap((_) => of(this.crafter.setSnack('Amigo añadido!',  SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
@@ -186,7 +187,7 @@ export class UserEffects {
   alertsUser1Effect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.removeFriend),
-      concatMap((_) => of(this.crafter.setSnack('Amigo eliminado!', 'info')))
+      concatMap((_) => of(this.crafter.setSnack('Amigo eliminado!',  SnackTypeEnum.INFO)))
     ), { dispatch: false }
   )
 
@@ -195,7 +196,7 @@ export class UserEffects {
     sentence: string
   ): Promise<void> {
     if (path) this.router.navigateByUrl(path);
-    this.crafter.setSnack(sentence, 'info');
+    this.crafter.setSnack(sentence,  SnackTypeEnum.INFO);
   }
 
   private resetUser(): void {

@@ -42,12 +42,13 @@ export const QUILL_HELP_DIALOG: FormattedDialog<QuillHelpComponent> = {
   css: 'quill-help'
 };
 
-export const PREVIEW_DRAFT_DIALOG_UPDATE = (draft: Post): FormattedDialog<DraftPreviewDialogComponent> => ({
-  component: DraftPreviewDialogComponent,
-  css: 'preview',
-  data: {
-    updateStatus: true,
-    draft
+export const PREVIEW_DRAFT_DIALOG_UPDATE = (draft: Post): 
+  FormattedDialog<DraftPreviewDialogComponent> => ({
+    component: DraftPreviewDialogComponent,
+    css: 'preview',
+    data: {
+      updateStatus: true,
+      draft
   }
 });
 
@@ -57,12 +58,13 @@ export const LOGIN_DIALOG: FormattedDialog<LogInOverlayComponent> = {
   css: 'login-overlay'
 };
 
-export const EDIT_PROFILE_DIALOG = (user: User): FormattedDialog<EditProfileDialogComponent> => ({
-  component: EditProfileDialogComponent,
-  data: {
-    user
-  },
-  css: 'edit-profile'
+export const EDIT_PROFILE_DIALOG = (user: User): 
+  FormattedDialog<EditProfileDialogComponent> => ({
+    component: EditProfileDialogComponent,
+    data: {
+      user
+    },
+    css: 'edit-profile'
 });
 
 export const PUSH_DENIED_DIALOG: FormattedDialog<PushDeniedOverlayComponent> = {

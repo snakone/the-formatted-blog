@@ -12,6 +12,8 @@ import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE 
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { CHECKSTATUS } from '@shared/data/data';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
+import { CHECK_KEY, STATUS_KEY } from '@shared/data/constants';
+import { DraftStatusEnum, SnackTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-admin-draft',
@@ -88,18 +90,18 @@ export class AdminDraftComponent {
     } // UPDATE DRAFT
     else {
       setTimeout(() => this.navigate(), 1000);
-      this.draftsFacade.updateKey(this.draft?._id, {key: 'check', value: this.draft.check}, true);
+      this.draftsFacade.updateKey(this.draft?._id, {key: CHECK_KEY, value: this.draft.check}, true);
 
       if (this.markAsPending) {
         this.draftsFacade.updateKey(
-          this.draft?._id, {key: 'status', value: 'pending'}, true
+          this.draft?._id, {key: STATUS_KEY, value: DraftStatusEnum.PENDING}, true
         )
       }
     }
   }
 
   private checkCover(draft: Post): void {
-    this.markAsPending = this.draft.status === 'pending';
+    this.markAsPending = this.draft.status === DraftStatusEnum.PENDING;
     
     try {
       this.sendRequest(draft.cover || '', (sizeInBytes) => {
@@ -118,7 +120,7 @@ export class AdminDraftComponent {
       });
     } catch (err) {
       console.log(err);
-      this.crafter.setSnack(UNKWON_ERROR_SENTENCE, 'error')
+      this.crafter.setSnack(UNKWON_ERROR_SENTENCE, SnackTypeEnum.ERROR)
     }
   }
 

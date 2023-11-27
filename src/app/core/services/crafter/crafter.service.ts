@@ -3,7 +3,8 @@ import { Subject } from 'rxjs';
 
 import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormattedDialog, Snack } from '@shared/types/interface.app';
+import { ConfirmationDialogProps, FormattedDialog, Snack } from '@shared/types/interface.app';
+import { SnackType, SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable({providedIn: 'root'})
 
@@ -25,7 +26,7 @@ export class CrafterService {
 
   public setSnack(
     message: string | null,
-    type: SnackType = 'info',
+    type: SnackType = SnackTypeEnum.INFO,
     duration: number = 3000
   ): void {
     if (this.alreadySnack) { return; }
@@ -50,7 +51,7 @@ export class CrafterService {
   }
 
   public confirmation(
-    { title, message }: { title: string, message: string }
+    { title, message }: ConfirmationDialogProps
   ): MatDialogRef<ConfirmationComponent> {
     return this.matDialog.open(ConfirmationComponent, {
       data: { title, message }
@@ -59,4 +60,4 @@ export class CrafterService {
 
 }
 
-type SnackType = 'success' | 'info' | 'warning' | 'error';
+

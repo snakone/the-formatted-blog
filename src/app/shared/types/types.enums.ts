@@ -1,9 +1,47 @@
-export type DraftStatus = DraftStatusEnum.NOT_SEEN | DraftStatusEnum.SEEN | DraftStatusEnum.PENDING | DraftStatusEnum.APPROVED;
-export type DraftTypes = DraftTypeEnum.DRAFT | DraftTypeEnum.POST;
-export type AccountType = AccountTypeEnum.SUPER | AccountTypeEnum.ADMIN | AccountTypeEnum.USER | AccountTypeEnum.GUEST;
-export type UserActivityType = UserActivityEnum.CREATE | UserActivityEnum.DELETE | UserActivityEnum.UPDATE;
-export type SearchType = SearchTypeEnum.POST | SearchTypeEnum.DRAFT | SearchTypeEnum.FAVORITE;
-export type SavingDraftType = SavingTypeEnum.SAVING | SavingTypeEnum.WARNING | SavingTypeEnum.TEMPORAL;
+export type DraftStatus = 
+  DraftStatusEnum.NOT_SEEN | 
+  DraftStatusEnum.SEEN | 
+  DraftStatusEnum.PENDING | 
+  DraftStatusEnum.APPROVED;
+
+export type DraftTypes = 
+  DraftTypeEnum.DRAFT | 
+  DraftTypeEnum.POST;
+
+export type AccountType = 
+  AccountTypeEnum.SUPER | 
+  AccountTypeEnum.ADMIN | 
+  AccountTypeEnum.USER | 
+  AccountTypeEnum.GUEST;
+
+export type UserActivityType = 
+  UserActivityEnum.CREATE | 
+  UserActivityEnum.DELETE | 
+  UserActivityEnum.UPDATE;
+
+export type SearchType = 
+  SearchTypeEnum.POST | 
+  SearchTypeEnum.DRAFT | 
+  SearchTypeEnum.FAVORITE;
+
+export type SavingDraftType = 
+  SavingTypeEnum.SAVING | 
+  SavingTypeEnum.WARNING | 
+  SavingTypeEnum.TEMPORAL;
+
+export type SnackType = 
+  SnackTypeEnum.SUCCESS | 
+  SnackTypeEnum.INFO | 
+  SnackTypeEnum.WARNING | 
+  SnackTypeEnum.ERROR;
+
+export type ValidatorType = 
+  ValidatorEnum.MIN_LENGTH | 
+  ValidatorEnum.MAX_LENGTH | 
+  ValidatorEnum.REQUIRED | 
+  ValidatorEnum.PATTERN | 
+  ValidatorEnum.EMAIL | 
+  ValidatorEnum.PASSWORD;
 
 export enum SavingTypeEnum {
   SAVING = 'saving',
@@ -50,4 +88,11 @@ export enum ValidatorEnum {
   PATTERN = 'pattern',
   EMAIL = 'email',
   PASSWORD = 'password'
+}
+
+export enum SnackTypeEnum {
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  ERROR = 'error'
 }

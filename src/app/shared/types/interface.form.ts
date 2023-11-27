@@ -21,3 +21,10 @@ export interface EditProfileForm {
   github: FormControl<string>;
   portfolio: FormControl<string>;
 }
+
+export interface CreateDraftForm {
+  title: FormControl<string>;
+  category: FormControl<string>;
+  cover: FormControl<string>;
+  intro: FormControl<string>;
+}

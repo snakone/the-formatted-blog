@@ -3,6 +3,7 @@ import { Post } from '@shared/types/interface.post';
 import { CheckStatusList } from '@shared/types/interface.server';
 import { DraftStatusEnum, DraftTypeEnum } from '@shared/types/types.enums';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { TITLE_KEY, CATEGORY_KEY, COVER_KEY, INTRO_KEY } from './constants';
 
 export const CARROUSEL_OPTS: OwlOptions = {
   loop: false,
@@ -89,9 +90,9 @@ export const USER_INDEX: IconList[] = [
 
 export const CREATE_ACTION_LIST: ActionList[] = [
   { icon: 'fas fa-plus', label: 'Nuevo...', action: 'new' },
-  { icon: 'fas fa-external-link-alt', label: 'Previsualizar', action: 'preview' },
+  { icon: 'far fa-eye', label: 'Previsualizar', action: 'preview' },
   { icon: 'fas fa-broom', label: 'Limpiar', action: 'clean' },
-  { icon: 'fas fa-trash', label: 'Eliminar', action: 'delete' },
+  { icon: 'far fa-trash-alt', label: 'Eliminar', action: 'delete' },
   { icon: 'fas fa-cloud-download-alt', label: 'Descargar en HTML', action: 'download' },
 ];
 
@@ -391,3 +392,5 @@ export const SOCIAL_LIST: IconList[] = [
   { label: 'github', icon: 'fab fa-github' },
   { label: 'portfolio', icon: 'fas fa-link' },
 ];
+
+export const EMPTY_DRAFT: Post = {[TITLE_KEY]: '', [CATEGORY_KEY]: '', [COVER_KEY]: '', [INTRO_KEY]: ''}

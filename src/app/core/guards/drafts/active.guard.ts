@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CREATE_ROUTE } from '@shared/data/constants';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { map, Observable } from 'rxjs';
 
@@ -16,7 +17,7 @@ export class ActiveGuard {
     return this.draftsFacade.active$
      .pipe(
        map(res => res ? true : 
-        (this.router.navigateByUrl('/create'), false)
+        (this.router.navigateByUrl(CREATE_ROUTE), false)
       )
     )
   }

@@ -20,7 +20,6 @@ export class DraftCardComponent {
   @Input() draft: Post | undefined;
   @Input() deletedDraftID: string | undefined; // DELETE
   @Input() saving: SavingType | undefined;
-  @Input() first: boolean;
   @Input() collapsed = false;
   private unsubscribe$ = new Subject<void>();
   draftStatus = DraftStatusEnum;

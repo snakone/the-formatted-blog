@@ -55,7 +55,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     );
   }
 
-  switchAction: any = {
+  switchAction: {[key: string]: (saving?: boolean) => void} = {
     new: (saving: boolean) => this.new(saving),
     preview: (saving: boolean) => this.preview(saving),
     clean: (saving: boolean) => {if (!saving) this.clean.emit()},
@@ -85,7 +85,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   private help(saving: boolean): void {
     if (saving) { return; }
-    this.form ? null : this.crafter.dialog(QUILL_HELP_DIALOG);
+    this.crafter.dialog(QUILL_HELP_DIALOG);
   }
 
   private download(saving: boolean): void {

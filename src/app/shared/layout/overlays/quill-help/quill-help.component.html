@@ -1,10 +1,29 @@
 <section class="ql-toolbar">
   <div class="wrapper">
-    @for(item of items; track item.icon) {
-      <div [class]="item.class ? item.class : null">
-        <i [class]="item.icon"></i>
-        <span>{{item.label}}</span>
+    <!-- TOOLBAR -->
+    @for(toolbar of toolbarItems; track toolbar.icon) {
+      <div>
+        <i [class]="toolbar.icon"></i>
+        <h2>{{toolbar.label}}</h2>
+        <p [innerHTML]="toolbar.message | Sanitizer:'html'"></p>
       </div>
+    }
+    <hr>
+    <!-- ACTIONS -->
+    @for(action of actionItems; track action.icon) {
+      <div>
+        <i [class]="action.icon"></i>
+        <h2>{{action.label}}</h2>
+        <p [innerHTML]="action.message | Sanitizer:'html'"></p>
+      </div>
+    }
+    @defer (on viewport) {
+      <div class="more">
+        Si quieres saber más, visita la&nbsp;
+        <a mat-dialog-close [routerLink]="'/help'">página principal de ayuda</a>.
+      </div>
+    } @placeholder {
+      <span></span>
     }
   </div>
 </section>

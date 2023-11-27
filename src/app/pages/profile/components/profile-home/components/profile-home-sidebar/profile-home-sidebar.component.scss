@@ -68,18 +68,18 @@ ul:not(.social) {
   @include flex-start();
   width: 100%;
   position: relative;
-  margin-top: 12px;
+  margin-top: 20px;
 
   & li {
     padding: 0 12px;
     flex-direction: column;
     position: relative;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
 
     & i {
       transition: color 666ms ease-in-out;
-      font-size: 12px;
+      font-size: 16px;
       margin-right: 4px;
     }
 
@@ -117,7 +117,7 @@ ul.social {
     @include text-ellipsis(10px);
 
     & i {
-      font-size: 15px;
+      font-size: 16px;
       margin-right: 10px;
       position: relative;
       top: 1px;

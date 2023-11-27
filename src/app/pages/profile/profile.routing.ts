@@ -13,10 +13,13 @@ import {
   ProfilePublicComponent
 } from './profile.index';
 
+import { UserGuard } from '@core/guards/user/user.guard';
+
 const routes: Routes = [
   {
     path: '',
     component: ProfileComponent,
+    canActivate: [UserGuard],
     children: [
       { path: '', component: ProfileHomeComponent },
       { path: 'posts', component: ProfilePostsComponent },

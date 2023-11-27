@@ -92,13 +92,8 @@
   }
 }
 
-.mat-tooltip {
-  background: var(--dark-color) !important;
-  color: var(--light-color) !important;
-  padding: 2px 8px !important;
-  font-weight: bold;
-  font-size: 12px;
-  border-radius: 2px !important;
+.mat-mdc-tooltip {
+  overflow: hidden;
 }
 
 .mat-dialog-actions .mat-button-base + .mat-button-base {

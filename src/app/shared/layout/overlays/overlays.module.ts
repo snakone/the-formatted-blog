@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SnippetsModule } from '@shared/snippets/snippets.module';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button'
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { RouterModule } from '@angular/router';
 
 const Material = [
   MatDialogModule,
@@ -32,6 +34,8 @@ const Material = [
     QuillModule,
     ReactiveFormsModule,
     SnippetsModule,
+    PipesModule,
+    RouterModule,
     ...Material
   ],
   exports: [

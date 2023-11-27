@@ -80,6 +80,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "sourceMap": false,
               "aot": true,
               "budgets": [
                 {

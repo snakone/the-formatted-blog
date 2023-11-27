@@ -47,14 +47,14 @@ export class EditProfileDialogComponent {
     if (this.editProfileForm.invalid) { return; }
     const { name, role, bio, twitter, github, portfolio } = this.editProfileForm.value;
 
-    const profile: UserProfile = {
-      bio,
+    const profile = new UserProfile(
       role,
+      bio,
       twitter,
       github,
       portfolio,
-      location: this.data.user.profile.location
-    };
+      this.data.user.profile.location
+    );
 
     const updatedUser: User = {
       ...this.data.user,

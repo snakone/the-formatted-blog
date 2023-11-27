@@ -58,12 +58,11 @@
               }
               <span>{{post.created}}</span>
             </p>
-            <span class="author">{{post.author}}</span>
+            <span class="author" (click)="friend()">{{post.author}}</span>
           </div>
         } @else {
-          <span class="author">{{post.author}}</span>
+          <span class="author"  (click)="friend()">{{post.author}}</span>
         }
-
         <!-- ICONS -->
         <ul [ngClass]="{'small': small}">
           <!-- DRAFT ICONS -->

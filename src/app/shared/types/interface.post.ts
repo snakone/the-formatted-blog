@@ -34,5 +34,5 @@ export interface PostHeader {
 export interface QuillHelpItem {
   icon: string;
   label: string;
-  class?: string;
+  message: string;
 }

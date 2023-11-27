@@ -116,7 +116,7 @@ export class SignUpComponent implements OnInit {
   }
 
   private getControl(name: string): AbstractControl | null {
-    return this.signUpForm.get(name);
+    return this.signUpForm?.get(name);
   }
 
   ngOnDestroy(): void {

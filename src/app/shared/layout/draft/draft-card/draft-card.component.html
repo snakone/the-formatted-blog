@@ -6,7 +6,6 @@
         'active': draft.active,
         'zoomOutLeft': deletedDraftID === draft._id,
         'disabled': saving?.value || draft.status === draftStatus.PENDING,
-        'first': first,
         'temporal': draft.temporal
       }">
     @if(collapsed) {

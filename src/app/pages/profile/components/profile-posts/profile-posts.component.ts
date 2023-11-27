@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
 import { Post } from '@shared/types/interface.post';
-import { SearchTypeEnum } from '@shared/types/types.enums';
+import { DraftTypeEnum, SearchTypeEnum } from '@shared/types/types.enums';
 import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
 
 export class ProfilePostsComponent implements OnInit {
 
-  items$: Observable<Post[]>;
+  items$: Observable<Post[]> = null;
   favoritesID$: Observable<string[]> | undefined;
   private unsubscribe$ = new Subject<void>();
   searchType = SearchTypeEnum;
@@ -26,17 +26,19 @@ export class ProfilePostsComponent implements OnInit {
     this.favoritesID$ = this.postFacade.favoritesID$;
     
     this.items$ = this.postFacade.filtered$.pipe(
-      map(res => res.filter(post => post.type === 'post'))
+      map(res => res.filter(post => post.type === DraftTypeEnum.POST))
     );
   }
 
   private checkData(): void {
+    const user = this.userSrv.getUser();
+
     this.postFacade.byUserLoaded$
      .pipe(
-       filter(res => !res && !!this.userSrv.getUser()),
+       filter(res => !res && Boolean(user)),
        takeUntil(this.unsubscribe$)
       )
-     .subscribe(_ => this.postFacade.getByUser(this.userSrv.getUser()?._id));
+     .subscribe(_ => this.postFacade.getByUser(user._id));
   }
 
   ngOnDestroy() {

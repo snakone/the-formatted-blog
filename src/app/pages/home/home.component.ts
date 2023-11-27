@@ -4,6 +4,7 @@ import { PWAService } from '@core/services/pwa/pwa.service';
 import { UserService } from '@core/services/api/users.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { LOGIN_FIRST_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent {
   public notification(): void {
     this.userService.getUser() ? 
     this.pwaSrv.requestNotification() :
-    this.crafter.setSnack(LOGIN_FIRST_SENTENCE, 'warning');
+    this.crafter.setSnack(LOGIN_FIRST_SENTENCE, SnackTypeEnum.WARNING);
   }
 
   ngOnInit() { }

@@ -130,7 +130,7 @@ li.dropdown {
   @for $i from 1 to 7 {
     .dropdown-item-#{$i} {
       transform-origin: top center;
-      animation: scaleZ 300ms ($i * 60ms) ease-in-out forwards
+      animation: scaleZ 300ms ($i * 60ms) ease-in-out forwards;
     }
   }
 
