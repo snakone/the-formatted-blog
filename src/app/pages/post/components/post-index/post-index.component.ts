@@ -26,19 +26,32 @@ export class PostIndexComponent implements AfterContentInit {
   }
 
   private listenToScroll(): void {
-    if (!this.post.headers) { return; }
+    if (!this.post || !this.post.headers) { return; }
+
     setTimeout(() => {
       const headers = document.querySelectorAll('h2');
+
+      const handleIntersection = (entry: IntersectionObserverEntry): void => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        this.setID(entry.target.id);
+      };
+
       try {
-        const inter = new IntersectionObserver((int) => {
-          if (!int[0].isIntersecting) { return; }
-          this.setID(int[0].target.id);
+        const intersectionObserver = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            handleIntersection(entry);
+          }
         });
-        headers.forEach((el: Element) => {
-          inter.observe(el);
+
+        headers.forEach((header: Element) => {
+          intersectionObserver.observe(header);
         });
-      } catch (err) { console.log(err); }
-    }, 2500);  // wait H2 to LOAD
+      } catch (error) {
+        console.error(error);
+      }
+    }, 3500);  // wait H2 to LOAD
   }
 
   private setID(id: string): void {

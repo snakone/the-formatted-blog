@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { ConfirmationComponent } from '@layout/overlays/confirmation/confirmation.component';
+import { ConfirmationDialogComponent } from '@layout/overlays/confirmation/confirmation.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationDialogProps, FormattedDialog, Snack } from '@shared/types/interface.app';
 import { SnackType, SnackTypeEnum } from '@shared/types/types.enums';
@@ -52,8 +52,8 @@ export class CrafterService {
 
   public confirmation(
     { title, message }: ConfirmationDialogProps
-  ): MatDialogRef<ConfirmationComponent> {
-    return this.matDialog.open(ConfirmationComponent, {
+  ): MatDialogRef<ConfirmationDialogComponent> {
+    return this.matDialog.open(ConfirmationDialogComponent, {
       data: { title, message }
     })
   }

@@ -4,6 +4,7 @@ import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil 
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { FilterType } from '@shared/types/interface.app';
 import { SearchType, DraftStatus, DraftStatusEnum } from '@shared/types/types.enums';
+import { KEYUP_EVENT } from '@shared/data/constants';
 
 @Component({
   selector: 'app-post-search',
@@ -27,7 +28,7 @@ export class PostSearchComponent {
   constructor(private postFacade: PostsFacade) { }
 
   ngAfterViewInit() {
-    fromEvent(this.input.nativeElement, 'keyup').
+    fromEvent(this.input.nativeElement, KEYUP_EVENT).
      pipe(
       map((ev: any) => ev.target?.value as string),
       debounceTime(100),

@@ -1,8 +1,8 @@
 import { DraftPreviewDialogComponent } from "@shared/layout/overlays/draft-preview/draft-preview.component";
 import { EditProfileDialogComponent } from "@shared/layout/overlays/edit-profile/edit-profile.component";
-import { LogInOverlayComponent } from "@shared/layout/overlays/log-in/log-in.component";
-import { PushDeniedOverlayComponent } from "@shared/layout/overlays/push-denied/push-denied.component";
-import { QuillHelpComponent } from "@shared/layout/overlays/quill-help/quill-help.component";
+import { LogInDialogComponent } from "@shared/layout/overlays/log-in/log-in.component";
+import { PushDeniedDialogComponent } from "@shared/layout/overlays/push-denied/push-denied.component";
+import { QuillHelpDialogComponent } from "@shared/layout/overlays/quill-help/quill-help.component";
 import { ConfirmationDialogProps, FormattedDialog } from "@shared/types/interface.app";
 import { Post } from "@shared/types/interface.post";
 import { User } from "@shared/types/interface.user";
@@ -37,8 +37,8 @@ export const PREVIEW_DRAFT_DIALOG: FormattedDialog<DraftPreviewDialogComponent> 
   css: 'preview'
 };
 
-export const QUILL_HELP_DIALOG: FormattedDialog<QuillHelpComponent> = {
-  component: QuillHelpComponent,
+export const QUILL_HELP_DIALOG: FormattedDialog<QuillHelpDialogComponent> = {
+  component: QuillHelpDialogComponent,
   css: 'quill-help'
 };
 
@@ -52,8 +52,8 @@ export const PREVIEW_DRAFT_DIALOG_UPDATE = (draft: Post):
   }
 });
 
-export const LOGIN_DIALOG: FormattedDialog<LogInOverlayComponent> = {
-  component: LogInOverlayComponent,
+export const LOGIN_DIALOG: FormattedDialog<LogInDialogComponent> = {
+  component: LogInDialogComponent,
   id: 'login', 
   css: 'login-overlay'
 };
@@ -67,6 +67,6 @@ export const EDIT_PROFILE_DIALOG = (user: User):
     css: 'edit-profile'
 });
 
-export const PUSH_DENIED_DIALOG: FormattedDialog<PushDeniedOverlayComponent> = {
-  component: PushDeniedOverlayComponent
+export const PUSH_DENIED_DIALOG: FormattedDialog<PushDeniedDialogComponent> = {
+  component: PushDeniedDialogComponent
 }

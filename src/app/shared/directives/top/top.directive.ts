@@ -1,6 +1,7 @@
 import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { takeUntil, distinctUntilChanged, throttleTime } from 'rxjs/operators';
 import { Subject, fromEvent } from 'rxjs';
+import { SCROLL_EVENT } from '@shared/data/constants';
 
 const limit = 800;
 const addClass = 'fadeInRight';
@@ -21,7 +22,7 @@ export class TopDirective implements AfterViewInit, OnDestroy {
   }
 
   private listenScroll(): void {
-    fromEvent(window, 'scroll')
+    fromEvent(window, SCROLL_EVENT)
       .pipe(
         takeUntil(this.unsubscribe$),
         throttleTime(300),

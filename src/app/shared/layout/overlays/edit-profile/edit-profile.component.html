@@ -18,8 +18,7 @@
                 required/>
         <span class="hint">El nombre que te identifica en la aplicación.</span>
         <app-form-error [control]="name"
-                        [validator]="['pattern', 'minlength', 'maxlength', 'required']">
-        </app-form-error>
+                        [validator]="['pattern', 'minlength', 'maxlength', 'required']"/>
       </div>
       <!-- PROFESION -->
       <div class="form-control">
@@ -28,9 +27,7 @@
                 autocomplete="off"
                 type="text"/>
         <span class="hint">Indica tu profesión (opcional).</span>
-        <app-form-error [control]="role"
-                        [validator]="['maxlength']">
-        </app-form-error>
+        <app-form-error [control]="role" [validator]="['maxlength']"/>
       </div>
       <!-- TWITTER -->
       <div class="form-control">
@@ -39,9 +36,7 @@
                 autocomplete="off"
                 type="text"/>
         <span class="hint">Añade el link a tu perfil de Twitter.</span>
-        <app-form-error [control]="twitter"
-                        [validator]="['pattern']">
-        </app-form-error>
+        <app-form-error [control]="twitter" [validator]="['pattern']"/>
       </div>
       <!-- GITHUB -->
       <div class="form-control">
@@ -50,9 +45,7 @@
                 autocomplete="off"
                 type="text"/>
         <span class="hint">Añade tu repositorio de Github.</span>
-        <app-form-error [control]="github"
-                        [validator]="['pattern']">
-        </app-form-error>
+        <app-form-error [control]="github" [validator]="['pattern']"/>
       </div>
       <!-- PORTFOLIO -->
       <div class="form-control">
@@ -61,9 +54,7 @@
                 autocomplete="off"
                 type="text"/>
         <span class="hint">Añade el link a tu Portfolio personal.</span>
-        <app-form-error [control]="portfolio"
-                        [validator]="['pattern']">
-        </app-form-error>
+        <app-form-error [control]="portfolio" [validator]="['pattern']"/>
       </div>
       <!-- ABOUT -->
       <div class="form-control">
@@ -73,9 +64,7 @@
                 type="text">
         </textarea>
         <span class="hint">Escribe algo sobre ti.</span>
-        <app-form-error [control]="bio"
-                        [validator]="['minlength', 'maxlength']">
-        </app-form-error>
+        <app-form-error [control]="bio" [validator]="['minlength', 'maxlength']"/>
       </div>
       <!-- SUBMIT -->
       <button type="submit"

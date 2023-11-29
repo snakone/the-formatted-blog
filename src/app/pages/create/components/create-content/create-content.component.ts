@@ -14,7 +14,7 @@ import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
 import { SavingTypeEnum, SavingDraftType } from '@shared/types/types.enums';
 import { MESSAGE_KEY, RESIZE_EVENT } from '@shared/data/constants';
-import { getQuillHeaders } from '@shared/utils/functions/quill.util.functions';
+import { getQuillHeaders } from '@shared/utils/quill.util.functions';
 import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_MODULES } from '@shared/data/quills';
 
 const Quill_Icons = Quill.import('ui/icons');
@@ -73,7 +73,8 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
        distinctUntilChanged(),
        map(([_, sv]) => _.content as any)
      )
-     .subscribe((delta: DeltaStatic) => this.onChange(delta, getQuillHeaders(delta.ops)));
+     .subscribe((delta: DeltaStatic) => 
+     this.onChange(delta, getQuillHeaders(delta.ops)));
   }
 
   private onChange(

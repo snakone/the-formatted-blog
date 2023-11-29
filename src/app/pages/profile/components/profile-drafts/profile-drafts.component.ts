@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Post } from '@shared/types/interface.post';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { SearchTypeEnum } from '@shared/types/types.enums';
+import { DraftTypeEnum, SearchTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-profile-drafts',
@@ -23,7 +23,7 @@ export class ProfileDraftsComponent implements OnInit {
     this.favoritesID$ = this.postFacade.favoritesID$;
 
     this.drafts$ = this.postFacade.filtered$.pipe(
-      map(res => res.filter(post => post.type === 'draft'))
+      map(res => res.filter(post => post.type === DraftTypeEnum.DRAFT))
     );
   }
 

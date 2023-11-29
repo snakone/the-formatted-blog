@@ -2,7 +2,8 @@ import {
   Component, 
   OnInit, 
   OnDestroy,
-  Input
+  Input,
+  ElementRef
  } from '@angular/core';
 
  import { 
@@ -17,6 +18,12 @@ import {
 import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
 import { FormattedNew } from '@shared/types/interface.app';
+import { RESIZE_EVENT } from '@shared/data/constants';
+
+const multiply = 3;
+const maxNumberPost = 50;
+const loadingDuration = 1500;
+const minScrollToStart = 475;
 
 @Component({
   selector: 'app-news-masonry',
@@ -27,12 +34,11 @@ import { FormattedNew } from '@shared/types/interface.app';
 export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   @Input() news: FormattedNew[] | undefined;
-  @Input() duration!: number;
+  @Input() duration: number = loadingDuration;
   isLoaded = false;
   grid!: HTMLElement | null;
   $unsubscribe = new Subject<void>();
   masonry!: MasonryType;
-  multiply = 3;
   currentPage = 1;
   items: FormattedNew[] = [];
 
@@ -45,21 +51,24 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
 
   private initMasonry(): void {
     this.grid = document.getElementById('grid');
-    if (this.grid && this.news) { 
-      this.createMasonry();
-      this.items.push(...this.news.slice(0, 7));
-      this.currentPage = this.multiply;
+  
+    if (!this.grid || !this.news) {
+      return;
     }
+  
+    this.createMasonry();
+    this.items.push(...this.news.slice(0, 7));
+    this.currentPage = multiply;
   }
 
-  private createMasonry(update = false): void {
+  private async createMasonry(update = false): Promise<void> {
     this.isLoaded = true;
+  
     try {
-      setTimeout(() => {
-        this.masonry = this.masonrySrv.createMasonry(this.grid);
-      }, update ? 0 : 150);
+      await new Promise(resolve => setTimeout(resolve, update ? 0 : 150));
+      this.masonry = this.masonrySrv.createMasonry(this.grid);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       this.isLoaded = false;
     }
   }
@@ -69,11 +78,11 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.$unsubscribe),
         filter(_ => !!this.items.length && !!this.masonry),
-        takeWhile(() => this.items.length <= 50),
+        takeWhile(() => this.items.length <= maxNumberPost),
         throttleTime(100),
-        filter((_: any) => (
+        filter(({target}: any) => (
           this.grid!.offsetHeight - 
-          _.target.scrollingElement.scrollTop <= 475
+          target.scrollingElement.scrollTop <= minScrollToStart
         ))
       ).subscribe(_ => this.makeScroll());
   }
@@ -88,15 +97,15 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
   }
 
   private addElements(): void {
-    const skip = this.currentPage * this.multiply;
+    const skip = this.currentPage * multiply;
     if (this.news) {
-      this.items.push(...this.news.slice(skip, skip + this.multiply));
+      this.items.push(...this.news.slice(skip, skip + multiply));
       this.currentPage++;
       this.createMasonry(true);
     }
 
     setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event(RESIZE_EVENT));
     }, 2000);
   }
 

@@ -9,7 +9,7 @@ import { ConfirmationDialogProps } from '@shared/types/interface.app';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ConfirmationComponent {
+export class ConfirmationDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) 

@@ -9,7 +9,7 @@ import {
 import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { UsersFacade } from '@store/users/users.facade';
-import { LogInOverlayComponent } from '../../log-in.component';
+import { LogInDialogComponent } from '../../log-in.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SignInForm } from '@shared/types/interface.form';
 import { SIGN_IN_FORM } from '@shared/data/forms';
@@ -29,7 +29,7 @@ export class SignInComponent implements OnInit {
   remember = false;
 
   constructor(
-    public dialogRef: MatDialogRef<LogInOverlayComponent>,
+    public dialogRef: MatDialogRef<LogInDialogComponent>,
     private userFcd: UsersFacade
   ) { }
 

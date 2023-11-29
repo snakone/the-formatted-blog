@@ -18,10 +18,10 @@ import { RESIZE_EVENT, VALUE_KEY } from '@shared/data/constants';
 export class CreateSidebarComponent implements OnInit {
 
   @Input() drafts!: Post[] | null;
+  @Input() originalCollapsed: boolean;
   deletedID$: Observable<string> | undefined;
   saving$: Observable<SavingType> | undefined;
   collaped = false;
-  @Input() originalCollapsed: boolean;
 
   constructor(
     private createDraftService: CreateDraftService,

@@ -21,7 +21,7 @@ import { LOGIN_SENTENCE, LOGOUT_SENTENCE, REGISTER_SENTENCE, UPDATED_SENTENCE } 
 import { UserState } from './users.reducer';
 import { Store } from '@ngrx/store';
 import { FriendsService } from '@core/services/api/friends.service';
-import { TOKEN_KEY } from '@shared/data/constants';
+import { PROFILE_ROUTE, TOKEN_KEY } from '@shared/data/constants';
 import { User } from '@shared/types/interface.user';
 import { SnackTypeEnum } from '@shared/types/types.enums';
 
@@ -63,7 +63,7 @@ export class UserEffects {
       concatMap((action) =>
       this.loginSrv.signUp(action.user)
         .pipe(
-          tap(_ => this.navigate('/profile', REGISTER_SENTENCE)),
+          tap(_ => this.navigate(PROFILE_ROUTE, REGISTER_SENTENCE)),
           map(user => UserActions.loginSuccess({ user })),
           catchError(error =>
               of(UserActions.loginFailure({ error: error.message }))
@@ -104,7 +104,7 @@ export class UserEffects {
       this.userSrv.update(action.user)
         .pipe(
           tap(_ => this.navigate(null, UPDATED_SENTENCE)),
-          map(user => UserActions.loginSuccess({ user })),
+          map(user => UserActions.updateSuccess({ user })),
           catchError(error =>
               of(UserActions.updateFailure({ error: error.message }))
     ))))
@@ -127,7 +127,7 @@ export class UserEffects {
   // USER UPDATE ACTIVITIES
   userUpdateActivitiesEffect$ = createEffect(() => this.actions
     .pipe(
-      ofType(UserActions.loginSuccess),
+      ofType(UserActions.updateSuccess),
       concatMap(_ => of(ActivitiesActions.get()))
     )
   );

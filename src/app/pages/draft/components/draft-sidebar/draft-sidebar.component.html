@@ -1,5 +1,5 @@
 <app-sticky-aside [selector]="'draft-content'">
-  <ng-container *ngIf="draft">
+  @defer(when draft) {
     <div class="draft-status">
       <h1>Estado del boceto</h1>
       <p>
@@ -7,43 +7,37 @@
         seguir el boceto para que se convierta en <b>artículo</b>, una vez con eso, podrá ser visto, leido y disfrutado por todo el mundo.
         Se paciente, la comprobación está en camino.
       </p>
-      <ng-container *ngIf="check.length > 0 && status">
-        <div class="item" *ngFor="let c of status; let i = index">
-          <!-- CHECKBOX -->
-          <div class="form-control"
-               [ngClass]="{'valid': check[i].ok}">
-            <ng-container *ngIf="check[i].ok; else notOk">
-              <i class="fas fa-check"></i>
-            </ng-container>
-            <ng-template #notOk>
-              <i class="fas fa-times"></i>
-            </ng-template>
-            <span [innerHTML]="c.hint"></span>
-            <p *ngIf="!check[i].ok" class="cause">
-              {{check[i].cause}}
-            </p>
+      @if(check.length > 0) {
+        @for(stat of status; track stat.name; let i = $index) {
+          <div class="item">
+            <!-- CHECKBOX -->
+            <div class="form-control"
+                 [ngClass]="{'valid': check[i].ok}">
+                 @if(check[i].ok) {<i class="fas fa-check"></i>} 
+                 @else {<i class="fas fa-times"></i>}
+              <span [innerHTML]="stat.hint"></span>
+              @if(!check[i].ok && check[i].cause) {
+                <p class="cause"><strong>Administrador:</strong> {{check[i].cause}}</p>
+              }
+            </div>
           </div>
-        </div>
+        }
         <div class="item">
           <div class="form-control"
                [ngClass]="{'valid': check[4].ok}">
-            <ng-container *ngIf="check[4].ok; else notOk">
-              <i class="fas fa-check"></i>
-            </ng-container>
-            <ng-template #notOk>
-              <i class="fas fa-times"></i>
-            </ng-template>
+               @if(check[4].ok) {<i class="fas fa-check"></i>} 
+               @else {<i class="fas fa-times"></i>}
             <span [innerHTML]="'El boceto tiene un mensaje correcto.'"></span>
-            <p *ngIf="!check[4].ok" class="cause">
-              {{check[4].cause}}
-            </p>
+            @if(!check[4].ok && check[4].cause) {
+              <p class="cause"><strong>Administrador:</strong> {{check[4].cause}}</p>
+            }
           </div>
         </div>
-      </ng-container>
+      }
       <div class="progress">
-        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" [value]="progress"/>
         {{progress + '%'}}
       </div>
     </div>
-  </ng-container>
+  }
 </app-sticky-aside>

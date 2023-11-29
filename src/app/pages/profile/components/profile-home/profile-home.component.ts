@@ -17,7 +17,10 @@ export class ProfileHomeComponent implements OnInit {
   activities$: Observable<UserActivity[]> | undefined;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private userFacade: UsersFacade, private activityFacade: ActivitiesFacade) { }
+  constructor(
+    private userFacade: UsersFacade, 
+    private activityFacade: ActivitiesFacade
+  ) { }
 
   ngOnInit(): void {
     this.checkData();

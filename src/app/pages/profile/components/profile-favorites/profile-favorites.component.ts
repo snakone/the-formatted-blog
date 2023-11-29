@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.post';
 import { SearchTypeEnum } from '@shared/types/types.enums';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-profile-favorites',
@@ -14,19 +14,16 @@ import { Observable, map, switchMap } from 'rxjs';
 export class ProfileFavoritesComponent implements OnInit {
 
   favorites$: Observable<Post[]> | undefined;
-  favoritesID$: Observable<string[]> | undefined;
   searchType = SearchTypeEnum;
 
   constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
-    this.favoritesID$ = this.postFacade.favoritesID$;
+    this.favorites$ = this.postFacade.favorites$;
+  }
 
-    this.favorites$ = this.postFacade.favoritesID$.pipe(
-      switchMap(ids => this.postFacade.filtered$.pipe(
-        map(res => res.filter(post => ids.includes(post?._id))))
-      )
-    );
+  public getIdsFromPost(post: Post[]): string[] {
+    return post.map(post => post._id);
   }
 
   ngOnDestroy(): void {

@@ -72,9 +72,8 @@ export class CreateFormComponent implements OnInit {
   private patchForm(draft: Post): void {
     this.draftForm.markAsPristine();
     this.draftForm.patchValue({...draft});
-    this.controls
-      .filter(c => Boolean(this[c].value))
-      .forEach(c => this[c].markAsDirty({onlySelf: true}));
+    this.controls.filter(c => Boolean(this[c].value))
+                 .forEach(c => this[c].markAsDirty({onlySelf: true}));
   }
 
   public clean(): void {
@@ -87,10 +86,10 @@ export class CreateFormComponent implements OnInit {
       this.draftsFacade.setSaving({type: SavingTypeEnum.WARNING, value: true})
       return; 
     }
+
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
 
-    // TEMPORAL - UNPUBLISH
     if (this.draft.temporal) {
       this.crafter.confirmation(EDIT_POST_CONFIRMATION)
       .afterClosed()
@@ -108,7 +107,6 @@ export class CreateFormComponent implements OnInit {
   private getControl(name: string): AbstractControl | null {
     return this.draftForm?.get(name);
   }
-
 
   get title(): AbstractControl { return this.getControl(TITLE_KEY); }
   get category(): AbstractControl { return this.getControl(CATEGORY_KEY); }

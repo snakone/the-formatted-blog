@@ -23,14 +23,7 @@ export class DraftSidebarComponent {
   }
 
   private calculateProgress(): void {
-    let total = 0;
-
-    this.check.forEach((c: CheckStatus) => {
-      if (c.ok) {
-        total++;
-      }
-    });
-
+    const total = this.check.filter(c => c.ok).length;
     this.progress = Math.round((total / this.check.length) * 100);
 
     if (this.check.length !== (this.status.length + 1)) {

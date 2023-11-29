@@ -18,7 +18,7 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { UsersFacade } from '@store/users/users.facade';
-import { LogInOverlayComponent } from '../../log-in.component';
+import { LogInDialogComponent } from '../../log-in.component';
 import { PWAService } from '@core/services/pwa/pwa.service';
 import { UtilsService } from '@core/services/utils/utils.service';
 import { UserProfile } from '@shared/types/class.types';
@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
   conditions = false;
 
   constructor(
-    public dialogRef: MatDialogRef<LogInOverlayComponent>,
+    public dialogRef: MatDialogRef<LogInDialogComponent>,
     private userFcd: UsersFacade,
     private pwaSrv: PWAService,
     private utils: UtilsService

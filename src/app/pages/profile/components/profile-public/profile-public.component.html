@@ -7,12 +7,10 @@
       }; as obs) {
         <app-profile-home-content id="sticky-wrapper" 
                                   [user]="obs.user" 
-                                  [activities]="obs.activities">
-        </app-profile-home-content>
+                                  [activities]="obs.activities"/>
         <app-profile-home-sidebar [user]="obs.user" 
                                   [isPublic]="true" 
-                                  [selector]="'profile-public-content'">
-        </app-profile-home-sidebar>
+                                  [selector]="'profile-public-content'"/>
       }
     </app-section>
   </section>

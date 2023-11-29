@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { UserService } from '@core/services/api/users.service';
 import { User, UserActivity } from '@shared/types/interface.user';
+import { DraftTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-profile-home-content',
@@ -14,14 +14,14 @@ export class ProfileHomeContentComponent {
   @Input() user: User | undefined;
   @Input() activities: UserActivity[] | undefined;
 
-  constructor(private userSrv: UserService) {}
+  constructor() {}
 
   public canVisit(activity: UserActivity): boolean {
     if (!activity.route) { return false; }
     if (
-      activity.route === 'post' || 
-      activity.route === 'draft' && 
-      activity.user === this.userSrv.getUser()?._id
+      activity.route === DraftTypeEnum.POST || 
+      activity.route === DraftTypeEnum.DRAFT && 
+      activity.user === this.user?._id
     ) {
       return true;
     }

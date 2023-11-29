@@ -107,7 +107,7 @@ export class PostCardComponent implements OnInit {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
+        filter(Boolean)
     ).subscribe(_ => this.draftsFacade.delete(this.post._id));
   }
 
@@ -130,7 +130,7 @@ export class PostCardComponent implements OnInit {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
+        filter(Boolean)
     ).subscribe(_ => this.editSuccess());
   }
 

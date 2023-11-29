@@ -21,7 +21,10 @@ export class CreateComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   collapsed$: Observable<boolean> | undefined;
 
-  constructor(private draftsFacade: DraftsFacade, private createDraftSrv: CreateDraftService) {}
+  constructor(
+    private draftsFacade: DraftsFacade,
+    private createDraftSrv: CreateDraftService
+  ) {}
 
   ngOnInit(): void { 
     this.checkData();

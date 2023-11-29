@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuillHelpComponent } from './quill-help.component';
+import { QuillHelpDialogComponent } from './quill-help.component';
 
-describe('QuillHelpComponent', () => {
-  let component: QuillHelpComponent;
-  let fixture: ComponentFixture<QuillHelpComponent>;
+describe('QuillHelpDialogComponent', () => {
+  let component: QuillHelpDialogComponent;
+  let fixture: ComponentFixture<QuillHelpDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuillHelpComponent ]
+      declarations: [ QuillHelpDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuillHelpComponent);
+    fixture = TestBed.createComponent(QuillHelpDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

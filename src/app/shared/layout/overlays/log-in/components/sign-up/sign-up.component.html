@@ -9,8 +9,7 @@
              required/>
       <span class="hint">Tu nombre público.</span>
       <app-form-error [control]="name"
-                      [validator]="['required', 'pattern', 'minlength', 'maxlength']">
-      </app-form-error>
+                      [validator]="['required', 'pattern', 'minlength', 'maxlength']"/>
     </div>
     <!-- EMAIL -->
     <div class="form-control">
@@ -21,8 +20,7 @@
              required/>
       <span class="hint">Para iniciar sesión.</span>
       <app-form-error [control]="email"
-                      [validator]="['required', 'email', 'maxlength']">
-      </app-form-error>
+                      [validator]="['required', 'email', 'maxlength']"/>
     </div>
     <!-- PROFESIÓN -->
     <div class="form-control">
@@ -31,8 +29,7 @@
              autocomplete="off"
              type="text"/>
       <app-form-error [control]="role"
-                      [validator]="['maxlength']">
-      </app-form-error>
+                      [validator]="['maxlength']"/>
     </div>
     <!-- PASSWORD -->
     <div class="form-control">
@@ -42,8 +39,7 @@
              autocomplete="off"
              required>
       <app-form-error [control]="password"
-                      [validator]="['required', 'maxlength', 'minlength']">
-      </app-form-error>
+                      [validator]="['required', 'maxlength', 'minlength']"/>
     </div>
     <!-- REPEAT PASSWORD -->
     <div class="form-control">
@@ -53,8 +49,7 @@
              autocomplete="off"
              required>
       <app-form-error [control]="password2"
-                      [validator]="['required', 'minlength', 'maxlength', 'password']">
-      </app-form-error>
+                      [validator]="['required', 'minlength', 'maxlength', 'password']"/>
     </div>
     <!-- CHECKBOX -->
     <div class="checkbox-wrapper">

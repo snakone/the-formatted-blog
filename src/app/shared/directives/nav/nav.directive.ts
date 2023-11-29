@@ -1,5 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { RESIZE_EVENT, SCROLL_EVENT } from '@shared/data/constants';
 import { fromEvent, tap, filter, from } from 'rxjs';
 
 const NAV_HEIGHT = 48;
@@ -26,7 +27,7 @@ export class NavDirective implements AfterViewInit {
   }
 
   private stickyNavbar(): void {
-    fromEvent(window, 'scroll')
+    fromEvent(window, SCROLL_EVENT)
      .pipe(tap(_ => this.scrolled.emit(true)))
       .subscribe(_ => {
         this.checkScroll(this.css, window.scrollY);
@@ -60,7 +61,7 @@ export class NavDirective implements AfterViewInit {
      .pipe(
       filter((e): e is NavigationEnd => (e instanceof NavigationEnd && !!this.el)),
       tap(_ => this.el.nativeElement.classList.remove(SCROLL_CLASS))
-     ).subscribe(_ => setTimeout(() => window.dispatchEvent(new Event('resize')), RESIZE_DELAY));
+     ).subscribe(_ => setTimeout(() => window.dispatchEvent(new Event(RESIZE_EVENT)), RESIZE_DELAY));
   }
 
 }

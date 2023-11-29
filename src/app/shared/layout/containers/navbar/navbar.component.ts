@@ -37,8 +37,8 @@ export class NavbarComponent implements OnInit {
     this.user$ = this.userFcd.user$;
   }
 
-  public onScroll(scrollDetected: boolean): void {
-    if (scrollDetected) {
+  public onScroll(detected: boolean): void {
+    if (detected) {
       this.menuOpened = false;
     }
   }

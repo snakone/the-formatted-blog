@@ -8,6 +8,7 @@ import {
 import { Subject, fromEvent } from 'rxjs';
 import { distinctUntilChanged, filter, map, takeUntil, throttleTime } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
+import { RESIZE_EVENT } from '@shared/data/constants';
 
 // tslint:disable-next-line:directive-selector
 @Directive({selector: '[Sticky]'})
@@ -22,12 +23,12 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     this.subscribeToResize();
     setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event(RESIZE_EVENT));
     }, 1500);
   }
 
   private subscribeToResize(): void {
-    fromEvent(window, 'resize')
+    fromEvent(window, RESIZE_EVENT)
       .pipe(
         takeUntil(this.unsubscribe$),
         throttleTime(300),

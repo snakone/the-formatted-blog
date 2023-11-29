@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, computed } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry, debounceTime } from 'rxjs';
 
 import { Post } from '@shared/types/interface.post';
 import { DraftCheck } from '@shared/types/interface.server';
@@ -12,8 +12,10 @@ import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE 
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { CHECKSTATUS } from '@shared/data/data';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
-import { CHECK_KEY, STATUS_KEY } from '@shared/data/constants';
+import { CHECK_KEY, ID_KEY, STATUS_KEY } from '@shared/data/constants';
 import { DraftStatusEnum, SnackTypeEnum } from '@shared/types/types.enums';
+
+const maxImageSize = 150;
 
 @Component({
   selector: 'app-admin-draft',
@@ -27,13 +29,12 @@ export class AdminDraftComponent {
   draft: Post | undefined;
   private unsubscribe$ = new Subject<void>();
   checkStatus = CHECKSTATUS;
-  public coverSize: string;
+  public coverSize: number;
   adminDraftMessageDesc = ADMIN_DRAFT_MESSAGE_DESC;
   eveythingOK: boolean;
-  markAsPending = false;
-  maxImageSize = 150;
+  markAsPending: boolean;
 
-  xhr: XMLHttpRequest;
+  xhr: XMLHttpRequest = new XMLHttpRequest();;
 
   constructor(
     private draftsFacade: DraftsFacade,
@@ -51,11 +52,14 @@ export class AdminDraftComponent {
     this.route.paramMap
     .pipe(
       takeUntil(this.unsubscribe$),
-      switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get('id'))),
+      switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get(ID_KEY))),
       throttleTime(100),
       tap(res => !res ? this.draftsFacade.getAll() : null),
       retry(1)
-    ).pipe(filter(res => !!res))
+    ).pipe(
+      filter(Boolean),
+      tap((res: Post) => this.markAsPending = res.status === DraftStatusEnum.PENDING)
+    )
     .subscribe((res: Post) => (this.draft = res, this.checkCover(res)));
   }
 
@@ -66,81 +70,88 @@ export class AdminDraftComponent {
   }
 
   public publish(): void {
-    const allCheckOK = this.isEverythingOK(this.draft.check);
-    Object.values(this.draft.check).forEach(c => {
+    const allChecksPassed = this.allDraftChecksOK(this.draft.check);
+    this.clearCausesForPassedChecks(this.draft.check);
+
+    if (allChecksPassed) {
+      this.showPublishConfirmation();
+    }
+    else {
+      this.updateDraftAndStatus();
+      setTimeout(() => this.navigate(), 1000);
+    }
+  }
+
+  private clearCausesForPassedChecks(checks: DraftCheck): void {
+    Object.values(checks).forEach(c => {
       if (c.ok) {
         c.cause = null;
       }
     });
+  }
 
-    // PUBLISH DRAFT
-    if (allCheckOK) {
-      this.crafter.confirmation(PUBLISH_CONFIRMATION)
-       .afterClosed()
-        .pipe(
-          takeUntil(this.unsubscribe$),
-          filter(_ => !!_)
-      ).subscribe(_ => {
-        this.draftsFacade.publish(this.draft);
+  private showPublishConfirmation(): void {
+    this.crafter.confirmation(PUBLISH_CONFIRMATION)
+      .afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(Boolean),
+        tap(_ => this.draftsFacade.publish(this.draft))
+      ).subscribe(_ => firstValueFrom(
+        this.sw.send(this.sw.set(Object.assign({}, PUBLISH_PUSH), this.draft))
+      ).then(_ => this.navigate()));
+  }
 
-        firstValueFrom(this.sw.send(
-          this.sw.set(Object.assign({}, PUBLISH_PUSH), this.draft)
-        )).then(_ => this.navigate());
-      });
-    } // UPDATE DRAFT
-    else {
-      setTimeout(() => this.navigate(), 1000);
-      this.draftsFacade.updateKey(this.draft?._id, {key: CHECK_KEY, value: this.draft.check}, true);
-
-      if (this.markAsPending) {
-        this.draftsFacade.updateKey(
-          this.draft?._id, {key: STATUS_KEY, value: DraftStatusEnum.PENDING}, true
-        )
-      }
+  private updateDraftAndStatus(): void {
+    this.draftsFacade.updateKey(this.draft?._id, { key: CHECK_KEY, value: this.draft.check }, true);
+  
+    if (this.markAsPending) {
+      this.draftsFacade.updateKey(
+        this.draft?._id, { key: STATUS_KEY, value: DraftStatusEnum.PENDING }, true
+      );
     }
   }
 
-  private checkCover(draft: Post): void {
-    this.markAsPending = this.draft.status === DraftStatusEnum.PENDING;
-    
+  private async checkCover(draft: Post): Promise<void> {
     try {
-      this.sendRequest(draft.cover || '', (sizeInBytes) => {
-        this.coverSize = (sizeInBytes / 1024).toFixed(2);
-        
-        if (Number(this.coverSize) > this.maxImageSize) {
-          this.draft.check.hasGoodCover.ok = false;
-          this.draft.check.hasGoodCover.cause = BAD_COVER_SIZE
-        }
+      const sizeInBytes = await this.sendRequest(draft.cover || '');
+      this.coverSize = Number((sizeInBytes / 1024).toFixed(2));
+
+      if (Number(this.coverSize) > maxImageSize) {
+        this.handleBadCover(BAD_COVER_SIZE);
+      }
   
-        if (isNaN(sizeInBytes)) {
-          this.coverSize = '0';
-          this.draft.check.hasGoodCover.ok = false;
-          this.draft.check.hasGoodCover.cause = BAD_COVER_CAUSE;
-        }
-      });
+      if (isNaN(sizeInBytes)) {
+        this.coverSize = 0;
+        this.handleBadCover(BAD_COVER_CAUSE);
+      }
     } catch (err) {
       console.log(err);
       this.crafter.setSnack(UNKWON_ERROR_SENTENCE, SnackTypeEnum.ERROR)
     }
   }
 
-  private sendRequest(cover: string, callback: (size: number) => void) {
-    this.xhr = new XMLHttpRequest();
-    this.xhr.open('HEAD', cover, true);
-    this.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    this.xhr.onreadystatechange = () => {
-      if (this.xhr.readyState === this.xhr.DONE) {
-        if (callback) {
+  private sendRequest(cover: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.xhr.open('HEAD', cover, true);
+      this.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+      this.xhr.onreadystatechange = () => {
+        if (this.xhr.readyState === this.xhr.DONE) {
           const size = parseInt(this.xhr.getResponseHeader('Content-Length')!, 10);
-          callback(size);
+          !isNaN(size) ? resolve(size) : reject(new Error('Invalid content size'));
         }
-      }
-    };
-    this.xhr.send();
+      };
+      this.xhr.send();
+    });
   }
 
-  public isEverythingOK(value: DraftCheck): boolean {
+  public allDraftChecksOK(value: DraftCheck): boolean {
     return Object.values(value).every(i => i.ok)
+  }
+
+  private handleBadCover(cause: string): void {
+    this.draft.check.hasGoodCover.ok = false;
+    this.draft.check.hasGoodCover.cause = cause;
   }
 
   private navigate(): void {

@@ -2,7 +2,7 @@
   @if({user: user$ | async}; as obs) {
     <div class="wrapper">
       <div class="nav"> <!-- LEFT SIDE -->
-        <app-text-slider></app-text-slider>
+        <app-text-slider/>
       </div>
       <div class="actions"> <!-- RIGHT SIDE -->
         <div class="icons">
@@ -101,6 +101,6 @@
 }
 
 @if(showSearchBar) {
-  <app-search-bar (closed)="showSearchBar = !showSearchBar"></app-search-bar>
+  <app-search-bar (closed)="showSearchBar = !showSearchBar"/>
 }
 

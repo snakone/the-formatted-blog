@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RESIZE_EVENT } from '@shared/data/constants';
 import { FQA_ITEMS } from '@shared/data/data';
 
 @Component({
@@ -16,7 +17,7 @@ export class HelpContentComponent {
   ngOnInit() { }
 
   public stickyFix(): void {
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event(RESIZE_EVENT));
   }
 
 }

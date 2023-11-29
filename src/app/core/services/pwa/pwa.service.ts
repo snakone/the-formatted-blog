@@ -7,7 +7,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
-import { PushDeniedOverlayComponent } from '@layout/overlays/push-denied/push-denied.component';
+import { PushDeniedDialogComponent } from '@layout/overlays/push-denied/push-denied.component';
 import { NotificationPayload } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { SWResponse } from '@shared/types/interface.server';

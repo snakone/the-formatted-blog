@@ -7,7 +7,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PushDeniedOverlayComponent {
+export class PushDeniedDialogComponent {
 
   constructor() { }
 

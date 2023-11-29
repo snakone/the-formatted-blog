@@ -12,6 +12,7 @@ import { FavoriteService } from '@core/services/api/favorite.service';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Router } from '@angular/router';
 import { SnackTypeEnum } from '@shared/types/types.enums';
+import { HOME_ROUTE } from '@shared/data/constants';
 
 @Injectable()
 
@@ -48,7 +49,7 @@ export class PostEffects {
         .pipe(
           map(post => PostsActions.getBySlugSuccess({ post })),
           catchError(error => {
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl(HOME_ROUTE);
             return of(PostsActions.getBySlugFailure({ error: error.message }))
           }
     ))))

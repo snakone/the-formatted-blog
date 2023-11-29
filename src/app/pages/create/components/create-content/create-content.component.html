@@ -4,12 +4,10 @@
                 (onContentChanged)="stickyFix()"
                 [ngModel]="draft ? draft.message : model"
                 (onEditorCreated)="show = !show"
-                [ngStyle]="{'display': show ? 'block' : 'none'}">
-  </quill-editor>
+                [ngStyle]="{'display': show ? 'block' : 'none'}"/>
 
   <app-quill-toolbar [draft]="draft" 
-                     (clean)="clean()">
-  </app-quill-toolbar>
+                     (clean)="clean()"/>
 </div>
 
 @if(active$ | async) {}

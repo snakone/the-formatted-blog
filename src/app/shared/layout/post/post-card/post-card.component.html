@@ -40,8 +40,10 @@
 
       @if(alone) {
          <!-- FULL MESSAGE -->
-        <div class="alone-intro" [innerHTML]="post.intro | shortMessage: alone"></div>
-        <quill-view [content]="post.message" [modules]="quillModules" class="alone"></quill-view>
+         @defer (when post.message) {
+          <div class="alone-intro" [innerHTML]="post.intro | shortMessage: alone"></div>
+          <quill-view [content]="post.message" [modules]="quillModules" class="alone"/>
+         }
       } @else {
         <div [ngClass]="{'intro': !!post.intro}" 
              [innerHTML]="(post.intro | shortMessage: alone : small : showIntro) | Sanitizer: 'html'">

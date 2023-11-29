@@ -1,21 +1,23 @@
 <div class="content animated fadeIn">
-  <app-post-search [type]="searchType.POST"></app-post-search>
-  @if(items$ | async; as items) {
-    @for(item of items; track item._id; let last = $last) {
+  <app-post-search [type]="searchType.POST"/>
+  @if({
+    items: items$ | async,
+    favorites: favoritesID$ | async
+  }; as obs) {
+    @for(item of obs.items; track item._id; let last = $last) {
       <app-post-card  [small]="true"
                       [border]="false"
                       [last]="last"
                       [post]="item"
                       [alone]="false"
-                      [favoritesID]="favoritesID$ | async">
-      </app-post-card>
+                      [favoritesID]="obs.favorites"/>
     } @empty {
       <p>No se han encontrado artículos.</p>
     }
   } 
   @else {
     @for(card of [1,2,3,4]; track card; let last = $last) {
-      <app-post-card-skeleton [small]="true" [showIntro]="false" [last]="last"></app-post-card-skeleton>
+      <app-post-card-skeleton [small]="true" [showIntro]="false" [last]="last"/>
     }
   }
 </div>

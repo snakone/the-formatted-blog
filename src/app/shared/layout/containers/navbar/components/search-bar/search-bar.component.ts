@@ -1,5 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { BOUNCE_IN_DOWN_CLASS, BOUNCE_OUT_UP_CLASS } from '@shared/data/constants';
 import { SEARCH_SENTENCE } from '@shared/data/sentences';
+
+const typeDelay = 1000;
+const closeDelay = 800;
 
 @Component({
   selector: 'app-search-bar',
@@ -13,8 +17,6 @@ export class SearchBarComponent implements OnInit {
   value = '';
   placeholder = '';
   index = 0;
-  typeDelay = 1000;
-  closeDelay = 800;
   sentence = SEARCH_SENTENCE;
 
   constructor(private renderer: Renderer2) { }
@@ -32,12 +34,12 @@ export class SearchBarComponent implements OnInit {
     const el = document.getElementById('search-bar') || null;
     if (el) {
       this.applyAnimationClasses(el);
-      setTimeout(() => this.closed.emit(), this.closeDelay);
+      setTimeout(() => this.closed.emit(), closeDelay);
     }
   }
 
   private autoType(): void {
-    setTimeout(() => this.typing(), this.typeDelay);
+    setTimeout(() => this.typing(), typeDelay);
   }
 
   private typing(): void {
@@ -48,8 +50,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   private applyAnimationClasses(el: HTMLElement): void {
-    this.renderer.removeClass(el, 'bounceInDown');
-    this.renderer.addClass(el, 'bounceOutUp');
+    this.renderer.removeClass(el, BOUNCE_IN_DOWN_CLASS);
+    this.renderer.addClass(el, BOUNCE_OUT_UP_CLASS);
   }
 
 }

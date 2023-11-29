@@ -13,7 +13,7 @@ export class RecentPostBoxComponent {
 
   @Input() posts: Post[] = EMPTY_RECENT_POST;
   @Input() margin: boolean | undefined;
-  @Input() limit: number;
+  @Input() limit: number = 3;
 
   constructor() { }
 

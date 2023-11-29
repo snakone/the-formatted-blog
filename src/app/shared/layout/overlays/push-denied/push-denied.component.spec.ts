@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PushDeniedOverlayComponent } from './push-denied.component';
+import { PushDeniedDialogComponent } from './push-denied.component';
 
-describe('PushDeniedOverlayComponent', () => {
-  let component: PushDeniedOverlayComponent;
-  let fixture: ComponentFixture<PushDeniedOverlayComponent>;
+describe('PushDeniedDialogComponent', () => {
+  let component: PushDeniedDialogComponent;
+  let fixture: ComponentFixture<PushDeniedDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PushDeniedOverlayComponent ]
+      declarations: [ PushDeniedDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PushDeniedOverlayComponent);
+    fixture = TestBed.createComponent(PushDeniedDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

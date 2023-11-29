@@ -3,6 +3,7 @@ import * as PostActions from './posts.actions';
 import { Post } from '@shared/types/interface.post';
 import { DraftsState } from '../drafts/drafts.reducer';
 import { FilterType } from '@shared/types/interface.app';
+import { ANY_KEY, TYPE_KEY } from '@shared/data/constants';
 
 export interface PostState {
   posts: Post[];
@@ -115,23 +116,31 @@ function completed(posts: Post[]): boolean {
   return posts?.length === 0;
 }
 
-export const getFavorites = (statePost: PostState, stateDraft: DraftsState) =>
-  [...stateDraft.drafts, ...statePost.posts].filter(post => statePost.favorites.includes(post?._id));
-
 export const getFiltered = (statePost: PostState, stateDraft: DraftsState) => filterAll(statePost, stateDraft);
+
+export const getFavorites = (
+  statePost: PostState, 
+  stateDraft: DraftsState
+) => getFiltered(statePost, stateDraft)
+      .filter((post: Post) => statePost?.favorites.includes(post?._id));
 
 const switchObj = {
   draft: (_: PostState, stateDraft: DraftsState) => stateDraft.drafts,
   post: (statePost: PostState, _: DraftsState) => statePost.user,
   favorite: (statePost: PostState, stateDraft: DraftsState) => getFavorites(statePost, stateDraft),
-  any: (statePost: PostState, stateDraft: DraftsState) => !statePost.user || !stateDraft.drafts ? [] : [...statePost.user, ...stateDraft.drafts?.filter(d => !d.temporal)],
+  any: (
+    statePost: PostState, 
+    stateDraft: DraftsState
+  ) => !statePost.user || 
+        !stateDraft.drafts ? [] : 
+        [...statePost.user, ...stateDraft.drafts?.filter(d => !d.temporal)],
 };
 
 const filterAll = (statePost: PostState, stateDraft: DraftsState) => {
-  return switchObj[statePost.filter.type || 'any'](statePost, stateDraft)
+  return switchObj[statePost.filter.type || ANY_KEY](statePost, stateDraft)
     .filter((post) => 
       Object.entries(statePost.filter)
-      .filter(([key, _]) => key !== 'type')
+      .filter(([key, _]) => key !== TYPE_KEY)
       .some(
       ([
         key,

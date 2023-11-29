@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LogInOverlayComponent } from './log-in.component';
+import { LogInDialogComponent } from './log-in.component';
 
-describe('LogInOverlayComponent', () => {
-  let component: LogInOverlayComponent;
-  let fixture: ComponentFixture<LogInOverlayComponent>;
+describe('LogInDialogComponent', () => {
+  let component: LogInDialogComponent;
+  let fixture: ComponentFixture<LogInDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogInOverlayComponent ]
+      declarations: [ LogInDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LogInOverlayComponent);
+    fixture = TestBed.createComponent(LogInDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

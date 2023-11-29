@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
+
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
-import { EDIT_PROFILE_DIALOG, REMOVE_FRIEND_CONFIRMATION } from '@shared/data/dialogs';
-import { EditProfileDialogComponent } from '@shared/layout/overlays/edit-profile/edit-profile.component';
 import { Post } from '@shared/types/interface.post';
 import { User } from '@shared/types/interface.user';
-import { Observable, Subject, filter, map, takeUntil, tap } from 'rxjs';
+
+import { SOCIAL_LIST, STATS_LIST } from '@shared/data/data';
+import { EDIT_PROFILE_DIALOG, REMOVE_FRIEND_CONFIRMATION } from '@shared/data/dialogs';
 
 @Component({
   selector: 'app-profile-home-sidebar',
@@ -22,7 +23,7 @@ export class ProfileHomeSidebarComponent {
   @Input() isPublic: boolean = false;
   @Input() selector: string;
 
-  recentPost$: Observable<Post[]> | undefined;
+  userPost$: Observable<Post[]> | undefined;
   friends$: Observable<User[]> | undefined;
 
   statsList = STATS_LIST;
@@ -36,7 +37,7 @@ export class ProfileHomeSidebarComponent {
   ) { }
 
   ngOnInit() {
-    this.recentPost$ = this.postFacade.byUser$;
+    this.userPost$ = this.postFacade.byUser$;
     this.friends$ = this.userFacade.friends$;
   }
 
@@ -59,7 +60,7 @@ export class ProfileHomeSidebarComponent {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
+        filter(Boolean)
       ).subscribe(_ => this.userFacade.removeFriend(this.user._id));
   }
 
