@@ -1,0 +1,26 @@
+<aside>
+  <i class="fas fa-long-arrow-alt-left" 
+     [ngClass]="{'collapsed': collaped}" 
+     (click)="collapseSidebar()" 
+     [matTooltip]="collaped ? 'Expandir' : 'Contraer'">
+  </i>
+  @if({
+    saving: saving$ | async,
+    ondeleteID: deletedID$ | async
+  }; as obs) {
+    <ul class="draft-list" [ngClass]="{'collapsed': collaped}">
+      @for(draft of drafts; track draft._id; let first = $first) {
+        <app-draft-card [draft]="draft"
+                        [deletedDraftID]="obs.ondeleteID"
+                        [saving]="obs.saving"
+                        [collapsed]="collaped"/>
+      }
+    </ul>
+  }
+</aside>
+
+
+
+
+
+

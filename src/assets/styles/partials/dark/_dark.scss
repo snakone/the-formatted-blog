@@ -1,21 +1,37 @@
-body {
-  transition: background 666ms ease-in-out,
-              color 888ms ease-in-out;
-}
-
+//DARK MODE
 :root {
-  //DARK MODE
   body.dark {
-    --light-color: #000000;
-    --dark-color: #ffffff;
+    --light-color: #090b0e;
+    --dark-color: #f7f3f3;
     --shadow-color: #2b2b2b;
     --text-color: #bdbdbd;
-    --primary-color: #d8d4be;
-    --input-bg: rgba(20, 20, 20, .5);
+    --primary-color: var(--contrast-color);
+    --input-bg: rgb(255, 255, 255);
     --contrast-color: #ffe364;
-    --border-color: #141414;
-    --transparent-bg: rgba(0, 0, 0 , 0.9);
-    --quote-bg: #080808;
-    --shade-color: #484a4a;
+    --border-color: #242424;
+    --transparent-bg: rgba(0, 0, 0 , 90%);
+    --quote-bg: #fffce8;
+    --navigation-border: #4d4d4d;
+    --navbar-border: #e9e9e9;
+    --add-bg: rgba(30, 30, 30, .7);
+    --button-text-color: #202020;
+    --inverted-contrast: #001c9b;
+    --li-hover: #090c10;
+    --success-color: #4bb543;
+    --input-focus: rgba(255, 255, 255, 20%);
+    --action-bar-bg: #ffffff;
+    --action-bar-text: #555555;
+    --light-gradient: #0A0C0F;
+    --quill-bg: #0c0e11;
+    --scrollbar-bg: #f7f3f305;
+    --not-seen-color: #d2d2ff;
+    --seen-color: #fdf5e2;
+    --pending-color: #fbdfee;
+    --approved-color: #81bd9a;
+    --skeleton-color: #adadad;
+    --shadow-card-border: rgba(28 28 28 / 22%);
+    --mdc-dialog-container-color: #090b0e;
+
+    & a { color: rgb(0, 140, 255) }
   }
 }

@@ -1,0 +1,18 @@
+@defer {
+  <ul class="profile-list">  
+    <!-- LIST -->
+    @for(item of list; track item.label) {
+      <li [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+        <i [class]="item.icon"></i> 
+        <span>{{item.label}}</span>
+      </li>
+    }
+    <li (click)="logOut()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Salir</span>
+    </li>
+  </ul>
+}
+

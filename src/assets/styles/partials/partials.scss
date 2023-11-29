@@ -1,4 +1,7 @@
-@import './dark/dark.scss';
-@import './scrollbar/scrollbar';
 @import './animated/animated';
-@import './layout/app';
+@import './dark/dark.scss';
+@import './layout/layout.scss';
+@import './post/post';
+@import './scrollbar/scrollbar';
+@import './typography/typography';
+@import './post/quill';

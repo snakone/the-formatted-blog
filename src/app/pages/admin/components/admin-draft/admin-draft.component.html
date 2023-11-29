@@ -1,0 +1,129 @@
+@defer(when draft) {
+  <div class="header">
+    <h1>
+      Aprobación del Artículo
+      <i class="fas fa-step-backward" 
+         [routerLink]="'../'" 
+         [replaceUrl]="true" 
+         [matTooltip]="'Volver'">
+      </i>
+      <i class="fas fa-trash" 
+         [matTooltip]="'Eliminar'" 
+         (click)="deleteDraftByID()">
+      </i>
+    </h1>
+    <!-- TITLE -->    
+    <h2>{{draft.title}}</h2>
+    <button class="formatted preview" (click)="preview()">Ver boceto</button>
+
+    <div class="form-control">
+      <input type="checkbox" 
+             [(ngModel)]="markAsPending"/>
+            <span>Marcar como pendiente</span>
+    </div>
+
+    <p>A continuación se muestran los criterios que un <b>Boceto</b> debe cumplir,
+      cada uno de ellos acompañado de la información pertinente.
+      Añade una causa para el usuario si algo no es correcto.
+    </p>
+  </div>
+  <div class="grid">
+    @for(check of checkStatus; track check.name) {
+      <div class="draft-card" >
+        <h3>
+          <i [class]="check.icon"></i> {{check.name}}
+        </h3>
+        <p>{{check.hint}}</p>
+        <!-- DRAFT PROPERTY EXAMPLE -->
+        <p class="example">
+          @if(draft[check.prop]) {
+            {{draft[check.prop]}}
+          } @else {
+            <span>{{draft.author}} aún no ha añadido la {{check.name.toLowerCase()}}</span>
+          }
+        </p>
+  
+        @if(check.prop === 'cover') {
+          <img class="cover"
+               alt="cover"
+               #img
+              (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'"
+              [src]="draft.cover"/>
+        }
+  
+        <!-- DESCRIPTION -->
+        <div [innerHTML]="check.desc | Sanitizer:'html'" class="desc"></div>
+
+        @if(check.prop === 'cover') {
+          <p class="size">Tamaño de la imagen: <strong>{{coverSize}} Kb</strong></p>
+        }
+
+        <!-- CHECKBOX -->
+        <div class="form-control">
+          <input type="checkbox" 
+                 [(ngModel)]="draft.check[check.checkProp].ok"
+                 [checked]="draft.check[check.checkProp].ok" role="checkbox" aria-label="check-invalid"/>
+                <span [innerHTML]="check.checkMessage"></span>
+        </div>
+  
+        <!-- CAUSE -->
+        <div class="input-group"
+             [ngClass]="{'disabled': draft.check[check.checkProp].ok}">
+          <mat-label>Causa</mat-label>
+          <input type="text"
+                 [placeholder]="check.cause"
+                 [(ngModel)]="draft.check[check.checkProp].cause" role="text"/>
+        </div>
+      </div>
+    }
+
+    <!-- MESSAGE -->
+    <div class="draft-card animated fadeIn">
+      <h3>
+        <i class="fas fa-file-alt"></i> Mensaje
+      </h3>
+      <p>Mensaje cumple todos los requisitos</p>
+
+      <!-- DRAFT PROPERTY EXAMPLE -->
+      <p class="example">
+        @if(draft.message.ops[0] && draft.message.ops[0].insert === '\n') {
+          <span>{{draft.author}} aún no ha añadido el mensaje.</span>
+        }
+      </p>
+
+      <!-- DESCRIPTION -->
+      <div [innerHTML]="adminDraftMessageDesc | Sanitizer:'html'" class="desc"></div>
+
+      <!-- CHECKBOX -->
+      <div class="form-control">
+        <input type="checkbox" 
+               [(ngModel)]="draft.check.hasGoodMessage.ok"
+               [checked]="draft.check.hasGoodMessage.ok" aria-label="check-invalid"/>
+        <span>
+          El boceto tiene un <strong>mensaje</strong> correcto. 
+          Asegúrate de comprobar el boceto primero.
+        </span>
+      </div>
+
+      <!-- CAUSE -->
+      <div class="input-group"
+           [ngClass]="{'disabled' : draft.check.hasGoodMessage.ok}">
+        <mat-label>Causa</mat-label>
+        <input type="text"
+              [placeholder]="'¿Por qué el mensaje no cumple los requisitos?'"
+              [(ngModel)]="draft.check.hasGoodMessage.cause"/>
+      </div>
+    </div>
+  </div>
+  <!-- SUBMIT -->
+  <button class="formatted"
+          (click)="publish()"
+          [disabled]="!draft.category || !draft.intro">
+          {{allDraftChecksOK(draft.check) ? 'Publicar' : 'Actualizar'}}
+  </button>
+} @placeholder {
+  <div class="empty">
+    Parece ser que el contenido que buscas no existe. Comprueba la URL.
+  </div>
+}
+

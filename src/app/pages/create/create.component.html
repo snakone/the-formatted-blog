@@ -1,0 +1,18 @@
+<div class="animated fadeIn">
+  @if({collapsed: collapsed$ | async}; as obs) {
+    <section class="create-content">
+      <app-section spellcheck="false" [margin]="false" [collapsed]="obs.collapsed">
+        @if(drafts$ | async; as drafts) {
+          @if(drafts.length > 0) {
+            <app-create-sidebar [drafts]="drafts" [originalCollapsed]="obs.collapsed"/>
+          }
+        }
+        <div id="sticky-wrapper">
+          <router-outlet></router-outlet>
+        </div>
+      </app-section>
+    </section>
+  }
+</div>
+
+<app-scroll-top/>

@@ -1,4 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
+
+import { PostsFacade } from '@store/posts/posts.facade';
+import { Post } from '@shared/types/interface.post';
 
 @Component({
   selector: 'app-home-content',
@@ -9,9 +13,30 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 export class HomeContentComponent implements OnInit {
 
-  constructor() { }
+  posts$!: Observable<Post[]>;
+  private unsubscribe$ = new Subject<void>();
+  favoritesID$: Observable<string[]> | undefined;
+  
+  constructor(private postFacade: PostsFacade) { }
 
   ngOnInit(): void {
+    this.checkData();
+    this.posts$ = this.postFacade.posts$;
+    this.favoritesID$ = this.postFacade.favoritesID$;
+  }
+
+  private checkData(): void {
+    this.postFacade.loaded$
+     .pipe(
+       filter(res => !res),
+       takeUntil(this.unsubscribe$)
+      )
+     .subscribe(_ => this.postFacade.get());
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

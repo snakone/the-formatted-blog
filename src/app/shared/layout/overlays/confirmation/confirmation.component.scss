@@ -1,0 +1,38 @@
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 21px;
+}
+
+.message {
+  margin-bottom: .8rem;
+}
+
+.actions {
+  margin-top: 1rem;
+
+  & button {
+    color: var(--dark-color);
+
+    &[cdkFocusInitial] {
+      color: var(--light-color);
+      background-color: var(--contrast-color);
+    }
+  }
+}
+
+@media(max-width: 550px) {
+  button {
+    font-size: 13px;
+    min-width: 48px;
+    line-height: 28px;
+  }
+
+  .message {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  .actions {
+    padding-top: 0;
+  }
+}

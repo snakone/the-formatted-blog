@@ -1,0 +1,159 @@
+$icon-size: 16px;
+
+.flex {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.toolbar {
+  border: none;
+  border-top: 1px solid var(--navigation-border);
+  transition: border 666ms ease-in-out;
+  padding: 12px 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & i:not(.fa-pulse):not(.fa-check) {
+    width: 28px;
+    height: 24px;
+    padding: 3px 8px;
+    position: relative;
+    top: .5px;
+    cursor: pointer;
+    font-size: $icon-size;
+    transition: filter 200ms ease-in;
+    &:hover:not(.disabled) { color: var(--contrast-color) }
+  }
+
+  // SUCCESS
+  & i.fa-check { 
+    top: 0;
+    color: var(--success-color);
+    margin-right: 1rem;
+    font-size: $icon-size;
+  }
+
+  // SAVING SPINNER
+  & i.fa-spinner.fa-pulse {
+    font-size: $icon-size;
+    margin-right: 1rem;
+  }
+
+  & .actions i {
+    &:nth-last-child(2) { 
+      margin-left: 30px;
+
+      @media(max-width: 450px) {
+        margin-left: 12px;
+      }
+     }
+
+    &:nth-child(2) {
+      margin-left: 23px;
+      margin-right: 5px;
+
+      @media(max-width: 450px) {
+        margin-left: 12px;
+      }
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+
+      &:not(.fa-spell-check) {
+        filter: invert(1);
+      }
+    }
+  }
+
+  & i.fa-pulse {
+    margin-right: .8rem;
+    position: relative;
+  }
+
+  & i.fa-trash-alt {
+    margin: 0 4px 0 6px;
+  }
+
+  // GO TO FORM
+  & i.fa-spell-check {
+    margin-left: 10px;
+    color: var(--contrast-color);
+
+    &.disabled {
+      opacity: .7;
+    }
+  }
+
+  // SAVING WARNING
+  & i.fa-exclamation-triangle {
+    color: var(--error-color);
+    top: -1px !important;
+    margin-right: .8rem;
+  }
+
+  & .total {
+    margin-left: -5px;
+    font-size: $icon-size;
+  }
+
+  // TOTAL DRAFTS
+  & i.fa-paper-plane {
+    margin-right: 5px;
+  }
+
+  // HELP
+  & i.fa-question-circle {
+    font-size: $icon-size;
+    top: 1.5px !important;
+  }
+
+  & i.fa-external-link-alt {
+    margin-left: 2px;
+  }
+
+  // SAVING
+  & .animated {
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+    margin-left: 28px;
+
+    &.warning {
+      margin-left: 20px;
+    }
+
+    &.temporal {
+      margin-left: 19px;
+    }
+    
+    @media(width < 1200px) {
+      font-size: 13px;
+    }
+  }
+
+  @media(max-width: 710px) {
+    & .animated {
+      & span {
+        display: none;
+      }
+    }
+  }
+}
+
+.toolbar.form {
+ & .actions i {
+  &:nth-child(2) {
+    margin-left: 30px;
+    margin-right: initial;
+  }
+  &:nth-child(3) {
+    margin-left: 11px;
+    margin-right: -1px;
+  }
+ }
+}
+
+

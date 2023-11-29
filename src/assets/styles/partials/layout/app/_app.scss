@@ -1,0 +1,339 @@
+@import 'mixins/mixins.scss';
+
+#app {
+  @media(max-width: 377px) { display: none }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+}
+
+// NOTIFICATION BAR
+.jump {
+  display: none;
+  @media (min-width: 575px) and (max-width: 1200px) { display: block }
+}
+
+.jump-card {
+  display: none;
+  @media (max-width: 490px) { display: block }
+}
+
+// CARROUSEL
+.owl-carousel.owl-theme.owl-loaded { z-index: 0 }
+
+button { 
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+
+  &[disabled] {
+    pointer-events: none;
+    filter: contrast(.5);
+    opacity: .7;
+  }
+}
+
+.is-affixed .profile-list {
+  margin-top: 0;
+}
+
+.scroll-down .actions {
+  @media(max-width: 700px) {
+    border-top: 1px solid transparent !important;
+  }
+}
+
+// FORMS
+.form-control {
+  margin-bottom: 1.6rem;
+  position: relative;
+
+  & label {
+    position: relative;
+  }
+}
+
+// HOME MAIN POST
+.main-post {
+  overflow: hidden;
+  position: relative;
+  margin-top: .666rem;
+
+  & figure {
+    & img {
+      display: block;
+      width: 100%;
+      z-index: 1;
+      border: 1px solid transparent;
+      transition: aspect-ratio 100ms ease-in;
+    }
+  }
+
+  & .content {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 20px;
+    background: var(--transparent-bg);
+    transition: background 666ms ease-in-out,
+                border 666ms ease-in-out;
+    border: 1px solid transparent;
+
+    @media(min-width: 1201px) { 
+      width: 60%;
+      left: 20%;
+    }
+
+    @media (min-width: 993px) and (max-width: 1200px) { 
+      padding: 20px 25px;
+      left: 28%;
+      width: 44%;
+    }
+
+    & .inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+
+      & h2 { @include main-title() }
+
+      & p {
+        text-align: center;
+        overflow: hidden;
+
+        & span {
+          font: normal 12px/15px 'Merriweather', Arial, Helvetica;
+          display: inline-block;
+          position: relative;
+          font-style: italic;
+          color: var(--text-color);
+          padding: 0 15px;
+          line-height: inherit;
+          opacity: .8;
+          vertical-align: middle;
+
+          & i {
+            margin-right: 6px;
+            position: relative;
+            top: -1px;
+            font-size: 16px;
+            color: var(--contrast-color);
+          }
+
+          &.slash,
+          &.hyphen {
+            &:after {
+              position: absolute;
+              top: 2px;
+              left: -4px;
+              font-size: 15px;
+              line-height: 18px;
+            }
+          }
+
+          &.slash:after {
+            content: "/";
+          }
+
+          &.hyphen:after {
+            content: "-";
+          }
+        }
+
+        &:first-child { padding: 0 0 20px }
+      }
+    }
+
+    @media(max-width: 992px) and (min-width: 731px) {
+      left: 25%;
+      width: 50%;
+    }
+
+    @media(max-width: 730px) {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      padding: 10px;
+
+      & .inner {
+        & p:first-child { padding: 0 0 10px }
+        & h2 { margin: 0 0 12px }
+      }
+    }
+
+    @media(max-width: 475px) { height: 100% }
+  }
+
+  &:hover {
+    cursor: pointer;
+    figure img { opacity: .8 }
+
+    & .content {
+      background: var(--light-color);
+
+      @media(max-width: 730px) {
+        border-top: 1px solid transparent;
+        border-left: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
+      }
+    }
+  }
+}
+
+// FORM ERROR
+input + span + app-form-error > .form-error,
+select + span + app-form-error > .form-error
+ {
+  margin-top: 1px !important;
+}
+
+textarea + span + app-form-error > .form-error
+ {
+  margin-top: -9px !important;
+}
+
+input + span + app-form-error > .form-error,
+select + span + app-form-error > .form-error,
+textarea + span + app-form-error > .form-error
+ {
+  @media(max-width: 520px) {
+    position: relative !important;
+
+    & span {
+      top: 20px;
+      position: absolute;
+      left: 6px;
+      margin-left: 0 !important;
+    }
+  }
+}
+
+// BUTTON 
+button.formatted {
+  width: 75%;
+  @include hover-button();
+  transition: all 333ms ease-in-out;
+
+  &:hover {
+    background: var(--contrast-color);
+    color: var(--light-color);
+  }
+
+  @media(max-width: 750px) {
+    padding: 10px 14px;
+    margin-left: inherit;
+    margin-top: 10px;
+  }
+
+  @media(max-width: 550px) {
+    font-size: 13px;
+  }
+}
+
+// CONDITIONS
+.conditions {
+  & .mat-mdc-tab {
+
+    &.mdc-tab--active {
+      & .mdc-tab__content .mdc-tab__text-label {
+        opacity: 1;
+      }
+    }
+
+    & .mdc-tab__content .mdc-tab__text-label {
+      opacity: .5;
+      color: var(--contrast-color) !important;
+    }
+
+    & .mdc-tab-indicator__content {
+      border-color: var(--contrast-color) !important;
+    }
+
+    & .mdc-tab-indicator__content--underline {
+      border-top-width: 1px !important;
+    }
+  }
+}
+
+.accordion {
+  & p {
+    text-wrap: pretty;
+
+    & i {
+      padding: 0 6px;
+      font-size: 18px;
+    
+      &.fa-check {
+        color: var(--success-color);
+      }
+    }
+  }
+
+  & ol, & ul {
+    padding-left: 12px;
+    font-size: 13px;
+    margin: 20px 0;
+
+    & li {
+      padding-left: 8px;
+    }
+  }
+}
+
+h2[mat-dialog-title] {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--navigation-border);
+  margin-bottom: 2rem;
+  @include text-ellipsis(4rem);
+  padding-top: 1.4rem;
+
+  & button {
+    position: absolute;
+    top: 20px;
+    right: -6px;
+    border-radius: 100%;
+    margin-top: -1px;
+    width: 38px;
+    height: 38px;
+    min-width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+    & i {
+      font-size: 1.6rem;
+      color: var(--dark-color);
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  @media(max-width: 550px) {
+    font-size: 1.8rem;
+  }
+}
+
+label:has(+ input:required):after {
+  content: '*';
+  font-size: 30px;
+  color: var(--error-color);
+  position: absolute;
+  top: -3px;
+  right: -12px;
+}
+
+label:has(+ input[type="checkbox"]:required):after {
+  top: 1px;
+  right: -9px;
+}

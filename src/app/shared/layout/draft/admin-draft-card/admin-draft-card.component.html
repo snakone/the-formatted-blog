@@ -1,0 +1,17 @@
+@if(draft) {
+  <div class="card" [routerLink]="'./' + draft._id">
+    <h6>{{ draft.title }}</h6>
+    <div class="card-data">
+        <span class="bold">{{ draft.author }}</span>
+        <span>{{ draft.created }}</span>
+        <div class="category">
+          {{draft.category}}
+        </div>
+        <span>
+          <button [class]="draft.status">
+            {{ draft.status | draftStatus }}
+          </button>
+        </span>
+    </div>
+  </div>
+}

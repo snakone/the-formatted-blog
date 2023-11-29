@@ -1,0 +1,13 @@
+<div class="content">  <!-- EDITOR -->
+  <quill-editor [modules]="quillModules"
+                #editor
+                (onContentChanged)="stickyFix()"
+                [ngModel]="draft ? draft.message : model"
+                (onEditorCreated)="show = !show"
+                [ngStyle]="{'display': show ? 'block' : 'none'}"/>
+
+  <app-quill-toolbar [draft]="draft" 
+                     (clean)="clean()"/>
+</div>
+
+@if(active$ | async) {}

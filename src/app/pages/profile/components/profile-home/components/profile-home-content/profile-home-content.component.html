@@ -1,0 +1,42 @@
+<h1>Actividad reciente</h1>
+<p class="reset">La actividad se borra cada 30 días.</p>
+<div class="profile-content">
+  @if(user) {
+    @defer(when activities) {
+      @for(activity of activities; track activity.slug) {
+        <article [ngClass]="{'admin': activity.admin, 'route': canVisit(activity)}" 
+                 [class]="activity.type"
+                 [routerLink]="canVisit(activity) ? ('/' + activity.route + '/' + activity.slug) : null">
+          <div class="content" [ngClass]="{'link': canVisit(activity)}">
+            <span [innerHTML]="activity.message"></span>
+            <p class="title">
+              @if(!activity.userAction) {
+                Título: 
+              }
+              <b>{{activity.title}}</b> - {{activity.date}}
+          </div>
+        </article>
+      } @empty {
+        Aún no se han registrado actividades. Realiza acciones dentro de la aplicación para registrar actividades.
+      }
+
+    } @placeholder {
+      @for(item of [1,2,3,4]; track item; let last = $last) {
+        <app-activity-skeleton [last]="last"></app-activity-skeleton>
+      }
+    }
+  }
+  <ng-container *ngIf="user">
+    <ng-container *ngIf="activities; else loading">
+
+    </ng-container>
+    <ng-template #loading>
+      
+    </ng-template>
+    <ng-container *ngIf="activities && activities.length === 0">
+      
+    </ng-container>
+  </ng-container>
+</div>
+
+

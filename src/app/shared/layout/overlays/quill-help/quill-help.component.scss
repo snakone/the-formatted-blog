@@ -1,0 +1,52 @@
+section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 660px;
+
+  & .wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+p {
+  width: 100%;
+  margin: 1rem 0 2rem 0;
+}
+
+img, i {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 14px;
+}
+
+i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--contrast-color);
+}
+
+.ql-toolbar > div > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+
+  & h2 {
+    font-size: 18px;
+  }
+
+  &:last-of-type { margin-bottom: 0; }
+}
+
+hr {
+  margin-bottom: 2.8rem;
+}

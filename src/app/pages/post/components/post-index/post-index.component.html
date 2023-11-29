@@ -1,0 +1,12 @@
+@if(post && post.headers?.length > 0) {
+  @if({spy: scrollSpy$ | async}; as obs) {
+    <ul>
+      @for(header of post.headers; track header.id) {
+        <li (click)="scroll(header.id)"
+            [ngClass]="{'active' : header.id === obs.spy}">
+            {{header.text}}
+        </li>
+      }
+    </ul>
+  }
+}

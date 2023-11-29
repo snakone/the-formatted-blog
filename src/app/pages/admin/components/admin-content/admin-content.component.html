@@ -1,0 +1,17 @@
+<div class="buttons">
+  @for(button of status; track button.status) {
+    <button [class]="button.status" 
+            (click)="sort(button)" 
+            [ngClass]="{'active': button.active}">
+      {{ button.status | draftStatus}}
+    </button>
+  }
+</div>
+
+@for(draft of filteredDrafts; track draft._id) {
+  <app-admin-draft-card [draft]="draft"/>
+} @empty {
+  <div class="empty">
+    No se han encontrado bocetos.
+  </div>
+}

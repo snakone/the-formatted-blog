@@ -1,35 +1,33 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
 
-import { AppRoutingModule } from './app.routing';
-import { AppComponent } from './app.component';
-import { environment } from '@env/environment';
 import { CoreModule } from '@core/core.module';
-import { HammerConfig } from '@core/hammer.config';
-import { MinWidthComponent } from '@layout/min-width/min-width.component';
 import { LayoutModule } from '@layout/layout.module';
+import { AppComponent } from './app.component';
+import { RoutingModule } from './app.routing';
+import { APP_CONFIG, APP_CONSTANTS } from './app.config';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MinWidthComponent
-  ],
+  bootstrap: [AppComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    }),
+    RoutingModule,
     CoreModule,
     LayoutModule,
-    BrowserAnimationsModule
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false
+      }
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10,
+    }),
   ],
-  providers: [
-    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: APP_CONFIG, useValue: APP_CONSTANTS }]
 })
 
 export class AppModule { }

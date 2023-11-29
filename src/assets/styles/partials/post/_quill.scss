@@ -1,0 +1,124 @@
+.quill-focus .ql-editor {
+  color: rgba(200, 200, 200, 100);
+}
+
+.quill-focus .ql-editor > * {
+  transition: color 300ms;
+}
+
+.quill-focus .focused-blot {
+  color: rgba(45, 45, 45, 255);
+}
+
+.alone .ql-container.ql-snow {
+  background: initial !important;
+}
+
+.ql-container.ql-snow, 
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid var(--navigation-border);
+  transition: border 666ms ease-in-out;
+}
+
+.ql-container.ql-snow { 
+  height: auto;
+  overflow-y: auto;
+  border: none !important;
+  background: var(--quill-bg);
+  transition: background 666ms ease-in-out;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar { width: 4px !important;  }
+
+.ql-container.ql-snow::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-bg) !important;
+}
+
+.ql-container.ql-snow::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+.ql-toolbar.ql-snow {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  padding-bottom: 12px;
+}
+
+
+// FIX SCROLL AFTER PASTER
+.ql-clipboard {
+  position: fixed !important;
+  display: none;
+  left: 50%;
+  top: 50%;
+}
+
+.ql-formats {
+  position: relative;
+  left: -2px;
+  display: inline-flex !important;
+  margin-right: 0 !important;
+  @media(min-width: 550px) { margin-right: 24px !important; }
+  &:first-of-type { top: -.5px; }
+  &:last-of-type { margin-right: 0 !important }
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none;
+  stroke: var(--text-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ql-toolbar .ql-fill {
+  fill: var(--text-color);
+  stroke: none;
+}
+
+.ql-editor .ql-video {
+  width: 100%;
+  min-height: 420px;
+  margin: 0 auto 34px auto;
+}
+
+.ql-toolbar .ql-picker { color: var(--text-color) }
+.ql-blockquote .ql-fill { stroke: var(--text-color) }
+
+.ql-snow.ql-toolbar button {
+  width: 30px !important;
+  
+  &:hover {
+    & .ql-stroke { stroke: var(--contrast-color) }
+    & .ql-fill { fill: var(--contrast-color) }
+  }
+
+  &.ql-undo, &.ql-redo {
+    &::after {
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      font-weight: 900;
+      color: var(--text-color);
+      position: relative;
+    }
+
+    &:hover::after { color: var(--contrast-color) }
+  }
+
+  &.ql-undo::after { content: '\f0e2' }
+  &.ql-redo::after { content: '\f01e' }
+
+  &.ql-video, &.ql-link, &.ql-image {
+    margin: 0 2px;
+  }
+}
+
+.ql-snow .ql-tooltip {
+  left: 5% !important;
+
+  @media(min-width: 550px) {
+    left: 25% !important;
+  }
+}

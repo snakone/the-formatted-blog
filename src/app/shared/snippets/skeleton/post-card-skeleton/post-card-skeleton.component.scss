@@ -1,0 +1,202 @@
+@import 'mixins/mixins.scss';
+
+article {
+  position: relative;
+  
+  & figure {
+    overflow: hidden;
+    margin: 0 0 40px;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 870/500;
+    display: block;
+    @include skeleton();
+  }
+
+  & .main-content {
+    position: relative;
+
+    & .category, & .date {
+      margin: 0 0 22px;
+      height: 18px;
+      width: 100px;
+      @include skeleton();
+    }
+
+    & .title {
+      line-height: 30px;
+      margin: 0 0 20px;
+      @include skeleton();
+      height: 28px;
+      width: 320px;
+    }
+
+    & .date {
+      width: 120px;
+      height: 20px;
+      margin: 1.8rem 0 1.6rem 0;
+    }
+
+    & .intro {
+      width: 100%;
+      @include skeleton();
+      margin-bottom: 26px;
+      height: 35px;
+
+      @media(max-width: 550px) {
+        height: 66px;
+      }
+    }
+
+    & .bottom {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.8rem;
+  
+      & .author {
+        margin: 0 0 20px;
+        height: 20px;
+        width: 140px;
+        @include skeleton();
+      }
+  
+      &.first { 
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 40px;
+        padding-bottom: 16px;
+      }
+  
+      & ul {
+        list-style: none;
+        height: 20px;
+        width: 120px;
+        @include skeleton();
+      }
+    }
+  }
+
+  @media(min-width: 751px) {
+    &:not(.small) .main-content .bottom {
+      padding-bottom: 1.35rem;
+    }
+  }
+
+  &.small {
+    figure {
+      margin: 0;
+    }
+
+    & .main-content {
+      position: relative;
+  
+      & .category {
+        margin-top: 22px;
+        margin-bottom: 14px;
+      }
+
+      & .date {
+        margin-top: 2.5rem;
+        margin-bottom: .6rem;
+        height: 16px;
+        width: 100px;
+      }
+
+      & .bottom {
+        margin-top: 0;
+        padding: 0;
+        position: absolute;
+        bottom: unset;
+        width: 100%;
+        top: initial;
+  
+        @media (max-width: 750px) {
+          top: 0;
+          position: relative;
+          margin-top: 2px;
+        }
+  
+        & .author, & ul {
+          height: 16px;
+        }
+
+        & .author {
+          margin-bottom: 0;
+        }
+  
+        & ul {
+          width: 100px;
+        }
+      }
+    }
+
+    @media(min-width: 751px) {
+      display: grid;
+      grid-template-columns: 35% 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+
+      & .main-content {
+        & .category {
+          margin-top: 8px;
+          margin-bottom: 20px;
+        }
+
+        & .title {
+          height: 24px;
+          margin-bottom: 48px;
+        }
+
+        & .date {
+          position: absolute;
+          bottom: 18px;
+        }
+
+        & .bottom {
+          position: absolute;
+          bottom: 1px;
+        }
+      }
+    }
+
+    @media (max-width: 750px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &.last {
+    margin-bottom: 0;
+
+    @media(max-width: 750px) {
+      margin-bottom: 79px;
+    }
+
+    @media(min-width: 751px) and (max-width: 992px) {
+      margin-bottom: 76px;
+    }
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    &.small {
+      & .main-content {
+        & .date {
+          margin-top: 1.5rem;
+        }
+
+        & .title {
+          margin-bottom: initial;
+        }
+
+        & .category {
+          margin-top: 5px;
+          margin-bottom: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 992px) and (min-width: 751px) {
+  article.small .intro {
+    display: none;
+  }
+}

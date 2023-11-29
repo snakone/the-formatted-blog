@@ -1,0 +1,40 @@
+@import 'mixins/mixins.scss';
+
+.login {
+  width: 290px;
+
+  & button {
+    @include hover-button();
+    width: 100%;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px;
+    margin: 3.5rem auto 1.6rem;
+    background: var(--contrast-color);
+  
+    &:disabled {
+      opacity: .4;
+      pointer-events: none;
+      filter: contrast(0.5);
+    }
+  }
+
+  & .bottom {
+  
+    & p {
+      text-align: center;
+      font-size: 13px;
+      line-height: 20px;
+    }
+  
+    & strong  {
+      color: var(--contrast-color);
+      cursor: pointer;
+      &:hover { filter: brightness(1.3); }
+    }
+  }
+
+  @media(width < 550px) {
+    width: 260px;
+  }
+}

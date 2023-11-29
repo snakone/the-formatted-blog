@@ -1,0 +1,10 @@
+<div class="list">
+  <ul>
+    @for(item of categories; track item.name) {
+      <li>
+        <em>{{item.name}}</em>
+        <i>{{item.amount}}</i>
+      </li>
+    }
+  </ul>
+</div>

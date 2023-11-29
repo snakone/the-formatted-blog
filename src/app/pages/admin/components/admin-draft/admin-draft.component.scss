@@ -1,0 +1,187 @@
+@import 'mixins/mixins.scss';
+
+.grid {
+  margin-top: 2rem;
+
+  & .draft-card {
+    width: 100%;
+    padding: 1.2rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+    @include shadow-card();
+    position: relative;
+
+    @media(max-width: 650px) {
+      margin-bottom: 4rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        width: 100%;
+        left: 0;
+        border-top: 1px solid var(--border-color);
+        transition: all 666ms ease-in-out;
+      }
+
+      &:first-of-type {
+        &::before {
+          content: unset;
+        }
+      }
+    }
+  }
+}
+
+.example {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--contrast-color);
+  margin: 1rem 0;
+  @include text-ellipsis(30px);
+
+  & span {
+    color: #fd4c4c;
+    opacity: .9;
+    font-size: 1rem;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--contrast-color);
+  margin-top: .8rem;
+  margin-bottom: 1rem;
+  position: relative;
+
+  & i {
+    position: absolute;
+    right: 1px;
+    font-size: 18px;
+    top: 5px;
+    cursor: pointer;
+    color: var(--dark-color);
+    opacity: .7;
+
+    &:hover {
+      color: var(--contrast-color);
+      filter: brightness(1.1);
+    }
+
+    &.fa-trash {
+      right: 36px;
+    }
+  }
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  @include text-ellipsis(30px);
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 18px;
+  position: relative;
+
+  & i {
+    margin-right: 6px;
+  }
+}
+
+.desc {
+  margin: 10px 0 16px 0;
+}
+
+input[type="checkbox"] {
+  margin-right: 12px;
+  position: relative;
+  top: 1px;
+  cursor: pointer;
+}
+
+.form-control, .size {
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 8px;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: .3;
+    filter: grayscale(1);
+  }
+}
+
+mat-label {
+  margin-bottom: 4px;
+}
+
+img {
+  display: block;
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  width: 100%;
+  border: 0;
+  aspect-ratio: 870 / 500;
+  margin: 1.8rem 0 2rem 0;
+}
+
+button {
+  width: 100%;
+  margin-top: 1.2rem;
+
+  &.preview {
+    max-width: 200px;
+    margin: 1.2rem auto 1.5rem 0;
+  }
+}
+
+@media(max-width: 650px) {
+  h1 {
+    font-size: 1.6rem;
+    margin-top: 0;
+
+    & i {
+      font-size: 16px;
+      top: 5px;
+    }
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-top: 1.2rem;
+  }
+
+  p, .desc, .form-control, input, mat-label {
+    font-size: 13px;
+  }
+
+  button.preview {
+    padding: 6px 8px;
+  }
+
+  .grid {
+    gap: 10px;
+
+    & .draft-card {
+      padding: 0 !important;
+      box-shadow: none !important;
+
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+@media(max-width: 450px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}

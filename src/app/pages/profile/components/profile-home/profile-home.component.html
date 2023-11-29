@@ -1,0 +1,14 @@
+<section class="profile-home-content">
+  @if({
+    user: user$ | async,
+    activities: activities$ | async
+  }; as obs) {
+    <app-section>
+      <app-profile-home-content id="sticky-wrapper" 
+                                [user]="obs.user" 
+                                [activities]="obs.activities"/>
+      <app-profile-home-sidebar [user]="obs.user" 
+                                [selector]="'profile-home-content'"/>
+    </app-section>
+  }
+</section>

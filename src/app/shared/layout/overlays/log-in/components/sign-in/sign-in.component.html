@@ -1,0 +1,40 @@
+<div class="login animated fadeIn">
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <!-- EMAIL -->
+    <div class="form-control">
+      <label for="name">Email</label>
+      <input formControlName="email"
+             autocomplete="off"
+             type="email"/>
+      <app-form-error [control]="email"
+                      [validator]="['required', 'email', 'maxlength']"/>
+    </div>
+    <!-- PASSWORD -->
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input formControlName="password"
+             type="password"
+             autocomplete="off">
+      <app-form-error [control]="password"
+                      [validator]="['required', 'maxlength', 'minlength']"/>
+    </div>
+
+    <button type="submit"
+            aria-label="Entrar"
+            [disabled]="signInForm.invalid">
+      Entrar
+    </button>
+    <!-- SUBMIT -->
+    <div class="bottom">
+      <p>¿No tienes cuenta?
+        <strong (click)="signUp()">
+          Regístrate ahora
+        </strong>
+      </p>
+      <p class="recover"
+         (click)="recover()">
+        <i>¿Has olvidado la contraseña?</i>
+      </p>
+    </div>
+  </form>
+</div>

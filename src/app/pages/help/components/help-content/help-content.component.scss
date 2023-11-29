@@ -1,0 +1,112 @@
+@import 'mixins/mixins.scss';
+
+.wrapper {
+  min-height: 250px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 1.8rem;
+
+  @media (max-width: 550px) {
+    margin-top: 8px;
+  }
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 3rem;
+  }
+}
+
+details {
+  @include shadow-card();
+  margin-bottom: 1.5rem;
+
+  & summary {
+    padding: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &::marker {
+      content: ''
+    }
+
+    &::after {
+      position: absolute;
+      right: 16px;
+      top: 30%;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f067";
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-size: 14px;
+      color: var(--contrast-color);
+      transition: color 666ms ease-in-out, transform 333ms ease-in-out;
+      transform: rotate(0);
+    }
+  }
+
+  &[open] summary:after {
+    content: "\f068";
+    transition: transform 300ms ease-in-out;
+    transform: rotate(360deg);
+  }
+
+  & .accordion {
+    opacity: .8;
+    padding: 18px 24px;
+    background-color: var(--border-color);
+    transition: background-color 666ms ease-in-out;
+    color: var(--dark-color);
+
+    & p {
+      text-align: initial;
+      text-wrap: pretty;
+
+      &:last-child {
+        margin-bottom: 0;
+      } 
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@media(max-width: 992px) {
+  details {
+    &:last-of-type {
+      margin-bottom: 2.5rem;
+    }
+  }
+}
+
+@media(max-width: 675px) {
+  details {
+    & summary {
+      font-size: 13px;
+      padding: 12px;
+      padding-right: 70px;
+      line-height: 20px;
+
+      &:after {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media(max-width: 550px) {
+  .wrapper p {
+    font-size: 13px;
+  }
+}

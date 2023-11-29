@@ -1,0 +1,42 @@
+button { margin: 1.5rem auto }
+
+.checkbox-wrapper {
+  margin-top: 3.8rem;
+}
+
+.form-control {
+  margin-bottom: 2.6rem;
+  position: relative;
+
+  &.checkbox {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & label {
+      font-style: italic;
+    }
+  }
+
+  & label[for="notify"],
+    label[for="conditions"] {
+    font-size: .8rem;
+  }
+
+  & .hint {
+    bottom: -24px;
+    left: 2px;
+    position: absolute;
+    opacity: 0.5;
+    font-size: 12px;
+  }
+
+  & textarea + .hint {
+    bottom: -18px;
+  }
+}
+
+input {
+  user-select: all;
+}

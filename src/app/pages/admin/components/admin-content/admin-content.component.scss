@@ -1,0 +1,25 @@
+@import 'mixins/mixins.scss';
+
+.buttons {
+  @include flex-start();
+
+  & button {
+    position: relative !important;
+    margin-right: 10px;
+    border: 0 !important;
+
+    &.active {
+      filter: drop-shadow(2px 5px 5px #3333336e);
+    }
+
+    &.all {
+      border: 1px solid var(--navigation-border) !important;
+    }
+  }
+}
+
+.empty {
+  min-height: 76.58px;
+  padding: 4px 0;
+  margin: 1.5rem 0;
+}

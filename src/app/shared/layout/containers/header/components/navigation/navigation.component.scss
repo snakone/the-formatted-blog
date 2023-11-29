@@ -1,0 +1,115 @@
+@import 'mixins/mixins.scss';
+
+nav {
+  font-size: 13px;
+  line-height: 15px;
+  border: 0;
+  background: none;
+  text-transform: uppercase;
+  @include container();
+  @include row();
+
+  & .wrapper {
+    border-bottom: 1px solid var(--navigation-border);
+    border-top: 1px solid var(--navigation-border);
+    transition: border 666ms ease-in-out;
+    overflow: hidden;
+    z-index: 100;
+    transition: all 0.5s ease-in-out;
+
+    & ul {
+      text-align: center;
+      width: 100%;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      min-width: 1000px;
+      display: grid;
+      grid-auto-flow: column;
+      scroll-snap-type: x mandatory;
+
+      & li {
+        float: none;
+        padding: 15px 12px;
+        line-height: normal;
+        position: relative;
+        background: none;
+        color: var(--text-color);
+        outline: 0 none;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+        scroll-snap-align: start;
+
+        &:hover {
+          @include hover(1.5);
+        }
+
+        &::after, &::before {
+          content: "";
+          height: 25%;
+          left: 0;
+          position: absolute;
+          top: 38%;
+          transform: scale(0);
+          transition: all 0.5s ease-in-out 0s;
+          width: 100%;
+          z-index: 3;
+        }
+
+        &::before {
+          border-left: 1px solid var(--contrast-color);
+          transform-origin: 0 100% 0;
+        }
+
+        &::after {
+          border-right: 1px solid var(--contrast-color);
+          transform-origin: 100% 0 0;
+        }
+
+        &:hover::after, &:hover::before {
+          transform: scale(1);
+        }
+      }
+
+      @media(max-width: 1200px) {
+        margin: 0 auto;
+        & li { padding: 10px 12px; }
+      }
+    }
+  }
+
+  & .indicators {
+    position: relative;
+
+    & i {
+      position: absolute;
+      transition: all 0.4s ease-in-out;
+      color: var(--contrast-color);
+      font-size: 16px;
+
+      &.next {
+        left: 0;
+        top: -1.3rem;
+      }
+
+      &.prev {
+        right: 0;
+        top: -1.3rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: var(--contrast-color);
+      }
+
+      @media(min-width: 1201px) {
+        display: none;
+      }
+    }
+
+    @media(max-width: 780px) {
+      margin: 0 auto;
+      padding-left: 0px;
+    }
+  }
+}

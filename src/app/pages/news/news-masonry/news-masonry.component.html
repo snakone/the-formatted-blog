@@ -1,0 +1,38 @@
+<div class="grid" id="grid" [ngClass]="{'loaded': isLoaded}">
+  @for(news of items; track news.url) {
+    <div class="grid-item">
+        <div class="content">
+            <div class="inner">
+                <img [src]="news.image" 
+                      alt="News Image" 
+                      loading="lazy"
+                      #img
+                      (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
+            </div>
+            <div class="card">
+              <p class="category">{{news.category}}</p>
+              <h4>
+                <a [href]="news.url" target="_blank">{{news.title}}</a></h4>
+              <div class="flex">
+                <p class="author">
+                  <span>{{news.author}}</span>
+                </p>
+                <p class="date">
+                    <span>{{news.published_at | date}}</span>
+                </p>
+              </div>
+              <p>{{news.description}}</p>
+            </div>
+        </div>
+    </div>
+  } @empty {
+    <p class="empty">No se han encontrado noticias. Prueba de nuevo más tarde.</p>
+  }
+</div>
+
+<app-spinner [loading]="!isLoaded"/>
+
+
+
+
+

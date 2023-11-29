@@ -1,0 +1,17 @@
+<div class="content animated fadeIn">
+  <app-post-search [type]="searchType.FAVORITE"/>
+  @if(favorites$ | async; as favorites) {
+    @for(post of favorites; track post._id; let last = $last) {
+      <app-post-card [small]="true"
+                     [border]="false"
+                     [last]="last"
+                     [post]="post"
+                     [isDraft]="post.type === 'draft'"
+                     [favoritesID]="getIdsFromPost(favorites)"/>
+    } @empty {
+      <p>
+        No se han encontrado favoritos. ¡Anímate! Agrega alguno que te guste.
+      </p>
+    }
+  }
+</div>

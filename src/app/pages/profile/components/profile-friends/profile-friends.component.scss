@@ -1,0 +1,9 @@
+@import 'mixins/mixins.scss';
+
+app-profile-friends-content {
+  @include grid-component();
+}
+
+app-profile-friends-sidebar {
+  @include grid-child();
+}

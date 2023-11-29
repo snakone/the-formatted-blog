@@ -1,0 +1,22 @@
+<nav >
+  <div class="indicators">
+    @if(panned <= maxWidthPanned && panned >= 40) {
+      <i class="fas fa-angle-left animated fadeIn next"
+        (click)="move(false)">
+      </i>
+    }
+    @if(panned <= minWidthPanned) {
+      <i class="fas fa-angle-right animated fadeIn prev"
+        (click)="move(true)">
+      </i>
+    }
+  </div>
+  <!-- LIST -->
+  <div class="wrapper" id="pan-nav">
+    <ul>
+      @for(item of items; track item) {
+        <li [routerLink]="'/home'">{{item}}</li>
+      }
+    </ul>
+  </div>
+</nav>

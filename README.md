@@ -1,13 +1,15 @@
 # The Formatted Blog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
+
+Visit the project here [The Formatted Blog](https://formatted-blog.netlify.app/home)
 
 ## Installation
 
 1. Download LTS Version of Nodejs
 2. Clone this repository
 3. Navigate to the root folder
-4. Execute `npm install`
+4. Execute `npm install` && `npm start`
 
 ## Development server
 

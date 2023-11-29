@@ -1,0 +1,10 @@
+<div class="animated fadeIn">
+  <section class="draft-content">
+    <app-section>
+      @if(draft$ | async; as draft) {
+        <app-draft-content id="sticky-wrapper" [draft]="draft"/>
+        <app-draft-sidebar [draft]="draft"/>
+      }
+    </app-section>
+  </section>
+</div>

@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from './directives/directives.module';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     FormsModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule,
+    DirectivesModule
   ],
   exports: [
-    FormsModule
+    FormsModule,
+    PipesModule,
+    ReactiveFormsModule,
+    DirectivesModule
   ]
 })
 

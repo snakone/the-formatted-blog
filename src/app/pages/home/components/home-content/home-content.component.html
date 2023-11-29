@@ -1,7 +1,20 @@
 <div class="content">
-  <app-post-card></app-post-card>
-  <app-post-card></app-post-card>
-  <app-post-card></app-post-card>
-  <app-post-card></app-post-card>
-  <app-post-card></app-post-card>
+  <!-- POSTS -->
+  @if(posts$ | async; as posts) {
+    @if({favorites: favoritesID$ | async}; as obs) {
+      @for(post of posts; track post._id; let i = $index; let last = $last) {
+        <app-post-card [small]="i >= 1"
+                       [border]="i === 0"
+                       [last]="last"
+                       [post]="post"
+                       [alone]="false"
+                       [favoritesID]="obs.favorites"
+                       [showIntro]="i === 0"/>
+      }
+    }
+  } @else {
+    @for(card of [1,2,3,4]; track card; let i = $index; let last = $last) {
+      <app-post-card-skeleton [small]="i >= 1" [showIntro]="i === 0" [last]="last"/>
+    }
+  }
 </div>

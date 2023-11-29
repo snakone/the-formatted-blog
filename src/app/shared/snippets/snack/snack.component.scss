@@ -1,0 +1,35 @@
+@import 'mixins/mixins.scss';
+
+.snack {
+  @include flex-center();
+  background: var(--dark-color);
+  color: var(--light-color);
+  text-align: center;
+  font-weight: bold;
+  position: fixed;
+  min-width: var(--snack-width);
+  top: 80px;
+  left: 0;
+  font: normal 11px/14px "Merriweather", Arial, Helvetica;
+  padding: 8px 20px 8px 16px;
+
+  &::after {
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 4px;
+    right: 0;
+    top: 0;
+  }
+
+  &.error { &::after { background: #b40707 }}
+  &.warning { &::after { background: #e0bf04 }}
+  &.info { &::after { background: #0554ca }}
+  &.success { &::after { background: #05ca15 }}
+
+  @media(max-width: 700px) {
+    top: 3%;
+    z-index: 9999;
+  }
+
+}

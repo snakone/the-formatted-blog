@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": { "analytics": false },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-
     "formatted-blog": {
       "projectType": "application",
       "schematics": {
@@ -32,13 +32,20 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/_redirects"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+              "node_modules/highlight.js/styles/vs2015.css"
             ],
             "scripts": [
-              "node_modules/sticky-sidebar/dist/sticky-sidebar.min.js"
+              "node_modules/sticky-sidebar/dist/sticky-sidebar.min.js",
+              "src/assets/scripts/fas.js",
+              "src/assets/scripts/masonry.js",
+              "src/assets/scripts/highlight.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
@@ -52,7 +59,12 @@
               "includePaths": [
                 "src/assets/styles"
               ]
-          }
+            },
+            "allowedCommonJsDependencies": [
+              "quill-delta-to-html",
+              "quill",
+              "quill-image-compress"
+            ]
           },
           "configurations": {
             "production": {
@@ -64,21 +76,22 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "sourceMap": false,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
                 }
               ]
             }
@@ -88,18 +101,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "formatted-blog:build"
+            "buildTarget": "formatted-blog:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "formatted-blog:build:production"
+              "buildTarget": "formatted-blog:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "formatted-blog:build"
+            "buildTarget": "formatted-blog:build"
           }
         },
         "test": {
@@ -120,19 +133,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -147,6 +147,5 @@
         }
       }
     }
-  },
-  "defaultProject": "formatted-blog"
+  }
 }

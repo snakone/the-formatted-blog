@@ -1,0 +1,20 @@
+@import 'mixins/mixins.scss';
+
+section, .wrapper {
+  @include container();
+  @include row();
+  margin-top: 0.666rem;
+}
+
+app-post-content {
+  @include grid-component();
+}
+
+app-post-sidebar {
+  @include grid-child();
+
+  @media(max-width: 992px) {
+    grid-row: 1;
+    margin-bottom: 1.2rem;
+  }
+}

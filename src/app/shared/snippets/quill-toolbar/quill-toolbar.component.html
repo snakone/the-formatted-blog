@@ -1,0 +1,71 @@
+<div class="toolbar" [ngClass]="{'form': form}">  <!-- TOOLBAR -->
+  <div class="flex">
+    <span class="total"><i class="far fa-paper-plane"></i> {{totalDrafts$ | async}}</span> <!-- TOTAL -->
+    @if(saving$ | async; as state) {
+      @switch(state.type) {
+        @case(saveTypes.SAVING) {
+          <div class="animated fadeIn saving">
+            <i [class]="state.value ? 'fas fa-spinner fa-pulse' : 'fas fa-check'"></i> 
+            <span>{{state.value ? 'Guardando...' : 'Guardado'}}</span>
+          </div>
+        }
+        @case(saveTypes.WARNING) {
+          <div class="animated fadeIn warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Error al guardar. Comprueba los datos</span>
+          </div>
+        }
+        @case(saveTypes.TEMPORAL) {
+          <div class="animated fadeIn temporal">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>No se guardará hasta que los aceptes.</span>
+          </div>
+        }
+      }
+    }
+  </div>
+  @if({saving: saving$ | async}; as obs) {
+    <div class="actions">
+      @if(!form) {
+        <!-- ACTIONS -->
+        @for(item of iconList; track item.label) {
+          <i [class]="item.icon"
+             [matTooltip]="(!obs.saving?.value && draft) ? item.label : null"
+             (click)="switchAction[item.action](obs.saving?.value)"
+             [ngClass]="{'disabled': 
+                obs.saving?.value || !draft || (draft.temporal && (item.action === 'new'))
+             }">
+          </i>
+        }
+        <!-- HELP -->
+        <i class="fas fa-question-circle" 
+          matTooltip="Ayuda" 
+          (click)="switchAction.help()">
+        </i>
+        <!-- FORM -->
+        <i class="fas fa-spell-check"
+          [matTooltip]="(!obs.saving?.value && draft) ? 'Formulario' : null"
+          [ngClass]="{'disabled': obs.saving?.value || !draft}"
+          (click)="switchAction.form()">
+        </i>
+      } @else {
+        <!-- CLEAN -->
+        <i class="fas fa-broom"
+          matTooltip="Limpiar"
+          (click)="switchAction.clean()">
+        </i>
+        <!-- HELP -->
+        <i class="fas fa-question-circle" 
+          matTooltip="Ayuda" 
+          (click)="switchAction.help()">
+        </i>
+        <!-- BACK -->
+        <i class="fas fa-pen-nib"
+          matTooltip="Lienzo"
+          [routerLink]="['../']"
+          *ngIf="form">
+        </i>
+      }
+    </div>
+  }
+</div>

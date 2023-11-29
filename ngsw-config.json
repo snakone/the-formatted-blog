@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "The Formatted Blog",
       "installMode": "prefetch",
       "resources": {
         "files": [
@@ -12,6 +12,10 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://stackpath.bootstrapcdn.com/font-awesome/**",
+          "https://fonts.googleapis.com/**"
         ]
       }
     },
@@ -26,5 +30,18 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "drafts-api",
+      "urls": ["https://theformattedblog-snakone.b4a.run/drafts"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 12,
+        "maxAge": "4h",
+        "timeout": "5s"
+      }
+    }
   ]
 }
+

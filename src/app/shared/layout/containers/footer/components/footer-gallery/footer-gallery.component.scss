@@ -1,0 +1,80 @@
+@import 'mixins/mixins.scss';
+
+.wrapper {
+  @include container();
+  @include row();
+  overflow: hidden;
+}
+
+@mixin bar() {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid var(--border-color);
+  transition: border-top 666ms ease-in-out;
+  top: -22px;
+  left: 0;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16%, 1fr));
+  margin-bottom: 3rem;
+  overflow: hidden;
+
+  & .inner {
+    overflow: hidden;
+
+    & img {
+      max-width: 100%;
+      border: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 300ms ease-in-out;
+      @media(min-width: 1201px) { aspect-ratio: 260 / 250 }
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        opacity: .8;
+      }
+    }
+  }
+
+  @media(max-width: 650px) {
+    grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+  }
+}
+
+h1 {
+  margin: 80px 0 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+  padding-top: 30px;
+
+  &:not(.create)::before {
+    @include bar();
+  }
+
+  @media(min-width: 993px) {
+    &.create {
+      margin-top: 40px !important;
+    }
+  }
+
+  @media(max-width: 992px) {
+    margin-top: 35px;
+    padding-top: 20px;
+
+    &.create {
+      margin-top: 40px;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@defer(when posts) {
+  <div class="recent" [ngClass]="{'margin': margin}">
+    <ul>
+      @for(post of posts; track post._id) {
+        <li [routerLink]="'/post/' + post.slug">
+          <div class="wrapper">
+            <img [src]="post.cover" alt="Post Image" 
+            #img
+            (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'; img.className='no-image'"/>
+          </div>
+          <div class="info">
+            <h1>{{post.title}}</h1>
+            <span>{{post.author}}</span>
+            <span class="date">{{post.created}}</span>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+} @placeholder {
+  <app-recent-post-skeleton [limit]="limit"/>
+}
+
+

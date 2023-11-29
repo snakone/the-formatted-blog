@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { STORAGE_CONSTANTS, Storage } from './storage.config';
 import { LocalStorage } from 'ngx-webstorage';
+import { STORAGE_CONSTANTS, Storage } from './storage.config';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 
 export class StorageService {
 
@@ -10,7 +10,7 @@ export class StorageService {
   public storage!: Storage;
 
   constructor() {
-    this.loadStorage();
+    setTimeout(()=> this.loadStorage(), 1000)
   }
 
   public setKey(key: string, value: any): void {
@@ -22,14 +22,12 @@ export class StorageService {
 
   public get(value: string): string | undefined {
     this.loadStorage();
-    if (this.storage[value] === undefined) { return; }
+    if (this.storage[value] === undefined) { return undefined; }
     return this.storage[value];
   }
 
   private loadStorage(): void {
-    if (!this.storage) {
-      this.reset();
-    }
+    if (!this.storage) { this.reset(); }
   }
 
   public reset(): void {

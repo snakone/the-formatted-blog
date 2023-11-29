@@ -1,0 +1,57 @@
+@import 'mixins/mixins.scss';
+
+article {
+  padding: 14px 18px 14px 22px;
+  margin-bottom: 1rem;
+  position: relative;
+  @include shadow-card();
+
+  @media(max-width: 992px) {
+    height: 78px;
+  }
+
+  & .message {
+    width: 250px;
+    height: 18px;
+    display: block;
+    margin-bottom: 7px;
+    @include skeleton();
+  }
+
+  & p.title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    & span {
+      display: block;
+      margin: 0 4px;
+    }
+
+    & b {
+      display: block;
+      width: 75px;
+      height: 14px;
+      @include skeleton();
+
+      &:first-of-type {
+        width: 175px;
+      }
+    }
+  }
+
+  &.last {
+    margin-bottom: 0;
+  }
+
+  &::before {
+    content: "";
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .4;
+    background-color: var(--skeleton-color);
+  }
+}

@@ -1,0 +1,7 @@
+@if(data?.message; as msg) {
+  <div class="snack animated fadeInLeft" 
+    #snack
+    [textContent]="msg"
+    [class]="data?.type">
+  </div>
+}

@@ -1,0 +1,41 @@
+// FORMS
+input, select, textarea {
+  &:not([type="checkbox"]) {
+    width: 100%;
+    border: 1px solid transparent;
+    outline: none;
+    font-size: .9rem;
+    padding: 5px 12px;
+    border-radius: 0;
+    background: var(--input-bg);
+    transition: border 300ms ease-in-out;
+    appearance: none;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  }
+}
+
+input, select, textarea {
+  &.ng-invalid:not(.ng-pristine) {
+    border: 1px solid red;
+  }
+}
+
+p {
+  text-wrap: pretty;
+
+  @media (max-width: 550px) {
+    font-size: 13px;
+  }
+}
+
+a {
+  transition: color 666ms ease-in-out;
+}
+.ql-editor {
+    padding: 24px;
+    font-size: 13px;
+
+    @media(width < 550px) {
+      padding: 16px;
+    }
+}

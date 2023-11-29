@@ -1,9 +1,0 @@
-@import 'mixins/mixins.scss';
-
-.section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-  margin-top: calc(4rem - 1px);
-  position: relative;
-  @include carrousel-fix();
-}

@@ -1,0 +1,130 @@
+@import 'mixins/mixins.scss';
+
+.recent {
+  position: relative;
+  text-align: center;
+  @media(max-width: 992px) { margin-bottom: 25px }
+
+  &.margin {
+    margin-top: 3rem;
+  }
+
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+
+    & li {
+      list-style: none;
+      overflow: hidden;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      @media (min-width: 993px) {
+        &:first-child {
+          padding-top: 0;
+          border: 0;
+        }
+      }
+
+      &:last-of-type {
+        @media(min-width: 993px) {
+          padding-bottom: 0;
+        }
+      }
+
+      & .wrapper {
+        margin-right: 18px;
+      }
+
+      & img {
+        transition: all 300ms ease-in-out;
+        width: 90px;
+        height: 70px;
+
+        &:not(.no-image) {
+          object-fit: cover;
+          display: block;
+        }
+      }
+
+      & .info {
+        text-align: left;
+        position: relative;
+        top: -4px;
+        overflow: hidden;
+
+        & h1 {
+          @include text-ellipsis(0);
+          color: var(--text-color);
+          font-style: normal;
+          font-family: 'Raleway', Arial, Helvetica, sans-serif;
+          font-weight: 600;
+          line-height: 1.5;
+          margin: 0px 0px 8px 0px;
+          font-size: 15px;
+        }
+
+        & span {
+          display: block;
+          font-family: 'Merriweather', Arial, Helvetica, sans-serif;
+          font-style: italic;
+          font-size: 10px;
+          line-height: 14px;
+
+          &.date {
+            color: var(--contrast-color);
+            transition: color 666ms ease-in-out;
+          }
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        & h1 { filter: contrast(1.5); }
+
+        & img {
+          opacity: .8;
+          transform: scale(1.05);
+        }
+
+        &::after {
+          right: 10px;
+        }
+      }
+    }
+
+    @media(min-width: 750px) and (max-width: 992px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 2rem;
+
+      & li {
+        & .info h1 { font-size: 14px; }
+      }
+    }
+
+    @media(min-width: 550px) and (max-width: 749px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    width: 100%;
+    left: 0;
+    border-top: 1px solid var(--border-color);
+    transition: all 666ms ease-in-out;
+
+    @media(min-width: 993px) {
+      top: -35px;
+    }
+  }
+
+}

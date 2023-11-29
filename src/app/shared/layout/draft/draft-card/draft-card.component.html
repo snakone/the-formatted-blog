@@ -1,0 +1,46 @@
+
+@defer(when draft) {
+  <li (click)="activate(draft)"
+      class="animated"
+      [ngClass]="{
+        'active': draft.active,
+        'zoomOutLeft': deletedDraftID === draft._id,
+        'disabled': saving?.value || draft.status === draftStatus.PENDING,
+        'temporal': draft.temporal
+      }">
+    @if(collapsed) {
+      <span class="capital" 
+            [ngClass]="{'pending': draft.status === draftStatus.PENDING}">
+        {{draft.title.charAt(0)}}
+      </span>
+    } @else {
+      <div>
+        <!-- TITLE -->
+        <h3>{{draft.title}}</h3>
+        <!-- STATUS -->
+        <p class="info">
+          @if(draft.category) {
+            <span class="category">{{draft.category}}</span>
+            <span class="tale">-</span>
+          }
+          <span class="created">{{draft.created}}</span>
+
+          @if(draft.status === draftStatus.PENDING) {
+            <span class="pending"><span class="tale">-</span> Pendiente</span>
+          }
+          @if(draft.temporal) {
+            <!-- TEMPORAL -->
+            <span class="temp"><span class="tale">-</span> Temporal</span>
+          }
+        </p>
+      </div>
+    }
+
+    @if(draft.active) {
+      <div class="icons animated fadeIn">
+        <i class="fas fa-external-link-alt" (click)="preview()"></i>
+        <i class="fas fa-trash" (click)="delete()"></i>
+      </div>
+    }
+  </li>
+}

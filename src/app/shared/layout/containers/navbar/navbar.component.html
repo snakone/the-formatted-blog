@@ -1,0 +1,106 @@
+<nav StickyNav (scrolled)="onScroll($event)">
+  @if({user: user$ | async}; as obs) {
+    <div class="wrapper">
+      <div class="nav"> <!-- LEFT SIDE -->
+        <app-text-slider/>
+      </div>
+      <div class="actions"> <!-- RIGHT SIDE -->
+        <div class="icons">
+          <ul aria-hidden="false">
+            <li>
+              <i class="fas fa-home"
+                 routerLink="/home"
+                 routerLinkActive="active"
+                 aria-label="home"
+                 aria-hidden="false">
+              </i>
+            </li>
+            <!-- CREATE -->
+            @if (obs.user) {
+              <li class="animated fadeIn">
+                <i class="fas fa-feather-alt"
+                   aria-label="create"
+                   aria-hidden="false"
+                   routerLink="/create"
+                   routerLinkActive="active">
+                </i>
+              </li>
+            }
+            <!-- ICONS -->
+            <li *ngFor="let i of icons">
+              <i [class]="i.icon"
+                 [attr.aria-label]="i.icon"
+                 [routerLink]="i.route"
+                 routerLinkActive="active"
+                 aria-hidden="false">
+              </i>
+            </li>
+            <!-- THEME -->
+            @if(mode === 'dark') {
+              <li (click)="toggleTheme()">
+                <i class="far fa-lightbulb" aria-label="light" aria-hidden="false"></i>
+              </li>
+            } @else {
+              <li (click)="toggleTheme()">
+                <i class="far fa-moon" aria-label="dark" aria-hidden="false"></i>
+              </li>
+            }
+            <!-- DROPDOWN -->
+            <li class="dropdown"> 
+              <i class="fas fa-align-justify"
+                 (click)="menuOpened = !menuOpened"
+                 aria-label="dropwdown">
+              </i>
+              @if(menuOpened) {
+                <ul class="dropdown-menu">
+                  @for(menu of dropdown; track menu.icon; let i = $index) {
+                    <li [class]="'dropdown-item-' + (i + 1)" aria-hidden="false"
+                        [routerLink]="menu.route"
+                        (click)="menuOpened = false">{{menu.label}}
+                    </li>
+                  }
+                  @if(obs.user && (obs.user.account === 'Admin' || obs.user.account === 'Super')) {
+                    <li [class]="'dropdown-item-' + (dropdown.length + 1)"
+                        [routerLink]="'/admin'"
+                        (click)="menuOpened = false"
+                        aria-label="admin">Admin
+                    </li>
+                  }
+                </ul>
+              }
+            </li>  
+            <!-- USER -->
+            @if(obs.user) {
+              <li>
+                <i [routerLink]="'/profile'" 
+                   routerLinkActive="active" 
+                   class="fas fa-user"
+                   aria-hidden="false"
+                   aria-label="user">
+                </i>
+              </li>
+            } @else {
+              <li (click)="openModal()">
+                <i class="fas fa-sign-in-alt" aria-label="sign" aria-hidden="false"></i>
+              </li>
+            }
+          </ul>
+        </div> 
+        <!-- SEARCH BUTTON -->
+        <div class="search"
+             (click)="showSearchBar = !showSearchBar">
+          <i class="fas fa-search" aria-label="search" aria-hidden="false"></i>
+        </div>
+      </div>
+    </div>
+  }
+</nav>
+
+@if(menuOpened) {
+  <div class="backdrop" (click)="menuOpened = false"></div>
+}
+
+@if(showSearchBar) {
+  <app-search-bar (closed)="showSearchBar = !showSearchBar"/>
+}
+

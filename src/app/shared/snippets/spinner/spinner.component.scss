@@ -1,0 +1,37 @@
+$duration: 1.5s;
+
+.progress {
+  width: 100%;
+  height: 16px;
+  padding: 0;
+  position: relative;
+  margin: 35px 0 35px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: rgba(255, 255, 255, 0.1);
+  @media(min-width: 993px) { margin: 35px 0 -12px 0 }
+}
+
+.progress-value {
+  width: 0;
+  height: 18px;
+  background: var(--contrast-color);
+  box-shadow: 0 10px 20px -10px var(--shadow-color);
+  animation: loading $duration normal forwards;
+}
+
+@keyframes loading {
+  0% { width: 0; }
+  1% { width: 1%; }
+  2% { width: 2%; }
+  5% { width: 5%; }
+  6% { width: 6%; }
+  8% { width: 8%; }
+  10% { width: 10%; }
+  11% { width: 11%; }
+  12% { width: 12%; }
+  15% { width: 15%; }
+  20% { width: 25%; }
+  100% { width: 100%; }
+}
