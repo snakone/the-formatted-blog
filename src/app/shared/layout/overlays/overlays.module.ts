@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 
 import { LogInModule } from './log-in/log-in.module';
-import { PushDeniedOverlayComponent } from './push-denied/push-denied.component';
-import { QuillHelpComponent } from './quill-help/quill-help.component';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { PushDeniedDialogComponent } from './push-denied/push-denied.component';
+import { QuillHelpDialogComponent } from './quill-help/quill-help.component';
+import { ConfirmationDialogComponent } from './confirmation/confirmation.component';
 import { DraftPreviewDialogComponent } from './draft-preview/draft-preview.component';
 import { EditProfileDialogComponent } from './edit-profile/edit-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnippetsModule } from '@shared/snippets/snippets.module';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button'
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { RouterModule } from '@angular/router';
 
 const Material = [
   MatDialogModule,
@@ -20,9 +22,9 @@ const Material = [
 
 @NgModule({
   declarations: [
-    PushDeniedOverlayComponent,
-    QuillHelpComponent,
-    ConfirmationComponent,
+    PushDeniedDialogComponent,
+    QuillHelpDialogComponent,
+    ConfirmationDialogComponent,
     DraftPreviewDialogComponent,
     EditProfileDialogComponent
   ],
@@ -32,12 +34,14 @@ const Material = [
     QuillModule,
     ReactiveFormsModule,
     SnippetsModule,
+    PipesModule,
+    RouterModule,
     ...Material
   ],
   exports: [
-    PushDeniedOverlayComponent,
-    QuillHelpComponent,
-    ConfirmationComponent,
+    PushDeniedDialogComponent,
+    QuillHelpDialogComponent,
+    ConfirmationDialogComponent,
     DraftPreviewDialogComponent,
     EditProfileDialogComponent
   ],

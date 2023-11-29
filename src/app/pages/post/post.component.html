@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <div class="wrapper">
-    <app-post-carrousel></app-post-carrousel>
+    <app-post-carrousel/>
     <app-action-bar [text]="text"
                     buttonText="Subscríbete"
                     (function)="notification()"
@@ -9,14 +9,12 @@
   </div>
   <section class="post-content">
     <app-section [margin]="false">
-      <ng-container *ngIf="(post$ | async) as post">
-        <app-post-content [post]="post" 
-                          id="sticky-wrapper">
-        </app-post-content>
-        <app-post-sidebar [post]="post"></app-post-sidebar>
-      </ng-container>
+      @if(post$ | async; as post) {
+        <app-post-content [post]="post" id="sticky-wrapper"/>
+        <app-post-sidebar [post]="post"/>
+      }
     </app-section>
   </section>
 </div>
 
-<app-scroll-top></app-scroll-top>
+<app-scroll-top/>

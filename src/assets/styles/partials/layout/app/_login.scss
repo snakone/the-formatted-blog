@@ -1,7 +1,7 @@
 @import 'mixins/mixins.scss';
 
 .login {
-  max-width: 361px;
+  width: 290px;
 
   & button {
     @include hover-button();
@@ -9,7 +9,7 @@
     font-size: 16px;
     line-height: 16px;
     padding: 10px;
-    margin: 2.5rem auto 1.6rem;
+    margin: 3.5rem auto 1.6rem;
     background: var(--contrast-color);
   
     &:disabled {
@@ -19,27 +19,22 @@
     }
   }
 
-  & input[type="checkbox"] {
-    position: relative;
-    left: 14px;
-    top: 2px;
-    margin-top: .8rem;
-    cursor: pointer;
-  }
-
   & .bottom {
-    text-align: center;
   
     & p {
-      font-size: 12px;
+      text-align: center;
+      font-size: 13px;
       line-height: 20px;
     }
   
-    & strong { color: var(--contrast-color) }
-  
     & strong  {
+      color: var(--contrast-color);
       cursor: pointer;
       &:hover { filter: brightness(1.3); }
     }
+  }
+
+  @media(width < 550px) {
+    width: 260px;
   }
 }

@@ -1,6 +1,6 @@
 import { DeltaStatic } from "quill";
 import { DraftCheck } from "./interface.server";
-import { DraftStatus } from "./interface.user";
+import { DraftStatus, DraftTypes } from "./types.enums";
 
 // POST
 export interface Post {
@@ -20,7 +20,7 @@ export interface Post {
   check?: DraftCheck; // Draft Check to become Post
   adminSeenOnce?: boolean; // Admin saw the Post at least once since the last edit
   temporal?: boolean; // When a Post is editing but still it's not a Draft
-  type?: 'draft' | 'post';
+  type?: DraftTypes;
   likes?: number;
   views?: number;
   published?: string; // When the Post was published
@@ -29,4 +29,10 @@ export interface Post {
 export interface PostHeader {
   text: string;
   id: string;
+}
+
+export interface QuillHelpItem {
+  icon: string;
+  label: string;
+  message: string;
 }

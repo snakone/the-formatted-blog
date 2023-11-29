@@ -1,4 +1,4 @@
-<ng-container *ngIf="draft">
+@if(draft) {
   <div class="card" [routerLink]="'./' + draft._id">
     <h6>{{ draft.title }}</h6>
     <div class="card-data">
@@ -14,4 +14,4 @@
         </span>
     </div>
   </div>
-</ng-container>
+}

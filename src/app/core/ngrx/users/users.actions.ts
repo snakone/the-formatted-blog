@@ -35,6 +35,10 @@ export const update =
   createAction('[Users API] Update User',
   props<{ user: User }>());
 
+  export const updateSuccess =
+  createAction('[Users API] Update User Success',
+  props<{ user: User }>());
+
 export const updateFailure =
   createAction('[Users API] Update User Failure',
   props<{ error: string }>());

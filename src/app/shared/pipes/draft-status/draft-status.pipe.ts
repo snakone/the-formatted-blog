@@ -1,20 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 
-const switchObj: any = {
-  "not-seen": "No visto",
-  "seen": "Visto",
-  "pending": "Pendiente",
-  "approved": "Aprobado",
-  "all": "Todos"
+const switchStatus: {[key in DraftStatusEnum]: string} = {
+  [DraftStatusEnum.NOT_SEEN]: "No visto",
+  [DraftStatusEnum.SEEN]: "Visto",
+  [DraftStatusEnum.PENDING]: "Pendiente",
+  [DraftStatusEnum.APPROVED]: "Aprobado",
+  [DraftStatusEnum.ALL]: "Todos"
 };
 
 @Pipe({name: 'draftStatus'})
 
 export class DraftStatusPipe implements PipeTransform {
 
-  transform(value: string | undefined): string {
-    if (!value) { return 'not-seen'; }
-    return switchObj[value];
+  transform(value: DraftStatusEnum | undefined): string {
+    if (!value) { return DraftStatusEnum.NOT_SEEN; }
+    return switchStatus[value];
   }
 
 }

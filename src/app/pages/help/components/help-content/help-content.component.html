@@ -9,10 +9,14 @@
     Aunque la idea es muy general y no está inspirada en ella, hay una página conocida similar que sigue el mismo concepto, 
     <a href="https://medium.com" target="_blank">https://medium.com</a>. Básicamente es algo parecido hecho desde cero.
   </p>
-  <details *ngFor="let i of items">
-    <summary (click)="stickyFix()">{{i.label}}</summary>
-    <div class="accordion">
-      <p *ngFor="let p of i.content" [innerHTML]="p"></p>
-    </div>
-  </details>
+  @for(item of items; track item.label) {
+    <details>
+      <summary (click)="stickyFix()">{{item.label}}</summary>
+      <div class="accordion">
+        @for(p of item.content; track p) {
+          <p [innerHTML]="p | Sanitizer:'html'"></p>
+        }
+      </div>
+    </details>
+  }
 </div>

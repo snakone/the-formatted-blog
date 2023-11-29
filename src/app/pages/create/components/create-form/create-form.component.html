@@ -1,4 +1,4 @@
-<ng-container *ngIf="draftForm">
+@if(draftForm) {
   <form [formGroup]="draftForm" autocomplete="off" class="animated fadeIn" spellcheck="false">
     <!-- TITLE -->
     <div class="form-control">
@@ -51,4 +51,4 @@
                      [form]="true"
                      (clean)="clean()">
   </app-quill-toolbar>
-</ng-container>
+}

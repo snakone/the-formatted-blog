@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
-import { PostsFacade } from '@core/ngrx/posts/posts.facade';
-import { SearchType, FilterType } from '@shared/types/interface.app';
 import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil } from 'rxjs';
+
+import { PostsFacade } from '@core/ngrx/posts/posts.facade';
+import { FilterType } from '@shared/types/interface.app';
+import { SearchType, DraftStatus, DraftStatusEnum } from '@shared/types/types.enums';
+import { KEYUP_EVENT } from '@shared/data/constants';
 
 @Component({
   selector: 'app-post-search',
@@ -14,25 +16,26 @@ import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil 
 export class PostSearchComponent {
 
   @ViewChild('input', {static: true}) input: ElementRef;
-  private unsubscribe$ = new Subject<void>();
   @Input() type: SearchType;
+  private unsubscribe$ = new Subject<void>();
 
-  switchObj = {
-    'pendiente': 'pending',
-    'visto': 'seen',
-    'no visto': 'not-seen'
+  switchSearch: {[key: string]: DraftStatus} = {
+    'pendiente': DraftStatusEnum.PENDING,
+    'visto': DraftStatusEnum.SEEN,
+    'no visto': DraftStatusEnum.NOT_SEEN
   };
 
-  constructor(private postFacade: PostsFacade, private draftsFacade: DraftsFacade) { }
+  constructor(private postFacade: PostsFacade) { }
 
   ngAfterViewInit() {
-    fromEvent(this.input.nativeElement, 'keyup').
+    fromEvent(this.input.nativeElement, KEYUP_EVENT).
      pipe(
       map((ev: any) => ev.target?.value as string),
-      debounceTime(500),
+      debounceTime(100),
       distinctUntilChanged(),
       takeUntil(this.unsubscribe$)
-     ).subscribe((value: string) => this.postFacade.setFilter(this.createFilter(value)));
+     ).subscribe((value: string) => 
+     this.postFacade.setFilter(this.createFilter(value)));
   }
 
   private createFilter(value: string): FilterType {
@@ -45,8 +48,8 @@ export class PostSearchComponent {
     }
   }
 
-  private convertStatus(value: string): string {
-    return this.switchObj[value.toLowerCase().trim()];
+  private convertStatus(value: string): DraftStatus {
+    return this.switchSearch[(value || '').toLowerCase().trim()];
   }
 
   ngOnDestroy(): void {

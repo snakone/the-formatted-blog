@@ -20,6 +20,22 @@ input, select, textarea {
   }
 }
 
+p {
+  text-wrap: pretty;
+
+  @media (max-width: 550px) {
+    font-size: 13px;
+  }
+}
+
 a {
   transition: color 666ms ease-in-out;
+}
+.ql-editor {
+    padding: 24px;
+    font-size: 13px;
+
+    @media(width < 550px) {
+      padding: 16px;
+    }
 }

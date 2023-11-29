@@ -1,17 +1,18 @@
 <div class="animated fadeIn">
-  <section class="create-content" *ngIf="{
-    collapsed: collapsed$ | async
-  } as pipe">
-    <app-section spellcheck="false" [margin]="false" [collapsed]="pipe.collapsed">
-      <ng-container *ngIf="drafts$ | async as drafts">
-        <app-create-sidebar *ngIf="drafts && drafts.length > 0" [drafts]="drafts" [originalCollapsed]="pipe.collapsed">
-        </app-create-sidebar>
-      </ng-container>
-      <div id="sticky-wrapper">
-        <router-outlet></router-outlet>
-      </div>
-    </app-section>
-  </section>
+  @if({collapsed: collapsed$ | async}; as obs) {
+    <section class="create-content">
+      <app-section spellcheck="false" [margin]="false" [collapsed]="obs.collapsed">
+        @if(drafts$ | async; as drafts) {
+          @if(drafts.length > 0) {
+            <app-create-sidebar [drafts]="drafts" [originalCollapsed]="obs.collapsed"/>
+          }
+        }
+        <div id="sticky-wrapper">
+          <router-outlet></router-outlet>
+        </div>
+      </app-section>
+    </section>
+  }
 </div>
 
-<app-scroll-top></app-scroll-top>
+<app-scroll-top/>

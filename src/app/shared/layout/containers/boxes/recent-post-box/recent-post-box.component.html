@@ -1,26 +1,24 @@
-<ng-container *ngIf="posts; else loading">
-  <ng-container *ngIf="posts.length > 0">
-    <div class="recent" [ngClass]="{'margin': margin}">
-      <ul>
-        <li *ngFor="let p of posts" [routerLink]="'/post/' + p.slug">
+@defer(when posts) {
+  <div class="recent" [ngClass]="{'margin': margin}">
+    <ul>
+      @for(post of posts; track post._id) {
+        <li [routerLink]="'/post/' + post.slug">
           <div class="wrapper">
-            <img [src]="p.cover" alt="Post Image" 
+            <img [src]="post.cover" alt="Post Image" 
             #img
             (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'; img.className='no-image'"/>
           </div>
           <div class="info">
-            <h1>{{p.title}}</h1>
-            <span>{{p.author}}</span>
-            <span class="date">{{p.created}}</span>
+            <h1>{{post.title}}</h1>
+            <span>{{post.author}}</span>
+            <span class="date">{{post.created}}</span>
           </div>
         </li>
-      </ul>
-    </div>
-  </ng-container>
-</ng-container>
-
-<ng-template #loading>
-  <app-recent-post-skeleton [limit]="limit"></app-recent-post-skeleton>
-</ng-template>
+      }
+    </ul>
+  </div>
+} @placeholder {
+  <app-recent-post-skeleton [limit]="limit"/>
+}
 
 

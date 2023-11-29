@@ -5,6 +5,9 @@ import { SavingType } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
 
+import { DraftStatusEnum } from '@shared/types/types.enums';
+import { RESIZE_EVENT, VALUE_KEY } from '@shared/data/constants';
+
 @Component({
   selector: 'app-create-sidebar',
   templateUrl: './create-sidebar.component.html',
@@ -15,10 +18,10 @@ import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
 export class CreateSidebarComponent implements OnInit {
 
   @Input() drafts!: Post[] | null;
-  id$: Observable<string> | undefined;
-  saving$: Observable<SavingType> | undefined;
-  isCollapsed = false;
   @Input() originalCollapsed: boolean;
+  deletedID$: Observable<string> | undefined;
+  saving$: Observable<SavingType> | undefined;
+  collaped = false;
 
   constructor(
     private createDraftService: CreateDraftService,
@@ -28,35 +31,39 @@ export class CreateSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkCollapseResize();
-    this.id$ = this.createDraftService.onDraftDelete$;
+    this.deletedID$ = this.createDraftService.onDraftDelete$;
     this.saving$ = this.draftsFacade.saving$.pipe(
-      filter(res => !!res), 
-      distinctUntilKeyChanged('value')
+      filter(Boolean), 
+      distinctUntilKeyChanged(VALUE_KEY)
     ); 
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      if (this.drafts && this.drafts.length === 1 && this.drafts[0].status !== 'pending') {
-        this.draftsFacade.setActive(this.drafts[0]);
-      }
-    }, 666);
+    this.setActiveIfDraftAlone();
   }
 
-  public collapse(): void {
-    this.isCollapsed = !this.isCollapsed;
-    this.createDraftService.onCollapse(this.isCollapsed);
+  private setActiveIfDraftAlone(): void {
+    const firstDraft = this.drafts[0];
+
+    if (
+      this.drafts && 
+      this.drafts.length === 1 && 
+      firstDraft.status !== DraftStatusEnum.PENDING
+    ) {
+      this.draftsFacade.setActive(firstDraft);
+    }
   }
 
-  private async checkCollapseResize(): Promise<void> {
-    window.addEventListener('resize', async () => {
-      if (document.body.clientWidth < 984) { 
-        this.isCollapsed = false;
-        this.changeRef.detectChanges();
-      } else {
-        this.isCollapsed = this.originalCollapsed;
-        this.changeRef.detectChanges();
-      }
+  public collapseSidebar(): void { 
+    this.collaped = !this.collaped;
+    this.createDraftService.onCollapse(this.collaped);
+  }
+
+  private checkCollapseResize(): void {
+    window.addEventListener(RESIZE_EVENT, () => {
+      document.body.clientWidth < 984 ? 
+        this.collaped = false : this.collaped = this.originalCollapsed;
+      this.changeRef.detectChanges();
     })
   }
 

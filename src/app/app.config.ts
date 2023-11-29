@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
+import { APP_NAME } from "@shared/data/constants";
 
-const APP_VERSION = '0.1.1';
-export const URI = 'https://formatted-blog.netlify.app/';
+const APP_VERSION = '0.17.1';
 
 export interface AppConfig {
   TITLE: string;
@@ -9,7 +9,7 @@ export interface AppConfig {
 }
 
 export const APP_CONSTANTS: AppConfig = {
-  TITLE: 'Formatted Blog',
+  TITLE: APP_NAME,
   APP_VERSION,
 };
 

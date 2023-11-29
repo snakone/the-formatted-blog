@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, Subject, filter, map, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
 
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 import { Post } from '@shared/types/interface.post';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
+import { SLUG_KEY } from '@shared/data/constants';
 
 @Component({
   selector: 'app-post',
@@ -30,8 +31,8 @@ export class PostComponent implements OnInit {
     this.route.paramMap
     .pipe(
       takeUntil(this.unsubscribe$),
-      filter(res => !!res && !!res.get('slug')),
-      map(res => res.get('slug')),
+      filter(res => res?.has(SLUG_KEY)),
+      map(res => res.get(SLUG_KEY)),
     ).subscribe((slug: string) => this.postsFacade.getBySlug(slug));
   }
 

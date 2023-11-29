@@ -1,8 +1,7 @@
 <div class="login">
-  <ng-container *ngIf="!register; else SignIn">
-    <app-sign-in (register)="register = !register"></app-sign-in>
-  </ng-container>
-  <ng-template #SignIn>
-    <app-sign-up (login)="register = !register"></app-sign-up>
-  </ng-template>
+  @if(register) {
+    <app-sign-up (login)="register = !register"/>
+  } @else {
+    <app-sign-in (register)="register = !register"/>
+  }
 </div>

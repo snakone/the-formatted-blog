@@ -1,8 +1,9 @@
 <section class="profile-friends-content">
-  <ng-container *ngIf="(friends$ | async) as friends">
+  @if(friends$ | async; as friends) {
     <app-section>
-      <app-profile-friends-content id="sticky-wrapper" [friends]="friends"></app-profile-friends-content>
-      <app-profile-friends-sidebar [friends]="friends"></app-profile-friends-sidebar>
+      <app-profile-friends-content id="sticky-wrapper" 
+                                   [friends]="friends"/>
+      <app-profile-friends-sidebar [friends]="friends"/>
     </app-section>
-  </ng-container>
+  }
 </section>

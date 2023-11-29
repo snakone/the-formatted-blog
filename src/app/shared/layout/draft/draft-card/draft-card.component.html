@@ -1,41 +1,46 @@
-<ng-container *ngIf="draft">
+
+@defer(when draft) {
   <li (click)="activate(draft)"
       class="animated"
       [ngClass]="{
         'active': draft.active,
-        'zoomOutLeft': id === draft._id,
-        'disabled': saving?.value || draft.status === 'pending',
-        'first': first,
+        'zoomOutLeft': deletedDraftID === draft._id,
+        'disabled': saving?.value || draft.status === draftStatus.PENDING,
         'temporal': draft.temporal
       }">
-    <ng-container *ngIf="!collapsed; else isCollapsed">
+    @if(collapsed) {
+      <span class="capital" 
+            [ngClass]="{'pending': draft.status === draftStatus.PENDING}">
+        {{draft.title.charAt(0)}}
+      </span>
+    } @else {
       <div>
         <!-- TITLE -->
         <h3>{{draft.title}}</h3>
         <!-- STATUS -->
         <p class="info">
-          <ng-container *ngIf="draft.category">
+          @if(draft.category) {
             <span class="category">{{draft.category}}</span>
             <span class="tale">-</span>
-          </ng-container>
+          }
           <span class="created">{{draft.created}}</span>
-          <span class="pending" *ngIf="draft.status === 'pending'">
-            <span class="tale">-</span> {{draft.status | draftStatus}}
-          </span>
-          <!-- TEMPORAL -->
-          <span *ngIf="draft.temporal" class="temp">
-            <span class="tale">-</span>Temporal
-          </span>
+
+          @if(draft.status === draftStatus.PENDING) {
+            <span class="pending"><span class="tale">-</span> Pendiente</span>
+          }
+          @if(draft.temporal) {
+            <!-- TEMPORAL -->
+            <span class="temp"><span class="tale">-</span> Temporal</span>
+          }
         </p>
       </div>
-    </ng-container>
-    <ng-template #isCollapsed>
-      <span class="capital" [ngClass]="{'pending': draft.status === 'pending'}">{{draft.title?.charAt(0)}}</span>
-    </ng-template>
-    
-    <div class="icons animated fadeIn" *ngIf="draft.active">
-      <i class="fas fa-external-link-alt" (click)="preview()"></i>
-      <i class="fas fa-trash" (click)="delete()"></i>
-    </div>
+    }
+
+    @if(draft.active) {
+      <div class="icons animated fadeIn">
+        <i class="fas fa-external-link-alt" (click)="preview()"></i>
+        <i class="fas fa-trash" (click)="delete()"></i>
+      </div>
+    }
   </li>
-</ng-container>
+}

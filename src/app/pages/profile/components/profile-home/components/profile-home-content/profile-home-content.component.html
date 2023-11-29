@@ -1,26 +1,40 @@
 <h1>Actividad reciente</h1>
 <p class="reset">La actividad se borra cada 30 días.</p>
 <div class="profile-content">
+  @if(user) {
+    @defer(when activities) {
+      @for(activity of activities; track activity.slug) {
+        <article [ngClass]="{'admin': activity.admin, 'route': canVisit(activity)}" 
+                 [class]="activity.type"
+                 [routerLink]="canVisit(activity) ? ('/' + activity.route + '/' + activity.slug) : null">
+          <div class="content" [ngClass]="{'link': canVisit(activity)}">
+            <span [innerHTML]="activity.message"></span>
+            <p class="title">
+              @if(!activity.userAction) {
+                Título: 
+              }
+              <b>{{activity.title}}</b> - {{activity.date}}
+          </div>
+        </article>
+      } @empty {
+        Aún no se han registrado actividades. Realiza acciones dentro de la aplicación para registrar actividades.
+      }
+
+    } @placeholder {
+      @for(item of [1,2,3,4]; track item; let last = $last) {
+        <app-activity-skeleton [last]="last"></app-activity-skeleton>
+      }
+    }
+  }
   <ng-container *ngIf="user">
     <ng-container *ngIf="activities; else loading">
-      <article *ngFor="let a of activities" 
-              [ngClass]="{'admin': a.admin, 'route': canVisit(a)}" 
-              [class]="a.type"
-              [routerLink]="canVisit(a) ? ('/' + a.route + '/' + a.slug) : null">
-        <div class="content" [ngClass]="{'link': canVisit(a)}">
-          <span [innerHTML]="a.message"></span>
-          <p class="title">
-            <ng-container *ngIf="!a.userAction">Título: </ng-container>
-            <b>{{a.title}}</b> - {{a.date}}
-          </p>
-        </div>
-      </article>
+
     </ng-container>
     <ng-template #loading>
-      <app-activity-skeleton *ngFor="let i of [1,2,3,4]; let last = last" [last]="last"></app-activity-skeleton>
+      
     </ng-template>
     <ng-container *ngIf="activities && activities.length === 0">
-      Aún no se han registrado actividades. Realiza acciones dentro de la aplicación para registrar actividades.
+      
     </ng-container>
   </ng-container>
 </div>

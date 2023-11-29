@@ -18,7 +18,7 @@ p {
   margin-bottom: 1rem;
 
   &:last-of-type {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 }
 
@@ -49,12 +49,15 @@ details {
       -webkit-font-smoothing: antialiased;
       font-size: 14px;
       color: var(--contrast-color);
-      transition: color 666ms ease-in-out;
+      transition: color 666ms ease-in-out, transform 333ms ease-in-out;
+      transform: rotate(0);
     }
   }
 
   &[open] summary:after {
     content: "\f068";
+    transition: transform 300ms ease-in-out;
+    transform: rotate(360deg);
   }
 
   & .accordion {
@@ -66,15 +69,11 @@ details {
 
     & p {
       text-align: initial;
-      font-size: 13px;
+      text-wrap: pretty;
 
       &:last-child {
         margin-bottom: 0;
       } 
-
-      & i {
-        padding: 0 10px;
-      }
     }
   }
 

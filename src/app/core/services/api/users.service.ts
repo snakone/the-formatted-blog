@@ -63,7 +63,7 @@ export class UserService {
       );
   }
 
-  public getById(id: string): Observable<UserResponse> {
+  public getByIdPublic(id: string): Observable<UserResponse> {
     return this.http
       .get<UserResponse>(this.API_USER + '/' + id)
       .pipe(

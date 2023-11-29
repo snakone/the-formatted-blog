@@ -10,25 +10,29 @@ export class UtilsService {
   public getFriendlyLocation(): Promise<string> {
     return new Promise((res, req) => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(((pos: GeolocationPosition) => {
+        navigator.geolocation.getCurrentPosition((async (pos: GeolocationPosition) => {
           const { latitude, longitude } = pos.coords;
           const geocodingAPI = getURL(latitude, longitude);
+          const response = await fetch(geocodingAPI);
+          const data: GeocodingResponse = await response.json();
 
-          fetch(geocodingAPI)
-           .then((res) => res.json() as Promise<GeocodingResponse>)
-            .then(data => {
-            if (data.status.code !== 200) {
-              req(data.status.message);
-            }
-            const country = data.results[0].components.country;
-            const region = data.results[0].components.state || data.results[0].components.region;
-            res(`${country} - ${region}`);
-          });
+          if (data && data.status.code !== 200) {
+            req(data.status.message);
+          }
+
+          res(this.setLocation(data.results[0]));
         }), (err) => req(err));
       } else {
         req('Geolocalización no soportada en este navegador');
       }
     });
+  }
+
+  private setLocation(result: GeocodingResult): string | null {
+    if (!result) { return null; }
+    const country = result.components.country;
+    const region = result.components.state || result.components.region;
+    return (!country || !region) ? null : `${country} - ${region}`;
   }
 }
 

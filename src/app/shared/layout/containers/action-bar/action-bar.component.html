@@ -2,12 +2,14 @@
      [ngClass]="{'margin': margin,
                  'no-button': !buttonText}">
   <div class="info">
-    <p [innerHTML]="text"></p>
+    <p [innerHTML]="text | Sanitizer:'html'"></p>
   </div>
   <!-- BUTTON -->
-  <div class="submit" *ngIf="buttonText">
-    <button (click)="action()" class="formatted">
-      <span>{{ buttonText }}</span>
-    </button>
-  </div>
+  @if(buttonText) {
+    <div class="submit">
+      <button (click)="action()" class="formatted">
+        <span>{{ buttonText }}</span>
+      </button>
+    </div>
+  }
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { environment } from '@env/environment';
+import { APP_CONSTANTS } from 'app/app.config';
 
 @Component({
   selector: 'app-footer',
@@ -17,7 +18,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.year = this.getYear();
-    this.version = environment.version;
+    this.version = APP_CONSTANTS.APP_VERSION;
   }
 
   private getYear(): string {

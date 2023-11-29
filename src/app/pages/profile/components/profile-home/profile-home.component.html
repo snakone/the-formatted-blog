@@ -1,8 +1,14 @@
 <section class="profile-home-content">
-  <ng-container *ngIf="(user$ | async) as user">
+  @if({
+    user: user$ | async,
+    activities: activities$ | async
+  }; as obs) {
     <app-section>
-      <app-profile-home-content id="sticky-wrapper" [user]="user" [activities]="activities$ | async"></app-profile-home-content>
-      <app-profile-home-sidebar [user]="user" [selector]="'profile-home-content'"></app-profile-home-sidebar>
+      <app-profile-home-content id="sticky-wrapper" 
+                                [user]="obs.user" 
+                                [activities]="obs.activities"/>
+      <app-profile-home-sidebar [user]="obs.user" 
+                                [selector]="'profile-home-content'"/>
     </app-section>
-  </ng-container>
+  }
 </section>

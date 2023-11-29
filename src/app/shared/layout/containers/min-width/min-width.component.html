@@ -1,4 +1,4 @@
 <div class="min-width">
-  <h2 [innerHTML]="sentence"></h2>
+  <h2 [innerHTML]="sentence | Sanitizer:'html'"></h2>
   <p>El equipo de desarollo.</p>
 </div>

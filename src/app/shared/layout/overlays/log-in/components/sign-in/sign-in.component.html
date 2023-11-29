@@ -7,8 +7,7 @@
              autocomplete="off"
              type="email"/>
       <app-form-error [control]="email"
-                      [validator]="['required', 'email']">
-      </app-form-error>
+                      [validator]="['required', 'email', 'maxlength']"/>
     </div>
     <!-- PASSWORD -->
     <div class="form-control">
@@ -17,8 +16,7 @@
              type="password"
              autocomplete="off">
       <app-form-error [control]="password"
-                      [validator]="['required']">
-      </app-form-error>
+                      [validator]="['required', 'maxlength', 'minlength']"/>
     </div>
 
     <button type="submit"

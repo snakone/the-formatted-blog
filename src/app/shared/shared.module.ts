@@ -4,8 +4,6 @@ import { DirectivesModule } from './directives/directives.module';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     FormsModule,
     PipesModule,

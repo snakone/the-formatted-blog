@@ -5,18 +5,17 @@ aside {
 
   & i {
     position: absolute;
-    transform: scale(-1, 1);
+    transform: scale(1, 1);
     right: 12px;
-    top: -30px;
-    font-size: 15px;
+    top: -31px;
+    font-size: 20px;
     cursor: pointer;
     display: block;
-    height: 24px;
-    width: 28px;
+    transition: transform 200ms ease-in;
 
     &.collapsed {
-      transform: scale(1, 1);
-      right: 8px;
+      right: 17px;
+      transform: scale(-1, 1);
     }
 
     @media(max-width: 992px) {
@@ -36,7 +35,6 @@ ul {
   position: relative;
   margin-top: 36px;
   overflow-x: hidden;
-  transition: width 300ms ease-in;
 
   @media(max-width: 992px) {
     display: grid;
@@ -53,38 +51,8 @@ ul {
     display: block;
     margin-bottom: 20px;
   }
+
 }
-
-p.total {
-  opacity: .6;
-  margin-bottom: 12px;
-}
-
-.empty {
-  font-size: 13px;
-
-  & p {
-    margin-bottom: 25px;
-    padding-right: 3rem;
-    &:first-child { margin-top: 30px }
-    &:last-child { margin-bottom: 0 }
-  }
-
-  @media(max-width: 1200px) and (min-width: 993px) {
-    & p {
-      padding-right: 2rem;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-  }
-
-  @media(max-width: 992px) {
-    padding: 0 0 50px;
-    border-bottom: 1px solid var(--navigation-border);
-  }
-}
-
-i.fa-wpforms, i.fa-question-circle { margin: 0 4px }
 
 // SCROLLBAR
 ::-webkit-scrollbar { width: 4px !important;  }

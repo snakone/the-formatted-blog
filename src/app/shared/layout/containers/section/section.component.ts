@@ -10,7 +10,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class SectionComponent {
 
   @Input() margin = true;
-  @Input() auto = false;
   @Input() collapsed = false;
 
   constructor() { }

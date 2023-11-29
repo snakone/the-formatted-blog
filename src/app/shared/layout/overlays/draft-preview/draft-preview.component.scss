@@ -17,3 +17,29 @@
 ::-webkit-scrollbar-track-piece {
   background: transparent;
 }
+
+quill-view {
+  display: block;
+  margin: 2rem 0;
+}
+
+h2 {
+  position: relative;
+  font-size: 26px;
+}
+
+.close {
+  background-color: transparent;
+  position: absolute;
+  outline: none;
+  right: 0px;
+  top: -1px;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+
+  & i {
+    font-size: 20px;
+    color: var(--dark-color);
+  }
+}

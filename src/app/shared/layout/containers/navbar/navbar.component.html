@@ -1,100 +1,106 @@
 <nav StickyNav (scrolled)="onScroll($event)">
-  <div class="wrapper">
-    <div class="nav"> <!-- LEFT SIDE -->
-      <app-text-slider></app-text-slider>
-    </div>
-    <div class="actions"> <!-- RIGHT SIDE -->
-      <div class="icons">
-        <ul aria-hidden="false">  <!-- ARRAY -->
-          <li>
-            <i class="fas fa-home"
-               routerLink="/home"
-               routerLinkActive="active"
-               aria-label="home"
-               aria-hidden="false">
-            </i>
-          </li>
-          <!-- CREATE -->
-          <ng-container *ngIf="user$ | async">
-            <li class="animated fadeIn">
-              <i class="fas fa-feather-alt"
-                 aria-label="create"
-                 aria-hidden="false"
-                 routerLink="/create"
-                 routerLinkActive="active">
-              </i>
-            </li>
-          </ng-container>
-          <li *ngFor="let i of icons">
-            <i [class]="i.icon"
-               [attr.aria-label]="i.icon"
-               [routerLink]="i.route"
-               routerLinkActive="active"
-               aria-hidden="false">
-            </i>
-          </li>
-          <ng-container *ngIf="mode === 'dark'; else light">
-            <li (click)="theme()">
-              <i class="far fa-lightbulb" aria-label="light" aria-hidden="false"></i>
-            </li>
-          </ng-container>
-          <ng-template #light> <!-- THEME -->
-            <li (click)="theme()">
-              <i class="far fa-moon" aria-label="dark" aria-hidden="false"></i>
-            </li>
-          </ng-template>
-          <li class="dropdown"> <!-- DROPDOWN -->
-            <i class="fas fa-align-justify"
-               (click)="menuOpened = !menuOpened"
-               aria-label="dropwdown">
-            </i>
-            <ul class="dropdown-menu" *ngIf="menuOpened">
-              <li [class]="'dropdown-item-' + (i + 1)" aria-hidden="false"
-                  *ngFor="let m of dropdown; let i = index"
-                  [routerLink]="m.route"
-                  (click)="menuOpened = false">{{m.label}}
-              </li>
-              <ng-container *ngIf="(user$ | async) as user">
-                <li *ngIf="user.account === 'Admin' || user.account === 'Super'" 
-                     [class]="'dropdown-item-' + (dropdown.length + 1)"
-                     [routerLink]="'/admin'"
-                     (click)="menuOpened = false"
-                     aria-label="admin">Admin
-                </li>
-              </ng-container>
-            </ul>
-          </li>  <!-- USER -->
-          <ng-container *ngIf="(user$ | async); else noUser">
+  @if({user: user$ | async}; as obs) {
+    <div class="wrapper">
+      <div class="nav"> <!-- LEFT SIDE -->
+        <app-text-slider/>
+      </div>
+      <div class="actions"> <!-- RIGHT SIDE -->
+        <div class="icons">
+          <ul aria-hidden="false">
             <li>
-              <i [routerLink]="'/profile'" 
-                 routerLinkActive="active" 
-                 class="fas fa-user"
-                 aria-hidden="false"
-                 aria-label="user">
+              <i class="fas fa-home"
+                 routerLink="/home"
+                 routerLinkActive="active"
+                 aria-label="home"
+                 aria-hidden="false">
               </i>
             </li>
-          </ng-container>
-          <ng-template #noUser>
-            <li (click)="openModal()">
-              <i class="fas fa-sign-in-alt" aria-label="sign" aria-hidden="false"></i>
+            <!-- CREATE -->
+            @if (obs.user) {
+              <li class="animated fadeIn">
+                <i class="fas fa-feather-alt"
+                   aria-label="create"
+                   aria-hidden="false"
+                   routerLink="/create"
+                   routerLinkActive="active">
+                </i>
+              </li>
+            }
+            <!-- ICONS -->
+            <li *ngFor="let i of icons">
+              <i [class]="i.icon"
+                 [attr.aria-label]="i.icon"
+                 [routerLink]="i.route"
+                 routerLinkActive="active"
+                 aria-hidden="false">
+              </i>
             </li>
-          </ng-template>
-        </ul>
-      </div> <!-- SEARCH BUTTON -->
-      <div class="search"
-           (click)="showSearchBar = !showSearchBar">
-        <i class="fas fa-search" aria-label="search" aria-hidden="false"></i>
+            <!-- THEME -->
+            @if(mode === 'dark') {
+              <li (click)="toggleTheme()">
+                <i class="far fa-lightbulb" aria-label="light" aria-hidden="false"></i>
+              </li>
+            } @else {
+              <li (click)="toggleTheme()">
+                <i class="far fa-moon" aria-label="dark" aria-hidden="false"></i>
+              </li>
+            }
+            <!-- DROPDOWN -->
+            <li class="dropdown"> 
+              <i class="fas fa-align-justify"
+                 (click)="menuOpened = !menuOpened"
+                 aria-label="dropwdown">
+              </i>
+              @if(menuOpened) {
+                <ul class="dropdown-menu">
+                  @for(menu of dropdown; track menu.icon; let i = $index) {
+                    <li [class]="'dropdown-item-' + (i + 1)" aria-hidden="false"
+                        [routerLink]="menu.route"
+                        (click)="menuOpened = false">{{menu.label}}
+                    </li>
+                  }
+                  @if(obs.user && (obs.user.account === 'Admin' || obs.user.account === 'Super')) {
+                    <li [class]="'dropdown-item-' + (dropdown.length + 1)"
+                        [routerLink]="'/admin'"
+                        (click)="menuOpened = false"
+                        aria-label="admin">Admin
+                    </li>
+                  }
+                </ul>
+              }
+            </li>  
+            <!-- USER -->
+            @if(obs.user) {
+              <li>
+                <i [routerLink]="'/profile'" 
+                   routerLinkActive="active" 
+                   class="fas fa-user"
+                   aria-hidden="false"
+                   aria-label="user">
+                </i>
+              </li>
+            } @else {
+              <li (click)="openModal()">
+                <i class="fas fa-sign-in-alt" aria-label="sign" aria-hidden="false"></i>
+              </li>
+            }
+          </ul>
+        </div> 
+        <!-- SEARCH BUTTON -->
+        <div class="search"
+             (click)="showSearchBar = !showSearchBar">
+          <i class="fas fa-search" aria-label="search" aria-hidden="false"></i>
+        </div>
       </div>
     </div>
-  </div>
+  }
 </nav>
 
-<div class="backdrop"
-     (click)="menuOpened = false"
-     *ngIf="menuOpened">
-</div>
+@if(menuOpened) {
+  <div class="backdrop" (click)="menuOpened = false"></div>
+}
 
- <!-- SEARCH BAR -->
- <app-search-bar *ngIf="showSearchBar" 
-                (closed)="showSearchBar = !showSearchBar">
-</app-search-bar>
+@if(showSearchBar) {
+  <app-search-bar (closed)="showSearchBar = !showSearchBar"/>
+}
+

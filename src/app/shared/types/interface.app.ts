@@ -1,4 +1,6 @@
+import { ComponentType } from "@angular/cdk/portal";
 import { Post } from "./interface.post";
+import { DraftStatusEnum, SavingDraftType, SearchType } from "./types.enums";
 
 export interface PostHeader {
   text: string;
@@ -69,7 +71,7 @@ export interface FilterType {
 }
 
 export interface StatusButtons {
-  status: string;
+  status: DraftStatusEnum;
   active: boolean;
 }
 
@@ -98,8 +100,10 @@ export interface FormattedNew {
   published_at: Date;
 }
 
-export type DraftStatus = 'not-seen' | 'seen' | 'pending' | 'approved';
-export type AccountType = 'Super' | 'Admin' | 'User' | 'Guest';
-export type UserActivityType = 'create' | 'delete' | 'update';
-export type SearchType = 'post' | 'draft' | 'favorite';
-export type SavingDraftType = 'saving' | 'warning' | 'temporal';
+export interface FormattedDialog<T> {
+  component: ComponentType<T>,
+  data?: any,
+  id?: string,
+  css?: string
+}
+

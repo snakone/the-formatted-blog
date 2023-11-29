@@ -1,8 +1,10 @@
 <div class="list">
   <ul>
-    <li *ngFor="let c of categories">
-      <em>{{c.name}}</em>
-      <i>{{c.amount}}</i>
-    </li>
+    @for(item of categories; track item.name) {
+      <li>
+        <em>{{item.name}}</em>
+        <i>{{item.amount}}</i>
+      </li>
+    }
   </ul>
 </div>

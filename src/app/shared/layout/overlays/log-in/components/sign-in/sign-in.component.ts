@@ -6,11 +6,14 @@ import {
   EventEmitter 
 } from '@angular/core';
 
-import { UntypedFormGroup, AbstractControl, UntypedFormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { UsersFacade } from '@store/users/users.facade';
-import { LogInOverlayComponent } from '../../log-in.component';
+import { LogInDialogComponent } from '../../log-in.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SignInForm } from '@shared/types/interface.form';
+import { SIGN_IN_FORM } from '@shared/data/forms';
+import { EMAIL_KEY, PASSWORD_KEY } from '@shared/data/constants';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,11 +25,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class SignInComponent implements OnInit {
 
   @Output() register = new EventEmitter<void>();
-  signInForm!: UntypedFormGroup;
+  signInForm!: FormGroup<SignInForm>;
   remember = false;
 
   constructor(
-    public dialogRef: MatDialogRef<LogInOverlayComponent>,
+    public dialogRef: MatDialogRef<LogInDialogComponent>,
     private userFcd: UsersFacade
   ) { }
 
@@ -35,15 +38,7 @@ export class SignInComponent implements OnInit {
   }
 
   private createSignInForm(): void {
-    this.signInForm = new UntypedFormGroup({
-      email: new UntypedFormControl(null, [
-         Validators.required,
-         Validators.email,
-         Validators.minLength(5),
-         Validators.maxLength(35)
-      ]),
-      password: new UntypedFormControl(null, [Validators.required])
-    });
+    this.signInForm = SIGN_IN_FORM();
   }
 
   public onSubmit(): void {
@@ -61,7 +56,13 @@ export class SignInComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  get email(): AbstractControl { return this.signInForm.get('email') as AbstractControl; }
-  get password(): AbstractControl { return this.signInForm.get('password') as AbstractControl; }
+  private getControl(name: string): AbstractControl | null {
+    return this.signInForm.get(name);
+  }
+
+  get email(): AbstractControl { return this.getControl(EMAIL_KEY); }
+  get password(): AbstractControl { return this.getControl(PASSWORD_KEY); }
 
 }
+
+

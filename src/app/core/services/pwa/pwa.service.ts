@@ -7,16 +7,17 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';
 import { CrafterService } from '../crafter/crafter.service';
-import { PushDeniedOverlayComponent } from '@layout/overlays/push-denied/push-denied.component';
+import { PushDeniedDialogComponent } from '@layout/overlays/push-denied/push-denied.component';
 import { NotificationPayload } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { SWResponse } from '@shared/types/interface.server';
 
-import { URI } from 'app/app.config';
-import { USER_ID_KEY } from '@shared/data/constants';
+import { URI, USER_ID_KEY } from '@shared/data/constants';
 import { WELCOME_PUSH } from '@shared/data/notifications';
 import { ERROR_SERVICE_WORKER, SUB_UPDATED_SENTENCE } from '@shared/data/sentences';
 import { environment } from '@env/environment';
+import { PUSH_DENIED_DIALOG } from '@shared/data/dialogs';
+import { SnackTypeEnum } from '@shared/types/types.enums';
 
 @Injectable({providedIn: 'root'})
 
@@ -63,7 +64,7 @@ export class PWAService {
             ).subscribe(_ => !_ ?? this.crafter.setSnack(SUB_UPDATED_SENTENCE))
         }
       }).catch(_ => {
-        this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+        this.crafter.setSnack(ERROR_SERVICE_WORKER, SnackTypeEnum.ERROR);
         console.error(_);
       });
     }, timer);
@@ -72,7 +73,7 @@ export class PWAService {
   public async requestNotification(): Promise<void> {
     const permission = await Notification.requestPermission()
      .catch(_ => {
-      this.crafter.setSnack(ERROR_SERVICE_WORKER, 'error');
+      this.crafter.setSnack(ERROR_SERVICE_WORKER,  SnackTypeEnum.ERROR);
       console.log(_);
     });
     permission !== 'granted' ? this.openPushModal() : this.showPrompt(1000);
@@ -119,9 +120,7 @@ export class PWAService {
   }
 
   private openPushModal(): void {
-    setTimeout(() => {
-      this.crafter.dialog(PushDeniedOverlayComponent);
-    }, 333);
+    setTimeout(() => this.crafter.dialog(PUSH_DENIED_DIALOG), 333);
   }
 
 }

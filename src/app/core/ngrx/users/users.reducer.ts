@@ -24,6 +24,7 @@ const featureReducer = createReducer(
   inititalState,
   // LOGIN USER
   on(UserActions.loginSuccess, (state, { user }) => ({...state, error: null, user, loaded: true })),
+  on(UserActions.updateSuccess, (state, { user }) => ({...state, user })),
   on(UserActions.loginFailure, (state, { error }) => ({ ...state, loaded: false, error })),
   // USER LOG OUT
   on(UserActions.userLogOut, (state) => ({ ...state, error: null, user: null, loaded: false })),

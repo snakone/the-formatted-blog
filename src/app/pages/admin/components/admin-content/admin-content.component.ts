@@ -2,7 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { StatusButtons } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
-import { Subject, filter, map, takeUntil } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
+
+import { RESIZE_EVENT } from '@shared/data/constants';
+import { DraftStatusEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-admin-content',
@@ -18,10 +21,10 @@ export class AdminContentComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
   status: StatusButtons[] = [
-    {status: 'not-seen', active: false},
-    {status: 'seen', active: false}, 
-    {status: 'pending', active: false},
-    {status: 'all', active: false}
+    {status: DraftStatusEnum.NOT_SEEN, active: false},
+    {status: DraftStatusEnum.SEEN, active: false}, 
+    {status: DraftStatusEnum.PENDING, active: false},
+    {status: DraftStatusEnum.ALL, active: false}
   ];
 
   constructor(private draftsFacade: DraftsFacade) { }
@@ -29,7 +32,7 @@ export class AdminContentComponent implements OnInit {
   ngOnInit(): void {
     this.draftsFacade.all$.pipe(
       takeUntil(this.unsubscribe$),
-      map(drafts => drafts?.filter(d => d.status !== 'approved'))
+      map(drafts => drafts?.filter(d => d.status !== DraftStatusEnum.APPROVED))
     ).subscribe(res => {
       this.drafts = res;
       this.filteredDrafts = res;
@@ -40,15 +43,15 @@ export class AdminContentComponent implements OnInit {
     this.status.forEach(s => s.active = false);
     value.active = true;
     
-    if (value.status === 'all') {
+    if (value.status === DraftStatusEnum.ALL) {
       this.filteredDrafts = this.drafts;
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event(RESIZE_EVENT));
       return;
     }
     this.filteredDrafts = this.drafts
     .filter((draft: Post) => draft.status === value.status);
 
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event(RESIZE_EVENT));
   }
 
   ngOnDestroy(): void {

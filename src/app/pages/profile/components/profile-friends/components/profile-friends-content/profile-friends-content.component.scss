@@ -43,6 +43,11 @@ article {
   & h2 {
     font-size: 20px;
     margin-bottom: 6px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--contrast-color);
+    }
   }
 }
 
@@ -51,18 +56,19 @@ ul {
   @include flex-center();
   width: 100%;
   position: relative;
-  margin-top: 12px;
+  margin-top: 16px;
+  margin-bottom: 6px;
 
   & li {
     padding: 0 12px;
     flex-direction: column;
     position: relative;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
 
     & i {
       transition: color 666ms ease-in-out;
-      font-size: 12px;
+      font-size: 16px;
       margin-right: 4px;
     }
 
@@ -80,6 +86,10 @@ ul {
 
     &:first-child {
       padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
     }
 
     &:last-of-type {

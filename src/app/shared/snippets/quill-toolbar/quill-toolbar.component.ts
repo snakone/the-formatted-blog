@@ -1,16 +1,24 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, filter, Subject, Observable, map } from 'rxjs';
+import { takeUntil, filter, Subject, Observable, map, tap } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { CREATE_ACTION_LIST, DELETE_CONFIRMATION, SAVE_CONFIRMATION } from '@shared/data/data';
-import { QuillHelpComponent } from '@shared/layout/overlays/quill-help/quill-help.component';
 import { Post } from '@shared/types/interface.post';
-import { DraftPreviewDialogComponent } from '@shared/layout/overlays/draft-preview/draft-preview.component';
 import { QuillService } from '@core/services/quill/quill.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { SavingType } from '@shared/types/interface.app';
+
+import { MESSAGE_KEY } from '@shared/data/constants';
+import { SavingTypeEnum } from '@shared/types/types.enums';
+import { CREATE_ACTION_LIST } from '@shared/data/data';
+
+import { 
+  SAVE_CONFIRMATION, 
+  DELETE_CONFIRMATION, 
+  PREVIEW_DRAFT_DIALOG, 
+  QUILL_HELP_DIALOG 
+} from '@shared/data/dialogs';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -26,9 +34,10 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   @Output() clean = new EventEmitter<void>();
   saving$: Observable<SavingType>;
   private unsubscribe$ = new Subject<void>();
-  total$: Observable<number> | undefined;
+  totalDrafts$: Observable<number> | undefined;
+  saveTypes = SavingTypeEnum;
   
-  list = CREATE_ACTION_LIST;
+  iconList = CREATE_ACTION_LIST;
 
   constructor(
     private crafter: CrafterService,
@@ -41,66 +50,61 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.saving$ = this.draftsFacade.saving$;
-    this.total$ = this.draftsFacade.drafts$.pipe(
+    this.totalDrafts$ = this.draftsFacade.drafts$.pipe(
       map(drafts => drafts?.length || 0)
     );
   }
 
-  switchObj: any = {
-    new: (sv: boolean) => this.new(sv),
-    preview: (sv: boolean) => this.preview(sv),
-    clean: (sv: boolean) => {if (!sv) this.clean.emit()},
-    delete: (sv: boolean) => this.delete(sv),
-    download: (sv: boolean) => this.download(sv),
-    help: (sv: boolean) => this.help(sv),
-    next: () => this.next()
+  switchAction: {[key: string]: (saving?: boolean) => void} = {
+    new: (saving: boolean) => this.new(saving),
+    preview: (saving: boolean) => this.preview(saving),
+    clean: (saving: boolean) => {if (!saving) this.clean.emit()},
+    delete: (saving: boolean) => this.delete(saving),
+    download: (saving: boolean) => this.download(saving),
+    help: (saving: boolean) => this.help(saving),
+    form: () => this.goToForm()
   };
 
-  private new(sv: boolean): void {
-    if (!this.draft || sv || this.draft.temporal) { return; }
+  private new(saving: boolean): void {
+    if (!this.draft || saving || this.draft.temporal) { return; }
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => {
-        this.draftsFacade.updateKey(
-          this.draft._id, { key: 'message', value: this.draft.message }
-        );
-        this.draftsFacade.resetActive();
-    });
+        filter(Boolean),
+        tap(_ => this.draftsFacade.updateKey(
+          this.draft._id, { key: MESSAGE_KEY, value: this.draft.message }
+        ))
+    ).subscribe(_ => this.draftsFacade.resetActive());
   }
 
-  private preview(sv: boolean): void {
-    if (!this.draft || sv) { return; }
-    this.crafter.dialog(DraftPreviewDialogComponent, null, undefined, 'preview');
+  private preview(saving: boolean): void {
+    if (!this.draft || saving) { return; }
+    this.crafter.dialog(PREVIEW_DRAFT_DIALOG);
   }
 
-  private help(sv: boolean): void {
-    if (sv) { return; }
-    this.form ? null :
-    this.crafter.dialog(QuillHelpComponent, null, '', 'quill-help');
+  private help(saving: boolean): void {
+    if (saving) { return; }
+    this.crafter.dialog(QUILL_HELP_DIALOG);
   }
 
-  private download(sv: boolean): void {
-    if (!this.draft || sv) { return; }
+  private download(saving: boolean): void {
+    if (!this.draft || saving) { return; }
     this.quillSrv.convertToHTML(this.draft);
   }
 
-  private delete(sv: boolean): void {
-    if (!this.draft || sv) { return; }
+  private delete(saving: boolean): void {
+    if (!this.draft || saving) { return; }
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => (
-        this.draftsFacade.delete(this.draft._id),
-        this.createDraftSrv.onDeleteDraft(this.draft._id)
-    ));
+        filter(Boolean),
+        tap(_ => this.createDraftSrv.onDeleteDraft(this.draft._id))
+    ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
   }
 
-  private next(): void {
+  private goToForm(): void {
     if (!this.draft) { return; }
     this.router.navigate(['form'], {relativeTo: this.route});
   }

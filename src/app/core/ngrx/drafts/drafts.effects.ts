@@ -10,6 +10,8 @@ import { Store } from '@ngrx/store';
 import { DraftsState } from './drafts.reducer';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
+import { SavingTypeEnum, SnackTypeEnum } from '@shared/types/types.enums';
+import { CREATE_ROUTE } from '@shared/data/constants';
 
 @Injectable()
 
@@ -158,21 +160,21 @@ export class DraftsEffects {
   alertsDraftEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.createSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto creado!', 'success')))
+      concatMap((_) => of(this.crafter.setSnack('Boceto creado!', SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
   alertsDraft1Effect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.deleteSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto borrado!', 'success')))
+      concatMap((_) => of(this.crafter.setSnack('Boceto borrado!', SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
   alertsDraft2Effect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.updateSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+      concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
@@ -180,7 +182,7 @@ export class DraftsEffects {
   .pipe(
     ofType(DraftsActions.updateKeySuccess),
     filter(_ => _.admin),
-    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', 'success')))
+    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
@@ -197,11 +199,23 @@ export class DraftsEffects {
   onPublishDraftEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.publishSuccess),
-      tap(_ => this.crafter.setSnack('Boceto publicado!', 'success')),
+      tap(_ => this.crafter.setSnack('Boceto publicado!', SnackTypeEnum.SUCCESS)),
       switchMap((_) => of(...[
         DraftsActions.reset(null),
         PostsActions.reset()
       ]))
+    )
+  )
+
+  onUpdateKeyFailureEffect$ = createEffect(() => this.actions
+    .pipe(
+      ofType(DraftsActions.updateKeyFailure, DraftsActions.createFailure),
+      concatMap(_ => {
+        if (window.location.href.includes(CREATE_ROUTE)) {
+          return of(DraftsActions.setSaving({data: {type: SavingTypeEnum.WARNING, value: null}}))
+        }
+        return of(null);
+      })
     )
   )
 

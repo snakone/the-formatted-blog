@@ -51,6 +51,10 @@ button {
 .form-control {
   margin-bottom: 1.6rem;
   position: relative;
+
+  & label {
+    position: relative;
+  }
 }
 
 // HOME MAIN POST
@@ -119,7 +123,7 @@ button {
             margin-right: 6px;
             position: relative;
             top: -1px;
-            font-size: 12px;
+            font-size: 16px;
             color: var(--contrast-color);
           }
 
@@ -189,7 +193,7 @@ button {
 input + span + app-form-error > .form-error,
 select + span + app-form-error > .form-error
  {
-  margin-top: -2px !important;
+  margin-top: 1px !important;
 }
 
 textarea + span + app-form-error > .form-error
@@ -262,9 +266,12 @@ button.formatted {
 
 .accordion {
   & p {
-    & i {
-      padding: 0 4px;
+    text-wrap: pretty;
 
+    & i {
+      padding: 0 6px;
+      font-size: 18px;
+    
       &.fa-check {
         color: var(--success-color);
       }
@@ -274,6 +281,11 @@ button.formatted {
   & ol, & ul {
     padding-left: 12px;
     font-size: 13px;
+    margin: 20px 0;
+
+    & li {
+      padding-left: 8px;
+    }
   }
 }
 
@@ -310,4 +322,18 @@ h2[mat-dialog-title] {
   @media(max-width: 550px) {
     font-size: 1.8rem;
   }
+}
+
+label:has(+ input:required):after {
+  content: '*';
+  font-size: 30px;
+  color: var(--error-color);
+  position: absolute;
+  top: -3px;
+  right: -12px;
+}
+
+label:has(+ input[type="checkbox"]:required):after {
+  top: 1px;
+  right: -9px;
 }

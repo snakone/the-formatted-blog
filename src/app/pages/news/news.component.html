@@ -3,15 +3,14 @@
     <app-action-bar [text]="text"
                     buttonText="Subscríbete"
                     (function)="notification()"
-                    [margin]="true">
-    </app-action-bar>
+                    [margin]="true"/>
   </div>
   <section class="news-content">
     <app-section [margin]="false">
-      <app-news-masonry [duration]="duration" [news]="news$ | async"></app-news-masonry>
+      <app-news-masonry [duration]="duration" [news]="news$ | async"/>
     </app-section>
   </section>
 </div>
 
-<app-scroll-top></app-scroll-top>
+<app-scroll-top/>
 

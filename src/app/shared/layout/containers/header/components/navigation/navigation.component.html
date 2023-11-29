@@ -1,20 +1,22 @@
-<nav (pan)="panned($event)">
+<nav >
   <div class="indicators">
-    <i class="fas fa-angle-left animated fadeIn next"
-      *ngIf="t <= 900 && t >= 40"
-      (click)="move(false)">
-    </i>
-    <i class="fas fa-angle-right animated fadeIn prev"
-      *ngIf="t <= 600"
-      (click)="move(true)">
-    </i>
+    @if(panned <= maxWidthPanned && panned >= 40) {
+      <i class="fas fa-angle-left animated fadeIn next"
+        (click)="move(false)">
+      </i>
+    }
+    @if(panned <= minWidthPanned) {
+      <i class="fas fa-angle-right animated fadeIn prev"
+        (click)="move(true)">
+      </i>
+    }
   </div>
   <!-- LIST -->
   <div class="wrapper" id="pan-nav">
     <ul>
-      <li *ngFor="let i of items"
-          [routerLink]="'/home'">{{i}}
-      </li>
+      @for(item of items; track item) {
+        <li [routerLink]="'/home'">{{item}}</li>
+      }
     </ul>
   </div>
 </nav>
