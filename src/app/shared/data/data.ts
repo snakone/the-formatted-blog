@@ -319,7 +319,7 @@ export const FQA_ITEMS: FQAItem[] = [
       aunque necesita más tiempo para revisarlo. Mientras el boceto esté en este estado, el autor no podrá editarlo. Esto sirve para que el administrador no 
       tenga que estar revisando a cada nuevo cambio del autor.`,
       `En resumen, si ves que alguno de tus bocetos esta en 'pendiente', es por que un adminitrador lo está revisando y ha bloqueado la edición para que no
-      haya nuevos cambios y pueda resivar el boceto tranquilamente.`
+      haya nuevos cambios y pueda revisar el boceto tranquilamente.`
     ]
   },
   {

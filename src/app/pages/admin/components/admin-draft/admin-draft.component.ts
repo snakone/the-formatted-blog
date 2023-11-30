@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, Component, Signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PWAService } from '@core/services/pwa/pwa.service';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry, debounceTime } from 'rxjs';
-
 import { Post } from '@shared/types/interface.post';
 import { DraftCheck } from '@shared/types/interface.server';
 
-import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE } from '@shared/data/dialogs';
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { CHECKSTATUS } from '@shared/data/data';
-import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { CHECK_KEY, ID_KEY, STATUS_KEY } from '@shared/data/constants';
 import { DraftStatusEnum, SnackTypeEnum } from '@shared/types/types.enums';
+import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE } from '@shared/data/dialogs';
+import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 
 const maxImageSize = 150;
 
@@ -33,6 +33,7 @@ export class AdminDraftComponent {
   adminDraftMessageDesc = ADMIN_DRAFT_MESSAGE_DESC;
   eveythingOK: boolean;
   markAsPending: boolean;
+  originalPending: boolean;
 
   xhr: XMLHttpRequest = new XMLHttpRequest();;
 
@@ -58,7 +59,7 @@ export class AdminDraftComponent {
       retry(1)
     ).pipe(
       filter(Boolean),
-      tap((res: Post) => this.markAsPending = res.status === DraftStatusEnum.PENDING)
+      tap((res: Post) => this.setPendingStatus(res.status))
     )
     .subscribe((res: Post) => (this.draft = res, this.checkCover(res)));
   }
@@ -67,6 +68,12 @@ export class AdminDraftComponent {
     if (!this.draft) { return; }
     this.draftsFacade.setPreview(this.draft);
     this.crafter.dialog(PREVIEW_DRAFT_DIALOG_UPDATE(this.draft));
+  }
+
+  private setPendingStatus(status: DraftStatusEnum): void {
+    this.markAsPending = status === DraftStatusEnum.PENDING;
+    this.originalPending = status === DraftStatusEnum.PENDING;
+
   }
 
   public publish(): void {
@@ -105,7 +112,7 @@ export class AdminDraftComponent {
   private updateDraftAndStatus(): void {
     this.draftsFacade.updateKey(this.draft?._id, { key: CHECK_KEY, value: this.draft.check }, true);
   
-    if (this.markAsPending) {
+    if (this.markAsPending && !this.originalPending) {
       this.draftsFacade.updateKey(
         this.draft?._id, { key: STATUS_KEY, value: DraftStatusEnum.PENDING }, true
       );
@@ -132,13 +139,13 @@ export class AdminDraftComponent {
   }
 
   private sendRequest(cover: string): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.xhr.open('HEAD', cover, true);
       this.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
       this.xhr.onreadystatechange = () => {
         if (this.xhr.readyState === this.xhr.DONE) {
           const size = parseInt(this.xhr.getResponseHeader('Content-Length')!, 10);
-          !isNaN(size) ? resolve(size) : reject(new Error('Invalid content size'));
+          resolve(!isNaN(size) ? size : 0);
         }
       };
       this.xhr.send();
@@ -146,7 +153,7 @@ export class AdminDraftComponent {
   }
 
   public allDraftChecksOK(value: DraftCheck): boolean {
-    return Object.values(value).every(i => i.ok)
+    return Object.values(value).every(i => i.ok);
   }
 
   private handleBadCover(cause: string): void {
@@ -164,11 +171,9 @@ export class AdminDraftComponent {
     .afterClosed()
       .pipe(
         takeUntil(this.unsubscribe$),
-        filter(_ => _ && !!_)
-      ).subscribe(_ => (
-        this.draftsFacade.delete(this.draft._id, true),
-        this.navigate()
-    ));
+        filter(Boolean),
+        tap(_ => this.draftsFacade.delete(this.draft._id, true)),
+    ).subscribe(_ => this.navigate());
   }
 
   ngOnDestroy(): void {

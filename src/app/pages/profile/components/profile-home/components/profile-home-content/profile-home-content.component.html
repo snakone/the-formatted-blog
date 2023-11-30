@@ -7,8 +7,8 @@
         <article [ngClass]="{'admin': activity.admin, 'route': canVisit(activity)}" 
                  [class]="activity.type"
                  [routerLink]="canVisit(activity) ? ('/' + activity.route + '/' + activity.slug) : null">
-          <div class="content" [ngClass]="{'link': canVisit(activity)}">
-            <span [innerHTML]="activity.message"></span>
+          <div class="content">
+            <span [innerHTML]="activity.message | Sanitizer:'html'"></span>
             <p class="title">
               @if(!activity.userAction) {
                 Título: 
@@ -22,21 +22,10 @@
 
     } @placeholder {
       @for(item of [1,2,3,4]; track item; let last = $last) {
-        <app-activity-skeleton [last]="last"></app-activity-skeleton>
+        <app-activity-skeleton [last]="last"/>
       }
     }
   }
-  <ng-container *ngIf="user">
-    <ng-container *ngIf="activities; else loading">
-
-    </ng-container>
-    <ng-template #loading>
-      
-    </ng-template>
-    <ng-container *ngIf="activities && activities.length === 0">
-      
-    </ng-container>
-  </ng-container>
 </div>
 
 

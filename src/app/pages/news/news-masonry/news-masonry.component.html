@@ -3,11 +3,13 @@
     <div class="grid-item">
         <div class="content">
             <div class="inner">
+              <a [href]="news.url" target="_blank">
                 <img [src]="news.image" 
-                      alt="News Image" 
-                      loading="lazy"
-                      #img
-                      (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
+                        alt="News Image" 
+                        loading="lazy"
+                        #img
+                        (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
+              </a>
             </div>
             <div class="card">
               <p class="category">{{news.category}}</p>

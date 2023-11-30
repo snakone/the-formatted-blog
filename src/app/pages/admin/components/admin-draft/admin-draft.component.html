@@ -2,20 +2,22 @@
   <div class="header">
     <h1>
       Aprobación del Artículo
-      <i class="fas fa-step-backward" 
+      <i class="far fa-list-alt" 
          [routerLink]="'../'" 
          [replaceUrl]="true" 
-         [matTooltip]="'Volver'">
-      </i>
-      <i class="fas fa-trash" 
-         [matTooltip]="'Eliminar'" 
-         (click)="deleteDraftByID()">
+         [matTooltip]="'Lista'">
       </i>
     </h1>
     <!-- TITLE -->    
     <h2>{{draft.title}}</h2>
-    <button class="formatted preview" (click)="preview()">Ver boceto</button>
-
+    <div class="flex">
+      <button class="formatted preview" (click)="preview()">Ver boceto</button>
+          <!-- DELETE-->
+      <button class="formatted delete"
+            (click)="deleteDraftByID()">
+            Eliminar <i class="fas fa-trash"></i>
+      </button>
+    </div>
     <div class="form-control">
       <input type="checkbox" 
              [(ngModel)]="markAsPending"/>

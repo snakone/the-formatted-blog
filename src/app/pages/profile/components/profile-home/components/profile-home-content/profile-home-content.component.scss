@@ -24,6 +24,14 @@ h1 {
 
     &.route {
       cursor: pointer;
+
+      &:hover {
+        & .content {
+          &::after {
+            color: var(--contrast-color);
+          }
+        }
+      }
     }
 
     & span {
@@ -36,20 +44,6 @@ h1 {
 
     & .content {
       position: relative;
-
-      &.link {
-        &::after {
-          content: "\f35d";
-          position: absolute;
-          font-size: 13px;
-          font-family: "Font Awesome 5 Free";
-          font-weight: 900;
-          display: inline-block;
-          font-style: normal;
-          top: 0;
-          right: 0;
-        }
-      }
     }
 
     & p.title {
@@ -70,6 +64,53 @@ h1 {
       font-size: 16px;
     }
 
+    &.route {
+      & .content {
+        &::after {
+          content: "\f101";
+          position: absolute;
+          font-size: 13px;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          display: inline-block;
+          font-style: normal;
+          top: 0;
+          right: 0;
+          transition: all 150ms ease-in-out;
+        }
+      }
+    }
+
+    @media(max-width: 992px) {
+      & span {
+        font-size: 13px;
+      }
+    }
+
+    &.create::before, 
+    &.delete::before, 
+    &.update::before {
+      content: "";
+      height: 100%;
+      width: 6px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .6;
+    }
+
+    &.create::before {
+      background-color: var(--success-color);
+    }
+
+    &.delete::before {
+      background-color: var(--error-color);
+    }
+
+    &.update::before {
+      background-color: var(--info-color);
+    }
+
     &.admin {
       &::before {
         content: "";
@@ -81,36 +122,6 @@ h1 {
         left: 0;
         opacity: .6;
       }
-    }
-
-    @media(max-width: 992px) {
-      & span {
-        font-size: 13px;
-      }
-    }
-
-    &.create::after, 
-    &.delete::after, 
-    &.update::after {
-      content: "";
-      height: 100%;
-      width: 6px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: .6;
-    }
-
-    &.create::after {
-      background-color: var(--success-color);
-    }
-
-    &.delete::after {
-      background-color: var(--error-color);
-    }
-
-    &.update::after {
-      background-color: var(--info-color);
     }
   }
 
