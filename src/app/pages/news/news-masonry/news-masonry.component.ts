@@ -1,17 +1,13 @@
 import { 
   Component, 
-  OnInit, 
-  OnDestroy,
   Input,
-  ElementRef
+  DestroyRef
  } from '@angular/core';
 
  import { 
   fromEvent, 
   filter, 
   takeWhile, 
-  Subject, 
-  takeUntil, 
   throttleTime
 } from 'rxjs';
 
@@ -19,6 +15,7 @@ import { MasonryService } from '@core/services/masonry/masonry.service';
 import { MasonryType } from '@shared/types/class.types';
 import { FormattedNew } from '@shared/types/interface.app';
 import { RESIZE_EVENT } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const multiply = 3;
 const maxNumberPost = 50;
@@ -31,18 +28,17 @@ const minScrollToStart = 475;
   styleUrls: ['./news-masonry.component.scss']
 })
 
-export class NewsMasonryComponent implements OnInit, OnDestroy {
+export class NewsMasonryComponent {
 
   @Input() news: FormattedNew[] | undefined;
   @Input() duration: number = loadingDuration;
   isLoaded = false;
   grid!: HTMLElement | null;
-  $unsubscribe = new Subject<void>();
   masonry!: MasonryType;
   currentPage = 1;
   items: FormattedNew[] = [];
 
-  constructor(private masonrySrv: MasonryService) { }
+  constructor(private masonrySrv: MasonryService, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
     setTimeout(() => this.initMasonry(), this.duration);
@@ -76,7 +72,7 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
   private hasEnded(): void {
     fromEvent(window, 'scroll')
       .pipe(
-        takeUntil(this.$unsubscribe),
+        takeUntilDestroyed(this.destroyRef),
         filter(_ => !!this.items.length && !!this.masonry),
         takeWhile(() => this.items.length <= maxNumberPost),
         throttleTime(100),
@@ -107,11 +103,6 @@ export class NewsMasonryComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.dispatchEvent(new Event(RESIZE_EVENT));
     }, 2000);
-  }
-
-  ngOnDestroy() {
-    this.$unsubscribe.next();
-    this.$unsubscribe.complete();
   }
 
 }

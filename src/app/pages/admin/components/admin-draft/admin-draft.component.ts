@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Subject, takeUntil, switchMap, filter, firstValueFrom, throttleTime, tap, retry } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef } from '@angular/core';
+import { switchMap, filter, firstValueFrom, tap, retry, debounceTime } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
@@ -10,10 +10,11 @@ import { DraftCheck } from '@shared/types/interface.server';
 
 import { PUBLISH_PUSH } from '@shared/data/notifications';
 import { CHECKSTATUS } from '@shared/data/data';
-import { CHECK_KEY, ID_KEY, STATUS_KEY } from '@shared/data/constants';
-import { DraftStatusEnum, SnackTypeEnum } from '@shared/types/types.enums';
+import { ID_KEY } from '@shared/data/constants';
+import { DraftStatus, DraftStatusEnum, SnackTypeEnum } from '@shared/types/types.enums';
 import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE } from '@shared/data/dialogs';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const maxImageSize = 150;
 
@@ -27,7 +28,6 @@ const maxImageSize = 150;
 export class AdminDraftComponent {
 
   draft: Post | undefined;
-  private unsubscribe$ = new Subject<void>();
   checkStatus = CHECKSTATUS;
   public coverSize: number;
   adminDraftMessageDesc = ADMIN_DRAFT_MESSAGE_DESC;
@@ -35,14 +35,15 @@ export class AdminDraftComponent {
   markAsPending: boolean;
   originalPending: boolean;
 
-  xhr: XMLHttpRequest = new XMLHttpRequest();;
+  xhr: XMLHttpRequest = new XMLHttpRequest();
 
   constructor(
     private draftsFacade: DraftsFacade,
     private route: ActivatedRoute,
     private crafter: CrafterService,
     private router: Router,
-    private sw: PWAService
+    private sw: PWAService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit() {
@@ -52,10 +53,9 @@ export class AdminDraftComponent {
   private getDraftByID(): void {
     this.route.paramMap
     .pipe(
-      takeUntil(this.unsubscribe$),
+      takeUntilDestroyed(this.destroyRef),
       switchMap((res: ParamMap) => this.draftsFacade.byID$(res.get(ID_KEY))),
-      throttleTime(100),
-      tap(res => !res ? this.draftsFacade.getAll() : null),
+      debounceTime(333),
       retry(1)
     ).pipe(
       filter(Boolean),
@@ -101,7 +101,7 @@ export class AdminDraftComponent {
     this.crafter.confirmation(PUBLISH_CONFIRMATION)
       .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.draftsFacade.publish(this.draft))
       ).subscribe(_ => firstValueFrom(
@@ -110,13 +110,22 @@ export class AdminDraftComponent {
   }
 
   private updateDraftAndStatus(): void {
-    this.draftsFacade.updateKey(this.draft?._id, { key: CHECK_KEY, value: this.draft.check }, true);
-  
-    if (this.markAsPending && !this.originalPending) {
-      this.draftsFacade.updateKey(
-        this.draft?._id, { key: STATUS_KEY, value: DraftStatusEnum.PENDING }, true
-      );
+    const updatedPost: Post = {
+      ...this.draft,
+      check: this.draft.check,
+      status: this.shouldMarkPending()
     }
+
+    this.draftsFacade.update(updatedPost, true);
+  }
+
+  private shouldMarkPending(): DraftStatus {
+    return (
+      this.markAsPending && 
+      !this.originalPending
+    ) || this.markAsPending ? 
+    DraftStatusEnum.PENDING : 
+      DraftStatusEnum.NOT_SEEN;
   }
 
   private async checkCover(draft: Post): Promise<void> {
@@ -170,15 +179,13 @@ export class AdminDraftComponent {
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.draftsFacade.delete(this.draft._id, true)),
     ).subscribe(_ => this.navigate());
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.xhr?.abort();
   }
 

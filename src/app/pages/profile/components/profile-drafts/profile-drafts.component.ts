@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Post } from '@shared/types/interface.post';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
@@ -11,7 +11,7 @@ import { DraftTypeEnum, SearchTypeEnum } from '@shared/types/types.enums';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileDraftsComponent implements OnInit {
+export class ProfileDraftsComponent {
 
   drafts$!: Observable<Post[]>;
   favoritesID$: Observable<string[]> | undefined;

@@ -60,11 +60,12 @@
           (click)="switchAction.help()">
         </i>
         <!-- BACK -->
-        <i class="fas fa-pen-nib"
-          matTooltip="Lienzo"
-          [routerLink]="['../']"
-          *ngIf="form">
-        </i>
+        @if (form) {
+          <i class="fas fa-pen-nib"
+                    matTooltip="Lienzo"
+                    [routerLink]="['../']">
+          </i>
+        }
       }
     </div>
   }

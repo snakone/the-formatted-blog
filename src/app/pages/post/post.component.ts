@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { Observable, filter, map } from 'rxjs';
 
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 import { Post } from '@shared/types/interface.post';
 import { ActivatedRoute } from '@angular/router';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { SLUG_KEY } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post',
@@ -14,13 +15,16 @@ import { SLUG_KEY } from '@shared/data/constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostComponent implements OnInit {
+export class PostComponent {
 
   post$: Observable<Post>;
   text = NOTIFICATION_TEXT;
-  private unsubscribe$ = new Subject<void>();
 
-  constructor(private postsFacade: PostsFacade, private route: ActivatedRoute) { }
+  constructor(
+    private postsFacade: PostsFacade,
+    private route: ActivatedRoute,
+    private destroyRef: DestroyRef
+  ) { }
 
   ngOnInit(): void {
     this.post$ = this.postsFacade.bySlug$;
@@ -30,7 +34,7 @@ export class PostComponent implements OnInit {
   private getPostBySlug(): void {
     this.route.paramMap
     .pipe(
-      takeUntil(this.unsubscribe$),
+      takeUntilDestroyed(this.destroyRef),
       filter(res => res?.has(SLUG_KEY)),
       map(res => res.get(SLUG_KEY)),
     ).subscribe((slug: string) => this.postsFacade.getBySlug(slug));
@@ -38,11 +42,6 @@ export class PostComponent implements OnInit {
 
   public notification(): void {
     console.log('home');
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

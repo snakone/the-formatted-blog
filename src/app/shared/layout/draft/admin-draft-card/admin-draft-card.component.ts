@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Post } from '@shared/types/interface.post';
 
 @Component({
@@ -7,7 +7,7 @@ import { Post } from '@shared/types/interface.post';
   styleUrls: ['./admin-draft-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdminDraftCardComponent implements OnInit {
+export class AdminDraftCardComponent {
 
   @Input() draft: Post;
 

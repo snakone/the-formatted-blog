@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin',
@@ -11,9 +12,10 @@ import { Subject, filter, takeUntil } from 'rxjs';
 
 export class AdminComponent {
 
-  private unsubscribe$ = new Subject<void>();
-
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(
+    private draftsFacade: DraftsFacade,
+    private destroyRef: DestroyRef
+  ) { }
 
   ngOnInit(): void {
     this.checkData();
@@ -23,14 +25,12 @@ export class AdminComponent {
     this.draftsFacade.allLoaded$
      .pipe(
        filter(res => !res),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.draftsFacade.getAll());
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.draftsFacade.reset();
   }
 

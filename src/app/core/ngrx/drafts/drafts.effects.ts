@@ -84,11 +84,11 @@ export class DraftsEffects {
     .pipe(
       ofType(DraftsActions.update),
       withLatestFrom(this.store.select(fromDrafts.getActive)),
-      filter(([_, active]) => !!active),
+      filter(([_, active]) => !!active || _.admin),
       concatMap(([action]) =>
       this.draftSrv.updateDraft(action.draft)
         .pipe(
-          map(draft => DraftsActions.updateSuccess({ draft })),
+          map(draft => DraftsActions.updateSuccess({ draft, admin: action.admin })),
           catchError(error =>
               of(DraftsActions.updateFailure({ error: error.message }))
     ))))
@@ -99,9 +99,9 @@ export class DraftsEffects {
     .pipe(
       ofType(DraftsActions.updateKey),
       concatMap((action) =>
-      this.draftSrv.updateDraftKey(action.id, {...action.keys})
+      this.draftSrv.updateDraftKey(action.data.id, {...action.data.keys})
         .pipe(
-          map(draft => DraftsActions.updateKeySuccess({ draft, admin: action.admin })),
+          map(draft => DraftsActions.updateKeySuccess({ draft, admin: action.data.admin })),
           catchError(error =>
               of(DraftsActions.updateKeyFailure({ error: error.message }))
     ))))
@@ -175,14 +175,6 @@ export class DraftsEffects {
     .pipe(
       ofType(DraftsActions.updateSuccess),
       concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', SnackTypeEnum.SUCCESS)))
-    ), { dispatch: false }
-  )
-
-  alertsDraft3Effect$ = createEffect(() => this.actions
-  .pipe(
-    ofType(DraftsActions.updateKeySuccess),
-    filter(_ => _.admin),
-    concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 

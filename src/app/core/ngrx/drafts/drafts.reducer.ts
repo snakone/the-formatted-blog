@@ -110,7 +110,8 @@ const featureReducer = createReducer(
       loaded: false,
       error: null,
       drafts: [],
-      allLoaded: false
+      allLoaded: false,
+      all: []
     }
   )}),
   on(DraftActions.resetSaving, (state) => ({ ...state, saving: null})),

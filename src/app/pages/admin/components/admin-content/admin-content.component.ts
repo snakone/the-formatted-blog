@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { StatusButtons } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
-import { Subject, map, takeUntil } from 'rxjs';
+import { map } from 'rxjs';
 
 import { RESIZE_EVENT } from '@shared/data/constants';
 import { DraftStatusEnum } from '@shared/types/types.enums';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-content',
@@ -14,11 +15,10 @@ import { DraftStatusEnum } from '@shared/types/types.enums';
   changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class AdminContentComponent implements OnInit {
+export class AdminContentComponent {
 
   drafts: Post[] | undefined;
   filteredDrafts: Post[];
-  private unsubscribe$ = new Subject<void>();
 
   status: StatusButtons[] = [
     {status: DraftStatusEnum.NOT_SEEN, active: false},
@@ -27,11 +27,11 @@ export class AdminContentComponent implements OnInit {
     {status: DraftStatusEnum.ALL, active: false}
   ];
 
-  constructor(private draftsFacade: DraftsFacade) { }
+  constructor(private draftsFacade: DraftsFacade, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
     this.draftsFacade.all$.pipe(
-      takeUntil(this.unsubscribe$),
+      takeUntilDestroyed(this.destroyRef),
       map(drafts => drafts?.filter(d => d.status !== DraftStatusEnum.APPROVED))
     ).subscribe(res => {
       this.drafts = res;
@@ -52,11 +52,6 @@ export class AdminContentComponent implements OnInit {
     .filter((draft: Post) => draft.status === value.status);
 
     window.dispatchEvent(new Event(RESIZE_EVENT));
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

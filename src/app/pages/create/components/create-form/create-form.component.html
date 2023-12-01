@@ -15,9 +15,9 @@
       <label for="category">Categoría</label>
       <div class="select">
         <select formControlName="category">
-          <option *ngFor="let o of categories" 
-                  [value]="o.label">{{o.label}}
-          </option>
+          @for(option of categories; track option.label) {
+          <option [value]="option.label">{{option.label}}</option>
+          }
         </select>
         <span class="hint">Una buena introducción hace que el lector entre a tu artículo.</span>
         <app-form-error [control]="category"

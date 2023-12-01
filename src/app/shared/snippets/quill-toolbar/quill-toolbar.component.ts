@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, DestroyRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeUntil, filter, Subject, Observable, map, tap } from 'rxjs';
+import { filter, Observable, map, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { CrafterService } from '@core/services/crafter/crafter.service';
@@ -27,13 +28,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class QuillToolbarComponent implements OnInit, OnDestroy {
+export class QuillToolbarComponent {
 
   @Input() draft: Post;
   @Input() form = false;
   @Output() clean = new EventEmitter<void>();
   saving$: Observable<SavingType>;
-  private unsubscribe$ = new Subject<void>();
   totalDrafts$: Observable<number> | undefined;
   saveTypes = SavingTypeEnum;
   
@@ -45,7 +45,8 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private quillSrv: QuillService,
-    private createDraftSrv: CreateDraftService
+    private createDraftSrv: CreateDraftService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -70,10 +71,10 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     this.crafter.confirmation(SAVE_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.draftsFacade.updateKey(
-          this.draft._id, { key: MESSAGE_KEY, value: this.draft.message }
+          {id: this.draft._id, keys: { key: MESSAGE_KEY, value: this.draft.message }}
         ))
     ).subscribe(_ => this.draftsFacade.resetActive());
   }
@@ -98,7 +99,7 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.createDraftSrv.onDeleteDraft(this.draft._id))
     ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
@@ -110,8 +111,6 @@ export class QuillToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.draftsFacade.resetSaving();
   }
 

@@ -27,14 +27,16 @@
               </li>
             }
             <!-- ICONS -->
-            <li *ngFor="let i of icons">
-              <i [class]="i.icon"
-                 [attr.aria-label]="i.icon"
-                 [routerLink]="i.route"
+            @for (item of icons; track item.label) {
+            <li>
+              <i [class]="item.icon"
+                 [attr.aria-label]="item.icon"
+                 [routerLink]="item.route"
                  routerLinkActive="active"
                  aria-hidden="false">
               </i>
             </li>
+            }
             <!-- THEME -->
             @if(mode === 'dark') {
               <li (click)="toggleTheme()">

@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { UserService } from '@core/services/api/users.service';
 import { Post } from '@shared/types/interface.post';
 import { DraftTypeEnum, SearchTypeEnum } from '@shared/types/types.enums';
-import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-profile-posts',
@@ -12,14 +13,17 @@ import { Observable, Subject, filter, map, takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfilePostsComponent implements OnInit {
+export class ProfilePostsComponent {
 
   items$: Observable<Post[]> = null;
   favoritesID$: Observable<string[]> | undefined;
-  private unsubscribe$ = new Subject<void>();
   searchType = SearchTypeEnum;
 
-  constructor(private postFacade: PostsFacade, private userSrv: UserService) { }
+  constructor(
+    private postFacade: PostsFacade,
+    private userSrv: UserService,
+    private destroyRef: DestroyRef
+  ) { }
 
   ngOnInit(): void {
     this.checkData();
@@ -36,14 +40,12 @@ export class ProfilePostsComponent implements OnInit {
     this.postFacade.byUserLoaded$
      .pipe(
        filter(res => !res && Boolean(user)),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.postFacade.getByUser(user._id));
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.postFacade.resetFilter();
   }
 

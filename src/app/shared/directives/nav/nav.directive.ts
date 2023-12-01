@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { RESIZE_EVENT, SCROLL_EVENT } from '@shared/data/constants';
 import { fromEvent, tap, filter, from } from 'rxjs';
@@ -9,7 +9,7 @@ const SCROLL_CLASS = 'scroll-down'
 
 @Directive({selector: '[StickyNav]'})
 
-export class NavDirective implements AfterViewInit {
+export class NavDirective {
 
   @Output() scrolled = new EventEmitter<boolean>();
   scroll = 0;

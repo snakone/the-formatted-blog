@@ -2,6 +2,7 @@
   @for(news of items; track news.url) {
     <div class="grid-item">
         <div class="content">
+          @defer {
             <div class="inner">
               <a [href]="news.url" target="_blank">
                 <img [src]="news.image" 
@@ -11,20 +12,23 @@
                         (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
               </a>
             </div>
-            <div class="card">
-              <p class="category">{{news.category}}</p>
-              <h4>
-                <a [href]="news.url" target="_blank">{{news.title}}</a></h4>
-              <div class="flex">
-                <p class="author">
-                  <span>{{news.author}}</span>
-                </p>
-                <p class="date">
-                    <span>{{news.published_at | date}}</span>
-                </p>
-              </div>
-              <p>{{news.description}}</p>
+          } @loading {
+            <p class="placerholder"></p>
+          }
+          <div class="card">
+            <p class="category">{{news.category}}</p>
+            <h4>
+              <a [href]="news.url" target="_blank">{{news.title}}</a></h4>
+            <div class="flex">
+              <p class="author">
+                <span>{{news.author}}</span>
+              </p>
+              <p class="date">
+                  <span>{{news.published_at | date}}</span>
+              </p>
             </div>
+            <p>{{news.description}}</p>
+          </div>
         </div>
     </div>
   } @empty {

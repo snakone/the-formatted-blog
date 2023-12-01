@@ -1,7 +1,8 @@
-import { Directive, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { takeUntil, distinctUntilChanged, throttleTime } from 'rxjs/operators';
-import { Subject, fromEvent } from 'rxjs';
+import { Directive, ElementRef, DestroyRef } from '@angular/core';
+import { distinctUntilChanged, throttleTime } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 import { SCROLL_EVENT } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const limit = 800;
 const addClass = 'fadeInRight';
@@ -9,13 +10,12 @@ const outClass = 'fadeOutRight'
 
 @Directive({selector: '[TopDirective]'})
 
-export class TopDirective implements AfterViewInit, OnDestroy {
+export class TopDirective {
 
   displayed = false;
   button = this.el.nativeElement;  // Button
-  private unsubscribe$ = new Subject<void>();
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private destroyRef: DestroyRef) { }
 
   ngAfterViewInit(): void {
     this.listenScroll();
@@ -24,7 +24,7 @@ export class TopDirective implements AfterViewInit, OnDestroy {
   private listenScroll(): void {
     fromEvent(window, SCROLL_EVENT)
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         throttleTime(300),
         distinctUntilChanged()
       )
@@ -54,11 +54,6 @@ export class TopDirective implements AfterViewInit, OnDestroy {
         this.button.classList.remove(addClass);
         this.button.classList.add(outClass);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

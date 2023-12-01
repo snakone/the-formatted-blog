@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { debounceTime, filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { filter, Observable } from 'rxjs';
 
 import { PostsFacade } from '@store/posts/posts.facade';
 import { Post } from '@shared/types/interface.post';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-content',
@@ -11,13 +12,12 @@ import { Post } from '@shared/types/interface.post';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HomeContentComponent implements OnInit {
+export class HomeContentComponent {
 
   posts$!: Observable<Post[]>;
-  private unsubscribe$ = new Subject<void>();
   favoritesID$: Observable<string[]> | undefined;
   
-  constructor(private postFacade: PostsFacade) { }
+  constructor(private postFacade: PostsFacade, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
     this.checkData();
@@ -29,14 +29,9 @@ export class HomeContentComponent implements OnInit {
     this.postFacade.loaded$
      .pipe(
        filter(res => !res),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.postFacade.get());
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

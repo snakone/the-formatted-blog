@@ -147,9 +147,16 @@ button {
     background-color: var(--error-color);
     max-width: 150px;
     margin: 1.2rem 0 1.5rem 0;
+    opacity: .8;
+    color: #f7f3f3 !important; // Light color
 
     & i {
       margin-left: 8px;
+      color: #f7f3f3;
+    }
+
+    &:hover {
+      opacity: 1;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { User } from '@shared/types/interface.user';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class ProfileFriendsComponent implements OnInit {
+export class ProfileFriendsComponent {
 
   friends$: Observable<User[]> | undefined;
 

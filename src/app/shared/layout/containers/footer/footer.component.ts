@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { environment } from '@env/environment';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { APP_CONSTANTS } from 'app/app.config';
 
 @Component({
@@ -9,7 +8,7 @@ import { APP_CONSTANTS } from 'app/app.config';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   year: string | undefined;
   version: string | undefined;

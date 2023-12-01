@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { User } from '@shared/types/interface.user';
@@ -16,7 +16,7 @@ import { LOGIN_DIALOG } from '@shared/data/dialogs';
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   user$!: Observable<User | null>;
   showSearchBar = false;

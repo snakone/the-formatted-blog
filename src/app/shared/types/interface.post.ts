@@ -1,6 +1,7 @@
 import { DeltaStatic } from "quill";
 import { DraftCheck } from "./interface.server";
 import { DraftStatus, DraftTypes } from "./types.enums";
+import { KeyPair } from "./interface.app";
 
 // POST
 export interface Post {
@@ -35,4 +36,11 @@ export interface QuillHelpItem {
   icon: string;
   label: string;
   message: string;
+}
+
+export interface UpdateDraftKeyData {
+  id: string; 
+  keys: KeyPair; 
+  admin?: boolean;
+  showDialog?: boolean;
 }

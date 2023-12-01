@@ -1,17 +1,16 @@
 import { 
   Component, 
-  OnInit, 
   ChangeDetectionStrategy, 
   Output, 
   EventEmitter 
 } from '@angular/core';
 
 import { AbstractControl, FormGroup } from '@angular/forms';
-
 import { UsersFacade } from '@store/users/users.facade';
 import { LogInDialogComponent } from '../../log-in.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SignInForm } from '@shared/types/interface.form';
+
 import { SIGN_IN_FORM } from '@shared/data/forms';
 import { EMAIL_KEY, PASSWORD_KEY } from '@shared/data/constants';
 
@@ -22,7 +21,7 @@ import { EMAIL_KEY, PASSWORD_KEY } from '@shared/data/constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
   @Output() register = new EventEmitter<void>();
   signInForm!: FormGroup<SignInForm>;

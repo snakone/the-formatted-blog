@@ -1,14 +1,15 @@
 import { 
   Component, 
-  AfterViewInit, 
   ViewChild, 
-  ElementRef 
+  ElementRef, 
+  DestroyRef
 } from '@angular/core';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { FADE_IN_LEFT_CLASS, FADE_OUT_LEFT_CLASS } from '@shared/data/constants';
 import { Snack } from '@shared/types/interface.app';
-import { Subject, debounceTime, takeUntil } from 'rxjs';
+import { debounceTime } from 'rxjs';
 
 const delay = 800;
 
@@ -18,18 +19,20 @@ const delay = 800;
   styleUrls: ['./snack.component.scss']
 })
 
-export class SnackOverlayComponent implements AfterViewInit {
+export class SnackOverlayComponent {
 
   @ViewChild('snack', {static: false}) el!: ElementRef<any>;
   data!: Snack | null;
-  $unsubscribe = new Subject<void>();
   count = 0;
 
-  constructor(private crafter: CrafterService) { }
+  constructor(private crafter: CrafterService, private destroyRef: DestroyRef) { }
 
   ngAfterViewInit(): void {
     this.crafter.snack$
-    .pipe(takeUntil(this.$unsubscribe), debounceTime(100))
+    .pipe(
+      takeUntilDestroyed(this.destroyRef), 
+      debounceTime(100)
+    )
      .subscribe((res: Snack) => this.handleCSS(res));
   }
 
@@ -54,11 +57,6 @@ export class SnackOverlayComponent implements AfterViewInit {
     }
 
     setTimeout(() => (this.data = res, this.count++), delay * 2); 
-  }
-
-  ngOnDestroy() {
-    this.$unsubscribe.next();
-    this.$unsubscribe.complete();
   }
 
 }

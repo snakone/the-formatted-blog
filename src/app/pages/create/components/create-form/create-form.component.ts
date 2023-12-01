@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { AbstractControl, FormGroup} from '@angular/forms';
-import { filter, Subject, takeUntil, tap, distinctUntilChanged, debounceTime } from 'rxjs';
+import { filter, tap, distinctUntilChanged, debounceTime } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.post';
@@ -13,6 +13,7 @@ import { POST_CATEGORIES } from '@shared/data/data';
 import { CREATE_DRAFT_FORM } from '@shared/data/forms';
 import { CreateDraftForm } from '@shared/types/interface.form';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const timer = 5000;
 
@@ -22,10 +23,9 @@ const timer = 5000;
   styleUrls: ['./create-form.component.scss']
 })
 
-export class CreateFormComponent implements OnInit {
+export class CreateFormComponent {
 
   draftForm: FormGroup<CreateDraftForm>;
-  private unsubscribe$ = new Subject<void>();
   categories = POST_CATEGORIES;
   url: string;
   draft: Post;
@@ -34,7 +34,8 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private draftsFacade: DraftsFacade,
     private crafter: CrafterService,
-    private postFacade: PostsFacade
+    private postFacade: PostsFacade,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class CreateFormComponent implements OnInit {
   private getActive(): void {
     this.draftsFacade.active$
      .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(draft => this.draft = draft),
       )
@@ -60,7 +61,7 @@ export class CreateFormComponent implements OnInit {
   private listenValues(): void {
     this.draftForm.valueChanges
      .pipe(
-       takeUntil(this.unsubscribe$),
+       takeUntilDestroyed(this.destroyRef),
        distinctUntilChanged(),
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
        tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: true})),
@@ -94,7 +95,7 @@ export class CreateFormComponent implements OnInit {
       this.crafter.confirmation(EDIT_POST_CONFIRMATION)
       .afterClosed()
         .pipe(
-          takeUntil(this.unsubscribe$),
+          takeUntilDestroyed(this.destroyRef),
           filter(Boolean)
       ).subscribe(_ => this.postFacade.unPublish(draft));
     } else {

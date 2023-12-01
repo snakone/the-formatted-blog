@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit, HostListener } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostListener } from '@angular/core';
 
 const distance = 300;
 const minWidth = 1199; 
@@ -10,7 +10,7 @@ const minWidth = 1199;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NavigationComponent implements AfterViewInit {
+export class NavigationComponent {
 
   items = [
     'Home', 'About us', 'Contact', 'Post Type', 
@@ -44,7 +44,7 @@ export class NavigationComponent implements AfterViewInit {
     if (this.el) {
       next ? 
       (this.el.scrollLeft += distance, this.panned += distance) : 
-      (this.el.scrollLeft -= distance, this.panned -= distance)
+        (this.el.scrollLeft -= distance, this.panned -= distance)
     }
   }
 

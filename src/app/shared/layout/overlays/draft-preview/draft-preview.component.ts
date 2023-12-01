@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { Post } from '@shared/types/interface.post';
+import { Post, UpdateDraftKeyData } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -17,7 +17,7 @@ const TIME_TO_BE_SEEN = 10000;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class DraftPreviewDialogComponent implements OnInit {
+export class DraftPreviewDialogComponent {
 
   preview$: Observable<Post>;
   timer: NodeJS.Timer;
@@ -38,11 +38,18 @@ export class DraftPreviewDialogComponent implements OnInit {
     const status = draft?.status;
     
     if (status === DraftStatusEnum.NOT_SEEN) {
-      this.timer = setTimeout(() => {
-        this.draftsFacade.updateKey(
-         draft?._id, { key: STATUS_KEY, value: DraftStatusEnum.SEEN }, true);
-      }, TIME_TO_BE_SEEN);
+      const data: UpdateDraftKeyData = {
+        id: draft?._id,
+        keys: { key: STATUS_KEY, value: DraftStatusEnum.SEEN },
+        admin: true
+      };
+
+      this.waitAndSetStatus(data);
     }
+  }
+
+  private waitAndSetStatus(data: UpdateDraftKeyData): void {
+    this.timer = setTimeout(() => this.draftsFacade.updateKey(data), TIME_TO_BE_SEEN);
   }
 
   ngOnDestroy() {

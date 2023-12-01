@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnDestroy, AfterContentInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
+import { Component, ViewChild, DestroyRef } from '@angular/core';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, tap, withLatestFrom } from 'rxjs';
 import { QuillEditorComponent, QuillModules } from 'ngx-quill';
 import Quill from 'quill';
 import { DeltaStatic } from 'quill';
@@ -16,6 +16,7 @@ import { SavingTypeEnum, SavingDraftType } from '@shared/types/types.enums';
 import { MESSAGE_KEY, RESIZE_EVENT } from '@shared/data/constants';
 import { getQuillHeaders } from '@shared/utils/quill.util.functions';
 import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_MODULES } from '@shared/data/quills';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const Quill_Icons = Quill.import('ui/icons');
 const tick = 5000;
@@ -26,11 +27,10 @@ const tick = 5000;
   styleUrls: ['./create-content.component.scss']
 })
 
-export class CreateContentComponent implements OnDestroy, AfterContentInit {
+export class CreateContentComponent {
 
   @ViewChild('editor', { static: true }) editor!: QuillEditorComponent;
   draft!: Post;
-  private unsubscribe$ = new Subject<void>();
   show = false;
   model = EMPTY_QUILL as unknown as DeltaStatic;
   active$: Observable<Post> | undefined;
@@ -41,7 +41,8 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     private draftsFacade: DraftsFacade,
     private sw: PWAService,
     private crafter: CrafterService,
-    private postFacade: PostsFacade
+    private postFacade: PostsFacade,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit() {
@@ -65,7 +66,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   private listenEditor(): void {
     this.editor.onContentChanged
      .pipe(
-       takeUntil(this.unsubscribe$),
+       takeUntilDestroyed(this.destroyRef),
        filter(_ => _.source !== 'api'),
        withLatestFrom(this.draftsFacade.saving$),
        tap(([_, saving]) => !saving?.value ? this.save(true) : null),
@@ -105,7 +106,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
 
     draft.temporal ? this.showDraftTemportalDialog(draft) : (
       this.save(false),
-      this.draftsFacade.updateKey(this.draft._id, {key: MESSAGE_KEY, value: delta})
+      this.draftsFacade.updateKey({id: this.draft._id, keys: {key: MESSAGE_KEY, value: delta}})
     );
 
     this.draftsFacade.setPreview(draft);
@@ -116,7 +117,7 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
     .afterClosed()
       .pipe(
         tap(res => !res ? this.save(false, SavingTypeEnum.TEMPORAL) : null),
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.save(false))
     ).subscribe(_ => this.postFacade.unPublish(draft));
@@ -143,8 +144,6 @@ export class CreateContentComponent implements OnDestroy, AfterContentInit {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.draftsFacade.resetPreview();
   }
 

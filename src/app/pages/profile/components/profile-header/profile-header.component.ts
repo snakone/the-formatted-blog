@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { UsersFacade } from '@store/users/users.facade';
 import { USER_INDEX } from '@shared/data/data';
 
@@ -9,7 +9,7 @@ import { USER_INDEX } from '@shared/data/data';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileHeaderComponent implements OnInit {
+export class ProfileHeaderComponent {
 
   list = USER_INDEX;
 

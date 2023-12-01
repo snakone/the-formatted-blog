@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CARROUSEL_OPTS } from '@shared/data/data';
 
 @Component({
@@ -8,7 +8,7 @@ import { CARROUSEL_OPTS } from '@shared/data/data';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostCarrouselComponent implements OnInit {
+export class PostCarrouselComponent {
 
   customOptions = CARROUSEL_OPTS;
 

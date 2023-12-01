@@ -1,9 +1,9 @@
 import { 
   Component, 
-  OnInit, 
   ChangeDetectionStrategy, 
   EventEmitter, 
-  Output 
+  Output, 
+  DestroyRef
 } from '@angular/core';
 
 import { 
@@ -14,8 +14,6 @@ import {
   FormGroup,
   FormControl
 } from '@angular/forms';
-
-import { Subject, takeUntil } from 'rxjs';
 
 import { UsersFacade } from '@store/users/users.facade';
 import { LogInDialogComponent } from '../../log-in.component';
@@ -28,6 +26,7 @@ import { SignUpForm } from '@shared/types/interface.form';
 
 import { SIGN_UP_FORM } from '@shared/data/forms';
 import { EMAIL_KEY, NAME_KEY, PASSWORD2_KEY, PASSWORD_KEY, ROLE_KEY } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,12 +35,11 @@ import { EMAIL_KEY, NAME_KEY, PASSWORD2_KEY, PASSWORD_KEY, ROLE_KEY } from '@sha
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
 
   @Output() login = new EventEmitter<void>();
   signUpForm!: FormGroup<SignUpForm>;
   matchError = false;
-  private unsubscribe$ = new Subject<void>();
   
   notify = false;
   conditions = false;
@@ -50,7 +48,8 @@ export class SignUpComponent implements OnInit {
     public dialogRef: MatDialogRef<LogInDialogComponent>,
     private userFcd: UsersFacade,
     private pwaSrv: PWAService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -111,7 +110,7 @@ export class SignUpComponent implements OnInit {
 
   private passwordMatch(): void {
     this.password?.valueChanges
-     .pipe(takeUntil(this.unsubscribe$))
+     .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((_: string) => this.password2?.updateValueAndValidity())
   }
 
@@ -120,9 +119,6 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-
     if (this.notify) {
       setTimeout(() => this.pwaSrv.requestNotification(), 1000);
     }

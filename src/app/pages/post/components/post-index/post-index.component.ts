@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, AfterContentInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Post } from '@shared/types/interface.post';
 import { Subject } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostIndexComponent implements AfterContentInit {
+export class PostIndexComponent {
 
   @Input() post: Post;
   scrollSpy$ = new Subject<string>();

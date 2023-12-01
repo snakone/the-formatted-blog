@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivitiesFacade } from '@core/ngrx/activities/activities.facade';
 import { UsersFacade } from '@core/ngrx/users/users.facade';
 import { User, UserActivity } from '@shared/types/interface.user';
-import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 
 @Component({
   selector: 'app-profile-home',
@@ -11,15 +12,15 @@ import { Observable, Subject, filter, takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class ProfileHomeComponent implements OnInit {
+export class ProfileHomeComponent {
 
   user$: Observable<User> | undefined;
   activities$: Observable<UserActivity[]> | undefined;
-  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private userFacade: UsersFacade, 
-    private activityFacade: ActivitiesFacade
+    private activityFacade: ActivitiesFacade,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -32,14 +33,12 @@ export class ProfileHomeComponent implements OnInit {
     this.activityFacade.loaded$
      .pipe(
        filter(res => !res),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.activityFacade.get());
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.activityFacade.reset();
   }
 

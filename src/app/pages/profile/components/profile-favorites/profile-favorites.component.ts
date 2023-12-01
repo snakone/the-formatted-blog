@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.post';
 import { SearchTypeEnum } from '@shared/types/types.enums';
-import { Observable, debounceTime } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-favorites',
@@ -11,7 +11,7 @@ import { Observable, debounceTime } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileFavoritesComponent implements OnInit {
+export class ProfileFavoritesComponent {
 
   favorites$: Observable<Post[]> | undefined;
   searchType = SearchTypeEnum;

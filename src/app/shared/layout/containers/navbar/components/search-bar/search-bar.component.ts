@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { BOUNCE_IN_DOWN_CLASS, BOUNCE_OUT_UP_CLASS } from '@shared/data/constants';
 import { SEARCH_SENTENCE } from '@shared/data/sentences';
 
@@ -11,7 +11,7 @@ const closeDelay = 800;
   styleUrls: ['./search-bar.component.scss']
 })
 
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
 
   @Output() closed = new EventEmitter<void>();
   value = '';

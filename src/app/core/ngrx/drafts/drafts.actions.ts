@@ -1,6 +1,6 @@
 import { props, createAction } from '@ngrx/store';
 import { KeyPair, SavingType, FilterType } from '@shared/types/interface.app';
-import { Post } from '@shared/types/interface.post';
+import { Post, UpdateDraftKeyData } from '@shared/types/interface.post';
 
 // GET DRAFTS BY SLUG
 export const getBySlug =
@@ -55,11 +55,11 @@ export const createFailure =
 // UPDATE DRAFT
 export const update =
   createAction('[Drafts API] Update Draft',
-  props<{ draft: Post }>());
+  props<{ draft: Post, admin?: boolean }>());
 
 export const updateSuccess =
   createAction('[Drafts API] Update Draft Success',
-  props<{ draft: Post }>());
+  props<{ draft: Post, admin?: boolean }>());
 
 export const updateFailure =
   createAction('[Drafts API] Update Draft Failure',
@@ -68,7 +68,7 @@ export const updateFailure =
 // UPDATE DRAFT KEY
 export const updateKey =
   createAction('[Drafts API] Update Draft Key',
-  props<{ id: string, keys: KeyPair, admin?: boolean }>());
+  props<{ data: UpdateDraftKeyData }>());
 
 export const updateKeySuccess =
   createAction('[Drafts API] Update Draft Key Success',

@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, ViewChild } from '@angular/core';
+import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { FilterType } from '@shared/types/interface.app';
 import { SearchType, DraftStatus, DraftStatusEnum } from '@shared/types/types.enums';
 import { KEYUP_EVENT } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post-search',
@@ -17,7 +18,6 @@ export class PostSearchComponent {
 
   @ViewChild('input', {static: true}) input: ElementRef;
   @Input() type: SearchType;
-  private unsubscribe$ = new Subject<void>();
 
   switchSearch: {[key: string]: DraftStatus} = {
     'pendiente': DraftStatusEnum.PENDING,
@@ -25,7 +25,7 @@ export class PostSearchComponent {
     'no visto': DraftStatusEnum.NOT_SEEN
   };
 
-  constructor(private postFacade: PostsFacade) { }
+  constructor(private postFacade: PostsFacade, private destroyRef: DestroyRef) { }
 
   ngAfterViewInit() {
     fromEvent(this.input.nativeElement, KEYUP_EVENT).
@@ -33,7 +33,7 @@ export class PostSearchComponent {
       map((ev: any) => ev.target?.value as string),
       debounceTime(100),
       distinctUntilChanged(),
-      takeUntil(this.unsubscribe$)
+      takeUntilDestroyed(this.destroyRef)
      ).subscribe((value: string) => 
      this.postFacade.setFilter(this.createFilter(value)));
   }
@@ -52,9 +52,5 @@ export class PostSearchComponent {
     return this.switchSearch[(value || '').toLowerCase().trim()];
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
 }
+

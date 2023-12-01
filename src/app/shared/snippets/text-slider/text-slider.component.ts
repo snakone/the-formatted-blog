@@ -1,4 +1,8 @@
-import { AfterContentChecked, Component } from '@angular/core';
+import { Component } from '@angular/core';
+
+const overlapIndexTime = 800;
+const intervalTime = 5000;
+const itemWidth = 228;
 
 @Component({
   selector: 'app-text-slider',
@@ -6,16 +10,13 @@ import { AfterContentChecked, Component } from '@angular/core';
   styleUrls: ['./text-slider.component.scss']
 })
 
-export class TextSliderComponent implements AfterContentChecked {
+export class TextSliderComponent {
 
   index = 0;
   transitionTime = 400;
-  overlapIndexTime = 800;
-  intervalTime = 5000;
   slider: HTMLElement | undefined | null;
   timeouts: NodeJS.Timer[] = [];
   interval = this.createInterval();
-  itemWidth = 228;
 
   items: string[] = [
     'The Latest For Your New Post',
@@ -31,7 +32,7 @@ export class TextSliderComponent implements AfterContentChecked {
 
   private createInterval(): NodeJS.Timer {
     this.timeouts.forEach((out: unknown) => window.clearTimeout(out as number))
-    return setInterval(() => this.slide(1), this.intervalTime);
+    return setInterval(() => this.slide(1), intervalTime);
   }
 
   public slide(value: number, clear = false): void {
@@ -40,7 +41,7 @@ export class TextSliderComponent implements AfterContentChecked {
   
     if (clear && this.interval) { 
       window.clearInterval(this.interval as unknown as number);
-      this.timeouts.push(setTimeout(() => this.createInterval(), this.intervalTime));
+      this.timeouts.push(setTimeout(() => this.createInterval(), intervalTime));
     }
   }
   
@@ -48,9 +49,9 @@ export class TextSliderComponent implements AfterContentChecked {
     const newIndex = this.index + value;
   
     if (newIndex < 0) {
-      this.set(this.items.length - 1, this.overlapIndexTime);
+      this.set(this.items.length - 1, overlapIndexTime);
     } else if (newIndex >= this.items.length) {
-      this.set(0, this.overlapIndexTime);
+      this.set(0, overlapIndexTime);
     } else {
       this.set(newIndex, this.transitionTime);
     }
@@ -69,7 +70,7 @@ export class TextSliderComponent implements AfterContentChecked {
   }
 
   private createTransformStyle(): string {
-    return `translate3d(-${this.index * this.itemWidth}px, 0, 0)`;
+    return `translate3d(-${this.index * itemWidth}px, 0, 0)`;
   }
 
   private set(

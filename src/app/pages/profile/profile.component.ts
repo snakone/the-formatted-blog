@@ -1,11 +1,13 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { filter } from 'rxjs';
 
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { UserService } from '@core/services/api/users.service';
 
 import { LIKE_TEXT } from '@shared/data/sentences';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { User } from '@shared/types/interface.user';
 
 @Component({
   selector: 'app-profile',
@@ -14,15 +16,15 @@ import { LIKE_TEXT } from '@shared/data/sentences';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
   text = LIKE_TEXT;
-  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private postFacade: PostsFacade,
     private draftsFacade: DraftsFacade,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -31,25 +33,26 @@ export class ProfileComponent implements OnInit {
 
   private checkData(): void {
     const user = this.userSrv.getUser();
-    
+    this.checkPostByUser(user);
+    this.checkDrafts(user);
+  }
+
+  private checkPostByUser(user: User): void {
     this.postFacade.byUserLoaded$
      .pipe(
        filter(res => !res && Boolean(user)),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.postFacade.getByUser(user._id));
+  }
 
+  private checkDrafts(user: User): void {
     this.draftsFacade.loaded$
     .pipe(
       filter(res => !res && Boolean(user)),
-      takeUntil(this.unsubscribe$)
+      takeUntilDestroyed(this.destroyRef)
     )
     .subscribe(_ => this.draftsFacade.get());
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, DestroyRef, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { SavingType } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { DraftsFacade } from '@store/drafts/drafts.facade';
-import { takeUntil, filter, Subject, tap } from 'rxjs';
+import { filter, tap } from 'rxjs';
 
 import { DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
 import { DraftStatusEnum } from '@shared/types/types.enums';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-draft-card',
@@ -21,13 +22,13 @@ export class DraftCardComponent {
   @Input() deletedDraftID: string | undefined; // DELETE
   @Input() saving: SavingType | undefined;
   @Input() collapsed = false;
-  private unsubscribe$ = new Subject<void>();
   draftStatus = DraftStatusEnum;
 
   constructor(
     private draftsFacade: DraftsFacade,
     private crafter: CrafterService,
-    private createDraftSrv: CreateDraftService
+    private createDraftSrv: CreateDraftService,
+    private destroyRef: DestroyRef
   ) { }
 
   public activate(draft: Post): void {
@@ -45,15 +46,10 @@ export class DraftCardComponent {
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
         tap(_ => this.createDraftSrv.onDeleteDraft(this.draft._id))
     ).subscribe(_ => this.draftsFacade.delete(this.draft._id));
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

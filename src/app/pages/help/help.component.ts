@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HELP_SENTENCE } from '@shared/data/sentences';
 
 @Component({
@@ -8,7 +8,7 @@ import { HELP_SENTENCE } from '@shared/data/sentences';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HelpComponent implements OnInit {
+export class HelpComponent {
 
   text = HELP_SENTENCE;
 

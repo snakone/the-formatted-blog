@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { filter, Observable } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 import { Post } from '@shared/types/interface.post';
 import { CreateDraftService } from './services/create-draft.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-create',
@@ -13,17 +14,17 @@ import { CreateDraftService } from './services/create-draft.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CreateComponent implements OnInit, OnDestroy {
+export class CreateComponent {
   
   drafts$!: Observable<Post[]>;
   text = NOTIFICATION_TEXT;
   title!: string;
-  private unsubscribe$ = new Subject<void>();
   collapsed$: Observable<boolean> | undefined;
 
   constructor(
     private draftsFacade: DraftsFacade,
-    private createDraftSrv: CreateDraftService
+    private createDraftSrv: CreateDraftService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void { 
@@ -36,14 +37,12 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.draftsFacade.loaded$
      .pipe(
        filter(res => !res),
-       takeUntil(this.unsubscribe$)
+       takeUntilDestroyed(this.destroyRef)
       )
      .subscribe(_ => this.draftsFacade.get());
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.draftsFacade.resetActive();
   }
 

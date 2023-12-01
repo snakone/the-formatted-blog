@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Post } from '@shared/types/interface.post';
+import { Post, UpdateDraftKeyData } from '@shared/types/interface.post';
 
 import * as DraftActions from './drafts.actions';
 import { DraftsState } from './drafts.reducer';
@@ -48,12 +48,12 @@ export class DraftsFacade {
     this.store.dispatch(DraftActions.publish({draft}));
   }
 
-  public update(draft: Post): void {
-    this.store.dispatch(DraftActions.update({draft}));
+  public update(draft: Post, admin?: boolean): void {
+    this.store.dispatch(DraftActions.update({draft, admin}));
   }
 
-  public updateKey(id: string, keys: KeyPair, admin?: boolean): void {
-    this.store.dispatch(DraftActions.updateKey({id, keys, admin}));
+  public updateKey(data: UpdateDraftKeyData): void {
+    this.store.dispatch(DraftActions.updateKey({data}));
   }
 
   public delete(id: string, reload = false): void {

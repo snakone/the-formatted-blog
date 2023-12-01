@@ -1,15 +1,16 @@
 <div id="app">
   <!-- HEADER -->
   <app-navbar/>
-  <app-header/>
   @defer {
+    <app-header/>
     <!-- MAIN -->
     <main> 
       <router-outlet/>
     </main>
+    <app-footer/>
   }
-  <app-footer/>
 </div>
+np
 @defer {
   <app-snack/>
   <app-min-width/>

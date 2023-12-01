@@ -1,24 +1,22 @@
 import {
   Directive,
   Input,
-  AfterContentInit,
-  OnDestroy
+  DestroyRef
 } from '@angular/core';
 
-import { Subject, fromEvent } from 'rxjs';
-import { distinctUntilChanged, filter, map, takeUntil, throttleTime } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { distinctUntilChanged, filter, map, throttleTime } from 'rxjs/operators';
 import { StickyService } from '@services/sticky/sticky.service';
 import { RESIZE_EVENT } from '@shared/data/constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-// tslint:disable-next-line:directive-selector
 @Directive({selector: '[Sticky]'})
 
-export class StickyDirective implements AfterContentInit, OnDestroy {
+export class StickyDirective {
 
   @Input() selector: string | undefined;
-  private unsubscribe$ = new Subject<void>();
 
-  constructor(private stickySrv: StickyService) { }
+  constructor(private stickySrv: StickyService, private destroyRef: DestroyRef) { }
 
   ngAfterContentInit(): void {
     this.subscribeToResize();
@@ -30,7 +28,7 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   private subscribeToResize(): void {
     fromEvent(window, RESIZE_EVENT)
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         throttleTime(300),
         filter(_ => !!this.selector),
         map(_ => this.clientSize()),
@@ -49,8 +47,6 @@ export class StickyDirective implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.stickySrv.destroy();
     this.selector = undefined;
   }

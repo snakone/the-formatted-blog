@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, takeUntil, filter } from 'rxjs';
+import { filter } from 'rxjs';
 import { QuillModules } from 'ngx-quill';
 
 import { Post } from '@shared/types/interface.post';
@@ -16,6 +16,7 @@ import { DRAFT_ICONS, POST_ICONS } from '@shared/data/data';
 import { DELETE_CONFIRMATION, EDIT_POST_CONFIRMATION, PREVIEW_DRAFT_DIALOG } from '@shared/data/dialogs';
 import { CREATE_ROUTE, POST_KEY, PROFILE_ROUTE } from '@shared/data/constants';
 import { DraftStatusEnum } from '@shared/types/types.enums';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post-card',
@@ -24,7 +25,7 @@ import { DraftStatusEnum } from '@shared/types/types.enums';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PostCardComponent implements OnInit {
+export class PostCardComponent {
 
   @Input() post: Post | undefined;
   @Input() border = true;
@@ -40,7 +41,6 @@ export class PostCardComponent implements OnInit {
   postIcons = POST_ICONS;
   draftIcons = DRAFT_ICONS;
   draftStatus = DraftStatusEnum;
-  private unsubscribe$ = new Subject<void>();
 
   quillModules: QuillModules = {
     syntax: true,
@@ -68,7 +68,8 @@ export class PostCardComponent implements OnInit {
     private quillSrv: QuillService,
     private postFacade: PostsFacade,
     private userSrv: UserService,
-    private shareSrv: ShareService
+    private shareSrv: ShareService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void { 
@@ -106,7 +107,7 @@ export class PostCardComponent implements OnInit {
     this.crafter.confirmation(DELETE_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean)
     ).subscribe(_ => this.draftsFacade.delete(this.post._id));
   }
@@ -129,7 +130,7 @@ export class PostCardComponent implements OnInit {
     this.crafter.confirmation(EDIT_POST_CONFIRMATION)
     .afterClosed()
       .pipe(
-        takeUntil(this.unsubscribe$),
+        takeUntilDestroyed(this.destroyRef),
         filter(Boolean)
     ).subscribe(_ => this.editSuccess());
   }
@@ -139,11 +140,6 @@ export class PostCardComponent implements OnInit {
     this.draftsFacade.setActive(this.post);
     this.draftsFacade.addTemporal(this.post);
     this.router.navigate([CREATE_ROUTE], {replaceUrl: true});
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { DraftsFacade } from '@core/ngrx/drafts/drafts.facade';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { SavingType } from '@shared/types/interface.app';
@@ -15,7 +15,7 @@ import { RESIZE_EVENT, VALUE_KEY } from '@shared/data/constants';
   changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class CreateSidebarComponent implements OnInit {
+export class CreateSidebarComponent {
 
   @Input() drafts!: Post[] | null;
   @Input() originalCollapsed: boolean;
