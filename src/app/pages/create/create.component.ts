@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, DestroyRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, DestroyRef, HostListener } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';

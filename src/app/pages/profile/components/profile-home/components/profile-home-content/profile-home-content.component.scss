@@ -123,9 +123,17 @@ h1 {
         opacity: .6;
       }
     }
+
+    @media(width < 650px) {
+      & span {
+        padding-right: 40px;
+      }
+
+      & .title {
+        margin-top: 10px;
+      }
+    }
   }
-
-
 }
 
 @media(max-width: 992px) {
@@ -151,12 +159,3 @@ h1 {
 }
 
 ::-webkit-scrollbar { width: 4px !important;  }
-
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-bg) !important;
-}
-
-::-webkit-scrollbar-track-piece {
-  background: transparent;
-}
-

@@ -15,6 +15,7 @@ import { DraftStatus, DraftStatusEnum, SnackTypeEnum } from '@shared/types/types
 import { PUBLISH_CONFIRMATION, DELETE_CONFIRMATION, PREVIEW_DRAFT_DIALOG_UPDATE } from '@shared/data/dialogs';
 import { ADMIN_DRAFT_MESSAGE_DESC, BAD_COVER_CAUSE, BAD_COVER_SIZE, UNKWON_ERROR_SENTENCE } from '@shared/data/sentences';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { getQuillHeaders } from '@shared/utils/quill.util.functions';
 
 const maxImageSize = 150;
 
@@ -80,13 +81,8 @@ export class AdminDraftComponent {
     const allChecksPassed = this.allDraftChecksOK(this.draft.check);
     this.clearCausesForPassedChecks(this.draft.check);
 
-    if (allChecksPassed) {
-      this.showPublishConfirmation();
-    }
-    else {
-      this.updateDraftAndStatus();
-      setTimeout(() => this.navigate(), 1000);
-    }
+    allChecksPassed ? this.showPublishConfirmation() :
+                      this.updateDraftAndStatus();
   }
 
   private clearCausesForPassedChecks(checks: DraftCheck): void {
@@ -98,14 +94,16 @@ export class AdminDraftComponent {
   }
 
   private showPublishConfirmation(): void {
+    const draft = Object.assign({}, this.draft);
+    draft.headers = getQuillHeaders(draft.message.ops);
     this.crafter.confirmation(PUBLISH_CONFIRMATION)
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
-        tap(_ => this.draftsFacade.publish(this.draft))
+        tap(_ => this.draftsFacade.publish(draft))
       ).subscribe(_ => firstValueFrom(
-        this.sw.send(this.sw.set(Object.assign({}, PUBLISH_PUSH), this.draft))
+        this.sw.send(this.sw.set(Object.assign({}, PUBLISH_PUSH), draft))
       ).then(_ => this.navigate()));
   }
 
@@ -117,6 +115,7 @@ export class AdminDraftComponent {
     }
 
     this.draftsFacade.update(updatedPost, true);
+    setTimeout(() => this.navigate(), 1000);
   }
 
   private shouldMarkPending(): DraftStatus {
@@ -125,7 +124,7 @@ export class AdminDraftComponent {
       !this.originalPending
     ) || this.markAsPending ? 
     DraftStatusEnum.PENDING : 
-      DraftStatusEnum.NOT_SEEN;
+      this.draft.status === DraftStatusEnum.SEEN ? this.draft.status : DraftStatusEnum.NOT_SEEN;
   }
 
   private async checkCover(draft: Post): Promise<void> {

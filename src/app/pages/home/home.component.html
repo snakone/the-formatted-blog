@@ -1,26 +1,21 @@
 <div class="animated fadeIn">
   <!-- HOME HEADER -->
   <section>
-    @defer {
-      <app-main-post/>
-      <app-action-bar [text]="text"
-                      buttonText="Subscríbete"
-                      (function)="notification()"/>
-    }
+    <app-main-post/>
+    <app-action-bar [text]="text"
+                    buttonText="Subscríbete"
+                    (function)="notification()"/>
+
   </section>
   <!-- CARROUSEL -->
   <section>
-    @defer {
-      <app-post-carrousel/>
-    }
+    <app-post-carrousel/>
   </section>
   <!-- STICKY GRID-->
   <section class="home-content">
-    @defer(on viewport){
-      <app-section>
-        <app-home-content id="sticky-wrapper"/>
-        <app-home-sidebar/>
-      </app-section>
-    } @placeholder {<span></span>}
+    <app-section>
+      <app-home-content id="sticky-wrapper"/>
+      <app-home-sidebar/>
+    </app-section>
   </section>
 </div>

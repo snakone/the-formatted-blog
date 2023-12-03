@@ -34,7 +34,7 @@
             <span [class]="post.status">{{post.status | draftStatus}} </span>
             <span class="tale">-</span>
           }
-          <span>{{post.created}}</span>
+          <span>{{post.createdAt | date}}</span>
         </p>
       }
 
@@ -58,7 +58,7 @@
                 <span [class]="post.status">{{post.status | draftStatus}} </span>
                 <span class="tale">-</span> 
               }
-              <span>{{post.created}}</span>
+              <span>{{post.createdAt | date}}</span>
             </p>
             <span class="author" (click)="friend()">{{post.author}}</span>
           </div>

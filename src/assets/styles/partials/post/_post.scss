@@ -17,7 +17,7 @@ $quill-padding-sm: 16px;
 
 .ql-editor {
   font-family: 'Raleway', Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 14px !important;
   padding: $quill-padding;
   line-height: inherit;
   overflow-y: initial;
@@ -60,44 +60,14 @@ $quill-padding-sm: 16px;
     text-align: justify;
   }
 
-  @media(max-width: 550px) {
-    padding: 16px;
-    font-size: 13px;
-
-    &.ql-blank::before {
-      top: -8px;
-      right: $quill-padding-sm !important;
-      left: $quill-padding-sm !important;
-      padding-bottom: $quill-padding-sm !important;
-    }
-
-    & blockquote {
-      font-size: 14px !important;
-      margin: 25px 0 25px !important;
-    }
-
-    & pre {
-      margin: 25px 0 25px !important;
-    }
-
-    & h2 {
-      margin: 30px 0 25px 0 !important;
-    }
-
-    & h2 {
-      margin: 25px 0 20px 0 !important;
-    }
-  }
-
   // BLOCKQUOTE
   & blockquote {
     width: 100%;
-    margin: 36px 0 35px;
+    margin: 36px 0 35px !important;
     background: var(--quote-bg);
-    padding: 15px 22px 15px 25px !important;
+    padding: 15px 22px 15px 25px;
     transition: background 666ms ease-in-out;
-    font-style: italic;
-    font-size: 15px;
+    font-size: 14px;
     border-left: 5px solid var(--contrast-color) !important;
     color: var(--button-text-color);
     text-align: justify;
@@ -129,6 +99,14 @@ $quill-padding-sm: 16px;
         font-size: 20px;
         color: var(--contrast-color);
       }
+
+      @media(width < 550px) {
+        padding-left: 1rem !important;
+
+        &::before {
+          font-size: 18px;
+        }
+      }
     }
 
     &:first-child { margin-top: 0 }
@@ -143,7 +121,6 @@ $quill-padding-sm: 16px;
     & li {
       margin: 12px 0;
       position: relative;
-      padding-left: 27px;
       counter-increment: my-counter;
 
       &::before {
@@ -155,6 +132,14 @@ $quill-padding-sm: 16px;
         -webkit-font-smoothing: antialiased;
         font-size: 20px;
         color: var(--contrast-color);
+      }
+
+      @media(width < 550px) {
+        padding-left: 1rem !important;
+
+        &::before {
+          font-size: 18px;
+        }
       }
     }
 
@@ -187,7 +172,8 @@ $quill-padding-sm: 16px;
 
   // CODE
   & pre {
-    margin: 36px 0 35px;
+    background-color: #1f1f1f !important;
+    margin: 36px 0 35px !important;
     &:first-child { margin-top: 0 !important }
   }
 
@@ -196,6 +182,50 @@ $quill-padding-sm: 16px;
     display: block;
     margin: 14px 0 30px;
     &:last-child { margin-bottom: 0 }
+  }
+
+  @media(max-width: 550px) {
+    padding: 16px;
+    font-size: 13px;
+
+    &.ql-blank::before {
+      top: -8px;
+      right: $quill-padding-sm !important;
+      left: $quill-padding-sm !important;
+      padding-bottom: $quill-padding-sm !important;
+    }
+
+    & blockquote {
+      font-size: 13px !important;
+      line-height: 18px;
+      margin: 25px 0 25px !important;
+      padding: 15px !important;
+
+      & + h2 {
+        margin-top: 45px !important;
+      }
+    }
+
+    & h2 {
+      margin: 30px 0 25px 0 !important;
+
+      &:first-child {
+        margin-top: 10px !important;
+      }
+    }
+
+    & pre {
+      font-size: 13px;
+      margin: 25px 0 25px !important;
+
+      & + h2 {
+        margin-top: 45px !important;
+      }
+    }
+
+    & li {
+      font-size: 13px;
+    }
   }
 }
 

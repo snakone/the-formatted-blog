@@ -13,7 +13,7 @@
               @if(!activity.userAction) {
                 Título: 
               }
-              <b>{{activity.title}}</b> - {{activity.date}}
+              <b>{{activity.title}}</b> - {{activity.createdAt | date}}
           </div>
         </article>
       } @empty {
@@ -21,7 +21,7 @@
       }
 
     } @placeholder {
-      @for(item of [1,2,3,4]; track item; let last = $last) {
+      @for(item of [1,2,3,4,5,6]; track item; let last = $last) {
         <app-activity-skeleton [last]="last"/>
       }
     }

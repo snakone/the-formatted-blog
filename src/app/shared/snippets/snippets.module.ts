@@ -11,6 +11,7 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { QuillToolbarComponent } from './quill-toolbar/quill-toolbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SnackOverlayComponent } from './snack/snack.component';
+import { ContentSearchComponent } from './content-search/content-search.component';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -25,7 +26,8 @@ const Material = [
     ScrollTopComponent,
     QuillToolbarComponent,
     SpinnerComponent,
-    SnackOverlayComponent
+    SnackOverlayComponent,
+    ContentSearchComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ const Material = [
     ScrollTopComponent,
     QuillToolbarComponent,
     SpinnerComponent,
-    SnackOverlayComponent
+    SnackOverlayComponent,
+    ContentSearchComponent
   ],
   providers: [QuillService]
 })

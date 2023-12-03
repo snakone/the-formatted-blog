@@ -1,4 +1,5 @@
 import { props, createAction } from '@ngrx/store';
+import { FilterType } from '@shared/types/interface.app';
 import { User } from '@shared/types/interface.user';
 
 // LOGIN USER
@@ -74,3 +75,11 @@ export const setPublic =
 
 // RESET PUBLIC PROFILE
 export const resetPublic = createAction('[Users API] Reset Public');
+
+// SET FILTER
+export const setFilter =
+  createAction('[Users API] Set Filter',
+  props<{ value: FilterType }>());
+
+export const resetFilter =
+  createAction('[Users API] Reset Filter');

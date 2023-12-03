@@ -11,16 +11,16 @@ import { FilterType } from '@shared/types/interface.app';
 
 export class PostsFacade {
 
-  posts$ = this.store.select(fromPosts.get);
-  filtered$ = this.store.select(fromPosts.getFiltered);
-  favorites$ = this.store.select(fromPosts.getFavorites);
-  favoritesID$ = this.store.select(fromPosts.getFavoritesID);
-  loaded$ = this.store.select(fromPosts.getLoaded);
-  getFull$ = this.store.select(fromPosts.getFull);
-  byUser$ = this.store.select(fromPosts.getByUser);
-  byUserLoaded$ = this.store.select(fromPosts.getByUserLoaded);
-  bySlug$ = this.store.select(fromPosts.getBySlug);
-  byID$ = (id: string) => this.store.select(fromPosts.getById(id));
+  public posts$ = this.store.select(fromPosts.get);
+  public filtered$ = this.store.select(fromPosts.getFiltered);
+  public favorites$ = this.store.select(fromPosts.getFavorites);
+  public favoritesID$ = this.store.select(fromPosts.getFavoritesID);
+  public loaded$ = this.store.select(fromPosts.getLoaded);
+  public getFull$ = this.store.select(fromPosts.getFull);
+  public byUser$ = this.store.select(fromPosts.getByUser);
+  public byUserLoaded$ = this.store.select(fromPosts.getByUserLoaded);
+  public bySlug$ = this.store.select(fromPosts.getBySlug);
+  public byID$ = (id: string) => this.store.select(fromPosts.getById(id));
 
   constructor(private store: Store<AppState>) { }
 

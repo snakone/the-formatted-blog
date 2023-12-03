@@ -5,6 +5,8 @@ import { LayoutModule } from '@layout/layout.module';
 import { ProfileRoutingModule } from './profile.routing';
 import { ProfileComponent } from './profile.component';
 import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { UserLayoutModule } from '@shared/layout/user/user-layout.module';
 
 import {
   ProfileHomeComponent,
@@ -23,7 +25,6 @@ import { ActivitiesAccessModule } from '@core/ngrx/activities/data-access/activi
 import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 import { ProfileFriendsContentComponent } from './components/profile-friends/components/profile-friends-content/profile-friends-content.component';
 import { ProfileFriendsSidebarComponent } from './components/profile-friends/components/profile-friends-sidebar/profile-friends-sidebar.component';
-import { PipesModule } from '@shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PipesModule } from '@shared/pipes/pipes.module';
     DraftsAccessModule,
     ActivitiesAccessModule,
     SkeletonModule,
-    PipesModule
+    PipesModule,
+    UserLayoutModule
   ]
 })
 

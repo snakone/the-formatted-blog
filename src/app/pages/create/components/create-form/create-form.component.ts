@@ -1,19 +1,20 @@
 import { Component, DestroyRef } from '@angular/core';
 import { AbstractControl, FormGroup} from '@angular/forms';
-import { filter, tap, distinctUntilChanged, debounceTime } from 'rxjs';
+import { filter, tap, distinctUntilChanged, debounceTime, withLatestFrom } from 'rxjs';
 
 import { DraftsFacade } from '@store/drafts/drafts.facade';
 import { Post } from '@shared/types/interface.post';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
-import { SavingTypeEnum } from '@shared/types/types.enums';
+import { SavingDraftType, SavingTypeEnum } from '@shared/types/types.enums';
 import { CATEGORY_KEY, COVER_KEY, INTRO_KEY, TITLE_KEY } from '@shared/data/constants';
 import { POST_CATEGORIES } from '@shared/data/data';
 import { CREATE_DRAFT_FORM } from '@shared/data/forms';
 import { CreateDraftForm } from '@shared/types/interface.form';
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CreateDraftService } from '@pages/create/services/create-draft.service';
 
 const timer = 5000;
 
@@ -30,18 +31,21 @@ export class CreateFormComponent {
   url: string;
   draft: Post;
   controls = [TITLE_KEY, CATEGORY_KEY, COVER_KEY, INTRO_KEY];
+  isTemporal = false;
 
   constructor(
     private draftsFacade: DraftsFacade,
     private crafter: CrafterService,
     private postFacade: PostsFacade,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private createDraftSrv: CreateDraftService
   ) { }
 
   ngOnInit(): void {
     this.createForm();
     this.getActive();
     this.listenValues();
+    this.listenToTemporalSave();
   }
 
   private getActive(): void {
@@ -49,7 +53,7 @@ export class CreateFormComponent {
      .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter(Boolean),
-        tap(draft => this.draft = draft),
+        tap(draft => (this.draft = draft, this.checkIfTemporal())),
       )
     .subscribe(draft => this.patchForm(draft));
   }
@@ -64,7 +68,8 @@ export class CreateFormComponent {
        takeUntilDestroyed(this.destroyRef),
        distinctUntilChanged(),
        filter(_ => this.draftForm.valid && !this.draftForm.pristine),
-       tap(_ => this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: true})),
+       withLatestFrom(this.draftsFacade.saving$),
+       tap(([_, saving]) => (!saving?.value && !this.isTemporal) ? this.save(true) : null),
        debounceTime(timer),
     )
      .subscribe(_ => this.submit());
@@ -84,25 +89,58 @@ export class CreateFormComponent {
 
   public submit(): void {
     if (this.draftForm.invalid) { 
-      this.draftsFacade.setSaving({type: SavingTypeEnum.WARNING, value: true})
+      this.save(true, SavingTypeEnum.WARNING)
       return; 
     }
 
+    if (this.draft.temporal) { return; }
+
+    const values = this.draftForm.value;
+    const draft: Post = {...this.draft, ...values};
+    this.draftsFacade.update(draft);
+    this.save(false);
+  }
+
+  private showTemporalDialog(): void {
     const values = this.draftForm.value;
     const draft: Post = {...this.draft, ...values};
 
-    if (this.draft.temporal) {
-      this.crafter.confirmation(EDIT_POST_CONFIRMATION)
-      .afterClosed()
-        .pipe(
-          takeUntilDestroyed(this.destroyRef),
-          filter(Boolean)
-      ).subscribe(_ => this.postFacade.unPublish(draft));
-    } else {
-      this.draftsFacade.update(draft);
-    }
+    this.crafter.confirmation(EDIT_POST_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(Boolean)
+    ).subscribe(_ => this.postFacade.unPublish(draft));
+  }
 
-    this.draftsFacade.setSaving({type: SavingTypeEnum.SAVING, value: false})
+  private checkIfTemporal(): void {
+    if (this.draft.temporal) {
+      this.isTemporal = true;
+      this.save(false, SavingTypeEnum.TEMPORAL);
+    } else {
+      this.save(false, null);
+      this.isTemporal = false;
+    }
+  }
+
+  private save(
+    value: boolean, 
+    type: SavingDraftType | 
+          SavingTypeEnum.TEMPORAL = SavingTypeEnum.SAVING
+  ): void {
+    this.draftsFacade.setSaving({type, value})
+  }
+
+  private listenToTemporalSave(): void {
+    this.createDraftSrv.onSaveTemportal$
+     .pipe(
+      takeUntilDestroyed(this.destroyRef),
+      filter(id => 
+        Boolean(id) && 
+        id === this.draft._id && 
+        Boolean(this.draft.temporal)
+      ))
+     .subscribe(_ => this.showTemporalDialog())
   }
 
   private getControl(name: string): AbstractControl | null {

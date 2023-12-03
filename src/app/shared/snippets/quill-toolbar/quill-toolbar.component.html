@@ -4,21 +4,31 @@
     @if(saving$ | async; as state) {
       @switch(state.type) {
         @case(saveTypes.SAVING) {
-          <div class="animated fadeIn saving">
+          <div class="icons animated fadeIn saving">
             <i [class]="state.value ? 'fas fa-spinner fa-pulse' : 'fas fa-check'"></i> 
             <span>{{state.value ? 'Guardando...' : 'Guardado'}}</span>
           </div>
         }
         @case(saveTypes.WARNING) {
-          <div class="animated fadeIn warning">
+          <div class="icons animated fadeIn warning">
             <i class="fas fa-exclamation-triangle"></i>
             <span>Error al guardar. Comprueba los datos</span>
           </div>
         }
         @case(saveTypes.TEMPORAL) {
-          <div class="animated fadeIn temporal">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span>No se guardará hasta que los aceptes.</span>
+          <div class="icons animated fadeIn temporal">
+            <i class="fas fa-exclamation-triangle"
+               [matTooltip]="'Guardado manual'">
+            </i>
+            <!-- SAVE ICON -->
+            <i [matTooltip]="'Guardar'" 
+               (click)="saveTemporalDraft()" 
+               class="far fa-save animated fadeIn">
+            </i>
+            <!-- SAVE TEXT -->
+            <span (click)="saveTemporalDraft()" 
+                  class="animated fadeIn">Guardar cambios.
+            </span>
           </div>
         }
       }

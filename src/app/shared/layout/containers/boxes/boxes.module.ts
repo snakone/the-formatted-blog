@@ -9,7 +9,7 @@ import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 @NgModule({
   declarations: [
     RecentPostBoxComponent,
-    CategoryBoxComponent,
+    CategoryBoxComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
   ],
   exports: [
     RecentPostBoxComponent,
-    CategoryBoxComponent,
+    CategoryBoxComponent
   ]
 })
 

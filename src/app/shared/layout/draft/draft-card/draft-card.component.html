@@ -23,7 +23,7 @@
             <span class="category">{{draft.category}}</span>
             <span class="tale">-</span>
           }
-          <span class="created">{{draft.created}}</span>
+          <span class="created">{{draft.createdAt | date}}</span>
 
           @if(draft.status === draftStatus.PENDING) {
             <span class="pending"><span class="tale">-</span> Pendiente</span>

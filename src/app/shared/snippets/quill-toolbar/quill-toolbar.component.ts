@@ -94,6 +94,11 @@ export class QuillToolbarComponent {
     this.quillSrv.convertToHTML(this.draft);
   }
 
+  public saveTemporalDraft(): void {
+    if (!this.draft || !this.draft.temporal) { return; }
+    this.createDraftSrv.onSaveTemporal(this.draft._id);
+  }
+
   private delete(saving: boolean): void {
     if (!this.draft || saving) { return; }
     this.crafter.confirmation(DELETE_CONFIRMATION)

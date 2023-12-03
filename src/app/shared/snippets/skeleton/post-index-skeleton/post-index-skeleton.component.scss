@@ -1,0 +1,12 @@
+@import 'mixins/mixins.scss';
+
+.skeleton {
+  list-style: none;
+  
+  & li {
+    width: 100%;
+    height: 24px;
+    @include skeleton();
+    margin-bottom: 1rem;
+  }
+}

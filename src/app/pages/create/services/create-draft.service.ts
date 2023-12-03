@@ -6,6 +6,7 @@ export class CreateDraftService {
 
   onDraftDelete$ = new Subject<string>();
   onCollapse$ = new Subject<boolean>();
+  onSaveTemportal$ = new Subject<string>();
 
   constructor() { }
 
@@ -15,5 +16,9 @@ export class CreateDraftService {
 
   public onCollapse(collapse: boolean): void {
     this.onCollapse$.next(collapse);
+  }
+
+  public onSaveTemporal(id: string): void {
+    this.onSaveTemportal$.next(id);
   }
 }

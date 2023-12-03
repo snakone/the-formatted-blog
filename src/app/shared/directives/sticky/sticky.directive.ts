@@ -22,7 +22,7 @@ export class StickyDirective {
     this.subscribeToResize();
     setTimeout(() => {
       window.dispatchEvent(new Event(RESIZE_EVENT));
-    }, 1500);
+    }, 3000);
   }
 
   private subscribeToResize(): void {

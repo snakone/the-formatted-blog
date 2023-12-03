@@ -5,6 +5,7 @@ import { AppState } from '../ngrx.index';
 import * as UserActions from './users.actions';
 import * as fromUsers from './users.selectors';
 import { User } from '@shared/types/interface.user';
+import { FilterType } from '@shared/types/interface.app';
 
 @Injectable({providedIn: 'root'})
 
@@ -13,6 +14,7 @@ export class UsersFacade {
   public user$ = this.store.select(fromUsers.get);
   public friends$ = this.store.select(fromUsers.getFriends);
   public public$ = this.store.select(fromUsers.getPublic);
+  public filteredFriendsd$ = this.store.select(fromUsers.getFilteredFriends);
 
   constructor(private store: Store<AppState>) { }
 
@@ -50,6 +52,14 @@ export class UsersFacade {
 
   public setPublic(user: User): void {
     this.store.dispatch(UserActions.setPublic({user}));
+  }
+
+  public setFilter(value: FilterType): void {
+    this.store.dispatch(UserActions.setFilter({value}));
+  }
+
+  public resetFilter(): void {
+    this.store.dispatch(UserActions.resetFilter());
   }
 
 }

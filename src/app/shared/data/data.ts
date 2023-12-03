@@ -29,7 +29,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING.',
     category: 'Home & Living',
     author: 'Elisa Park',
-    created: 'Sep, 10 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/05-img.jpg',
     status: DraftStatusEnum.NOT_SEEN,
     type: DraftTypeEnum.POST,
@@ -40,7 +40,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Amazing Food',
     author: 'Marisa Hudson',
-    created: 'Jun, 26 2019',
+    createdAt: new Date('Sep, 06 2019'),
     status: DraftStatusEnum.NOT_SEEN,
     type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg',
@@ -52,7 +52,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Lifestyle',
     author: 'Jhone Albert',
-    created: 'Sep, 17 2015',
+    createdAt: new Date('Sep, 07 2019'),
     status: DraftStatusEnum.PENDING,
     type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
@@ -62,7 +62,7 @@ export const DUMMY_POST: Post[] = [
     title: 'Sed quis sollicitudin eros, non lobortis purus.',
     category: 'Travel',
     author: 'Albert Jhone',
-    created: 'Dec, 10 2016',
+    createdAt: new Date('Sep, 08 2019'),
     status: DraftStatusEnum.APPROVED,
     type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
@@ -72,7 +72,7 @@ export const DUMMY_POST: Post[] = [
     title: 'LOREM IPSUM, DOLOR SIT AMET CONSECTETUR ADIPISICING ELIT OUSL BAK.',
     category: 'Miscellenious',
     author: 'Alfred Hannog',
-    created: 'Jan, 05 2016',
+    createdAt: new Date('Sep, 09 2019'),
     status: DraftStatusEnum.SEEN,
     type: DraftTypeEnum.POST,
     cover: 'assets/images/05-img.jpg'
@@ -83,8 +83,8 @@ export const USER_INDEX: IconList[] = [
   { icon: 'far fa-user-circle', label: 'Perfil', route: './' },
   { icon: 'fab fa-ioxhost', label: 'Artículos', route: 'posts' },
   { icon: 'fas fa-file-signature', label: 'Bocetos', route: 'drafts' },
-  { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'far fa-star', label: 'Favoritos', route: 'favorites'},
+  { icon: 'fas fa-users', label: 'Amigos', route: 'friends' },
   { icon: 'fas fa-cog', label: 'Ajustes', route: 'settings' }
 ];
 
@@ -346,37 +346,37 @@ export const EMPTY_RECENT_POST: Post[] = [
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/06-img.jpg'
   },
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/07-img.jpg'
   },
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/08-img.jpg'
   },
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/09-img.jpg'
   },
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/12-img.jpg'
   },
   {
     title: 'Beauty of Nature',
     author: 'Rick Allenson',
-    created: 'Sep, 05 2019',
+    createdAt: new Date('Sep, 05 2019'),
     cover: 'assets/images/13-img.jpg'
   },
 ];
@@ -384,7 +384,7 @@ export const EMPTY_RECENT_POST: Post[] = [
 export const STATS_LIST: IconList[] = [
   { label: 'views', icon: 'far fa-eye' },
   { label: 'likes', icon: 'far fa-heart' },
-  { label: 'friends', icon: 'fas fa-user-friends' },
+  { label: 'friends', icon: 'fas fa-user-friends' }
 ];
 
 export const SOCIAL_LIST: IconList[] = [
@@ -393,4 +393,6 @@ export const SOCIAL_LIST: IconList[] = [
   { label: 'portfolio', icon: 'fas fa-link' },
 ];
 
-export const EMPTY_DRAFT: Post = {[TITLE_KEY]: '', [CATEGORY_KEY]: '', [COVER_KEY]: '', [INTRO_KEY]: ''}
+export const EMPTY_DRAFT: Post = {[TITLE_KEY]: '', [CATEGORY_KEY]: '', [COVER_KEY]: '', [INTRO_KEY]: ''};
+
+export const SEARCH_DEFAULT_PLACEHOLDER = 'Busca por título, categoría, autor, estado del boceto...';

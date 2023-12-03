@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { PROFILE_ROUTE } from '@shared/data/constants';
-import { STATS_LIST } from '@shared/data/data';
 import { User } from '@shared/types/interface.user';
+import { SearchTypeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-profile-friends-content',
@@ -14,16 +12,10 @@ import { User } from '@shared/types/interface.user';
 export class ProfileFriendsContentComponent {
 
   @Input() friends: User[] | undefined;
-  statsList = STATS_LIST;
+  searchType = SearchTypeEnum;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.friends = Array(30).fill(this.friends[0]);
-  }
-
-  public goToProfile(id: string): void {
-    this.router.navigateByUrl(PROFILE_ROUTE + '/' + id);
-  }
+  ngOnInit() {}
 
 }

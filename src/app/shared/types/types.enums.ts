@@ -22,7 +22,8 @@ export type UserActivityType =
 export type SearchType = 
   SearchTypeEnum.POST | 
   SearchTypeEnum.DRAFT | 
-  SearchTypeEnum.FAVORITE;
+  SearchTypeEnum.FAVORITE |
+  SearchTypeEnum.FRIENDS;
 
 export type SavingDraftType = 
   SavingTypeEnum.SAVING | 
@@ -78,7 +79,8 @@ export enum UserActivityEnum {
 export enum SearchTypeEnum {
   POST = 'post',
   DRAFT = 'draft',
-  FAVORITE = 'favorite'
+  FAVORITE = 'favorite',
+  FRIENDS = 'friends'
 }
 
 export enum ValidatorEnum {

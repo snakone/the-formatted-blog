@@ -31,7 +31,7 @@ export interface UserStats {
 export interface UserActivity {
   message: string;
   title: string;
-  date: string;
+  createdAt?: Date;
   type?: UserActivityType;
   admin: boolean;
   userAction?: boolean;

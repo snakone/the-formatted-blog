@@ -9,9 +9,9 @@
   </div>
   <section class="post-content">
     <app-section [margin]="false">
-      @if(post$ | async; as post) {
-        <app-post-content [post]="post" id="sticky-wrapper"/>
-        <app-post-sidebar [post]="post"/>
+      @if({post: post$ | async}; as obs) {
+        <app-post-content [post]="obs.post" id="sticky-wrapper"/>
+        <app-post-sidebar [post]="obs.post"/>
       }
     </app-section>
   </section>

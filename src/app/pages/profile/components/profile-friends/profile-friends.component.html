@@ -1,6 +1,6 @@
 <section class="profile-friends-content">
   @if(friends$ | async; as friends) {
-    <app-section>
+    <app-section [margin]="false">
       <app-profile-friends-content id="sticky-wrapper" 
                                    [friends]="friends"/>
       <app-profile-friends-sidebar [friends]="friends"/>

@@ -30,6 +30,7 @@ export const VALUE_KEY = 'value';
 export const HISTORY_KEY = 'history';
 export const SLUG_KEY = 'slug';
 export const ID_KEY = 'id';
+export const LOCATION_KEY = 'location';
 
 // EVENTS
 export const RESIZE_EVENT = 'resize';

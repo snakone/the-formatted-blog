@@ -5,7 +5,7 @@ ul {
     position: relative;
     font-size: 14px;
     margin-bottom: 1rem;
-    transition: color 666ms ease-in;
+    transition: color 333ms ease-in;
     font-style: italic;
     cursor: pointer;
 
@@ -21,12 +21,15 @@ ul {
         font-weight: 900;
         right: 13px;
         font-size: 0.8rem;
-        transition: all 666ms ease-in-out;
         color: var(--dark-color);
         left: -14px;
         top: 1px;
         font-style: normal;
       }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }

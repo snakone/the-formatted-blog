@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 import { APP_NAME } from "@shared/data/constants";
 
-const APP_VERSION = '0.17.1';
+const APP_VERSION = '0.17.2';
 
 export interface AppConfig {
   TITLE: string;

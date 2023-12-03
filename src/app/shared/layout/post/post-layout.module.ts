@@ -8,7 +8,6 @@ import { PipesModule } from '@shared/pipes/pipes.module';
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostCarrouselComponent } from './post-carrousel/post-carrousel.component';
 import { FormsModule } from '@angular/forms';
-import { PostSearchComponent } from './post-search/post-search.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 const Material = [
@@ -18,8 +17,7 @@ const Material = [
 @NgModule({
   declarations: [
     PostCardComponent,
-    PostCarrouselComponent,
-    PostSearchComponent
+    PostCarrouselComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +30,7 @@ const Material = [
   ],
   exports: [
     PostCardComponent,
-    PostCarrouselComponent,
-    PostSearchComponent
+    PostCarrouselComponent
   ]
 })
 

@@ -9,6 +9,7 @@ import { PostContentComponent } from './components/post-content/post-content.com
 import { PostSidebarComponent } from './components/post-sidebar/post-sidebar.component';
 import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.module';
 import { PostIndexComponent } from './components/post-index/post-index.component';
+import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostIndexComponent } from './components/post-index/post-index.component
     PostRoutingModule,
     LayoutModule,
     SnippetsModule,
-    DraftsAccessModule
+    DraftsAccessModule,
+    SkeletonModule
   ]
 })
 

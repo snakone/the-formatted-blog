@@ -1,6 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as UserActions from './users.actions';
 import { User } from '@shared/types/interface.user';
+import { LOCATION_KEY, ROLE_KEY, TYPE_KEY } from '@shared/data/constants';
+import { FilterType } from '@shared/types/interface.app';
 
 export interface UserState {
   user: User | null;
@@ -9,6 +11,7 @@ export interface UserState {
   loaded: boolean;
   friends: User[];
   public: User;
+  filter: FilterType;
 }
 
 export const inititalState: UserState = {
@@ -17,7 +20,8 @@ export const inititalState: UserState = {
   error: null,
   loaded: false,
   friends: [],
-  public: null
+  public: null,
+  filter: {name: '', type: null},
 };
 
 const featureReducer = createReducer(
@@ -54,6 +58,13 @@ const featureReducer = createReducer(
   on(UserActions.setPublic, (state, { user }) => (
     {...state, public: user }
   )),
+  // FILTERS
+  on(UserActions.setFilter, (state, { value }) => (
+    {...state, filter: { ...state.filter, ...value }}
+  )),
+  on(UserActions.resetFilter, (state) => (
+    {...state, filter: { ...inititalState.filter }}
+  )),
 );
 
 export function reducer(state: UserState | undefined, action: Action) {
@@ -63,3 +74,22 @@ export function reducer(state: UserState | undefined, action: Action) {
 export const getUser = (state: UserState) => state.user;
 export const getFriends = (state: UserState) => state.friends;
 export const getPublic = (state: UserState) => state.public;
+export const getUserFilter = (state: UserState) => state.filter;
+
+export const getFriendsFiltered = (stateUser: UserState) => filterFriends(stateUser);
+
+const filterFriends = (stateUser: UserState) => {
+  const { filter, friends } = stateUser;
+  return friends.filter((friend) => 
+      Object.entries(filter)
+       .filter(([key]) => key !== TYPE_KEY)
+       .some(([key, value]) => {
+        const input = key === LOCATION_KEY || key === ROLE_KEY
+          ? friend.profile?.[key]
+          : friend[key];
+        return input
+          ? input.toLowerCase().includes(String(value)?.toLowerCase())
+        : false;
+    })
+  )
+}

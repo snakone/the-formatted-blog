@@ -1,0 +1,5 @@
+<ul class="skeleton">
+  @for(item of items; track item.id) {
+    <li [style.width]="item.width + 'px'"></li>
+  }
+</ul>

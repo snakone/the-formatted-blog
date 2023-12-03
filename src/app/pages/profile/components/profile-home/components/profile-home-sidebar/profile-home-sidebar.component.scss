@@ -135,6 +135,12 @@ button {
 
   &.remove {
     background-color: var(--error-light);
+    opacity: .8;
+    color: #f7f3f3 !important;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 

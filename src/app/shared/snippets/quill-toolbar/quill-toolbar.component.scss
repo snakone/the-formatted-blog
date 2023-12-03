@@ -4,6 +4,11 @@ $icon-size: 16px;
   display: flex;
   align-items: center;
   position: relative;
+
+  @media(width < 600px) {
+    position: relative;
+    top: -1px;
+  }
 }
 
 .toolbar {
@@ -15,7 +20,7 @@ $icon-size: 16px;
   justify-content: space-between;
   align-items: center;
 
-  & i:not(.fa-pulse):not(.fa-check) {
+  & i:not(.fa-pulse):not(.fa-check):not(.fa-exclamation-triangle) {
     width: 28px;
     height: 24px;
     padding: 3px 8px;
@@ -25,6 +30,11 @@ $icon-size: 16px;
     font-size: $icon-size;
     transition: filter 200ms ease-in;
     &:hover:not(.disabled) { color: var(--contrast-color) }
+
+    @media(width < 550px) {
+      font-size: 14px;
+      width: 24px;
+    }
   }
 
   // SUCCESS
@@ -46,7 +56,7 @@ $icon-size: 16px;
       margin-left: 30px;
 
       @media(max-width: 450px) {
-        margin-left: 12px;
+        margin-left: 6px;
       }
      }
 
@@ -97,11 +107,16 @@ $icon-size: 16px;
   & .total {
     margin-left: -5px;
     font-size: $icon-size;
-  }
+    // TOTAL DRAFTS
+    & i.fa-paper-plane {
+      margin-right: 8px;
+      position: relative;
+      top: 2px;
+    }
 
-  // TOTAL DRAFTS
-  & i.fa-paper-plane {
-    margin-right: 5px;
+    @media(width < 550px) {
+      font-size: 13px;
+    }
   }
 
   // HELP
@@ -115,7 +130,7 @@ $icon-size: 16px;
   }
 
   // SAVING
-  & .animated {
+  & .icons {
     font-size: 14px;
     position: relative;
     top: 2px;
@@ -127,14 +142,29 @@ $icon-size: 16px;
 
     &.temporal {
       margin-left: 19px;
+
+      &:hover {
+        & span {
+          color: var(--contrast-color);
+          cursor: pointer;
+        }
+      }
+
+      & .fa-save {
+        display: none;
+
+        @media(width < 600px) {
+          display: initial;
+        }
+      }
     }
     
-    @media(width < 1200px) {
+    @media(width < 550px) {
       font-size: 13px;
     }
   }
 
-  @media(max-width: 710px) {
+  @media(width < 600px) {
     & .animated {
       & span {
         display: none;

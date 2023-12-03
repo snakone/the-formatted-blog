@@ -1,4 +1,4 @@
-@if(post && post.headers?.length > 0) {
+@defer(when post) {
   @if({spy: scrollSpy$ | async}; as obs) {
     <ul>
       @for(header of post.headers; track header.id) {
@@ -9,4 +9,6 @@
       }
     </ul>
   }
+} @placeholder {
+  <app-post-index-skeleton/>
 }

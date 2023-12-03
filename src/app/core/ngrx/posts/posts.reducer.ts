@@ -79,6 +79,7 @@ const featureReducer = createReducer(
   on(PostActions.resetByUser, (state) => (
     {...state, userLoaded: false, error: null, user: []}
   )),
+  // FILTERS
   on(PostActions.setFilter, (state, { value }) => (
     {...state, filter: { ...state.filter, ...value }}
   )),

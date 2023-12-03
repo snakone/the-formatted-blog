@@ -3,7 +3,7 @@
     <h6>{{ draft.title }}</h6>
     <div class="card-data">
         <span class="bold">{{ draft.author }}</span>
-        <span>{{ draft.created }}</span>
+        <span>{{ draft.createdAt | date }}</span>
         <div class="category">
           {{draft.category}}
         </div>

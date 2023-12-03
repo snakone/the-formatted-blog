@@ -30,7 +30,8 @@ export const QUILL_CONTAINER: string | string[] | QuillToolbarConfig = [
   [{ 'header': 2 }, { 'header': 3 }],
   [{ 'list': 'ordered'}, { 'list': 'bullet' }],
   ['undo' , 'redo'],
-  ['link', 'image', 'video']
+  ['link', 'image', 'video'],
+  ['clean']
 ];
 
 export const HEADER_3_QUILL_ICON: string = `<svg viewBox="0 0 18 18">
@@ -122,6 +123,13 @@ export const QUILL_HELP_ITEMS_TOOLBAR: QuillHelpItem[] = [
               proporciona el enlace del video que deseas agregar desde plataformas de terceros como <strong>YouTube</strong> o <strong>Vimeo</strong>. 
               El editor de texto facilitará la inclusión del video, permitiendo que los lectores visualicen el contenido multimedia directamente en el documento.`
   },
+  {
+    icon: 'fas fa-remove-format',
+    label: 'Limpiar formato',
+    message: `Al hacer clic en este botón, eliminarás cualquier formato aplicado al texto, como negrita, cursiva, subrayado, y 
+              otros estilos de formato. Útil para volver al estilo <strong>predeterminado</strong> y comenzar con un lienzo de texto fresco y sin formato.
+              Recuerda que puedes seleccionar el texto al que quieres quitar el formato.`
+  }
 ];
 
 export const QUILL_HELP_ITEMS_ACTIONS: QuillHelpItem[] = [

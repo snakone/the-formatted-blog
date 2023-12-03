@@ -1,5 +1,5 @@
 <div class="content animated fadeIn">
-  <app-post-search [type]="searchType.FAVORITE"/>
+  <app-content-search [type]="searchType.FAVORITE"/>
   @if(favorites$ | async; as favorites) {
     @for(post of favorites; track post._id; let last = $last) {
       <app-post-card [small]="true"

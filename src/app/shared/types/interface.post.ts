@@ -10,7 +10,6 @@ export interface Post {
   title?: string;
   category?: string;
   message?: DeltaStatic; // Quill Delta
-  created?: string; // Date
   author?: string;
   cover?: string; // Image
   intro?: string;
@@ -25,6 +24,7 @@ export interface Post {
   likes?: number;
   views?: number;
   published?: string; // When the Post was published
+  createdAt?: Date;
 }
 
 export interface PostHeader {

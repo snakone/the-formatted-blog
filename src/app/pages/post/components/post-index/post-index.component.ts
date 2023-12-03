@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Post } from '@shared/types/interface.post';
 import { Subject } from 'rxjs';
 
+const loadTime = 5000;
+
 @Component({
   selector: 'app-post-index',
   templateUrl: './post-index.component.html',
@@ -20,15 +22,9 @@ export class PostIndexComponent {
     this.listenToScroll();
   }
 
-  public scroll(id: string): void {
-    const el = document.getElementById(id);
-    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  }
-
   private listenToScroll(): void {
-    if (!this.post || !this.post.headers) { return; }
-
     setTimeout(() => {
+      if (!this.post || !this.post.headers) { return; }
       const headers = document.querySelectorAll('h2');
 
       const handleIntersection = (entry: IntersectionObserverEntry): void => {
@@ -51,7 +47,12 @@ export class PostIndexComponent {
       } catch (error) {
         console.error(error);
       }
-    }, 3500);  // wait H2 to LOAD
+    }, loadTime);
+  }
+
+  public scroll(id: string): void {
+    const el = document.getElementById(id);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   }
 
   private setID(id: string): void {

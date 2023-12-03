@@ -1,22 +1,11 @@
-<h1>Lista de amigos</h1>
+<app-content-search [type]="searchType.FRIENDS"
+                 [placeholder]="'Busca a tus amigos por su nombre, correo electrónico, lugar, oficio...'"/>
+
 <div class="grid">
   @for(friend of friends; track friend._id) {
-    <article>
-      <img [src]="friend.avatar" alt="user-avatar"/>
-      <h2 (click)="goToProfile(friend._id)">{{friend.name}}</h2>
-      @if(friend.profile?.role) {
-        <p>{{friend.profile?.role}}</p>
-      }
-      <p>{{friend.profile?.location || 'Lugar desconocido'}}</p>
-      <!-- STATS -->
-      <ul>
-        @for(stat of statsList; track stat.label) {
-          <li><i [class]="stat.icon"></i> {{friend.stats[stat.label]}}</li>
-        }
-      </ul>
-    </article>
+    <app-friends-card [friend]="friend"/>
   } @empty {
-    Tu lista de amigos está vacía.
+    No se han encontrado amigos.
   }
 </div>
 

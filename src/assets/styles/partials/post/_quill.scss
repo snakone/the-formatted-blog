@@ -45,8 +45,15 @@
   justify-content: center;
   padding: 0;
   padding-bottom: 12px;
-}
 
+  @media(width < 550px) {
+
+    & .ql-formats {
+      position: relative;
+      left: -4px !important;
+    }
+  }
+}
 
 // FIX SCROLL AFTER PASTER
 .ql-clipboard {
@@ -61,7 +68,7 @@
   left: -2px;
   display: inline-flex !important;
   margin-right: 0 !important;
-  @media(min-width: 550px) { margin-right: 24px !important; }
+  @media(min-width: 615px) { margin-right: 24px !important; }
   &:first-of-type { top: -.5px; }
   &:last-of-type { margin-right: 0 !important }
 }
@@ -89,7 +96,20 @@
 
 .ql-snow.ql-toolbar button {
   width: 30px !important;
-  
+
+  @media(width < 550px) {
+    width: 27px !important;
+
+    &.ql-bold {
+      position: relative;
+      left: 2px;
+    }
+  }
+
+  @media(width < 430px) {
+    width: 26px !important;
+  }
+
   &:hover {
     & .ql-stroke { stroke: var(--contrast-color) }
     & .ql-fill { fill: var(--contrast-color) }
@@ -112,6 +132,11 @@
 
   &.ql-video, &.ql-link, &.ql-image {
     margin: 0 2px;
+  }
+
+  &.ql-clean {
+    position: relative;
+    top: 1px;
   }
 }
 

@@ -1,6 +1,10 @@
-<article>
-  <app-post-card [border]="false"
-                 [alone]="true"
-                 [post]="post"
-                 [favoritesID]="favoritesID$ | async"/>
-</article>
+@defer (when post) {
+  <article>
+    <app-post-card [border]="false"
+                   [alone]="true"
+                   [post]="post"
+                   [favoritesID]="favoritesID$ | async"/>
+  </article>
+} @placeholder {
+  <app-post-card-skeleton [small]="false"/>
+}
