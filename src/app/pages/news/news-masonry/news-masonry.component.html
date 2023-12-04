@@ -2,19 +2,21 @@
   @for(news of items; track news.url) {
     <div class="grid-item">
         <div class="content">
-          @defer {
+
             <div class="inner">
               <a [href]="news.url" target="_blank">
-                <img [src]="news.image" 
-                        alt="News Image" 
-                        loading="lazy"
-                        #img
-                        (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
+                @defer (on viewport){
+                  <img [src]="news.image" 
+                          alt="News Image" 
+                          loading="lazy"
+                          #img
+                          (error)="img.src = 'assets/images/placeholder.png'; img.alt='No Image'">
+                } @placeholder {
+                  <img src="assets/images/placeholder.png" alt="placeholder"/>
+                }
               </a>
             </div>
-          } @loading {
-            <p class="placerholder"></p>
-          }
+
           <div class="card">
             <p class="category">{{news.category}}</p>
             <h4>

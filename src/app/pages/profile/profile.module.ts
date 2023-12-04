@@ -25,6 +25,8 @@ import { ActivitiesAccessModule } from '@core/ngrx/activities/data-access/activi
 import { SkeletonModule } from '@shared/snippets/skeleton/skeleton.module';
 import { ProfileFriendsContentComponent } from './components/profile-friends/components/profile-friends-content/profile-friends-content.component';
 import { ProfileFriendsSidebarComponent } from './components/profile-friends/components/profile-friends-sidebar/profile-friends-sidebar.component';
+import { ProfileSettingsContentComponent } from './components/profile-settings/components/profile-settings-content/profile-settings-content.component';
+import { ProfileSettingsSidebarComponent } from './components/profile-settings/components/profile-settings-sidebar/profile-settings-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ProfileFriendsSidebarComponent } from './components/profile-friends/com
     ProfileHomeSidebarComponent,
     ProfilePublicComponent,
     ProfileFriendsContentComponent,
-    ProfileFriendsSidebarComponent
+    ProfileFriendsSidebarComponent,
+    ProfileSettingsContentComponent,
+    ProfileSettingsSidebarComponent
   ],
   imports: [
     CommonModule,

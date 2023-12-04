@@ -17,7 +17,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class CreateComponent {
   
   drafts$!: Observable<Post[]>;
-  text = NOTIFICATION_TEXT;
   title!: string;
   collapsed$: Observable<boolean> | undefined;
 

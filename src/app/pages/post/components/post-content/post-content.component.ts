@@ -3,6 +3,12 @@ import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 import { Post } from '@shared/types/interface.post';
 import { Observable } from 'rxjs';
 
+declare const hljs;
+
+hljs.configure({
+  languages: ['javascript', 'typescript', 'html', 'css']
+})
+
 @Component({
   selector: 'app-post-content',
   templateUrl: './post-content.component.html',

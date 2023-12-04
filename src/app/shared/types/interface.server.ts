@@ -1,6 +1,6 @@
 import { FormattedNew } from "./interface.app";
 import { Post } from "./interface.post";
-import { User, UserActivity } from "./interface.user";
+import { SearchResult, User, UserActivity } from "./interface.user";
 
 // SERVER RESPONSES
 interface ServerResponse {
@@ -45,6 +45,10 @@ export interface NewsResponse extends ServerResponse {
 
 export interface ActivitiesResponse extends ServerResponse { 
   activities?: UserActivity[];
+}
+
+export interface SearchResponse extends ServerResponse { 
+  result?: SearchResult;
 }
 
 // CHECK

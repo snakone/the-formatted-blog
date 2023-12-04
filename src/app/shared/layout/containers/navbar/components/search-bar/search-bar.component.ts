@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { SearchFacade } from '@core/ngrx/search/search.facade';
 import { BOUNCE_IN_DOWN_CLASS, BOUNCE_OUT_UP_CLASS } from '@shared/data/constants';
 import { SEARCH_SENTENCE } from '@shared/data/sentences';
 
@@ -14,20 +16,41 @@ const closeDelay = 800;
 export class SearchBarComponent {
 
   @Output() closed = new EventEmitter<void>();
-  value = '';
+  value = 'sergi';
   placeholder = '';
   index = 0;
   sentence = SEARCH_SENTENCE;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    private searchFacade: SearchFacade,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.autoType();
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      const input = document.getElementById('search-input');
+      if (input) {
+        input.focus();
+      }
+    }, 500);
+  }
+
   public search(): void {
-    console.log(this.value);
+    this.searchFacade.search(this.value || '');
     this.close();
+    this.router.navigateByUrl('/search')
+     .then(res => {
+      if (res) {
+        setTimeout(() => {
+          window.dispatchEvent(new Event('resize'));
+        }, 3000);
+      }
+     });
   }
 
   public close(): void {

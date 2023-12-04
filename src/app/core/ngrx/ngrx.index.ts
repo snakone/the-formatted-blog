@@ -6,16 +6,20 @@ import * as fromPosts from '@store/posts/posts.reducer';
 import * as fromDrafts from '@store/drafts/drafts.reducer';
 import * as fromActivities from '@store/activities/activities.reducer';
 import * as fromNews from '@store/news/news.reducer';
+import * as fromSearch from '@store/search/search.reducer';
 
 // APP STATE
 export interface AppState {
   user: fromUsers.UserState;
   posts: fromPosts.PostState;
+  search: fromSearch.SearchState
 }
 export const appReducers: ActionReducerMap<AppState> = {
   user: fromUsers.reducer,
-  posts: fromPosts.reducer
+  posts: fromPosts.reducer,
+  search: fromSearch.reducer
 };
+
 export const getAppState = createFeatureSelector<AppState>('AppState');
 
 // DRAFTS

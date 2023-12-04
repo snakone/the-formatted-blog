@@ -63,6 +63,12 @@ const routes: Routes = [
       import('./pages/conditions/conditions.module')
        .then(mod => mod.ConditionsModule), data: { name: 'Conditions' }
   },
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('./pages/search/search.module')
+       .then(mod => mod.SearchModule), data: { name: 'Search' }
+  },
   { path: '**', redirectTo: 'home' },
 ];
 

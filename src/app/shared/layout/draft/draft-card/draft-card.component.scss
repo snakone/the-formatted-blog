@@ -54,6 +54,10 @@ li {
 
     @media(max-width: 992px) {
       display: block;
+
+      & i {
+        font-size: 13px;
+      }
     }
   }
 

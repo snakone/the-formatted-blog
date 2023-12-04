@@ -18,6 +18,7 @@ import { UserEffects } from './ngrx/users/users.effects';
 import { PostEffects } from './ngrx/posts/posts.effects';
 import { JwtInterceptor } from './services/http/jwt.interceptor';
 import { QuillFormatModule } from './services/quill/quill.module';
+import { SearchEffects } from './ngrx/search/search.effects';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { QuillFormatModule } from './services/quill/quill.module';
     StoreModule.forFeature('AppState', appReducers),
     EffectsModule.forRoot([
       UserEffects,
-      PostEffects
+      PostEffects,
+      SearchEffects
     ]),
     QuillFormatModule,
     StorageModule,

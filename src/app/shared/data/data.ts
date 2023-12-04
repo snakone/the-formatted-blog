@@ -1,9 +1,10 @@
 import { IconList, ActionList, TextList, FQAItem } from '@shared/types/interface.app';
-import { Post } from '@shared/types/interface.post';
+import { Post, SearchResultAmount } from '@shared/types/interface.post';
 import { CheckStatusList } from '@shared/types/interface.server';
 import { DraftStatusEnum, DraftTypeEnum } from '@shared/types/types.enums';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TITLE_KEY, CATEGORY_KEY, COVER_KEY, INTRO_KEY } from './constants';
+import { SearchResult } from '@shared/types/interface.user';
 
 export const CARROUSEL_OPTS: OwlOptions = {
   loop: false,
@@ -396,3 +397,10 @@ export const SOCIAL_LIST: IconList[] = [
 export const EMPTY_DRAFT: Post = {[TITLE_KEY]: '', [CATEGORY_KEY]: '', [COVER_KEY]: '', [INTRO_KEY]: ''};
 
 export const SEARCH_DEFAULT_PLACEHOLDER = 'Busca por título, categoría, autor, estado del boceto...';
+
+export const SEARCH_RESULT_AMOUNT_LIST= (result: SearchResult) => [
+  { name: 'Artículos', icon: 'far fa-newspaper', amount: result.posts.length || 0 },
+  { name: 'Bocetos', icon: 'far fa-paper-plane', amount: result.drafts.length || 0 },
+  { name: 'Usuarios', icon: 'fas fa-user', amount: result.users.length || 0 },
+  { name: 'Amigos', icon: 'fas fa-users', amount: result.friends.length || 0 },
+];

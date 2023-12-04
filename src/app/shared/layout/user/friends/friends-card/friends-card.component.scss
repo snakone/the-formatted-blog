@@ -4,6 +4,8 @@ article {
   @include shadow-card();
   text-align: center;
   padding: 16px;
+  min-height: 241px;
+  position: relative;
 
   & img {
     max-width: 100%;
@@ -28,9 +30,11 @@ ul {
   list-style: none;
   @include flex-center();
   width: 100%;
-  position: relative;
+  position: absolute;
   margin-top: 16px;
   margin-bottom: 6px;
+  left: 0;
+  bottom: 12px;
 
   & li {
     padding: 0 12px;

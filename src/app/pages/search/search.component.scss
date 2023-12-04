@@ -1,0 +1,19 @@
+@import 'mixins/mixins.scss';
+
+section, .wrapper {
+  @include container();
+  @include row();
+  margin-top: 0.666rem;
+}
+
+app-searh-content {
+  @include grid-component();
+
+  @media (max-width: 992px) {
+    grid-row: 2;
+  }
+}
+
+app-searh-sidebar {
+  @include grid-child();
+}

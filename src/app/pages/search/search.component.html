@@ -1,0 +1,26 @@
+<div class="animated fadeIn">
+  <div class="wrapper">
+    <app-action-bar [text]="text"
+                    buttonText="Subscríbete"
+                    (function)="notification()"
+                    [margin]="true"/>
+  </div>
+  <section class="search-content">
+    @if({
+      result: result$ | async,
+      value: value$ | async,
+      favorites: favoritesID$ | async
+    }; as obs) {
+      <app-section [margin]="false">
+        <app-searh-content [result]="obs.result" 
+                           [value]="obs.value"
+                           [favorites]="obs.favorites"
+                           id="sticky-wrapper"/>
+        @if(obs.result) {
+          <app-searh-sidebar [result]="obs.result" 
+                             [value]="obs.value"/>
+        }
+      </app-section>
+    }
+  </section>
+</div>

@@ -1,0 +1,37 @@
+h1 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 20px;
+  color: var(--contrast-color);
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  opacity: 0.7;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 32px;
+  position: relative;
+  left: 4px;
+
+  & li {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & i {
+      font-size: 15px;
+      margin-right: 8px;
+    }
+  }
+}

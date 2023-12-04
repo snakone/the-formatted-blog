@@ -1,0 +1,21 @@
+<app-sticky-aside [selector]="'search-content'">
+  <h1>Resultados de la búsqueda para...</h1>
+  <p class="value">{{value}}</p>
+    @if(emptyResult(result)) {
+      <p class="subtitle">
+        Lo sentimos, no hemos podido encontrar nada relacionado, ¿Por qué no pruebas de nuevo?
+      </p>
+    } @else {
+      <p class="subtitle">
+        Hemos encontrado resultados relevantes para tu búsqueda específica. Aquí están los detalles desglosados por secciones:
+      </p>
+      <ul>
+        @for(item of createResultList(); track item.icon) {
+          <li>
+            <i [class]="item.icon" [matTooltip]="item.name"></i>
+            <span>{{item.amount}}</span>
+          </li>
+        }
+      </ul>
+    }
+</app-sticky-aside>

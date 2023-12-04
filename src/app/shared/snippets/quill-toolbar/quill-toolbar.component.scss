@@ -155,6 +155,8 @@ $icon-size: 16px;
 
         @media(width < 600px) {
           display: initial;
+          position: relative;
+          left: -5px;
         }
       }
     }

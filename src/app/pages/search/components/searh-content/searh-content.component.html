@@ -1,0 +1,67 @@
+@if(result) {
+  <!-- ARTICLES -->
+  <div class="result">
+    <h2>Artículos</h2>
+    @if(result.posts?.length > 0) {
+      <p class="subtitle">Los artículos son públicos, puedes encontrar de cualquier usuario que tenga uno.</p>
+    }
+    <div class="list">
+      @for(post of result.posts; track post._id) {
+        <app-post-card [small]="true" 
+                       [post]="post" 
+                       [border]="false" 
+                       [favoritesID]="favorites"/>
+      } @empty {
+        <p>No se han encontrado artículos.</p>
+      }
+    </div>
+  </div>
+  <!-- DRAFTS -->
+  <div class="result">
+    <h2>Bocetos</h2>
+    @if(result.drafts?.length > 0) {
+      <p class="subtitle">Los bocetos son privados lo que quiere decir que solo verás resultados de tus propios bocetos.</p>
+    }
+    <div class="list">
+      @for(draft of result.drafts; track draft._id) {
+        <app-post-card [small]="true" 
+                       [post]="draft"
+                       [isDraft]="true"
+                       [border]="false" 
+                       [favoritesID]="favorites"/>
+      } @empty {
+        <p>No se han encontrado bocetos.</p>
+      }
+    </div>
+  </div>
+  <!-- USERS -->
+  <div class="result">
+    <h2>Usuarios</h2>
+    @if(result.users?.length > 0) {
+      <p class="subtitle">Puedes encontrar a cualquier usuario registrado en la aplicación.</p>
+    }
+    <div class="list grid">
+      @for(user of result.users; track user._id) {
+        <app-friends-card  [friend]="user"/>
+      } @empty {
+        <p>No se han encontrado usuarios.</p>
+      }
+    </div>
+  </div>
+  <!-- FRIENDS -->
+  <div class="result">
+    <h2>Amigos</h2>
+    @if(result.friends?.length > 0) {
+      <p class="subtitle">Los resultados de tus amigos obviamente son solamente los tuyos.</p>
+    }
+    <div class="list grid">
+      @for(friend of result.friends; track friend._id) {
+        <app-friends-card  [friend]="friend"/>
+      } @empty {
+        <p>No se han encontrado amigos.</p>
+      }
+    </div>
+  </div>
+} @else {
+  No se han encontrado resultados.
+}

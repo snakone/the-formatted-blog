@@ -1,3 +1,4 @@
+import { Post } from "./interface.post";
 import { AccountType, UserActivityType } from "./types.enums";
 
 // USER
@@ -43,6 +44,13 @@ export interface UserActivity {
 export interface SameIDUser {
   public: User;
   current: User;
+}
+
+export interface SearchResult {
+  posts?: Post[];
+  drafts?: Post[];
+  users?: User[];
+  friends?: User[];
 }
 
 

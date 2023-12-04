@@ -1,25 +1,27 @@
 @defer {
-  <div id="search-bar"
-  class="wrapper animated bounceInDown">
-<div class="search-bar">
- <div class="search-input">
-   <i class="fas fa-search"></i>
-    <!-- INPUT -->
-   <input type="text"
-          [(ngModel)]="value"
-          [placeholder]="placeholder"/>
-   <button [disabled]="!value"
-           (click)="search()">Buscar
-   </button>
- </div>
-  <!-- CLOSE -->
- <div class="close">
-   <span (click)="close()">
-     <i class="far fa-times-circle"></i>
-   </span>
- </div>
-</div>
-</div>
+  <div id="search-bar" class="wrapper animated bounceInDown">
+    <div class="search-bar">
+      <div class="search-input">
+        <i class="fas fa-search"></i>
+          <!-- INPUT -->
+        <input type="text"
+               [(ngModel)]="value"
+               [placeholder]="placeholder"
+               (keyup.enter)="search()"
+               id="search-input"
+               autofocus/>
+        <button [disabled]="!value"
+                (click)="search()">Buscar
+        </button>
+      </div>
+        <!-- CLOSE -->
+      <div class="close">
+        <span (click)="close()">
+          <i class="far fa-times-circle"></i>
+        </span>
+      </div>
+    </div>
+  </div>
 }
 
 <div class="backdrop" (click)="close()"></div>

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-profile-settings',
@@ -9,9 +10,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 export class ProfileSettingsComponent {
 
+  text = NOTIFICATION_TEXT;
+
   constructor() { }
 
-  ngOnInit(): void {
+  public notification(): void {
+    console.log('home');
   }
 
 }

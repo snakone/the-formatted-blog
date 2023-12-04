@@ -38,6 +38,12 @@ export interface QuillHelpItem {
   message: string;
 }
 
+export interface SearchResultAmount {
+  icon: string;
+  name: string;
+  amount: number;
+}
+
 export interface UpdateDraftKeyData {
   id: string; 
   keys: KeyPair; 
