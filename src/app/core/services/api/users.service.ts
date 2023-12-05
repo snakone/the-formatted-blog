@@ -71,4 +71,13 @@ export class UserService {
       );
   }
 
+  public getUserEmailById(id: string): Observable<string> {
+    return this.http
+      .get<UserResponse>(this.API_USER + '/email/' + id)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.email)
+      );
+  }
+
 }

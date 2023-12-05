@@ -5,8 +5,10 @@ import { SavingType } from '@shared/types/interface.app';
 import { Post } from '@shared/types/interface.post';
 import { Observable, distinctUntilKeyChanged, filter } from 'rxjs';
 
-import { DraftStatusEnum } from '@shared/types/types.enums';
+import { DraftSidebarSettingsEnum, DraftStatusEnum } from '@shared/types/types.enums';
 import { RESIZE_EVENT, VALUE_KEY } from '@shared/data/constants';
+import { UserSettings } from '@shared/types/class.types';
+import { StorageService } from '@core/services/storage/storage.service';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -22,11 +24,13 @@ export class CreateSidebarComponent {
   deletedID$: Observable<string> | undefined;
   saving$: Observable<SavingType> | undefined;
   collaped = false;
+  settings: UserSettings;
 
   constructor(
     private createDraftService: CreateDraftService,
     private draftsFacade: DraftsFacade,
-    private changeRef: ChangeDetectorRef
+    private changeRef: ChangeDetectorRef,
+    private ls: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -36,10 +40,22 @@ export class CreateSidebarComponent {
       filter(Boolean), 
       distinctUntilKeyChanged(VALUE_KEY)
     ); 
+
+    this.checkSettings();
   }
 
   ngAfterViewInit() {
     this.setActiveIfDraftAlone();
+  }
+
+  private checkSettings(): void {
+    this.settings = this.ls.getSettings() as UserSettings;
+
+    if (this.settings.draftSidebar.state === DraftSidebarSettingsEnum.COLLAPSED) {
+      this.collaped = true;
+      this.originalCollapsed = true;
+      this.createDraftService.onCollapse(this.collaped);
+    }
   }
 
   private setActiveIfDraftAlone(): void {

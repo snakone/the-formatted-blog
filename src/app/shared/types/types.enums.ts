@@ -44,6 +44,10 @@ export type ValidatorType =
   ValidatorEnum.EMAIL | 
   ValidatorEnum.PASSWORD;
 
+export type ThemeType =
+ ThemeEnum.LIGHT |
+ ThemeEnum.DARK;
+
 export enum SavingTypeEnum {
   SAVING = 'saving',
   WARNING = 'warning',
@@ -97,4 +101,14 @@ export enum SnackTypeEnum {
   INFO = 'info',
   WARNING = 'warning',
   ERROR = 'error'
+}
+
+export enum ThemeEnum {
+  LIGHT = 'light',
+  DARK = 'dark'
+}
+
+export enum DraftSidebarSettingsEnum {
+  EXPANDED = 'expanded',
+  COLLAPSED = 'collapsed'
 }

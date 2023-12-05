@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from 'ngx-webstorage';
 import { STORAGE_CONSTANTS, Storage } from './storage.config';
+import { UserSettings } from '@shared/types/class.types';
 
 @Injectable()
 
@@ -20,10 +21,31 @@ export class StorageService {
     this.storage = this.storage;
   }
 
+  public setKeySettings(key: string, value: any): void {
+    this.loadStorage();
+    if (value === undefined) { return; }
+    this.storage.settings[key] = value;
+    this.storage = this.storage;
+  }
+
+  public setSettings(settings: UserSettings): void {
+    this.loadStorage();
+    if (settings === undefined) { return; }
+    this.storage.settings = settings;
+    this.storage = this.storage;
+  }
+
   public get(value: string): string | undefined {
     this.loadStorage();
-    if (this.storage[value] === undefined) { return undefined; }
-    return this.storage[value];
+    return this.storage[value] || undefined;
+  }
+
+  public getSettings(value?: string): string | UserSettings | boolean | undefined {
+    this.loadStorage();
+    if (!value) {
+      return this.storage.settings || undefined;
+    }
+    return this.storage.settings[value] || undefined;
   }
 
   private loadStorage(): void {

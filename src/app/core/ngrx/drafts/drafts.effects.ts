@@ -12,6 +12,7 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { SavingTypeEnum, SnackTypeEnum } from '@shared/types/types.enums';
 import { CREATE_ROUTE } from '@shared/data/constants';
+import { DRAFT_CREATE_SENTENCE, DRAFT_DELETE_SENTENCE, DRAFT_PUBLISH_SENTENCE, DRAFT_UPDATE_SENTENCE } from '@shared/data/sentences';
 
 @Injectable()
 
@@ -160,21 +161,21 @@ export class DraftsEffects {
   alertsDraftEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.createSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto creado!', SnackTypeEnum.SUCCESS)))
+      concatMap((_) => of(this.crafter.setSnack(DRAFT_CREATE_SENTENCE, SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
   alertsDraft1Effect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.deleteSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto borrado!', SnackTypeEnum.SUCCESS)))
+      concatMap((_) => of(this.crafter.setSnack(DRAFT_DELETE_SENTENCE, SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
   alertsDraft2Effect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.updateSuccess),
-      concatMap((_) => of(this.crafter.setSnack('Boceto actualizado!', SnackTypeEnum.SUCCESS)))
+      concatMap((_) => of(this.crafter.setSnack(DRAFT_UPDATE_SENTENCE, SnackTypeEnum.SUCCESS)))
     ), { dispatch: false }
   )
 
@@ -191,7 +192,7 @@ export class DraftsEffects {
   onPublishDraftEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(DraftsActions.publishSuccess),
-      tap(_ => this.crafter.setSnack('Boceto publicado!', SnackTypeEnum.SUCCESS)),
+      tap(_ => this.crafter.setSnack(DRAFT_PUBLISH_SENTENCE, SnackTypeEnum.SUCCESS)),
       switchMap((_) => of(...[
         DraftsActions.reset(null),
         PostsActions.reset()

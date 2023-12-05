@@ -1,1 +1,72 @@
-<p>profile-settings-content works!</p>
+<section class="settings">
+  <!-- APPLICATION -->
+  <div class="wrapper">
+    <h1>Aplicación</h1>
+    <p class="sub">Todo lo relacionado con tu experiencia en la aplicación</p>
+    <div class="form-control">
+      <h2><i class="fas fa-palette"></i> Tema</h2>
+      <div class="radio">
+        <div>
+          <label for="light">
+            <i class="far fa-sun" [matTooltip]="'Light'"></i>
+          </label>
+          <input type="radio" 
+                 name="theme" 
+                 value="light"
+                 [(ngModel)]="settings.theme"
+                 [checked]="settings.theme === 'light'"/>
+        </div>
+        <div>
+          <label for="dark">
+            <i class="far fa-moon" [matTooltip]="'Dark'"></i>
+          </label>
+          <input type="radio" 
+                 name="theme" 
+                 value="dark"
+                 [(ngModel)]="settings.theme" 
+                 [checked]="settings.theme === 'dark'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ACCOUNT -->
+  <div class="wrapper">
+    <h1>Cuenta</h1>
+    <p class="sub">Administra tu inicio de sesión, el token identificador, etc...</p>
+    <!-- AUTO LOGIN -->
+    <div class="form-control">
+      <h2><i class="fas fa-sign-in-alt"></i> Auto login</h2>
+      <mat-slide-toggle color="primary" [(ngModel)]="settings.autoLogin"/>
+    </div>
+    <!-- REFRESH TOKEN -->
+    <div class="form-control">
+      <h2><i class="fas fa-retweet"></i> Refrescar token</h2>
+      <mat-slide-toggle color="primary" [(ngModel)]="settings.refreshToken"/>
+    </div>
+    <!-- AUTO LOGIN -->
+    <div class="form-control">
+      <h2><i class="far fa-envelope"></i> Recordar email</h2>
+      <mat-slide-toggle color="primary" [(ngModel)]="settings.rememberEmail"/>
+    </div>
+  </div>
+  <!-- CREATE -->
+  <div class="wrapper">
+    <h1>Creación</h1>
+    <p class="sub">Personaliza tu experiencia cuando estás creando contenido.</p>
+    <div class="form-control">
+      <h2><i class="far fa-save"></i> Auto guardado</h2>
+      <mat-slide-toggle color="primary" [(ngModel)]="settings.autoSave"/>
+    </div>
+    <div class="form-control">
+      <h2><i class="fas fa-expand"></i> Barra lateral fija</h2>
+      <mat-slide-toggle color="primary" [(ngModel)]="settings.draftSidebar.fixed"/>
+    </div>
+    <div class="form-control select">
+      <h2><i class="fas fa-border-all"></i> Estado de la barra lateral</h2>
+      <select [(ngModel)]="settings.draftSidebar.state">
+        <option value="expanded">Expandida</option>
+        <option value="collapsed">Cerrada</option>
+      </select>
+    </div>
+  </div>
+</section>

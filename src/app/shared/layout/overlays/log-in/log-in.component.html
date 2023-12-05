@@ -2,6 +2,6 @@
   @if(register) {
     <app-sign-up (login)="register = !register"/>
   } @else {
-    <app-sign-in (register)="register = !register"/>
+    <app-sign-in (register)="register = !register" [rememberEmail]="rememberEmail$ | async"/>
   }
 </div>

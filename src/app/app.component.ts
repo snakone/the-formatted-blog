@@ -4,7 +4,8 @@ import { UsersFacade } from '@store/users/users.facade';
 import { PWAService } from '@services/pwa/pwa.service';
 import { StorageService } from '@services/storage/storage.service';
 
-import { DARK_KEY, THEME_KEY, TOKEN_KEY } from '@shared/data/constants';
+import { THEME_KEY, TOKEN_KEY } from '@shared/data/constants';
+import { ThemeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +26,15 @@ export class AppComponent {
   }
 
   private checkTheme(): void {
-    if (this.ls.get(THEME_KEY) === DARK_KEY) {
-      document.body.classList.toggle(DARK_KEY);
+    if (this.ls.getSettings(THEME_KEY) === ThemeEnum.DARK) {
+      document.body.classList.toggle(ThemeEnum.DARK);
     }
   }
 
   private checkToken(): void {
-    if (this.ls.get(TOKEN_KEY)) { this.userFcd.verifyToken(); }
+    const token = this.ls.get(TOKEN_KEY);
+    const autoLogin = this.ls.getSettings('autoLogin');
+    if (token && autoLogin) { this.userFcd.verifyToken(); }
   }
 
 }

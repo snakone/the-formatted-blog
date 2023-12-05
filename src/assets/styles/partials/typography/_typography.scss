@@ -1,6 +1,6 @@
 // FORMS
 input, select, textarea {
-  &:not([type="checkbox"]) {
+  &:not([type="checkbox"]):not([type="radio"]) {
     width: 100%;
     border: 1px solid transparent;
     outline: none;

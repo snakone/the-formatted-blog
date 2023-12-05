@@ -10,7 +10,7 @@ import { QuillService } from '@core/services/quill/quill.service';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
 import { SavingType } from '@shared/types/interface.app';
 
-import { MESSAGE_KEY } from '@shared/data/constants';
+import { AUTO_SAVE_KEY, MESSAGE_KEY } from '@shared/data/constants';
 import { SavingTypeEnum } from '@shared/types/types.enums';
 import { CREATE_ACTION_LIST } from '@shared/data/data';
 
@@ -20,6 +20,7 @@ import {
   PREVIEW_DRAFT_DIALOG, 
   QUILL_HELP_DIALOG 
 } from '@shared/data/dialogs';
+import { StorageService } from '@core/services/storage/storage.service';
 
 @Component({
   selector: 'app-quill-toolbar',
@@ -36,6 +37,7 @@ export class QuillToolbarComponent {
   saving$: Observable<SavingType>;
   totalDrafts$: Observable<number> | undefined;
   saveTypes = SavingTypeEnum;
+  autoSave: boolean = false;
   
   iconList = CREATE_ACTION_LIST;
 
@@ -46,7 +48,8 @@ export class QuillToolbarComponent {
     private route: ActivatedRoute,
     private quillSrv: QuillService,
     private createDraftSrv: CreateDraftService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private ls: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +57,12 @@ export class QuillToolbarComponent {
     this.totalDrafts$ = this.draftsFacade.drafts$.pipe(
       map(drafts => drafts?.length || 0)
     );
+
+    this.autoSave = this.ls.getSettings(AUTO_SAVE_KEY) as boolean;
+
+    if (!this.autoSave) {
+      this.draftsFacade.setSaving({value: false, type: SavingTypeEnum.TEMPORAL});
+    }
   }
 
   switchAction: {[key: string]: (saving?: boolean) => void} = {
@@ -94,9 +103,8 @@ export class QuillToolbarComponent {
     this.quillSrv.convertToHTML(this.draft);
   }
 
-  public saveTemporalDraft(): void {
-    if (!this.draft || !this.draft.temporal) { return; }
-    this.createDraftSrv.onSaveTemporal(this.draft._id);
+  public saveManualDraft(): void {
+    this.createDraftSrv.onSaveManual(this.draft?._id || null);
   }
 
   private delete(saving: boolean): void {

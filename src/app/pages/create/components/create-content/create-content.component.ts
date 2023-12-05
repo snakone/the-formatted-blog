@@ -12,11 +12,13 @@ import { CrafterService } from '@core/services/crafter/crafter.service';
 import { PostsFacade } from '@core/ngrx/posts/posts.facade';
 
 import { EDIT_POST_CONFIRMATION } from '@shared/data/dialogs';
-import { SavingTypeEnum, SavingDraftType } from '@shared/types/types.enums';
-import { MESSAGE_KEY, RESIZE_EVENT } from '@shared/data/constants';
+import { SavingTypeEnum, SavingDraftType, SnackTypeEnum } from '@shared/types/types.enums';
+import { AUTO_SAVE_KEY, MESSAGE_KEY, RESIZE_EVENT } from '@shared/data/constants';
 import { EMPTY_QUILL, HEADER_3_QUILL_ICON, QUILL_MODULES } from '@shared/data/quills';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateDraftService } from '@pages/create/services/create-draft.service';
+import { StorageService } from '@core/services/storage/storage.service';
+import { DRAFT_UPDATE_SENTENCE } from '@shared/data/sentences';
 
 const Quill_Icons = Quill.import('ui/icons');
 const tick = 5000;
@@ -36,6 +38,7 @@ export class CreateContentComponent {
   active$: Observable<Post> | undefined;
   quillModules: QuillModules;
   isTemporal = false;
+  autoSave = false;
 
   constructor(
     private draftsFacade: DraftsFacade,
@@ -43,7 +46,8 @@ export class CreateContentComponent {
     private crafter: CrafterService,
     private postFacade: PostsFacade,
     private destroyRef: DestroyRef,
-    private createDraftSrv: CreateDraftService
+    private createDraftSrv: CreateDraftService,
+    private ls: StorageService
   ) { }
 
   ngOnInit() {
@@ -54,7 +58,8 @@ export class CreateContentComponent {
   ngAfterContentInit(): void {
     this.getQuillModules();
     this.listenEditor();
-    this.listenToTemporalSave();
+    this.listenToManualSave();
+    this.autoSave = this.ls.getSettings(AUTO_SAVE_KEY) as boolean;
   }
 
   private getQuillModules(): void {
@@ -63,8 +68,9 @@ export class CreateContentComponent {
 
   private getActive(): void {
     this.active$ = this.draftsFacade.active$.pipe(
+      tap(res => (this.draft = res)),
       filter(Boolean),
-      tap(res => (this.draft = res, this.checkIfTemporal()))
+      tap(_ => this.checkIfTemporal())
     );
   }
 
@@ -72,7 +78,7 @@ export class CreateContentComponent {
     this.editor.onContentChanged
      .pipe(
        takeUntilDestroyed(this.destroyRef),
-       filter(_ => _.source !== 'api'),
+       filter(_ => _.source !== 'api' && this.autoSave),
        withLatestFrom(this.draftsFacade.saving$),
        tap(([_, saving]) => (!saving?.value && !this.isTemporal) ? this.save(true) : null),
        debounceTime(tick),
@@ -92,6 +98,9 @@ export class CreateContentComponent {
   private createNewDraft(
     delta: DeltaStatic
   ): void {
+    if (delta.ops[0] && delta.ops[0].insert === '\n') {
+      return;
+    }
     const draft = { title: 'Boceto ', message: delta };
     this.draftsFacade.create(draft);
     this.save(false);
@@ -108,23 +117,6 @@ export class CreateContentComponent {
     this.draftsFacade.setPreview(draft);
   }
 
-  private updateAndShowDialog(): void {
-    if (!this.draft.temporal) { return; }
-    const delta: DeltaStatic = this.editor.quillEditor.getContents();
-    const draft = Object.assign({}, this.draft);
-    draft.message = delta;
-    this.showDraftTemportalDialog(draft);
-  }
-
-  private showDraftTemportalDialog(draft: Post): void {
-    this.crafter.confirmation(EDIT_POST_CONFIRMATION)
-    .afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter(Boolean),
-    ).subscribe(_ => this.postFacade.unPublish(draft));
-  }
-
   private setDeltaAndUpdate(
     delta: DeltaStatic
   ): Post {
@@ -139,7 +131,9 @@ export class CreateContentComponent {
     type: SavingDraftType | 
           SavingTypeEnum.TEMPORAL = SavingTypeEnum.SAVING
   ): void {
-    this.draftsFacade.setSaving({type, value})
+    if (this.autoSave) {
+      this.draftsFacade.setSaving({type, value});
+    }
   }
 
   public clean(): void {
@@ -156,16 +150,39 @@ export class CreateContentComponent {
     }
   }
 
-  private listenToTemporalSave(): void {
-    this.createDraftSrv.onSaveTemportal$
+  private listenToManualSave(): void {
+    this.createDraftSrv.onSaveManual$
      .pipe(
-      takeUntilDestroyed(this.destroyRef),
-      filter(id => 
-        Boolean(id) && 
-        id === this.draft._id && 
-        Boolean(this.draft.temporal)
-      ))
+      takeUntilDestroyed(this.destroyRef)
+      )
      .subscribe(_ => this.updateAndShowDialog())
+  }
+
+  private updateAndShowDialog(): void {
+    const delta: DeltaStatic = this.editor.quillEditor.getContents();
+
+    if (!this.draft) {
+      this.createNewDraft(delta);
+      return;
+    }
+
+    const draft = Object.assign({}, this.draft);
+    draft.message = delta;
+    if (this.draft.temporal) {
+      this.showDraftTemportalDialog(draft);
+    } else if(!this.autoSave) {
+      this.updateDraft(delta);
+      this.crafter.setSnack(DRAFT_UPDATE_SENTENCE, SnackTypeEnum.SUCCESS)
+    }
+  }
+
+  private showDraftTemportalDialog(draft: Post): void {
+    this.crafter.confirmation(EDIT_POST_CONFIRMATION)
+    .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(Boolean),
+    ).subscribe(_ => this.postFacade.unPublish(draft));
   }
 
   public stickyFix(): void {

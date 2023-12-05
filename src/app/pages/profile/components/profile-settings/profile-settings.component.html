@@ -1,14 +1,10 @@
 <div class="animated fadeIn">
   <app-action-bar [text]="text"
-                  buttonText="Subscríbete"
-                  (function)="notification()"
                   [margin]="true"/>
   <section class="profile-settings-content">
     <app-section>
+      <app-profile-settings-content id="sticky-wrapper"/>
       <app-profile-settings-sidebar/>
-      <div id="sticky-wrapper">
-        <app-profile-settings-content />
-      </div>
     </app-section>
   </section>
 </div>

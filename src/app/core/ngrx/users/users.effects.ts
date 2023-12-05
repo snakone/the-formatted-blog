@@ -133,7 +133,7 @@ export class UserEffects {
   );
 
   // GET FAVORITES ON LOGIN
-  getFavoritesOnLogin$ = createEffect(() => this.actions
+  getFavoritesOnLoginEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.loginSuccess),
       concatMap(_ => 
@@ -146,7 +146,7 @@ export class UserEffects {
   );
 
   // GET FRIENDS ON LOGIN
-  getFriendsOnLogin$ = createEffect(() => this.actions
+  getFriendsOnLoginEffect$ = createEffect(() => this.actions
     .pipe(
       ofType(UserActions.loginSuccess),
       concatMap(_ => 

@@ -1,5 +1,5 @@
 import { Post } from "./interface.post";
-import { AccountType, UserActivityType } from "./types.enums";
+import { AccountType, DraftSidebarSettingsEnum, ThemeType, UserActivityType } from "./types.enums";
 
 // USER
 export interface User {
@@ -52,5 +52,12 @@ export interface SearchResult {
   users?: User[];
   friends?: User[];
 }
+
+export interface DraftSideBarSettings {
+  fixed: boolean;
+  state: DraftSidebarSettingsEnum;
+}
+
+
 
 

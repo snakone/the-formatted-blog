@@ -24,6 +24,7 @@ export interface UserResponse extends ServerResponse {
   user: User;
   token?: string;
   activities?: UserActivity[];
+  email?: string;
 }
 
 // SERVICE WORKER

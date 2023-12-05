@@ -132,7 +132,7 @@ export class CreateFormComponent {
   }
 
   private listenToTemporalSave(): void {
-    this.createDraftSrv.onSaveTemportal$
+    this.createDraftSrv.onSaveManual$
      .pipe(
       takeUntilDestroyed(this.destroyRef),
       filter(id => 

@@ -7,8 +7,9 @@ import { StorageService } from '@services/storage/storage.service';
 import { CrafterService } from '@services/crafter/crafter.service';
 
 import { NAVBAR_ICONS, NAVBAR_MENU } from '@shared/data/data';
-import { DARK_KEY, LIGHT_KEY, THEME_KEY } from '@shared/data/constants';
+import { THEME_KEY } from '@shared/data/constants';
 import { LOGIN_DIALOG } from '@shared/data/dialogs';
+import { ThemeEnum } from '@shared/types/types.enums';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,7 @@ export class NavbarComponent {
   ) { }
 
   ngOnInit(): void {
-    this.mode = this.ls.get(THEME_KEY);
+    this.mode = this.ls.getSettings(THEME_KEY) as string;
     this.user$ = this.userFcd.user$;
   }
 
@@ -48,9 +49,9 @@ export class NavbarComponent {
   }
 
   public toggleTheme(): void {
-    const isDark = document.body.classList.toggle(DARK_KEY);
-    this.mode = isDark ? DARK_KEY : LIGHT_KEY;
-    this.ls.setKey(THEME_KEY, this.mode);
+    const isDark = document.body.classList.toggle(ThemeEnum.DARK);
+    this.mode = isDark ? ThemeEnum.DARK : ThemeEnum.LIGHT;
+    this.ls.setKeySettings(THEME_KEY, this.mode);
   }
 
 }

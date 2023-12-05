@@ -2,8 +2,11 @@
 export const TOKEN_KEY = 'token';
 export const THEME_KEY = 'theme';
 export const USER_ID_KEY = 'user_id';
-export const DARK_KEY = 'dark';
-export const LIGHT_KEY = 'light';
+export const SETTINGS_KEY = 'settings';
+export const STORAGE_KEY = 'storage';
+export const REFRESH_TOKEN_KEY = 'refreshToken';
+export const REMEMBER_EMAIL_KEY = 'rememberEmail';
+export const AUTO_SAVE_KEY = 'autoSave';
 
 // KEYS
 export const MESSAGE_KEY = 'message';

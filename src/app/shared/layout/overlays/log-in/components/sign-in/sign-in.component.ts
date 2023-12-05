@@ -2,7 +2,8 @@ import {
   Component, 
   ChangeDetectionStrategy, 
   Output, 
-  EventEmitter 
+  EventEmitter, 
+  Input
 } from '@angular/core';
 
 import { AbstractControl, FormGroup } from '@angular/forms';
@@ -25,7 +26,10 @@ export class SignInComponent {
 
   @Output() register = new EventEmitter<void>();
   signInForm!: FormGroup<SignInForm>;
-  remember = false;
+
+  @Input() set rememberEmail(value: string) {
+    if (value && this.signInForm) { this.patchAndDirty(value); }
+  };
 
   constructor(
     public dialogRef: MatDialogRef<LogInDialogComponent>,
@@ -57,6 +61,11 @@ export class SignInComponent {
 
   private getControl(name: string): AbstractControl | null {
     return this.signInForm.get(name);
+  }
+
+  private patchAndDirty(value: string): void {
+    this.signInForm.controls.email.patchValue(value);
+    this.signInForm.controls.email.markAsDirty();
   }
 
   get email(): AbstractControl { return this.getControl(EMAIL_KEY); }

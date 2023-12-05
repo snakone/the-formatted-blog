@@ -1,4 +1,17 @@
 p {
   margin-bottom: 1rem;
   font-size: 13px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+button {
+  width: 100%;
+  margin-top: 2.5rem;
+
+  @media(max-width: 992px) {
+    margin-bottom: 2rem;
+  }
 }

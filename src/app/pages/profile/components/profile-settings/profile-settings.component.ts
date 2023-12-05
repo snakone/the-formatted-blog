@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NOTIFICATION_TEXT } from '@shared/data/sentences';
+import { HELP_SENTENCE, NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 @Component({
   selector: 'app-profile-settings',
@@ -10,7 +10,7 @@ import { NOTIFICATION_TEXT } from '@shared/data/sentences';
 
 export class ProfileSettingsComponent {
 
-  text = NOTIFICATION_TEXT;
+  text = HELP_SENTENCE;
 
   constructor() { }
 

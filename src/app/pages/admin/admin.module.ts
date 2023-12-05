@@ -10,7 +10,6 @@ import { DraftsAccessModule } from '@store/drafts/data-access/drafts-access.modu
 import { DraftLayoutModule } from '@shared/layout/draft/draft-layout.module';
 import { PipesModule } from '@shared/pipes/pipes.module';
 import { AdminDraftComponent } from './components/admin-draft/admin-draft.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -19,8 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 const Material = [
   MatFormFieldModule,
   MatDialogModule,
-  MatTooltipModule,
-  MatCheckboxModule
+  MatTooltipModule
 ];
 
 @NgModule({

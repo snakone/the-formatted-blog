@@ -27,6 +27,11 @@ export const ERROR_CONVERT_HTML_SENTENCE = 'Hubo un error al convertir los datos
 export const ADMIN_DRAFT_MESSAGE_DESC = '<p>Seguramente el <strong>mensaje</strong> es la parte más importante del boceto. No estamos para corregir faltas de ortografía pero sí para detectar contenido inhadecuado, ofensivo, en resumen... cualquier contenido inhapropiado. Tómate tu tiempo, no hay prisa para llenar el bául de Artículos publicados. Preferimos calidad por encima de cantidad.</p>'
 export const BAD_COVER_SIZE = 'Esta imagen exede el tamaño requerido.';
 export const BAD_COVER_CAUSE = 'Parece que la imagen tiene un mal formato. Intenta subir otra.';
+export const SESSION_OVER = 'Tu sesión ha caducado';
+export const DRAFT_CREATE_SENTENCE = 'Boceto creado!';
+export const DRAFT_UPDATE_SENTENCE = 'Boceto actualizado!';
+export const DRAFT_DELETE_SENTENCE = 'Boceto borrado!';
+export const DRAFT_PUBLISH_SENTENCE = 'Boceto publicado!';
 export const QUILL_PLACEHOLDER = `
 Estás frente a un lienzo en blanco. Utiliza los botones de edición situados en la parte superior para dotar a tu artículo de un fórmato profesional.
 

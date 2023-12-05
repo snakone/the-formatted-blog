@@ -1,9 +1,11 @@
 <aside>
-  <i class="fas fa-long-arrow-alt-left" 
-     [ngClass]="{'collapsed': collaped}" 
-     (click)="collapseSidebar()" 
-     [matTooltip]="collaped ? 'Expandir' : 'Contraer'">
-  </i>
+  @if(!settings.draftSidebar.fixed) {
+    <i class="fas fa-long-arrow-alt-left" 
+      [ngClass]="{'collapsed': collaped}" 
+      (click)="collapseSidebar()" 
+      [matTooltip]="collaped ? 'Expandir' : 'Contraer'">
+    </i>
+  }
   @if({
     saving: saving$ | async,
     ondeleteID: deletedID$ | async

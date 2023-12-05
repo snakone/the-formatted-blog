@@ -8,12 +8,10 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogInDialogComponent } from './log-in.component';
 
 import { UtilsService } from '@core/services/utils/utils.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'
 
 const Material = [
-  MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule
 ];

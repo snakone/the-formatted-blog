@@ -106,3 +106,7 @@
     overflow-y: visible;
   }
 }
+
+.mdc-switch .mdc-switch__ripple {
+  width: 0 !important;
+}
